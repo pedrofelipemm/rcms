@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>RCMS - Research Content Management System</title>
+
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+    </head>
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+        <!-- Include all compiled plugins (below), or include individual files as needed --> 
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.tagcanvas.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                if (!$('#myCanvas').tagcanvas({
+                    textColour: '#ffffff',
+                    outlineThickness: 1,
+                    maxSpeed: 0.1,
+                    depth: 0.75
+                })) {
+                    // TagCanvas failed to load
+                    $('#myCanvasContainer').hide();
+                }
+                // your other jQuery stuff here...
+            });
+        </script>
+
+        <div id="cabecalho" class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3 col-md-3">
+                        <form class="form-horizontal" role="form">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                                <input type="text" class="form-control input-sm" placeholder="digite aqui sua busca">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-6 col-md-6"><p>&nbsp;</p></div>
+                    <div class="col-xs-1 col-md-1">
+                        <!-- Small modal -->
+                        <a class="btn btn-link" data-toggle="modal" data-target=".bs-login-modal-sm">Login</a>
+
+                        <div class="modal fade bs-login-modal-sm" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <form role="form">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Login</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="loginEmail">E-mail</label>
+                                                <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="loginPassword">Senha</label>
+                                                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                            <button type="submit" class="btn btn-default">Entrar</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-md-2">
+                        <select class="form-control input-sm">
+                            <option>Português</option>
+                            <option>Inglês</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="menu" class="container-fluid">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="index.html"><img src="imagens/logo-rcms.jpg" alt="RCMS" /></a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="active"><a href="index.html">Início</a></li>
+                        <li class="box-hover"><a href="#">O Grupo</a></li>
+                        <li class="box-hover"><a href="pesquisadores.html">Pesquisadores</a></li>
+                        <li class="box-hover"><a href="#">Projetos de Pesquisa</a></li>
+                        <li class="box-hover"><a href="#">Publicações</a></li>
+                        <li class="box-hover"><a href="#">Indicadores</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">Pesquisadores</a></li>
+                        <li class="active">Antonio Francisco do Prado</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-9">
+                    <h1>Antonio Francisco do Prado<br/>
+						<small>prado@dc.ufscar.br</small></h1>
+                    <hr/>
+                    <p>Possui graduação em Engenharia de Fortificação e Construção pelo Instituto Militar de Engenharia (1979), graduação em Matemática Licenciatura Plena pela Faculdade de Filosofia Ciências e Letras de Itajubá (1974), graduação em Engenharia Militar pela Academia Militar da Agulhas Negras (1971), mestrado em Sistemas e Computação pelo Instituto Militar de Engenharia (1986) e doutorado em Informática pela Pontifícia Universidade Católica do Rio de Janeiro (1992). Atualmente é professor Associado Nível 3 / iv da Universidade Federal de São Carlos. Tem experiência na área de Ciência da Computação, com ênfase em Engenharia de Software, atuando principalmente nos seguintes temas: reúso de software, orientação a objetos, reengenharia e transformação de software, engenharia de software na computação úbiqua, ferramentas case, frameworks e engenharia reversa.</p>
+                </div>
+                <div class="col-md-3 text-right">
+                	<img src="imagens/foto-prado.jpg" alt="" />
+                    <p><a href="#" class="lnk-lattes">Currículo Lattes</a></p>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Endereço</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>Endereço Profissional</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Universidade Federal de São Carlos, Centro de Ciências Exatas e de Tecnologia, Departamento de Computação. <br>
+                                    Rodovia Washington Luiz, Km 235 - Jardim Guanabara - Prédio DC1 - Sala 13<br>
+                                    Jardim Guanabara<br>
+                                    13565905 - Sao Carlos, SP - Brasil - Caixa-postal: 676<br>
+                                    Telefone: (16) 33518598<br>
+                                    Fax: (16) 33518233<br>
+                                    URL da Homepage: http://www.dc.ufscar.br/~prado
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Formação acadêmica/titulação</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1990 - 1992</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Doutorado em Informática (Conceito CAPES 7).<br>
+                                    Pontifícia Universidade Católica do Rio de Janeiro, PUC-Rio, Brasil. <br>
+                                    Título: Estratégia de Reengenharia de Software Orientada a Domínios, Ano de obtenção: 1992. <br>
+                                    Orientador: Julio Cesar Sampaio do Prado Leite. <br>
+                                    Palavras-chave: Reengenharia de Software; Domínio; Sistema de Transformação Draco; Engenharia Reversa; Manutenção de Software.<br>
+                                    Grande área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Engenharia de Software. <br>
+                                    Grande Área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Reengenharia de Software. <br>
+                                    Grande Área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Linguagens de Programação. <br>
+                                    Setores de atividade: Informática.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1984 - 1986</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Mestrado em Sistemas e Computação (Conceito CAPES 3). <br>
+                                    Instituto Militar de Engenharia, IME, Brasil. <br>
+                                    Título: Gerador de Sistemas de Consulta On-Line - GESCOL,Ano de Obtenção: 1986.<br>
+                                    Orientador: Luis Otávio Queiroz de Freitas.<br>
+                                    Palavras-chave: Gerador de Sistemas; Consulta; Concorrência; Estrutura em árvore.<br>
+                                    Grande área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Engenharia de Software. <br>
+                                    Setores de atividade: Informática.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1982 - 1982</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Especialização em Processamento de Dados. (Carga Horária: 360h). <br>
+                                    Instituto Militar de Engenharia, IME, Brasil.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1976 - 1979</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Graduação em Engenharia de Fortificação e Construção. <br>
+                                    Instituto Militar de Engenharia, IME, Brasil.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1972 - 1974</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Graduação em Matemática Licenciatura Plena. <br>
+                                    Faculdade de Filosofia Ciências e Letras de Itajubá.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1968 - 1971</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Graduação em Engenharia Militar. <br>
+                                    Academia Militar da Agulhas Negras.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1965 - 1967</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Ensino Médio (2º grau). <br>
+                                    Instituto de Educação 21 de Abril.
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1960 - 1964</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Ensino Fundamental (1º grau). <br>
+                                    Ginásio Estadual de Sabino.
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Linhas de pesquisa</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>1.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Reengenharia de Software e Transformação Software
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>2.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Engenharia de Software: Reengenharia de Software
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>3.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Engenharia de Software: Reúso de Software
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>4.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Engenharia de Software: Orientação a Aspectos
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>5.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Linguagens de Programação
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>6.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Engenharia de Software na Computação Ubíqua
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>7.</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Engenharia de Software: Desenvolvimento Baseado em Componentes (DBC)
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Projetos de pesquisa</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>2011 - 2012</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Elaboração de Material Didático Interdisciplinar de Apoio ao Processo de Desenvolvimento de Software nas Etapas de Modelagem e Implementação<br>
+                                    <br>
+                                    Descrição: A presente proposta tem como objetivo a elaboração de material didático interdisciplinar que atenda às etapas de modelagem e implementação de sistemas de software. Pretende-se elaborar material didático que envolva a integração de disciplinas de programação, desenvolvimento de Software e Banco de Dados ministradas nos módulos do curso Sistemas de Informação. Essas disciplinas nortearão o desenvolvimento de um material didático que apoiará os professores e alunos ao longo do curso.<br>
+                                    Situação: Em andamento; Natureza: Pesquisa. <br>
+                                    Alunos envolvidos: Graduação: (4) / Mestrado acadêmico: (2) / Doutorado: (1) . <br>
+                                    <br>
+                                    Integrantes: Antonio Francisco do Prado - Coordenador / Marilde T P Santos - Integrante / Carlos Eduardo Cirilo - Integrante / Carlos Roberto Silveira Júnior - Integrante / Bruno Luigi Borgo - Integrante / Graziele Aparecida de Lima Rocco - Integrante / Paulo Eduardo Papotti - Integrante / Eurico Rogério Corte - Integrante.<br><br>
+                                </div>
+                            </div>
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>2009 - 2012</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    Software Reuse<br>
+                                    <br>
+                                    Descrição: Motivados pela importância da Tecnologia da Informação, visando contribuir para o avanço do conhecimento e da tecnologia no desenvolvimento de aplicações na WEB 2.0, em Engenharia de Software, e com foco nas idéias sobre a Reutilização de Software, este projeto visa pesquisar e explorar conceitos, técnicas, métodos e ferramentas para tornar o Reuso de Software uma prática intra e inter comunidades. Com foco na reutilização, investiga-se uma Estratégia para o Desenvolvimento de Software, que visa o compartilhamento de recursos e a cooperação na web, apoiando e melhorando a Internet como plataforma de trabalho. O principal objetivo deste projeto é elaborar uma Estratégia para o Desenvolvimento de Software, orientada para Reuso, combinando idéias, disciplinas, tecnologias, e ferramentas, conforme o paradigma emergente da WEB2.0. Outros objetivos são: Definir um conjunto de recursos computacionais, incluindo ontologias, serviços, componentes, padrões, frameworks, sistemas multi-agentes, e ferramentas, para apoiar a Estratégia Orientada para o Reuso; Desenvolver uma Linha de Produtos de Software em domínios de aplicações na WEB 2.0. Essas linha de produtos servirá como estudo de caso para propor, testar, e refinar a Estratégia de Reuso proposta; Elaborar documentações e tutoriais que instruem sobre o PDS orientado para o Reuso; e Elaborar publicações que divulgam os resultados alcançados. A Estratégia servirá para orientar o desenvolvimento orientado para o reuso de software de aplicações na web. O apoio computacional produzido com o projeto pode ser utilizado para facilitar a prática da estratégia nas empresas. Por fim, a documentação do projeto, tutoriais e publicações servirão para divulgar e estimular o uso da estratégia pelas diferentes comunidades que desenvolvem software.. <br>
+                                    Situação: Em andamento; Natureza: Pesquisa. <br>
+                                    Alunos envolvidos: Doutorado: (2) . <br>
+                                    <br>
+                                    Integrantes: Antonio Francisco do Prado - Coordenador.<br>
+                                    Financiador(es): Ci&T - Cooperação / Digital Assets - Cooperação / Fundação de Amparo à Pesquisa do Estado de São Paulo - Cooperação.<br>
+                                    Número de produções C, T & A: 2 / Número de orientações: 1
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Produções</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<div class="row">
+                            	<div class="col-md-2 text-right">
+                                	<strong>Nome em citações bibliográficas</strong>
+                                </div>
+                                <div class="col-md-10">
+                                    PRADO, A. F.;DO PRADO, A. F.;PRADO, A. F. do;PRADO, ANTONIO F.;DO PRADO, ANTONIO F.;DO PRADO, ANTÔNIO F.;FRANCISCO DO PRADO, ANTONIO<br><br>
+                                </div>
+                            </div>
+                            <div class="row">
+	                            <div class="col-md-12">
+                                	<h4>Artigos completos publicados em periódicos</h4>
+                                    <ol class="listas-numeradas">
+                                    	<li>PRADO, A. F. ; PAPOTTI, P. E. . Reengenharia e Reutilização de Software. Revista TIS - Tecnologias, Infraestrutura e Software, v. 2, p. 1-10, 2013.</li>
+                                    	<li>VIANA, MATHEUS C. ; PENTEADO, ROSÂNGELA A.D. ; DO PRADO, ANTÔNIO F. . Domain-Specific Modeling Languages to improve framework instantiation. The Journal of Systems and Software, v. 86, p. 3123-3139, 2013.</li>
+                                    	<li>FORTE, Marcos ; DE SOUZA, WANDERLEY L. ; DA SILVA, ROSELI F. ; DO PRADO, ANTONIO F. ; RODRIGUES, JOSE F. . A Ubiquitous Reflective E-Portfolio Architecture. International Journal of Medical Informatics, v. 82, p. 1111-1122, 2013.</li>
+                                    	<li>CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; ZAINA, L. A. M. ; RODRIGUES JUNIOR, J. F. . Towards a Hybrid Approach for Adapting Web Graphical User Interfaces to Heterogeneous Devices using Context. International Journal of Software Engineering and Knowledge Engineering, p. 1-32, 2012.</li>
+                                    	<li>GASPAR, T. C. ; TEIXEIRA, C. A. C. ; PRADO, A. F. . Component Reuse in Synchronous Collaborative Web 2.0 Applications. European Journal for the Informatics Professional, v. XII, p. 15-25, 2011.</li>
+                                    	<li>PEREIRA, V. ; PRADO, A. F. . RAMBUS: An Agile Process for Developing Web Applications. Journal of Intelligent Computing, v. 2, p. 42-53, 2011.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="row">
+	                            <div class="col-md-12">
+                                	<h4>Capítulos de livros publicados</h4>
+                                    <ol class="listas-numeradas">
+                                    	<li>CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; ZAINA, L. A. M. . Building Adaptive Rich Interfaces for Interactive Ubiquitous Applications. In: Ioannis Deliyannis. (Org.). Interactive Multimedia. Rijeka: InTech - Open Access Publisher, 2012, v. , p. 191-218.</li>
+                                    	<li>BRAGA, R. M. M. ; CAVALINI, L. T. ; CIRILO, C. E. ; COOK, T. W. ; CORREA, B. S. P. M. ; FREIRE, S. M. ; GOMES, A. T. A. ; MACEDO, V. M. ; MENEZES, A. L. ; MORAES, João Luis Cardoso de ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; TEIXEIRA, I. M. ; ZIVIANI, A. . Model-driven development of healthcare applications. In: Raúl A. Feijóo; Artur Ziviani; Pablo J. Blanco.. (Org.). Scientific Computing Applied to Medicine and Healthcare: Current State and Future Trends at the INCT-MACC. 1ed.Petrópolis, Brasil: INCT-MACC/LNCC, 2012, v. 1, p. 315-354.</li>
+                                    	<li>SOUZA, Wanderley Lopes de ; PRADO, A. F. ; FORTE, Marcos ; CIRILO, C. E. . Content Adaptation in Ubiquitous Computing. In: Eduard Babkin. (Org.). Ubiquitous Computing. 1ed.Rijeka: InTech, 2011, v. 1, p. 67-94.</li>
+                                    	<li>GASPAR, T. C. ; YAGUINUMA, Cristiane A ; PRADO, A. F. . Desenvolvimento de Aplicações Colaborativas Síncronas na Web 2.0. In: Mário Meireles Teixeira; César Augusto Camillo Teixeira; Fernando Antônio Mota Trinta; Pedro Porfírio Muniz Farias. (Org.). Anais Webmedia: XV Simpósio Brasileiro de Sistemas Multimídia e Web. Fortaleza, CE: Sociedade Brasileira de Computação - SBC, 2009, v. 3, p. 168-207.</li>
+                                    	<li>PRADO, A. F. . Reengenharia de Software Baseada em Componentes. In: Itana Maria de Souza Gimenes; Elisa Hatsue Moriya Huzita. (Org.). Desenvolvimento Baseado em Componentes: Conceitos e Técnicas. Rio de Janeiro: Ciência Moderna Ltda, 2005, v. 1, p. 105-166.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="row">
+	                            <div class="col-md-12">
+                                	<h4>Textos em jornais de notícias/revistas</h4>
+                                    <ol class="listas-numeradas">
+                                    	<li>CUNHA, João Ronaldo Del Ducca ; PRADO, A. F. ; SANTOS, Antonio Carlos Do . Uma Abordagem para o Processo de Gerenciamento de Configuração de Software. Revista Eletrônica de Sistemas de Informação (RESI), digital, , v. 1, p. 1 - 10, 12 nov. 2004.</li>
+                                    	<li>CATARINO, Iolanda Cláudia Sanches ; PRADO, A. F. ; SOUZA NETO, Raphael Marcílio de . Framework para ensino a distância baseado em componentes de Software. UNOPAR Científica. Ciências Exatas e Tecnológicas, UNOPAR Editora, , v. 1, p. 17 - 24, 01 nov. 2002.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="row">
+	                            <div class="col-md-12">
+                                	<h4>Trabalhos completos publicados em anais de congressos</h4>
+                                    <ol class="listas-numeradas">
+                                    	<li>da Silva, V. G. ; CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; PEREIRA, V. . An Approach to Dynamic Discovery of Context-Sensitive Web Services. In: ICIW 2013 : The Eighth International Conference on Internet and Web Applications and Services, 2013, Roma, Italia. Iaria, 2013. p. 83-89.</li>
+                                    	<li>RODRIGUES, JOSE F. ; CIRILO, CARLOS E. ; PRADO, ANTONIO F. ; ZAINA, LUCIANA A. M. . Hierarchical visual filtering, pragmatic and epistemic actions for database visualization. In: the 28th Annual ACM Symposium, 2013, Coimbra. Proceedings of the 28th Annual ACM Symposium on Applied Computing - SAC '13. New York: ACM Press, 2013. p. 946-952.</li>
+                                    	<li>DE MORAES, JOAO LUIS CARDOSO ; DE SOUZA, WANDERLEY LOPES ; PIRES, LUIS FERREIRA ; CAVALINI, LUCIANA TRICAI ; FRANCISCO DO PRADO, ANTONIO . A novel architecture for message exchange in Pervasive Healthcare based on the use of Intelligent Agents. In: 2013 ACS International Conference on Computer Systems and Applications (AICCSA), 2013, Ifrane. 2013 ACS International Conference on Computer Systems and Applications (AICCSA). v. 1. p. 1-8.</li>
+                                    	<li>PAPOTTI, P. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; CIRILO, C. E. ; PIRES, L. F. . A Quantitative Analysis of Model-Driven Code Generation through Software Experimentation. In: 25th International Conference on Advanced Information Systems Engineering, 2013, Valencia. Lecture Notes in Computer Science (LNCS): Advanced Information Systems Engineering CAISE 2013. Berlin: Springer-Verlag, 2013. v. 7908. p. 321-337.</li>
+                                    	<li>MORAES, João Luis Cardoso de ; SOUZA, Wanderley Lopes de ; PIRES, L. F. ; PRADO, A. F. . A Novel Approach to Developing Applications in the Pervasive Healthcare Environment through the Use of Archetypes. In: The 13th International Conference on Computational Science and Its Applications (ICCSA 2013), 2013, Ho Chi Minh City. Computational Science and Its Applications ICCSA 2013. Berlin: Springer Berlin Heidelberg, 2013. v. 7975. p. 475-490.</li>
+                                    	<li>MORAES, João Luis Cardoso de ; SOUZA, Wanderley Lopes de ; PIRES, L. F. ; PRADO, A. F. . Towards a Reusable Architecture for Message Exchange in Pervasive Healthcare. In: 15th International Conference on Enterprise Information Systems (ICEIS 2013), 2013, Angers. Proceedings of the 15th International Conference on Enterprise Information Systems (ICEIS 2013). Lisboa: Science and Technology Publications, 2013. v. 2. p. 393-402.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="row-logotipos" class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 logo-cell"><a href="#"><img src="imagens/logo-ufscar.jpg" alt="UFSCar" /></a></div>
+                    <div class="col-md-3 logo-cell"><a href="#"><img src="imagens/logo-dc-ufscar.jpg" alt="DC/UFSCar" /></a></div>
+                    <div class="col-md-3 logo-cell"><a href="#"><img src="imagens/logo-capes.jpg" alt="CAPES" /></a></div>
+                    <div class="col-md-3 logo-cell"><a href="#"><img src="imagens/logo-fapesp.jpg" alt="FAPESP" /></a></div>
+                </div>
+            </div>
+        </div>        
+        <div id="rodape" class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>Contato</h3>
+                        <address>UFSCar - Campus São Carlos<br/>
+                            Rodovia Washington Luís, Km 235 - SP 310<br/>
+                            São Carlos - SP - Brasil<br/>
+                            CEP 13565-905<br/>
+                            <br/>
+                            Telefone: (16) 3351-8111<br/>
+                            <br/>
+                            E-mail: <a href="#">contato@domino.com</a></address>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Mapa do site</h3>
+                        <ul>
+                            <li><a href="#">Início</a></li>
+                            <li><a href="#">O Grupo</a></li>
+                            <li><a href="#">Pesquisadores</a></li>
+                            <li><a href="#">Projetos de Pesquisa</a></li>
+                            <li><a href="#">Publicações</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h3>Mais procurados</h3>
+                        <div id="myCanvasContainer">
+                            <canvas width="200" height="170" id="myCanvas">
+                                <p>Anything in here will be replaced on browsers that support the canvas element</p>
+                                <ul>
+                                    <li><a href="#">Java</a></li>
+                                    <li><a href="#">Linux</a></li>
+                                    <li><a href="#">Android</a></li>
+                                    <li><a href="#">Grails</a></li>
+                                    <li><a href="#">Groove</a></li>
+                                    <li><a href="#">Postgres</a></li>
+                                    <li><a href="#">Netbeans</a></li>
+                                    <li><a href="#">Eclipse</a></li>
+                                    <li><a href="#">JPA</a></li>
+                                    <li><a href="#">JSF</a></li>
+                                    <li><a href="#">Framework</a></li>
+                                </ul>
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        2014 &copy; Departamento de Computação - UFSCar. Todos os direitos reservados.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

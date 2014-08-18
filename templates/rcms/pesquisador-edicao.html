@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>RCMS - Research Content Management System</title>
+
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/estilo.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+              <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+              <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+    </head>
+    <body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+        <!-- Include all compiled plugins (below), or include individual files as needed --> 
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.tagcanvas.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                if (!$('#myCanvas').tagcanvas({
+                    textColour: '#ffffff',
+                    outlineThickness: 1,
+                    maxSpeed: 0.1,
+                    depth: 0.75
+                })) {
+                    // TagCanvas failed to load
+                    $('#myCanvasContainer').hide();
+                }
+                // your other jQuery stuff here...
+            });
+        </script>
+
+        <div id="menu" class="container-fluid">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="navbar-header text-right">
+                    <a class="navbar-brand" href="#">RCMS</a>
+                </div>
+                <p class="navbar-text">Bem vindo, Administrador!</p>
+				<ul class="nav navbar-nav navbar-right">
+			        <li class="box-hover"><a href="#">Sair</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-fluid">
+        	<div class="col-md-2 menu-admin" style="background-color: #222; margin: 70px 0 0 -15px; padding: 15px 0 15px 15px;">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#">Painel de Controle</a></li>
+                    <hr/>
+                    <li><a href="#">O Grupo</a></li>
+                    <li class="active"><a href="pesquisadores.html">Pesquisadores</a></li>
+                    <li><a href="#">Projetos de Pesquisa</a></li>
+                    <li><a href="#">Publicações</a></li>
+                    <li><a href="#">Indicadores</a></li>
+                </ul>
+            </div>
+            <div class="col-md-10" style="margin-top: 70px;">
+		        <div class="container-fluid">
+		            <div class="row">
+        		    	<div class="col-md-9">
+                		    <h1>Antonio Francisco do Prado<br/>
+								<small>prado@dc.ufscar.br</small></h1>
+		                    <hr/>
+                            <div class="form-group">
+                                <label for="resumoProfissional">Resumo Profissional</label>
+                                <textarea class="form-control" rows="8" id="resumoProfissional">Possui graduação em Engenharia de Fortificação e Construção pelo Instituto Militar de Engenharia (1979), graduação em Matemática Licenciatura Plena pela Faculdade de Filosofia Ciências e Letras de Itajubá (1974), graduação em Engenharia Militar pela Academia Militar da Agulhas Negras (1971), mestrado em Sistemas e Computação pelo Instituto Militar de Engenharia (1986) e doutorado em Informática pela Pontifícia Universidade Católica do Rio de Janeiro (1992). Atualmente é professor Associado Nível 3 / iv da Universidade Federal de São Carlos. Tem experiência na área de Ciência da Computação, com ênfase em Engenharia de Software, atuando principalmente nos seguintes temas: reúso de software, orientação a objetos, reengenharia e transformação de software, engenharia de software na computação úbiqua, ferramentas case, frameworks e engenharia reversa.</textarea>
+                            </div>
+		                </div>
+                        <div class="col-md-3 text-right">
+                            <img src="imagens/foto-prado.jpg" alt="" /><br>
+                            <br>
+                            <button type="button" class="btn btn-primary">Alterar foto</button><br>
+                            <br>
+                            <div class="form-group">
+                                <label for="codigoLattes">Código Lattes</label>
+                                <input type="text" class="form-control" id="codigoLattes" value="2668568143800755">
+                            </div>
+                        </div>
+		            </div>
+                </div>
+	        </div>
+        </div>
+        <div id="rodape" class="container-fluid" style="background-color: #222; padding-top: 10px;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    2014 &copy; Departamento de Computação - UFSCar. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

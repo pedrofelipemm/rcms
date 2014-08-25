@@ -1,7 +1,5 @@
 package br.ufscar.view.mb;
 
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,58 +12,60 @@ import br.ufscar.rcms.servico.PesquisadorService;
 
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")
-public class PesquisadorMB implements Serializable{
+public class PesquisadorMB extends AbstractMB {
 
-	private static final long serialVersionUID = 7023051572658948461L;
+    private static final long serialVersionUID = 7023051572658948461L;
 
-	@ManagedProperty("#{pesquisadorService}")
-	private PesquisadorService pesquisadorService;
+    @ManagedProperty("#{pesquisadorService}")
+    private PesquisadorService pesquisadorService;
 
-	private Pesquisador pesquisador;
+    private Pesquisador pesquisador;
 
-	@PostConstruct
-	public void inicializar() {
+    @PostConstruct
+    public void inicializar() {
 
-		limparDados();
-	}
+        limparDados();
+    }
 
-	private void limparDados() {
+    private void limparDados() {
 
-		pesquisador = new Pesquisador();
-	}
+        pesquisador = new Pesquisador();
+    }
 
-	public void salvar() {
+    public void salvar() {
 
-		pesquisadorService.salvar(pesquisador);
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, 
-						"Pesquisador " + pesquisador.getNome() + " Salvo com sucesso", null));
+        pesquisadorService.salvar(pesquisador);
+        //TODO i18n
+        //TODO encapsular
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, 
+                        "Pesquisador " + pesquisador.getNome() + " Salvo com sucesso", null));
 
-		limparDados();
-	}
+        limparDados();
+    }
 
-	public void pesquisar() {
+    public void pesquisar() {
 
-	}
+    }
 
-	public PesquisadorService getPesquisadorService() {
+    public PesquisadorService getPesquisadorService() {
 
-		return pesquisadorService;
-	}
+        return pesquisadorService;
+    }
 
-	public void setPesquisadorService(PesquisadorService pesquisadorService) {
+    public void setPesquisadorService(PesquisadorService pesquisadorService) {
 
-		this.pesquisadorService = pesquisadorService;
-	}
+        this.pesquisadorService = pesquisadorService;
+    }
 
-	public Pesquisador getPesquisador() {
+    public Pesquisador getPesquisador() {
 
-		return pesquisador;
-	}
+        return pesquisador;
+    }
 
-	public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(Pesquisador pesquisador) {
 
-		this.pesquisador = pesquisador;
-	}
+        this.pesquisador = pesquisador;
+    }
 
 }

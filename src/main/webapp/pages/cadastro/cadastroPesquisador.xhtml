@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<ui:composition template="/pages/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="growl"  />
+			
+			<h1>#{mensagens['cadastro.pesquisador']}</h1>
+				
+			<h:panelGrid id="cadastroPesquisador" columns="2" cellpadding="5">
+			
+				<h:outputLabel for="nome" value="nome" />
+				<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
+					requiredMessage="'Nome' não preenchido"/>
+				
+				<h:outputLabel for="codigoLattes" value="Código Lattes" />
+				<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+					required="true" requiredMessage="'Código Lattes' não preenchido" />
+				
+				<h:outputText for="resumoProfissional" value="Resumo Profissional" />
+				<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
+					required="true" requiredMessage="'Resumo Profissional' não preenchido"/>
+				
+			</h:panelGrid>
+	
+			<p:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" update="@form" style="margin-right: 10px;"/>		
+		</h:form>
+	</ui:define>
+</ui:composition>

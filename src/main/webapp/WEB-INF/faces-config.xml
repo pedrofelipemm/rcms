@@ -11,8 +11,13 @@
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	
 		<locale-config>
-			<default-locale>pt-br</default-locale>
+			<default-locale>pt</default-locale>
 		</locale-config>
+		
+		<resource-bundle>
+			<base-name>bundle</base-name>
+			<var>mensagens</var>
+		</resource-bundle>
 		
 	</application>
 	
@@ -24,7 +29,7 @@
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroPesquisador</from-outcome>
-			<to-view-id>/rcms_pages/cadastroPesquisador.xhtml</to-view-id>
+			<to-view-id>/pages/cadastro/cadastroPesquisador.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>

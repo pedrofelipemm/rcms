@@ -3,7 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" >
 
 	<h:head>
         <title>RCMS - Research Content Management System</title>
@@ -38,15 +38,13 @@
          
 	</h:head>
 	
-	<h:body styleClass="well">
+	<h:body>
 
 		<h:panelGroup id="page" layout="block">
  
-	    	<div id="cabecalho">
 				<ui:insert name="cabecalho" >
 		  			<ui:include src="/pages/templates/cabecalho.xhtml" />
 				</ui:insert>
-	    	</div>
  
 		    <div id="conteudo">
 		  		<ui:insert name="conteudo" >
@@ -54,13 +52,13 @@
 		   		</ui:insert>
 		    </div>
  
-<!-- 
+
 	    	<div id="rodape">
 	    		<ui:insert name="rodape" >
 	    	  		<ui:include src="/pages/templates/rodape.xhtml" />
 	    		</ui:insert>
     	    </div>
- -->
+
         </h:panelGroup>
 
 	</h:body>

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html[
+    <!ENTITY nbsp "&#160;">
+]>
 <ui:composition template="/pages/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -9,25 +11,63 @@
 		<h:form>
 			<p:growl id="growl"  />
 			
-			<h1>#{mensagens['cadastro.pesquisador']}</h1>
-				
-			<h:panelGrid id="cadastroPesquisador" columns="2" cellpadding="5">
+			<div class="container">
 			
-				<h:outputLabel for="nome" value="nome" />
-				<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
-					requiredMessage="'Nome' não preenchido"/>
+	            <div class="row">
+	                <div class="col-md-12">
+	                    <ol class="breadcrumb">
+	                        <li><a href="#">Início</a></li>
+	                        <li><a href="#">Pesquisadores</a></li>
+	                        <li class="active">Cadastro</li>
+	                    </ol>
+	                </div>
+	            </div>
+	            
+	            <div class="row">
+	            	<div class="col-md-9">
+	                	<h1>#{mensagens['cadastro.pesquisador']}</h1>
+	            	</div>
+	            </div>
+	            
+	            <div class="row">
+            		<div class="col-md-12">&nbsp;</div>
+            	</div>
+	            
+	            <div class="row">
+					<div class="col-md-12">
+						<h:outputLabel for="nome" value="Nome" />&nbsp;
+						<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
+						requiredMessage="'Nome' não preenchido"/>
+					</div>
+				</div>
 				
-				<h:outputLabel for="codigoLattes" value="Código Lattes" />
-				<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
-					required="true" requiredMessage="'Código Lattes' não preenchido" />
+				<div class="row">
+					<div class="col-md-12">
+						<h:outputLabel for="codigoLattes" value="Código Lattes" />&nbsp;
+						<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+							required="true" requiredMessage="'Código Lattes' não preenchido" />
+					</div>
+				</div>
 				
-				<h:outputText for="resumoProfissional" value="Resumo Profissional" />
-				<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
-					required="true" requiredMessage="'Resumo Profissional' não preenchido"/>
+				<div class="row">
+					<div class="col-md-12">
+						<h:outputLabel for="resumoProfissional" value="Resumo Profissional" />&nbsp;
+						<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
+							required="true" requiredMessage="'Resumo Profissional' não preenchido"/>
+					</div>
+				</div>
 				
-			</h:panelGrid>
-	
-			<p:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" update="@form" style="margin-right: 10px;"/>		
+				<div class="row">
+            		<div class="col-md-12">&nbsp;</div>
+            	</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<p:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" update="@form" style="margin-right: 10px;"/>
+					</div>
+				</div>
+			</div>
+					
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -8,61 +8,71 @@
 	xmlns:p="http://primefaces.org/ui">
 	<h:body>
 		<ui:composition>
-				
-					<div id="rodape" class="container-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3>Contato</h3>
-                        <address>UFSCar - Campus São Carlos<br/>
-                            Rodovia Washington Luís, Km 235 - SP 310<br/>
-                            São Carlos - SP - Brasil<br/>
-                            CEP 13565-905<br/>
-                            <br/>
-                            Telefone: (16) 3351-8111<br/>
-                            <br/>
-                            E-mail: <a href="#">contato@domino.com</a></address>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Mapa do site</h3>
-                        <ul>
-                            <li><a href="#">Início</a></li>
-                            <li><a href="#">O Grupo</a></li>
-                            <li><a href="#">Pesquisadores</a></li>
-                            <li><a href="#">Projetos de Pesquisa</a></li>
-                            <li><a href="#">Publicações</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Mais procurados</h3>
-                        <div id="myCanvasContainer">
-                            <canvas width="200" height="170" id="myCanvas">
-                                <p>Anything in here will be replaced on browsers that support the canvas element</p>
-                                <ul>
-                                    <li><a href="#">Java</a></li>
-                                    <li><a href="#">Linux</a></li>
-                                    <li><a href="#">Android</a></li>
-                                    <li><a href="#">Grails</a></li>
-                                    <li><a href="#">Groove</a></li>
-                                    <li><a href="#">Postgres</a></li>
-                                    <li><a href="#">Netbeans</a></li>
-                                    <li><a href="#">Eclipse</a></li>
-                                    <li><a href="#">JPA</a></li>
-                                    <li><a href="#">JSF</a></li>
-                                    <li><a href="#">Framework</a></li>
-                                </ul>
-                            </canvas>
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        2014 &copy; Departamento de Computação - UFSCar. Todos os direitos reservados.
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div id="row-logotipos" class="container-fluid">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-3 logo-cell"><a href="#"><h:graphicImage value="/imagens/logo-ufscar.jpg" alt="UFSCar" /></a></div>
+	                    <div class="col-md-3 logo-cell"><a href="#"><h:graphicImage value="/imagens/logo-dc-ufscar.jpg" alt="DC/UFSCar" /></a></div>
+	                    <div class="col-md-3 logo-cell"><a href="#"><h:graphicImage value="/imagens/logo-capes.jpg" alt="CAPES" /></a></div>
+	                    <div class="col-md-3 logo-cell"><a href="#"><h:graphicImage value="/imagens/logo-fapesp.jpg" alt="FAPESP" /></a></div>
+	                </div>
+	            </div>
+	        </div>
+	        
+			<div id="rodape" class="container-fluid">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-md-4">
+	                        <h3>Contato</h3>
+	                        <address>UFSCar - Campus São Carlos<br/>
+	                            Rodovia Washington Luís, Km 235 - SP 310<br/>
+	                            São Carlos - SP - Brasil<br/>
+	                            CEP 13565-905<br/>
+	                            <br/>
+	                            Telefone: (16) 3351-8111<br/>
+	                            <br/>
+	                            E-mail: <a href="#">contato@domino.com</a></address>
+	                    </div>
+	                    <div class="col-md-4">
+	                        <h3>Mapa do site</h3>
+	                        <ul>
+	                            <li><a href="#">Início</a></li>
+	                            <li><a href="#">O Grupo</a></li>
+	                            <li><a href="#">Pesquisadores</a></li>
+	                            <li><a href="#">Projetos de Pesquisa</a></li>
+	                            <li><a href="#">Publicações</a></li>
+	                        </ul>
+	                    </div>
+	                    <div class="col-md-4">
+	                        <h3>Mais procurados</h3>
+	                        <div id="myCanvasContainer">
+	                            <canvas width="200" height="170" id="myCanvas">
+	                                <p>Anything in here will be replaced on browsers that support the canvas element</p>
+	                                <ul>
+	                                    <li><a href="#">Java</a></li>
+	                                    <li><a href="#">Linux</a></li>
+	                                    <li><a href="#">Android</a></li>
+	                                    <li><a href="#">Grails</a></li>
+	                                    <li><a href="#">Groove</a></li>
+	                                    <li><a href="#">Postgres</a></li>
+	                                    <li><a href="#">Netbeans</a></li>
+	                                    <li><a href="#">Eclipse</a></li>
+	                                    <li><a href="#">JPA</a></li>
+	                                    <li><a href="#">JSF</a></li>
+	                                    <li><a href="#">Framework</a></li>
+	                                </ul>
+	                            </canvas>
+	                        </div>
+	                    </div>
+	                </div>
+	                <hr/>
+	                <div class="row">
+	                    <div class="col-md-12 text-center">
+	                        2014 &copy; Departamento de Computação - UFSCar. Todos os direitos reservados.
+	                    </div>
+	                </div>
+	            </div>
+        	</div>
 		</ui:composition>
 	</h:body>
 </html>

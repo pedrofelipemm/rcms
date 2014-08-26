@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<ui:composition template="/pages/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	
+		<div class="container">
+		       <div class="row">
+		           <div class="col-md-12">
+		               <ol class="breadcrumb">
+		                   <li><a href="#">Início</a></li>
+		                   <li class="active">Pesquisadores</li>
+		               </ol>
+		                   <h1>Pesquisadores</h1>
+		                   <hr/>
+		               <ul class="listas">
+							<li><h:link outcome="exibirPesquisador" value="Antonio Francisco do Prado"/></li>
+							<li><a href="#">Marilde Terezinha Prado Santos</a></li>
+							<li><a href="#">Sérgio Donizetti Zorzo</a></li>
+							<li><a href="#">Vania Paula de Almeida Neris</a></li>
+						</ul>
+						<h:link outcome="cadastroPesquisador" value="Cadastrar novo Pesquisador"/>
+		           </div>
+		       </div>
+		</div>
+	</ui:define>
+</ui:composition>

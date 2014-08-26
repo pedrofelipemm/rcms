@@ -11,8 +11,6 @@
 	<h:body>
 		<ui:composition>
 			
-			
-			
 			<div id="cabecalho" class="container-fluid">
 	            <div class="container">
 	                <div class="row">
@@ -26,7 +24,7 @@
 	                    </div>
 	                    <div class="col-xs-6 col-md-6"><p>&nbsp;</p></div>
 	                    <div class="col-xs-1 col-md-1">
-	                        <a class="btn btn-link" data-toggle="modal" data-target=".bs-login-modal-sm">Login</a>
+	                        <a class="btn btn-'" data-toggle="modal" data-target=".bs-login-modal-sm">Login</a>
 	
 	                        <div class="modal fade bs-login-modal-sm" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
 	                            <div class="modal-dialog modal-sm">
@@ -69,13 +67,13 @@
 	            <nav class="navbar navbar-default navbar-static-top" role="navigation">
 	                <div class="container">
 	                    <div class="navbar-header">
-	                        <a href="index.html"><img src="imagens/logo-rcms.jpg" alt="RCMS" /></a>
+	                        <a href="index.html"><h:graphicImage value="/imagens/logo-rcms.jpg" alt="RCMS" /></a>
 	                    </div>
 	                    <ul class="nav navbar-nav navbar-right">
 	
 	                        <li class="active"><a href="index.html">Início</a></li>
 	                        <li class="box-hover"><a href="#">O Grupo</a></li>
-	                        <li class="box-hover"><a href="pesquisadores.html">Pesquisadores</a></li>
+	                        <li class="box-hover"><h:link outcome="listagemPesquisadores" value="Pesquisadores"/></li>
 	                        <li class="box-hover"><a href="#">Projetos de Pesquisa</a></li>
 	                        <li class="box-hover"><a href="#">Publicações</a></li>
 	                        <li class="box-hover"><a href="#">Indicadores</a></li>

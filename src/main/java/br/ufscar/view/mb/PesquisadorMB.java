@@ -7,6 +7,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
 
@@ -21,6 +24,8 @@ public class PesquisadorMB extends AbstractMB {
 
     private Pesquisador pesquisador;
 
+    private UploadedFile fotoPesquisador;
+
     @PostConstruct
     public void inicializar() {
 
@@ -32,14 +37,21 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador = new Pesquisador();
     }
 
+    public void handleFileUpload(FileUploadEvent event) {
+
+        fotoPesquisador = event.getFile();
+
+    }
+
     public void salvar() {
 
         pesquisadorService.salvar(pesquisador);
-        //TODO i18n
-        //TODO encapsular
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                        "Pesquisador " + pesquisador.getNome() + " Salvo com sucesso", null));
+        // TODO i18n
+        // TODO encapsular
+        FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Pesquisador " + pesquisador.getNome()
+                        + " Salvo com sucesso", null));
 
         limparDados();
     }
@@ -68,4 +80,11 @@ public class PesquisadorMB extends AbstractMB {
         this.pesquisador = pesquisador;
     }
 
+    public UploadedFile getFotoPesquisador() {
+        return fotoPesquisador;
+    }
+
+    public void setFotoPesquisador(UploadedFile fotoPesquisador) {
+        this.fotoPesquisador = fotoPesquisador;
+    }
 }

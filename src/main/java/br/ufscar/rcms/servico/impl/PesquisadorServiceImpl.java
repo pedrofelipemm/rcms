@@ -10,17 +10,17 @@ import br.ufscar.rcms.servico.PesquisadorService;
 
 @Service("pesquisadorService")
 @Transactional
-public class PesquisadorServiceImpl implements PesquisadorService{
+public class PesquisadorServiceImpl implements PesquisadorService {
 
-	private static final long serialVersionUID = 4593268685421323315L;
+    private static final long serialVersionUID = 4593268685421323315L;
 
-	@Autowired
-	private PesquisadorDAO pesquisadorDAO;
+    @Autowired
+    private PesquisadorDAO pesquisadorDAO;
 
-	@Override
-	public void salvar(Pesquisador pesquisador) {
+    @Override
+    public void salvar(Pesquisador pesquisador) {
 
-		pesquisadorDAO.salvar(pesquisador);
-	}
+        pesquisadorDAO.salvar(pesquisador);
+    }
 
 }

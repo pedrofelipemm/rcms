@@ -1,109 +1,194 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PESQUISADORES")
-public class Pesquisador extends Entidade{
+public class Pesquisador extends Administrador {
 
-	private static final long serialVersionUID = 8459435679917888175L;
+    private static final long serialVersionUID = 8459435679917888175L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idPesquisador;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idPesquisador;
 
-	@Column(nullable = false)
-	private String nome;
+    @Column(nullable = false)
+    private String codigoLattes;
 
-	@Column(nullable = false)
-	private String codigoLattes;
+    @Column(nullable = false)
+    private String nome;
 
-	@Column(nullable = false)
-	private String resumoProfissional;
+    @Column(nullable = false)
+    private String enderecoProfissional;
 
+    private byte[] foto;
 
-	public Integer getIdPesquisador() {
+    @Column(nullable = false)
+    private String resumoProfissional;
 
-		return idPesquisador;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PesquisadorNomeCitacao> pesquisadorNomeCitacao;
 
-	public void setIdPesquisador(Integer idPesquisador) {
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PesquisadorFormacao> pesquisadorFormacoes = new ArrayList<PesquisadorFormacao>();
 
-		this.idPesquisador = idPesquisador;
-	}
+    @ManyToMany
+    private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
 
-	public String getNome() {
+    @ManyToMany
+    private List<Idioma> idiomas = new ArrayList<Idioma>();
 
-		return nome;
-	}
+    @ManyToMany
+    private List<Publicacao> publicacoes = new ArrayList<Publicacao>();
 
-	public void setNome(String nome) {
+    @ManyToMany
+    private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
-		this.nome = nome;
-	}
+    public Integer getIdPesquisador() {
+        return idPesquisador;
+    }
 
-	public String getCodigoLattes() {
+    public void setIdPesquisador(Integer idPesquisador) {
+        this.idPesquisador = idPesquisador;
+    }
 
-		return codigoLattes;
-	}
+    public String getCodigoLattes() {
+        return codigoLattes;
+    }
 
-	public void setCodigoLattes(String codigoLattes) {
+    public void setCodigoLattes(String codigoLattes) {
+        this.codigoLattes = codigoLattes;
+    }
 
-		this.codigoLattes = codigoLattes;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getResumoProfissional() {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-		return resumoProfissional;
-	}
+    public String getEnderecoProfissional() {
+        return enderecoProfissional;
+    }
 
-	public void setResumoProfissional(String resumoProfissional) {
+    public void setEnderecoProfissional(String enderecoProfissional) {
+        this.enderecoProfissional = enderecoProfissional;
+    }
 
-		this.resumoProfissional = resumoProfissional;
-	}
+    public byte[] getFoto() {
+        return foto;
+    }
 
-	@Override
-	public int hashCode() {
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idPesquisador == null) ? 0 : idPesquisador.hashCode());
-		return result;
-	}
+    public String getResumoProfissional() {
+        return resumoProfissional;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
+    public void setResumoProfissional(String resumoProfissional) {
+        this.resumoProfissional = resumoProfissional;
+    }
 
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof Pesquisador)) {
-			return false;
-		}
-		Pesquisador other = (Pesquisador) obj;
-		if (idPesquisador == null) {
-			if (other.idPesquisador != null) {
-				return false;
-			}
-		} else if (!idPesquisador.equals(other.idPesquisador)) {
-			return false;
-		}
-		return true;
-	}
+    public List<PesquisadorNomeCitacao> getPesquisadorNomeCitacao() {
+        return pesquisadorNomeCitacao;
+    }
 
-	@Override
-	public String toString() {
+    public void setPesquisadorNomeCitacao(List<PesquisadorNomeCitacao> pesquisadorNomeCitacao) {
+        this.pesquisadorNomeCitacao = pesquisadorNomeCitacao;
+    }
 
-		return "Pesquisador [idPesquisador=" + idPesquisador + ", nome=" + nome + ", codigoLattes="
-				+ codigoLattes + ", resumoProfissional=" + resumoProfissional + "]";
-	}
+    public List<PesquisadorFormacao> getPesquisadorFormacoes() {
+        return pesquisadorFormacoes;
+    }
+
+    public void setPesquisadorFormacoes(List<PesquisadorFormacao> pesquisadorFormacoes) {
+        this.pesquisadorFormacoes = pesquisadorFormacoes;
+    }
+
+    public List<AreaAtuacao> getAreaAtuacoes() {
+        return areaAtuacoes;
+    }
+
+    public void setAreaAtuacoes(List<AreaAtuacao> areaAtuacoes) {
+        this.areaAtuacoes = areaAtuacoes;
+    }
+
+    public List<Idioma> getIdiomas() {
+        return idiomas;
+    }
+
+    public void setIdiomas(List<Idioma> idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    public List<Publicacao> getPublicacoes() {
+        return publicacoes;
+    }
+
+    public void setPublicacoes(List<Publicacao> publicacoes) {
+        this.publicacoes = publicacoes;
+    }
+
+    public List<ProjetoPesquisa> getProjetosPesquisa() {
+        return projetosPesquisa;
+    }
+
+    public void setProjetosPesquisa(List<ProjetoPesquisa> projetosPesquisa) {
+        this.projetosPesquisa = projetosPesquisa;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idPesquisador == null) ? 0 : idPesquisador.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Pesquisador)) {
+            return false;
+        }
+        Pesquisador other = (Pesquisador) obj;
+        if (idPesquisador == null) {
+            if (other.idPesquisador != null) {
+                return false;
+            }
+        } else if (!idPesquisador.equals(other.idPesquisador)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pesquisador [idPesquisador=" + idPesquisador + ", codigoLattes=" + codigoLattes + ", nome=" + nome
+                + ", enderecoProfissional=" + enderecoProfissional + ", foto=" + Arrays.toString(foto)
+                + ", resumoProfissional=" + resumoProfissional + ", pesquisadorNomeCitacao=" + pesquisadorNomeCitacao
+                + ", pesquisadorFormacoes=" + pesquisadorFormacoes + ", areaAtuacoes=" + areaAtuacoes + ", idiomas="
+                + idiomas + ", publicacoes=" + publicacoes + ", projetosPesquisa=" + projetosPesquisa + "]";
+    }
 
 }

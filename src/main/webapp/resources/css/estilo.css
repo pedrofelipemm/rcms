@@ -139,3 +139,7 @@ ol.listas-numeradas > li:before {
 .menu-admin a:hover {
 	color: #222;
 }
+
+.panelGrid td, .panelGrid tr {
+    border: none !important;
+}

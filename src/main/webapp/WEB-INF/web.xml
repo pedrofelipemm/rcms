@@ -19,6 +19,11 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
   	
+  	<context-param>
+		<param-name>primefaces.UPLOADER</param-name>
+		<param-value>native</param-value>
+	</context-param>
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -59,4 +64,5 @@
     	<servlet-name>Faces Servlet</servlet-name>
     	<url-pattern>*.xhtml</url-pattern>
   	</servlet-mapping>
+  	
 </web-app>

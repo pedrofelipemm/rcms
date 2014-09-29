@@ -40,7 +40,7 @@ public abstract class AbstractMB implements Serializable {
 
         if (key == null || value == null) {
             //TODO i18n
-            throw new IllegalArgumentException("Parâmetros key e value não podem ser nulos");
+            throw new IllegalArgumentException("ParÃ¢metros key e value nï¿½o podem ser nulos");
         }
 
         getFlash().put(key, value);
@@ -70,7 +70,7 @@ public abstract class AbstractMB implements Serializable {
 
         if (key == null) {
             //TODO i18n
-            throw new IllegalArgumentException("Key não pode ser nula");
+            throw new IllegalArgumentException("Key nï¿½o pode ser nula");
         }
 
         return getResourceBundle().getString(key);
@@ -81,7 +81,7 @@ public abstract class AbstractMB implements Serializable {
         String mensagem = getMessage(key);
         if (parameters == null) {
             //TODO i18n
-            throw new IllegalArgumentException("Parameters não pode ser nulo");
+            throw new IllegalArgumentException("Parameters nï¿½o pode ser nulo");
         }
 
         internacionalizarParametros(parameters);

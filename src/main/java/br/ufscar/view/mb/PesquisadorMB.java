@@ -1,11 +1,9 @@
 package br.ufscar.view.mb;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -46,12 +44,8 @@ public class PesquisadorMB extends AbstractMB {
     public void salvar() {
 
         pesquisadorService.salvar(pesquisador);
-        // TODO i18n
-        // TODO encapsular
-        FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Pesquisador " + pesquisador.getNome()
-                        + " Salvo com sucesso", null));
+
+        adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
 
         limparDados();
     }

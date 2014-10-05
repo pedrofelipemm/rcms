@@ -140,6 +140,10 @@ ol.listas-numeradas > li:before {
 	color: #222;
 }
 
-.panelGrid td, .panelGrid tr {
-    border: none !important;
+.top-buffer-10 {
+	margin-top: 10px;
+}
+
+.top-buffer-20 {
+	margin-top: 20px;
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
@@ -39,8 +41,7 @@ public abstract class AbstractMB implements Serializable {
     public void setFlashObject(String key, Object value) {
 
         if (key == null || value == null) {
-            //TODO i18n
-            throw new IllegalArgumentException("Parâmetros key e value n�o podem ser nulos");
+            throw new IllegalArgumentException("key.value.nao.nulo");
         }
 
         getFlash().put(key, value);
@@ -69,23 +70,21 @@ public abstract class AbstractMB implements Serializable {
     public String getMessage(String key) {
 
         if (key == null) {
-            //TODO i18n
-            throw new IllegalArgumentException("Key n�o pode ser nula");
+            throw new IllegalArgumentException("key.nao.nulo");
         }
 
         return getResourceBundle().getString(key);
     }
 
-    public String getMessage(String key, String... parameters) {
+    public String getMessage(String key, String... parametros) {
 
         String mensagem = getMessage(key);
-        if (parameters == null) {
-            //TODO i18n
-            throw new IllegalArgumentException("Parameters n�o pode ser nulo");
+        if (parametros == null) {
+            throw new IllegalArgumentException("parametros.nao.nulo");
         }
 
-        internacionalizarParametros(parameters);
-        mensagem = MessageFormat.format(mensagem, (Object[]) parameters);
+        internacionalizarParametros(parametros);
+        mensagem = MessageFormat.format(mensagem, (Object[]) parametros);
 
         return mensagem;
     }
@@ -101,5 +100,37 @@ public abstract class AbstractMB implements Serializable {
             String parametroInternacionalizado = getMessage(parametro);
             parametro = (parametroInternacionalizado == null) ? parametro : parametroInternacionalizado;
         }
+    }
+
+    public void adicionarMensagemInfo(String texto) {
+        adicionarMensagem(texto, FacesMessage.SEVERITY_INFO);
+    }
+
+    public void adicionarMensagemInfoByKey(String key, String... parameters) {
+        adicionarMensagemByKey(FacesMessage.SEVERITY_INFO, key, parameters);
+    }
+
+    public void adicionarMensagemErro(String texto) {
+        adicionarMensagem(texto, FacesMessage.SEVERITY_ERROR);
+    }
+
+    public void adicionarMensagemErroByKey(String key, String... parameters) {
+        adicionarMensagemByKey(FacesMessage.SEVERITY_ERROR, key, parameters);
+    }
+
+    public void adicionarMensagemAlerta(String texto) {
+        adicionarMensagem(texto, FacesMessage.SEVERITY_WARN);
+    }
+
+    public void adicionarMensagemAlertaByKey(String key, String... parameters) {
+        adicionarMensagemByKey(FacesMessage.SEVERITY_WARN, key, parameters);
+    }
+
+    private void adicionarMensagem(String texto, Severity severity) {
+        getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
+    }
+
+    private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
+        getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
     }
 }

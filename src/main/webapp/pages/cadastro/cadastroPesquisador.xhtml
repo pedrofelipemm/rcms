@@ -31,36 +31,56 @@
 	            <div class="row">
             		<div class="col-md-12">&nbsp;</div>
             	</div>
+            	
+            	<div>
 	            
-	            <p:panelGrid id="painelCadastroPesquisador" styleClass="panelGrid" columns="3">
+					<div class="row top-buffer-10">
+						<div class="col-md-2">					
+							<h:outputLabel for="nome" value="Nome: " />
+						</div>
+						<div class="col-md-10">
+							<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
+								requiredMessage="'Nome' não preenchido"/>	            
+							<p:messages for="nome" closable="true" autoUpdate="true" showIcon="false" />
+						</div>
+					</div>
 					
-					<h:outputLabel for="nome" value="Nome: " />
-					<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
-						requiredMessage="'Nome' não preenchido"/>	            
-					<p:messages for="nome" closable="true" autoUpdate="true" showIcon="false" />
-
-					<h:outputLabel for="codigoLattes" value="Código Lattes: " />
-					<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
-						required="true" requiredMessage="'Código Lattes' não preenchido" />
-					<p:messages for="codigoLattes" closable="true" autoUpdate="true" showIcon="false" />
-			
-					<h:outputLabel for="enderecoProfissional" value="Endereço Profissional: " />
-					<p:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
-						required="true" requiredMessage="'Endereço Profissional' não preenchido" />
-					<p:messages for="enderecoProfissional" closable="true" autoUpdate="true" showIcon="false" />
-			
-					<h:outputLabel for="resumoProfissional" value="Resumo Profissional: " />
-					<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
-						required="true" requiredMessage="'Resumo Profissional' não preenchido"/>
-					<p:messages for="resumoProfissional" closable="true" autoUpdate="true" showIcon="false" />
+					<div class="row top-buffer-10">
+						<div class="col-md-2">
+							<h:outputLabel for="codigoLattes" value="Código Lattes: " />
+						</div>
+						<div class="col-md-10">
+							<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+								required="true" requiredMessage="'Código Lattes' não preenchido" />
+							<p:messages for="codigoLattes" closable="true" autoUpdate="true" showIcon="false" />
+						</div>
+					</div>
+					
+					<div class="row top-buffer-10">
+						<div class="col-md-2">
+							<h:outputLabel for="enderecoProfissional" value="Endereço Profissional: " />
+						</div>
+						<div class="col-md-10">
+							<p:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+								required="true" requiredMessage="'Endereço Profissional' não preenchido" />
+							<p:messages for="enderecoProfissional" closable="true" autoUpdate="true" showIcon="false" />
+						</div>
+					</div>
+					
+					<div class="row top-buffer-10">
+						<div class="col-md-2">
+							<h:outputLabel for="resumoProfissional" value="Resumo Profissional: " />
+						</div>
+						<div class="col-md-10">
+							<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
+								required="true" requiredMessage="'Resumo Profissional' não preenchido"/>
+							<p:messages for="resumoProfissional" closable="true" autoUpdate="true" showIcon="false" />
+						</div>
+					</div>
+					
+				</div>
 				
-				</p:panelGrid>
-				
-				<div class="row">
-            		<div class="col-md-12">&nbsp;</div>
-            	</div>
-				
-				<div class="row">
+				<div class="row top-buffer-20">
 					<div class="col-md-12">
 						<p:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" update="@form" style="margin-right: 10px;"/>
 					</div>

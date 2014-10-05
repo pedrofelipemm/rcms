@@ -6,13 +6,14 @@
 	xmlns:p="http://primefaces.org/ui" >
 
 	<h:head>
-        <title>RCMS - Research Content Management System</title>
+        <title>#{titulo.sistema}</title>
 
 		<meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <h:outputStylesheet name="bootstrap.min.css" library="css"/>
+        <h:outputStylesheet name="primefaces.css" library="css"/>
         <h:outputStylesheet name="estilo.css" library="css"/>
 
 		<h:outputScript name="jquery-1.11.1.min.js" library="js"/>        
@@ -42,20 +43,19 @@
 
 		<h:panelGroup id="page" layout="block">
  
-				<ui:insert name="cabecalho" >
-		  			<ui:include src="/pages/templates/cabecalho.xhtml" />
-				</ui:insert>
+			<ui:insert name="cabecalho" >
+  				<ui:include src="/pages/templates/cabecalho.xhtml" />
+			</ui:insert>
  
 		    <div id="conteudo">
 		  		<ui:insert name="conteudo" >
 		 	  		
 		   		</ui:insert>
 		    </div>
- 
 
-	    		<ui:insert name="rodape" >
-	    	  		<ui:include src="/pages/templates/rodape.xhtml" />
-	    		</ui:insert>
+    		<ui:insert name="rodape" >
+    	  		<ui:include src="/pages/templates/rodape.xhtml" />
+    		</ui:insert>
 
         </h:panelGroup>
 

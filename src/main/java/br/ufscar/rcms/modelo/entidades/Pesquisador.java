@@ -1,7 +1,6 @@
 package br.ufscar.rcms.modelo.entidades;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,7 +32,7 @@ public class Pesquisador extends Administrador {
     @Column(nullable = false)
     private String enderecoProfissional;
 
-    private byte[] foto;
+    private Byte[] foto;
 
     @Column(nullable = false)
     private String resumoProfissional;
@@ -55,6 +54,10 @@ public class Pesquisador extends Administrador {
 
     @ManyToMany
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
+
+    // TODO
+    // @OneToMany
+    // private CitacaoBibliografica citacaoBibliografica;
 
     public Integer getIdPesquisador() {
         return idPesquisador;
@@ -88,11 +91,11 @@ public class Pesquisador extends Administrador {
         this.enderecoProfissional = enderecoProfissional;
     }
 
-    public byte[] getFoto() {
+    public Byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(Byte[] foto) {
         this.foto = foto;
     }
 
@@ -185,10 +188,7 @@ public class Pesquisador extends Administrador {
     @Override
     public String toString() {
         return "Pesquisador [idPesquisador=" + idPesquisador + ", codigoLattes=" + codigoLattes + ", nome=" + nome
-                + ", enderecoProfissional=" + enderecoProfissional + ", foto=" + Arrays.toString(foto)
-                + ", resumoProfissional=" + resumoProfissional + ", pesquisadorNomeCitacao=" + pesquisadorNomeCitacao
-                + ", pesquisadorFormacoes=" + pesquisadorFormacoes + ", areaAtuacoes=" + areaAtuacoes + ", idiomas="
-                + idiomas + ", publicacoes=" + publicacoes + ", projetosPesquisa=" + projetosPesquisa + "]";
+                + "]";
     }
 
 }

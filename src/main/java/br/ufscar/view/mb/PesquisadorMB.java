@@ -1,12 +1,12 @@
 package br.ufscar.view.mb;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import javax.servlet.http.Part;
 
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
@@ -22,7 +22,7 @@ public class PesquisadorMB extends AbstractMB {
 
     private Pesquisador pesquisador;
 
-    private UploadedFile fotoPesquisador;
+    private Part fotoPesquisador;
 
     @PostConstruct
     public void inicializar() {
@@ -35,13 +35,22 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador = new Pesquisador();
     }
 
-    public void handleFileUpload(FileUploadEvent event) {
+    private String getFileName(Part part) {
 
-        fotoPesquisador = event.getFile();
-
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
     }
 
-    public void salvar() {
+    // TODO CRIAR HIERARQUIA DE EXCEPTION
+    public void salvar() throws IOException {
+
+        // File file = new File(getFileName(fotoPesquisador));
+        // pesquisador.setFoto(Files.readAllBytes(file.toPath()));
 
         pesquisadorService.salvar(pesquisador);
 
@@ -74,11 +83,12 @@ public class PesquisadorMB extends AbstractMB {
         this.pesquisador = pesquisador;
     }
 
-    public UploadedFile getFotoPesquisador() {
+    public Part getFotoPesquisador() {
         return fotoPesquisador;
     }
 
-    public void setFotoPesquisador(UploadedFile fotoPesquisador) {
+    public void setFotoPesquisador(Part fotoPesquisador) {
         this.fotoPesquisador = fotoPesquisador;
     }
+
 }

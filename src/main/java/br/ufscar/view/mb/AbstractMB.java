@@ -79,27 +79,11 @@ public abstract class AbstractMB implements Serializable {
     public String getMessage(String key, String... parametros) {
 
         String mensagem = getMessage(key);
-        if (parametros == null) {
-            throw new IllegalArgumentException("parametros.nao.nulo");
+        if (parametros != null) {
+            mensagem = MessageFormat.format(mensagem, (Object[]) parametros);
         }
-
-        internacionalizarParametros(parametros);
-        mensagem = MessageFormat.format(mensagem, (Object[]) parametros);
 
         return mensagem;
-    }
-
-    private void internacionalizarParametros(String... arrayParametros) {
-
-        if (arrayParametros == null) {
-            return;
-        }
-
-        for (String parametro : arrayParametros) {
-
-            String parametroInternacionalizado = getMessage(parametro);
-            parametro = (parametroInternacionalizado == null) ? parametro : parametroInternacionalizado;
-        }
     }
 
     public void adicionarMensagemInfo(String texto) {

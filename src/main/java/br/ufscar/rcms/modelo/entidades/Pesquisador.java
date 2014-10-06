@@ -32,7 +32,7 @@ public class Pesquisador extends Administrador {
     @Column(nullable = false)
     private String enderecoProfissional;
 
-    private Byte[] foto;
+    private byte[] foto;
 
     @Column(nullable = false)
     private String resumoProfissional;
@@ -91,11 +91,11 @@ public class Pesquisador extends Administrador {
         this.enderecoProfissional = enderecoProfissional;
     }
 
-    public Byte[] getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(Byte[] foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 

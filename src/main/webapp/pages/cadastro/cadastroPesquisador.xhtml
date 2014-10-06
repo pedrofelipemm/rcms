@@ -3,13 +3,16 @@
 ]>
 <ui:composition template="/pages/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
-		<h:form>
-
+		
+		<h:form id="formPesquisador" enctype="multipart/form-data">
+			
+			<p:growl autoUpdate="true"/>
+			
 			<div class="container">
 			
 	            <div class="row">
@@ -40,18 +43,18 @@
 						</div>
 						<div class="col-md-10">
 							<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
-								requiredMessage="'Nome' não preenchido"/>	            
+								requiredMessage="'Nome' não preenchido" styleClass="input-5"/>	            
 							<p:messages for="nome" closable="true" autoUpdate="true" showIcon="false" />
 						</div>
 					</div>
-					
+
 					<div class="row top-buffer-10">
 						<div class="col-md-2">
 							<h:outputLabel for="codigoLattes" value="Código Lattes: " />
 						</div>
 						<div class="col-md-10">
 							<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
-								required="true" requiredMessage="'Código Lattes' não preenchido" />
+								required="true" requiredMessage="'Código Lattes' não preenchido" styleClass="input-5"/>
 							<p:messages for="codigoLattes" closable="true" autoUpdate="true" showIcon="false" />
 						</div>
 					</div>
@@ -62,7 +65,7 @@
 						</div>
 						<div class="col-md-10">
 							<p:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
-								required="true" requiredMessage="'Endereço Profissional' não preenchido" />
+								required="true" requiredMessage="'Endereço Profissional' não preenchido" styleClass="input-5"/>
 							<p:messages for="enderecoProfissional" closable="true" autoUpdate="true" showIcon="false" />
 						</div>
 					</div>
@@ -73,8 +76,19 @@
 						</div>
 						<div class="col-md-10">
 							<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
-								required="true" requiredMessage="'Resumo Profissional' não preenchido"/>
+								required="true" requiredMessage="'Resumo Profissional' não preenchido" styleClass="input-5"/>
 							<p:messages for="resumoProfissional" closable="true" autoUpdate="true" showIcon="false" />
+						</div>
+					</div>
+					
+					<div class="row top-buffer-10">
+						<div class="col-md-2">
+							<h:outputLabel for="foto" value="Enviar Foto: " />
+						</div>
+						<div class="col-md-10">
+							<h:inputFile disabled="true" id="foto" value="#{pesquisadorMB.fotoPesquisador}" required="true"
+								requiredMessage="Foto obrigatória"/>
+							<p:messages for="foto" closable="true" autoUpdate="true" showIcon="false" />
 						</div>
 					</div>
 					
@@ -82,7 +96,9 @@
 				
 				<div class="row top-buffer-20">
 					<div class="col-md-12">
-						<p:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" update="@form" style="margin-right: 10px;"/>
+						<h:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" style="margin-right: 10px;">
+							<f:ajax render="@form" execute="@form"/>
+						</h:commandButton>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 package br.ufscar.view.mb;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class PesquisadorMB extends AbstractMB {
     private Pesquisador pesquisador;
 
     private AreaAtuacao areaSelecionada;
+
     private List<AreaAtuacao> areas;
 
     private Part fotoPesquisador;
@@ -36,33 +39,19 @@ public class PesquisadorMB extends AbstractMB {
     @PostConstruct
     public void inicializar() {
 
-        areas = new ArrayList<AreaAtuacao>();
-
         limparDados();
     }
 
     private void limparDados() {
 
         pesquisador = new Pesquisador();
-    }
-
-    private String getFileName(Part part) {
-
-        final String partHeader = part.getHeader("content-disposition");
-        for (String content : part.getHeader("content-disposition").split(";")) {
-            if (content.trim().startsWith("filename")) {
-                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-            }
-        }
-        return null;
+        areas = new ArrayList<AreaAtuacao>();
     }
 
     // TODO CRIAR HIERARQUIA DE EXCEPTION
     public void salvar() {
 
-        // File file = new File(getFileName(fotoPesquisador));
-        // pesquisador.setFoto(Files.readAllBytes(file.toPath()));
-
+        converterFotoPesquisador(pesquisador);
         pesquisadorService.salvar(pesquisador);
 
         adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
@@ -70,8 +59,38 @@ public class PesquisadorMB extends AbstractMB {
         limparDados();
     }
 
+    private void converterFotoPesquisador(Pesquisador pesquisador) {
+
+        byte[] buffer = new byte[(int) fotoPesquisador.getSize()];
+        InputStream inputStream;
+
+        try {
+
+            inputStream = fotoPesquisador.getInputStream();
+            inputStream.read(buffer);
+            pesquisador.setFoto(buffer);
+        } catch (IOException e) {
+            // TODO TRATAR EXCEPTION
+            e.printStackTrace();
+        }
+    }
+
     public void pesquisar() {
 
+    }
+
+    public void addAreaAtuacao() {
+        if (areaSelecionada != null) {
+            pesquisador.getAreaAtuacoes().add(areaSelecionada);
+            areas.remove(areas.indexOf(areaSelecionada));
+        }
+    }
+
+    public void removerAreaAtuacao() {
+        if (areaSelecionada != null) {
+            pesquisador.getAreaAtuacoes().remove(pesquisador.getAreaAtuacoes().indexOf(areaSelecionada));
+            areas.add(areaSelecionada);
+        }
     }
 
     public PesquisadorService getPesquisadorService() {
@@ -100,20 +119,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setFotoPesquisador(Part fotoPesquisador) {
         this.fotoPesquisador = fotoPesquisador;
-    }
-
-    public void addAreaAtuacao() {
-        if (areaSelecionada != null) {
-            pesquisador.getAreaAtuacoes().add(areaSelecionada);
-            areas.remove(areas.indexOf(areaSelecionada));
-        }
-    }
-
-    public void removerAreaAtuacao() {
-        if (areaSelecionada != null) {
-            pesquisador.getAreaAtuacoes().remove(pesquisador.getAreaAtuacoes().indexOf(areaSelecionada));
-            areas.add(areaSelecionada);
-        }
     }
 
     public AreaAtuacaoService getAreaAtuacaoService() {

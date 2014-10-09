@@ -54,7 +54,6 @@ public class Pesquisador extends Administrador {
 
     @ManyToMany
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
-
     // TODO
     // @OneToMany
     // private CitacaoBibliografica citacaoBibliografica;

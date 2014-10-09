@@ -151,3 +151,7 @@ ol.listas-numeradas > li:before {
 .input-5 {
 	width: 500px;
 }
+
+.panelGrid td, .panelGrid tr {
+    border: none !important;
+}

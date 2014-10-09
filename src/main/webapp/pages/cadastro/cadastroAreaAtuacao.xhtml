@@ -1,0 +1,52 @@
+<!DOCTYPE html[
+    <!ENTITY nbsp "&#160;">
+]>
+<ui:composition template="/pages/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="conteudo">
+		<h:form>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ol class="breadcrumb">
+							<li><a href="#">Início</a></li>
+							<li><a href="#">Area de Atuação</a></li>
+							<li class="active">Cadastro</li>
+						</ol>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-9">
+						<h1>Cadastro de Área de Atuação</h1>
+					</div>
+				</div>
+
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+
+				<p:panelGrid id="painelCadastroAreaAtuacao" styleClass="panelGrid"
+					columns="3">
+
+					<h:outputLabel for="descricao" value="Descrição " />
+					<p:inputText id="descricao"
+						value="#{areaAtuacaoMB.area.descricao}" required="true"
+						requiredMessage="'Descrição' não preenchida" />
+					<p:messages for="descricao" closable="true" autoUpdate="true"
+						showIcon="false" />
+
+					<div class="row">
+						<div class="col-md-12">
+							<p:commandButton value="Salvar" action="#{areaAtuacaoMB.salvar}"
+								update="@form" style="margin-right: 10px;" />
+						</div>
+					</div>
+				</p:panelGrid>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

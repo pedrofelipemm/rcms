@@ -8,43 +8,45 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
-		
+
 		<h:form id="formPesquisador" enctype="multipart/form-data">
-			
-			<p:growl autoUpdate="true"/>
-			
+
+			<p:growl autoUpdate="true" />
+
 			<div class="container">
-			
-	            <div class="row">
-	                <div class="col-md-12">
-	                    <ol class="breadcrumb">
-	                        <li><a href="#">Início</a></li>
-	                        <li><a href="#">Pesquisadores</a></li>
-	                        <li class="active">Cadastro</li>
-	                    </ol>
-	                </div>
-	            </div>
-	            
-	            <div class="row">
-	            	<div class="col-md-9">
-	                	<h1>#{mensagens['cadastro.pesquisador']}</h1>
-	            	</div>
-	            </div>
-	            
-	            <div class="row">
-            		<div class="col-md-12">&nbsp;</div>
-            	</div>
-            	
-            	<div>
-	            
+
+				<div class="row">
+					<div class="col-md-12">
+						<ol class="breadcrumb">
+							<li><a href="#">Início</a></li>
+							<li><a href="#">Pesquisadores</a></li>
+							<li class="active">Cadastro</li>
+						</ol>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-9">
+						<h1>#{mensagens['cadastro.pesquisador']}</h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">&nbsp;</div>
+				</div>
+
+				<div>
+
 					<div class="row top-buffer-10">
-						<div class="col-md-2">					
+						<div class="col-md-2">
 							<h:outputLabel for="nome" value="Nome: " />
 						</div>
 						<div class="col-md-10">
-							<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" required="true"
-								requiredMessage="'Nome' não preenchido" styleClass="input-5"/>	            
-							<p:messages for="nome" closable="true" autoUpdate="true" showIcon="false" />
+							<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}"
+								required="true" requiredMessage="'Nome' não preenchido"
+								styleClass="input-5" />
+							<p:messages for="nome" closable="true" autoUpdate="true"
+								showIcon="false" />
 						</div>
 					</div>
 
@@ -53,56 +55,128 @@
 							<h:outputLabel for="codigoLattes" value="Código Lattes: " />
 						</div>
 						<div class="col-md-10">
-							<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
-								required="true" requiredMessage="'Código Lattes' não preenchido" styleClass="input-5"/>
-							<p:messages for="codigoLattes" closable="true" autoUpdate="true" showIcon="false" />
+							<p:inputText id="codigoLattes"
+								value="#{pesquisadorMB.pesquisador.codigoLattes}"
+								required="true" requiredMessage="'Código Lattes' não preenchido"
+								styleClass="input-5" />
+							<p:messages for="codigoLattes" closable="true" autoUpdate="true"
+								showIcon="false" />
 						</div>
 					</div>
-					
+
 					<div class="row top-buffer-10">
 						<div class="col-md-2">
-							<h:outputLabel for="enderecoProfissional" value="Endereço Profissional: " />
+							<h:outputLabel for="enderecoProfissional"
+								value="Endereço Profissional: " />
 						</div>
 						<div class="col-md-10">
-							<p:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
-								required="true" requiredMessage="'Endereço Profissional' não preenchido" styleClass="input-5"/>
-							<p:messages for="enderecoProfissional" closable="true" autoUpdate="true" showIcon="false" />
+							<p:inputText id="enderecoProfissional"
+								value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+								required="true"
+								requiredMessage="'Endereço Profissional' não preenchido"
+								styleClass="input-5" />
+							<p:messages for="enderecoProfissional" closable="true"
+								autoUpdate="true" showIcon="false" />
 						</div>
 					</div>
-					
+
 					<div class="row top-buffer-10">
 						<div class="col-md-2">
-							<h:outputLabel for="resumoProfissional" value="Resumo Profissional: " />
+							<h:outputLabel for="resumoProfissional"
+								value="Resumo Profissional: " />
 						</div>
 						<div class="col-md-10">
-							<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
-								required="true" requiredMessage="'Resumo Profissional' não preenchido" styleClass="input-5"/>
-							<p:messages for="resumoProfissional" closable="true" autoUpdate="true" showIcon="false" />
+							<p:inputTextarea id="resumoProfissional"
+								value="#{pesquisadorMB.pesquisador.resumoProfissional}"
+								required="true"
+								requiredMessage="'Resumo Profissional' não preenchido"
+								styleClass="input-5" />
+							<p:messages for="resumoProfissional" closable="true"
+								autoUpdate="true" showIcon="false" />
 						</div>
 					</div>
-					
+
 					<div class="row top-buffer-10">
 						<div class="col-md-2">
 							<h:outputLabel for="foto" value="Enviar Foto: " />
 						</div>
 						<div class="col-md-10">
-							<h:inputFile disabled="true" id="foto" value="#{pesquisadorMB.fotoPesquisador}" required="true"
-								requiredMessage="Foto obrigatória"/>
-							<p:messages for="foto" closable="true" autoUpdate="true" showIcon="false" />
+							<h:inputFile disabled="true" id="foto"
+								value="#{pesquisadorMB.fotoPesquisador}" required="true"
+								requiredMessage="Foto obrigatória" />
+							<p:messages for="foto" closable="true" autoUpdate="true"
+								showIcon="false" />
 						</div>
 					</div>
-					
+
 				</div>
-				
+
+				<p:growl autoUpdate="true" />
+
+				<p:accordionPanel>
+					<p:tab title="Áreas de atuação">
+						<h:form>
+							<div id="cabecaloInclusaoAreas" class="col-md8">
+								<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
+									columns="2">
+									<h:selectOneMenu id="selectAreas"
+										value="#{pesquisadorMB.areaSelecionada}"
+										converter="areaAtuacaoConverter">
+										<f:selectItem itemLabel="Selecione uma área" itemValue=""></f:selectItem>
+										<f:selectItems value="#{pesquisadorMB.areas}" var="area"
+											itemLabel="#{area.descricao}" itemValue="#{area}"></f:selectItems>
+									</h:selectOneMenu>
+
+									<p:commandButton value="Adicionar"
+										update="areasDoPesquisador selectAreas"
+										action="#{pesquisadorMB.addAreaAtuacao}"></p:commandButton>
+								</p:panelGrid>
+							</div>
+
+							<p:separator />
+
+							<h:dataTable id="areasDoPesquisador"
+								value="#{pesquisadorMB.pesquisador.areaAtuacoes}" var="area">
+								<h:column>
+
+									<div class="col-md8">
+										<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
+											columns="2">
+											<h:outputLabel value="#{area.descricao}"></h:outputLabel>
+											<h:commandButton action="#{pesquisadorMB.removerAreaAtuacao}"
+												value="Remover" update="areasDoPesquisador selectAreas">
+												<f:setPropertyActionListener value="#{area}"
+													target="#{pesquisadorMB.areaSelecionada}"></f:setPropertyActionListener>
+											</h:commandButton>
+										</p:panelGrid>
+									</div>
+								</h:column>
+							</h:dataTable>
+						</h:form>
+					</p:tab>
+					<p:tab title="Idiomas compreendidos">
+					</p:tab>
+					<p:tab title="Atuação profissional">
+					</p:tab>
+					<p:tab title="Formação acadêmica">
+					</p:tab>
+				</p:accordionPanel>
+
+				<div class="row">
+					<div class="col-md-12">&nbsp;</div>
+				</div>
+
+
 				<div class="row top-buffer-20">
 					<div class="col-md-12">
-						<h:commandButton value="Salvar" action="#{pesquisadorMB.salvar}" style="margin-right: 10px;">
-							<f:ajax render="@form" execute="@form"/>
+						<h:commandButton value="Salvar" action="#{pesquisadorMB.salvar}"
+							style="margin-right: 10px;">
+							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
 					</div>
 				</div>
 			</div>
-					
+
 		</h:form>
 	</ui:define>
 </ui:composition>

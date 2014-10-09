@@ -32,6 +32,11 @@
 			<to-view-id>/pages/cadastro/cadastroPesquisador.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>cadastroAreaAtuacao</from-outcome>
+			<to-view-id>/pages/cadastro/cadastroAreaAtuacao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>

@@ -1,12 +1,17 @@
 package br.ufscar.view.mb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
+import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.PesquisadorService;
 
 @ViewScoped
@@ -18,12 +23,20 @@ public class PesquisadorMB extends AbstractMB {
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
 
+    @ManagedProperty("#{areaAtuacaoService}")
+    private AreaAtuacaoService areaAtuacaoService;
+
     private Pesquisador pesquisador;
+
+    private AreaAtuacao areaSelecionada;
+    private List<AreaAtuacao> areas;
 
     private Part fotoPesquisador;
 
     @PostConstruct
     public void inicializar() {
+
+        areas = new ArrayList<AreaAtuacao>();
 
         limparDados();
     }
@@ -89,4 +102,41 @@ public class PesquisadorMB extends AbstractMB {
         this.fotoPesquisador = fotoPesquisador;
     }
 
+    public void addAreaAtuacao() {
+        if (areaSelecionada != null) {
+            pesquisador.getAreaAtuacoes().add(areaSelecionada);
+            areas.remove(areas.indexOf(areaSelecionada));
+        }
+    }
+
+    public void removerAreaAtuacao() {
+        if (areaSelecionada != null) {
+            pesquisador.getAreaAtuacoes().remove(pesquisador.getAreaAtuacoes().indexOf(areaSelecionada));
+            areas.add(areaSelecionada);
+        }
+    }
+
+    public AreaAtuacaoService getAreaAtuacaoService() {
+        return areaAtuacaoService;
+    }
+
+    public void setAreaAtuacaoService(AreaAtuacaoService areaAtuacaoService) {
+        this.areaAtuacaoService = areaAtuacaoService;
+    }
+
+    public AreaAtuacao getAreaSelecionada() {
+        return areaSelecionada;
+    }
+
+    public void setAreaSelecionada(AreaAtuacao areaSelecionada) {
+        this.areaSelecionada = areaSelecionada;
+    }
+
+    public List<AreaAtuacao> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<AreaAtuacao> areas) {
+        this.areas = areas;
+    }
 }

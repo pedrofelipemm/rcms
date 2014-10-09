@@ -1,7 +1,5 @@
 package br.ufscar.view.mb;
 
-import java.io.IOException;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -47,7 +45,7 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     // TODO CRIAR HIERARQUIA DE EXCEPTION
-    public void salvar() throws IOException {
+    public void salvar() {
 
         // File file = new File(getFileName(fotoPesquisador));
         // pesquisador.setFoto(Files.readAllBytes(file.toPath()));

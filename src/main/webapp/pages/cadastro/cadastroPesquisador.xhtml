@@ -9,7 +9,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
 		
-		<h:form id="formPesquisador" enctype="multipart/form-data">
+		<h:form id="formPesquisador" >
 			
 			<p:growl autoUpdate="true"/>
 			
@@ -86,9 +86,11 @@
 							<h:outputLabel for="foto" value="Enviar Foto: " />
 						</div>
 						<div class="col-md-10">
-							<h:inputFile disabled="true" id="foto" value="#{pesquisadorMB.fotoPesquisador}" required="true"
+						<!-- 
+							<h:inputFile id="foto" value="#{pesquisadorMB.fotoPesquisador}" required="true"
 								requiredMessage="Foto obrigatória"/>
 							<p:messages for="foto" closable="true" autoUpdate="true" showIcon="false" />
+						 -->
 						</div>
 					</div>
 					

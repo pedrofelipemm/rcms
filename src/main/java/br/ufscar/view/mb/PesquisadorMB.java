@@ -12,8 +12,10 @@ import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
+import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.PesquisadorService;
 
 @ViewScoped
@@ -27,6 +29,9 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{areaAtuacaoService}")
     private AreaAtuacaoService areaAtuacaoService;
+    
+    @ManagedProperty("#{idiomaService}")
+    private IdiomaService idiomaService;
 
     private Pesquisador pesquisador;
 
@@ -35,17 +40,22 @@ public class PesquisadorMB extends AbstractMB {
     private List<AreaAtuacao> areas;
 
     private Part fotoPesquisador;
+    
+    private List<Idioma> idiomas;
+    private Idioma idiomaSelecionado;
 
     @PostConstruct
     public void inicializar() {
 
         limparDados();
+        
+        areas = areaAtuacaoService.BuscarTodas();
+        idiomas = idiomaService.BuscarTodas();
     }
 
     private void limparDados() {
 
         pesquisador = new Pesquisador();
-        areas = new ArrayList<AreaAtuacao>();
     }
 
     // TODO CRIAR HIERARQUIA DE EXCEPTION
@@ -90,6 +100,20 @@ public class PesquisadorMB extends AbstractMB {
         if (areaSelecionada != null) {
             pesquisador.getAreaAtuacoes().remove(pesquisador.getAreaAtuacoes().indexOf(areaSelecionada));
             areas.add(areaSelecionada);
+        }
+    }
+    
+    public void addIdioma() {
+    	if (idiomaSelecionado != null) {
+            pesquisador.getIdiomas().add(idiomaSelecionado);
+            idiomas.remove(idiomas.indexOf(idiomaSelecionado));
+        }
+    }
+
+    public void removerIdioma() {
+        if (idiomaSelecionado != null) {
+            pesquisador.getIdiomas().remove(pesquisador.getIdiomas().indexOf(idiomaSelecionado));
+            idiomas.add(idiomaSelecionado);
         }
     }
 
@@ -144,4 +168,29 @@ public class PesquisadorMB extends AbstractMB {
     public void setAreas(List<AreaAtuacao> areas) {
         this.areas = areas;
     }
+
+	public List<Idioma> getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(List<Idioma> idiomas) {
+		this.idiomas = idiomas;
+	}
+
+	public Idioma getIdiomaSelecionado() {
+		return idiomaSelecionado;
+	}
+
+	public void setIdiomaSelecionado(Idioma idiomaSelecionado) {
+		this.idiomaSelecionado = idiomaSelecionado;
+	}
+
+	public IdiomaService getIdiomaService() {
+		return idiomaService;
+	}
+
+	public void setIdiomaService(IdiomaService idiomaService) {
+		this.idiomaService = idiomaService;
+	}
+	
 }

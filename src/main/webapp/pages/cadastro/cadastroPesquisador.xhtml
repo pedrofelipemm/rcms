@@ -113,7 +113,6 @@
 
 				<p:accordionPanel>
 					<p:tab title="Áreas de atuação">
-						<h:form>
 							<div id="cabecaloInclusaoAreas" class="col-md8">
 								<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
 									columns="2">
@@ -125,9 +124,10 @@
 											itemLabel="#{area.descricao}" itemValue="#{area}"></f:selectItems>
 									</h:selectOneMenu>
 
-									<p:commandButton value="Adicionar"
-										update="areasDoPesquisador selectAreas"
-										action="#{pesquisadorMB.addAreaAtuacao}"></p:commandButton>
+									<h:commandButton value="Adicionar"
+										action="#{pesquisadorMB.addAreaAtuacao}">
+										<f:ajax render="areasDoPesquisador selectAreas" execute="selectAreas"/>
+									</h:commandButton>
 								</p:panelGrid>
 							</div>
 
@@ -150,9 +150,45 @@
 									</div>
 								</h:column>
 							</h:dataTable>
-						</h:form>
 					</p:tab>
 					<p:tab title="Idiomas compreendidos">
+						<h:form>
+							<div id="cabecaloInclusaoIdioma" class="col-md8">
+								<p:panelGrid id="painelSelectIdiomas" styleClass="panelGrid"
+									columns="2">
+									<h:selectOneMenu id="selectIdiomas"
+										value="#{pesquisadorMB.idiomaSelecionado}">
+										<f:selectItem itemLabel="Selecione um idioma" itemValue=""></f:selectItem>
+										<f:selectItems value="#{pesquisadorMB.idiomas}" var="idioma"
+											itemLabel="#{idioma.descricao}" itemValue="#{idioma}"></f:selectItems>
+									</h:selectOneMenu>
+
+									<p:commandButton value="Adicionar"
+										update="idiomasDoPesquisador selectIdiomas"
+										action="#{pesquisadorMB.addIdioma}"></p:commandButton>
+								</p:panelGrid>
+							</div>
+
+							<p:separator />
+
+							<h:dataTable id="idiomasDoPesquisador"
+								value="#{pesquisadorMB.pesquisador.idiomas}" var="idioma">
+								<h:column>
+
+									<div class="col-md8">
+										<p:panelGrid id="painelSelectIdiomas" styleClass="panelGrid"
+											columns="2">
+											<h:outputLabel value="#{idioma.descricao}"></h:outputLabel>
+											<h:commandButton action="#{pesquisadorMB.removerIdioma}"
+												value="Remover" update="idiomasDoPesquisador selectIdiomas">
+												<f:setPropertyActionListener value="#{idioma}"
+													target="#{pesquisadorMB.idiomaSelecionado}"></f:setPropertyActionListener>
+											</h:commandButton>
+										</p:panelGrid>
+									</div>
+								</h:column>
+							</h:dataTable>
+						</h:form>
 					</p:tab>
 					<p:tab title="Atuação profissional">
 					</p:tab>

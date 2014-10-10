@@ -13,10 +13,6 @@ import br.ufscar.rcms.servico.AreaAtuacaoService;
 @Service("areaAtuacaoService")
 @Transactional
 public class AreaAtuacaoServiceImpl implements AreaAtuacaoService {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2677518803876740903L;
 	
 	@Autowired
 	private AreaAtuacaoDAO areaDAO;

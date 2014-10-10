@@ -16,59 +16,59 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+
 @Configuration
 @EnableTransactionManagement
 public class PersistenceJPAConfig {
 
-    private static final String[] PACKAGES_TO_SCAN = { "br.ufscar.rcms.modelo.entidades" };
+	private static final String[] PACKAGES_TO_SCAN = { "br.ufscar.rcms.modelo.entidades" };
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(PACKAGES_TO_SCAN);
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(PACKAGES_TO_SCAN);
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
 
-        return em;
-    }
+		return em;
+	}
 
-    @Bean
-    public DataSource dataSource() {
+	@Bean
+	public DataSource dataSource() {
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        // TODO EXTRACT CONSTANTS
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcms");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("root");
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcms");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("novasenha");
 
-        return dataSource;
-    }
+		return dataSource;
+	}
 
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
 
-        return transactionManager;
-    }
+		return transactionManager;
+	}
 
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
 
-    private Properties additionalProperties() {
+	private Properties additionalProperties() {
 
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        return properties;
-    }
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		return properties;
+	}
 }

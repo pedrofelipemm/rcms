@@ -113,7 +113,6 @@
 
 				<p:accordionPanel>
 					<p:tab title="Áreas de atuação">
-						<h:form>
 							<div id="cabecaloInclusaoAreas" class="col-md8">
 								<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
 									columns="2">
@@ -125,9 +124,10 @@
 											itemLabel="#{area.descricao}" itemValue="#{area}"></f:selectItems>
 									</h:selectOneMenu>
 
-									<p:commandButton value="Adicionar"
-										update="areasDoPesquisador selectAreas"
-										action="#{pesquisadorMB.addAreaAtuacao}"></p:commandButton>
+									<h:commandButton value="Adicionar"
+										action="#{pesquisadorMB.addAreaAtuacao}">
+										<f:ajax render="areasDoPesquisador selectAreas" execute="selectAreas"/>
+									</h:commandButton>
 								</p:panelGrid>
 							</div>
 
@@ -150,7 +150,6 @@
 									</div>
 								</h:column>
 							</h:dataTable>
-						</h:form>
 					</p:tab>
 					<p:tab title="Idiomas compreendidos">
 					</p:tab>

@@ -1,4 +1,4 @@
-package br.ufscar.view.mb;
+package br.ufscar.view.converter;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

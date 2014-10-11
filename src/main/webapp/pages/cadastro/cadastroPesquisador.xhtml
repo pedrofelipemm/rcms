@@ -8,7 +8,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
-	
+
 		<h:form id="formPesquisador" enctype="multipart/form-data">
 
 			<p:growl autoUpdate="true" />
@@ -101,9 +101,10 @@
 							<h:outputLabel for="foto" value="Enviar Foto: " />
 						</div>
 						<div class="col-md-10">
-							<h:inputFile id="foto" value="#{pesquisadorMB.fotoPesquisador}" required="true"
-								requiredMessage="Foto obrigatória"/>
-							<p:messages for="foto" closable="true" autoUpdate="true" showIcon="false" />
+							<h:inputFile id="foto" value="#{pesquisadorMB.fotoPesquisador}"
+								required="true" requiredMessage="Foto obrigatória" />
+							<p:messages for="foto" closable="true" autoUpdate="true"
+								showIcon="false" />
 						</div>
 					</div>
 
@@ -113,82 +114,85 @@
 
 				<p:accordionPanel>
 					<p:tab title="Áreas de atuação">
-							<div id="cabecaloInclusaoAreas" class="col-md8">
-								<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
-									columns="2">
-									<h:selectOneMenu id="selectAreas"
-										value="#{pesquisadorMB.areaSelecionada}"
-										converter="areaAtuacaoConverter">
-										<f:selectItem itemLabel="Selecione uma área" itemValue=""></f:selectItem>
-										<f:selectItems value="#{pesquisadorMB.areas}" var="area"
-											itemLabel="#{area.descricao}" itemValue="#{area}"></f:selectItems>
-									</h:selectOneMenu>
+						<div id="cabecaloInclusaoAreas" class="col-md8">
+							<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
+								columns="2">
+								<h:selectOneMenu id="selectAreas" class="form-control"
+									value="#{pesquisadorMB.areaSelecionada}"
+									converter="areaAtuacaoConverter">
+									<f:selectItem itemLabel="Selecione uma área" itemValue=""></f:selectItem>
+									<f:selectItems value="#{pesquisadorMB.areas}" var="area"
+										itemLabel="#{area.descricao}" itemValue="#{area}"></f:selectItems>
+								</h:selectOneMenu>
 
-									<h:commandButton value="Adicionar"
-										action="#{pesquisadorMB.addAreaAtuacao}">
-										<f:ajax render="areasDoPesquisador selectAreas" execute="selectAreas"/>
-									</h:commandButton>
-								</p:panelGrid>
-							</div>
+								<h:commandButton value="Adicionar"
+									action="#{pesquisadorMB.addAreaAtuacao}">
+									<f:ajax render="areasDoPesquisador selectAreas"
+										execute="selectAreas" />
+								</h:commandButton>
+							</p:panelGrid>
+						</div>
 
-							<p:separator />
+						<p:separator />
 
-							<h:dataTable id="areasDoPesquisador"
-								value="#{pesquisadorMB.pesquisador.areaAtuacoes}" var="area">
-								<h:column>
-
-									<div class="col-md8">
-										<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
-											columns="2">
-											<h:outputLabel value="#{area.descricao}"></h:outputLabel>
-											<h:commandButton action="#{pesquisadorMB.removerAreaAtuacao}"
-												value="Remover" update="areasDoPesquisador selectAreas">
-												<f:setPropertyActionListener value="#{area}"
-													target="#{pesquisadorMB.areaSelecionada}"></f:setPropertyActionListener>
-											</h:commandButton>
-										</p:panelGrid>
-									</div>
-								</h:column>
-							</h:dataTable>
+						<h:dataTable id="areasDoPesquisador"
+							value="#{pesquisadorMB.pesquisador.areaAtuacoes}" var="area">
+							<h:column>
+								<div class="col-md8">
+									<p:panelGrid id="painelSelectAreas" styleClass="panelGrid"
+										columns="2">
+										<h:outputLabel value="#{area.descricao}"></h:outputLabel>
+										<h:commandButton action="#{pesquisadorMB.removerAreaAtuacao}"
+											value="Remover">
+											<f:ajax render="@form" execute="areasDoPesquisador" />
+											<f:setPropertyActionListener value="#{area}"
+												target="#{pesquisadorMB.areaSelecionada}"></f:setPropertyActionListener>
+										</h:commandButton>
+									</p:panelGrid>
+								</div>
+							</h:column>
+						</h:dataTable>
 					</p:tab>
 					<p:tab title="Idiomas compreendidos">
-						<h:form>
-							<div id="cabecaloInclusaoIdioma" class="col-md8">
-								<p:panelGrid id="painelSelectIdiomas" styleClass="panelGrid"
-									columns="2">
-									<h:selectOneMenu id="selectIdiomas"
-										value="#{pesquisadorMB.idiomaSelecionado}">
-										<f:selectItem itemLabel="Selecione um idioma" itemValue=""></f:selectItem>
-										<f:selectItems value="#{pesquisadorMB.idiomas}" var="idioma"
-											itemLabel="#{idioma.descricao}" itemValue="#{idioma}"></f:selectItems>
-									</h:selectOneMenu>
+						<div id="cabecaloInclusaoIdioma" class="col-md8">
+							<p:panelGrid id="painelSelectIdiomas" styleClass="panelGrid"
+								columns="2">
+								<h:selectOneMenu id="selectIdiomas" class="form-control"
+									value="#{pesquisadorMB.idiomaSelecionado}"
+									converter="idiomaConverter">
+									<f:selectItem itemLabel="Selecione um idioma" itemValue=""></f:selectItem>
+									<f:selectItems value="#{pesquisadorMB.idiomas}" var="idioma"
+										itemLabel="#{idioma.descricao}" itemValue="#{idioma}"></f:selectItems>
+								</h:selectOneMenu>
 
-									<p:commandButton value="Adicionar"
-										update="idiomasDoPesquisador selectIdiomas"
-										action="#{pesquisadorMB.addIdioma}"></p:commandButton>
-								</p:panelGrid>
-							</div>
+								<h:commandButton value="Adicionar"
+									action="#{pesquisadorMB.addIdioma}">
+									<f:ajax render="idiomasDoPesquisador selectIdiomas"
+										execute="selectIdiomas" />
+								</h:commandButton>
+							</p:panelGrid>
+						</div>
 
-							<p:separator />
+						<p:separator />
 
-							<h:dataTable id="idiomasDoPesquisador"
-								value="#{pesquisadorMB.pesquisador.idiomas}" var="idioma">
-								<h:column>
+						<h:dataTable id="idiomasDoPesquisador"
+							value="#{pesquisadorMB.pesquisador.idiomas}" var="idioma">
+							<h:column>
 
-									<div class="col-md8">
-										<p:panelGrid id="painelSelectIdiomas" styleClass="panelGrid"
-											columns="2">
-											<h:outputLabel value="#{idioma.descricao}"></h:outputLabel>
-											<h:commandButton action="#{pesquisadorMB.removerIdioma}"
-												value="Remover" update="idiomasDoPesquisador selectIdiomas">
-												<f:setPropertyActionListener value="#{idioma}"
-													target="#{pesquisadorMB.idiomaSelecionado}"></f:setPropertyActionListener>
-											</h:commandButton>
-										</p:panelGrid>
-									</div>
-								</h:column>
-							</h:dataTable>
-						</h:form>
+								<div class="col-md8">
+									<p:panelGrid id="painelSelectIdiomas" styleClass="panelGrid"
+										columns="2">
+										<h:outputLabel value="#{idioma.descricao}"></h:outputLabel>
+										<h:commandButton action="#{pesquisadorMB.removerIdioma}"
+											value="Remover">
+											<f:ajax render="@form" execute="idiomasDoPesquisador" />
+											<f:setPropertyActionListener value="#{idioma}"
+												target="#{pesquisadorMB.idiomaSelecionado}"></f:setPropertyActionListener>
+										</h:commandButton>
+									</p:panelGrid>
+								</div>
+							</h:column>
+						</h:dataTable>
 					</p:tab>
 					<p:tab title="Atuação profissional">
 					</p:tab>

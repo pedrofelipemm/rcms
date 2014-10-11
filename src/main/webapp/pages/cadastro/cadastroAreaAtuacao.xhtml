@@ -33,7 +33,7 @@
 					columns="3">
 
 					<h:outputLabel for="descricao" value="Descrição " />
-					<p:inputText id="descricao"
+					<p:inputText id="descricao" class="form-control"
 						value="#{areaAtuacaoMB.area.descricao}" required="true"
 						requiredMessage="'Descrição' não preenchida" />
 					<p:messages for="descricao" closable="true" autoUpdate="true"
@@ -41,7 +41,7 @@
 
 					<div class="row">
 						<div class="col-md-12">
-							<p:commandButton value="Salvar" action="#{areaAtuacaoMB.salvar}"
+							<p:commandButton class="btn btn-default" value="Salvar" action="#{areaAtuacaoMB.salvar}"
 								update="@form" style="margin-right: 10px;" />
 						</div>
 					</div>

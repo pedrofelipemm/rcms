@@ -2,3 +2,7 @@
     display: inline-block;
     margin-left: 15px;
 }
+
+.panelGrid td, .panelGrid tr {
+    border: none !important;
+}

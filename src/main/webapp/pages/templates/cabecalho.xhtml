@@ -24,7 +24,7 @@
 	                    </div>
 	                    <div class="col-xs-6 col-md-6"><p>&nbsp;</p></div>
 	                    <div class="col-xs-1 col-md-1">
-	                        <a class="btn btn-'" data-toggle="modal" data-target=".bs-login-modal-sm">Login</a>
+	                        <a class="btn btn-'" data-toggle="modal" data-target=".bs-login-modal-sm">#{mensagens['login']}</a>
 	
 	                        <div class="modal fade bs-login-modal-sm" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
 	                            <div class="modal-dialog modal-sm">
@@ -32,21 +32,21 @@
 	                                    <form role="form">
 	                                        <div class="modal-header">
 	                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	                                            <h4 class="modal-title" id="myModalLabel">Login</h4>
+	                                            <h4 class="modal-title" id="myModalLabel">#{mensagens['login']}</h4>
 	                                        </div>
 	                                        <div class="modal-body">
 	                                            <div class="form-group">
-	                                                <label for="loginEmail">E-mail</label>
+	                                                <label for="loginEmail">#{mensagens['email']}</label>
 	                                                <input type="email" class="form-control" id="loginEmail" placeholder="Email"/>
 	                                            </div>
 	                                            <div class="form-group">
-	                                                <label for="loginPassword">Senha</label>
+	                                                <label for="loginPassword">#{mensagens['senha']}</label>
 	                                                <input type="password" class="form-control" id="loginPassword" placeholder="Password"/>
 	                                            </div>
 	                                        </div>
 	                                        <div class="modal-footer">
-	                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-	                                            <button type="submit" class="btn btn-default">Entrar</button>
+	                                            <button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['fechar']}</button>
+	                                            <button type="submit" class="btn btn-default">#{mensagens['entrar']}</button>
 	                                        </div>
 	
 	                                    </form>
@@ -56,8 +56,8 @@
 	                    </div>
 	                    <div class="col-xs-2 col-md-2">
 	                        <select class="form-control input-sm">
-	                            <option>Português</option>
-	                            <option>Inglês</option>
+	                            <option>#{mensagens['portugues']}</option>
+	                            <option>#{mensagens['ingles']}</option>
 	                        </select>
 	                    </div>
 	                </div>
@@ -67,22 +67,20 @@
 	            <nav class="navbar navbar-default navbar-static-top" role="navigation">
 	                <div class="container">
 	                    <div class="navbar-header">
-	                        <a href="index.html"><h:graphicImage value="/imagens/logo-rcms.jpg" alt="RCMS" /></a>
+	                        <a href="pages/index.xhtml"><h:graphicImage value="http://localhost:8080/RCMS//resources/images/logo-rcms.jpg" alt="RCMS" /></a>
 	                    </div>
 	                    <ul class="nav navbar-nav navbar-right">
 	
-	                        <li class="active"><a href="index.html">Início</a></li>
-	                        <li class="box-hover"><a href="#">O Grupo</a></li>
-	                        <li class="box-hover"><h:link outcome="listagemPesquisadores" value="Pesquisadores"/></li>
-	                        <li class="box-hover"><a href="#">Projetos de Pesquisa</a></li>
-	                        <li class="box-hover"><a href="#">Publicações</a></li>
-	                        <li class="box-hover"><a href="#">Indicadores</a></li>
+	                        <li class="active"><a href="index.html">#{mensagens['indice']}</a></li>
+	                        <li class="box-hover"><a href="#">#{mensagens['o.grupo']}</a></li>
+	                        <li class="box-hover"><h:link outcome="listagemPesquisadores" value="#{mensagens['pesquisadores']}"/></li>
+	                        <li class="box-hover"><a href="#">#{mensagens['projetos.de.pesquisa']}</a></li>
+	                        <li class="box-hover"><a href="#">#{mensagens['publicacoes']}</a></li>
+	                        <li class="box-hover"><a href="#">#{mensagens['indicadores']}</a></li>
 	                    </ul>
 	                </div>
 	            </nav>
 	        </div>
-		
-		
 		
 		</ui:composition>
 	</h:body>

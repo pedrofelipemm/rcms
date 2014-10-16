@@ -1,11 +1,9 @@
-<!DOCTYPE html[
-    <!ENTITY nbsp "&#160;">
-]>
-<ui:composition template="/pages/templates/template.xhtml"
+<!DOCTYPE html>
+<ui:composition template="/pages/templates/templatePortal.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
 		<h:form>
@@ -13,16 +11,16 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ol class="breadcrumb">
-							<li><a href="#">Início</a></li>
-							<li><a href="#">Area de Atuação</a></li>
-							<li class="active">Cadastro</li>
+							<li><a href="#">#{mensagens['indice']}</a></li>
+							<li><a href="#">#{mensagens['area.atuacao']}</a></li>
+							<li class="active">#{mensagens['cadastro.area.atuacao']}</li>
 						</ol>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-9">
-						<h1>Cadastro de Área de Atuação</h1>
+						<h1>#{mensagens['cadastro.area.atuacao']}</h1>
 					</div>
 				</div>
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" >
+
+	<h:head>
+        <title>#{titulo.sistema}</title>
+
+		<meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <h:outputStylesheet name="bootstrap.min.css" library="css"/>
+        <h:outputStylesheet name="primefaces.css" library="css"/>
+        <h:outputStylesheet name="estilo.css" library="css"/>
+
+		<h:outputScript name="jquery-1.11.1.min.js" library="js"/>        
+		<h:outputScript name="bootstrap.min.js" library="js"/>
+		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
+        
+        <!-- EXTRAIR PARA ARQUIVO -->
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+                if (!$('#myCanvas').tagcanvas({
+                    textColour: '#ffffff',
+                    outlineThickness: 1,
+                    maxSpeed: 0.1,
+                    depth: 0.75
+                })) {
+                    // TagCanvas failed to load
+                    $('#myCanvasContainer').hide();
+                }
+                // your other jQuery stuff here...
+            });
+        </script>
+         
+	</h:head >
+	
+	<h:body styleClass="admin-bg">
+
+		<h:panelGroup id="page" layout="block">
+ 
+			<div id="cabecalho" >
+  				<ui:include src="/pages/templates/cabecalhoAdmin.xhtml" />
+			</div>
+ 			
+ 			<div id="menuEsquerdo">
+		  		<ui:include src="/pages/templates/menuEsquerdoAdmin.xhtml" />
+		    </div>
+ 			
+		    <div id="conteudo">
+		  		<div id="admin-fluid-content">
+	  				<div id="admin-inner-content">
+	    				<div class="container-fluid">
+							<ui:insert name="conteudo" >
+		 	  		
+	   						</ui:insert>	          				
+	          			</div>
+	          		</div>
+	          	</div>
+		    </div>
+
+    		<div id="rodapeAdmin" >
+    	  		<ui:include src="/pages/templates/rodapeAdmin.xhtml" />
+    		</div>
+
+        </h:panelGroup>
+
+	</h:body>
+	
+</html>

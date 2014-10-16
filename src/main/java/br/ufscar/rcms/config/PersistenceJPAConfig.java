@@ -5,8 +5,11 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,59 +19,83 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
 public class PersistenceJPAConfig {
 
-	private static final String[] PACKAGES_TO_SCAN = { "br.ufscar.rcms.modelo.entidades" };
+    @Value("${spring.packages.to.scan}")
+    private String[] packesToScan;
 
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    @Value("${hibernate.hbm2ddl.auto}")
+    private String hibernateHBM2DLL;
 
-		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
-		em.setPackagesToScan(PACKAGES_TO_SCAN);
+    @Value("${hibernate.dialect}")
+    private String hibernateDialect;
 
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		em.setJpaVendorAdapter(vendorAdapter);
-		em.setJpaProperties(additionalProperties());
+    @Value("${database.driver.class.name}")
+    private String databaseDriverClassName;
 
-		return em;
-	}
+    @Value("${database.url}")
+    private String databaseUrl;
 
-	@Bean
-	public DataSource dataSource() {
+    @Value("${database.username}")
+    private String databaseUsername;
 
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcms");
-		dataSource.setUsername("postgres");
-		dataSource.setPassword("novasenha");
+    @Value("${database.password}")
+    private String databasePassword;
 
-		return dataSource;
-	}
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
-	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(emf);
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan(packesToScan);
 
-		return transactionManager;
-	}
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(additionalProperties());
 
-	@Bean
-	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return em;
+    }
 
-		return new PersistenceExceptionTranslationPostProcessor();
-	}
+    @Bean
+    public DataSource dataSource() {
 
-	private Properties additionalProperties() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(databaseDriverClassName);
+        dataSource.setUrl(databaseUrl);
+        dataSource.setUsername(databaseUsername);
+        dataSource.setPassword(databasePassword);
 
-		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-		return properties;
-	}
+        return dataSource;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+
+        return transactionManager;
+    }
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    private Properties additionalProperties() {
+
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", hibernateHBM2DLL);
+        properties.setProperty("hibernate.dialect", hibernateDialect);
+        return properties;
+    }
 }

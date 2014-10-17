@@ -1,4 +1,4 @@
-package br.ufscar.view.mb;
+package br.ufscar.rcms.view.mb;
 
 import java.io.IOException;
 import java.io.InputStream;

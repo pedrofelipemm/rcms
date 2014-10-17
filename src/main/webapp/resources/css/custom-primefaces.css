@@ -6,3 +6,8 @@
 .panelGrid td, .panelGrid tr {
     border: none !important;
 }
+
+.ui-growl {  
+	z-index:9999 !important;
+	margin-top: 5%;
+}

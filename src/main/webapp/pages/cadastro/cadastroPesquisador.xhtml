@@ -1,54 +1,99 @@
-<!DOCTYPE html[
-    <!ENTITY nbsp "&#160;">
-]>
+<!DOCTYPE html>
 <ui:composition template="/pages/templates/templateAdmin.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
 	<ui:define name="conteudo">
-
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['pesquisadores']}</h1>
+        	</div>
+        </div>
+		
 		<h:form id="formPesquisador" enctype="multipart/form-data">
-				
-			<p:growl id="messageBox" autoUpdate="true" />
+			
+			<o:messages id="messageBoxValidation" for="formPesquisador" styleClass="message-box-validation"/>
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
 			<div class="row">
-					<div class="col-md-12">
-  						<h1>#{mensagens['pesquisadores']}</h1>
-  					</div>
-  				</div>
-
-			<div class="row">
-				<div class="col-md-12">&nbsp;</div>
-			</div>
-
-			<div>
-
-				<div class="row top-buffer-10">
-					<div class="col-md-2">
-						<h:outputLabel for="nome" value="#{mensagens['label.nome']} " />
-					</div>
-					<div class="col-md-10">
-						<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}"
+          		<div class="col-md-5">
+            		<div class="form-group">
+            			<h:outputLabel for="nome" value="#{mensagens['label.nome']} " />
+						<h:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}"
 							required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
-							styleClass="input-5" />
-						<p:messages for="nome" closable="true" autoUpdate="true"
-							showIcon="false" />
+							styleClass="form-control"/>
 					</div>
-				</div>
+					<div class="form-group">
+		            	<label for="senha">#{mensagens['label.senha']}</label>
+		              	<input type="password" class="form-control" id="senha" />
+		            </div>
+		            <div class="form-group">
+		              	<label for="confirma-senha">#{mensagens['label.confirmacao.senha']}</label>
+		              	<input type="password" class="form-control" id="confirma-senha" />
+		            </div>
+		        </div>
+		        <div class="col-md-4">
+            		<div class="form-group">
+            			<h:outputLabel for="codigoLattes" value="#{mensagens['label.codigo.lattes']} " />
+						<h:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+							required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
+							styleClass="form-control" />
+            		</div>
+            		<div class="form-group">
+            			<label for="email">#{mensagens['label.email']}</label>
+              			<input type="email" class="form-control" id="email"/>
+            		</div>
+            		<div class="form-group">
+            			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
+            			<h:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+            				rendered="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
+            				styleClass="form-control"/>
+            		</div>
+            	</div>
+            	<div class="col-md-3 text-center"> <img src="imagens/foto-prado.jpg" alt="" />
+            		<div class="form-group">
+              			<label for="foto">#{mensagens['label.enviar.foto']}</label>
+              			<input type="file" id="foto"/>
+              			<p class="help-block">Tamanho máximo de 200KB (i18n com tamanho parametrizado) -</p>
+            		</div>
+          		</div>
+        	</div>
+        	<div class="row">
+          		<div class="col-md-12">
+            		<div class="form-group">
+              			<h:outputLabel for="resumoProfissional" value="#{mensagens['label.resumo.profissional']}"/>
+              			<h:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
+              				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
+              				styleClass="form-control"/>
+            		</div>
+          		</div>
+        	</div>
+        	<div class="row">
+          		<div class="col-md-12">
+            		<div class="form-group">
+              			<h:commandButton value="#{mensagens['salvar']}" action="#{pesquisadorMB.salvar}"
+							styleClass="btn btn-default">
+							<f:ajax render="@form" execute="@form" />
+						</h:commandButton>
+            		</div>
+          		</div>
+        	</div>
+        </h:form>
+            	
+						
+						
+			
 
+				<!-- 
 				<div class="row top-buffer-10">
 					<div class="col-md-2">
-						<h:outputLabel for="codigoLattes" value="#{mensagens['label.codigo.lattes']} " />
 					</div>
 					<div class="col-md-10">
-						<p:inputText id="codigoLattes"
-							value="#{pesquisadorMB.pesquisador.codigoLattes}"
-							required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
-							styleClass="input-5" />
-						<p:messages for="codigoLattes" closable="true" autoUpdate="true"
-							showIcon="false" />
+						
 					</div>
 				</div>
 
@@ -96,6 +141,7 @@
 				</div>
 
 			</div>
+				 -->
 				
 				<!-- 
 				<p:accordionPanel>
@@ -185,7 +231,6 @@
 					<p:tab title="Formação acadêmica">
 					</p:tab>
 				</p:accordionPanel>
-				 -->
 
 			<div class="row">
 				<div class="col-md-12">&nbsp;</div>
@@ -193,13 +238,11 @@
 
 			<div class="row top-buffer-20">
 				<div class="col-md-12">
-					<h:commandButton value="#{mensagens['salvar']}" action="#{pesquisadorMB.salvar}"
-						style="margin-right: 10px;">
-						<f:ajax render="@form" execute="@form" />
-					</h:commandButton>
+					
 				</div>
 			</div>
+				 -->
 
-		</h:form>
+		
 	</ui:define>
 </ui:composition>

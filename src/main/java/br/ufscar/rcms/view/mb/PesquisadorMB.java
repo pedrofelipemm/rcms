@@ -2,7 +2,6 @@ package br.ufscar.rcms.view.mb;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +28,7 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{areaAtuacaoService}")
     private AreaAtuacaoService areaAtuacaoService;
-    
+
     @ManagedProperty("#{idiomaService}")
     private IdiomaService idiomaService;
 
@@ -40,7 +39,7 @@ public class PesquisadorMB extends AbstractMB {
     private List<AreaAtuacao> areas;
 
     private Part fotoPesquisador;
-    
+
     private List<Idioma> idiomas;
     private Idioma idiomaSelecionado;
 
@@ -48,7 +47,7 @@ public class PesquisadorMB extends AbstractMB {
     public void inicializar() {
 
         limparDados();
-        
+
         areas = areaAtuacaoService.BuscarTodas();
         idiomas = idiomaService.BuscarTodas();
     }
@@ -58,10 +57,12 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador = new Pesquisador();
     }
 
-    // TODO CRIAR HIERARQUIA DE EXCEPTION
     public void salvar() {
 
-        converterFotoPesquisador(pesquisador);
+        // TODO TRATAR
+        if (fotoPesquisador != null) {
+            converterFotoPesquisador(pesquisador);
+        }
         pesquisadorService.salvar(pesquisador);
 
         adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
@@ -102,7 +103,7 @@ public class PesquisadorMB extends AbstractMB {
             areas.add(areaSelecionada);
         }
     }
-    
+
     public void addIdioma() {
     	if (idiomaSelecionado != null) {
             pesquisador.getIdiomas().add(idiomaSelecionado);
@@ -192,5 +193,5 @@ public class PesquisadorMB extends AbstractMB {
 	public void setIdiomaService(IdiomaService idiomaService) {
 		this.idiomaService = idiomaService;
 	}
-	
+
 }

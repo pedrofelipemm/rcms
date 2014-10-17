@@ -15,7 +15,7 @@
 		<javax.faces.version>2.2.4</javax.faces.version>
 		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
 		<org.hibernate.version>4.3.6.Final</org.hibernate.version>
-		<org.omnifaces.version>1.5</org.omnifaces.version>
+		<org.omnifaces.version>1.8.1</org.omnifaces.version>
 		<org.primefaces.version>5.0</org.primefaces.version>
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
 		<org.spring-security.version>3.1.0.RELEASE</org.spring-security.version>

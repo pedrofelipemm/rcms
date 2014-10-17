@@ -19,6 +19,8 @@
 			<var>mensagens</var>
 		</resource-bundle>
 		
+		<action-listener>org.omnifaces.eventlistener.ResetInputAjaxActionListener</action-listener>
+		
 	</application>
 	
 	<factory>

@@ -212,3 +212,7 @@ ol.listas-numeradas > li:before {
 .input-5 {
 	width: 500px;
 }
+
+.message-box-validation {
+	color: red;
+}

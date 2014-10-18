@@ -151,7 +151,7 @@
 								columns="2">
 								<h:selectOneMenu id="selectAreas" class="form-control"
 									value="#{pesquisadorMB.areaSelecionada}"
-									converter="areaAtuacaoConverter">
+									converter="entityConverter">
 									<f:selectItem itemLabel="Selecione uma área" itemValue=""></f:selectItem>
 									<f:selectItems value="#{pesquisadorMB.areas}" var="area"
 										itemLabel="#{area.descricao}" itemValue="#{area}"></f:selectItems>
@@ -191,7 +191,7 @@
 								columns="2">
 								<h:selectOneMenu id="selectIdiomas" class="form-control"
 									value="#{pesquisadorMB.idiomaSelecionado}"
-									converter="idiomaConverter">
+									converter="entityConverter">
 									<f:selectItem itemLabel="Selecione um idioma" itemValue=""></f:selectItem>
 									<f:selectItems value="#{pesquisadorMB.idiomas}" var="idioma"
 										itemLabel="#{idioma.descricao}" itemValue="#{idioma}"></f:selectItems>

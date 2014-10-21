@@ -4,5 +4,5 @@ import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 
 public interface AreaAtuacaoDAO extends BaseDAO<AreaAtuacao, Long> {
 
-    public abstract AreaAtuacao buscarPorDescricao(String Descricao);
+    AreaAtuacao buscarPorDescricao(String Descricao);
 }

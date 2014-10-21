@@ -11,11 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PREMIO_TITULO")
-public class PremioTitulo extends Entidade{
+public class PremioTitulo extends Entidade {
 
-	private static final long serialVersionUID = 3391459887339405825L;
+    private static final long serialVersionUID = 3391459887339405825L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPesquisadorPremioTitulo;
 
@@ -28,27 +28,36 @@ public class PremioTitulo extends Entidade{
     @Column(nullable = false)
     private String descricao;
 
-	public Integer getIdPesquisadorPremioTitulo() {
-		return idPesquisadorPremioTitulo;
-	}
+    public Integer getIdPesquisadorPremioTitulo() {
+        return idPesquisadorPremioTitulo;
+    }
 
-	public void setIdPesquisadorPremioTitulo(Integer idPesquisadorPremioTitulo) {
-		this.idPesquisadorPremioTitulo = idPesquisadorPremioTitulo;
-	}
+    public void setIdPesquisadorPremioTitulo(Integer idPesquisadorPremioTitulo) {
+        this.idPesquisadorPremioTitulo = idPesquisadorPremioTitulo;
+    }
 
-	public Pesquisador getPesquisador() {
-		return pesquisador;
-	}
+    public Pesquisador getPesquisador() {
+        return pesquisador;
+    }
 
-	public void setPesquisador(Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
+    public void setPesquisador(Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Integer getAno() {
+        return ano;
+    }
+
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
+
 }

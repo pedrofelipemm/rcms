@@ -11,52 +11,52 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PESQUISADOR_IDIOMA")
-public class Idioma extends Entidade{
+public class Idioma extends Entidade {
 
-	private static final long serialVersionUID = 3667531830943589983L;
+    private static final long serialVersionUID = 3667531830943589983L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPesquisadorIdioma;
-    
+    private Integer idIdioma;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pesquisador pesquisador;
-    
+
     @Column(nullable = false)
-    private String descricaoIdioma;
-    
-	@Column(nullable = false)
+    private String descricao;
+
+    @Column(nullable = false)
     private String proficiencia;
 
-	public Integer getIdPesquisadorIdioma() {
-        return idPesquisadorIdioma;
+    public Integer getIdIdioma() {
+        return idIdioma;
     }
 
-	public void setIdPesquisadorIdioma(Integer idPesquisadorIdioma) {
-		this.idPesquisadorIdioma = idPesquisadorIdioma;
-	}
+    public void setIdIdioma(Integer idIdioma) {
+        this.idIdioma = idIdioma;
+    }
 
     public Pesquisador getPesquisador() {
-		return pesquisador;
-	}
+        return pesquisador;
+    }
 
-	public void setPesquisador(Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
+    public void setPesquisador(Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
+    }
 
-	public String getDescricaoIdioma() {
-		return descricaoIdioma;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setDescricaoIdioma(String descricaoIdioma) {
-		this.descricaoIdioma = descricaoIdioma;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public String getProficiencia() {
-		return proficiencia;
-	}
+    public String getProficiencia() {
+        return proficiencia;
+    }
 
-	public void setProficiencia(String proficiencia) {
-		this.proficiencia = proficiencia;
-	}
+    public void setProficiencia(String proficiencia) {
+        this.proficiencia = proficiencia;
+    }
 }

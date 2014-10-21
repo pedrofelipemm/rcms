@@ -19,22 +19,22 @@ public abstract class Producao extends Entidade {
 
     @Column(nullable = false)
     private String titulo;
-    
+
     @Column()
     private Integer ano;
-    
+
     @Column()
     private Integer volume;
-    
+
     @Column()
     private String paginas;
-    
+
     @Column()
     private String link;
-    
+
     @Column()
     private byte[] arquivo;
-    
+
     public Integer getIdProducao() {
         return idProducao;
     }
@@ -43,51 +43,67 @@ public abstract class Producao extends Entidade {
         this.idProducao = idProducao;
     }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public String getTitulo() {
+        return titulo;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public Integer getAno() {
-		return ano;
-	}
+    public Integer getAno() {
+        return ano;
+    }
 
-	public void setAno(Integer ano) {
-		this.ano = ano;
-	}
+    public void setAno(Integer ano) {
+        this.ano = ano;
+    }
 
-	public Integer getVolume() {
-		return volume;
-	}
+    public Integer getVolume() {
+        return volume;
+    }
 
-	public void setVolume(Integer volume) {
-		this.volume = volume;
-	}
+    public void setVolume(Integer volume) {
+        this.volume = volume;
+    }
 
-	public String getPaginas() {
-		return paginas;
-	}
+    public String getPaginas() {
+        return paginas;
+    }
 
-	public void setPaginas(String paginas) {
-		this.paginas = paginas;
-	}
+    public void setPaginas(String paginas) {
+        this.paginas = paginas;
+    }
 
-	public String getLink() {
-		return link;
-	}
+    public String getLink() {
+        return link;
+    }
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+    public void setLink(String link) {
+        this.link = link;
+    }
 
-	public byte[] getArquivo() {
-		return arquivo;
-	}
+    public byte[] getArquivo() {
 
-	public void setArquivo(byte[] arquivo) {
-		this.arquivo = arquivo;
-	}
+        if (arquivo == null) {
+            return new byte[0];
+        }
+
+        byte[] copyOfArquivo = new byte[arquivo.length];
+        System.arraycopy(arquivo, 0, copyOfArquivo, 0, arquivo.length);
+
+        return copyOfArquivo;
+    }
+
+    public void setArquivo(byte[] arquivo) {
+
+        if (arquivo == null) {
+            return;
+        }
+
+        byte[] copyOfArquivo = new byte[arquivo.length];
+        System.arraycopy(arquivo, 0, copyOfArquivo, 0, arquivo.length);
+
+        this.arquivo = copyOfArquivo;
+    }
 }

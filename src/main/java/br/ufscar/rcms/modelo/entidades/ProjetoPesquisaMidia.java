@@ -13,40 +13,55 @@ import javax.persistence.Table;
 @Table(name = "PROJETO_PESQUISA_MIDIA")
 public class ProjetoPesquisaMidia extends Entidade {
 
-	private static final long serialVersionUID = 3759933099478534637L;
+    private static final long serialVersionUID = 3759933099478534637L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProjetoPesquisaMidia;
-    
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ProjetoPesquisa projetoPesquisa;
 
-	@Column(nullable = false)
-    private byte[] arquivo;
+    @Column(nullable = false)
+    private byte[] midia;
 
-	public Integer getIdProjetoPesquisaMidia() {
-		return idProjetoPesquisaMidia;
-	}
+    public Integer getIdProjetoPesquisaMidia() {
+        return idProjetoPesquisaMidia;
+    }
 
-	public void setIdProjetoPesquisaMidia(Integer idProjetoPesquisaMidia) {
-		this.idProjetoPesquisaMidia = idProjetoPesquisaMidia;
-	}
+    public void setIdProjetoPesquisaMidia(Integer idProjetoPesquisaMidia) {
+        this.idProjetoPesquisaMidia = idProjetoPesquisaMidia;
+    }
 
-	public ProjetoPesquisa getProjetoPesquisa() {
-		return projetoPesquisa;
-	}
+    public ProjetoPesquisa getProjetoPesquisa() {
+        return projetoPesquisa;
+    }
 
-	public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
-		this.projetoPesquisa = projetoPesquisa;
-	}
+    public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+        this.projetoPesquisa = projetoPesquisa;
+    }
 
-	public byte[] getArquivo() {
-		return arquivo;
-	}
+    public byte[] getMidia() {
 
-	public void setArquivo(byte[] arquivo) {
-		this.arquivo = arquivo;
-	}
+        if (midia == null) {
+            return new byte[0];
+        }
 
+        byte[] copyOfMidia = new byte[midia.length];
+        System.arraycopy(midia, 0, copyOfMidia, 0, midia.length);
+
+        return copyOfMidia;
+    }
+
+    public void setMidia(byte[] midia) {
+
+        if (midia == null) {
+            return;
+        }
+
+        byte[] copyOfMidia = new byte[midia.length];
+        System.arraycopy(midia, 0, copyOfMidia, 0, midia.length);
+
+        this.midia = copyOfMidia;
+    }
 }

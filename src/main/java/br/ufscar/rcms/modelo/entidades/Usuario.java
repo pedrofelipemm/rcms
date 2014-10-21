@@ -10,13 +10,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USUARIO")
 public class Usuario extends Entidade {
-	
-	private static final long serialVersionUID = 5066890213009565801L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idUsuario;
-	 
+    private static final long serialVersionUID = 5066890213009565801L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idUsuario;
+
     @Column(nullable = false)
     private String nome;
 
@@ -29,14 +29,14 @@ public class Usuario extends Entidade {
     @Column(nullable = false)
     private String senha;
 
-	public Integer getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -46,30 +46,30 @@ public class Usuario extends Entidade {
     }
 
     public Boolean getFlagAdministrador() {
-		return flagAdministrador;
-	}
+        return flagAdministrador;
+    }
 
-	public void setFlagAdministrador(Boolean flagAdministrador) {
-		this.flagAdministrador = flagAdministrador;
-	}
+    public void setFlagAdministrador(Boolean flagAdministrador) {
+        this.flagAdministrador = flagAdministrador;
+    }
 
-	public String getLogin() {
-		return login;
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	@Override
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

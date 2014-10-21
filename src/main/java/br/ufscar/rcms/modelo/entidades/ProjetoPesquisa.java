@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PROJETO_PESQUISA")
-public class ProjetoPesquisa extends Entidade{
+public class ProjetoPesquisa extends Entidade {
 
     private static final long serialVersionUID = -9149061665883584009L;
 
@@ -19,20 +19,20 @@ public class ProjetoPesquisa extends Entidade{
 
     @Column(nullable = false)
     private String nome;
-    
+
     @Column()
     private String descricao;
-    
+
     @Column()
     private Integer anoInicio;
-    
+
     @Column()
     private Integer anoConclusao;
-    
+
     @Column()
     private String agenciaDeFomento;
 
-	public Integer getIdProjetoPesquisa() {
+    public Integer getIdProjetoPesquisa() {
         return idProjetoPesquisa;
     }
 
@@ -41,42 +41,42 @@ public class ProjetoPesquisa extends Entidade{
     }
 
     public String getNome() {
-		return nome;
-	}
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public Integer getAnoInicio() {
-		return anoInicio;
-	}
+    public Integer getAnoInicio() {
+        return anoInicio;
+    }
 
-	public void setAnoInicio(Integer anoInicio) {
-		this.anoInicio = anoInicio;
-	}
+    public void setAnoInicio(Integer anoInicio) {
+        this.anoInicio = anoInicio;
+    }
 
-	public Integer getAnoConclusao() {
-		return anoConclusao;
-	}
+    public Integer getAnoConclusao() {
+        return anoConclusao;
+    }
 
-	public void setAnoConclusao(Integer anoConclusao) {
-		this.anoConclusao = anoConclusao;
-	}
+    public void setAnoConclusao(Integer anoConclusao) {
+        this.anoConclusao = anoConclusao;
+    }
 
-	public String getAgenciaDeFomento() {
-		return agenciaDeFomento;
-	}
+    public String getAgenciaDeFomento() {
+        return agenciaDeFomento;
+    }
 
-	public void setAgenciaDeFomento(String agenciaDeFomento) {
-		this.agenciaDeFomento = agenciaDeFomento;
-	}
+    public void setAgenciaDeFomento(String agenciaDeFomento) {
+        this.agenciaDeFomento = agenciaDeFomento;
+    }
 }

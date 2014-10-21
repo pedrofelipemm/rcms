@@ -10,28 +10,27 @@ import javax.persistence.Table;
 @Table(name = "TEXTO_EM_JORNAL")
 public class TextoEmJornal extends ProducaoBibliografica {
 
-	private static final long serialVersionUID = 5261866874043980414L;
+    private static final long serialVersionUID = 5261866874043980414L;
 
-	@Column()
-	private String nomeJornal;
-	
-	@Column()
-	private Date dataPublicacao;
+    @Column()
+    private String nomeJornal;
 
-	public String getNomeJornal() {
-		return nomeJornal;
-	}
+    @Column()
+    private Date dataPublicacao;
 
-	public void setNomeJornal(String nomeJornal) {
-		this.nomeJornal = nomeJornal;
-	}
+    public String getNomeJornal() {
+        return nomeJornal;
+    }
 
-	public Date getDataPublicacao() {
-		return dataPublicacao;
-	}
+    public void setNomeJornal(String nomeJornal) {
+        this.nomeJornal = nomeJornal;
+    }
 
-	public void setDataPublicacao(Date dataPublicacao) {
-		this.dataPublicacao = dataPublicacao;
-	}
-	
+    public Date getDataPublicacao() {
+        return new Date(dataPublicacao.getTime());
+    }
+
+    public void setDataPublicacao(Date dataPublicacao) {
+        this.dataPublicacao = new Date(dataPublicacao.getTime());
+    }
 }

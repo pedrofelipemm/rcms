@@ -20,6 +20,7 @@
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
 		<org.spring-security.version>3.1.0.RELEASE</org.spring-security.version>
 		<postgresql.version>9.1-901-1.jdbc4</postgresql.version>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
   	</properties>
   
   	<dependencyManagement>
@@ -149,7 +150,7 @@
         		<artifactId>maven-compiler-plugin</artifactId>
         		<version>3.1</version>
         		<configuration>
-          			<encoding>ISO-8859-1</encoding>
+          			<encoding>${project.build.sourceEncoding}</encoding>
           			<source>1.8</source>
           			<target>1.8</target>
         		</configuration>
@@ -165,14 +166,16 @@
 				<executions>
                     <execution>
                         <goals>
+                        	<!-- 
 							<goal>check</goal>
                             <goal>cpd-check</goal>
+                        	 -->
                         </goals>
                     </execution>
                 </executions>
 				<configuration>
 					<linkXref>true</linkXref>
-					<sourceEncoding>ISO-8859-1</sourceEncoding>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 				</configuration>
 			</plugin>
 			<plugin>

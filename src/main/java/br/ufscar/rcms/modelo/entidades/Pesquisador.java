@@ -14,12 +14,12 @@ import javax.persistence.Table;
 @Table(name = "PESQUISADOR")
 public class Pesquisador extends Usuario {
 
-	private static final long serialVersionUID = 7468024654193724256L;
+    private static final long serialVersionUID = 7468024654193724256L;
 
-	@Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String codigoLattes;
 
-	@Column()
+    @Column()
     private byte[] foto;
 
     @Column(nullable = false)
@@ -41,7 +41,7 @@ public class Pesquisador extends Usuario {
     private List<FormacaoAcademica> pesquisadorFormacoes = new ArrayList<FormacaoAcademica>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Idioma> pesquisadorIdiomas = new ArrayList<Idioma>();
+    private List<Idioma> idiomas = new ArrayList<Idioma>();
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<PremioTitulo> pesquisadorPremiosTitulos = new ArrayList<PremioTitulo>();
@@ -69,14 +69,6 @@ public class Pesquisador extends Usuario {
         this.codigoLattes = codigoLattes;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
     public String getEnderecoProfissional() {
         return enderecoProfissional;
     }
@@ -85,11 +77,10 @@ public class Pesquisador extends Usuario {
         this.enderecoProfissional = enderecoProfissional;
     }
 
-<<<<<<< HEAD
     public byte[] getFoto() {
 
         if (foto == null) {
-            return null;
+            return new byte[0];
         }
 
         byte[] copyOfFoto = new byte[foto.length];
@@ -108,7 +99,8 @@ public class Pesquisador extends Usuario {
         System.arraycopy(foto, 0, copyOfFoto, 0, foto.length);
 
         this.foto = copyOfFoto;
-=======
+    }
+
     public double getEnderecoProfissionalLatitude() {
         return enderecoProfissionalLatitude;
     }
@@ -123,7 +115,6 @@ public class Pesquisador extends Usuario {
 
     public void setEnderecoProfissionalLongitude(double enderecoProfissionalLongitude) {
         this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
->>>>>>> 317a73c6d69fab559f0950607c4b1ec8f5d12bc0
     }
 
     public String getResumoProfissional() {
@@ -158,42 +149,39 @@ public class Pesquisador extends Usuario {
         this.areaAtuacoes = areaAtuacoes;
     }
 
-    public List<Idioma> getPesquisadorIdiomas() {
-        return pesquisadorIdiomas;
+    public List<Idioma> getIdiomas() {
+        return idiomas;
     }
 
-    public void setPesquisadorIdiomas(List<Idioma> idiomas) {
-        this.pesquisadorIdiomas = idiomas;
+    public void setIdiomas(List<Idioma> idiomas) {
+        this.idiomas = idiomas;
     }
 
     public List<PremioTitulo> getPesquisadorPremiosTitulos() {
-		return pesquisadorPremiosTitulos;
-	}
+        return pesquisadorPremiosTitulos;
+    }
 
-	public void setPesquisadorPremiosTitulos(
-			List<PremioTitulo> pesquisadorPremiosTitulos) {
-		this.pesquisadorPremiosTitulos = pesquisadorPremiosTitulos;
-	}
+    public void setPesquisadorPremiosTitulos(List<PremioTitulo> pesquisadorPremiosTitulos) {
+        this.pesquisadorPremiosTitulos = pesquisadorPremiosTitulos;
+    }
 
-	public List<ParticipacaoEvento> getPesquisadorParticipacaoEventos() {
-		return pesquisadorParticipacaoEventos;
-	}
+    public List<ParticipacaoEvento> getPesquisadorParticipacaoEventos() {
+        return pesquisadorParticipacaoEventos;
+    }
 
-	public void setPesquisadorParticipacaoEventos(
-			List<ParticipacaoEvento> pesquisadorParticipacaoEventos) {
-		this.pesquisadorParticipacaoEventos = pesquisadorParticipacaoEventos;
-	}
+    public void setPesquisadorParticipacaoEventos(List<ParticipacaoEvento> pesquisadorParticipacaoEventos) {
+        this.pesquisadorParticipacaoEventos = pesquisadorParticipacaoEventos;
+    }
 
-	public List<OrganizacaoEvento> getPesquisadorOrganizacaoEventos() {
-		return pesquisadorOrganizacaoEventos;
-	}
+    public List<OrganizacaoEvento> getPesquisadorOrganizacaoEventos() {
+        return pesquisadorOrganizacaoEventos;
+    }
 
-	public void setPesquisadorOrganizacaoEventos(
-			List<OrganizacaoEvento> pesquisadorOrganizacaoEventos) {
-		this.pesquisadorOrganizacaoEventos = pesquisadorOrganizacaoEventos;
-	}
+    public void setPesquisadorOrganizacaoEventos(List<OrganizacaoEvento> pesquisadorOrganizacaoEventos) {
+        this.pesquisadorOrganizacaoEventos = pesquisadorOrganizacaoEventos;
+    }
 
-	public List<Producao> getPublicacoes() {
+    public List<Producao> getPublicacoes() {
         return publicacoes;
     }
 
@@ -225,10 +213,10 @@ public class Pesquisador extends Usuario {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Pesquisador)) {
+        if (!(obj instanceof Usuario)) {
             return false;
         }
-        Pesquisador other = (Pesquisador) obj;
+        Usuario other = (Usuario) obj;
         if (getIdUsuario() == null) {
             if (other.getIdUsuario() != null) {
                 return false;
@@ -241,7 +229,8 @@ public class Pesquisador extends Usuario {
 
     @Override
     public String toString() {
-        return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes + "]";
+        return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes
+                + "]";
     }
 
 }

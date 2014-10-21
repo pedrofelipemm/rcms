@@ -91,11 +91,27 @@ public class Pesquisador extends Administrador {
     }
 
     public byte[] getFoto() {
-        return foto;
+
+        if (foto == null) {
+            return null;
+        }
+
+        byte[] copyOfFoto = new byte[foto.length];
+        System.arraycopy(foto, 0, copyOfFoto, 0, foto.length);
+
+        return copyOfFoto;
     }
 
     public void setFoto(byte[] foto) {
-        this.foto = foto;
+
+        if (foto == null) {
+            return;
+        }
+
+        byte[] copyOfFoto = new byte[foto.length];
+        System.arraycopy(foto, 0, copyOfFoto, 0, foto.length);
+
+        this.foto = copyOfFoto;
     }
 
     public String getResumoProfissional() {

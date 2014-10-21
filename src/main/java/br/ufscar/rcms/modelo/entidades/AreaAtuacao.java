@@ -1,18 +1,23 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class AreaAtuacao extends Entidade{
+@Table(name = "AREA_ATUACAO")
+public class AreaAtuacao extends Entidade {
 
 	private static final long serialVersionUID = -3948561964306499761L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAreaAtuacao;
+    
+    @Column(nullable = false)
     private String descricao;
 
     public Integer getIdAreaAtuacao() {

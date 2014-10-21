@@ -1,59 +1,62 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PESQUISADOR_IDIOMA")
 public class Idioma extends Entidade{
 
 	private static final long serialVersionUID = 3667531830943589983L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idIdioma;
-    private String descricao;
-
-    public Integer getIdIdioma() {
-        return idIdioma;
-    }
-
-    public void setIdIdioma(Integer idIdioma) {
-        this.idIdioma = idIdioma;
-    }
+    private Integer idPesquisadorIdioma;
     
-    @Override
-   	public int hashCode() {
-   		final int prime = 31;
-   		int result = 1;
-   		result = prime * result
-   				+ ((idIdioma == null) ? 0 : idIdioma.hashCode());
-   		return result;
-   	}
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Pesquisador pesquisador;
+    
+    @Column(nullable = false)
+    private String descricaoIdioma;
+    
+	@Column(nullable = false)
+    private String proficiencia;
 
-   	@Override
-   	public boolean equals(Object obj) {
-   		if (this == obj)
-   			return true;
-   		if (obj == null)
-   			return false;
-   		if (getClass() != obj.getClass())
-   			return false;
-   		Idioma other = (Idioma) obj;
-   		if (idIdioma == null) {
-   			if (other.idIdioma != null)
-   				return false;
-   		} else if (!idIdioma.equals(other.idIdioma))
-   			return false;
-   		return true;
-   	}
+	public Integer getIdPesquisadorIdioma() {
+        return idPesquisadorIdioma;
+    }
 
-	public String getDescricao() {
-		return descricao;
+	public void setIdPesquisadorIdioma(Integer idPesquisadorIdioma) {
+		this.idPesquisadorIdioma = idPesquisadorIdioma;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+    public Pesquisador getPesquisador() {
+		return pesquisador;
+	}
+
+	public void setPesquisador(Pesquisador pesquisador) {
+		this.pesquisador = pesquisador;
+	}
+
+	public String getDescricaoIdioma() {
+		return descricaoIdioma;
+	}
+
+	public void setDescricaoIdioma(String descricaoIdioma) {
+		this.descricaoIdioma = descricaoIdioma;
+	}
+
+	public String getProficiencia() {
+		return proficiencia;
+	}
+
+	public void setProficiencia(String proficiencia) {
+		this.proficiencia = proficiencia;
 	}
 }

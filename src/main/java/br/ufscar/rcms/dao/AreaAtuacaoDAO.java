@@ -2,7 +2,7 @@ package br.ufscar.rcms.dao;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 
-public interface AreaAtuacaoDAO extends BaseDAO<AreaAtuacao, Long>{
+public interface AreaAtuacaoDAO extends BaseDAO<AreaAtuacao, Long> {
 
-	public AreaAtuacao BuscarPorDescricao(String Descricao);
+    public abstract AreaAtuacao buscarPorDescricao(String Descricao);
 }

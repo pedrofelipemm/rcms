@@ -5,11 +5,13 @@ import java.util.List;
 
 import br.ufscar.rcms.modelo.entidades.Idioma;
 
-public interface IdiomaService extends Serializable{
-	
-	public void Salvar(Idioma idioma);
-	public void Alterar(Idioma idioma);
-	public List<Idioma> BuscarTodas();
-	public Idioma BuscarPorDescricao(String Descricao);
+public interface IdiomaService extends Serializable {
 
+    void salvar(Idioma idioma);
+
+    void alterar(Idioma idioma);
+
+    List<Idioma> buscarTodas();
+
+    Idioma buscarPorDescricao(String Descricao);
 }

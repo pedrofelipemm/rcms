@@ -5,17 +5,17 @@ import java.util.List;
 
 public interface BaseDAO<T, K extends Serializable> extends Serializable {
 
-	public abstract T buscar(Long id);
+    T buscar(Long id);
 
-	public abstract List<T> buscarTodos();
+    List<T> buscarTodos();
 
-	public abstract Long count();
+    Long count();
 
-	public abstract void salvar(T entidade);
+    void salvar(T entidade);
 
-	public abstract void atualizar(T entidade);
+    void atualizar(T entidade);
 
-	public abstract void remover(T entidade);
+    void remover(T entidade);
 
-	public abstract void remover(Long id);
+    void remover(Long id);
 }

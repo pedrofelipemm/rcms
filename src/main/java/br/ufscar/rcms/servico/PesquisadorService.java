@@ -6,6 +6,5 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 
 public interface PesquisadorService extends Serializable {
 
-    public abstract void salvar(Pesquisador pesquisador);
-
+    void salvar(Pesquisador pesquisador);
 }

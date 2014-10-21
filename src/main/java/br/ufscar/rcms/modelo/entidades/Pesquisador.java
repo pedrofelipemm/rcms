@@ -6,65 +6,60 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PESQUISADORES")
-public class Pesquisador extends Administrador {
+@Table(name = "PESQUISADOR")
+public class Pesquisador extends Usuario {
 
-    private static final long serialVersionUID = 8459435679917888175L;
+	private static final long serialVersionUID = 7468024654193724256L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPesquisador;
-
-    @Column(nullable = false)
+	@Column(nullable = false, unique = true)
     private String codigoLattes;
 
-    @Column(nullable = false)
-    private String nome;
+	@Column()
+    private byte[] foto;
 
     @Column(nullable = false)
     private String enderecoProfissional;
 
-    private byte[] foto;
+    @Column()
+    private double enderecoProfissionalLatitude;
+
+    @Column()
+    private double enderecoProfissionalLongitude;
 
     @Column(nullable = false)
     private String resumoProfissional;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<PesquisadorNomeCitacao> pesquisadorNomeCitacao;
+    private List<NomeCitacaoBibliografica> pesquisadorNomeCitacao;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<PesquisadorFormacao> pesquisadorFormacoes = new ArrayList<PesquisadorFormacao>();
+    private List<FormacaoAcademica> pesquisadorFormacoes = new ArrayList<FormacaoAcademica>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Idioma> pesquisadorIdiomas = new ArrayList<Idioma>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PremioTitulo> pesquisadorPremiosTitulos = new ArrayList<PremioTitulo>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ParticipacaoEvento> pesquisadorParticipacaoEventos = new ArrayList<ParticipacaoEvento>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrganizacaoEvento> pesquisadorOrganizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
     @ManyToMany
     private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
 
     @ManyToMany
-    private List<Idioma> idiomas = new ArrayList<Idioma>();
-
-    @ManyToMany
-    private List<Publicacao> publicacoes = new ArrayList<Publicacao>();
+    private List<Producao> publicacoes = new ArrayList<Producao>();
 
     @ManyToMany
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
-    // TODO
-    // @OneToMany
-    // private CitacaoBibliografica citacaoBibliografica;
-
-    public Integer getIdPesquisador() {
-        return idPesquisador;
-    }
-
-    public void setIdPesquisador(Integer idPesquisador) {
-        this.idPesquisador = idPesquisador;
-    }
 
     public String getCodigoLattes() {
         return codigoLattes;
@@ -74,12 +69,12 @@ public class Pesquisador extends Administrador {
         this.codigoLattes = codigoLattes;
     }
 
-    public String getNome() {
-        return nome;
+    public byte[] getFoto() {
+        return foto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public String getEnderecoProfissional() {
@@ -90,6 +85,7 @@ public class Pesquisador extends Administrador {
         this.enderecoProfissional = enderecoProfissional;
     }
 
+<<<<<<< HEAD
     public byte[] getFoto() {
 
         if (foto == null) {
@@ -112,6 +108,22 @@ public class Pesquisador extends Administrador {
         System.arraycopy(foto, 0, copyOfFoto, 0, foto.length);
 
         this.foto = copyOfFoto;
+=======
+    public double getEnderecoProfissionalLatitude() {
+        return enderecoProfissionalLatitude;
+    }
+
+    public void setEnderecoProfissionalLatitude(double enderecoProfissionalLatitude) {
+        this.enderecoProfissionalLatitude = enderecoProfissionalLatitude;
+    }
+
+    public double getEnderecoProfissionalLongitude() {
+        return enderecoProfissionalLongitude;
+    }
+
+    public void setEnderecoProfissionalLongitude(double enderecoProfissionalLongitude) {
+        this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
+>>>>>>> 317a73c6d69fab559f0950607c4b1ec8f5d12bc0
     }
 
     public String getResumoProfissional() {
@@ -122,19 +134,19 @@ public class Pesquisador extends Administrador {
         this.resumoProfissional = resumoProfissional;
     }
 
-    public List<PesquisadorNomeCitacao> getPesquisadorNomeCitacao() {
+    public List<NomeCitacaoBibliografica> getPesquisadorNomeCitacao() {
         return pesquisadorNomeCitacao;
     }
 
-    public void setPesquisadorNomeCitacao(List<PesquisadorNomeCitacao> pesquisadorNomeCitacao) {
+    public void setPesquisadorNomeCitacao(List<NomeCitacaoBibliografica> pesquisadorNomeCitacao) {
         this.pesquisadorNomeCitacao = pesquisadorNomeCitacao;
     }
 
-    public List<PesquisadorFormacao> getPesquisadorFormacoes() {
+    public List<FormacaoAcademica> getPesquisadorFormacoes() {
         return pesquisadorFormacoes;
     }
 
-    public void setPesquisadorFormacoes(List<PesquisadorFormacao> pesquisadorFormacoes) {
+    public void setPesquisadorFormacoes(List<FormacaoAcademica> pesquisadorFormacoes) {
         this.pesquisadorFormacoes = pesquisadorFormacoes;
     }
 
@@ -146,19 +158,46 @@ public class Pesquisador extends Administrador {
         this.areaAtuacoes = areaAtuacoes;
     }
 
-    public List<Idioma> getIdiomas() {
-        return idiomas;
+    public List<Idioma> getPesquisadorIdiomas() {
+        return pesquisadorIdiomas;
     }
 
-    public void setIdiomas(List<Idioma> idiomas) {
-        this.idiomas = idiomas;
+    public void setPesquisadorIdiomas(List<Idioma> idiomas) {
+        this.pesquisadorIdiomas = idiomas;
     }
 
-    public List<Publicacao> getPublicacoes() {
+    public List<PremioTitulo> getPesquisadorPremiosTitulos() {
+		return pesquisadorPremiosTitulos;
+	}
+
+	public void setPesquisadorPremiosTitulos(
+			List<PremioTitulo> pesquisadorPremiosTitulos) {
+		this.pesquisadorPremiosTitulos = pesquisadorPremiosTitulos;
+	}
+
+	public List<ParticipacaoEvento> getPesquisadorParticipacaoEventos() {
+		return pesquisadorParticipacaoEventos;
+	}
+
+	public void setPesquisadorParticipacaoEventos(
+			List<ParticipacaoEvento> pesquisadorParticipacaoEventos) {
+		this.pesquisadorParticipacaoEventos = pesquisadorParticipacaoEventos;
+	}
+
+	public List<OrganizacaoEvento> getPesquisadorOrganizacaoEventos() {
+		return pesquisadorOrganizacaoEventos;
+	}
+
+	public void setPesquisadorOrganizacaoEventos(
+			List<OrganizacaoEvento> pesquisadorOrganizacaoEventos) {
+		this.pesquisadorOrganizacaoEventos = pesquisadorOrganizacaoEventos;
+	}
+
+	public List<Producao> getPublicacoes() {
         return publicacoes;
     }
 
-    public void setPublicacoes(List<Publicacao> publicacoes) {
+    public void setPublicacoes(List<Producao> publicacoes) {
         this.publicacoes = publicacoes;
     }
 
@@ -174,7 +213,7 @@ public class Pesquisador extends Administrador {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((idPesquisador == null) ? 0 : idPesquisador.hashCode());
+        result = prime * result + ((getIdUsuario() == null) ? 0 : getIdUsuario().hashCode());
         return result;
     }
 
@@ -190,11 +229,11 @@ public class Pesquisador extends Administrador {
             return false;
         }
         Pesquisador other = (Pesquisador) obj;
-        if (idPesquisador == null) {
-            if (other.idPesquisador != null) {
+        if (getIdUsuario() == null) {
+            if (other.getIdUsuario() != null) {
                 return false;
             }
-        } else if (!idPesquisador.equals(other.idPesquisador)) {
+        } else if (!getIdUsuario().equals(other.getIdUsuario())) {
             return false;
         }
         return true;
@@ -202,8 +241,7 @@ public class Pesquisador extends Administrador {
 
     @Override
     public String toString() {
-        return "Pesquisador [idPesquisador=" + idPesquisador + ", codigoLattes=" + codigoLattes + ", nome=" + nome
-                + "]";
+        return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes + "]";
     }
 
 }

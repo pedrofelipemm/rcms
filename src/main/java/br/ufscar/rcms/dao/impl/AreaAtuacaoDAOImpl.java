@@ -1,7 +1,6 @@
 package br.ufscar.rcms.dao.impl;
 
-import java.util.List;
-
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -10,30 +9,24 @@ import br.ufscar.rcms.dao.AreaAtuacaoDAO;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 
 @Repository
-public class AreaAtuacaoDAOImpl extends BaseDAOImpl<AreaAtuacao, Long>
-		implements AreaAtuacaoDAO {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4170408904792442435L;
+public class AreaAtuacaoDAOImpl extends BaseDAOImpl<AreaAtuacao, Long> implements AreaAtuacaoDAO {
 
-	public AreaAtuacaoDAOImpl() {
+    private static final long serialVersionUID = -4170408904792442435L;
 
-		setClazz(AreaAtuacao.class);
-	}
+    public AreaAtuacaoDAOImpl() {
 
-	@Override
-	public AreaAtuacao BuscarPorDescricao(String Descricao) {
-		Query q = entityManager
-				.createQuery("SELECT a from AreaAtuacao AS a WHERE a.descricao = :d");
-		q.setParameter("d", Descricao);
+        setClazz(AreaAtuacao.class);
+    }
 
-		List<AreaAtuacao> resultList = q.getResultList();
+    @Override
+    public AreaAtuacao buscarPorDescricao(String Descricao) {
+        Query q = getEntityManager().createQuery("SELECT a from AreaAtuacao AS a WHERE a.descricao = :d");
+        q.setParameter("d", Descricao);
 
-		if (resultList.isEmpty())
-			return null;
-		else
-			return resultList.get(0);
-	}
-
+        try {
+            return (AreaAtuacao) q.getSingleResult();
+        } catch (NoResultException noResultException) {
+            return null;
+        }
+    }
 }

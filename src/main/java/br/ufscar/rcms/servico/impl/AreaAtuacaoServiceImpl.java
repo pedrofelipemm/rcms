@@ -13,27 +13,30 @@ import br.ufscar.rcms.servico.AreaAtuacaoService;
 @Service("areaAtuacaoService")
 @Transactional
 public class AreaAtuacaoServiceImpl implements AreaAtuacaoService {
-	
-	@Autowired
-	private AreaAtuacaoDAO areaDAO;
 
-	@Override
-	public void Salvar(AreaAtuacao area) {
-		areaDAO.salvar(area);		
-	}
+    private static final long serialVersionUID = 2895202629904115552L;
 
-	@Override
-	public void Alterar(AreaAtuacao area) {
-		areaDAO.atualizar(area);
-	}
+    @Autowired
+    private AreaAtuacaoDAO areaDAO;
 
-	@Override
-	public List<AreaAtuacao> BuscarTodas() {
-		return areaDAO.buscarTodos();		
-	}
-	
-	public AreaAtuacao BuscarPorDescricao(String Descricao){
-		return areaDAO.BuscarPorDescricao(Descricao);
-	}
+    @Override
+    public void salvar(AreaAtuacao area) {
+        areaDAO.salvar(area);
+    }
+
+    @Override
+    public void alterar(AreaAtuacao area) {
+        areaDAO.atualizar(area);
+    }
+
+    @Override
+    public List<AreaAtuacao> buscarTodas() {
+        return areaDAO.buscarTodos();
+    }
+
+    @Override
+    public AreaAtuacao buscarPorDescricao(String Descricao) {
+        return areaDAO.buscarPorDescricao(Descricao);
+    }
 
 }

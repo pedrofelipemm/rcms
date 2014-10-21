@@ -10,13 +10,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @ManagedBean
 @SuppressWarnings("serial")
 public abstract class AbstractMB implements Serializable {
+
+    private static final String BUNDLE_NAME = "bundle";
 
     public FacesContext getCurrentInstance() {
 
@@ -33,23 +34,18 @@ public abstract class AbstractMB implements Serializable {
         return getCurrentInstance().getExternalContext();
     }
 
-    private Flash getFlash() {
-
-        return getExternalContext().getFlash();
-    }
-
     public void setFlashObject(String key, Object value) {
 
         if (key == null || value == null) {
             throw new IllegalArgumentException("key.value.nao.nulo");
         }
 
-        getFlash().put(key, value);
+        getExternalContext().getFlash().put(key, value);
     }
 
     public Object getFlashObject(String key) {
 
-        return getFlash().get(key);
+        return getExternalContext().getFlash().get(key);
     }
 
     public HttpServletRequest getRequest() {
@@ -64,7 +60,7 @@ public abstract class AbstractMB implements Serializable {
 
     public ResourceBundle getResourceBundle() {
 
-        return ResourceBundle.getBundle("bundle", getViewRoot().getLocale());
+        return ResourceBundle.getBundle(BUNDLE_NAME, getViewRoot().getLocale());
     }
 
     public String getMessage(String key) {

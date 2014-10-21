@@ -1,7 +1,6 @@
 package br.ufscar.rcms.view.mb;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
@@ -38,7 +39,7 @@ public class PesquisadorMB extends AbstractMB {
 
     private List<AreaAtuacao> areas;
 
-    private Part fotoPesquisador;
+    private transient Part fotoPesquisador;
 
     private List<Idioma> idiomas;
     private Idioma idiomaSelecionado;
@@ -48,8 +49,8 @@ public class PesquisadorMB extends AbstractMB {
 
         limparDados();
 
-        areas = areaAtuacaoService.BuscarTodas();
-        idiomas = idiomaService.BuscarTodas();
+        areas = areaAtuacaoService.buscarTodas();
+        idiomas = idiomaService.buscarTodas();
     }
 
     private void limparDados() {
@@ -72,14 +73,8 @@ public class PesquisadorMB extends AbstractMB {
 
     private void converterFotoPesquisador(Pesquisador pesquisador) {
 
-        byte[] buffer = new byte[(int) fotoPesquisador.getSize()];
-        InputStream inputStream;
-
         try {
-
-            inputStream = fotoPesquisador.getInputStream();
-            inputStream.read(buffer);
-            pesquisador.setFoto(buffer);
+            pesquisador.setFoto(IOUtils.toByteArray(fotoPesquisador.getInputStream()));
         } catch (IOException e) {
             // TODO TRATAR EXCEPTION
             e.printStackTrace();

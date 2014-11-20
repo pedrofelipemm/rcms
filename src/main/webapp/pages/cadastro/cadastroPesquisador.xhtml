@@ -54,7 +54,7 @@
             				styleClass="form-control"/>
             		</div>
             	</div>
-            	<div class="col-md-3 text-center"> <img src="imagens/foto-prado.jpg" alt="" />
+            	<div class="col-md-3 text-center"> <h:graphicImage value="/resources/images/foto-prado.jpg" alt="Imagem para representar foto do pesquisador" />
             		<div class="form-group">
               			<label for="foto">#{mensagens['label.enviar.foto']}</label>
               			<input type="file" id="foto"/>
@@ -68,7 +68,7 @@
               			<h:outputLabel for="resumoProfissional" value="#{mensagens['label.resumo.profissional']}"/>
               			<h:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
               				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
-              				styleClass="form-control"/>
+              				styleClass="form-control" rows="5"/>
             		</div>
           		</div>
         	</div>

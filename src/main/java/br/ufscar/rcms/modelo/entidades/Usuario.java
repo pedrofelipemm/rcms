@@ -29,6 +29,9 @@ public class Usuario extends Entidade {
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private String email;
+
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -67,6 +70,14 @@ public class Usuario extends Entidade {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

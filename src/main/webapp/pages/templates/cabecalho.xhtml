@@ -10,26 +10,28 @@
 	
 	<h:body>
 		<ui:composition>
-			
 			<div id="cabecalho" class="container-fluid">
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-xs-3 col-md-3">
-	                        <form class="form-horizontal" role="form">
+	                        <form class="form-horizontal"  id="area_busca" role="form" name="área de busca">
 	                            <div class="input-group">
-	                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-	                                <input type="text" class="form-control input-sm" placeholder="digite aqui sua busca"/>
-	                            </div>
+									<label for="campobusca"></label>
+	                                <input type="text" id="campobusca" title="campobusca" class="form-control input-sm" placeholder="digite aqui sua busca" /> 
+	                                <span class="input-group-btn">
+	                                  <button class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-search"></span></button>
+	                                </span>
+                            	</div><!-- /input-group -->
 	                        </form>
 	                    </div>
 	                    <div class="col-xs-6 col-md-6"><p>&nbsp;</p></div>
 	                    <div class="col-xs-1 col-md-1">
-	                        <a class="btn btn-'" data-toggle="modal" data-target=".bs-login-modal-sm">#{mensagens['login']}</a>
+	                        <a href="." title="Login de Acesso" class="btn btn-link" data-toggle="modal" data-target=".bs-login-modal-sm">#{mensagens['login']}</a>
 	
 	                        <div class="modal fade bs-login-modal-sm" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
 	                            <div class="modal-dialog modal-sm">
 	                                <div class="modal-content">
-	                                    <form role="form">
+	                                    <form role="form" action="admin_pesquisadores.html">
 	                                        <div class="modal-header">
 	                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	                                            <h4 class="modal-title" id="myModalLabel">#{mensagens['login']}</h4>
@@ -67,7 +69,7 @@
 	            <nav class="navbar navbar-default navbar-static-top" role="navigation">
 	                <div class="container">
 	                    <div class="navbar-header">
-	                        <a href="pages/index.xhtml"><h:graphicImage value="http://localhost:8080/RCMS//resources/images/logo-rcms.jpg" alt="RCMS" /></a>
+	                        <a href="#{request.contextPath}/pages/index.xhtml"><h:graphicImage value="/resources/images/logo-rcms.jpg" alt="RCMS" /></a>
 	                    </div>
 	                    <ul class="nav navbar-nav navbar-right">
 	

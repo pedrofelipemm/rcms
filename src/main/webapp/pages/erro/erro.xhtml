@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:o="http://omnifaces.org/ui">
+	
+	<!-- TODO: Internacionalizar -->
+	
+	<h:outputText value="Error Code: #{errorHandler.statusCode}"/><br />
+	
+	<h:outputText value="Error Desscription: #{errorHandler.message}"/><br />
+	
+	<h:outputText value="Exception Type: #{errorHandler.exceptionType}"/><br />
+	
+	<h:outputText value="Exception Calss: #{errorHandler.exception}"/><br />
+	
+	<h:outputText value="Request URI : #{errorHandler.requestURI}"/>
+</html>

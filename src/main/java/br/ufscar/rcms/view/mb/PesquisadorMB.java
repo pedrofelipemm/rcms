@@ -56,6 +56,8 @@ public class PesquisadorMB extends AbstractMB {
     private void limparDados() {
 
         pesquisador = new Pesquisador();
+        // TODO TEMP
+        pesquisador.setFlagAdministrador(true);
     }
 
     public void salvar() {
@@ -64,6 +66,7 @@ public class PesquisadorMB extends AbstractMB {
         if (fotoPesquisador != null) {
             converterFotoPesquisador(pesquisador);
         }
+
         pesquisadorService.salvar(pesquisador);
 
         adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
@@ -100,7 +103,7 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public void addIdioma() {
-    	if (idiomaSelecionado != null) {
+        if (idiomaSelecionado != null) {
             pesquisador.getIdiomas().add(idiomaSelecionado);
             idiomas.remove(idiomas.indexOf(idiomaSelecionado));
         }
@@ -165,28 +168,28 @@ public class PesquisadorMB extends AbstractMB {
         this.areas = areas;
     }
 
-	public List<Idioma> getIdiomas() {
-		return idiomas;
-	}
+    public List<Idioma> getIdiomas() {
+        return idiomas;
+    }
 
-	public void setIdiomas(List<Idioma> idiomas) {
-		this.idiomas = idiomas;
-	}
+    public void setIdiomas(List<Idioma> idiomas) {
+        this.idiomas = idiomas;
+    }
 
-	public Idioma getIdiomaSelecionado() {
-		return idiomaSelecionado;
-	}
+    public Idioma getIdiomaSelecionado() {
+        return idiomaSelecionado;
+    }
 
-	public void setIdiomaSelecionado(Idioma idiomaSelecionado) {
-		this.idiomaSelecionado = idiomaSelecionado;
-	}
+    public void setIdiomaSelecionado(Idioma idiomaSelecionado) {
+        this.idiomaSelecionado = idiomaSelecionado;
+    }
 
-	public IdiomaService getIdiomaService() {
-		return idiomaService;
-	}
+    public IdiomaService getIdiomaService() {
+        return idiomaService;
+    }
 
-	public void setIdiomaService(IdiomaService idiomaService) {
-		this.idiomaService = idiomaService;
-	}
+    public void setIdiomaService(IdiomaService idiomaService) {
+        this.idiomaService = idiomaService;
+    }
 
 }

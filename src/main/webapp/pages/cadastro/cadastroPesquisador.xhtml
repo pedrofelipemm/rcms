@@ -28,33 +28,51 @@
 							styleClass="form-control"/>
 					</div>
 					<div class="form-group">
-		            	<label for="senha">#{mensagens['label.senha']}</label>
-		              	<input type="password" class="form-control" id="senha" />
+		            	<h:outputLabel for="senha" value="#{mensagens['label.senha']}" />
+		            	<h:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}"
+							required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
+							styleClass="form-control"/>
 		            </div>
 		            <div class="form-group">
+            			<h:outputLabel for="email" value="#{mensagens['label.email']}" />
+		            	<h:inputText id="email" value="#{pesquisadorMB.pesquisador.email}"
+							required="true" requiredMessage="#{mensagens['email.nao.preenchido']}"
+							styleClass="form-control"/>
+            		</div>
+            		<div class="form-group">
+            			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
+            			<h:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+            				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
+            				styleClass="form-control"/>
+            		</div>
+		        </div>
+		        <div class="col-md-4">
+		        	<div class="form-group">
+            			<h:outputLabel for="login" value="#{mensagens['label.login']} " />
+						<h:inputText id="login" value="#{pesquisadorMB.pesquisador.login}"
+							required="true" requiredMessage="#{mensagens['login.nao.preenchido']}"
+							styleClass="form-control" />
+            		</div>
+            		<div class="form-group">
 		              	<label for="confirma-senha">#{mensagens['label.confirmacao.senha']}</label>
 		              	<input type="password" class="form-control" id="confirma-senha" />
 		            </div>
-		        </div>
-		        <div class="col-md-4">
             		<div class="form-group">
             			<h:outputLabel for="codigoLattes" value="#{mensagens['label.codigo.lattes']} " />
 						<h:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
 							required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
 							styleClass="form-control" />
             		</div>
+            		<!-- 
             		<div class="form-group">
-            			<label for="email">#{mensagens['label.email']}</label>
-              			<input type="email" class="form-control" id="email"/>
+            			<h:outputLabel for="flagAdmin" value="#{mensagens['label.flag.admin']} " />
+						<h:selectBooleanCheckbox id="flagAdmin" value="#{pesquisadorMB.pesquisador.flagAdministrador}"
+							required="true" requiredMessage="#{mensagens['flag.admin.nao.preenchido']}"
+							styleClass="form-control" />            		
             		</div>
-            		<div class="form-group">
-            			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
-            			<h:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
-            				rendered="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
-            				styleClass="form-control"/>
-            		</div>
+            		 -->
             	</div>
-            	<div class="col-md-3 text-center"> <img src="imagens/foto-prado.jpg" alt="" />
+            	<div class="col-md-3 text-center"> <h:graphicImage value="/resources/images/foto-prado.jpg" alt="Imagem para representar foto do pesquisador" />
             		<div class="form-group">
               			<label for="foto">#{mensagens['label.enviar.foto']}</label>
               			<input type="file" id="foto"/>
@@ -68,7 +86,7 @@
               			<h:outputLabel for="resumoProfissional" value="#{mensagens['label.resumo.profissional']}"/>
               			<h:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
               				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
-              				styleClass="form-control"/>
+              				styleClass="form-control" rows="5"/>
             		</div>
           		</div>
         	</div>

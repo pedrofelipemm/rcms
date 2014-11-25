@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/pages/templates/templateAdmin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	<ui:define name="conteudo">
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['formacao.academica']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formFormacaoAcademica" enctype="multipart/form-data">
+			
+			<o:messages id="messageBoxValidation" for="formFormacaoAcademica" styleClass="message-box-validation"/>
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+			
+			<div class="row">
+          		<div class="col-md-5">
+            		<div class="form-group">
+            			<h:outputLabel for="pesquisador" value="#{mensagens['label.pesquisador']} " />
+						<h:inputText id="pesquisador" value="#{pesquisadorMB.pesquisador.nome}"
+							required="true" requiredMessage="#{mensagens['pesquisador.nao.escolhido']}"
+							styleClass="form-control"/>
+					</div>
+					<div class="form-group">
+		            	<h:outputLabel for="anoInicio" value="#{mensagens['label.anoInicio']}" />
+		            	<h:inputText id="anoInicio" value="#{pesquisadorMB.pesquisador.senha}"
+							required="true" requiredMessage="#{mensagens['ano.inicio.vazio']}"
+							styleClass="form-control"/>
+		            </div>
+		            <div class="form-group">
+            			<h:outputLabel for="anoConclusao" value="#{mensagens['label.anoConclusao']}" />
+		            	<h:inputText id="anoConclusao" value="#{pesquisadorMB.pesquisador.email}"
+							required="true" requiredMessage="#{mensagens['ano.conclusao.vazio']}"
+							styleClass="form-control"/>
+            		</div>
+            		<div class="form-group">
+            			<h:outputLabel for="tipo" value="#{mensagens['label.tipo']}"/>
+            			<h:inputText id="tipo" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+            				required="true" requiredMessage="#{mensagens['tipo.vazio']}"
+            				styleClass="form-control"/>
+            		</div>
+		        </div>
+		        <div class="col-md-4">
+		        	<div class="form-group">
+            			<h:outputLabel for="nomeInstituicao" value="#{mensagens['label.nomeInstituicao']} " />
+						<h:inputText id="nomeInstituicao" value="#{pesquisadorMB.pesquisador.login}"
+							required="true" requiredMessage="#{mensagens['nomeInstituicao.vazio']}"
+							styleClass="form-control" />
+            		</div>
+            		<div class="form-group">
+            			<h:outputLabel for="descricao" value="#{mensagens['label.descricao']} " />
+						<h:inputText id="descricao" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+							required="true" requiredMessage="#{mensagens['descricao.vazia']}"
+							styleClass="form-control" />
+            		</div>
+            	</div>
+        	</div>
+        	<div class="row">
+          		<div class="col-md-12">
+            		<div class="form-group">
+              			<h:commandButton value="#{mensagens['salvar']}" action="#{pesquisadorMB.salvar}"
+							styleClass="btn btn-default">
+							<f:ajax render="@form" execute="@form" />
+						</h:commandButton>
+            		</div>
+          		</div>
+        	</div>
+        </h:form>
+
+		
+	</ui:define>
+</ui:composition>

@@ -42,6 +42,8 @@ public class PesquisadorMB extends AbstractMB {
     private transient Part fotoPesquisador;
 
     private List<Idioma> idiomas;
+    private List<Pesquisador> pesquisadores;
+
     private Idioma idiomaSelecionado;
 
     @PostConstruct
@@ -51,6 +53,7 @@ public class PesquisadorMB extends AbstractMB {
 
         areas = areaAtuacaoService.buscarTodas();
         idiomas = idiomaService.buscarTodas();
+        pesquisadores = pesquisadorService.buscarTodos();
     }
 
     private void limparDados() {
@@ -190,6 +193,14 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setIdiomaService(IdiomaService idiomaService) {
         this.idiomaService = idiomaService;
+    }
+
+    public List<Pesquisador> getPesquisadores() {
+        return pesquisadores;
+    }
+
+    public void setPesquisadores(List<Pesquisador> pesquisadores) {
+        this.pesquisadores = pesquisadores;
     }
 
 }

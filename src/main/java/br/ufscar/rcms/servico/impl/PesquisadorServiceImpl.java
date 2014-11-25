@@ -1,5 +1,7 @@
 package br.ufscar.rcms.servico.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,11 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     public void salvar(Pesquisador pesquisador) {
 
         pesquisadorDAO.salvar(pesquisador);
+    }
+
+    @Override
+    public List<Pesquisador> buscarTodos() {
+        return pesquisadorDAO.buscarTodos();
     }
 
 }

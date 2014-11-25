@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public abstract class AbstractMB implements Serializable {
 
-    private static final String BUNDLE_NAME = "bundle";
+    private static final String BUNDLE_NAME = "bundle_pt";
 
     public FacesContext getCurrentInstance() {
 

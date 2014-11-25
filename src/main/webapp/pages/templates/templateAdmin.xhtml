@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -6,23 +6,23 @@
 	xmlns:p="http://primefaces.org/ui" >
 
 	<h:head>
-        <title>#{titulo.sistema}</title>
-
-		<meta charset="utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <h:outputStylesheet name="bootstrap.min.css" library="css"/>
         <h:outputStylesheet name="custom-primefaces.css" library="css"/>
         <h:outputStylesheet name="estilo.css" library="css"/>
-
-		<h:outputScript name="jquery-1.11.1.min.js" library="js"/>
-		<noscript>Seu browser não suporta javascript</noscript>    
-		<h:outputScript name="bootstrap.min.js" library="js"/>
-		<noscript>Seu browser não suporta javascript</noscript>
-		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
-		<noscript>Seu browser não suporta javascript</noscript>
         
+        <h:outputScript name="jquery-1.11.1.min.js" library="js"/>
+		<h:outputScript name="bootstrap.min.js" library="js"/>
+		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
+        
+        <title>#{mensagens['titulo.sistema']}</title>
+	</h:head >
+	
+	<h:body styleClass="admin-bg">
+	
         <!-- EXTRAIR PARA ARQUIVO -->
         
         <script type="text/javascript">
@@ -40,9 +40,6 @@
             });
         </script>
         <noscript>Seu browser não suporta javascript</noscript>
-	</h:head >
-	
-	<h:body styleClass="admin-bg">
 
 		<h:panelGroup id="page" layout="block">
  

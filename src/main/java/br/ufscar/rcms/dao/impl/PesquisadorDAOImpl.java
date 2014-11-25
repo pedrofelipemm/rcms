@@ -8,11 +8,11 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 @Repository
 public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implements PesquisadorDAO {
 
-	private static final long serialVersionUID = 4493458867776635947L;
+    private static final long serialVersionUID = 4493458867776635947L;
 
-	public PesquisadorDAOImpl() {
+    public PesquisadorDAOImpl() {
 
-		setClazz(Pesquisador.class);
-	}
+        setClazz(Pesquisador.class);
+    }
 
 }

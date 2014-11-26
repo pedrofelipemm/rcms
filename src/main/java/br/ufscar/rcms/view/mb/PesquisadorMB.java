@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
@@ -42,7 +44,8 @@ public class PesquisadorMB extends AbstractMB {
     private transient Part fotoPesquisador;
 
     private List<Idioma> idiomas;
-    private List<Pesquisador> pesquisadores;
+
+    private transient DataModel<Pesquisador> pesquisadores;
 
     private Idioma idiomaSelecionado;
 
@@ -50,10 +53,20 @@ public class PesquisadorMB extends AbstractMB {
     public void inicializar() {
 
         limparDados();
+        carregarDados();
+    }
+
+    private void carregarDados() {
 
         areas = areaAtuacaoService.buscarTodas();
         idiomas = idiomaService.buscarTodas();
-        pesquisadores = pesquisadorService.buscarTodos();
+
+        pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
+
+        Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject("pesquisador");
+        if (pesquisadorEdicao != null) {
+            pesquisador = pesquisadorEdicao;
+        }
     }
 
     private void limparDados() {
@@ -63,7 +76,7 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador.setFlagAdministrador(true);
     }
 
-    public void salvar() {
+    public String salvar() {
 
         // TODO TRATAR
         if (fotoPesquisador != null) {
@@ -75,6 +88,15 @@ public class PesquisadorMB extends AbstractMB {
         adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
 
         limparDados();
+
+        return CONSULTA_PESQUISADORES;
+    }
+
+    public String editar(Pesquisador pesquisador) {
+
+        setFlashObject("pesquisador", pesquisador);
+
+        return AbstractMB.CADASTRO_PESQUISADOR;
     }
 
     private void converterFotoPesquisador(Pesquisador pesquisador) {
@@ -195,11 +217,11 @@ public class PesquisadorMB extends AbstractMB {
         this.idiomaService = idiomaService;
     }
 
-    public List<Pesquisador> getPesquisadores() {
+    public DataModel<Pesquisador> getPesquisadores() {
         return pesquisadores;
     }
 
-    public void setPesquisadores(List<Pesquisador> pesquisadores) {
+    public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
     }
 

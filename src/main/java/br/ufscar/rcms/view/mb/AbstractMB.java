@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public abstract class AbstractMB implements Serializable {
 
-    private static final String BUNDLE_NAME = "bundle_pt";
+    private static final String BUNDLE_NAME = "bundle";
+
+    public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
+    public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
 
     public FacesContext getCurrentInstance() {
 
@@ -34,18 +38,33 @@ public abstract class AbstractMB implements Serializable {
         return getCurrentInstance().getExternalContext();
     }
 
+    private Flash getFlash() {
+        return getExternalContext().getFlash();
+    }
+
     public void setFlashObject(String key, Object value) {
 
         if (key == null || value == null) {
             throw new IllegalArgumentException("key.value.nao.nulo");
         }
 
-        getExternalContext().getFlash().put(key, value);
+        if (getFlash() == null) {
+            // TODO
+            System.out.println("Internal Framework Problem");
+            return;
+        }
+        getFlash().put(key, value);
     }
 
     public Object getFlashObject(String key) {
 
-        return getExternalContext().getFlash().get(key);
+        if (getFlash() == null) {
+            // TODO
+            System.out.println("Internal Framework Problem");
+            return null;
+        }
+
+        return getFlash().get(key);
     }
 
     public HttpServletRequest getRequest() {

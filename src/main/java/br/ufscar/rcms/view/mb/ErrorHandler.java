@@ -1,5 +1,7 @@
 package br.ufscar.rcms.view.mb;
 
+import java.util.Map;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -8,38 +10,38 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class ErrorHandler {
 
+    private Map<String, Object> getRequestMap() {
+        return FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
+    }
+
     public String getStatusCode() {
-        String val = String.valueOf(FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-                .get("javax.servlet.error.status_code"));
-        return val;
+        Object val = getRequestMap().get("javax.servlet.error.status_code");
+        return val != null ? val.toString() : "";
     }
 
     public String getMessage() {
-        String val = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-                .get("javax.servlet.error.message");
-        return val;
+        Object val = getRequestMap().get("javax.servlet.error.message");
+        return val != null ? val.toString() : "";
     }
 
     public String getExceptionType() {
-        String val = FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-                .get("javax.servlet.error.exception_type").toString();
-        return val;
+        Object val = getRequestMap().get("javax.servlet.error.exception_type");
+        return val != null ? val.toString() : "";
     }
 
     public String getException() {
-        String val = ((Exception) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-                .get("javax.servlet.error.exception")).toString();
-        return val;
+        Object val = getRequestMap().get("javax.servlet.error.exception");
+        return val != null ? val.toString() : "";
     }
 
     public String getRequestURI() {
-        return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-                .get("javax.servlet.error.request_uri");
+        Object val = getRequestMap().get("javax.servlet.error.request_uri");
+        return val != null ? val.toString() : "";
     }
 
     public String getServletName() {
-        return (String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
-                .get("javax.servlet.error.servlet_name");
+        Object val = getRequestMap().get("javax.servlet.error.servlet_name");
+        return val != null ? val.toString() : "";
     }
 
 }

@@ -22,7 +22,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     @Override
     public void salvar(Pesquisador pesquisador) {
 
-        pesquisadorDAO.salvar(pesquisador);
+        pesquisadorDAO.atualizar(pesquisador);
     }
 
     @Override

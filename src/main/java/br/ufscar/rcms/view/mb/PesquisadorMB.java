@@ -56,29 +56,29 @@ public class PesquisadorMB extends AbstractMB {
         carregarDados();
     }
 
-    private void carregarDados() {
+    protected void carregarDados() {
 
         areas = areaAtuacaoService.buscarTodas();
         idiomas = idiomaService.buscarTodas();
 
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
 
-        Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject("pesquisador");
+	Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorEdicao;
         }
     }
 
-    private void limparDados() {
+    protected void limparDados() {
 
         pesquisador = new Pesquisador();
-        // TODO TEMP
+	// TODO PEDRO
         pesquisador.setFlagAdministrador(true);
     }
 
     public String salvar() {
 
-        // TODO TRATAR
+	// TODO PEDRO TRATAR
         if (fotoPesquisador != null) {
             converterFotoPesquisador(pesquisador);
         }
@@ -94,16 +94,16 @@ public class PesquisadorMB extends AbstractMB {
 
     public String editar(Pesquisador pesquisador) {
 
-        setFlashObject("pesquisador", pesquisador);
+	setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
 
-        return AbstractMB.CADASTRO_PESQUISADOR;
+        return CADASTRO_PESQUISADOR;
     }
 
     public String excluir(Pesquisador pesquisador) {
 
         pesquisadorService.remover(pesquisador);
 
-        return AbstractMB.CONSULTA_PESQUISADORES;
+        return CONSULTA_PESQUISADORES;
     }
 
     private void converterFotoPesquisador(Pesquisador pesquisador) {
@@ -111,7 +111,7 @@ public class PesquisadorMB extends AbstractMB {
         try {
             pesquisador.setFoto(IOUtils.toByteArray(fotoPesquisador.getInputStream()));
         } catch (IOException e) {
-            // TODO TRATAR EXCEPTION
+	    // TODO PEDRO TRATAR EXCEPTION
             e.printStackTrace();
         }
     }

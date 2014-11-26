@@ -35,8 +35,8 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
         if (pesquisadorToRemove == null) {
-            // TODO TRATAR EXCEPTION
-            throw new RuntimeException("Pesquisador não encontrado!");
+	    // TODO PEDRO TRATAR EXCEPTION
+	    throw new RuntimeException("Pesquisador não encontrado!");
         }
 
         pesquisadorDAO.remover(pesquisador);

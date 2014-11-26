@@ -14,7 +14,7 @@
         	</div>
         </div>
 		
-		<h:form id="formPesquisador" enctype="multipart/form-data">
+		<h:form id="formPesquisador">
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
@@ -36,7 +36,7 @@
     				<h:outputLabel value="#{pesquisador.nome}" />
     			</h:column>
     			
-    			<h:column headerClass="pull-right">
+    			<h:column headerClass="text-center">
     				<f:facet name="header">
     					<a href="${request.contextPath}/pages/cadastro/cadastroPesquisador.xhtml" class="btn btn-default">
 							#{mensagens['adicionar.pesquisador']}    					

@@ -21,7 +21,15 @@ public abstract class AbstractMB implements Serializable {
     private static final String BUNDLE_NAME = "bundle";
 
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
+
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
+
+    public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
+
+    // TODO PEDRO
+    // public abstract void inicializar();
+    // protected abstract void limparDados();
+    // protected abstract void carregarDados();
 
     public FacesContext getCurrentInstance() {
 
@@ -49,7 +57,7 @@ public abstract class AbstractMB implements Serializable {
         }
 
         if (getFlash() == null) {
-            // TODO
+	    // TODO PEDRO
             System.out.println("Internal Framework Problem");
             return;
         }
@@ -59,7 +67,7 @@ public abstract class AbstractMB implements Serializable {
     public Object getFlashObject(String key) {
 
         if (getFlash() == null) {
-            // TODO
+	    // TODO PEDRO
             System.out.println("Internal Framework Problem");
             return null;
         }

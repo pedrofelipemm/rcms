@@ -1,11 +1,16 @@
 package br.ufscar.rcms.view.mb;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import br.ufscar.rcms.factory.AreaAtuacaoFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 
 @ViewScoped
@@ -17,25 +22,27 @@ public class AreaAtuacaoMB extends AbstractMB {
     @ManagedProperty("#{areaAtuacaoService}")
     private AreaAtuacaoService areaAtuacaoService;
 
-    private AreaAtuacao area;
 
+    private GrandeAreaAtuacao gdeArea;
+    private AreaAtuacao area;
+    private SubAreaAtuacao subArea;
+    
     @PostConstruct
     public void inicializar() {
-        area = new AreaAtuacao();
+    	gdeArea = AreaAtuacaoFactory.CreateGrandeAreaEmpty();
+    	area = AreaAtuacaoFactory.CreateAreaAtuacaoEmpty();
+    	subArea = new SubAreaAtuacao();
     }
 
     public void salvar() {
-        if (area != null) {
-            AreaAtuacao areaExistente = areaAtuacaoService.buscarPorDescricao(area.getDescricao());
-
-            if (areaExistente == null) {
-                areaAtuacaoService.salvar(area);
-                adicionarMensagemInfoByKey("area.atuacao.cadastrada.sucesso", area.getDescricao());
-            } else {
-                adicionarMensagemAlertaByKey("area.atuacao.existente", area.getDescricao());
-            }
-
+    	if (area.getDescricao() != ""){
+    		if(subArea.getDescricao() != "")
+    			area.getSubAreasAtuacao().add(subArea);
+    		gdeArea.getAreasDeAtuacao().add(area);
         }
+    	
+    	areaAtuacaoService.salvar(gdeArea);
+    	adicionarMensagemInfoByKey("area.atuacao.cadastrada.sucesso", gdeArea.getDescricao());
     }
 
     public AreaAtuacaoService getAreaAtuacaoService() {
@@ -46,11 +53,28 @@ public class AreaAtuacaoMB extends AbstractMB {
         this.areaAtuacaoService = areaAtuacaoService;
     }
 
-    public AreaAtuacao getArea() {
-        return area;
-    }
+	public GrandeAreaAtuacao getGdeArea() {
+		return gdeArea;
+	}
 
-    public void setArea(AreaAtuacao area) {
-        this.area = area;
-    }
+	public void setGdeArea(GrandeAreaAtuacao gdeArea) {
+		this.gdeArea = gdeArea;
+	}
+
+	public AreaAtuacao getArea() {
+		return area;
+	}
+
+	public void setArea(AreaAtuacao area) {
+		this.area = area;
+	}
+
+	public SubAreaAtuacao getSubArea() {
+		return subArea;
+	}
+
+	public void setSubArea(SubAreaAtuacao subArea) {
+		this.subArea = subArea;
+	}
+
 }

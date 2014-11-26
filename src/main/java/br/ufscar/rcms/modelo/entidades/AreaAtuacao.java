@@ -1,31 +1,43 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "AREA_ATUACAO")
 public class AreaAtuacao extends Entidade {
 
-    private static final long serialVersionUID = -3948561964306499761L;
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAreaAtuacao;
-
-    @Column(nullable = false)
+    private Integer id;
+	
+	@Column(nullable = false)
     private String descricao;
+	
+	private static final long serialVersionUID = -3948561964306499761L;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="ID")
+	private Set<SubAreaAtuacao> subAreasAtuacao;
 
-    public Integer getIdAreaAtuacao() {
-        return idAreaAtuacao;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdAreaAtuacao(Integer idAreaAtuacao) {
-        this.idAreaAtuacao = idAreaAtuacao;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescricao() {
@@ -35,13 +47,20 @@ public class AreaAtuacao extends Entidade {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
+    public Set<SubAreaAtuacao> getSubAreasAtuacao() {
+		return subAreasAtuacao;
+	}
+	public void setSubAreasAtuacao(Set<SubAreaAtuacao> subAreasAtuacao) {
+		this.subAreasAtuacao = subAreasAtuacao;
+	}
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((idAreaAtuacao == null) ? 0 : idAreaAtuacao.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -56,6 +75,7 @@ public class AreaAtuacao extends Entidade {
         if (getClass() != obj.getClass()) {
             return false;
         }
+        
         AreaAtuacao other = (AreaAtuacao) obj;
         if (descricao == null) {
             if (other.descricao != null) {
@@ -64,14 +84,15 @@ public class AreaAtuacao extends Entidade {
         } else if (!descricao.equals(other.descricao)) {
             return false;
         }
-        if (idAreaAtuacao == null) {
-            if (other.idAreaAtuacao != null) {
+        if (id == null) {
+            if (other.id != null) {
                 return false;
             }
-        } else if (!idAreaAtuacao.equals(other.idAreaAtuacao)) {
+        } else if (!id.equals(other.id)) {
             return false;
         }
         return true;
     }
 
 }
+

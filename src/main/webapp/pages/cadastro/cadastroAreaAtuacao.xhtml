@@ -1,13 +1,65 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="/pages/templates/templatePortal.xhtml"
+<ui:composition template="/pages/templates/templateAdmin.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="conteudo">
-		<h:form>
-			<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>#{mensagens['area.de.atuacao']}</h1>
+			</div>
+		</div>
+		<h:form id="formCadAreaAtuacao">
+			<o:messages id="messageBoxValidation" for="formPesquisador"
+				styleClass="message-box-validation" />
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<h:outputLabel for="descricaoGdeArea"
+							value="#{mensagens['label.gdeArea.descricao']} " />
+						<h:inputText id="descricaoGdeArea"
+							value="#{areaAtuacaoMB.gdeArea.descricao}" required="true"
+							requiredMessage="#{mensagens['gdeArea.descricao.nao.preenchida']}"
+							pt:placeHolder="#{mensagens['label.gdeArea.placeholder']}"
+							styleClass="form-control" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="descricaoArea"
+							value="#{mensagens['label.area.descricao']} " />
+						<h:inputText id="descricaoArea"
+							value="#{areaAtuacaoMB.area.descricao}" required="true"
+							requiredMessage="#{mensagens['area.descricao.nao.preenchida']}"
+							pt:placeHolder="#{mensagens['label.area.placeholder']}"
+							styleClass="form-control" />
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="descricaoSubArea"
+							value="#{mensagens['label.subarea.descricao']} " />
+						<h:inputText id="descricaoSubArea"
+							value="#{areaAtuacaoMB.subArea.descricao}" required="true"
+							requiredMessage="#{mensagens['subarea.descricao.nao.preenchida']}"
+							pt:placeHolder="#{mensagens['label.subarea.placeholder']}"
+							styleClass="form-control" />
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<h:commandButton value="#{mensagens['salvar']}"
+									action="#{areaAtuacaoMB.salvar}" styleClass="btn btn-default">
+									<f:ajax render="@form" execute="@form" />
+								</h:commandButton>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--<div class="container">
 				<div class="row">
 					<div class="col-md-12">
 						<ol class="breadcrumb">
@@ -26,7 +78,7 @@
 
 				<p:messages id="messages" autoUpdate="true" closable="true" />
 
-				<p:panelGrid id="painelCadastroAreaAtuacao" styleClass="panelGrid"
+				 <p:panelGrid id="painelCadastroAreaAtuacao" styleClass="panelGrid"
 					columns="3">
 
 					<h:outputLabel for="descricao" value="Descrição " />
@@ -42,8 +94,8 @@
 								update="@form" style="margin-right: 10px;" />
 						</div>
 					</div>
-				</p:panelGrid>
-			</div>
+				</p:panelGrid> 
+			</div>-->
 		</h:form>
 	</ui:define>
 </ui:composition>

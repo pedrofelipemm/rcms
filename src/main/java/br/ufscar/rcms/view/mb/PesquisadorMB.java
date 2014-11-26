@@ -58,7 +58,7 @@ public class PesquisadorMB extends AbstractMB {
 
     protected void carregarDados() {
 
-        areas = areaAtuacaoService.buscarTodas();
+        //areas = areaAtuacaoService.buscarTodas();
         idiomas = idiomaService.buscarTodas();
 
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());

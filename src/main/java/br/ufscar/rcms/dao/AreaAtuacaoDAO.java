@@ -1,8 +1,10 @@
 package br.ufscar.rcms.dao;
 
-import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import java.util.List;
 
-public interface AreaAtuacaoDAO extends BaseDAO<AreaAtuacao, Long> {
+import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 
-    AreaAtuacao buscarPorDescricao(String Descricao);
+public interface AreaAtuacaoDAO extends BaseDAO<GrandeAreaAtuacao, Long> {
+
+	List<GrandeAreaAtuacao> buscarPorDescricao(String Descricao);
 }

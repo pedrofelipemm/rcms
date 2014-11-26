@@ -30,4 +30,16 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         return pesquisadorDAO.buscarTodos();
     }
 
+    @Override
+    public void remover(Pesquisador pesquisador) {
+
+        Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
+        if (pesquisadorToRemove == null) {
+            // TODO TRATAR EXCEPTION
+            throw new RuntimeException("Pesquisador não encontrado!");
+        }
+
+        pesquisadorDAO.remover(pesquisador);
+    }
+
 }

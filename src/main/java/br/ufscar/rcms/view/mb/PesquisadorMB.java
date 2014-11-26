@@ -99,6 +99,13 @@ public class PesquisadorMB extends AbstractMB {
         return AbstractMB.CADASTRO_PESQUISADOR;
     }
 
+    public String excluir(Pesquisador pesquisador) {
+
+        pesquisadorService.remover(pesquisador);
+
+        return AbstractMB.CONSULTA_PESQUISADORES;
+    }
+
     private void converterFotoPesquisador(Pesquisador pesquisador) {
 
         try {

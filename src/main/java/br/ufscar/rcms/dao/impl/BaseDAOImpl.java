@@ -57,7 +57,7 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
 
     @Override
     public void remover(T entidade) {
-        entityManager.remove(entidade);
+        entityManager.remove(entityManager.contains(entidade) ? entidade : entityManager.merge(entidade));
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Usuario extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuario;
+    private Long idUsuario;
 
     @Column(nullable = false)
     private String nome;
@@ -32,11 +32,11 @@ public class Usuario extends Entidade {
     @Column(nullable = false)
     private String email;
 
-    public Integer getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 

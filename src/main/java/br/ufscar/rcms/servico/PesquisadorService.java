@@ -10,4 +10,6 @@ public interface PesquisadorService extends Serializable {
     void salvar(Pesquisador pesquisador);
 
     List<Pesquisador> buscarTodos();
+
+    void remover(Pesquisador pesquisador);
 }

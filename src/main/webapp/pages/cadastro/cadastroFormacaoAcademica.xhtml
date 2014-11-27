@@ -23,25 +23,25 @@
           		<div class="col-md-5">
             		<div class="form-group">
             			<h:outputLabel for="pesquisador" value="#{mensagens['label.pesquisador']} " />
-						<h:inputText id="pesquisador" value="#{pesquisadorMB.pesquisador.nome}"
+						<h:inputText id="pesquisador" value="#{formacaoAcademicaMB.formacaoAcademica.pesquisador}"
 							required="true" requiredMessage="#{mensagens['pesquisador.nao.escolhido']}"
 							styleClass="form-control"/>
 					</div>
 					<div class="form-group">
 		            	<h:outputLabel for="anoInicio" value="#{mensagens['label.anoInicio']}" />
-		            	<h:inputText id="anoInicio" value="#{pesquisadorMB.pesquisador.senha}"
+		            	<h:inputText id="anoInicio" value="#{formacaoAcademicaMB.formacaoAcademica.anoInicio}"
 							required="true" requiredMessage="#{mensagens['ano.inicio.vazio']}"
 							styleClass="form-control"/>
 		            </div>
 		            <div class="form-group">
             			<h:outputLabel for="anoConclusao" value="#{mensagens['label.anoConclusao']}" />
-		            	<h:inputText id="anoConclusao" value="#{pesquisadorMB.pesquisador.email}"
+		            	<h:inputText id="anoConclusao" value="#{formacaoAcademicaMB.formacaoAcademica.anoConclusao}"
 							required="true" requiredMessage="#{mensagens['ano.conclusao.vazio']}"
 							styleClass="form-control"/>
             		</div>
             		<div class="form-group">
             			<h:outputLabel for="tipo" value="#{mensagens['label.tipo']}"/>
-            			<h:inputText id="tipo" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+            			<h:inputText id="tipo" value="#{formacaoAcademicaMB.formacaoAcademica.tipo}"
             				required="true" requiredMessage="#{mensagens['tipo.vazio']}"
             				styleClass="form-control"/>
             		</div>
@@ -49,13 +49,13 @@
 		        <div class="col-md-4">
 		        	<div class="form-group">
             			<h:outputLabel for="nomeInstituicao" value="#{mensagens['label.nomeInstituicao']} " />
-						<h:inputText id="nomeInstituicao" value="#{pesquisadorMB.pesquisador.login}"
+						<h:inputText id="nomeInstituicao" value="#{formacaoAcademicaMB.formacaoAcademica.nomeInstituicao}"
 							required="true" requiredMessage="#{mensagens['nomeInstituicao.vazio']}"
 							styleClass="form-control" />
             		</div>
             		<div class="form-group">
             			<h:outputLabel for="descricao" value="#{mensagens['label.descricao']} " />
-						<h:inputText id="descricao" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+						<h:inputText id="descricao" value="#{formacaoAcademicaMB.formacaoAcademica.descricao}"
 							required="true" requiredMessage="#{mensagens['descricao.vazia']}"
 							styleClass="form-control" />
             		</div>
@@ -64,7 +64,7 @@
         	<div class="row">
           		<div class="col-md-12">
             		<div class="form-group">
-              			<h:commandButton value="#{mensagens['salvar']}" action="#{pesquisadorMB.salvar}"
+              			<h:commandButton value="#{mensagens['salvar']}" action="#{formacaoAcademicaMB.salvar}"
 							styleClass="btn btn-default">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>

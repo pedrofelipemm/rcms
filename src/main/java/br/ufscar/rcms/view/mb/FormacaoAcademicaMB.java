@@ -22,6 +22,7 @@ public class FormacaoAcademicaMB extends AbstractMB{
 	 * Salva os dados de Formacao Academica
 	 */
 	public void salvar(){
+		//adicionarMensagemInfoByKey("formacaoAcademica.salvo.sucesso", formacaoAcademica.getPesquisador().getNome());
 		formacaoAcademicaService.salvar(formacaoAcademica);
 	}
 	

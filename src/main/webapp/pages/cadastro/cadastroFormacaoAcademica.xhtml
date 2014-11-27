@@ -26,7 +26,18 @@
 						<h:inputText id="pesquisador" value="#{formacaoAcademicaMB.formacaoAcademica.pesquisador}"
 							required="true" requiredMessage="#{mensagens['pesquisador.nao.escolhido']}"
 							styleClass="form-control"/>
+							
+									<h:selectOneMenu id="selectPesquisadores" class="form-control" value="#{formacaoAcademicaMB.pesquisadores}"	converter="entityConverter">
+										<f:selectItem itemLabel="Selecione um pesquisador" itemValue=""></f:selectItem>
+										<f:selectItems value="#{formacaoAcademicaMB.formacaoAcademica.pesquisador}" var="pesq" itemLabel="#{pesq.nome}" itemValue="#{pesq.idUsuario}"></f:selectItems>
+
+				
+									</h:selectOneMenu>
+							
 					</div>
+					
+					
+					
 					<div class="form-group">
 		            	<h:outputLabel for="anoInicio" value="#{mensagens['label.anoInicio']}" />
 		            	<h:inputText id="anoInicio" value="#{formacaoAcademicaMB.formacaoAcademica.anoInicio}"

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="/pages/templates/templatePortal.xhtml"
+<ui:composition template="/pages/templates/templateAdmin.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -7,43 +7,36 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="conteudo">
 		<h:form>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<ol class="breadcrumb">
-							<li><a href="#">#{mensagens['indice']}</a></li>
-							<li><a href="#">#{mensagens['idiomas']}</a></li>
-							<li class="active">#{mensagens['cadastro.idiomas']}</li>
-						</ol>
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['cadastro.idiomas']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formIdioma" enctype="multipart/form-data">
+			
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+			
+			<div class="row">
+          		<div class="col-md-5">
+            		<div class="form-group">
+            			<h:outputLabel for="idioma" value="#{mensagens['label.idioma']} " />
+						<h:inputText id="idioma" value="#{idiomaMB.idioma.descricao}"
+							required="true" requiredMessage="#{mensagens['idioma.nao.preenchido']}"
+							styleClass="form-control"/>
 					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-9">
-						<h1>#{mensagens['cadastro.idiomas']}</h1>
-					</div>
-				</div>
-
-				<p:messages id="messages" autoUpdate="true" closable="true" />
-
-				<p:panelGrid id="painelCadastroIdioma" styleClass="panelGrid"
-					columns="3">
-
-					<h:outputLabel for="descricao" value="Descrição " />
-					<p:inputText id="descricao"
-						value="#{idiomaMB.idioma.descricao}" required="true"
-						requiredMessage="'Descrição' não preenchida" />
-					<p:messages for="descricao" closable="true" autoUpdate="true"
-						showIcon="false" />
-
 					<div class="row">
 						<div class="col-md-12">
 							<p:commandButton value="Salvar" action="#{idiomaMB.salvar}"
 								update="@form" style="margin-right: 10px;" />
 						</div>
 					</div>
-				</p:panelGrid>
-			</div>
+		</div>
+		</div>
+		 </h:form>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

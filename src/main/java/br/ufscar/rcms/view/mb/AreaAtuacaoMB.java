@@ -82,13 +82,6 @@ public class AreaAtuacaoMB extends AbstractMB {
 	}
 
 	public void adicionarSubAreaAtuacao() {
-		/*
-		 * if (areaSelecionada != null) {
-		 * gdeArea.getAreasDeAtuacao().add(areaSelecionada);
-		 * _todasAsAreas.remove(_todasAsAreas.indexOf(areaSelecionada));
-		 * todasAsAreas = new ListDataModel<AreaAtuacao>(_todasAsAreas); areas =
-		 * new ListDataModel<AreaAtuacao>(gdeArea.getAreasDeAtuacao()); }
-		 */
 		area.getSubAreasAtuacao().add(subAreaSelecionada);
 		subAreaSelecionada = new SubAreaAtuacao();
 		subAreas = new ListDataModel<SubAreaAtuacao>(area.getSubAreasAtuacao());

@@ -19,8 +19,8 @@ public class Idioma extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idIdioma;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Pesquisador pesquisador;
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+//    private Pesquisador pesquisador;
 
     @Column(nullable = false)
     private String descricao;
@@ -36,13 +36,13 @@ public class Idioma extends Entidade {
         this.idIdioma = idIdioma;
     }
 
-    public Pesquisador getPesquisador() {
-        return pesquisador;
-    }
-
-    public void setPesquisador(Pesquisador pesquisador) {
-        this.pesquisador = pesquisador;
-    }
+//    public Pesquisador getPesquisador() {
+//        return pesquisador;
+//    }
+//
+//    public void setPesquisador(Pesquisador pesquisador) {
+//        this.pesquisador = pesquisador;
+//    }
 
     public String getDescricao() {
         return descricao;

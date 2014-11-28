@@ -3,15 +3,17 @@ package br.ufscar.rcms.servico;
 import java.io.Serializable;
 import java.util.List;
 
-import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 
 public interface AreaAtuacaoService extends Serializable {
 
-    void salvar(GrandeAreaAtuacao area);
+    void salvar(AreaAtuacao area);
 
-    void alterar(GrandeAreaAtuacao area);
+    void alterar(AreaAtuacao area);
+    
+    void remover(AreaAtuacao area);
 
-    List<GrandeAreaAtuacao> buscarTodas();
+    List<AreaAtuacao> buscarTodas();
 
-    List<GrandeAreaAtuacao> buscarPorDescricao(String Descricao);
+    List<AreaAtuacao> buscarPorDescricao(String Descricao);
 }

@@ -1,16 +1,17 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="GRANDE_AREA_ATUACAO")
@@ -25,9 +26,8 @@ public class GrandeAreaAtuacao extends Entidade{
 	@Column(nullable = false)
     private String descricao;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="ID")
-	private Set<AreaAtuacao> areasDeAtuacao;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<AreaAtuacao> areasDeAtuacao;
 
     public Integer getId() {
         return id;
@@ -45,10 +45,10 @@ public class GrandeAreaAtuacao extends Entidade{
         this.descricao = descricao;
     }
 	
-	public Set<AreaAtuacao> getAreasDeAtuacao() {
+	public List<AreaAtuacao> getAreasDeAtuacao() {
 		return areasDeAtuacao;
 	}
-	public void setAreasDeAtuacao(Set<AreaAtuacao> areasDeAtuacao) {
+	public void setAreasDeAtuacao(List<AreaAtuacao> areasDeAtuacao) {
 		this.areasDeAtuacao = areasDeAtuacao;
 	}
 

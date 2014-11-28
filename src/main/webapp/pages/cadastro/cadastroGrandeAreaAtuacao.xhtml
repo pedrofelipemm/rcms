@@ -9,7 +9,7 @@
 	<ui:define name="conteudo">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>#{mensagens['area.de.atuacao']}</h1>
+				<h1>#{mensagens['grande.area.de.atuacao']}</h1>
 			</div>
 		</div>
 		<h:form id="formCadAreaAtuacao">
@@ -20,12 +20,13 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<h2>#{areaAtuacaoMB.area.descricao}</h2>
-						<!-- <h:inputText id="descricaoArea"
-							value="#{areaAtuacaoMB.area.descricao}" required="true"
-							requiredMessage="#{mensagens['area.descricao.nao.preenchida']}"
-							pt:placeHolder="#{mensagens['label.area.placeholder']}"
-							styleClass="form-control" /> -->
+						<h:outputLabel for="descricaoGdeArea"
+							value="#{mensagens['label.gdeArea.descricao']} " />
+						<h:inputText id="descricaoGdeArea"
+							value="#{grandeAreaAtuacaoMB.gdeArea.descricao}" required="true"
+							requiredMessage="#{mensagens['gdeArea.descricao.nao.preenchida']}"
+							pt:placeHolder="#{mensagens['label.gdeArea.placeholder']}"
+							styleClass="form-control" />
 					</div>
 
 
@@ -48,20 +49,21 @@
 								</div>
 							</div>
 						</h:column> -->
-
-						<h:column headerClass="text-center">
-							<h:outputLabel for="descricaoSubArea"
-								value="#{mensagens['label.subarea.descricao']} " />
+						
+						 <h:column headerClass="text-center">
+							<h:outputLabel for="descricaoArea"
+								value="#{mensagens['label.area.descricao']} " />
 							<div class="input-group">
-								<h:inputText id="descricaoSubArea"
-									value="#{areaAtuacaoMB.subAreaSelecionada.descricao}"
-									pt:placeHolder="#{mensagens['label.subarea.placeholder']}"
+								<h:inputText id="descricaoArea"
+									value="#{grandeAreaAtuacaoMB.areaSelecionada.descricao}"
+									pt:placeHolder="#{mensagens['label.area.placeholder']}"
 									styleClass="form-control" />
 								<span class="input-group-btn"> <h:commandButton
 										value="#{mensagens['adicionar']}" styleClass="btn btn-default"
-										action="#{areaAtuacaoMB.adicionarSubAreaAtuacao}" > &nbsp;
+										action="#{grandeAreaAtuacaoMB.adicionarAreaAtuacao}" >
 										<f:ajax render="@form" execute="@form" />
 										</h:commandButton>
+										 &nbsp;
 								</span>
 							</div>
 						</h:column>
@@ -85,16 +87,16 @@
 						</h:column>-->
 
 
-					<h:dataTable value="#{areaAtuacaoMB.subAreas}" var="area"
+					<h:dataTable value="#{grandeAreaAtuacaoMB.areas}" var="area"
 						styleClass="table table-hover" headerClass="col-width-50"
 						rowClasses="col-width-50"
-						rendered="#{not empty areaAtuacaoMB.subAreas}">
+						rendered="#{not empty grandeAreaAtuacaoMB.areas}">
 
 						<h:column>
 							<f:facet name="header">
 								<h:outputLabel value="#" />
 							</f:facet>
-							<h:outputLabel value="#{areaAtuacaoMB.subAreas.rowIndex + 1}" />
+							<h:outputLabel value="#{grandeAreaAtuacaoMB.areas.rowIndex + 1}" />
 						</h:column>
 
 						<h:column headerClass="col-xs-10">
@@ -107,9 +109,9 @@
 						<h:column headerClass="text-center">
 							<h:commandButton value="#{mensagens['excluir']}"
 								styleClass="btn btn-default"
-								action="#{areaAtuacaoMB.removerSubAreaAtuacao(area)}" >
-							<f:ajax render="@form" execute="@form" />
-							</h:commandButton>
+								action="#{grandeAreaAtuacaoMB.removerAreaAtuacao(area)}" >
+								<f:ajax render="@form" execute="@form" />
+								</h:commandButton>
 						</h:column>
 
 					</h:dataTable>
@@ -136,7 +138,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<h:commandButton value="#{mensagens['salvar']}"
-									action="#{areaAtuacaoMB.salvar}" styleClass="btn btn-default">
+									action="#{grandeAreaAtuacaoMB.salvar}" styleClass="btn btn-default">
 									<f:ajax render="@form" execute="@form" />
 								</h:commandButton>
 							</div>

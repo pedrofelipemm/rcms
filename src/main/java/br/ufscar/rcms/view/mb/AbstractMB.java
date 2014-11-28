@@ -28,6 +28,8 @@ public abstract class AbstractMB implements Serializable {
     
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
     
+    public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "area";
+    
     public static final String CADASTRO_GRANDE_AREA = "cadastroGrandeAreaAtuacao";
     
     public static final String CONSULTA_GRANDE_AREA = "consultaGrandeAreaAtuacao";

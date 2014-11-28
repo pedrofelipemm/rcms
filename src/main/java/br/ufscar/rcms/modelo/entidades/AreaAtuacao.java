@@ -1,10 +1,11 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,9 +28,8 @@ public class AreaAtuacao extends Entidade {
 	
 	private static final long serialVersionUID = -3948561964306499761L;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="ID")
-	private Set<SubAreaAtuacao> subAreasAtuacao;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<SubAreaAtuacao> subAreasAtuacao;
 
 
     public Integer getId() {
@@ -48,10 +48,10 @@ public class AreaAtuacao extends Entidade {
         this.descricao = descricao;
     }
     
-    public Set<SubAreaAtuacao> getSubAreasAtuacao() {
+    public List<SubAreaAtuacao> getSubAreasAtuacao() {
 		return subAreasAtuacao;
 	}
-	public void setSubAreasAtuacao(Set<SubAreaAtuacao> subAreasAtuacao) {
+	public void setSubAreasAtuacao(List<SubAreaAtuacao> subAreasAtuacao) {
 		this.subAreasAtuacao = subAreasAtuacao;
 	}
 
@@ -92,6 +92,11 @@ public class AreaAtuacao extends Entidade {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "AreaAtuacao [Id=" + getId() + ", Descricao=" + getDescricao() + "]";
     }
 
 }

@@ -1,64 +1,128 @@
 package br.ufscar.rcms.view.mb;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 import br.ufscar.rcms.factory.AreaAtuacaoFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
+import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 
 @ViewScoped
 @ManagedBean(name = "areaAtuacaoMB")
 public class AreaAtuacaoMB extends AbstractMB {
 
-    private static final long serialVersionUID = 6030291216383161652L;
+	private static final long serialVersionUID = -1374520348706209763L;
 
-    @ManagedProperty("#{areaAtuacaoService}")
-    private AreaAtuacaoService areaAtuacaoService;
+	@ManagedProperty("#{areaAtuacaoService}")
+	private AreaAtuacaoService areaAtuacaoService;
 
+	private AreaAtuacao area;
+	private transient DataModel<SubAreaAtuacao> subAreas;
+	private transient DataModel<AreaAtuacao> todasAsAreas;
+	private SubAreaAtuacao subAreaSelecionada;
 
-    private GrandeAreaAtuacao gdeArea;
-    private AreaAtuacao area;
-    private SubAreaAtuacao subArea;
-    
-    @PostConstruct
-    public void inicializar() {
-    	gdeArea = AreaAtuacaoFactory.CreateGrandeAreaEmpty();
-    	area = AreaAtuacaoFactory.CreateAreaAtuacaoEmpty();
-    	subArea = new SubAreaAtuacao();
-    }
-
-    public void salvar() {
-    	if (area.getDescricao() != ""){
-    		if(subArea.getDescricao() != "")
-    			area.getSubAreasAtuacao().add(subArea);
-    		gdeArea.getAreasDeAtuacao().add(area);
-        }
-    	
-    	areaAtuacaoService.salvar(gdeArea);
-    	adicionarMensagemInfoByKey("area.atuacao.cadastrada.sucesso", gdeArea.getDescricao());
-    }
-
-    public AreaAtuacaoService getAreaAtuacaoService() {
-        return areaAtuacaoService;
-    }
-
-    public void setAreaAtuacaoService(AreaAtuacaoService areaAtuacaoService) {
-        this.areaAtuacaoService = areaAtuacaoService;
-    }
-
-	public GrandeAreaAtuacao getGdeArea() {
-		return gdeArea;
+	@PostConstruct
+	public void inicializar() {
+		limparDados();
+		carregarDados();
 	}
 
-	public void setGdeArea(GrandeAreaAtuacao gdeArea) {
-		this.gdeArea = gdeArea;
+	private void carregarDados() {
+		todasAsAreas = new ListDataModel<AreaAtuacao>(
+				areaAtuacaoService.buscarTodas());
+		subAreaSelecionada = new SubAreaAtuacao();
+
+		AreaAtuacao areaEditar = (AreaAtuacao) getFlashObject(FLASH_KEY_AREA_ATUACAO);
+		if (areaEditar != null) {
+			this.area = areaEditar;
+			subAreas = new ListDataModel<SubAreaAtuacao>(
+					this.area.getSubAreasAtuacao());
+		}
+
+	}
+
+	private void limparDados() {
+		area = AreaAtuacaoFactory.CreateAreaAtuacaoEmpty();
+	}
+
+	public void salvar() {
+
+		if (area.getId() != null) {
+			areaAtuacaoService.alterar(area);
+			adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso",
+					area.getDescricao());
+		} else {
+			areaAtuacaoService.salvar(area);
+			adicionarMensagemInfoByKey("area.atuacao.cadastrada.sucesso",
+					area.getDescricao());
+		}
+		subAreas = new ListDataModel<SubAreaAtuacao>(area.getSubAreasAtuacao());
+
+	}
+
+	public String editar(AreaAtuacao area) {
+		setFlashObject(FLASH_KEY_AREA_ATUACAO, area);
+
+		return CADASTRO_AREA_ATUACAO;
+	}
+
+	public String excluir(AreaAtuacao area) {
+
+		areaAtuacaoService.remover(area);
+
+		return CONSULTA_AREA_ATUACAO;
+	}
+
+	public void adicionarSubAreaAtuacao() {
+		/*
+		 * if (areaSelecionada != null) {
+		 * gdeArea.getAreasDeAtuacao().add(areaSelecionada);
+		 * _todasAsAreas.remove(_todasAsAreas.indexOf(areaSelecionada));
+		 * todasAsAreas = new ListDataModel<AreaAtuacao>(_todasAsAreas); areas =
+		 * new ListDataModel<AreaAtuacao>(gdeArea.getAreasDeAtuacao()); }
+		 */
+		area.getSubAreasAtuacao().add(subAreaSelecionada);
+		subAreaSelecionada = new SubAreaAtuacao();
+		subAreas = new ListDataModel<SubAreaAtuacao>(area.getSubAreasAtuacao());
+	}
+
+	public void removerSubAreaAtuacao(SubAreaAtuacao area) {
+		this.area.getSubAreasAtuacao().remove(
+				this.area.getSubAreasAtuacao().indexOf(area));
+		subAreas = new ListDataModel<SubAreaAtuacao>(
+				this.area.getSubAreasAtuacao());
+	}
+
+	public AreaAtuacaoService getAreaAtuacaoService() {
+		return areaAtuacaoService;
+	}
+
+	public void setAreaAtuacaoService(AreaAtuacaoService areaAtuacaoService) {
+		this.areaAtuacaoService = areaAtuacaoService;
+	}
+
+	public SubAreaAtuacao getSubAreaSelecionada() {
+		return subAreaSelecionada;
+	}
+
+	public void setSubAreaSelecionada(SubAreaAtuacao subAreaSelecionada) {
+		this.subAreaSelecionada = subAreaSelecionada;
+	}
+
+	public DataModel<SubAreaAtuacao> getSubAreas() {
+		return subAreas;
+	}
+
+	public void setSubAreas(DataModel<SubAreaAtuacao> subAreas) {
+		this.subAreas = subAreas;
 	}
 
 	public AreaAtuacao getArea() {
@@ -69,12 +133,12 @@ public class AreaAtuacaoMB extends AbstractMB {
 		this.area = area;
 	}
 
-	public SubAreaAtuacao getSubArea() {
-		return subArea;
+	public DataModel<AreaAtuacao> getTodasAsAreas() {
+		return todasAsAreas;
 	}
 
-	public void setSubArea(SubAreaAtuacao subArea) {
-		this.subArea = subArea;
+	public void setTodasAsAreas(DataModel<AreaAtuacao> todasAsAreas) {
+		this.todasAsAreas = todasAsAreas;
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PESQUISADOR_IDIOMA")
+@Table(name = "IDIOMA")
 public class Idioma extends Entidade {
 
     private static final long serialVersionUID = 3667531830943589983L;
@@ -19,14 +19,12 @@ public class Idioma extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idIdioma;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Pesquisador pesquisador;
+
 
     @Column(nullable = false)
     private String descricao;
 
-    @Column(nullable = false)
-    private String proficiencia;
+ 
 
     public Integer getIdIdioma() {
         return idIdioma;
@@ -36,13 +34,7 @@ public class Idioma extends Entidade {
         this.idIdioma = idIdioma;
     }
 
-    public Pesquisador getPesquisador() {
-        return pesquisador;
-    }
 
-    public void setPesquisador(Pesquisador pesquisador) {
-        this.pesquisador = pesquisador;
-    }
 
     public String getDescricao() {
         return descricao;
@@ -52,11 +44,4 @@ public class Idioma extends Entidade {
         this.descricao = descricao;
     }
 
-    public String getProficiencia() {
-        return proficiencia;
-    }
-
-    public void setProficiencia(String proficiencia) {
-        this.proficiencia = proficiencia;
-    }
 }

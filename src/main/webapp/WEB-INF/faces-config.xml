@@ -57,6 +57,34 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
+			<from-outcome>consultaAreaAtuacao</from-outcome>
+			<to-view-id>/pages/consulta/areaAreaAtuacao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroGrandeAreaAtuacao</from-outcome>
+			<to-view-id>/pages/cadastro/cadastroGrandeAreaAtuacao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaGrandeAreaAtuacao</from-outcome>
+			<to-view-id>/pages/consulta/grandeAreaAtuacao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
 			<from-outcome>cadastroIdioma</from-outcome>
 			<to-view-id>/pages/cadastro/cadastroIdioma.xhtml</to-view-id>
 			<redirect/>

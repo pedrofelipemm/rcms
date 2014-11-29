@@ -25,6 +25,7 @@ public class IdiomaMB extends AbstractMB {
     }
 
     public void salvar() {
+    	
         if (getIdioma() != null) {
             Idioma idiomaExistente = getIdiomaService().buscarPorDescricao(getIdioma().getDescricao());
 
@@ -32,6 +33,7 @@ public class IdiomaMB extends AbstractMB {
                 getIdiomaService().salvar(getIdioma());
                 // TODO i18n
                 adicionarMensagemInfo("Idioma " + idioma.getDescricao() + " cadastrado com sucesso!");
+                idioma = new Idioma();
             } else {
                 adicionarMensagemAlerta("Já existe um idioma com a descrição: " + idioma.getDescricao());
             }

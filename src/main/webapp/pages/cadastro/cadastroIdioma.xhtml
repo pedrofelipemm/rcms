@@ -29,8 +29,10 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<p:commandButton value="Salvar" action="#{idiomaMB.salvar}"
-								update="@form" style="margin-right: 10px;" />
+							<h:commandButton value="Salvar" action="#{idiomaMB.salvar}"
+								 style="margin-right: 10px;" >
+								 <f:ajax render="@form" execute="@form" />
+							</h:commandButton>
 						</div>
 					</div>
 		</div>

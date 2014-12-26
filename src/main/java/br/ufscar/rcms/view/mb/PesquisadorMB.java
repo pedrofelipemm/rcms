@@ -18,6 +18,7 @@ import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
+import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 
 @ViewScoped
@@ -34,6 +35,9 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{idiomaService}")
     private IdiomaService idiomaService;
+    
+    @ManagedProperty("#{lattesService}")
+    private LattesService lattesService;
 
     private Pesquisador pesquisador;
 
@@ -147,6 +151,16 @@ public class PesquisadorMB extends AbstractMB {
             idiomas.add(idiomaSelecionado);
         }
     }
+    
+    public void baixarDadosPesquisadorLattes(String userId, String nome){
+    	try {
+    		/*Random gerador = new Random();
+    		String.valueOf(gerador.nextInt());*/
+			lattesService.executarComandoLattes(nome, userId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
     public PesquisadorService getPesquisadorService() {
 
@@ -224,7 +238,15 @@ public class PesquisadorMB extends AbstractMB {
         this.idiomaService = idiomaService;
     }
 
-    public DataModel<Pesquisador> getPesquisadores() {
+    public LattesService getLattesService() {
+		return lattesService;
+	}
+
+	public void setLattesService(LattesService lattesService) {
+		this.lattesService = lattesService;
+	}
+
+	public DataModel<Pesquisador> getPesquisadores() {
         return pesquisadores;
     }
 

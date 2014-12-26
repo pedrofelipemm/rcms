@@ -31,6 +31,13 @@
                 <div class="col-md-3 text-right">
                 	<h:graphicImage value="/resources/images/foto-prado.jpg" alt="Foto do Pesquisador" />
                     <p><a href="#" class="lnk-lattes">Currículo Lattes</a></p>
+                    
+                    <h:form id="formImportarLattes" enctype="multipart/form-data">
+	                    <h:commandButton value="#{mensagens['importar.lattes']}" action="#{pesquisadorMB.baixarDadosPesquisadorLattes('2668568143800755', 'Antonio Francisco do Prado')}"
+								styleClass="btn btn-default lnk-lattes">
+								<f:ajax render="@form" execute="@form" />
+						</h:commandButton>
+					</h:form>
                 </div>
             </div>
             <div class="row">

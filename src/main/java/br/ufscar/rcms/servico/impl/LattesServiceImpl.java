@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.LattesService;
 
 @Service("lattesService")
@@ -26,9 +27,10 @@ public class LattesServiceImpl implements LattesService {
     @Value("${arquivo.config.lattes}")
     private String arquivoConfig;
     
-	public void executarComandoLattes(String nome, String hash)
+	public void executarComandoLattes(Pesquisador pesquisador)
 			throws IOException {
-
+		String hash=pesquisador.getCodigoLattes();
+		String nome = pesquisador.getNome();
 		criarArquivo(nome, hash, getConteudo(hash));
 
 		try {

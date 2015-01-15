@@ -152,13 +152,15 @@ public class PesquisadorMB extends AbstractMB {
         }
     }
     
-    public void baixarDadosPesquisadorLattes(String userId, String nome){
+    public String baixarDadosPesquisadorLattes(){
     	try {
     		/*Random gerador = new Random();
     		String.valueOf(gerador.nextInt());*/
-			lattesService.executarComandoLattes(nome, userId);
+			lattesService.executarComandoLattes(getPesquisador());
+			return CONSULTA_PESQUISADORES;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
     }
 

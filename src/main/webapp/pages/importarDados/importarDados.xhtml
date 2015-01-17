@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/pages/templates/templateAdmin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	<ui:define name="conteudo">
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['importar.lattes']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formImportaDaosPesquisadores">
+			
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+			
+			<h:selectOneMenu value="#{pesquisadorMB.pesquisador}" converter="entityConverter">
+				<f:selectItems value="#{pesquisadorMB.pesquisadores}" var="pesquisador"
+                       itemLabel="#{pesquisador.nome}" itemValue="#{pesquisador}"></f:selectItems>
+			</h:selectOneMenu>
+			
+			<div class="top-buffer-20">
+       			<h:commandButton value="#{mensagens['importar.lattes']}" action="#{pesquisadorMB.baixarDadosPesquisadorLattes}"
+					styleClass="btn btn-default">
+					<f:ajax render="@form" execute="@form" />
+				</h:commandButton>
+			</div>
+			
+        </h:form>
+		
+	</ui:define>
+</ui:composition>

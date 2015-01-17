@@ -21,17 +21,6 @@
         <version>2.4</version>
       </plugin>
       <plugin>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.2</version>
-        <executions>
-          <execution />
-        </executions>
-        <configuration>
-          <linkXref>true</linkXref>
-          <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-        </configuration>
-      </plugin>
-      <plugin>
         <artifactId>maven-jxr-plugin</artifactId>
         <version>2.4</version>
         <executions>
@@ -41,25 +30,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <id>analyze-compile</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <effort>Max</effort>
-          <threshold>Default</threshold>
-          <xmlOutput>true</xmlOutput>
-          <findbugsXmlOutputDirectory>/findbugs</findbugsXmlOutputDirectory>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -77,6 +47,11 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>2.1</version>
       </plugin>
     </plugins>
   </build>

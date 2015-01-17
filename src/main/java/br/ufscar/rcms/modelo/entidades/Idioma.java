@@ -1,12 +1,13 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,12 +20,11 @@ public class Idioma extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idIdioma;
 
-
-
     @Column(nullable = false)
     private String descricao;
 
- 
+    @ManyToMany(mappedBy = "idiomas")
+    private List<Pesquisador> pesquisadores;
 
     public Integer getIdIdioma() {
         return idIdioma;
@@ -33,8 +33,6 @@ public class Idioma extends Entidade {
     public void setIdIdioma(Integer idIdioma) {
         this.idIdioma = idIdioma;
     }
-
-
 
     public String getDescricao() {
         return descricao;

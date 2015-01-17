@@ -7,10 +7,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.ufscar.rcms.dao.AreaAtuacaoDAO;
 import br.ufscar.rcms.dao.GrandeAreaAtuacaoDAO;
-import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
-import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;;
+import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 
 @Repository
 public class GrandeAreaAtuacaoDAOImpl extends BaseDAOImpl<GrandeAreaAtuacao, Long> implements GrandeAreaAtuacaoDAO {
@@ -29,10 +27,11 @@ public class GrandeAreaAtuacaoDAOImpl extends BaseDAOImpl<GrandeAreaAtuacao, Lon
 
         try {
         	Object lst = q.getResultList();
-        	if (lst != null)
-        		return (List<GrandeAreaAtuacao>)lst;
-        	else
-        		return null;
+        	if (lst != null) {
+                return (List<GrandeAreaAtuacao>)lst;
+            } else {
+                return null;
+            }
         } catch (NoResultException noResultException) {
             return null;
         }

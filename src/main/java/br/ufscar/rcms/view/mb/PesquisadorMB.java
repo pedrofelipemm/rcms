@@ -12,6 +12,8 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
@@ -25,6 +27,8 @@ import br.ufscar.rcms.servico.PesquisadorService;
 public class PesquisadorMB extends AbstractMB {
 
     private static final long serialVersionUID = 7023051572658948461L;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorMB.class);
 
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
@@ -54,31 +58,31 @@ public class PesquisadorMB extends AbstractMB {
 
         limparDados();
         carregarDados();
+
+        LOGGER.info("info test");
+        LOGGER.error("erro test");
     }
 
     protected void carregarDados() {
 
-        //areas = areaAtuacaoService.buscarTodas();
+        // areas = areaAtuacaoService.buscarTodas();
         idiomas = idiomaService.buscarTodas();
 
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
 
-	Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
+        Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorEdicao;
         }
     }
 
     protected void limparDados() {
-
         pesquisador = new Pesquisador();
-	// TODO PEDRO
-        pesquisador.setFlagAdministrador(true);
     }
 
     public String salvar() {
 
-	// TODO PEDRO TRATAR
+        // TODO PEDRO TRATAR
         if (fotoPesquisador != null) {
             converterFotoPesquisador(pesquisador);
         }
@@ -94,7 +98,7 @@ public class PesquisadorMB extends AbstractMB {
 
     public String editar(Pesquisador pesquisador) {
 
-	setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
+        setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
 
         return CADASTRO_PESQUISADOR;
     }
@@ -111,8 +115,8 @@ public class PesquisadorMB extends AbstractMB {
         try {
             pesquisador.setFoto(IOUtils.toByteArray(fotoPesquisador.getInputStream()));
         } catch (IOException e) {
-	    // TODO PEDRO TRATAR EXCEPTION
-            e.printStackTrace();
+            // TODO PEDRO TRATAR EXCEPTION
+            LOGGER.error(e.getMessage(), e);
         }
     }
 

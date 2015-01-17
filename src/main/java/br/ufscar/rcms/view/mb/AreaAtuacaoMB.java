@@ -9,11 +9,8 @@ import javax.faces.model.ListDataModel;
 
 import br.ufscar.rcms.factory.AreaAtuacaoFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
-import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
-import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
-import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 
 @ViewScoped
 @ManagedBean(name = "areaAtuacaoMB")
@@ -42,15 +39,15 @@ public class AreaAtuacaoMB extends AbstractMB {
 
 		AreaAtuacao areaEditar = (AreaAtuacao) getFlashObject(FLASH_KEY_AREA_ATUACAO);
 		if (areaEditar != null) {
-			this.area = areaEditar;
+			area = areaEditar;
 			subAreas = new ListDataModel<SubAreaAtuacao>(
-					this.area.getSubAreasAtuacao());
+					area.getSubAreasAtuacao());
 		}
 
 	}
 
 	private void limparDados() {
-		area = AreaAtuacaoFactory.CreateAreaAtuacaoEmpty();
+                area = AreaAtuacaoFactory.createAreaAtuacaoEmpty();
 	}
 
 	public void salvar() {

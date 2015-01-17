@@ -8,9 +8,10 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
+@Deprecated
 public class ErrorHandler {
 
-    private Map<String, Object> getRequestMap() {
+    public Map<String, Object> getRequestMap() {
         return FacesContext.getCurrentInstance().getExternalContext().getRequestMap();
     }
 
@@ -45,4 +46,3 @@ public class ErrorHandler {
     }
 
 }
-

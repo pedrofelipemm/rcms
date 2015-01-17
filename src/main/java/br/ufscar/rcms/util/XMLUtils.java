@@ -6,11 +6,10 @@ import java.io.StringWriter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
-public class XMLUtils {
+public abstract class XMLUtils {
 
     @SuppressWarnings("unchecked")
     public static <T> T xmlToObject(final Class<T> clazz, final String clobContent) throws JAXBException {
@@ -26,7 +25,7 @@ public class XMLUtils {
         return (T) unmarshaller.unmarshal(new StreamSource(new StringReader(buffer.toString())));
     }
 
-    public static String objectToXML(final Object object) throws PropertyException, JAXBException {
+    public static String objectToXML(final Object object) throws JAXBException {
 
         String result = "";
         if (object == null) {

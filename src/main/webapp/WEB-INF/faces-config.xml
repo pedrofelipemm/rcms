@@ -7,17 +7,18 @@
     version="2.2">
 	
 	<application>
-	
+
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	
-		<locale-config>
-			<default-locale>pt_BR</default-locale>
-		</locale-config>
-		
 		<resource-bundle>
 			<base-name>bundle</base-name>
 			<var>mensagens</var>
 		</resource-bundle>
+		
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
 		
 		<action-listener>org.omnifaces.eventlistener.ResetInputAjaxActionListener</action-listener>
 		

@@ -63,14 +63,15 @@
 							required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
 							styleClass="form-control" />
             		</div>
-            		<!-- 
             		<div class="form-group">
-            			<h:outputLabel for="flagAdmin" value="#{mensagens['label.flag.admin']} " />
-						<h:selectBooleanCheckbox id="flagAdmin" value="#{pesquisadorMB.pesquisador.flagAdministrador}"
-							required="true" requiredMessage="#{mensagens['flag.admin.nao.preenchido']}"
-							styleClass="form-control" />            		
+            			<h:outputLabel for="tipoUsuario" value="#{mensagens['label.tipo.usuario']} " />
+						<h:selectOneMenu id="tipoUsuario" value="#{pesquisadorMB.pesquisador.flagAdministrador}"
+							required="true" requiredMessage="#{mensagens['flag.tipo.usuario.preenchido']}" 
+							styleClass="form-control">
+							<f:selectItems value="#{pesquisadorMB.tiposUsuario.entrySet()}" var="entry" 
+								itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+						</h:selectOneMenu>            		
             		</div>
-            		 -->
             	</div>
             	<div class="col-md-3 text-center"> <h:graphicImage value="/resources/images/default-image.jpg" alt="Imagem para representar foto do pesquisador" />
             		<div class="form-group">

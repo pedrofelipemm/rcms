@@ -40,7 +40,7 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<FormacaoAcademica> pesquisadorFormacoes = new ArrayList<FormacaoAcademica>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Idioma> idiomas = new ArrayList<Idioma>();
 
     @OneToMany(cascade = CascadeType.ALL)

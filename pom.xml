@@ -180,34 +180,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.2</version>
-				<executions>
-					<execution>
-						<goals>
-							<!-- <goal>check</goal> <goal>cpd-check</goal> -->
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<linkXref>true</linkXref>
-					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jxr</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
@@ -223,6 +196,51 @@
 						<id>analyze-compile</id>
 						<goals>
 							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+					<rulesets>
+						<ruleset>pmd/basic.xml</ruleset>
+						<ruleset>pmd/imports.xml</ruleset>
+						<ruleset>pmd/strings.xml</ruleset>
+						<ruleset>pmd/design.xml</ruleset>
+						<ruleset>pmd/braces.xml</ruleset>
+						<ruleset>pmd/j2ee.xml</ruleset>
+						<ruleset>pmd/controversial.xml</ruleset>
+						<ruleset>pmd/clone.xml</ruleset>
+						<ruleset>pmd/logging-java.xml</ruleset>
+						<ruleset>pmd/optimizations.xml</ruleset>
+					</rulesets>
+					<excludes>
+						<exclude>**/test/*.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+							<goal>cpd-check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jxr</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -247,6 +265,11 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>2.1</version>
 			</plugin>
 		</plugins>
 	</build>

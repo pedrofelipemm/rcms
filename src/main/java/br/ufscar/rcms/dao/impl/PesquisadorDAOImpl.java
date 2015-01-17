@@ -14,5 +14,4 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
 
         setClazz(Pesquisador.class);
     }
-
 }

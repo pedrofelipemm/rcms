@@ -10,7 +10,6 @@ import javax.faces.model.ListDataModel;
 import br.ufscar.rcms.factory.AreaAtuacaoFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
-import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 
@@ -35,19 +34,19 @@ public class GrandeAreaAtuacaoMB extends AbstractMB {
 		limparDados();
 		carregarDados();
 	}
-	
+
 	private void carregarDados() {
 		todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaAtuacaoService.buscarTodas());
 		GrandeAreaAtuacao gdeareaEditar = (GrandeAreaAtuacao) getFlashObject(FLASH_KEY_GRANDE_AREA_ATUACAO);
 		if (gdeareaEditar != null) {
-			this.gdeArea = gdeareaEditar;
-			this.areas = new ListDataModel<AreaAtuacao>(this.gdeArea.getAreasDeAtuacao());
+			gdeArea = gdeareaEditar;
+			areas = new ListDataModel<AreaAtuacao>(gdeArea.getAreasDeAtuacao());
 		}
 	}
 
 	private void limparDados() {
-		gdeArea = AreaAtuacaoFactory.CreateGrandeAreaEmpty();
-		areaSelecionada = AreaAtuacaoFactory.CreateAreaAtuacaoEmpty();
+                gdeArea = AreaAtuacaoFactory.createGrandeAreaEmpty();
+                areaSelecionada = AreaAtuacaoFactory.createAreaAtuacaoEmpty();
 	}
 
 	public void salvar() {
@@ -66,7 +65,7 @@ public class GrandeAreaAtuacaoMB extends AbstractMB {
 		areas = new ListDataModel<AreaAtuacao>(gdeArea.getAreasDeAtuacao());
 
 	}
-	
+
 	public String editar(GrandeAreaAtuacao area) {
 		setFlashObject(FLASH_KEY_GRANDE_AREA_ATUACAO, area);
 
@@ -79,10 +78,10 @@ public class GrandeAreaAtuacaoMB extends AbstractMB {
 
 		return CONSULTA_GRANDE_AREA;
 	}
-	
+
 	public void adicionarAreaAtuacao() {
 		gdeArea.getAreasDeAtuacao().add(areaSelecionada);
-		areaSelecionada = AreaAtuacaoFactory.CreateAreaAtuacaoEmpty();
+		areaSelecionada = AreaAtuacaoFactory.createAreaAtuacaoEmpty();
 		areas = new ListDataModel<AreaAtuacao>(gdeArea.getAreasDeAtuacao());
 	}
 

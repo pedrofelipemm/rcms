@@ -2,6 +2,8 @@ package br.ufscar.rcms.view.mb;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -25,18 +27,25 @@ public abstract class AbstractMB implements Serializable {
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
 
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
-    
+
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
-    
+
     public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "area";
-    
+
     public static final String CADASTRO_GRANDE_AREA = "cadastroGrandeAreaAtuacao";
-    
+
     public static final String CONSULTA_GRANDE_AREA = "consultaGrandeAreaAtuacao";
-    
+
     public static final String CADASTRO_AREA_ATUACAO = "cadastroAreaAtuacao";
-    
+
     public static final String CONSULTA_AREA_ATUACAO = "consultaAreaAtuacao";
+
+    public Map<String, Boolean> getTiposUsuario() {
+        Map<String, Boolean> map = new HashMap<String, Boolean>();
+        map.put(getMessage("pesquisador"), false);
+        map.put(getMessage("administrador"), true);
+        return map;
+    }
 
     // TODO PEDRO
     // public abstract void inicializar();
@@ -69,7 +78,7 @@ public abstract class AbstractMB implements Serializable {
         }
 
         if (getFlash() == null) {
-	    // TODO PEDRO
+            // TODO PEDRO
             System.out.println("Internal Framework Problem");
             return;
         }
@@ -79,7 +88,7 @@ public abstract class AbstractMB implements Serializable {
     public Object getFlashObject(String key) {
 
         if (getFlash() == null) {
-	    // TODO PEDRO
+            // TODO PEDRO
             System.out.println("Internal Framework Problem");
             return null;
         }

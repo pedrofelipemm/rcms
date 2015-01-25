@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "FORMACAO_ACADEMICA")
-public class FormacaoAcademica extends Entidade{
+public class FormacaoAcademica extends Entidade {
 
     private static final long serialVersionUID = -1883554721627714716L;
 
@@ -37,7 +37,7 @@ public class FormacaoAcademica extends Entidade{
     @Column(nullable = false)
     private String descricao;
 
-	public Integer getIdPesquisadorFormacao() {
+    public Integer getIdPesquisadorFormacao() {
         return idPesquisadorFormacao;
     }
 
@@ -46,51 +46,51 @@ public class FormacaoAcademica extends Entidade{
     }
 
     public Pesquisador getPesquisador() {
-		return pesquisador;
-	}
+        return pesquisador;
+    }
 
-	public void setPesquisador(Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
+    public void setPesquisador(Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
+    }
 
-	public Integer getAnoInicio() {
-		return anoInicio;
-	}
+    public Integer getAnoInicio() {
+        return anoInicio;
+    }
 
-	public void setAnoInicio(Integer anoInicio) {
-		this.anoInicio = anoInicio;
-	}
+    public void setAnoInicio(Integer anoInicio) {
+        this.anoInicio = anoInicio;
+    }
 
-	public Integer getAnoConclusao() {
-		return anoConclusao;
-	}
+    public Integer getAnoConclusao() {
+        return anoConclusao;
+    }
 
-	public void setAnoConclusao(Integer anoConclusao) {
-		this.anoConclusao = anoConclusao;
-	}
+    public void setAnoConclusao(Integer anoConclusao) {
+        this.anoConclusao = anoConclusao;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	public String getNomeInstituicao() {
-		return nomeInstituicao;
-	}
+    public String getNomeInstituicao() {
+        return nomeInstituicao;
+    }
 
-	public void setNomeInstituicao(String nomeInstituicao) {
-		this.nomeInstituicao = nomeInstituicao;
-	}
+    public void setNomeInstituicao(String nomeInstituicao) {
+        this.nomeInstituicao = nomeInstituicao;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
 }

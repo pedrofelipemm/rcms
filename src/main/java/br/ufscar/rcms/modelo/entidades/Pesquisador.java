@@ -19,16 +19,16 @@ public class Pesquisador extends Usuario {
     @Column(nullable = false, unique = true)
     private String codigoLattes;
 
-    @Column()
+    @Column
     private byte[] foto;
 
     @Column(nullable = false)
     private String enderecoProfissional;
 
-    @Column()
+    @Column
     private double enderecoProfissionalLatitude;
 
-    @Column()
+    @Column
     private double enderecoProfissionalLongitude;
 
     @Column(nullable = false)
@@ -40,7 +40,7 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<FormacaoAcademica> pesquisadorFormacoes = new ArrayList<FormacaoAcademica>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Idioma> idiomas = new ArrayList<Idioma>();
 
     @OneToMany(cascade = CascadeType.ALL)

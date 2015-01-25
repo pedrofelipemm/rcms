@@ -100,6 +100,13 @@ public class PesquisadorMB extends AbstractMB {
         return CONSULTA_PESQUISADORES;
     }
 
+    public void exibir(Pesquisador pesquisador) {
+
+        setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
+
+        // return EXIBE_PESQUISADOR;
+    }
+
     public String editar(Pesquisador pesquisador) {
 
         setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);

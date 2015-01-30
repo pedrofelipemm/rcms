@@ -110,5 +110,26 @@
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
-
+	
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroSubAreaAtuacao</from-outcome>
+			<to-view-id>/pages/cadastro/cadastroSubAreaAtuacao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaSubAreaAtuacao</from-outcome>
+			<to-view-id>/pages/consulta/subAreaAtuacao.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	
 </faces-config>

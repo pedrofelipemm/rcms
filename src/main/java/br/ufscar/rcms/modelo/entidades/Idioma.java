@@ -41,5 +41,4 @@ public class Idioma extends Entidade {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
 }

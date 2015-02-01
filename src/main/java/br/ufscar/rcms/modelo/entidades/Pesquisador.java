@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,14 +23,8 @@ public class Pesquisador extends Usuario {
     @Column
     private byte[] foto;
 
-    @Column(nullable = false)
-    private String enderecoProfissional;
-
-    @Column
-    private double enderecoProfissionalLatitude;
-
-    @Column
-    private double enderecoProfissionalLongitude;
+    @ManyToOne
+    private Endereco endereco = new Endereco();
 
     @Column(nullable = false)
     private String resumoProfissional;
@@ -38,25 +33,25 @@ public class Pesquisador extends Usuario {
     private List<CitacaoBibliografica> nomeCitacao;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<FormacaoAcademica> pesquisadorFormacoes = new ArrayList<FormacaoAcademica>();
+    private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Idioma> idiomas = new ArrayList<Idioma>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<PremioTitulo> pesquisadorPremiosTitulos = new ArrayList<PremioTitulo>();
+    private List<PremioTitulo> premios = new ArrayList<PremioTitulo>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<ParticipacaoEvento> pesquisadorParticipacaoEventos = new ArrayList<ParticipacaoEvento>();
+    private List<ParticipacaoEvento> participacaoEventos = new ArrayList<ParticipacaoEvento>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<OrganizacaoEvento> pesquisadorOrganizacaoEventos = new ArrayList<OrganizacaoEvento>();
+    private List<OrganizacaoEvento> organizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
     @ManyToMany
     private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
 
     @ManyToMany
-    private List<Producao> publicacoes = new ArrayList<Producao>();
+    private List<Producao> producoes = new ArrayList<Producao>();
 
     @ManyToMany
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
@@ -69,12 +64,12 @@ public class Pesquisador extends Usuario {
         this.codigoLattes = codigoLattes;
     }
 
-    public String getEnderecoProfissional() {
-        return enderecoProfissional;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecoProfissional(String enderecoProfissional) {
-        this.enderecoProfissional = enderecoProfissional;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public byte[] getFoto() {
@@ -101,22 +96,6 @@ public class Pesquisador extends Usuario {
         this.foto = copyOfFoto;
     }
 
-    public double getEnderecoProfissionalLatitude() {
-        return enderecoProfissionalLatitude;
-    }
-
-    public void setEnderecoProfissionalLatitude(double enderecoProfissionalLatitude) {
-        this.enderecoProfissionalLatitude = enderecoProfissionalLatitude;
-    }
-
-    public double getEnderecoProfissionalLongitude() {
-        return enderecoProfissionalLongitude;
-    }
-
-    public void setEnderecoProfissionalLongitude(double enderecoProfissionalLongitude) {
-        this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
-    }
-
     public String getResumoProfissional() {
         return resumoProfissional;
     }
@@ -131,14 +110,6 @@ public class Pesquisador extends Usuario {
 
     public void setNomeCitacao(List<CitacaoBibliografica> nomeCitacao) {
         this.nomeCitacao = nomeCitacao;
-    }
-
-    public List<FormacaoAcademica> getPesquisadorFormacoes() {
-        return pesquisadorFormacoes;
-    }
-
-    public void setPesquisadorFormacoes(List<FormacaoAcademica> pesquisadorFormacoes) {
-        this.pesquisadorFormacoes = pesquisadorFormacoes;
     }
 
     public List<AreaAtuacao> getAreaAtuacoes() {
@@ -157,36 +128,44 @@ public class Pesquisador extends Usuario {
         this.idiomas = idiomas;
     }
 
-    public List<PremioTitulo> getPesquisadorPremiosTitulos() {
-        return pesquisadorPremiosTitulos;
+    public List<FormacaoAcademica> getFormacoes() {
+        return formacoes;
     }
 
-    public void setPesquisadorPremiosTitulos(List<PremioTitulo> pesquisadorPremiosTitulos) {
-        this.pesquisadorPremiosTitulos = pesquisadorPremiosTitulos;
+    public void setFormacoes(List<FormacaoAcademica> formacoes) {
+        this.formacoes = formacoes;
     }
 
-    public List<ParticipacaoEvento> getPesquisadorParticipacaoEventos() {
-        return pesquisadorParticipacaoEventos;
+    public List<PremioTitulo> getPremios() {
+        return premios;
     }
 
-    public void setPesquisadorParticipacaoEventos(List<ParticipacaoEvento> pesquisadorParticipacaoEventos) {
-        this.pesquisadorParticipacaoEventos = pesquisadorParticipacaoEventos;
+    public void setPremios(List<PremioTitulo> premios) {
+        this.premios = premios;
     }
 
-    public List<OrganizacaoEvento> getPesquisadorOrganizacaoEventos() {
-        return pesquisadorOrganizacaoEventos;
+    public List<ParticipacaoEvento> getParticipacaoEventos() {
+        return participacaoEventos;
     }
 
-    public void setPesquisadorOrganizacaoEventos(List<OrganizacaoEvento> pesquisadorOrganizacaoEventos) {
-        this.pesquisadorOrganizacaoEventos = pesquisadorOrganizacaoEventos;
+    public void setParticipacaoEventos(List<ParticipacaoEvento> participacaoEventos) {
+        this.participacaoEventos = participacaoEventos;
     }
 
-    public List<Producao> getPublicacoes() {
-        return publicacoes;
+    public List<OrganizacaoEvento> getOrganizacaoEventos() {
+        return organizacaoEventos;
     }
 
-    public void setPublicacoes(List<Producao> publicacoes) {
-        this.publicacoes = publicacoes;
+    public void setOrganizacaoEventos(List<OrganizacaoEvento> organizacaoEventos) {
+        this.organizacaoEventos = organizacaoEventos;
+    }
+
+    public List<Producao> getProducoes() {
+        return producoes;
+    }
+
+    public void setProducoes(List<Producao> producoes) {
+        this.producoes = producoes;
     }
 
     public List<ProjetoPesquisa> getProjetosPesquisa() {

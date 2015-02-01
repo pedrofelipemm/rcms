@@ -8,17 +8,16 @@ import javax.persistence.Table;
 @Table(name = "APRESENTACAO_TRABALHO")
 public class ApresentacaoTrabalho extends ProducaoBibliografica {
 
-	private static final long serialVersionUID = 5668638568301910798L;
+    private static final long serialVersionUID = 5668638568301910798L;
 
-	@Column()
-	private String natureza;
+    @Column
+    private String natureza;
 
-	public String getNatureza() {
-		return natureza;
-	}
+    public String getNatureza() {
+        return natureza;
+    }
 
-	public void setNatureza(String natureza) {
-		this.natureza = natureza;
-	}
-	
+    public void setNatureza(String natureza) {
+        this.natureza = natureza;
+    }
 }

@@ -17,7 +17,7 @@ public class FormacaoAcademica extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPesquisadorFormacao;
+    private Integer idFormacaoAcademica;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pesquisador pesquisador;
@@ -37,12 +37,12 @@ public class FormacaoAcademica extends Entidade {
     @Column(nullable = false)
     private String descricao;
 
-    public Integer getIdPesquisadorFormacao() {
-        return idPesquisadorFormacao;
+    public Integer getIdFormacaoAcademica() {
+        return idFormacaoAcademica;
     }
 
-    public void setIdPesquisadorFormacao(Integer idPesquisadorFormacao) {
-        this.idPesquisadorFormacao = idPesquisadorFormacao;
+    public void setIdFormacaoAcademica(Integer idFormacaoAcademica) {
+        this.idFormacaoAcademica = idFormacaoAcademica;
     }
 
     public Pesquisador getPesquisador() {
@@ -92,5 +92,4 @@ public class FormacaoAcademica extends Entidade {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
 }

@@ -114,5 +114,4 @@ public class Usuario extends Entidade {
     public String toString() {
         return "Usuario [idUsuario=" + idUsuario + ", nome=" + nome + "]";
     }
-
 }

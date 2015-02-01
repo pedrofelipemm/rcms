@@ -8,39 +8,38 @@ import javax.persistence.Table;
 @Table(name = "CAPITULO_LIVRO")
 public class CapituloLivro extends ProducaoBibliografica {
 
-	private static final long serialVersionUID = -2059134777817514692L;
+    private static final long serialVersionUID = -2059134777817514692L;
 
-	@Column()
-	private String livro;
-	
-	@Column()
-	private String edicao;
-	
-	@Column()
-	private String editora;
+    @Column
+    private String livro;
 
-	public String getLivro() {
-		return livro;
-	}
+    @Column
+    private String edicao;
 
-	public void setLivro(String livro) {
-		this.livro = livro;
-	}
+    @Column
+    private String editora;
 
-	public String getEdicao() {
-		return edicao;
-	}
+    public String getLivro() {
+        return livro;
+    }
 
-	public void setEdicao(String edicao) {
-		this.edicao = edicao;
-	}
+    public void setLivro(String livro) {
+        this.livro = livro;
+    }
 
-	public String getEditora() {
-		return editora;
-	}
+    public String getEdicao() {
+        return edicao;
+    }
 
-	public void setEditora(String editora) {
-		this.editora = editora;
-	}
-	
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public void setEditora(String editora) {
+        this.editora = editora;
+    }
 }

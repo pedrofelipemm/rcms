@@ -53,6 +53,7 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     @Override
     public void atualizar(T entidade) {
         entityManager.merge(entidade);
+        entityManager.flush();
     }
 
     @Override

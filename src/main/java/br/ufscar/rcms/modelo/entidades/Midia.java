@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PROJETO_PESQUISA_MIDIA")
-public class ProjetoPesquisaMidia extends Entidade {
+@Table(name = "MIDIA")
+public class Midia extends Entidade {
 
     private static final long serialVersionUID = 3759933099478534637L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idProjetoPesquisaMidia;
+    private Integer idMidia;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ProjetoPesquisa projetoPesquisa;
@@ -25,12 +25,12 @@ public class ProjetoPesquisaMidia extends Entidade {
     @Column(nullable = false)
     private byte[] midia;
 
-    public Integer getIdProjetoPesquisaMidia() {
-        return idProjetoPesquisaMidia;
+    public Integer getIdMidia() {
+        return idMidia;
     }
 
-    public void setIdProjetoPesquisaMidia(Integer idProjetoPesquisaMidia) {
-        this.idProjetoPesquisaMidia = idProjetoPesquisaMidia;
+    public void setIdMidia(Integer idMidia) {
+        this.idMidia = idMidia;
     }
 
     public ProjetoPesquisa getProjetoPesquisa() {

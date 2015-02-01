@@ -8,28 +8,27 @@ import javax.persistence.Table;
 @Table(name = "TRABALHO_COMPLETO_CONGRESSO")
 public class TrabalhoCompletoCongresso extends ProducaoBibliografica {
 
-	private static final long serialVersionUID = -1822128070360441152L;
+    private static final long serialVersionUID = -1822128070360441152L;
 
-	@Column()
-	private String doi;
-	
-	@Column()
-	private String nomeEvento;
+    @Column
+    private String doi;
 
-	public String getDoi() {
-		return doi;
-	}
+    @Column
+    private String nomeEvento;
 
-	public void setDoi(String doi) {
-		this.doi = doi;
-	}
+    public String getDoi() {
+        return doi;
+    }
 
-	public String getNomeEvento() {
-		return nomeEvento;
-	}
+    public void setDoi(String doi) {
+        this.doi = doi;
+    }
 
-	public void setNomeEvento(String nomeEvento) {
-		this.nomeEvento = nomeEvento;
-	}
-	
+    public String getNomeEvento() {
+        return nomeEvento;
+    }
+
+    public void setNomeEvento(String nomeEvento) {
+        this.nomeEvento = nomeEvento;
+    }
 }

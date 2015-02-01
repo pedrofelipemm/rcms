@@ -20,19 +20,19 @@ public abstract class Producao extends Entidade {
     @Column(nullable = false)
     private String titulo;
 
-    @Column()
+    @Column
     private Integer ano;
 
-    @Column()
+    @Column
     private Integer volume;
 
-    @Column()
+    @Column
     private String paginas;
 
-    @Column()
+    @Column
     private String link;
 
-    @Column()
+    @Column
     private byte[] arquivo;
 
     public Integer getIdProducao() {

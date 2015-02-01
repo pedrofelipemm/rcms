@@ -20,16 +20,16 @@ public class ProjetoPesquisa extends Entidade {
     @Column(nullable = false)
     private String nome;
 
-    @Column()
+    @Column
     private String descricao;
 
-    @Column()
+    @Column
     private Integer anoInicio;
 
-    @Column()
+    @Column
     private Integer anoConclusao;
 
-    @Column()
+    @Column
     private String agenciaDeFomento;
 
     public Integer getIdProjetoPesquisa() {

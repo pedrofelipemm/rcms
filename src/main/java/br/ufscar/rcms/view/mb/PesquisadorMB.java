@@ -64,9 +64,6 @@ public class PesquisadorMB extends AbstractMB {
 
         limparDados();
         carregarDados();
-
-        LOGGER.info("info test");
-        LOGGER.error("erro test");
     }
 
     protected void carregarDados() {

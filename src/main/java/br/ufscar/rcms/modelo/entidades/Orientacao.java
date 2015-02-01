@@ -13,84 +13,83 @@ import javax.persistence.Table;
 @Table(name = "ORIENTACAO")
 public abstract class Orientacao extends Entidade {
 
-	private static final long serialVersionUID = 7468560304766568173L;
+    private static final long serialVersionUID = 7468560304766568173L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPesquisadorOrientacao;
-    
+    private Integer idOrientacao;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pesquisador pesquisador;
-    
+
     @Column(nullable = false)
     private String nomeDoAluno;
-    
-	@Column(nullable = false)
+
+    @Column(nullable = false)
     private String instituicao;
-    
-	@Column()
+
+    @Column
     private String agenciaDeFomento;
-    
-	@Column()
+
+    @Column
     private String tipoDeOrientacao;
-    
-	@Column()
+
+    @Column
     private String situacao;
 
-	public Integer getIdPesquisadorOrientacao() {
-		return idPesquisadorOrientacao;
-	}
+    public Integer getIdOrientacao() {
+        return idOrientacao;
+    }
 
-	public void setIdPesquisadorOrientacao(Integer idPesquisadorOrientacao) {
-		this.idPesquisadorOrientacao = idPesquisadorOrientacao;
-	}
+    public void setIdOrientacao(Integer idOrientacao) {
+        this.idOrientacao = idOrientacao;
+    }
 
-	public Pesquisador getPesquisador() {
-		return pesquisador;
-	}
+    public Pesquisador getPesquisador() {
+        return pesquisador;
+    }
 
-	public void setPesquisador(Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
+    public void setPesquisador(Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
+    }
 
-	public String getNomeDoAluno() {
-		return nomeDoAluno;
-	}
+    public String getNomeDoAluno() {
+        return nomeDoAluno;
+    }
 
-	public void setNomeDoAluno(String nomeDoAluno) {
-		this.nomeDoAluno = nomeDoAluno;
-	}
+    public void setNomeDoAluno(String nomeDoAluno) {
+        this.nomeDoAluno = nomeDoAluno;
+    }
 
-	public String getInstituicao() {
-		return instituicao;
-	}
+    public String getInstituicao() {
+        return instituicao;
+    }
 
-	public void setInstituicao(String instituicao) {
-		this.instituicao = instituicao;
-	}
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
+    }
 
-	public String getAgenciaDeFomento() {
-		return agenciaDeFomento;
-	}
+    public String getAgenciaDeFomento() {
+        return agenciaDeFomento;
+    }
 
-	public void setAgenciaDeFomento(String agenciaDeFomento) {
-		this.agenciaDeFomento = agenciaDeFomento;
-	}
+    public void setAgenciaDeFomento(String agenciaDeFomento) {
+        this.agenciaDeFomento = agenciaDeFomento;
+    }
 
-	public String getTipoDeOrientacao() {
-		return tipoDeOrientacao;
-	}
+    public String getTipoDeOrientacao() {
+        return tipoDeOrientacao;
+    }
 
-	public void setTipoDeOrientacao(String tipoDeOrientacao) {
-		this.tipoDeOrientacao = tipoDeOrientacao;
-	}
+    public void setTipoDeOrientacao(String tipoDeOrientacao) {
+        this.tipoDeOrientacao = tipoDeOrientacao;
+    }
 
-	public String getSituacao() {
-		return situacao;
-	}
+    public String getSituacao() {
+        return situacao;
+    }
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-	
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
 }

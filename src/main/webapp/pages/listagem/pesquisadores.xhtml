@@ -18,13 +18,8 @@
 					<hr />
 					<h:form id="formPesquisadores">
 						<ul class="listas">
-							<ui:repeat var="pesquisador"
-								value="#{pesquisadorMB.pesquisadores}">
-								<li><h:commandLink
-										action="#{pesquisadorMB.exibir(pesquisador)}"
-										value="#{pesquisador.nome}" /></li>
-								<f:setPropertyActionListener value="#{pesquisador}"
-									target="#{pesquisadorMB.pesquisador}"></f:setPropertyActionListener>
+							<ui:repeat var="pesquisador" value="#{pesquisadorMB.pesquisadores}">
+								<li><h:commandLink action="#{pesquisadorMB.exibir(pesquisador)}" value="#{pesquisador.nome}" /></li>
 							</ui:repeat>
 						</ul>
 					</h:form>

@@ -17,7 +17,7 @@ public class PremioTitulo extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPesquisadorPremioTitulo;
+    private Integer idPremioTitulo;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pesquisador pesquisador;
@@ -28,12 +28,12 @@ public class PremioTitulo extends Entidade {
     @Column(nullable = false)
     private String descricao;
 
-    public Integer getIdPesquisadorPremioTitulo() {
-        return idPesquisadorPremioTitulo;
+    public Integer getIdPremioTitulo() {
+        return idPremioTitulo;
     }
 
-    public void setIdPesquisadorPremioTitulo(Integer idPesquisadorPremioTitulo) {
-        this.idPesquisadorPremioTitulo = idPesquisadorPremioTitulo;
+    public void setIdPremioTitulo(Integer idPremioTitulo) {
+        this.idPremioTitulo = idPremioTitulo;
     }
 
     public Pesquisador getPesquisador() {

@@ -26,6 +26,8 @@ public abstract class AbstractMB implements Serializable {
 
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
 
+    public static final String EXIBE_PESQUISADOR = "pesquisador";
+
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
 
     public static final String FLASH_KEY_AREA_ATUACAO = "area";

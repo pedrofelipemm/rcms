@@ -43,8 +43,6 @@ public abstract class XMLUtils {
                 return writer.toString();
             }
         }
-
         return result;
     }
-
 }

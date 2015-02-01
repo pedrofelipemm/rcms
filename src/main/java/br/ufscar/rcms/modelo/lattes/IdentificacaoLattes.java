@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "identificacao")
 public class IdentificacaoLattes extends BaseLattes {
 
+    private static final long serialVersionUID = -7677027746469870708L;
+
     @XmlElement(name = "identificador10")
     private String identificador;
 
@@ -20,4 +22,24 @@ public class IdentificacaoLattes extends BaseLattes {
 
     @XmlElement
     private String sexo;
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public String getNomeInicial() {
+        return nomeInicial;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public String getNomeCitacaoBibliografica() {
+        return nomeCitacaoBibliografica;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
 }

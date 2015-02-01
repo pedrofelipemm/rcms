@@ -18,7 +18,11 @@
 			
 			<o:messages id="messageBoxValidation" for="formPesquisador" styleClass="message-box-validation"/>
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
-			
+
+			<h:commandButton value="ImportTest" action="#{pesquisadorMB.carregarCurriculoLattes}" styleClass="btn btn-default">
+				<f:ajax render="@form" execute="@form" />
+			</h:commandButton>
+
 			<div class="row">
           		<div class="col-md-5">
             		<div class="form-group">

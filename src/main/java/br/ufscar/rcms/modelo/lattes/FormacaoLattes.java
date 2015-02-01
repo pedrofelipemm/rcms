@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "formacao")
 public class FormacaoLattes extends BaseLattes {
 
+    private static final long serialVersionUID = -7809195471510168530L;
+
     @XmlElement(name = "ano_inicio")
     private Integer anoInicio;
 
@@ -20,4 +22,24 @@ public class FormacaoLattes extends BaseLattes {
 
     @XmlElement
     private String descricao;
+
+    public Integer getAnoInicio() {
+        return anoInicio;
+    }
+
+    public Integer getAnoConclusao() {
+        return anoConclusao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getNomeInstituicao() {
+        return nomeInstituicao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

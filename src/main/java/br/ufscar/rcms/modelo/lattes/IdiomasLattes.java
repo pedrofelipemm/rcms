@@ -8,6 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "idiomas")
 public class IdiomasLattes extends BaseLattes {
 
-    @XmlElement
-    private List<IdiomaLattes> idioma;
+    private static final long serialVersionUID = 3142453263659580699L;
+
+    @XmlElement(name = "idioma")
+    private List<IdiomaLattes> idiomas;
+
+    public List<IdiomaLattes> getIdiomas() {
+        return idiomas;
+    }
 }

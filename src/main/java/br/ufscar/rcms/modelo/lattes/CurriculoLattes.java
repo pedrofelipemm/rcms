@@ -8,6 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "curriculo_lattes")
 public class CurriculoLattes extends BaseLattes {
 
-    @XmlElement
-    private List<PesquisadorLattes> pesquisador;
+    private static final long serialVersionUID = 7747209856911005854L;
+
+    @XmlElement(name = "pesquisador")
+    private List<PesquisadorLattes> pesquisadores;
+
+    public List<PesquisadorLattes> getPesquisadores() {
+        return pesquisadores;
+    }
 }

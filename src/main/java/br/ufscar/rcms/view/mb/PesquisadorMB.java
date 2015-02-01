@@ -18,10 +18,12 @@ import org.slf4j.LoggerFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")
@@ -39,7 +41,7 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{idiomaService}")
     private IdiomaService idiomaService;
-    
+
     @ManagedProperty("#{lattesService}")
     private LattesService lattesService;
 
@@ -100,6 +102,13 @@ public class PesquisadorMB extends AbstractMB {
         return CONSULTA_PESQUISADORES;
     }
 
+    public String exibir(Pesquisador pesquisador) {
+
+        setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
+
+        return CADASTRO_PESQUISADOR;
+    }
+
     public String editar(Pesquisador pesquisador) {
 
         setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
@@ -155,17 +164,29 @@ public class PesquisadorMB extends AbstractMB {
             idiomas.add(idiomaSelecionado);
         }
     }
-    
-    public String baixarDadosPesquisadorLattes(){
-    	try {
-    		/*Random gerador = new Random();
-    		String.valueOf(gerador.nextInt());*/
-			lattesService.executarComandoLattes(getPesquisador());
-			return CONSULTA_PESQUISADORES;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+
+    public String baixarDadosPesquisadorLattes() {
+        try {
+            /*
+             * Random gerador = new Random(); String.valueOf(gerador.nextInt());
+             */
+            lattesService.executarComandoLattes(getPesquisador());
+            return CONSULTA_PESQUISADORES;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void carregarCurriculoLattes() {
+
+        try {
+            PesquisadorLattes pesquisadorLattes = lattesService.carregarCurriculoLattes(pesquisador.getCodigoLattes());
+        } catch (CurriculoLattesNaoEncontradoException e) {
+            // TODO PEDRO
+            LOGGER.error(e.getMessage(), e);
+        }
+
     }
 
     public PesquisadorService getPesquisadorService() {
@@ -245,19 +266,18 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public LattesService getLattesService() {
-		return lattesService;
-	}
+        return lattesService;
+    }
 
-	public void setLattesService(LattesService lattesService) {
-		this.lattesService = lattesService;
-	}
+    public void setLattesService(LattesService lattesService) {
+        this.lattesService = lattesService;
+    }
 
-	public DataModel<Pesquisador> getPesquisadores() {
+    public DataModel<Pesquisador> getPesquisadores() {
         return pesquisadores;
     }
 
     public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
     }
-
 }

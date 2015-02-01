@@ -35,7 +35,7 @@ public class Pesquisador extends Usuario {
     private String resumoProfissional;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<NomeCitacaoBibliografica> pesquisadorNomeCitacao;
+    private List<CitacaoBibliografica> nomeCitacao;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<FormacaoAcademica> pesquisadorFormacoes = new ArrayList<FormacaoAcademica>();
@@ -125,12 +125,12 @@ public class Pesquisador extends Usuario {
         this.resumoProfissional = resumoProfissional;
     }
 
-    public List<NomeCitacaoBibliografica> getPesquisadorNomeCitacao() {
-        return pesquisadorNomeCitacao;
+    public List<CitacaoBibliografica> getNomeCitacao() {
+        return nomeCitacao;
     }
 
-    public void setPesquisadorNomeCitacao(List<NomeCitacaoBibliografica> pesquisadorNomeCitacao) {
-        this.pesquisadorNomeCitacao = pesquisadorNomeCitacao;
+    public void setNomeCitacao(List<CitacaoBibliografica> nomeCitacao) {
+        this.nomeCitacao = nomeCitacao;
     }
 
     public List<FormacaoAcademica> getPesquisadorFormacoes() {

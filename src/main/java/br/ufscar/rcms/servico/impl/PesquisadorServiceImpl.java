@@ -25,10 +25,12 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
     @Override
     public void salvar(Pesquisador pesquisador) {
-        // TODO Pedro
-        // enderecoDAO.atualizar(pesquisador.getEndereco());
-        pesquisador.setEndereco(null);
-        pesquisadorDAO.atualizar(pesquisador);
+        pesquisadorDAO.salvar(pesquisador);
+    }
+
+    @Override
+    public Pesquisador salvarOuAtualizar(Pesquisador pesquisador) {
+        return pesquisadorDAO.salvarOuAtualizar(pesquisador);
     }
 
     @Override
@@ -46,5 +48,10 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         }
 
         pesquisadorDAO.remover(pesquisador);
+    }
+
+    @Override
+    public Pesquisador buscar(Long id) {
+        return pesquisadorDAO.buscar(id);
     }
 }

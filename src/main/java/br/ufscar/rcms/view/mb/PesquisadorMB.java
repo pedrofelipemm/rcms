@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
@@ -76,11 +77,17 @@ public class PesquisadorMB extends AbstractMB {
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorEdicao;
+            // TODO PEDRO
+            if (pesquisador.getEndereco() == null) {
+                pesquisadorEdicao.setEndereco(new Endereco());
+            }
         }
     }
 
     protected void limparDados() {
         pesquisador = new Pesquisador();
+        // TODO PEDRO
+        pesquisador.setEndereco(new Endereco());
     }
 
     public String salvar() {
@@ -90,7 +97,7 @@ public class PesquisadorMB extends AbstractMB {
             converterFotoPesquisador(pesquisador);
         }
 
-        pesquisadorService.salvar(pesquisador);
+        pesquisadorService.salvarOuAtualizar(pesquisador);
 
         adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
 
@@ -184,6 +191,19 @@ public class PesquisadorMB extends AbstractMB {
             LOGGER.error(e.getMessage(), e);
         }
 
+    }
+
+    public void salvarDadosLattes(Pesquisador pesquisador) {
+
+        try {
+
+            this.pesquisador = lattesService.salvarDadosLattes(pesquisador);
+            adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", pesquisador.getNome());
+            limparDados();
+
+        } catch (CurriculoLattesNaoEncontradoException e) {
+            adicionarMensagemErro(e.getMessage());
+        }
     }
 
     public PesquisadorService getPesquisadorService() {

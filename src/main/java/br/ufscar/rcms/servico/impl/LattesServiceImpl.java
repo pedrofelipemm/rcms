@@ -14,15 +14,18 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.builder.PesquisadorBuilder;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.lattes.CurriculoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.LattesService;
+import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.util.XMLUtils;
 
@@ -33,6 +36,9 @@ public class LattesServiceImpl implements LattesService {
 
     private static final long serialVersionUID = 4593268685421323315L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LattesServiceImpl.class);
+
+    @Autowired
+    private PesquisadorService pesquisadorService;
 
     @Value("${pasta.script.lattes}")
     private String pastaScriptLates;
@@ -46,9 +52,6 @@ public class LattesServiceImpl implements LattesService {
     @Override
     public PesquisadorLattes carregarCurriculoLattes(String codigoLattes) throws CurriculoLattesNaoEncontradoException {
 
-        // TODO PEDRO - Em Desenvolvimento
-        codigoLattes = "2668568143800755";
-
         CurriculoLattes curriculos = carregarCurriculosLattes();
         for (PesquisadorLattes pesquisador : curriculos.getPesquisadores()) {
             if (pesquisador.getCodigoLattes().equals(codigoLattes)) {
@@ -57,6 +60,16 @@ public class LattesServiceImpl implements LattesService {
         }
 
         throw new CurriculoLattesNaoEncontradoException(codigoLattes);
+    }
+
+    @Override
+    public Pesquisador salvarDadosLattes(Pesquisador pesquisador) throws CurriculoLattesNaoEncontradoException {
+
+        PesquisadorLattes pesquisadorLattes = null;
+
+        pesquisadorLattes = carregarCurriculoLattes(pesquisador.getCodigoLattes());
+        return pesquisadorService.salvarOuAtualizar(new PesquisadorBuilder(pesquisadorLattes, pesquisador).build());
+
     }
 
     private CurriculoLattes carregarCurriculosLattes() {

@@ -13,7 +13,9 @@ public interface BaseDAO<T, K extends Serializable> extends Serializable {
 
     void salvar(T entidade);
 
-    void atualizar(T entidade);
+    T atualizar(T entidade);
+
+    T salvarOuAtualizar(T entidade);
 
     void remover(T entidade);
 

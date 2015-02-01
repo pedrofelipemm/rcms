@@ -30,7 +30,7 @@ public class UnitTestConfig {
     private String[] packesToScan = new String[] { "br.ufscar.rcms.modelo.entidades" };
 
     // @Value("${hibernate.hbm2ddl.auto}")
-    private String hibernateHBM2DLL = "auto";
+    private String hibernateHBM2DLL = "create";
 
     // @Value("${hibernate.dialect}")
     private String hibernateDialect = "org.hibernate.dialect.PostgreSQLDialect";

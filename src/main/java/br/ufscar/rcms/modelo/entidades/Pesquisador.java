@@ -7,8 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +23,8 @@ public class Pesquisador extends Usuario {
     @Column
     private byte[] foto;
 
-    @ManyToOne
-    private Endereco endereco = new Endereco();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
 
     @Column(nullable = false)
     private String resumoProfissional;

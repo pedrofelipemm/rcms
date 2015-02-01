@@ -32,7 +32,7 @@ public abstract class AbstractMB implements Serializable {
 
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
 
-    public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "area";
+    public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "grandearea";
 
     public static final String CADASTRO_GRANDE_AREA = "cadastroGrandeAreaAtuacao";
 
@@ -41,6 +41,12 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_AREA_ATUACAO = "cadastroAreaAtuacao";
 
     public static final String CONSULTA_AREA_ATUACAO = "consultaAreaAtuacao";
+    
+    public static final String FLASH_KEY_SUBAREA_ATUACAO = "subarea";
+    
+    public static final String CADASTRO_SUBAREA_ATUACAO = "cadastroSubAreaAtuacao";
+    
+    public static final String CONSULTA_SUBAREA_ATUACAO = "constultaSubAreaAtuacao";
 
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();

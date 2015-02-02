@@ -23,7 +23,7 @@ public class Pesquisador extends Usuario {
     @Column
     private byte[] foto;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private Endereco endereco;
 
     @Column(nullable = false)

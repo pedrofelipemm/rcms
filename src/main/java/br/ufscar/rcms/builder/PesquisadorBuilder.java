@@ -39,19 +39,26 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
 
         this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
-                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), 
+                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(),
                 pesquisador.getFlagAdministrador(), pesquisador.getResumoProfissional());
 
         validatePesquisador(pesquisadorLattes, pesquisador);
 
-        endereco(pesquisadorLattes.getEndereco());
+        endereco(pesquisadorLattes.getEndereco(), pesquisador);
         formacaoAcademica(pesquisador.getFormacoes());
     }
 
-    public PesquisadorBuilder endereco(EnderecoLattes endereco) {
+    public PesquisadorBuilder endereco(EnderecoLattes endereco, Pesquisador pesquisador) {
 
-        pesquisador.setEndereco(EnderecoFactory.createEndereco(endereco.getEnderecoProfissional(),
-                endereco.getEnderecoProfissionalLatitude(), endereco.getEnderecoProfissionalLongitude()));
+        if (pesquisador.getEndereco() != null) {
+            this.pesquisador.setEndereco(EnderecoFactory.createEndereco(pesquisador.getEndereco().getIdEndereco(),
+                    endereco.getEnderecoProfissional(), endereco.getEnderecoProfissionalLatitude(),
+                    endereco.getEnderecoProfissionalLongitude()));
+        } else {
+            this.pesquisador.setEndereco(EnderecoFactory.createEndereco(endereco.getEnderecoProfissional(),
+                    endereco.getEnderecoProfissionalLatitude(), endereco.getEnderecoProfissionalLongitude()));
+        }
+
         return this;
     }
 

@@ -193,7 +193,7 @@ public class PesquisadorMB extends AbstractMB {
 
     }
 
-    public void salvarDadosLattes(Pesquisador pesquisador) {
+    public String salvarDadosLattes(Pesquisador pesquisador) {
 
         try {
 
@@ -204,6 +204,8 @@ public class PesquisadorMB extends AbstractMB {
         } catch (CurriculoLattesNaoEncontradoException e) {
             adicionarMensagemErro(e.getMessage());
         }
+
+        return CONSULTA_PESQUISADORES;
     }
 
     public PesquisadorService getPesquisadorService() {

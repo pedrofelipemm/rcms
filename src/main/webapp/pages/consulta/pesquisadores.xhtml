@@ -43,7 +43,7 @@
 					</f:facet>
 
 					<h:commandButton value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-default">
-						<f:ajax render=":formPesquisador:tabelaPesquisadores" execute="@form" />
+						<f:ajax render="@form" execute="@form" />
 					</h:commandButton>
 					<div class="text-center">
 					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;

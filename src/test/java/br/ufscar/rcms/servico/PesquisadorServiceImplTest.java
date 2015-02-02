@@ -27,7 +27,7 @@ public class PesquisadorServiceImplTest extends AbstractServiceTestBase {
 
     }
 
-    // TODO UPDATE TEST
+    // TODO PEDRO UPDATE TEST
 
     @Test
     public void salvarOuAtualizarPesquisadorComEnderecoTest() {

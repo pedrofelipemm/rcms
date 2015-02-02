@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +26,17 @@ public class Endereco extends Entidade {
 
     @Column
     private double enderecoProfissionalLongitude;
+
+    @OneToOne
+    private Pesquisador pesquisador;
+
+    public Pesquisador getPesquisador() {
+        return pesquisador;
+    }
+
+    public void setPesquisador(Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
+    }
 
     public Long getIdEndereco() {
         return idEndereco;

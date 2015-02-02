@@ -75,7 +75,7 @@ public class LattesServiceImpl implements LattesService {
     private CurriculoLattes carregarCurriculosLattes() {
 
         // TODO PEDRO - Em Desenvolvimento
-        CurriculoLattes curriculoLattes = null;
+        CurriculoLattes curriculoLattes = new CurriculoLattes();
         try {
 
             InputStream file = new FileInputStream(pastaScriptLates + arquivoCurriculoLattes);

@@ -6,11 +6,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ORIENTACAO")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Orientacao extends Entidade {
 
     private static final long serialVersionUID = 7468560304766568173L;

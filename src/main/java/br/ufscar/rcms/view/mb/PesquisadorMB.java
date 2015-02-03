@@ -198,7 +198,7 @@ public class PesquisadorMB extends AbstractMB {
         try {
 
             this.pesquisador = lattesService.salvarDadosLattes(pesquisador);
-            adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", pesquisador.getNome());
+            adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", this.pesquisador.getNome());
             limparDados();
 
         } catch (CurriculoLattesNaoEncontradoException e) {

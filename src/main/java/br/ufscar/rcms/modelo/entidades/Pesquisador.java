@@ -35,7 +35,7 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
     private List<Idioma> idiomas = new ArrayList<Idioma>();
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -47,13 +47,13 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrganizacaoEvento> organizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
     private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
     private List<Producao> producoes = new ArrayList<Producao>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
     public String getCodigoLattes() {

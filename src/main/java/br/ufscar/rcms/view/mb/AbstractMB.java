@@ -41,11 +41,11 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_AREA_ATUACAO = "cadastroAreaAtuacao";
 
     public static final String CONSULTA_AREA_ATUACAO = "consultaAreaAtuacao";
-    
+
     public static final String FLASH_KEY_SUBAREA_ATUACAO = "subarea";
-    
+
     public static final String CADASTRO_SUBAREA_ATUACAO = "cadastroSubAreaAtuacao";
-    
+
     public static final String CONSULTA_SUBAREA_ATUACAO = "constultaSubAreaAtuacao";
 
     public Map<String, Boolean> getTiposUsuario() {
@@ -164,9 +164,14 @@ public abstract class AbstractMB implements Serializable {
 
     private void adicionarMensagem(String texto, Severity severity) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
+        keepMessages(true);
     }
-
     private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
+        keepMessages(true);
+    }
+
+    private void keepMessages(boolean keep) {
+        getFlash().setKeepMessages(keep);
     }
 }

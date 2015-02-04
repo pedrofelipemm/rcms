@@ -5,10 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PRODUCAO")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Producao extends Entidade {
 
     private static final long serialVersionUID = 4347330488122627124L;
@@ -20,19 +23,19 @@ public abstract class Producao extends Entidade {
     @Column(nullable = false)
     private String titulo;
 
-    @Column()
+    @Column
     private Integer ano;
 
-    @Column()
+    @Column
     private Integer volume;
 
-    @Column()
+    @Column
     private String paginas;
 
-    @Column()
+    @Column
     private String link;
 
-    @Column()
+    @Column
     private byte[] arquivo;
 
     public Integer getIdProducao() {

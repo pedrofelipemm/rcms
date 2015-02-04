@@ -1,13 +1,17 @@
 package br.ufscar.rcms.dao.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.BaseDAO;
@@ -16,6 +20,7 @@ import br.ufscar.rcms.dao.BaseDAO;
 public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<T, K> {
 
     private static final long serialVersionUID = 4390975362917625589L;
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseDAOImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -51,8 +56,20 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     }
 
     @Override
-    public void atualizar(T entidade) {
-        entityManager.merge(entidade);
+    public T atualizar(T entidade) {
+        return entityManager.merge(entidade);
+    }
+
+    @Override
+    public T salvarOuAtualizar(T entidade) {
+
+        if (getEntityId(entidade) != null) {
+            atualizar(entidade);
+        } else {
+            salvar(entidade);
+        }
+
+        return entidade;
     }
 
     @Override
@@ -78,8 +95,29 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
         return entityManager;
     }
 
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    private Long getEntityId(T entidade) {
+        return getEntityId(entidade, entidade.getClass());
     }
 
+    private Long getEntityId(T entidade, Class<?> clazz) {
+        Object id = null;
+        try {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (field.isAnnotationPresent(Id.class)) {
+                    field.setAccessible(true);
+                    id = field.get(entidade);
+                    break;
+                }
+            }
+
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+
+        if (id == null && clazz.getSuperclass() != null) {
+            id = getEntityId(entidade, clazz.getSuperclass());
+        }
+
+        return id == null ? null : (Long) id;
+    }
 }

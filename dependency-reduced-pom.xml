@@ -103,9 +103,10 @@
     <org.slf4j.version>1.6.3</org.slf4j.version>
     <javax.faces.version>2.2.4</javax.faces.version>
     <log4j.version>1.2.17</log4j.version>
-    <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <org.springframework.version>4.0.6.RELEASE</org.springframework.version>
     <cxf.version>2.7.7</cxf.version>
+    <apache.commons.lang3.version>3.3.2</apache.commons.lang3.version>
   </properties>
 </project>
 

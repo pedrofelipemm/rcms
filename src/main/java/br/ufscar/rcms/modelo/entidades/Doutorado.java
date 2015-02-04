@@ -4,9 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ORIENTACAO_DOUTORADO")
-public class Doutorado extends Orientacao  {
+@Table(name = "DOUTORADO")
+public class Doutorado extends Orientacao {
 
-	private static final long serialVersionUID = 4919782666029531420L;
-
+    private static final long serialVersionUID = 4919782666029531420L;
 }

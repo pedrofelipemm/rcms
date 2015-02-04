@@ -8,39 +8,38 @@ import javax.persistence.Table;
 @Table(name = "ARTIGO_EM_PERIODICO")
 public class ArtigoEmPeriodico extends ProducaoBibliografica {
 
-	private static final long serialVersionUID = -6003079801862161779L;
+    private static final long serialVersionUID = -6003079801862161779L;
 
-	@Column()
-	private String doi;
-	
-	@Column()
-	private String revista;
+    @Column
+    private String doi;
 
-	@Column()
-	private Integer numero;
+    @Column
+    private String revista;
 
-	public String getDoi() {
-		return doi;
-	}
+    @Column
+    private Integer numero;
 
-	public void setDoi(String doi) {
-		this.doi = doi;
-	}
+    public String getDoi() {
+        return doi;
+    }
 
-	public String getRevista() {
-		return revista;
-	}
+    public void setDoi(String doi) {
+        this.doi = doi;
+    }
 
-	public void setRevista(String revista) {
-		this.revista = revista;
-	}
+    public String getRevista() {
+        return revista;
+    }
 
-	public Integer getNumero() {
-		return numero;
-	}
+    public void setRevista(String revista) {
+        this.revista = revista;
+    }
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
+    public Integer getNumero() {
+        return numero;
+    }
 
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 }

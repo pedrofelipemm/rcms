@@ -5,7 +5,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui">
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="conteudo">
 		
 		<div class="row">
@@ -18,32 +19,32 @@
 			
 			<o:messages id="messageBoxValidation" for="formPesquisador" styleClass="message-box-validation"/>
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
-			
+
 			<div class="row">
           		<div class="col-md-5">
             		<div class="form-group">
             			<h:outputLabel for="nome" value="#{mensagens['label.nome']} " />
 						<h:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}"
 							required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
-							styleClass="form-control"/>
+							pt:placeholder="#{mensagens['informe.nome.pesquisador']}" styleClass="form-control"/>
 					</div>
 					<div class="form-group">
 		            	<h:outputLabel for="senha" value="#{mensagens['label.senha']}" />
-		            	<h:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}"
+		            	<h:inputSecret id="senha" value="#{pesquisadorMB.pesquisador.senha}"
 							required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
-							styleClass="form-control"/>
+							pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
 		            </div>
 		            <div class="form-group">
             			<h:outputLabel for="email" value="#{mensagens['label.email']}" />
 		            	<h:inputText id="email" value="#{pesquisadorMB.pesquisador.email}"
 							required="true" requiredMessage="#{mensagens['email.nao.preenchido']}"
-							styleClass="form-control"/>
+							pt:placeholder="#{mensagens['informe.email.pesquisador']}" styleClass="form-control"/>
             		</div>
             		<div class="form-group">
             			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
-            			<h:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.enderecoProfissional}"
+            			<h:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
             				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
-            				styleClass="form-control"/>
+            				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control"/>
             		</div>
 		        </div>
 		        <div class="col-md-4">
@@ -51,17 +52,19 @@
             			<h:outputLabel for="login" value="#{mensagens['label.login']} " />
 						<h:inputText id="login" value="#{pesquisadorMB.pesquisador.login}"
 							required="true" requiredMessage="#{mensagens['login.nao.preenchido']}"
-							styleClass="form-control" />
+							pt:placeholder="#{mensagens['informe.login.pesquisador']}" styleClass="form-control" />
             		</div>
             		<div class="form-group">
 		              	<label for="confirma-senha">#{mensagens['label.confirmacao.senha']}</label>
-		              	<input type="password" class="form-control" id="confirma-senha" />
+		              	<h:inputSecret id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
+							required="true" requiredMessage="#{mensagens['confirmacao.senha.nao.preenchido']}"
+							pt:placeholder="#{mensagens['informe.confirmar.senha.pesquisador']}" styleClass="form-control"/>
 		            </div>
             		<div class="form-group">
             			<h:outputLabel for="codigoLattes" value="#{mensagens['label.codigo.lattes']} " />
 						<h:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
 							required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
-							styleClass="form-control" />
+							pt:placeholder="#{mensagens['informe.codigo.lattes.pesquisador']}" styleClass="form-control" />
             		</div>
             		<div class="form-group">
             			<h:outputLabel for="tipoUsuario" value="#{mensagens['label.tipo.usuario']} " />
@@ -87,7 +90,7 @@
               			<h:outputLabel for="resumoProfissional" value="#{mensagens['label.resumo.profissional']}"/>
               			<h:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
               				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
-              				styleClass="form-control" rows="5"/>
+              				pt:placeholder="#{mensagens['informe.resumo.profissional.pesquisador']}" styleClass="form-control" rows="5"/>
             		</div>
           		</div>
         	</div>

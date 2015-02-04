@@ -19,7 +19,7 @@
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
-			<h:dataTable value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
+			<h:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
 				headerClass="col-width-50" rowClasses="col-width-50" 
 				rendered="#{not empty pesquisadorMB.pesquisadores}" >
  
@@ -36,19 +36,21 @@
     				</f:facet>
     				<h:outputLabel value="#{pesquisador.nome}" />
     			</h:column>
-    			
-    			<h:column headerClass="text-center">
-    				<f:facet name="header">
-    					<a href="${request.contextPath}/pages/cadastro/cadastroPesquisador.xhtml" class="btn btn-default">
-							#{mensagens['adicionar.pesquisador']}    					
-    					</a>
-    				</f:facet>
-					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default"
-						action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;
-					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-						action="#{pesquisadorMB.excluir(pesquisador)}" />
-    			</h:column>
-			
+
+				<h:column headerClass="text-center">
+					<f:facet name="header">
+						<a href="${request.contextPath}/pages/cadastro/cadastroPesquisador.xhtml" class="btn btn-default"> #{mensagens['adicionar.pesquisador']} </a>
+					</f:facet>
+
+					<h:commandButton value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-default">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+					<div class="text-center">
+					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;
+					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{pesquisadorMB.excluir(pesquisador)}" /> &nbsp;
+					</div>
+				</h:column>
+
 			</h:dataTable>
         </h:form>
 		

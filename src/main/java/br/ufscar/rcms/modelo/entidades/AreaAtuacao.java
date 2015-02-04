@@ -12,24 +12,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "AREA_ATUACAO")
 public class AreaAtuacao extends Entidade {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-	
-	@Column(nullable = false)
-    private String descricao;
-	
-	private static final long serialVersionUID = -3948561964306499761L;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<SubAreaAtuacao> subAreasAtuacao;
 
+    @Column(nullable = false)
+    private String descricao;
+
+    private static final long serialVersionUID = -3948561964306499761L;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SubAreaAtuacao> subAreasAtuacao;
 
     public Integer getId() {
         return id;
@@ -46,13 +43,14 @@ public class AreaAtuacao extends Entidade {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     public List<SubAreaAtuacao> getSubAreasAtuacao() {
-		return subAreasAtuacao;
-	}
-	public void setSubAreasAtuacao(List<SubAreaAtuacao> subAreasAtuacao) {
-		this.subAreasAtuacao = subAreasAtuacao;
-	}
+        return subAreasAtuacao;
+    }
+
+    public void setSubAreasAtuacao(List<SubAreaAtuacao> subAreasAtuacao) {
+        this.subAreasAtuacao = subAreasAtuacao;
+    }
 
     @Override
     public int hashCode() {
@@ -74,7 +72,7 @@ public class AreaAtuacao extends Entidade {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         AreaAtuacao other = (AreaAtuacao) obj;
         if (descricao == null) {
             if (other.descricao != null) {
@@ -92,11 +90,10 @@ public class AreaAtuacao extends Entidade {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "AreaAtuacao [Id=" + getId() + ", Descricao=" + getDescricao() + "]";
     }
 
 }
-

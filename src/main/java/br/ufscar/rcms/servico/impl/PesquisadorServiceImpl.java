@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.dao.EnderecoDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
@@ -19,10 +20,22 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     @Autowired
     private PesquisadorDAO pesquisadorDAO;
 
+    @Autowired
+    private EnderecoDAO enderecoDAO;
+
     @Override
     public void salvar(Pesquisador pesquisador) {
+        pesquisadorDAO.salvar(pesquisador);
+    }
 
-        pesquisadorDAO.atualizar(pesquisador);
+    @Override
+    public Pesquisador salvarOuAtualizar(Pesquisador pesquisador) {
+
+        // TODO PEDRO
+        if (pesquisador.getEndereco() != null) {
+            pesquisador.getEndereco().setPesquisador(pesquisador);
+        }
+        return pesquisadorDAO.salvarOuAtualizar(pesquisador);
     }
 
     @Override
@@ -36,10 +49,14 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
         if (pesquisadorToRemove == null) {
 	    // TODO PEDRO TRATAR EXCEPTION
-	    throw new RuntimeException("Pesquisador não encontrado!");
+            throw new RuntimeException("Pesquisador não encontrado!");
         }
 
         pesquisadorDAO.remover(pesquisador);
     }
 
+    @Override
+    public Pesquisador buscar(Long id) {
+        return pesquisadorDAO.buscar(id);
+    }
 }

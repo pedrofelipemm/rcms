@@ -7,6 +7,5 @@ import javax.persistence.Table;
 @Table(name = "PROCESSO_OU_TECNICA")
 public class ProcessoOuTecnica extends ProducaoTecnica {
 
-	private static final long serialVersionUID = 6694121402955244752L;
-
+    private static final long serialVersionUID = 6694121402955244752L;
 }

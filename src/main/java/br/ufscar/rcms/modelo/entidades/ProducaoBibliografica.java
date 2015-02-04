@@ -7,6 +7,5 @@ import javax.persistence.Table;
 @Table(name = "PRODUCAO_BIBLIOGRAFICA")
 public abstract class ProducaoBibliografica extends Producao {
 
-	private static final long serialVersionUID = 6014105271050898430L;
-
+    private static final long serialVersionUID = 6014105271050898430L;
 }

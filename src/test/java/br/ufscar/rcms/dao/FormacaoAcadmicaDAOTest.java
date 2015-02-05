@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,6 +37,8 @@ public class FormacaoAcadmicaDAOTest extends AbstractDAOTestBase {
         salvar(pesquisador, formacaoAcademica, formacaoAcademica2);
     }
 
+    // TOOD PEDRO
+    @Ignore
     @Test
     public void buscarFormacaoAcademicaPorPesquisadorTest() {
 

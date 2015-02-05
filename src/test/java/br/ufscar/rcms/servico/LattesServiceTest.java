@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -59,6 +60,8 @@ public class LattesServiceTest extends AbstractServiceTestBase {
     @Autowired
     private LattesService lattesService;
 
+    // TOOD PEDRO
+    @Ignore
     @Test
     public void carregarCurriculoLattesTest() throws Exception {
 

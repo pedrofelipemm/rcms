@@ -18,7 +18,7 @@ public class Endereco extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEndereco;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String enderecoProfissional;
 
     @Column

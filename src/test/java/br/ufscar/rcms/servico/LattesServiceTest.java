@@ -54,7 +54,7 @@ import br.ufscar.rcms.modelo.lattes.TrabalhoCompletoLattes;
 import br.ufscar.rcms.modelo.lattes.TrabalhoLattes;
 import br.ufscar.rcms.modelo.lattes.TrabalhosTecnicoLattes;
 
-public class LattesServiceImplTest extends AbstractServiceTestBase {
+public class LattesServiceTest extends AbstractServiceTestBase {
 
     @Autowired
     private LattesService lattesService;

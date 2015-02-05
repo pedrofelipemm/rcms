@@ -16,4 +16,6 @@ public interface PesquisadorService extends Serializable {
     List<Pesquisador> buscarTodos();
 
     void remover(Pesquisador pesquisador);
+
+    Pesquisador buscarTodosDados(Long idUsuario);
 }

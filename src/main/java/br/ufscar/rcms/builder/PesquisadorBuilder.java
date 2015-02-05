@@ -1,14 +1,18 @@
 package br.ufscar.rcms.builder;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 
 import br.ufscar.rcms.factory.EnderecoFactory;
+import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
+import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
+import br.ufscar.rcms.modelo.lattes.FormacoesAcademicaLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
@@ -45,7 +49,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         validatePesquisador(pesquisadorLattes, pesquisador);
 
         endereco(pesquisadorLattes.getEndereco(), pesquisador);
-        formacaoAcademica(pesquisador.getFormacoes());
+        formacaoAcademica(pesquisadorLattes.getFormacoes(), pesquisador);
     }
 
     public PesquisadorBuilder endereco(EnderecoLattes endereco, Pesquisador pesquisador) {
@@ -68,15 +72,34 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder formacaoAcademica(FormacaoAcademica formacao) {
+    public PesquisadorBuilder formacaoAcademica(FormacaoAcademica... formacao) {
 
-        // TODO PEDRO
+        pesquisador.setFormacoes(Arrays.asList(formacao));
         return this;
     }
 
     public PesquisadorBuilder formacaoAcademica(List<FormacaoAcademica> formacoes) {
 
-        // TODO PEDRO
+        pesquisador.setFormacoes(formacoes);
+        return this;
+    }
+
+    public PesquisadorBuilder formacaoAcademica(FormacoesAcademicaLattes formacoes, Pesquisador pesquisador) {
+
+        for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
+            // FormacaoAcademica formacao = null;
+            // if ((formacao = pesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
+            // this.pesquisador.getFormacoes().add(
+            // FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
+            // formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
+            // formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), pesquisador));
+            // }else{
+            this.pesquisador.getFormacoes().add(FormacaoAcademicaFactory.createFormacaoAcademica(
+                    formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
+                    formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), pesquisador));
+            // }
+        }
+
         return this;
     }
 

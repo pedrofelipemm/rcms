@@ -19,39 +19,41 @@
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
-			<h:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
+			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
 				headerClass="col-width-50" rowClasses="col-width-50" 
-				rendered="#{not empty pesquisadorMB.pesquisadores}" >
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
+				rendered="#{not empty pesquisadorMB.pesquisadores}" paginator="true" rows="10">
  
- 				<h:column>
+ 				<p:column width="30">
  					<f:facet name="header">
  						<h:outputLabel value="#"/>
  					</f:facet>
  					<h:outputLabel value="#{pesquisadorMB.pesquisadores.rowIndex + 1}"/>
- 				</h:column>
+ 				</p:column>
  				
-    			<h:column headerClass="col-xs-10">
+    			<p:column headerClass="col-xs-10">
     				<f:facet name="header">
     					<h:outputLabel value="#{mensagens['nome']}"/>
     				</f:facet>
     				<h:outputLabel value="#{pesquisador.nome}" />
-    			</h:column>
+    			</p:column>
 
-				<h:column headerClass="text-center">
+				<p:column headerClass="text-center">
 					<f:facet name="header">
 						<a href="${request.contextPath}/pages/cadastro/cadastroPesquisador.xhtml" class="btn btn-default"> #{mensagens['adicionar.pesquisador']} </a>
 					</f:facet>
 
+					
+					<div class="text-center">
 					<h:commandButton value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-default">
 						<f:ajax render="@form" execute="@form" />
-					</h:commandButton>
-					<div class="text-center">
+					</h:commandButton>&nbsp;
 					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;
 					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{pesquisadorMB.excluir(pesquisador)}" /> &nbsp;
 					</div>
-				</h:column>
+				</p:column>
 
-			</h:dataTable>
+			</p:dataTable>
         </h:form>
 		
 	</ui:define>

@@ -77,6 +77,7 @@ public class PesquisadorMB extends AbstractMB {
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorEdicao;
+
             // TODO PEDRO
             if (pesquisador.getEndereco() == null) {
                 pesquisadorEdicao.setEndereco(new Endereco());
@@ -110,7 +111,7 @@ public class PesquisadorMB extends AbstractMB {
 
         setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
 
-        return CADASTRO_PESQUISADOR;
+        return EXIBE_PESQUISADOR;
     }
 
     public String editar(Pesquisador pesquisador) {

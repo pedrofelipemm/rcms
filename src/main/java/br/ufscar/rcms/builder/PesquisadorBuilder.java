@@ -98,6 +98,12 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
                     formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
                     formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), pesquisador));
             // }
+        // TODO PEDRO
+//        for (FormacaoLattes formacao : formacoes.getFormacoes()) {
+
+//            this.pesquisador.getFormacoes().add(FormacaoAcademicaFactory.createFormacaoAcademica(
+//                    formacao.getAnoConclusao(), formacao.getAnoInicio(), formacao.getDescricao(),
+//                    formacao.getNomeInstituicao(), formacao.getTipo(), pesquisador));
         }
 
         return this;

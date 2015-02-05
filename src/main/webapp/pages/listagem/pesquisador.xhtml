@@ -24,20 +24,13 @@
             <div class="row">
             	<div class="col-md-9">
                     <h1>#{pesquisadorMB.pesquisador.nome}<br/>
-						<small>prado@dc.ufscar.br</small></h1>
+						<small>#{pesquisadorMB.pesquisador.email}</small></h1>
                     <hr/>
-                    <p>Possui graduação em Engenharia de Fortificação e Construção pelo Instituto Militar de Engenharia (1979), graduação em Matemática Licenciatura Plena pela Faculdade de Filosofia Ciências e Letras de Itajubá (1974), graduação em Engenharia Militar pela Academia Militar da Agulhas Negras (1971), mestrado em Sistemas e Computação pelo Instituto Militar de Engenharia (1986) e doutorado em Informática pela Pontifícia Universidade Católica do Rio de Janeiro (1992). Atualmente é professor Associado Nível 3 / iv da Universidade Federal de São Carlos. Tem experiência na área de Ciência da Computação, com ênfase em Engenharia de Software, atuando principalmente nos seguintes temas: reúso de software, orientação a objetos, reengenharia e transformação de software, engenharia de software na computação úbiqua, ferramentas case, frameworks e engenharia reversa.</p>
+                    <p>#{pesquisadorMB.pesquisador.resumoProfissional}</p>
                 </div>
                 <div class="col-md-3 text-right">
-                	<h:graphicImage value="/resources/images/foto-prado.jpg" alt="Foto do Pesquisador" />
+                	<h:graphicImage value="/resources/images/person.png" alt="#{pesquisadorMB.pesquisador.nome}" />
                     <p><a href="#" class="lnk-lattes">Currículo Lattes</a></p>
-                    
-                    <h:form id="formImportarLattes" enctype="multipart/form-data">
-	                    <h:commandButton value="#{mensagens['importar.lattes']}" action="#{pesquisadorMB.baixarDadosPesquisadorLattes('2668568143800755', 'Antonio Francisco do Prado')}"
-								styleClass="btn btn-default lnk-lattes">
-								<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
-					</h:form>
                 </div>
             </div>
             <div class="row">
@@ -47,22 +40,16 @@
             	<div class="col-md-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Endereço</h3>
+                        <h3 class="panel-title">#{mensagens['exibir.pesquisador.endereco']}</h3>
                       </div>
                       <div class="panel-body">
                         <div class="container-fluid">
                         	<div class="row">
                             	<div class="col-md-2 text-right">
-                                	<strong>Endereço Profissional</strong>
+                                	<strong>#{mensagens['exibir.pesquisador.endereco.profissional']}</strong>
                                 </div>
                                 <div class="col-md-10">
-                                    Universidade Federal de São Carlos, Centro de Ciências Exatas e de Tecnologia, Departamento de Computação. <br/>
-                                    Rodovia Washington Luiz, Km 235 - Jardim Guanabara - Prédio DC1 - Sala 13<br/>
-                                    Jardim Guanabara<br/>
-                                    13565905 - Sao Carlos, SP - Brasil - Caixa-postal: 676<br/>
-                                    Telefone: (16) 33518598<br/>
-                                    Fax: (16) 33518233<br/>
-                                    URL da Homepage: http://www.dc.ufscar.br/~prado
+                                    #{pesquisadorMB.pesquisador.enderecoProfissional}
                                 </div>
                             </div>
                         </div>
@@ -74,7 +61,7 @@
             	<div class="col-md-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Formação acadêmica/titulação</h3>
+                        <h3 class="panel-title">#{mensagens['exibir.pesquisador.formacao.academica.titulacao']}</h3>
                       </div>
                       <div class="panel-body">
                         <div class="container-fluid">

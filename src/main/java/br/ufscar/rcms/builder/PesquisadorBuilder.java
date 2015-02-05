@@ -42,9 +42,10 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     public PesquisadorBuilder(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
 
-        this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
-                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(),
-                pesquisador.getFlagAdministrador(), pesquisador.getResumoProfissional());
+        this(pesquisador.getIdUsuario(), pesquisador.getLogin(),
+                pesquisadorLattes.getIdentificacao().getNomeCompleto(), pesquisador.getSenha(), pesquisador
+                        .getCodigoLattes(), pesquisador.getEmail(), pesquisador.getFlagAdministrador(), pesquisador
+                        .getResumoProfissional());
 
         validatePesquisador(pesquisadorLattes, pesquisador);
 
@@ -87,23 +88,21 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder formacaoAcademica(FormacoesAcademicaLattes formacoes, Pesquisador pesquisador) {
 
         for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
-            // FormacaoAcademica formacao = null;
-            // if ((formacao = pesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
-            // this.pesquisador.getFormacoes().add(
-            // FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
-            // formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
-            // formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), pesquisador));
-            // }else{
-            this.pesquisador.getFormacoes().add(FormacaoAcademicaFactory.createFormacaoAcademica(
+             FormacaoAcademica formacao = null;
+            // TODO PEDRO
+             if ((formacao = pesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
+                this.pesquisador.getFormacoes().add(
+                        FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
+                                formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(),
+                                formacaoLattes.getDescricao(), formacaoLattes.getNomeInstituicao(),
+                                formacaoLattes.getTipo(), pesquisador));
+             }else{
+                this.pesquisador.getFormacoes().add(
+                        FormacaoAcademicaFactory.createFormacaoAcademica(
                     formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
                     formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), pesquisador));
-            // }
-        // TODO PEDRO
-//        for (FormacaoLattes formacao : formacoes.getFormacoes()) {
+             }
 
-//            this.pesquisador.getFormacoes().add(FormacaoAcademicaFactory.createFormacaoAcademica(
-//                    formacao.getAnoConclusao(), formacao.getAnoInicio(), formacao.getDescricao(),
-//                    formacao.getNomeInstituicao(), formacao.getTipo(), pesquisador));
         }
 
         return this;

@@ -164,14 +164,12 @@ public abstract class AbstractMB implements Serializable {
 
     private void adicionarMensagem(String texto, Severity severity) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
-        keepMessages(true);
     }
     private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
-        keepMessages(true);
     }
 
-    private void keepMessages(boolean keep) {
-        getFlash().setKeepMessages(keep);
+    public void keepMessages() {
+        getFlash().setKeepMessages(true);
     }
 }

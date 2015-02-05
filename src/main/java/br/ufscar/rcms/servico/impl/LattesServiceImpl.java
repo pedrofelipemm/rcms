@@ -74,7 +74,6 @@ public class LattesServiceImpl implements LattesService {
         pesquisadorLattes = carregarCurriculoLattes(pesquisador.getCodigoLattes());
         pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
         return pesquisadorService.salvarOuAtualizar(new PesquisadorBuilder(pesquisadorLattes, pesquisador).build());
-
     }
 
     private CurriculoLattes carregarCurriculosLattes() {

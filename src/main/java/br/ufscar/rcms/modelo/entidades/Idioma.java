@@ -14,31 +14,32 @@ import javax.persistence.Table;
 @Table(name = "IDIOMA")
 public class Idioma extends Entidade {
 
-    private static final long serialVersionUID = 3667531830943589983L;
+	private static final long serialVersionUID = 3667531830943589983L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idIdioma;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idIdioma;
 
-    @Column(nullable = false)
-    private String descricao;
+	@Column(nullable = false)
+	private String descricao;
 
-    @ManyToMany(mappedBy = "idiomas")
-    private List<Pesquisador> pesquisadores;
+	// @ManyToMany(mappedBy = "idiomas")
+	// private List<Pesquisador> pesquisadores;
 
-    public Integer getIdIdioma() {
-        return idIdioma;
-    }
+	public Integer getIdIdioma() {
+		return idIdioma;
+	}
 
-    public void setIdIdioma(Integer idIdioma) {
-        this.idIdioma = idIdioma;
-    }
+	public void setIdIdioma(Integer idIdioma) {
+		this.idIdioma = idIdioma;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 }

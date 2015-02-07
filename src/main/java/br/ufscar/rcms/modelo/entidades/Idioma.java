@@ -18,7 +18,7 @@ public class Idioma extends Entidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idIdioma;
+	private Long idIdioma;
 
 	@Column(nullable = false)
 	private String descricao;
@@ -26,16 +26,18 @@ public class Idioma extends Entidade {
 	// @ManyToMany(mappedBy = "idiomas")
 	// private List<Pesquisador> pesquisadores;
 
-	public Integer getIdIdioma() {
-		return idIdioma;
-	}
-
-	public void setIdIdioma(Integer idIdioma) {
-		this.idIdioma = idIdioma;
-	}
+	
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public Long getIdIdioma() {
+		return idIdioma;
+	}
+
+	public void setIdIdioma(Long idIdioma) {
+		this.idIdioma = idIdioma;
 	}
 
 	public void setDescricao(String descricao) {

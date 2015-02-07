@@ -16,5 +16,7 @@ public interface IdiomaService extends Serializable {
     List<Idioma> buscarTodas();
 
     Idioma buscarPorDescricao(String Descricao);
+    
+    
 
 }

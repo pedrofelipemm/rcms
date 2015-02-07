@@ -21,7 +21,7 @@ public class IdiomaServiceImpl implements IdiomaService {
 
     @Override
     public void salvar(Idioma idioma) {
-        idiomaDAO.salvar(idioma);
+        idiomaDAO.salvarOuAtualizar(idioma);
     }
 
     @Override

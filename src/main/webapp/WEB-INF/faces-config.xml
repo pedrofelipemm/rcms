@@ -49,6 +49,15 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
+			<from-outcome>consultaIdiomas</from-outcome>
+			<to-view-id>/pages/consulta/idiomas.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
 			<from-outcome>cadastroAreaAtuacao</from-outcome>
 			<to-view-id>/pages/cadastro/cadastroAreaAtuacao.xhtml</to-view-id>
 			<redirect/>
@@ -86,7 +95,7 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>cadastroIdioma</from-outcome>
+			<from-outcome>cadastroIdiomas</from-outcome>
 			<to-view-id>/pages/cadastro/cadastroIdioma.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>

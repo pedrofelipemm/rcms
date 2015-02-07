@@ -25,10 +25,16 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
 
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
+    
+    public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
+    
+    public static final String CONSULTA_IDIOMAS = "consultaIdiomas";
 
     public static final String EXIBE_PESQUISADOR = "pesquisador";
 
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
+    
+    public static final String FLASH_KEY_IDIOMA = "cadastroIdioma";
 
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
 

@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Endereco;
@@ -200,13 +201,15 @@ public class PesquisadorMB extends AbstractMB {
 
             this.pesquisador = lattesService.salvarDadosLattes(pesquisador);
             adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", this.pesquisador.getNome());
-            keepMessages();
             limparDados();
 
+        } catch (InvalidDataAccessApiUsageException e) {
+            adicionarMensagemAlerta("Currículo lattes já importado!");
         } catch (CurriculoLattesNaoEncontradoException e) {
             adicionarMensagemErro(e.getMessage());
         }
 
+        keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
 

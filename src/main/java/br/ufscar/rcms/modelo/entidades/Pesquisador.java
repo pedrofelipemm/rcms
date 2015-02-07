@@ -29,7 +29,7 @@ public class Pesquisador extends Usuario {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private Endereco endereco;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String resumoProfissional;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -10,4 +10,6 @@ public interface FormacaoAcademicaService extends Serializable{
 	void salvar(FormacaoAcademica formacaoAcademica);
 
     List<FormacaoAcademica> buscarFormacaoAcademica(Long idPesquisador);
+
+    List<FormacaoAcademica> buscarTodos();
 }

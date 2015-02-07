@@ -11,7 +11,7 @@ import br.ufscar.rcms.dao.FormacaoAcademicaDAO;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
 import br.ufscar.rcms.servico.FormacaoAcademicaService;
 
-@Service("formacaoAcademica")
+@Service("formacaoAcademicaService")
 @Transactional
 public class FormacaoAcademicaServiceImpl implements FormacaoAcademicaService{
 
@@ -25,6 +25,7 @@ public class FormacaoAcademicaServiceImpl implements FormacaoAcademicaService{
 		formacaoAcademicaDao.salvar(formacaoAcademica);
 	}
 
+    @Override
 	public List<FormacaoAcademica> buscarTodos(){
 		return formacaoAcademicaDao.buscarTodos();
 	}

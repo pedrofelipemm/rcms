@@ -2,7 +2,6 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ public class FormacaoAcademica extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFormacaoAcademica;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
     @Column(nullable = false)

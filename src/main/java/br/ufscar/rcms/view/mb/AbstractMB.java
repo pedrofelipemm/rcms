@@ -169,7 +169,7 @@ public abstract class AbstractMB implements Serializable {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
     }
 
-    public void keepMessages() {
+    public void keepMessagesOnRedirect() {
         getFlash().setKeepMessages(true);
     }
 }

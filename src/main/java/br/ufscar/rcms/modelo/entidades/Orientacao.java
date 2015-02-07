@@ -2,7 +2,6 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +21,7 @@ public abstract class Orientacao extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrientacao;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
     @Column(nullable = false)
@@ -94,5 +93,35 @@ public abstract class Orientacao extends Entidade {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idOrientacao == null) ? 0 : idOrientacao.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Orientacao)) {
+            return false;
+        }
+        Orientacao other = (Orientacao) obj;
+        if (idOrientacao == null) {
+            if (other.idOrientacao != null) {
+                return false;
+            }
+        } else if (!idOrientacao.equals(other.idOrientacao)) {
+            return false;
+        }
+        return true;
     }
 }

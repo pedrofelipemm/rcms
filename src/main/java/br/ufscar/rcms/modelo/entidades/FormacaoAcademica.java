@@ -121,5 +121,4 @@ public class FormacaoAcademica extends Entidade {
         }
         return true;
     }
-
 }

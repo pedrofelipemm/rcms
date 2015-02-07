@@ -157,19 +157,19 @@ public class PesquisadorMB extends AbstractMB {
         }
     }
 
-    public void addIdioma() {
-        if (idiomaSelecionado != null) {
-            pesquisador.getIdiomas().add(idiomaSelecionado);
-            idiomas.remove(idiomas.indexOf(idiomaSelecionado));
-        }
-    }
-
-    public void removerIdioma() {
-        if (idiomaSelecionado != null) {
-            pesquisador.getIdiomas().remove(pesquisador.getIdiomas().indexOf(idiomaSelecionado));
-            idiomas.add(idiomaSelecionado);
-        }
-    }
+    // public void addIdioma() {
+    // if (idiomaSelecionado != null) {
+    // pesquisador.getIdiomas().add(idiomaSelecionado);
+    // idiomas.remove(idiomas.indexOf(idiomaSelecionado));
+    // }
+    // }
+    //
+    // public void removerIdioma() {
+    // if (idiomaSelecionado != null) {
+    // pesquisador.getIdiomas().remove(pesquisador.getIdiomas().indexOf(idiomaSelecionado));
+    // idiomas.add(idiomaSelecionado);
+    // }
+    // }
 
     public String baixarDadosPesquisadorLattes() {
         try {
@@ -204,7 +204,7 @@ public class PesquisadorMB extends AbstractMB {
             limparDados();
 
         } catch (InvalidDataAccessApiUsageException e) {
-            adicionarMensagemAlerta("Currículo lattes já importado!");
+            adicionarMensagemAlerta("Currï¿½culo lattes jï¿½ importado!");
         } catch (CurriculoLattesNaoEncontradoException e) {
             adicionarMensagemErro(e.getMessage());
         }

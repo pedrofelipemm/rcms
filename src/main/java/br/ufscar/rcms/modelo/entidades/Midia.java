@@ -2,7 +2,6 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ public class Midia extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMidia;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private ProjetoPesquisa projetoPesquisa;
 
     @Column(nullable = false)
@@ -63,5 +62,35 @@ public class Midia extends Entidade {
         System.arraycopy(midia, 0, copyOfMidia, 0, midia.length);
 
         this.midia = copyOfMidia;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idMidia == null) ? 0 : idMidia.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Midia)) {
+            return false;
+        }
+        Midia other = (Midia) obj;
+        if (idMidia == null) {
+            if (other.idMidia != null) {
+                return false;
+            }
+        } else if (!idMidia.equals(other.idMidia)) {
+            return false;
+        }
+        return true;
     }
 }

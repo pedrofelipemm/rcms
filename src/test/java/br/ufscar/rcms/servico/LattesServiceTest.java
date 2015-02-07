@@ -61,8 +61,8 @@ public class LattesServiceTest extends AbstractServiceTestBase {
     private LattesService lattesService;
 
     // TOOD PEDRO
-    @Ignore
     @Test
+    @Ignore
     public void carregarCurriculoLattesTest() throws Exception {
 
         String codigoLattesPrado = "2668568143800755";

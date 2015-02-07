@@ -21,6 +21,9 @@ public class Pesquisador extends Usuario {
     private String codigoLattes;
 
     @Column
+    private String sexo;
+
+    @Column
     private byte[] foto;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
@@ -35,7 +38,7 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<Idioma> idiomas = new ArrayList<Idioma>();
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -47,13 +50,13 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrganizacaoEvento> organizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<Producao> producoes = new ArrayList<Producao>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
     public String getCodigoLattes() {
@@ -62,6 +65,14 @@ public class Pesquisador extends Usuario {
 
     public void setCodigoLattes(String codigoLattes) {
         this.codigoLattes = codigoLattes;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public Endereco getEndereco() {
@@ -130,6 +141,24 @@ public class Pesquisador extends Usuario {
 
     public List<FormacaoAcademica> getFormacoes() {
         return formacoes;
+    }
+
+    public FormacaoAcademica containsFormacaoAcademica(Long idFormacao) {
+        for (FormacaoAcademica formacaoAcademica : formacoes) {
+            if (formacaoAcademica.getIdFormacaoAcademica().equals(idFormacao)) {
+                return formacaoAcademica;
+            }
+        }
+        return null;
+    }
+
+    public FormacaoAcademica containsFormacaoAcademica(String descricao) {
+        for (FormacaoAcademica formacaoAcademica : formacoes) {
+            if (formacaoAcademica.getDescricao().equals(descricao)) {
+                return formacaoAcademica;
+            }
+        }
+        return null;
     }
 
     public void setFormacoes(List<FormacaoAcademica> formacoes) {

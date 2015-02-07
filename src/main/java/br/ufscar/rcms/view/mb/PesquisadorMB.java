@@ -19,10 +19,12 @@ import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")
@@ -76,6 +78,7 @@ public class PesquisadorMB extends AbstractMB {
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorEdicao;
 
+            // TODO PEDRO
             if (pesquisador.getEndereco() == null) {
                 pesquisadorEdicao.setEndereco(new Endereco());
             }
@@ -197,6 +200,7 @@ public class PesquisadorMB extends AbstractMB {
 
             this.pesquisador = lattesService.salvarDadosLattes(pesquisador);
             adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", this.pesquisador.getNome());
+            keepMessages();
             limparDados();
 
         } catch (CurriculoLattesNaoEncontradoException e) {

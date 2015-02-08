@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MIDIA")
+@Table(name = "\"MIDIA\"")
 public class Midia extends Entidade {
 
     private static final long serialVersionUID = 3759933099478534637L;

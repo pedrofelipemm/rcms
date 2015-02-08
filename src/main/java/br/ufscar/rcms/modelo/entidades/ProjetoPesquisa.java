@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PROJETO_PESQUISA")
+@Table(name = "\"PROJETO_PESQUISA\"")
 public class ProjetoPesquisa extends Entidade {
 
     private static final long serialVersionUID = -9149061665883584009L;

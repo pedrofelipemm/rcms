@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ORIENTACAO")
+@Table(name = "\"ORIENTACAO\"")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Orientacao extends Entidade {
 

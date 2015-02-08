@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RESUMO_EXPANDIDO_CONGRESSO")
+@Table(name = "\"RESUMO_EXPANDIDO_CONGRESSO\"")
 public class ResumoExpandidoCongresso extends ProducaoBibliografica {
 
     private static final long serialVersionUID = -396352635868864895L;

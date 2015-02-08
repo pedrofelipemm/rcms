@@ -13,7 +13,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PESQUISADOR")
+@Table(name = "\"PESQUISADOR\"")
 public class Pesquisador extends Usuario {
 
     private static final long serialVersionUID = 7468024654193724256L;

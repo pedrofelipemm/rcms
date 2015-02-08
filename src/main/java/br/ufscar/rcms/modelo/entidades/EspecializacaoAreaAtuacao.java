@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ESPECIALIZACAO_AREA_ATUACAO")
+@Table(name = "\"ESPECIALIZACAO_AREA_ATUACAO\"")
 public class EspecializacaoAreaAtuacao
   extends Entidade
 {
@@ -18,22 +18,22 @@ public class EspecializacaoAreaAtuacao
   private int id;
   @Column(nullable=false)
   private String descricao;
-  
+
   public int getId()
   {
-    return this.id;
+    return id;
   }
-  
+
   public void setId(int id)
   {
     this.id = id;
   }
-  
+
   public String getDescricao()
   {
-    return this.descricao;
+    return descricao;
   }
-  
+
   public void setDescricao(String descricao)
   {
     this.descricao = descricao;

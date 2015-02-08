@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CITACAO_BIBLIOGRAFICA")
+@Table(name = "\"CITACAO_BIBLIOGRAFICA\"")
 public class CitacaoBibliografica extends Entidade {
 
     private static final long serialVersionUID = 1883662481651131111L;

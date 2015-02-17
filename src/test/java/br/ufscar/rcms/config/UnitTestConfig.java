@@ -45,7 +45,7 @@ public class UnitTestConfig {
     private String databaseUsername = "postgres";
 
     // @Value("${database.test.password}")
-    private String databasePassword = "root";
+    private String databasePassword = "postgres";
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

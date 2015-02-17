@@ -12,7 +12,7 @@ import br.ufscar.rcms.servico.DescricaoGrupoService;
 @Transactional
 public class DescricaoGrupoServiceImpl implements DescricaoGrupoService {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1104959415646003713L;
 
     @Autowired
     private DescricaoGrupoDAO descricaoGrupoDAO;
@@ -20,13 +20,12 @@ public class DescricaoGrupoServiceImpl implements DescricaoGrupoService {
     @Override
     public void salvar(DescricaoGrupo descricaoGrupo) {
         descricaoGrupoDAO.salvar(descricaoGrupo);
-        
+
     }
 
     @Override
     public void alterar(DescricaoGrupo descricaoGrupo) {
         descricaoGrupoDAO.atualizar(descricaoGrupo);
-        
-    }
 
+    }
 }

@@ -9,4 +9,5 @@ public interface DescricaoGrupoService extends Serializable {
     void salvar(DescricaoGrupo descricaoGrupo);
 
     void alterar(DescricaoGrupo descricaoGrupo);
+
 }

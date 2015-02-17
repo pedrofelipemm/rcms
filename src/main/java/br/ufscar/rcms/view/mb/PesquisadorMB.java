@@ -16,12 +16,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")

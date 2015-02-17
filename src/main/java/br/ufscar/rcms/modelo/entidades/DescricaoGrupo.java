@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "DESCRICAO_GRUPO")
 public class DescricaoGrupo extends Entidade {
 
-    private static final long serialVersionUID = -3948561964306499761L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

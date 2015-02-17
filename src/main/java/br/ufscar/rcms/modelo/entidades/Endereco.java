@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ENDERECO")
+@Table(name = "\"ENDERECO\"")
 public class Endereco extends Entidade {
 
     private static final long serialVersionUID = -8224274709519593945L;
@@ -69,4 +69,35 @@ public class Endereco extends Entidade {
     public void setEnderecoProfissionalLongitude(double enderecoProfissionalLongitude) {
         this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idEndereco == null) ? 0 : idEndereco.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Endereco)) {
+            return false;
+        }
+        Endereco other = (Endereco) obj;
+        if (idEndereco == null) {
+            if (other.idEndereco != null) {
+                return false;
+            }
+        } else if (!idEndereco.equals(other.idEndereco)) {
+            return false;
+        }
+        return true;
+    }
+
 }

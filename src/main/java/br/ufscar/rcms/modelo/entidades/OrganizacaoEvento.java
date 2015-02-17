@@ -2,7 +2,6 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ORGANIZACAO_EVENTO")
+@Table(name = "\"ORGANIZACAO_EVENTO\"")
 public class OrganizacaoEvento extends Entidade {
 
     private static final long serialVersionUID = -4704509426426228127L;
@@ -19,7 +18,7 @@ public class OrganizacaoEvento extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrganizacaoEvento;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
     @Column(nullable = false)
@@ -69,5 +68,35 @@ public class OrganizacaoEvento extends Entidade {
 
     public void setAno(Integer ano) {
         this.ano = ano;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idOrganizacaoEvento == null) ? 0 : idOrganizacaoEvento.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof OrganizacaoEvento)) {
+            return false;
+        }
+        OrganizacaoEvento other = (OrganizacaoEvento) obj;
+        if (idOrganizacaoEvento == null) {
+            if (other.idOrganizacaoEvento != null) {
+                return false;
+            }
+        } else if (!idOrganizacaoEvento.equals(other.idOrganizacaoEvento)) {
+            return false;
+        }
+        return true;
     }
 }

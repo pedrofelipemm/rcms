@@ -10,8 +10,13 @@ public interface IdiomaService extends Serializable {
     void salvar(Idioma idioma);
 
     void alterar(Idioma idioma);
+    
+    void remover (Idioma idioma);
 
     List<Idioma> buscarTodas();
 
     Idioma buscarPorDescricao(String Descricao);
+    
+    
+
 }

@@ -25,10 +25,16 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
 
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
+    
+    public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
+    
+    public static final String CONSULTA_IDIOMAS = "consultaIdiomas";
 
     public static final String EXIBE_PESQUISADOR = "pesquisador";
 
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
+    
+    public static final String FLASH_KEY_IDIOMA = "cadastroIdioma";
 
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
 
@@ -164,14 +170,12 @@ public abstract class AbstractMB implements Serializable {
 
     private void adicionarMensagem(String texto, Severity severity) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
-        keepMessages(true);
     }
     private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
-        keepMessages(true);
     }
 
-    private void keepMessages(boolean keep) {
-        getFlash().setKeepMessages(keep);
+    public void keepMessagesOnRedirect() {
+        getFlash().setKeepMessages(true);
     }
 }

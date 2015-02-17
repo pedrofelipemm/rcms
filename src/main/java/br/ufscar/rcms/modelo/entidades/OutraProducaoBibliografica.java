@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "OUTRA_PRODUCAO_BIBLIOGRAFICA")
+@Table(name = "\"OUTRA_PRODUCAO_BIBLIOGRAFICA\"")
 public class OutraProducaoBibliografica extends ProducaoBibliografica {
 
     private static final long serialVersionUID = -4621162924821882566L;

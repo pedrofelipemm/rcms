@@ -9,10 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PESQUISADOR")
+@Table(name = "\"PESQUISADOR\"")
 public class Pesquisador extends Usuario {
 
     private static final long serialVersionUID = 7468024654193724256L;
@@ -21,39 +22,51 @@ public class Pesquisador extends Usuario {
     private String codigoLattes;
 
     @Column
+    private String sexo;
+
+    @Column
     private byte[] foto;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private Endereco endereco;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String resumoProfissional;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<CitacaoBibliografica> nomeCitacao;
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
-    private List<Idioma> idiomas = new ArrayList<Idioma>();
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.pesquisador")
+    private List<CompreensaoIdioma> compreensaoIdiomas = new ArrayList<CompreensaoIdioma>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<PremioTitulo> premios = new ArrayList<PremioTitulo>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<ParticipacaoEvento> participacaoEventos = new ArrayList<ParticipacaoEvento>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<OrganizacaoEvento> organizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
+
+    @OrderColumn
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
-    private List<Producao> producoes = new ArrayList<Producao>();
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
+    @OrderColumn
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
     public String getCodigoLattes() {
@@ -62,6 +75,14 @@ public class Pesquisador extends Usuario {
 
     public void setCodigoLattes(String codigoLattes) {
         this.codigoLattes = codigoLattes;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public Endereco getEndereco() {
@@ -104,12 +125,20 @@ public class Pesquisador extends Usuario {
         this.resumoProfissional = resumoProfissional;
     }
 
-    public List<CitacaoBibliografica> getNomeCitacao() {
-        return nomeCitacao;
+    public List<CompreensaoIdioma> getCompreensaoIdiomas() {
+        return compreensaoIdiomas;
     }
 
-    public void setNomeCitacao(List<CitacaoBibliografica> nomeCitacao) {
-        this.nomeCitacao = nomeCitacao;
+    public void setCompreensaoIdiomas(List<CompreensaoIdioma> compreensaoIdiomas) {
+        this.compreensaoIdiomas = compreensaoIdiomas;
+    }
+
+    public List<CitacaoBibliografica> getCitacaoBibliograficas() {
+        return citacaoBibliograficas;
+    }
+
+    public void setCitacaoBibliograficas(List<CitacaoBibliografica> citacaoBibliograficas) {
+        this.citacaoBibliograficas = citacaoBibliograficas;
     }
 
     public List<AreaAtuacao> getAreaAtuacoes() {
@@ -120,16 +149,26 @@ public class Pesquisador extends Usuario {
         this.areaAtuacoes = areaAtuacoes;
     }
 
-    public List<Idioma> getIdiomas() {
-        return idiomas;
-    }
-
-    public void setIdiomas(List<Idioma> idiomas) {
-        this.idiomas = idiomas;
-    }
-
     public List<FormacaoAcademica> getFormacoes() {
         return formacoes;
+    }
+
+    public FormacaoAcademica containsFormacaoAcademica(Long idFormacao) {
+        for (FormacaoAcademica formacaoAcademica : formacoes) {
+            if (formacaoAcademica.getIdFormacaoAcademica().equals(idFormacao)) {
+                return formacaoAcademica;
+            }
+        }
+        return null;
+    }
+
+    public FormacaoAcademica containsFormacaoAcademica(String descricao) {
+        for (FormacaoAcademica formacaoAcademica : formacoes) {
+            if (formacaoAcademica.getDescricao().equals(descricao)) {
+                return formacaoAcademica;
+            }
+        }
+        return null;
     }
 
     public void setFormacoes(List<FormacaoAcademica> formacoes) {
@@ -160,14 +199,6 @@ public class Pesquisador extends Usuario {
         this.organizacaoEventos = organizacaoEventos;
     }
 
-    public List<Producao> getProducoes() {
-        return producoes;
-    }
-
-    public void setProducoes(List<Producao> producoes) {
-        this.producoes = producoes;
-    }
-
     public List<ProjetoPesquisa> getProjetosPesquisa() {
         return projetosPesquisa;
     }
@@ -176,34 +207,12 @@ public class Pesquisador extends Usuario {
         this.projetosPesquisa = projetosPesquisa;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getIdUsuario() == null) ? 0 : getIdUsuario().hashCode());
-        return result;
+    public List<Orientacao> getOrientacoes() {
+        return orientacoes;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof Usuario)) {
-            return false;
-        }
-        Usuario other = (Usuario) obj;
-        if (getIdUsuario() == null) {
-            if (other.getIdUsuario() != null) {
-                return false;
-            }
-        } else if (!getIdUsuario().equals(other.getIdUsuario())) {
-            return false;
-        }
-        return true;
+    public void setOrientacoes(List<Orientacao> orientacoes) {
+        this.orientacoes = orientacoes;
     }
 
     @Override
@@ -211,5 +220,4 @@ public class Pesquisador extends Usuario {
         return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes
                 + "]";
     }
-
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Endereco;
@@ -78,6 +79,7 @@ public class PesquisadorMB extends AbstractMB {
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorEdicao;
 
+            // TODO PEDRO
             if (pesquisador.getEndereco() == null) {
                 pesquisadorEdicao.setEndereco(new Endereco());
             }
@@ -155,19 +157,19 @@ public class PesquisadorMB extends AbstractMB {
         }
     }
 
-    public void addIdioma() {
-        if (idiomaSelecionado != null) {
-            pesquisador.getIdiomas().add(idiomaSelecionado);
-            idiomas.remove(idiomas.indexOf(idiomaSelecionado));
-        }
-    }
-
-    public void removerIdioma() {
-        if (idiomaSelecionado != null) {
-            pesquisador.getIdiomas().remove(pesquisador.getIdiomas().indexOf(idiomaSelecionado));
-            idiomas.add(idiomaSelecionado);
-        }
-    }
+    // public void addIdioma() {
+    // if (idiomaSelecionado != null) {
+    // pesquisador.getIdiomas().add(idiomaSelecionado);
+    // idiomas.remove(idiomas.indexOf(idiomaSelecionado));
+    // }
+    // }
+    //
+    // public void removerIdioma() {
+    // if (idiomaSelecionado != null) {
+    // pesquisador.getIdiomas().remove(pesquisador.getIdiomas().indexOf(idiomaSelecionado));
+    // idiomas.add(idiomaSelecionado);
+    // }
+    // }
 
     public String baixarDadosPesquisadorLattes() {
         try {
@@ -201,10 +203,13 @@ public class PesquisadorMB extends AbstractMB {
             adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", this.pesquisador.getNome());
             limparDados();
 
+        } catch (InvalidDataAccessApiUsageException e) {
+            adicionarMensagemAlerta("Curr�culo lattes j� importado!");
         } catch (CurriculoLattesNaoEncontradoException e) {
             adicionarMensagemErro(e.getMessage());
         }
 
+        keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
 

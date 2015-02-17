@@ -24,6 +24,7 @@ import br.ufscar.rcms.builder.PesquisadorBuilder;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.lattes.CurriculoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
+import br.ufscar.rcms.servico.FormacaoAcademicaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
@@ -39,6 +40,9 @@ public class LattesServiceImpl implements LattesService {
 
     @Autowired
     private PesquisadorService pesquisadorService;
+
+    @Autowired
+    private FormacaoAcademicaService formacaoService;
 
     @Value("${pasta.script.lattes}")
     private String pastaScriptLates;
@@ -68,8 +72,8 @@ public class LattesServiceImpl implements LattesService {
         PesquisadorLattes pesquisadorLattes = null;
 
         pesquisadorLattes = carregarCurriculoLattes(pesquisador.getCodigoLattes());
+        pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
         return pesquisadorService.salvarOuAtualizar(new PesquisadorBuilder(pesquisadorLattes, pesquisador).build());
-
     }
 
     private CurriculoLattes carregarCurriculosLattes() {
@@ -85,11 +89,11 @@ public class LattesServiceImpl implements LattesService {
                 curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, test);
 
             } catch (JAXBException e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage(), e);
         }
 
         return curriculoLattes;

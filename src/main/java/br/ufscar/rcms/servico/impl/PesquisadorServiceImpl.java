@@ -59,4 +59,9 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     public Pesquisador buscar(Long id) {
         return pesquisadorDAO.buscar(id);
     }
+
+    @Override
+    public Pesquisador buscarTodosDados(Long idUsuario) {
+        return pesquisadorDAO.buscarTodosDados(idUsuario);
+    }
 }

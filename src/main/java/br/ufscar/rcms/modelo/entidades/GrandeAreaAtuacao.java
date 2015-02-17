@@ -14,18 +14,18 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="GRANDE_AREA_ATUACAO")
+@Table(name = "\"GRANDE_AREA_ATUACAO\"")
 public class GrandeAreaAtuacao extends Entidade{
 
 	private static final long serialVersionUID = -3303227387678912075L;
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-	
+
 	@Column(nullable = false)
     private String descricao;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<AreaAtuacao> areasDeAtuacao;
 
@@ -44,7 +44,7 @@ public class GrandeAreaAtuacao extends Entidade{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-	
+
 	public List<AreaAtuacao> getAreasDeAtuacao() {
 		return areasDeAtuacao;
 	}

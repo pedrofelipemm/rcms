@@ -2,7 +2,6 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "FORMACAO_ACADEMICA")
+@Table(name = "\"FORMACAO_ACADEMICA\"")
 public class FormacaoAcademica extends Entidade {
 
     private static final long serialVersionUID = -1883554721627714716L;
@@ -19,7 +18,7 @@ public class FormacaoAcademica extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFormacaoAcademica;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
     @Column(nullable = false)
@@ -91,5 +90,35 @@ public class FormacaoAcademica extends Entidade {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idFormacaoAcademica == null) ? 0 : idFormacaoAcademica.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof FormacaoAcademica)) {
+            return false;
+        }
+        FormacaoAcademica other = (FormacaoAcademica) obj;
+        if (idFormacaoAcademica == null) {
+            if (other.idFormacaoAcademica != null) {
+                return false;
+            }
+        } else if (!idFormacaoAcademica.equals(other.idFormacaoAcademica)) {
+            return false;
+        }
+        return true;
     }
 }

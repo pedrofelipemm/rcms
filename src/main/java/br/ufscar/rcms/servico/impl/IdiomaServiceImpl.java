@@ -21,7 +21,7 @@ public class IdiomaServiceImpl implements IdiomaService {
 
     @Override
     public void salvar(Idioma idioma) {
-        idiomaDAO.salvar(idioma);
+        idiomaDAO.salvarOuAtualizar(idioma);
     }
 
     @Override
@@ -33,10 +33,25 @@ public class IdiomaServiceImpl implements IdiomaService {
     public List<Idioma> buscarTodas() {
         return idiomaDAO.buscarTodos();
     }
+    
+    @Override
+	public void remover(Idioma idioma) {
+		idiomaDAO.remover(idioma);		
+	}
 
     @Override
     public Idioma buscarPorDescricao(String Descricao) {
         return idiomaDAO.buscarPorDescricao(Descricao);
     }
+    
+    public List<Idioma> listar()
+    {
+    return this.idiomaDAO.listar();
+    }
+
+//    @Override
+//    public List<Idioma> buscarPorDescricao(String Descricao) {
+//        return idiomaDAO.buscarPorDescricao(Descricao);
+//    }
 
 }

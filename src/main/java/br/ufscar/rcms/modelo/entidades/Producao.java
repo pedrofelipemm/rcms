@@ -10,7 +10,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PRODUCAO")
+@Table(name = "\"PRODUCAO\"")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Producao extends Entidade {
 
@@ -36,7 +36,7 @@ public abstract class Producao extends Entidade {
     private String link;
 
     @Column
-    private byte[] arquivo;
+    private byte[] pdf;
 
     public Integer getIdProducao() {
         return idProducao;
@@ -86,27 +86,57 @@ public abstract class Producao extends Entidade {
         this.link = link;
     }
 
-    public byte[] getArquivo() {
+    public byte[] getPdf() {
 
-        if (arquivo == null) {
+        if (pdf == null) {
             return new byte[0];
         }
 
-        byte[] copyOfArquivo = new byte[arquivo.length];
-        System.arraycopy(arquivo, 0, copyOfArquivo, 0, arquivo.length);
+        byte[] copyOfPdf = new byte[pdf.length];
+        System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
 
-        return copyOfArquivo;
+        return copyOfPdf;
     }
 
-    public void setArquivo(byte[] arquivo) {
+    public void setPdf(byte[] pdf) {
 
-        if (arquivo == null) {
+        if (pdf == null) {
             return;
         }
 
-        byte[] copyOfArquivo = new byte[arquivo.length];
-        System.arraycopy(arquivo, 0, copyOfArquivo, 0, arquivo.length);
+        byte[] copyOfPdf = new byte[pdf.length];
+        System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
 
-        this.arquivo = copyOfArquivo;
+        this.pdf = copyOfPdf;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idProducao == null) ? 0 : idProducao.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Producao)) {
+            return false;
+        }
+        Producao other = (Producao) obj;
+        if (idProducao == null) {
+            if (other.idProducao != null) {
+                return false;
+            }
+        } else if (!idProducao.equals(other.idProducao)) {
+            return false;
+        }
+        return true;
     }
 }

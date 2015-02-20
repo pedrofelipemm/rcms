@@ -17,9 +17,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.Endereco;
+import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
@@ -48,11 +52,7 @@ public class PesquisadorMB extends AbstractMB {
     private LattesService lattesService;
 
     private Pesquisador pesquisador;
-
-    private AreaAtuacao areaSelecionada;
-
-    private List<AreaAtuacao> areas;
-
+    
     private transient Part fotoPesquisador;
 
     private List<Idioma> idiomas;
@@ -60,6 +60,15 @@ public class PesquisadorMB extends AbstractMB {
     private transient DataModel<Pesquisador> pesquisadores;
 
     private Idioma idiomaSelecionado;
+    
+    private GrandeAreaAtuacao grandeAreaSelecionada;
+    private AreaAtuacao areaAtuacaoSelecionada;
+    private DataModel<AreaAtuacao> areasAtuacaoParaSelecionar;
+    private SubAreaAtuacao subAreaAtuacaoSelecionada;
+    private DataModel<SubAreaAtuacao> subAreasParaSelecionar;
+    private EspecializacaoAreaAtuacao especializacaoSelecionada;
+    private DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar;
+    private AtuacaoPesquisador atuacaoSelecionada;
 
     @PostConstruct
     public void inicializar() {
@@ -77,7 +86,7 @@ public class PesquisadorMB extends AbstractMB {
 
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
-            pesquisador = pesquisadorEdicao;
+            pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
 
             // TODO PEDRO
             if (pesquisador.getEndereco() == null) {
@@ -143,19 +152,6 @@ public class PesquisadorMB extends AbstractMB {
 
     }
 
-    public void addAreaAtuacao() {
-        if (areaSelecionada != null) {
-            pesquisador.getAreaAtuacoes().add(areaSelecionada);
-            areas.remove(areas.indexOf(areaSelecionada));
-        }
-    }
-
-    public void removerAreaAtuacao() {
-        if (areaSelecionada != null) {
-            pesquisador.getAreaAtuacoes().remove(pesquisador.getAreaAtuacoes().indexOf(areaSelecionada));
-            areas.add(areaSelecionada);
-        }
-    }
 
     // public void addIdioma() {
     // if (idiomaSelecionado != null) {
@@ -212,6 +208,50 @@ public class PesquisadorMB extends AbstractMB {
         keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
+    
+    public void changeGrandeAreaSelecionada(){
+    	this.areasAtuacaoParaSelecionar = null;
+		this.subAreasParaSelecionar = null;
+		this.especializacoesParaSelecionar = null;
+		
+    	if(this.grandeAreaSelecionada != null){
+    		this.areasAtuacaoParaSelecionar = new ListDataModel<AreaAtuacao>(this.grandeAreaSelecionada.getAreasDeAtuacao());
+    	}
+    }
+    
+    public void changeAreaSelecionada(){
+    	subAreasParaSelecionar = null;
+		especializacoesParaSelecionar = null;
+		
+    	if(this.areaAtuacaoSelecionada != null){
+    		this.subAreasParaSelecionar = new ListDataModel<SubAreaAtuacao>(this.areaAtuacaoSelecionada.getSubAreasAtuacao());
+    	}
+    }
+    
+    public void changeSubAreaSelecionada(){
+    	
+    	especializacoesParaSelecionar = null;
+    	if(this.subAreaAtuacaoSelecionada != null){
+    		this.especializacoesParaSelecionar = new ListDataModel<EspecializacaoAreaAtuacao>(this.subAreaAtuacaoSelecionada.getEspecializacoes());
+    	}
+    }
+    
+    public void removerAtuacao(){
+    	if (atuacaoSelecionada != null){
+    		pesquisador.getAreaAtuacoes().remove(atuacaoSelecionada);
+    	}
+    }
+    
+    public void adicionarAtuacao(){
+    	
+    	if (grandeAreaSelecionada != null){
+    		AtuacaoPesquisador a = new AtuacaoPesquisador(grandeAreaSelecionada, areaAtuacaoSelecionada,
+    				subAreaAtuacaoSelecionada, especializacaoSelecionada, pesquisador);
+
+        	pesquisador.getAreaAtuacoes().add(a);
+    	}
+    }
+
 
     public PesquisadorService getPesquisadorService() {
 
@@ -247,22 +287,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setAreaAtuacaoService(AreaAtuacaoService areaAtuacaoService) {
         this.areaAtuacaoService = areaAtuacaoService;
-    }
-
-    public AreaAtuacao getAreaSelecionada() {
-        return areaSelecionada;
-    }
-
-    public void setAreaSelecionada(AreaAtuacao areaSelecionada) {
-        this.areaSelecionada = areaSelecionada;
-    }
-
-    public List<AreaAtuacao> getAreas() {
-        return areas;
-    }
-
-    public void setAreas(List<AreaAtuacao> areas) {
-        this.areas = areas;
     }
 
     public List<Idioma> getIdiomas() {
@@ -304,4 +328,71 @@ public class PesquisadorMB extends AbstractMB {
     public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
     }
+    
+    public GrandeAreaAtuacao getGrandeAreaSelecionada() {
+		return grandeAreaSelecionada;
+	}
+
+	public void setGrandeAreaSelecionada(GrandeAreaAtuacao grandeAreaSelecionada) {
+		this.grandeAreaSelecionada = grandeAreaSelecionada;
+	}
+
+	public AreaAtuacao getAreaAtuacaoSelecionada() {
+		return areaAtuacaoSelecionada;
+	}
+
+	public void setAreaAtuacaoSelecionada(AreaAtuacao areaAtuacaoSelecionada) {
+		this.areaAtuacaoSelecionada = areaAtuacaoSelecionada;
+	}
+
+	public DataModel<AreaAtuacao> getAreasAtuacaoParaSelecionar() {
+		return areasAtuacaoParaSelecionar;
+	}
+
+	public void setAreasAtuacaoParaSelecionar(
+			DataModel<AreaAtuacao> areasAtuacaoParaSelecionar) {
+		this.areasAtuacaoParaSelecionar = areasAtuacaoParaSelecionar;
+	}
+
+	public SubAreaAtuacao getSubAreaAtuacaoSelecionada() {
+		return subAreaAtuacaoSelecionada;
+	}
+
+	public void setSubAreaAtuacaoSelecionada(SubAreaAtuacao subAreaAtuacaoSelecionada) {
+		this.subAreaAtuacaoSelecionada = subAreaAtuacaoSelecionada;
+	}
+
+	public DataModel<SubAreaAtuacao> getSubAreasParaSelecionar() {
+		return subAreasParaSelecionar;
+	}
+
+	public void setSubAreasParaSelecionar(DataModel<SubAreaAtuacao> subAreasParaSelecionar) {
+		this.subAreasParaSelecionar = subAreasParaSelecionar;
+	}
+
+	public EspecializacaoAreaAtuacao getEspecializacaoSelecionada() {
+		return especializacaoSelecionada;
+	}
+
+	public void setEspecializacaoSelecionada(EspecializacaoAreaAtuacao especializacaoSelecionada) {
+		this.especializacaoSelecionada = especializacaoSelecionada;
+	}
+
+	public DataModel<EspecializacaoAreaAtuacao> getEspecializacoesParaSelecionar() {
+		return especializacoesParaSelecionar;
+	}
+
+	public void setEspecializacoesParaSelecionar(
+			DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar) {
+		this.especializacoesParaSelecionar = especializacoesParaSelecionar;
+	}
+
+	public AtuacaoPesquisador getAtuacaoSelecionada() {
+		return atuacaoSelecionada;
+	}
+
+	public void setAtuacaoSelecionada(AtuacaoPesquisador atuacaoSelecionada) {
+		this.atuacaoSelecionada = atuacaoSelecionada;
+	}
+
 }

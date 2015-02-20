@@ -61,9 +61,9 @@ public class Pesquisador extends Usuario {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
 
-    @OrderColumn
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-    private List<AreaAtuacao> areaAtuacoes = new ArrayList<AreaAtuacao>();
+    @OrderColumn(name = "INDEX")
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<AtuacaoPesquisador> areaAtuacoes = new ArrayList<AtuacaoPesquisador>();
 
     @OrderColumn
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
@@ -141,11 +141,11 @@ public class Pesquisador extends Usuario {
         this.citacaoBibliograficas = citacaoBibliograficas;
     }
 
-    public List<AreaAtuacao> getAreaAtuacoes() {
+    public List<AtuacaoPesquisador> getAreaAtuacoes() {
         return areaAtuacoes;
     }
 
-    public void setAreaAtuacoes(List<AreaAtuacao> areaAtuacoes) {
+    public void setAreaAtuacoes(List<AtuacaoPesquisador> areaAtuacoes) {
         this.areaAtuacoes = areaAtuacoes;
     }
 

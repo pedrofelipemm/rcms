@@ -35,6 +35,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         if (pesquisador.getEndereco() != null) {
             pesquisador.getEndereco().setPesquisador(pesquisador);
         }
+        
         return pesquisadorDAO.salvarOuAtualizar(pesquisador);
     }
 
@@ -49,7 +50,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
         if (pesquisadorToRemove == null) {
 	    // TODO PEDRO TRATAR EXCEPTION
-            throw new RuntimeException("Pesquisador não encontrado!");
+            throw new RuntimeException("Pesquisador nï¿½o encontrado!");
         }
 
         pesquisadorDAO.remover(pesquisador);

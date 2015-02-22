@@ -6,39 +6,15 @@
 	xmlns:p="http://primefaces.org/ui" >
 
 	<h:head>
-	
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <h:outputStylesheet name="bootstrap.min.css" library="css"/>
-        <h:outputStylesheet name="custom-primefaces.css" library="css"/>
-        <h:outputStylesheet name="estilo.css" library="css"/>
-
-		<h:outputScript name="jquery-1.11.1.min.js" library="js"/>
-		<h:outputScript name="bootstrap.min.js" library="js"/>
-		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
-	
         <title>#{mensagens['titulo.sistema']}</title>
 	</h:head>
 	
 	<h:body>
-        <!-- EXTRAIR PARA ARQUIVO -->
         
-        <script type="text/javascript">
-            $(document).ready(function() {
-                if (!$('#myCanvas').tagcanvas({
-                    textColour: '#ffffff',
-                    outlineThickness: 1,
-                    maxSpeed: 0.1,
-                    depth: 0.75
-                })) {
-                    // TagCanvas failed to load
-                    $('#myCanvasContainer').hide();
-                }
-                // your other jQuery stuff here...
-            });
-        </script>
         <noscript>Seu browser não suporta javascript</noscript>
 
 		<h:panelGroup id="page" layout="block">
@@ -58,7 +34,32 @@
     		</ui:insert>
 
         </h:panelGroup>
+		
+		<h:outputStylesheet name="bootstrap.min.css" library="css"/>
+        <h:outputStylesheet name="custom-primefaces.css" library="css"/>
+        <h:outputStylesheet name="estilo.css" library="css"/>
 
+		<h:outputScript name="jquery-1.11.1.min.js" library="js"/>
+		<h:outputScript name="jquery-ui-1.11.1.min.js" library="js"/>
+		<h:outputScript name="bootstrap.min.js" library="js"/>
+		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
+		
+		<!-- EXTRAIR PARA ARQUIVO -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                if (!$('#myCanvas').tagcanvas({
+                    textColour: '#ffffff',
+                    outlineThickness: 1,
+                    maxSpeed: 0.1,
+                    depth: 0.75
+                })) {
+                    // TagCanvas failed to load
+                    $('#myCanvasContainer').hide();
+                }
+                // your other jQuery stuff here...
+            });
+        </script>
+		
 	</h:body>
 	
 </html>

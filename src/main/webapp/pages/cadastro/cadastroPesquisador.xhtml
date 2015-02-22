@@ -94,6 +94,137 @@
             		</div>
           		</div>
         	</div>
+        	
+        	<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">#{mensagens['label.adicionar.area.atuacao']}</h4>
+			      </div>
+			      
+			      <div class="modal-body" >
+			        <div class="panel-body">
+	    				<div class="row">
+			          		<div class="col-md-6">
+			            		<div class="form-group">
+			            		    <h:outputLabel for="selectGrandeAreaAtuacao" value="#{mensagens['grande.area.de.atuacao']}" />
+			            			<h:selectOneMenu id="selectGrandeAreaAtuacao" styleClass="form-control" 
+			            			                 value="#{pesquisadorMB.grandeAreaSelecionada}"
+			            			                 converter="entityConverter">
+			            			    <p:ajax listener="#{pesquisadorMB.changeGrandeAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
+			            				<f:selectItem itemLabel="#{mensagens['label.gdeArea.placeholder']}" itemValue="#{null}"/>
+			            				<f:selectItems value="#{grandeAreaAtuacaoMB.todasAsGrandeAreas}"
+			            				               var="gdeArea" itemLabel="#{gdeArea.descricao}" itemValue="#{gdeArea}" />
+			            			</h:selectOneMenu>            			
+			              		</div>
+			          		</div>
+			          		
+			          		<div class="col-md-6">
+			            		<div class="form-group">
+			            		    <h:outputLabel for="selectAreaAtuacao" value="#{mensagens['area.de.atuacao']}" />
+			            			<h:selectOneMenu id="selectAreaAtuacao" styleClass="form-control" 
+			            			                 value="#{pesquisadorMB.areaAtuacaoSelecionada}"
+			            			                 converter="entityConverter">
+			            			    <p:ajax listener="#{pesquisadorMB.changeAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
+			            				<f:selectItem itemLabel="#{mensagens['label.area.placeholder']}" itemValue="#{null}"/>
+			            				<f:selectItems value="#{pesquisadorMB.areasAtuacaoParaSelecionar}"
+			            				               var="area" itemLabel="#{area.descricao}" itemValue="#{area}" />
+			            			</h:selectOneMenu>            			
+			              		</div>
+			          		</div>
+			        	</div>
+			        	
+			        	<div class= "row">
+			        		<div class="col-md-6">
+			            		<div class="form-group">
+			            		    <h:outputLabel for="selectSubArea" value="#{mensagens['subarea.de.atuacao']}" />
+			            			<h:selectOneMenu id="selectSubArea" styleClass="form-control" 
+			            			                 value="#{pesquisadorMB.subAreaAtuacaoSelecionada}"
+			            			                 converter="entityConverter">
+			            			    <p:ajax listener="#{pesquisadorMB.changeSubAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
+			            				<f:selectItem itemLabel="#{mensagens['label.subarea.placeholder']}" itemValue="#{null}"/>
+			            				<f:selectItems value="#{pesquisadorMB.subAreasParaSelecionar}"
+			            				               var="subArea" itemLabel="#{subArea.descricao}" itemValue="#{subArea}" />
+			            			</h:selectOneMenu>            			
+			              		</div>
+			          		</div>
+			          		
+			          		<div class="col-md-6">
+			            		<div class="form-group">
+			            		    <h:outputLabel for="selectEspec" value="#{mensagens['especializacao.descricao']}" />
+			            			<h:selectOneMenu id="selectEspec" styleClass="form-control" 
+			            			                 value="#{pesquisadorMB.especializacaoSelecionada}"
+			            			                 converter="entityConverter">
+			            			    <p:ajax  update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
+			            				<f:selectItem itemLabel="#{mensagens['label.especializacao.placeholder']}" itemValue="#{null}"/>
+			            				<f:selectItems value="#{pesquisadorMB.especializacoesParaSelecionar}"
+			            				               var="espec" itemLabel="#{espec.descricao}" itemValue="#{espec}" />
+			            			</h:selectOneMenu>            			
+			              		</div>
+			          		</div>
+			        	</div>
+  					 </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
+
+			        <h:commandButton action="#{pesquisadorMB.adicionarAtuacao}" styleClass="btn btn-primary" value="#{mensagens['adicionar']}">
+			          <f:ajax render="atuacaoDoPesquisador" />
+			          <f:passThroughAttribute name="data-toggle" value="modal" />
+                      <f:passThroughAttribute name="data-target" value="#myModal" />
+			        </h:commandButton>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+            		<div class="form-group">
+						<p:panel id="panelAtuacaoDoPesquisador" rendered="#{pesquisadorMB.pesquisador.idUsuario > 0}">
+						
+						<div class="row">
+			        		<div class="col-md-5">
+			        			<h1>#{mensagens['area.de.atuacao']}</h1>
+			        		</div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-md-3">
+			        			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">#{mensagens['adicionar']}</button>
+			        		</div>
+			        	</div>
+        
+			
+						<h:dataTable id="atuacaoDoPesquisador" value="#{pesquisadorMB.pesquisador.areaAtuacoes}" var="area" styleClass="table table-hover"
+							headerClass="col-width-50" rowClasses="col-width-50">
+			 				
+			    			<h:column headerClass="col-xs-10">
+			    				<f:facet name="header">
+			    					<h:outputLabel value="#{mensagens['descricao']}"/>
+			    				</f:facet>
+			    				<h:outputLabel value="#{area}" />
+			    			</h:column>
+			
+							<h:column headerClass="text-center">
+								<f:facet name="header">
+								</f:facet>
+			
+								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-default" action="#{pesquisadorMB.removerAtuacao}" >
+									<f:ajax render="@form"/>
+									<f:setPropertyActionListener value="#{area}"
+										target="#{pesquisadorMB.atuacaoSelecionada}"></f:setPropertyActionListener>
+								</h:commandButton> 
+							
+							</h:column>
+			
+						</h:dataTable>
+						</p:panel>
+					</div>
+				</div>
+			</div>
+        	
+        	
         	<div class="row">
           		<div class="col-md-12">
             		<div class="form-group">

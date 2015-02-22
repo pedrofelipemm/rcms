@@ -1,0 +1,69 @@
+
+#cabecalho {
+    color: #fff;
+    background-color: #B20000;
+    padding-top: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+#cabecalho a {
+    color: #fff;
+}
+
+.menu-admin a {
+	color: #ddd;
+}
+
+.menu-admin a:hover {
+	color: #222;
+}
+
+#admin-fluid-content h1 {
+	color: #428bca;
+}
+
+#admin-rodape {
+	position: absolute; 
+	border-bottom: 0;
+	font-style: italic;
+	padding: 30px 215px 15px 15px;
+}
+
+.admin-bg {
+  background-color: #eee;
+}
+
+#admin-menu-top p {
+	padding-right: 25px;
+}
+
+#admin-container {
+	width: 100%; 
+	height: 100%; 
+}
+
+#admin-menu-left {
+	float: left;
+	top: 72px; 
+	position: fixed;
+	width: 200px; 
+	height: 100%; 
+	background-color: #222; 
+	padding: 15px;
+}
+
+#admin-menu-left a {
+	color: #ddd;
+}
+
+#admin-menu-left a:hover {
+	color: #222;
+}
+
+#admin-fluid-content {
+	float:left;
+	width: 100%;
+	height: 100%;
+	margin-left: 200px;
+	padding: 86px 215px 15px 15px;
+}

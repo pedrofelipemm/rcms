@@ -9,14 +9,16 @@
 			
 			<nav id="admin-menu-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="container-fluid">
-			    	<div class="navbar-header text-right">
+			    	<div class="navbar-header">
 			    		<a class="navbar-brand" href="#">#{mensagens['rcms']}</a>
 			    	</div>
-			    	<ul class="nav navbar-nav navbar-right">
-		      			<li class="box-hover"><a href="#{request.contextPath}/pages/index.xhtml">#{mensagens['ir.para.site']}</a></li>
-		      			<li class="box-hover"><a href="#">#{mensagens['sair']}</a></li>
-		    		</ul>
-		  		  	<p class="navbar-text navbar-right">#{mensagens['bem.vindo.administrador']}</p>
+			    	<div class="collapse navbar-collapse">
+				    	<ul class="nav navbar-nav navbar-right">
+			      			<li class="box-hover"><a href="#{request.contextPath}/pages/index.xhtml">#{mensagens['ir.para.site']}</a></li>
+			      			<li class="box-hover"><a href="#">#{mensagens['sair']}</a></li>
+			    		</ul>
+			  		  	<p class="navbar-text navbar-right">#{mensagens['bem.vindo.administrador']}</p>
+			  		</div>
 		  		</div>
 			</nav>		
 		

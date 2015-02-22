@@ -57,9 +57,9 @@ public class PesquisadorMB extends AbstractMB {
 
     private List<Idioma> idiomas;
 
-    private transient DataModel<Pesquisador> pesquisadores;
-
     private Idioma idiomaSelecionado;
+
+    private transient DataModel<Pesquisador> pesquisadores;
 
     @PostConstruct
     public void inicializar() {
@@ -71,6 +71,7 @@ public class PesquisadorMB extends AbstractMB {
     protected void carregarDados() {
 
         // areas = areaAtuacaoService.buscarTodas();
+
         idiomas = idiomaService.buscarTodas();
 
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
@@ -109,6 +110,8 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public String exibir(Pesquisador pesquisador) {
+
+        pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
 
         setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
 

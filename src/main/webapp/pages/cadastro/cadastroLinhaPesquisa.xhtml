@@ -10,24 +10,24 @@
 		
 		<div class="row">
         	<div class="col-md-12">
-        		<h1>#{mensagens['formacao.academica']}</h1>
+        		<h1>#{mensagens['linhas.de.pesquisa']}</h1>
         	</div>
         </div>
 		
-		<h:form id="formFormacaoAcademica">
+		<h:form id="formLinhaPesquisa">
 			
-			<o:messages id="messageBoxValidation" for="formFormacaoAcademica" styleClass="message-box-validation"/>
+			<o:messages id="messageBoxValidation" for="formLinhaPesquisa" styleClass="message-box-validation"/>
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
 			<div class="row">
-          		<div class="col-md-12">
+		        <div class="col-md-12">
             		<div class="form-group">
             			<h:outputLabel for="descricao" value="#{mensagens['label.descricao']} " />
 						<h:inputText id="descricao" value="#{linhaPesquisaMB.linhaPesquisa.descricao}"
-							required="true" requiredMessage="#{mensagens['linha.de.pesquisa.nao.preenchida']}"
-							styleClass="form-control"/>
-					</div>
-		        </div>
+							required="true" requiredMessage="#{mensagens['descricao.vazia']}"
+							styleClass="form-control" />
+            		</div>
+            	</div>
         	</div>
         	<div class="row">
           		<div class="col-md-12">

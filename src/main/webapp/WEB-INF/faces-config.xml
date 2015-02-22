@@ -140,5 +140,40 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroSobreOGrupo</from-outcome>
+			<to-view-id>/pages/cadastro/cadastroSobreOGrupo.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>sobreOGrupo</from-outcome>
+			<to-view-id>/pages/listagem/sobreOGrupo.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaLinhaPesquisa</from-outcome>
+			<to-view-id>/pages/consulta/linhaPesquisa.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroLinhaPesquisa</from-outcome>
+			<to-view-id>/pages/cadastro/cadastroLinhaPesquisa.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
 </faces-config>

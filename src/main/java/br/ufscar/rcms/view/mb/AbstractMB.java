@@ -22,20 +22,23 @@ public abstract class AbstractMB implements Serializable {
 
     private static final String BUNDLE_NAME = "bundle";
 
+    // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
 
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
-    
-    public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
-    
-    public static final String CONSULTA_IDIOMAS = "consultaIdiomas";
 
     public static final String EXIBE_PESQUISADOR = "pesquisador";
 
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
     
+    // Idioma
+    public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
+    
+    public static final String CONSULTA_IDIOMAS = "consultaIdiomas";
+    
     public static final String FLASH_KEY_IDIOMA = "cadastroIdioma";
 
+    // Área de Atuação
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
 
     public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "grandearea";
@@ -53,6 +56,22 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_SUBAREA_ATUACAO = "cadastroSubAreaAtuacao";
 
     public static final String CONSULTA_SUBAREA_ATUACAO = "constultaSubAreaAtuacao";
+
+    // Sobre O Grupo
+    public static final String CADASTRO_SOBRE_O_GRUPO = "cadastroSobreOGrupo";
+
+    public static final String CONSULTA_SOBRE_O_GRUPO = "consultaSobreOGrupo";
+
+    public static final String EXIBE_SOBRE_O_GRUPO = "sobreOGrupo";
+
+    public static final String FLASH_KEY_SOBRE_O_GRUPO = "sobreOGrupo";
+
+    // Linhas de Pesquisa
+    public static final String CADASTRO_LINHA_PESQUISA = "cadastroLinhaPesquisa";
+
+    public static final String CONSULTA_LINHAS_PESQUISA = "consultaLinhaPesquisa";
+
+    public static final String FLASH_KEY_LINHA_PESQUISA = "linhaPesquisa";
 
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();

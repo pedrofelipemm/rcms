@@ -8,24 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"DESCRICAO_GRUPO\"")
-public class DescricaoGrupo extends Entidade {
+@Table(name = "\"LINHA_PESQUISA\"")
+public class LinhaPesquisa extends Entidade {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 5307316270928132625L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long idLinhaPesquisa;
 
     @Column(nullable = false)
     private String descricao;
 
-    public Integer getId() {
-        return id;
+    public Long getIdLinhaPesquisa() {
+        return idLinhaPesquisa;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdLinhaPesquisa(Long idLinhaPesquisa) {
+        this.idLinhaPesquisa = idLinhaPesquisa;
     }
 
     public String getDescricao() {
@@ -40,7 +40,7 @@ public class DescricaoGrupo extends Entidade {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((idLinhaPesquisa == null) ? 0 : idLinhaPesquisa.hashCode());
         return result;
     }
 
@@ -52,15 +52,15 @@ public class DescricaoGrupo extends Entidade {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof DescricaoGrupo)) {
+        if (!(obj instanceof LinhaPesquisa)) {
             return false;
         }
-        DescricaoGrupo other = (DescricaoGrupo) obj;
-        if (id == null) {
-            if (other.id != null) {
+        LinhaPesquisa other = (LinhaPesquisa) obj;
+        if (idLinhaPesquisa == null) {
+            if (other.idLinhaPesquisa != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!idLinhaPesquisa.equals(other.idLinhaPesquisa)) {
             return false;
         }
         return true;
@@ -68,7 +68,6 @@ public class DescricaoGrupo extends Entidade {
 
     @Override
     public String toString() {
-        return "DescricaoGrupo [Id=" + getId() + ", Descricao=" + getDescricao() + "]";
+        return "Linha de Pesquisa [idLinhaPesquisa=" + idLinhaPesquisa + ", descricao=" + descricao + "]";
     }
-
 }

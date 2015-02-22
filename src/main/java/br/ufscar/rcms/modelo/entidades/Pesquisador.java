@@ -69,6 +69,10 @@ public class Pesquisador extends Usuario {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
+    @OrderColumn
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisadorLinhaPesquisaPK.pesquisador")
+    private List<PesquisadorLinhaPesquisa> pesquisadorLinhaPesquisa = new ArrayList<PesquisadorLinhaPesquisa>();
+
     public String getCodigoLattes() {
         return codigoLattes;
     }
@@ -213,6 +217,14 @@ public class Pesquisador extends Usuario {
 
     public void setOrientacoes(List<Orientacao> orientacoes) {
         this.orientacoes = orientacoes;
+    }
+
+    public List<PesquisadorLinhaPesquisa> getPesquisadorLinhaPesquisa() {
+        return pesquisadorLinhaPesquisa;
+    }
+
+    public void setPesquisadorLinhaPesquisa(List<PesquisadorLinhaPesquisa> pesquisadorLinhaPesquisa) {
+        this.pesquisadorLinhaPesquisa = pesquisadorLinhaPesquisa;
     }
 
     @Override

@@ -7,7 +7,7 @@ import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
 
 public interface FormacaoAcademicaService extends Serializable{
 
-	void salvar(FormacaoAcademica formacaoAcademica);
+    void salvar(FormacaoAcademica formacaoAcademica);
 
     List<FormacaoAcademica> buscarFormacaoAcademica(Long idPesquisador);
 

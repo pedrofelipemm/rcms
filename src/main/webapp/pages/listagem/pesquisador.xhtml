@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-3 text-right">
                 	<h:graphicImage value="/resources/images/person.png" alt="#{pesquisadorMB.pesquisador.nome}" />
-                    <p><a href="#" class="lnk-lattes">Currículo Lattes</a></p>
+                    <p><a href="http://lattes.cnpq.br/#{pesquisadorMB.pesquisador.codigoLattes}" class="lnk-lattes" target="_blank">Currículo Lattes</a></p>
                 </div>
             </div>
             <div class="row">
@@ -65,90 +65,18 @@
                       </div>
                       <div class="panel-body">
                         <div class="container-fluid">
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1990 - 1992</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Doutorado em Informática (Conceito CAPES 7).<br/>
-                                    Pontifícia Universidade Católica do Rio de Janeiro, PUC-Rio, Brasil. <br/>
-                                    Título: Estratégia de Reengenharia de Software Orientada a Domínios, Ano de obtenção: 1992. <br/>
-                                    Orientador: Julio Cesar Sampaio do Prado Leite. <br/>
-                                    Palavras-chave: Reengenharia de Software; Domínio; Sistema de Transformação Draco; Engenharia Reversa; Manutenção de Software.<br/>
-                                    Grande área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Engenharia de Software. <br/>
-                                    Grande Área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Reengenharia de Software. <br/>
-                                    Grande Área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Linguagens de Programação. <br/>
-                                    Setores de atividade: Informática.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1984 - 1986</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Mestrado em Sistemas e Computação (Conceito CAPES 3). <br/>
-                                    Instituto Militar de Engenharia, IME, Brasil. <br/>
-                                    Título: Gerador de Sistemas de Consulta On-Line - GESCOL,Ano de Obtenção: 1986.<br/>
-                                    Orientador: Luis Otávio Queiroz de Freitas.<br/>
-                                    Palavras-chave: Gerador de Sistemas; Consulta; Concorrência; Estrutura em árvore.<br/>
-                                    Grande área: Ciências Exatas e da Terra / Área: Ciência da Computação / Subárea: Metodologia e Técnicas da Computação / Especialidade: Engenharia de Software. <br/>
-                                    Setores de atividade: Informática.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1982 - 1982</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Especialização em Processamento de Dados. (Carga Horária: 360h). <br/>
-                                    Instituto Militar de Engenharia, IME, Brasil.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1976 - 1979</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Graduação em Engenharia de Fortificação e Construção. <br/>
-                                    Instituto Militar de Engenharia, IME, Brasil.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1972 - 1974</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Graduação em Matemática Licenciatura Plena. <br/>
-                                    Faculdade de Filosofia Ciências e Letras de Itajubá.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1968 - 1971</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Graduação em Engenharia Militar. <br/>
-                                    Academia Militar da Agulhas Negras.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1965 - 1967</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Ensino Médio (2º grau). <br/>
-                                    Instituto de Educação 21 de Abril.
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1960 - 1964</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Ensino Fundamental (1º grau). <br/>
-                                    Ginásio Estadual de Sabino.
-                                </div>
-                            </div>
+                        	<ui:repeat var="formacao" value="#{pesquisadorMB.pesquisador.formacoes}">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{formacao.anoInicio} - #{formacao.anoConclusao}</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{formacao.tipo}<br/>
+	                                    #{formacao.nomeInstituicao}<br/>
+	                                    #{formacao.descricao}
+	                                </div>
+	                            </div>
+							</ui:repeat>
                         </div>
                       </div>
                     </div>
@@ -162,14 +90,6 @@
                       </div>
                       <div class="panel-body">
                         <div class="container-fluid">
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>1.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Reengenharia de Software e Transformação Software
-                                </div>
-                            </div>
                         	<div class="row">
                             	<div class="col-md-2 text-right">
                                 	<strong>2.</strong>

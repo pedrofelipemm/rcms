@@ -17,7 +17,7 @@
 		
 		<h:form id="formPesquisador" enctype="multipart/form-data">
 			
-			<o:messages id="messageBoxValidation" for="formPesquisador" styleClass="message-box-validation"/>
+<!-- 			<o:messages id="messageBoxValidation" for="formPesquisador" styleClass="message-box-validation"/> -->
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 
 			<div class="row">
@@ -38,7 +38,10 @@
             			<h:outputLabel for="email" value="#{mensagens['label.email']}" />
 		            	<h:inputText id="email" value="#{pesquisadorMB.pesquisador.email}"
 							required="true" requiredMessage="#{mensagens['email.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.email.pesquisador']}" styleClass="form-control"/>
+							pt:placeholder="#{mensagens['informe.email.pesquisador']}" styleClass="form-control"
+							validatorMessage="#{mensagens['email.invalido']}">
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</h:inputText>
             		</div>
             		<div class="form-group">
             			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
@@ -223,19 +226,18 @@
 					</div>
 				</div>
 			</div>
-        	
-        	
-        	<div class="row">
-          		<div class="col-md-12">
-            		<div class="form-group">
-              			<h:commandButton value="#{mensagens['salvar']}" action="#{pesquisadorMB.salvar}"
-							styleClass="btn btn-default">
+
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<h:commandButton id="buttonSalvar" value="#{mensagens['salvar']}" action="#{pesquisadorMB.salvar}" styleClass="btn btn-default">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
-            		</div>
-          		</div>
-        	</div>
-        </h:form>
+					</div>
+				</div>
+			</div>
+		</h:form>
             	
 						
 						

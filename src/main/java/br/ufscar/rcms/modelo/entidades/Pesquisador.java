@@ -28,7 +28,7 @@ public class Pesquisador extends Usuario {
     private byte[] foto;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
-    private Endereco endereco;
+    private Endereco endereco = new Endereco();
 
     @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String resumoProfissional;
@@ -168,7 +168,7 @@ public class Pesquisador extends Usuario {
 
     public FormacaoAcademica containsFormacaoAcademica(String descricao) {
         for (FormacaoAcademica formacaoAcademica : formacoes) {
-            if (formacaoAcademica.getDescricao().equals(descricao)) {
+            if (formacaoAcademica != null && formacaoAcademica.getDescricao().equals(descricao)) {
                 return formacaoAcademica;
             }
         }
@@ -231,5 +231,11 @@ public class Pesquisador extends Usuario {
     public String toString() {
         return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes
                 + "]";
+    }
+
+    public void addCitacoesBibliograficas(String[] citacoes) {
+        for (String citacao : citacoes) {
+            citacaoBibliograficas.add(new CitacaoBibliografica(this, citacao));
+        }
     }
 }

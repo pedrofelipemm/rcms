@@ -28,6 +28,7 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
         jpql.append("left join fetch p.formacoes f ");
         jpql.append("left join fetch p.compreensaoIdiomas ci ");
         jpql.append("left join fetch p.areaAtuacoes atu ");
+        jpql.append("left join fetch p.citacaoBibliograficas cb ");
         jpql.append("where p.idUsuario = :idUsuario ");
 
         Query query = createQuery(jpql.toString());

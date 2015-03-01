@@ -24,6 +24,14 @@ public class CitacaoBibliografica extends Entidade {
     @Column(nullable = false)
     private String nomeCitacao;
 
+    public CitacaoBibliografica() {
+    }
+
+    public CitacaoBibliografica(Pesquisador pesquisador, String nomeCitacao) {
+        this.pesquisador = pesquisador;
+        this.nomeCitacao = nomeCitacao;
+    }
+
     public Integer getIdCitacaoBibliografica() {
         return idCitacaoBibliografica;
     }

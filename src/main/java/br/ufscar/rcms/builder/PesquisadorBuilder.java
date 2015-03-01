@@ -13,6 +13,7 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
 import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
 import br.ufscar.rcms.modelo.lattes.FormacoesAcademicaLattes;
+import br.ufscar.rcms.modelo.lattes.IdentificacaoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
@@ -51,6 +52,15 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
         endereco(pesquisadorLattes.getEndereco(), pesquisador);
         formacaoAcademica(pesquisadorLattes.getFormacoes(), pesquisador);
+        citacaoBibliografica(pesquisadorLattes.getIdentificacao(), pesquisador);
+    }
+
+    private PesquisadorBuilder citacaoBibliografica(IdentificacaoLattes identificacao, Pesquisador pesquisador) {
+        if (identificacao != null) {
+            String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
+            this.pesquisador.addCitacoesBibliograficas(citacoes);
+        }
+        return this;
     }
 
     public PesquisadorBuilder endereco(EnderecoLattes endereco, Pesquisador pesquisador) {
@@ -89,7 +99,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
         for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
              FormacaoAcademica formacao = null;
-            // TODO PEDRO
              if ((formacao = pesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
                 this.pesquisador.getFormacoes().add(
                         FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
@@ -128,7 +137,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         validatePesquisador(pesquisador);
 
         if (!pesquisador.getCodigoLattes().equals(pesquisadorLattes.getCodigoLattes())) {
-            throw new IllegalStateException("CÛdigo lattes dos pequisadores n„o s„o iguais!");
+            throw new IllegalStateException("C√≥digo lattes dos pequisadores n√£o s√£o iguais!");
         }
     }
 }

@@ -52,13 +52,13 @@ public class PesquisadorMB extends AbstractMB {
     private LattesService lattesService;
 
     private Pesquisador pesquisador;
-    
+
     private transient Part fotoPesquisador;
 
     private List<Idioma> idiomas;
 
     private Idioma idiomaSelecionado;
-    
+
     private GrandeAreaAtuacao grandeAreaSelecionada;
     private AreaAtuacao areaAtuacaoSelecionada;
     private DataModel<AreaAtuacao> areasAtuacaoParaSelecionar;
@@ -88,11 +88,6 @@ public class PesquisadorMB extends AbstractMB {
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
-
-            // TODO PEDRO
-            if (pesquisador.getEndereco() == null) {
-                pesquisadorEdicao.setEndereco(new Endereco());
-            }
         }
     }
 
@@ -109,12 +104,16 @@ public class PesquisadorMB extends AbstractMB {
             converterFotoPesquisador(pesquisador);
         }
 
-        pesquisadorService.salvarOuAtualizar(pesquisador);
-
-        adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
+        try {
+            pesquisadorService.salvarOuAtualizar(pesquisador);
+            adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
+        } catch (Exception exception) {
+            adicionarMensagemErroByKey("erro.salvar.pesquisador", pesquisador.getNome());
+            LOGGER.error(exception.getMessage(), exception);
+        }
 
         limparDados();
-
+        keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
 
@@ -203,7 +202,7 @@ public class PesquisadorMB extends AbstractMB {
             limparDados();
 
         } catch (InvalidDataAccessApiUsageException e) {
-            adicionarMensagemAlerta("Curr�culo lattes j� importado!");
+            adicionarMensagemAlerta("Currículo lattes já importado!");
         } catch (CurriculoLattesNaoEncontradoException e) {
             adicionarMensagemErro(e.getMessage());
         }
@@ -211,42 +210,42 @@ public class PesquisadorMB extends AbstractMB {
         keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
-    
+
     public void changeGrandeAreaSelecionada(){
-    	this.areasAtuacaoParaSelecionar = null;
-		this.subAreasParaSelecionar = null;
-		this.especializacoesParaSelecionar = null;
-		
-    	if(this.grandeAreaSelecionada != null){
-    		this.areasAtuacaoParaSelecionar = new ListDataModel<AreaAtuacao>(this.grandeAreaSelecionada.getAreasDeAtuacao());
+    	areasAtuacaoParaSelecionar = null;
+		subAreasParaSelecionar = null;
+		especializacoesParaSelecionar = null;
+
+    	if(grandeAreaSelecionada != null){
+    		areasAtuacaoParaSelecionar = new ListDataModel<AreaAtuacao>(grandeAreaSelecionada.getAreasDeAtuacao());
     	}
     }
-    
+
     public void changeAreaSelecionada(){
     	subAreasParaSelecionar = null;
 		especializacoesParaSelecionar = null;
-		
-    	if(this.areaAtuacaoSelecionada != null){
-    		this.subAreasParaSelecionar = new ListDataModel<SubAreaAtuacao>(this.areaAtuacaoSelecionada.getSubAreasAtuacao());
+
+    	if(areaAtuacaoSelecionada != null){
+    		subAreasParaSelecionar = new ListDataModel<SubAreaAtuacao>(areaAtuacaoSelecionada.getSubAreasAtuacao());
     	}
     }
-    
+
     public void changeSubAreaSelecionada(){
-    	
+
     	especializacoesParaSelecionar = null;
-    	if(this.subAreaAtuacaoSelecionada != null){
-    		this.especializacoesParaSelecionar = new ListDataModel<EspecializacaoAreaAtuacao>(this.subAreaAtuacaoSelecionada.getEspecializacoes());
+    	if(subAreaAtuacaoSelecionada != null){
+    		especializacoesParaSelecionar = new ListDataModel<EspecializacaoAreaAtuacao>(subAreaAtuacaoSelecionada.getEspecializacoes());
     	}
     }
-    
+
     public void removerAtuacao(){
     	if (atuacaoSelecionada != null){
     		pesquisador.getAreaAtuacoes().remove(atuacaoSelecionada);
     	}
     }
-    
+
     public void adicionarAtuacao(){
-    	
+
     	if (grandeAreaSelecionada != null){
     		AtuacaoPesquisador a = new AtuacaoPesquisador(grandeAreaSelecionada, areaAtuacaoSelecionada,
     				subAreaAtuacaoSelecionada, especializacaoSelecionada, pesquisador);
@@ -331,7 +330,7 @@ public class PesquisadorMB extends AbstractMB {
     public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
     }
-    
+
     public GrandeAreaAtuacao getGrandeAreaSelecionada() {
 		return grandeAreaSelecionada;
 	}

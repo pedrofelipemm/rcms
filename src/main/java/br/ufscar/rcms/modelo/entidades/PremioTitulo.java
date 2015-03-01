@@ -27,6 +27,15 @@ public class PremioTitulo extends Entidade {
     @Column(nullable = false)
     private String descricao;
 
+    public PremioTitulo() {
+    }
+
+    public PremioTitulo(Pesquisador pesquisador, Integer ano, String descricao) {
+        this.pesquisador = pesquisador;
+        this.ano = ano;
+        this.descricao = descricao;
+    }
+
     public Integer getIdPremioTitulo() {
         return idPremioTitulo;
     }

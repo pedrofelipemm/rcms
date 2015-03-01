@@ -10,15 +10,22 @@ import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.lattes.AreaAtuacaoLattes;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
 import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
 import br.ufscar.rcms.modelo.lattes.FormacoesAcademicaLattes;
 import br.ufscar.rcms.modelo.lattes.IdentificacaoLattes;
+import br.ufscar.rcms.modelo.lattes.IdiomasLattes;
+import br.ufscar.rcms.modelo.lattes.OrganizacaoEventoLattes;
+import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
+import br.ufscar.rcms.modelo.lattes.PremiosLattes;
+import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     private Pesquisador pesquisador;
+    private Pesquisador cachedPesquisador;
 
     public PesquisadorBuilder(String login, String nome, String senha, String codigoLattes, String email,
             boolean flagAdministrador, String resumoProfissional) {
@@ -49,28 +56,65 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
                         .getResumoProfissional());
 
         validatePesquisador(pesquisadorLattes, pesquisador);
-
-        endereco(pesquisadorLattes.getEndereco(), pesquisador);
-        formacaoAcademica(pesquisadorLattes.getFormacoes(), pesquisador);
-        citacaoBibliografica(pesquisadorLattes.getIdentificacao(), pesquisador);
+        cachedPesquisador = pesquisador;
+//        participacaoEventos(pesquisadorLattes.getParticipacaoEvento(), pesquisador);
+//        organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento(), pesquisador);
+//        orientacoes(pesquisadorLattes, pesquisador);
+//        areaAtuacoes(pesquisadorLattes.getAreaAtuacao(), pesquisador);
+//        projetosPesquisa(pesquisadorLattes.getProjetosPesquisa(), pesquisador);
     }
 
-    private PesquisadorBuilder citacaoBibliografica(IdentificacaoLattes identificacao, Pesquisador pesquisador) {
+    public PesquisadorBuilder projetosPesquisa(ProjetetosPesquisaLattes projetosPesquisa) {
+        // TODO Pedro
+        return this;
+    }
+
+    public PesquisadorBuilder areaAtuacoes(AreaAtuacaoLattes areaAtuacao, Pesquisador pesquisador) {
+        // TODO Pedro
+        return this;
+    }
+
+    public PesquisadorBuilder orientacoes(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
+        // TODO Pedro
+        return this;
+    }
+
+    public PesquisadorBuilder organizacaoEventos(OrganizacaoEventoLattes organizacaoEvento, Pesquisador pesquisador) {
+        // TODO Pedro
+        return this;
+    }
+
+    public PesquisadorBuilder participacaoEventos(ParticipacaoEventoLattes participacaoEvento, Pesquisador pesquisador) {
+        // TODO Pedro
+        return this;
+    }
+
+    public PesquisadorBuilder premios(PremiosLattes premios) {
+        pesquisador.addPremios(premios);
+        return this;
+    }
+
+    public PesquisadorBuilder compreensaoIdiomas(IdiomasLattes idiomas, Pesquisador pesquisador) {
+        // TODO Pedro
+        return this;
+    }
+
+    public PesquisadorBuilder citacaoBibliografica(IdentificacaoLattes identificacao) {
         if (identificacao != null) {
             String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
-            this.pesquisador.addCitacoesBibliograficas(citacoes);
+            pesquisador.addCitacoesBibliograficas(citacoes);
         }
         return this;
     }
 
-    public PesquisadorBuilder endereco(EnderecoLattes endereco, Pesquisador pesquisador) {
+    public PesquisadorBuilder endereco(EnderecoLattes endereco) {
 
-        if (pesquisador.getEndereco() != null) {
-            this.pesquisador.setEndereco(EnderecoFactory.createEndereco(pesquisador.getEndereco().getIdEndereco(),
+        if (cachedPesquisador.getEndereco() != null) {
+            pesquisador.setEndereco(EnderecoFactory.createEndereco(cachedPesquisador.getEndereco().getIdEndereco(),
                     endereco.getEnderecoProfissional(), endereco.getEnderecoProfissionalLatitude(),
                     endereco.getEnderecoProfissionalLongitude()));
         } else {
-            this.pesquisador.setEndereco(EnderecoFactory.createEndereco(endereco.getEnderecoProfissional(),
+            pesquisador.setEndereco(EnderecoFactory.createEndereco(endereco.getEnderecoProfissional(),
                     endereco.getEnderecoProfissionalLatitude(), endereco.getEnderecoProfissionalLongitude()));
         }
 
@@ -95,21 +139,21 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder formacaoAcademica(FormacoesAcademicaLattes formacoes, Pesquisador pesquisador) {
+    public PesquisadorBuilder formacaoAcademica(FormacoesAcademicaLattes formacoes) {
 
         for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
              FormacaoAcademica formacao = null;
-             if ((formacao = pesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
-                this.pesquisador.getFormacoes().add(
+             if ((formacao = cachedPesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
+                pesquisador.getFormacoes().add(
                         FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
                                 formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(),
                                 formacaoLattes.getDescricao(), formacaoLattes.getNomeInstituicao(),
-                                formacaoLattes.getTipo(), pesquisador));
+                                formacaoLattes.getTipo(), cachedPesquisador));
              }else{
-                this.pesquisador.getFormacoes().add(
+                pesquisador.getFormacoes().add(
                         FormacaoAcademicaFactory.createFormacaoAcademica(
                     formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
-                    formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), pesquisador));
+                    formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), cachedPesquisador));
              }
 
         }

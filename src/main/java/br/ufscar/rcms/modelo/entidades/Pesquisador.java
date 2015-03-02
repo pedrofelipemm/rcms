@@ -1,6 +1,7 @@
 package br.ufscar.rcms.modelo.entidades;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,11 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-
-import br.ufscar.rcms.modelo.lattes.EventoLatttes;
-import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
-import br.ufscar.rcms.modelo.lattes.PremioLattes;
-import br.ufscar.rcms.modelo.lattes.PremiosLattes;
 
 @Entity
 @Table(name = "\"PESQUISADOR\"")
@@ -232,22 +228,16 @@ public class Pesquisador extends Usuario {
         this.pesquisadorLinhaPesquisa = pesquisadorLinhaPesquisa;
     }
 
-    public void addCitacoesBibliograficas(String[] citacoes) {
-        for (String citacao : citacoes) {
-            citacaoBibliograficas.add(new CitacaoBibliografica(this, citacao));
-        }
+    public void addParticipacaoEventos(ParticipacaoEvento... participacaoEventos) {
+        this.participacaoEventos.addAll(Arrays.asList(participacaoEventos));
     }
 
-    public void addPremios(PremiosLattes premios) {
-        for (PremioLattes premioLattes : premios.getPremio()) {
-            this.premios.add(new PremioTitulo(this, premioLattes.getAno(), premioLattes.getDescricao()));
-        }
+    public void addCitacaoBibliograficas(CitacaoBibliografica... citacaoBibliograficas) {
+        this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
     }
 
-    public void addParticipacaoEventos(ParticipacaoEventoLattes participacaoEvento) {
-        for (EventoLatttes eventoLatttes : participacaoEvento.getEventos()) {
-            participacaoEventos.add(new ParticipacaoEvento(this, eventoLatttes.getTitulo(), eventoLatttes.getAno()));
-        }
+    public void addPremios(PremioTitulo... premiosTitulo) {
+        premios.addAll(Arrays.asList(premiosTitulo));
     }
 
     @Override
@@ -255,4 +245,5 @@ public class Pesquisador extends Usuario {
         return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes
                 + "]";
     }
+
 }

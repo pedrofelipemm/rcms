@@ -7,11 +7,15 @@ import org.apache.commons.lang3.Validate;
 
 import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
+import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
+import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.PremioTitulo;
 import br.ufscar.rcms.modelo.lattes.AreaAtuacaoLattes;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
+import br.ufscar.rcms.modelo.lattes.EventoLatttes;
 import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
 import br.ufscar.rcms.modelo.lattes.FormacoesAcademicaLattes;
 import br.ufscar.rcms.modelo.lattes.IdentificacaoLattes;
@@ -19,6 +23,7 @@ import br.ufscar.rcms.modelo.lattes.IdiomasLattes;
 import br.ufscar.rcms.modelo.lattes.OrganizacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
+import br.ufscar.rcms.modelo.lattes.PremioLattes;
 import br.ufscar.rcms.modelo.lattes.PremiosLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
 
@@ -84,12 +89,16 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder participacaoEventos(ParticipacaoEventoLattes participacaoEvento) {
-        pesquisador.addParticipacaoEventos(participacaoEvento);
+        for (EventoLatttes eventoLatttes : participacaoEvento.getEventos()) {
+            pesquisador.addParticipacaoEventos(new ParticipacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(), eventoLatttes.getAno()));
+        }
         return this;
     }
 
     public PesquisadorBuilder premios(PremiosLattes premios) {
-        pesquisador.addPremios(premios);
+        for (PremioLattes premioLattes : premios.getPremio()) {
+            pesquisador.addPremios(new PremioTitulo(cachedPesquisador, premioLattes.getAno(), premioLattes.getDescricao()));
+        }
         return this;
     }
 
@@ -101,7 +110,9 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder citacaoBibliografica(IdentificacaoLattes identificacao) {
         if (identificacao != null) {
             String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
-            pesquisador.addCitacoesBibliograficas(citacoes);
+            for (String citacao : citacoes) {
+                pesquisador.addCitacaoBibliograficas(new CitacaoBibliografica(cachedPesquisador, citacao));
+            }
         }
         return this;
     }

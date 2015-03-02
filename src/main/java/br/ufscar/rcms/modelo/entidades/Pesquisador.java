@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import br.ufscar.rcms.modelo.lattes.EventoLatttes;
+import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PremioLattes;
 import br.ufscar.rcms.modelo.lattes.PremiosLattes;
 
@@ -239,6 +241,12 @@ public class Pesquisador extends Usuario {
     public void addPremios(PremiosLattes premios) {
         for (PremioLattes premioLattes : premios.getPremio()) {
             this.premios.add(new PremioTitulo(this, premioLattes.getAno(), premioLattes.getDescricao()));
+        }
+    }
+
+    public void addParticipacaoEventos(ParticipacaoEventoLattes participacaoEvento) {
+        for (EventoLatttes eventoLatttes : participacaoEvento.getEventos()) {
+            participacaoEventos.add(new ParticipacaoEvento(this, eventoLatttes.getTitulo(), eventoLatttes.getAno()));
         }
     }
 

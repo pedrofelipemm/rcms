@@ -107,14 +107,16 @@ public class PesquisadorMB extends AbstractMB {
         try {
             pesquisadorService.salvarOuAtualizar(pesquisador);
             adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
+
+            limparDados();
+
+            keepMessagesOnRedirect();
+            return CONSULTA_PESQUISADORES;
         } catch (Exception exception) {
             adicionarMensagemErroByKey("erro.salvar.pesquisador", pesquisador.getNome());
             LOGGER.error(exception.getMessage(), exception);
         }
-
-        limparDados();
-        keepMessagesOnRedirect();
-        return CONSULTA_PESQUISADORES;
+        return null;
     }
 
     public String exibir(Pesquisador pesquisador) {

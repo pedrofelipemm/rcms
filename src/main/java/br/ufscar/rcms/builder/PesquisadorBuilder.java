@@ -57,7 +57,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
         validatePesquisador(pesquisadorLattes, pesquisador);
         cachedPesquisador = pesquisador;
-//        participacaoEventos(pesquisadorLattes.getParticipacaoEvento(), pesquisador);
 //        organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento(), pesquisador);
 //        orientacoes(pesquisadorLattes, pesquisador);
 //        areaAtuacoes(pesquisadorLattes.getAreaAtuacao(), pesquisador);
@@ -84,8 +83,8 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder participacaoEventos(ParticipacaoEventoLattes participacaoEvento, Pesquisador pesquisador) {
-        // TODO Pedro
+    public PesquisadorBuilder participacaoEventos(ParticipacaoEventoLattes participacaoEvento) {
+        pesquisador.addParticipacaoEventos(participacaoEvento);
         return this;
     }
 

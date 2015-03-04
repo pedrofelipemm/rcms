@@ -42,7 +42,29 @@ public class ProjetoPesquisa extends Entidade {
     private List<Producao> producoes = new ArrayList<Producao>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
-    private List<Midia> midia;
+    private List<Midia> midia = new ArrayList<Midia>();
+
+    public ProjetoPesquisa() {
+    }
+
+    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao) {
+        this(nome, descricao, anoInicio, anoConclusao, null);
+    }
+
+    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao, String agenciaDeFomento) {
+        this(nome, descricao, anoInicio, anoConclusao, agenciaDeFomento, new ArrayList<Producao>(), new ArrayList<Midia>());
+    }
+
+    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao,
+            String agenciaDeFomento, List<Producao> producoes, List<Midia> midia) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.anoInicio = anoInicio;
+        this.anoConclusao = anoConclusao;
+        this.agenciaDeFomento = agenciaDeFomento;
+        this.producoes = producoes;
+        this.midia = midia;
+    }
 
     public List<Producao> getProducoes() {
         return producoes;

@@ -30,6 +30,16 @@ public class OrganizacaoEvento extends Entidade {
     @Column(nullable = false)
     private Integer ano;
 
+    public OrganizacaoEvento() {
+    }
+
+    public OrganizacaoEvento(Pesquisador pesquisador, String titulo, String natureza, Integer ano) {
+        this.pesquisador = pesquisador;
+        this.titulo = titulo;
+        this.natureza = natureza;
+        this.ano = ano;
+    }
+
     public Integer getIdOrganizacaoEvento() {
         return idOrganizacaoEvento;
     }

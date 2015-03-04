@@ -22,15 +22,17 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
     @Override
     public Pesquisador buscarTodosDados(Long idUsuario) {
 
-        StringBuilder jpql = new StringBuilder();
-        jpql.append("select p from " + Pesquisador.class.getName() + " p ");
-        jpql.append("left join fetch p.endereco e ");
-        jpql.append("left join fetch p.formacoes f ");
-        jpql.append("left join fetch p.compreensaoIdiomas ci ");
+        StringBuilder jpql = new StringBuilder("select p from " + Pesquisador.class.getName() + " p ");
+        jpql.append("left join fetch p.endereco end ");
+        jpql.append("left join fetch p.formacoes form ");
+        jpql.append("left join fetch p.compreensaoIdiomas compId ");
         jpql.append("left join fetch p.areaAtuacoes atu ");
-        jpql.append("left join fetch p.citacaoBibliograficas cb ");
+        jpql.append("left join fetch p.citacaoBibliograficas citBib ");
         jpql.append("left join fetch p.premios premios ");
-        jpql.append("left join fetch p.participacaoEventos pe ");
+        jpql.append("left join fetch p.participacaoEventos partEventos ");
+        jpql.append("left join fetch p.organizacaoEventos orgEventos ");
+        jpql.append("left join fetch p.projetosPesquisa projPesq ");
+        jpql.append("left join fetch p.orientacoes orientacoes");
         jpql.append("where p.idUsuario = :idUsuario ");
 
         Query query = createQuery(jpql.toString());

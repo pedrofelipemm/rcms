@@ -67,25 +67,25 @@ public class PesquisadorLattes extends BaseLattes {
     private ProducaoBibliograficaLattes producoesTecnica;
 
     @XmlElement(name = "orientacao_doutorado_em_andamento")
-    private OrientacaoDoutoradoLattes orientacaoDoutoradoAndamento;
+    private OrientacaoDoutoradoLattes orientacaoDoutoradoAndamento = new OrientacaoDoutoradoLattes();
 
     @XmlElement(name = "orientacao_mestrado_em_andamento")
-    private OrientacaoMestradoLattes orientacaoMestradoAndamento;
+    private OrientacaoMestradoLattes orientacaoMestradoAndamento = new OrientacaoMestradoLattes();
 
     @XmlElement(name = "orientacao_doutorado_concluido")
-    private OrientacaoDoutoradoLattes orientacaoDoutoradoConcluido;
+    private OrientacaoDoutoradoLattes orientacaoDoutoradoConcluido = new OrientacaoDoutoradoLattes();
 
     @XmlElement(name = "orientacao_mestrado_concluido")
-    private OrientacaoMestradoLattes orientacaoMestradoConcluido;
+    private OrientacaoMestradoLattes orientacaoMestradoConcluido = new OrientacaoMestradoLattes();
 
     @XmlElement(name = "orientacao_tcc_concluido")
-    private OrientacaoTCCLattes orientacaoTCCConcluido;
+    private OrientacaoTCCLattes orientacaoTCCConcluido = new OrientacaoTCCLattes();
 
     @XmlElement(name = "orientacao_iniciacao_cientifica_concluido")
-    private OrientacaoIniciacaoCientificaLattes orientacaoIniciacaoCientificaConcluido;
+    private OrientacaoIniciacaoCientificaLattes orientacaoIniciacaoCientificaConcluido = new OrientacaoIniciacaoCientificaLattes();
 
     @XmlElement(name = "orientacao_outros_tipos_concluido")
-    private OrientacaoOutrosTiposConcluidoLattes orientacaoOutrosTipoConcluido;
+    private OrientacaoOutrosTiposConcluidoLattes orientacaoOutrosTipoConcluido = new OrientacaoOutrosTiposConcluidoLattes();
 
     @XmlElement(name = "participacao_evento")
     private ParticipacaoEventoLattes participacaoEvento;

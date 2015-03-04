@@ -8,4 +8,5 @@ import javax.persistence.Table;
 public class Doutorado extends Orientacao {
 
     private static final long serialVersionUID = 4919782666029531420L;
+
 }

@@ -1,18 +1,31 @@
 package br.ufscar.rcms.builder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
+import br.ufscar.rcms.factory.OrientacaoFactory;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
+import br.ufscar.rcms.modelo.entidades.Doutorado;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
+import br.ufscar.rcms.modelo.entidades.IniciacaoCientifica;
+import br.ufscar.rcms.modelo.entidades.Mestrado;
+import br.ufscar.rcms.modelo.entidades.OrganizacaoEvento;
+import br.ufscar.rcms.modelo.entidades.Orientacao;
+import br.ufscar.rcms.modelo.entidades.OrientacaoOutroTipo;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.PremioTitulo;
+import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
+import br.ufscar.rcms.modelo.entidades.TCC;
 import br.ufscar.rcms.modelo.lattes.AreaAtuacaoLattes;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
 import br.ufscar.rcms.modelo.lattes.EventoLatttes;
@@ -21,13 +34,17 @@ import br.ufscar.rcms.modelo.lattes.FormacoesAcademicaLattes;
 import br.ufscar.rcms.modelo.lattes.IdentificacaoLattes;
 import br.ufscar.rcms.modelo.lattes.IdiomasLattes;
 import br.ufscar.rcms.modelo.lattes.OrganizacaoEventoLattes;
+import br.ufscar.rcms.modelo.lattes.OrientacaoLattes;
 import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.PremioLattes;
 import br.ufscar.rcms.modelo.lattes.PremiosLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
+import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorBuilder.class);
 
     private Pesquisador pesquisador;
     private Pesquisador cachedPesquisador;
@@ -62,14 +79,14 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
         validatePesquisador(pesquisadorLattes, pesquisador);
         cachedPesquisador = pesquisador;
-//        organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento(), pesquisador);
-//        orientacoes(pesquisadorLattes, pesquisador);
 //        areaAtuacoes(pesquisadorLattes.getAreaAtuacao(), pesquisador);
-//        projetosPesquisa(pesquisadorLattes.getProjetosPesquisa(), pesquisador);
     }
 
     public PesquisadorBuilder projetosPesquisa(ProjetetosPesquisaLattes projetosPesquisa) {
-        // TODO Pedro
+        for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
+            pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes.getDescricao(),
+                    projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao()));
+        }
         return this;
     }
 
@@ -78,13 +95,24 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder orientacoes(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
-        // TODO Pedro
+    public PesquisadorBuilder orientacoes(PesquisadorLattes pesquisadorLattes) {
+
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoDoutoradoAndamento().getTeses(), Doutorado.class));
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoDoutoradoConcluido().getTeses(), Doutorado.class));
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoIniciacaoCientificaConcluido().getIniciacaoCientifica(), IniciacaoCientifica.class));
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoMestradoAndamento().getDissertacoes(), Mestrado.class));
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoMestradoConcluido().getDissertacoes(), Mestrado.class));
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoOutrosTipoConcluido().getOrientacaoOutra(), OrientacaoOutroTipo.class));
+        pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoTCCConcluido().getTccs(), TCC.class));
+
         return this;
     }
 
-    public PesquisadorBuilder organizacaoEventos(OrganizacaoEventoLattes organizacaoEvento, Pesquisador pesquisador) {
-        // TODO Pedro
+    public PesquisadorBuilder organizacaoEventos(OrganizacaoEventoLattes organizacaoEvento) {
+        for (EventoLatttes eventoLatttes : organizacaoEvento.getEventos()) {
+            pesquisador.addOrgazicaoEventos(new OrganizacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(),
+                    eventoLatttes.getNatureza(), eventoLatttes.getAno()));
+        }
         return this;
     }
 
@@ -193,5 +221,24 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         if (!pesquisador.getCodigoLattes().equals(pesquisadorLattes.getCodigoLattes())) {
             throw new IllegalStateException("Código lattes dos pequisadores não são iguais!");
         }
+    }
+
+    private List<? extends Orientacao> buildOrientacao(List<? extends OrientacaoLattes> orientacoes, Class<? extends Orientacao> clazz) {
+
+        if (CollectionUtils.isEmpty(orientacoes)) {
+            return null;
+        }
+
+        List<Orientacao> orientacaoList = new ArrayList<Orientacao>();
+        for (OrientacaoLattes orientacao : orientacoes) {
+            try {
+                orientacaoList.add(OrientacaoFactory.createOrientacao(cachedPesquisador, orientacao.getNomeAluno(),
+                        orientacao.getInstituicao(), orientacao.getAgenciaFomento(), orientacao.getTipoOrientacao(),
+                        orientacao.getTituloTrabalho(), clazz));
+            } catch (InstantiationException | IllegalAccessException e) {
+                LOGGER.error(e.getMessage(), e);
+            }
+        }
+        return orientacaoList;
     }
 }

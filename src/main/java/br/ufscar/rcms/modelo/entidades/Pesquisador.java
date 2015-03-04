@@ -236,8 +236,24 @@ public class Pesquisador extends Usuario {
         this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
     }
 
-    public void addPremios(PremioTitulo... premiosTitulo) {
-        premios.addAll(Arrays.asList(premiosTitulo));
+    public void addPremios(PremioTitulo... premios) {
+        this.premios.addAll(Arrays.asList(premios));
+    }
+
+    public void addOrgazicaoEventos(OrganizacaoEvento... organizacaoEventos) {
+        this.organizacaoEventos.addAll(Arrays.asList(organizacaoEventos));
+    }
+
+    public void addProjetosPesquisa(ProjetoPesquisa... projetosPesquisa) {
+        this.projetosPesquisa.addAll(Arrays.asList(projetosPesquisa));
+    }
+
+    public void addOrientacoes(Orientacao... orientacoes) {
+        this.orientacoes.addAll(Arrays.asList(orientacoes));
+    }
+
+    public void addOrientacoes(List<? extends Orientacao> orientacoes) {
+        this.orientacoes.addAll(orientacoes);
     }
 
     @Override
@@ -245,5 +261,4 @@ public class Pesquisador extends Usuario {
         return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes
                 + "]";
     }
-
 }

@@ -65,6 +65,10 @@ local.properties
 .settings/
 .loadpath
 
+# Intellij.gitgnore #
+.idea
+.settings
+.iml
 # External tool builders
 .externalToolBuilders/
 

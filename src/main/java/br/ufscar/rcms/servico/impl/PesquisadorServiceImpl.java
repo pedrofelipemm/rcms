@@ -31,11 +31,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     @Override
     public Pesquisador salvarOuAtualizar(Pesquisador pesquisador) {
 
-        // TODO PEDRO
-        if (pesquisador.getEndereco() != null) {
-            pesquisador.getEndereco().setPesquisador(pesquisador);
-        }
-        
+        pesquisador.getEndereco().setPesquisador(pesquisador);
         return pesquisadorDAO.salvarOuAtualizar(pesquisador);
     }
 

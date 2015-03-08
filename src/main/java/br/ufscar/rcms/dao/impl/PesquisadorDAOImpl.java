@@ -23,7 +23,7 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
     public Pesquisador buscarTodosDados(Long idUsuario) {
 
         StringBuilder jpql = new StringBuilder("select p from " + Pesquisador.class.getName() + " p ");
-        jpql.append("left join fetch p.endereco end ");
+        jpql.append("left join fetch p.endereco ende ");
         jpql.append("left join fetch p.formacoes form ");
         jpql.append("left join fetch p.compreensaoIdiomas compId ");
         jpql.append("left join fetch p.areaAtuacoes atu ");
@@ -32,7 +32,7 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
         jpql.append("left join fetch p.participacaoEventos partEventos ");
         jpql.append("left join fetch p.organizacaoEventos orgEventos ");
         jpql.append("left join fetch p.projetosPesquisa projPesq ");
-        jpql.append("left join fetch p.orientacoes orientacoes");
+        jpql.append("left join fetch p.orientacoes orientacoes ");
         jpql.append("where p.idUsuario = :idUsuario ");
 
         Query query = createQuery(jpql.toString());

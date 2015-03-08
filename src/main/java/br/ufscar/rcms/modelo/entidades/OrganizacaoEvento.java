@@ -21,10 +21,10 @@ public class OrganizacaoEvento extends Entidade {
     @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String titulo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String natureza;
 
     @Column(nullable = false)

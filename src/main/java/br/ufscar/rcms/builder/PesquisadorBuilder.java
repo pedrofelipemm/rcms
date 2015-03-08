@@ -72,14 +72,13 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     public PesquisadorBuilder(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
 
-        this(pesquisador.getIdUsuario(), pesquisador.getLogin(),
-                pesquisadorLattes.getIdentificacao().getNomeCompleto(), pesquisador.getSenha(), pesquisador
-                        .getCodigoLattes(), pesquisador.getEmail(), pesquisador.getFlagAdministrador(), pesquisador
-                        .getResumoProfissional());
+        this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
+                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), pesquisador.getFlagAdministrador(),
+                pesquisador.getResumoProfissional());
 
+        this.pesquisador.setSexo(pesquisadorLattes.getIdentificacao().getSexo());
         validatePesquisador(pesquisadorLattes, pesquisador);
         cachedPesquisador = pesquisador;
-//        areaAtuacoes(pesquisadorLattes.getAreaAtuacao(), pesquisador);
     }
 
     public PesquisadorBuilder projetosPesquisa(ProjetetosPesquisaLattes projetosPesquisa) {

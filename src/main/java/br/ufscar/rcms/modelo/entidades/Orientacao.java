@@ -24,22 +24,22 @@ public abstract class Orientacao extends Entidade {
     @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
-    @Column(nullable = false)
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String nomeDoAluno;
 
-    @Column(nullable = false)
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String instituicao;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String tipoDeOrientacao;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String tituloTrabalho;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String situacao;
 
     public String getTituloTrabalho() {

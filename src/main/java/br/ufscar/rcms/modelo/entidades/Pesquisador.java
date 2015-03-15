@@ -228,6 +228,14 @@ public class Pesquisador extends Usuario {
         this.pesquisadorLinhaPesquisa = pesquisadorLinhaPesquisa;
     }
 
+    public void addCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {
+        this.compreensaoIdiomas.addAll(Arrays.asList(compreensaoIdiomas));
+    }
+
+    public void removeCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {
+        this.compreensaoIdiomas.removeAll(Arrays.asList(compreensaoIdiomas));
+    }
+
     public void addParticipacaoEventos(ParticipacaoEvento... participacaoEventos) {
         this.participacaoEventos.addAll(Arrays.asList(participacaoEventos));
     }

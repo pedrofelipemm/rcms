@@ -1,9 +1,10 @@
-
 #cabecalho {
     color: #fff;
-    background-color: #B20000;
+    background-color: #222;
     padding-top: 10px;
     border-bottom: 1px solid #fff;
+    width: 100%;
+    height: 75px;
 }
 
 #cabecalho a {
@@ -18,19 +19,19 @@
 	color: #222;
 }
 
-#admin-fluid-content h1 {
+#admin-fluid-content h1, h2, h3 {
 	color: #428bca;
 }
 
 #admin-rodape {
-	position: absolute; 
 	border-bottom: 0;
 	font-style: italic;
-	padding: 30px 215px 15px 15px;
+	padding: 10px;
 }
 
 .admin-bg {
   background-color: #eee;
+  height: 100%;
 }
 
 #admin-menu-top p {
@@ -43,10 +44,10 @@
 }
 
 #admin-menu-left {
-	float: left;
 	top: 72px; 
 	position: fixed;
-	width: 200px; 
+	min-width: 190px;
+	width: 13.15%; 
 	height: 100%; 
 	background-color: #222; 
 	padding: 15px;
@@ -61,9 +62,12 @@
 }
 
 #admin-fluid-content {
-	float:left;
-	width: 100%;
+	width: 86.85%;
 	height: 100%;
 	margin-left: 200px;
-	padding: 86px 215px 15px 15px;
+	padding: 15px;
+}
+
+.top-buffer-10 {
+	margin-top: 10px;
 }

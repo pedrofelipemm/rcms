@@ -28,6 +28,13 @@ public class Idioma extends Entidade {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.idioma")
     private List<CompreensaoIdioma> compreensaoIdiomas = new ArrayList<CompreensaoIdioma>();
 
+    public Idioma() {
+    }
+
+    public Idioma(String descricao) {
+        this.descricao = descricao;
+    }
+
     public List<CompreensaoIdioma> getCompreensaoIdiomas() {
         return compreensaoIdiomas;
     }

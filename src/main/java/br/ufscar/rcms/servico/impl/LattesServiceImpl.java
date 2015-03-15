@@ -79,7 +79,9 @@ public class LattesServiceImpl implements LattesService {
                 .citacaoBibliografica(pesquisadorLattes.getIdentificacao()).premios(pesquisadorLattes.getPremios())
                 .participacaoEventos(pesquisadorLattes.getParticipacaoEvento())
                 .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento())
-                .projetosPesquisa(pesquisadorLattes.getProjetosPesquisa()).orientacoes(pesquisadorLattes).build();
+                .projetosPesquisa(pesquisadorLattes.getProjetosPesquisa()).orientacoes(pesquisadorLattes)
+                .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
+                .build();
 
         return pesquisadorService.salvarOuAtualizar(novoPesquisador);
     }

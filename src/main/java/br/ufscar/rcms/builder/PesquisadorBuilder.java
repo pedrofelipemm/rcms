@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
+import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.factory.OrientacaoFactory;
@@ -16,6 +17,7 @@ import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.Doutorado;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
+import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.IniciacaoCientifica;
 import br.ufscar.rcms.modelo.entidades.Mestrado;
 import br.ufscar.rcms.modelo.entidades.OrganizacaoEvento;
@@ -32,6 +34,7 @@ import br.ufscar.rcms.modelo.lattes.EventoLatttes;
 import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
 import br.ufscar.rcms.modelo.lattes.FormacoesAcademicaLattes;
 import br.ufscar.rcms.modelo.lattes.IdentificacaoLattes;
+import br.ufscar.rcms.modelo.lattes.IdiomaLattes;
 import br.ufscar.rcms.modelo.lattes.IdiomasLattes;
 import br.ufscar.rcms.modelo.lattes.OrganizacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.OrientacaoLattes;
@@ -89,7 +92,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder areaAtuacoes(AreaAtuacaoLattes areaAtuacao, Pesquisador pesquisador) {
+    public PesquisadorBuilder areaAtuacoes(AreaAtuacaoLattes areaAtuacao) {
         // TODO Pedro
         return this;
     }
@@ -129,8 +132,11 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder compreensaoIdiomas(IdiomasLattes idiomas, Pesquisador pesquisador) {
-        // TODO Pedro
+    public PesquisadorBuilder compreensaoIdiomas(IdiomasLattes idiomas) {
+        for (IdiomaLattes idiomaLattes : idiomas.getIdiomas()) {
+            pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(
+                    new Idioma(idiomaLattes.getNome()), idiomaLattes.getProficiencia(), cachedPesquisador));
+        }
         return this;
     }
 

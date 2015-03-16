@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/pages/templates/templateAdmin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	<ui:define name="conteudo">
+		<div class="panel panel-default">
+  			<div class="panel-body">
+  				<li><a href="${request.contextPath}/pages/consulta/grandeAreaAtuacao.xhtml">#{mensagens['grande.area.de.atuacao']}</a></li>
+  			</div>
+		</div>
+		
+		<div class="panel panel-default">
+  			<div class="panel-body">
+  			<li><a href="${request.contextPath}/pages/consulta/areaDeAtuacao.xhtml">#{mensagens['area.de.atuacao']}</a></li>
+  			</div>
+		</div>
+		
+		<div class="panel panel-default">
+  			<div class="panel-body">
+  			<li><a href="${request.contextPath}/pages/consulta/subAreaAtuacao.xhtml">#{mensagens['subarea.de.atuacao']}</a></li>
+  			</div>
+		</div>
+	</ui:define>
+</ui:composition>

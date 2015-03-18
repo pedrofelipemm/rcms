@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +25,8 @@ public class SubAreaAtuacao
   private String descricao;
   @OneToMany(cascade={javax.persistence.CascadeType.ALL}, fetch=FetchType.EAGER)
   private List<EspecializacaoAreaAtuacao> especializacoes;
+  @ManyToOne
+  private AreaAtuacao areaAtuacao;
 
   public Integer getId()
   {
@@ -54,4 +57,12 @@ public class SubAreaAtuacao
   {
     this.especializacoes = especializacoes;
   }
+
+public AreaAtuacao getAreaAtuacao() {
+	return areaAtuacao;
+}
+
+public void setAreaAtuacao(AreaAtuacao areaAtuacao) {
+	this.areaAtuacao = areaAtuacao;
+}
 }

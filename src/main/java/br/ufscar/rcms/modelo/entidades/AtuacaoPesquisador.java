@@ -1,18 +1,12 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.junit.Ignore;
 
 @Entity
 @Table(name = "\"ATUACAO\"")
@@ -26,11 +20,8 @@ public class AtuacaoPesquisador extends Entidade{
 	
 	private int index;
 	
-	public AtuacaoPesquisador(GrandeAreaAtuacao grandeArea, AreaAtuacao area,
-			SubAreaAtuacao subArea, EspecializacaoAreaAtuacao especializacao, Pesquisador pesquisador){
-		this.grandeArea = grandeArea;
-		this.area = area;
-		this.subArea = subArea;
+	public AtuacaoPesquisador(EspecializacaoAreaAtuacao especializacao, Pesquisador pesquisador){
+
 		this.especializacao = especializacao;
 		this.pesquisador = pesquisador;
 		
@@ -82,35 +73,10 @@ public class AtuacaoPesquisador extends Entidade{
 	@ManyToOne(optional = false)
 	private Pesquisador pesquisador;
 	
-	private GrandeAreaAtuacao grandeArea;
-	private AreaAtuacao area;
-	private SubAreaAtuacao subArea;
+	@ManyToOne(optional = false)
 	private EspecializacaoAreaAtuacao especializacao;
 	
 	
-	public GrandeAreaAtuacao getGrandeArea() {
-		return grandeArea;
-	}
-	
-	public void setGrandeArea(GrandeAreaAtuacao grandeArea) {
-		this.grandeArea = grandeArea;
-	}
-	
-	public AreaAtuacao getArea() {
-		return area;
-	}
-	
-	public void setArea(AreaAtuacao area) {
-		this.area = area;
-	}
-	
-	public SubAreaAtuacao getSubArea() {
-		return subArea;
-	}
-	
-	public void setSubArea(SubAreaAtuacao subArea) {
-		this.subArea = subArea;
-	}
 	
 	public EspecializacaoAreaAtuacao getEspecializacao() {
 		return especializacao;
@@ -118,35 +84,8 @@ public class AtuacaoPesquisador extends Entidade{
 	
 	public void setEspecializacao(EspecializacaoAreaAtuacao especializacao) {
 		this.especializacao = especializacao;
-	}
+	}	
 	
-	@Override
-	public String toString(){
-		String ret = "";
-		
-		if (grandeArea != null){
-			ret += "Grande área: " +  grandeArea.getDescricao() + " /";
-		}
-		
-		if (area != null){
-			ret += " Área: " + area.getDescricao() + " /";
-		}
-		
-		if (subArea != null){
-			ret += " Subárea: " + subArea.getDescricao() + " /";
-		}
-		
-		if (especializacao != null){
-			ret += " Especialidade: " + especializacao.getDescricao();
-		}
-		
-		if (ret.endsWith("/")){
-			ret = String.copyValueOf(ret.toCharArray(), 0, ret.length() - 1);
-		}
-		
-		return ret;
-	}
-
 	public Pesquisador getPesquisador() {
 		return pesquisador;
 	}

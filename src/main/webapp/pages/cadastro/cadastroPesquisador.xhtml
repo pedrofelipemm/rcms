@@ -122,7 +122,7 @@
 			    				<f:facet name="header">
 			    					<h:outputLabel value="#{mensagens['descricao']}"/>
 			    				</f:facet>
-			    				<h:outputLabel value="#{area}" />
+			    				<h:outputLabel value="#{area.especializacao}" />
 			    			</h:column>
 			
 							<h:column headerClass="text-center">
@@ -174,7 +174,7 @@
 			            			                 converter="entityConverter">
 			            			    <p:ajax listener="#{pesquisadorMB.changeGrandeAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
 			            				<f:selectItem itemLabel="#{mensagens['label.gdeArea.placeholder']}" itemValue="#{null}"/>
-			            				<f:selectItems value="#{grandeAreaAtuacaoMB.todasAsGrandeAreas}"
+			            				<f:selectItems value="#{pesquisadorMB.todasAsGrandeAreas}"
 			            				               var="gdeArea" itemLabel="#{gdeArea.descricao}" itemValue="#{gdeArea}" />
 			            			</h:selectOneMenu>            			
 			              		</div>

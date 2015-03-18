@@ -27,6 +27,7 @@ import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
+import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
@@ -51,6 +52,9 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{lattesService}")
     private LattesService lattesService;
+    
+    @ManagedProperty("#{grandeAreaAtuacaoService}")
+    private GrandeAreaAtuacaoService grandeAreaService;
 
     private Pesquisador pesquisador;
     private transient DataModel<Pesquisador> pesquisadores;
@@ -70,6 +74,7 @@ public class PesquisadorMB extends AbstractMB {
     private EspecializacaoAreaAtuacao especializacaoSelecionada;
     private DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar;
     private AtuacaoPesquisador atuacaoSelecionada;
+    private DataModel<GrandeAreaAtuacao> todasAsGrandeAreas;
 
     @PostConstruct
     public void inicializar() {
@@ -81,6 +86,7 @@ public class PesquisadorMB extends AbstractMB {
     protected void carregarDados() {
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
         idiomas = new ArrayList<Idioma>(idiomaService.buscarTodos());
+        todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaService.buscarTodas());
 
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
@@ -231,8 +237,11 @@ public class PesquisadorMB extends AbstractMB {
     public void adicionarAtuacao(){
 
     	if (grandeAreaSelecionada != null){
-    		AtuacaoPesquisador a = new AtuacaoPesquisador(grandeAreaSelecionada, areaAtuacaoSelecionada,
-    				subAreaAtuacaoSelecionada, especializacaoSelecionada, pesquisador);
+    		areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
+    		subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
+    		especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
+    		
+    		AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
 
         	pesquisador.getAreaAtuacoes().add(a);
     	}
@@ -396,4 +405,20 @@ public class PesquisadorMB extends AbstractMB {
     public void setIdioma(Idioma idioma) {
         this.idioma = idioma;
     }
+
+	public DataModel<GrandeAreaAtuacao> getTodasAsGrandeAreas() {
+		return todasAsGrandeAreas;
+	}
+
+	public GrandeAreaAtuacaoService getGrandeAreaService() {
+		return grandeAreaService;
+	}
+
+	public void setGrandeAreaService(GrandeAreaAtuacaoService grandeAreaService) {
+		this.grandeAreaService = grandeAreaService;
+	}
+
+	public void setTodasAsGrandeAreas(DataModel<GrandeAreaAtuacao> todasAsGrandeAreas) {
+		this.todasAsGrandeAreas = todasAsGrandeAreas;
+	}
 }

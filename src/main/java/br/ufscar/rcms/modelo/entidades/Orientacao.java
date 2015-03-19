@@ -19,31 +19,42 @@ public abstract class Orientacao extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idOrientacao;
+    private Long idOrientacao;
 
     @ManyToOne(optional = false)
     private Pesquisador pesquisador;
 
-    @Column(nullable = false)
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String nomeDoAluno;
 
-    @Column(nullable = false)
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String instituicao;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String tipoDeOrientacao;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
+    private String tituloTrabalho;
+
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String situacao;
 
-    public Integer getIdOrientacao() {
+    public String getTituloTrabalho() {
+        return tituloTrabalho;
+    }
+
+    public void setTituloTrabalho(String tituloTrabalho) {
+        this.tituloTrabalho = tituloTrabalho;
+    }
+
+    public Long getIdOrientacao() {
         return idOrientacao;
     }
 
-    public void setIdOrientacao(Integer idOrientacao) {
+    public void setIdOrientacao(Long idOrientacao) {
         this.idOrientacao = idOrientacao;
     }
 

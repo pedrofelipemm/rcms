@@ -23,10 +23,10 @@ public class ProjetoPesquisa extends Entidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProjetoPesquisa;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String nome;
 
-    @Column
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String descricao;
 
     @Column
@@ -35,14 +35,37 @@ public class ProjetoPesquisa extends Entidade {
     @Column
     private Integer anoConclusao;
 
-    @Column
+    // TODO AGUARDANDO VALIDAÇÃO
+    @Column(length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<Producao> producoes = new ArrayList<Producao>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
-    private List<Midia> midia;
+    private List<Midia> midia = new ArrayList<Midia>();
+
+    public ProjetoPesquisa() {
+    }
+
+    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao) {
+        this(nome, descricao, anoInicio, anoConclusao, null);
+    }
+
+    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao, String agenciaDeFomento) {
+        this(nome, descricao, anoInicio, anoConclusao, agenciaDeFomento, new ArrayList<Producao>(), new ArrayList<Midia>());
+    }
+
+    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao,
+            String agenciaDeFomento, List<Producao> producoes, List<Midia> midia) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.anoInicio = anoInicio;
+        this.anoConclusao = anoConclusao;
+        this.agenciaDeFomento = agenciaDeFomento;
+        this.producoes = producoes;
+        this.midia = midia;
+    }
 
     public List<Producao> getProducoes() {
         return producoes;

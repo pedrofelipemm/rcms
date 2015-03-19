@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.rcms.dao.EnderecoDAO;
+import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
+import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
 
@@ -21,7 +22,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     private PesquisadorDAO pesquisadorDAO;
 
     @Autowired
-    private EnderecoDAO enderecoDAO;
+    private IdiomaDAO idiomaDAO;
 
     @Override
     public void salvar(Pesquisador pesquisador) {
@@ -31,11 +32,16 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     @Override
     public Pesquisador salvarOuAtualizar(Pesquisador pesquisador) {
 
-        // TODO PEDRO
-        if (pesquisador.getEndereco() != null) {
-            pesquisador.getEndereco().setPesquisador(pesquisador);
+        pesquisador.getEndereco().setPesquisador(pesquisador);
+
+        for (CompreensaoIdioma compreensaoIdioma : pesquisador.getCompreensaoIdiomas()) {
+            if (compreensaoIdioma.getCompreensaoIdiomaPK() != null
+                    && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma() != null
+                    && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma().getIdIdioma() == null) {
+                idiomaDAO.salvar(compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma());
+            }
         }
-        
+
         return pesquisadorDAO.salvarOuAtualizar(pesquisador);
     }
 

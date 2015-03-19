@@ -35,33 +35,5 @@ public class CompreensaoIdioma extends Entidade{
         this.proficiencia = proficiencia;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((proficiencia == null) ? 0 : proficiencia.hashCode());
-        return result;
-    }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!(obj instanceof CompreensaoIdioma)) {
-            return false;
-        }
-        CompreensaoIdioma other = (CompreensaoIdioma) obj;
-        if (proficiencia == null) {
-            if (other.proficiencia != null) {
-                return false;
-            }
-        } else if (!proficiencia.equals(other.proficiencia)) {
-            return false;
-        }
-        return true;
-    }
 }

@@ -9,15 +9,6 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-        <h:outputStylesheet name="bootstrap.min.css" library="css"/>
-        <h:outputStylesheet name="custom-primefaces.css" library="css"/>
-        <h:outputStylesheet name="estilo-admin.css" library="css"/>
-        
-        <h:outputScript name="jquery-1.11.1.min.js" library="js"/>
-		<h:outputScript name="bootstrap.min.js" library="js"/>
-		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
-        
         <title>#{mensagens['titulo.sistema']}</title>
 	</h:head >
 	
@@ -31,36 +22,33 @@
   				<ui:include src="/pages/templates/cabecalhoAdmin.xhtml" />
 			</div>
  			
- 			<div id="menuEsquerdo">
+ 			<div id="admin-menu-left">
 		  		<ui:include src="/pages/templates/menuEsquerdoAdmin.xhtml" />
 		    </div>
- 			
-		    <div id="conteudo">
-		  		<div id="admin-fluid-content">
-	  				<div id="admin-inner-content">
-	    				<div class="container-fluid">
-							<ui:insert name="conteudo" >
-		 	  		
-	   						</ui:insert>	          				
-	          			</div>
-	          		</div>
-	          	</div>
-		    </div>
 
-    		<div id="rodapeAdmin" >
-    	  		<ui:include src="/pages/templates/rodapeAdmin.xhtml" />
-    		</div>
+			<div id="admin-fluid-content">
+				<div id="admin-inner-content">
+					<div class="container-fluid">
+						<ui:insert name="conteudo"></ui:insert>
+					</div>
+				</div>
+			</div>
 
-        </h:panelGroup>
+<!-- 			<div id="admin-rodape"> -->
+<!-- 				<ui:include src="/pages/templates/rodapeAdmin.xhtml" /> -->
+<!-- 			</div> -->
+
+		</h:panelGroup>
 		
-		<h:outputStylesheet name="bootstrap.min.css" library="css"/>
-        <h:outputStylesheet name="custom-primefaces.css" library="css"/>
-        <h:outputStylesheet name="estilo.css" library="css"/>
+		<h:outputStylesheet name="bootstrap/bootstrap.min.css" library="css"/>
+        <h:outputStylesheet name="primefaces/custom-primefaces.css" library="css"/>
+        <h:outputStylesheet name="rcms/estilo-admin.css" library="css"/>
         
-        <h:outputScript name="jquery-1.11.1.min.js" library="js"/>
-		<h:outputScript name="jquery-ui-1.11.1.min.js" library="js"/>
-		<h:outputScript name="bootstrap.min.js" library="js"/>
-		<h:outputScript name="jquery.tagcanvas.min.js" library="js"/>
+        <h:outputScript name="jquery/jquery-1.11.1.min.js" library="js"/>
+		<h:outputScript name="jquery/jquery-ui-1.11.1.min.js" library="js"/>
+		<h:outputScript name="jquery/jquery.tagcanvas.min.js" library="js"/>
+		<h:outputScript name="bootstrap/bootstrap.min.js" library="js"/>
+		<h:outputScript name="rcms/rcms-admin.js" library="js"/>
 		
 	</h:body>
 	

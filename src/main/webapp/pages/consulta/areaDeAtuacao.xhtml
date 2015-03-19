@@ -18,9 +18,10 @@
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
-			<h:dataTable value="#{areaAtuacaoMB.todasAsAreas}" var="area" styleClass="table table-hover"
-				headerClass="col-width-50" rowClasses="col-width-50" 
-				rendered="#{not empty areaAtuacaoMB.todasAsAreas}" >
+			<h:dataTable id="tabelaAreaAtuacao" value="#{areaAtuacaoMB.todasAsAreas}" var="area" styleClass="table table-hover"
+				headerClass="col-width-50" rowClasses="col-width-50"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}" 
+				rendered="#{not empty areaAtuacaoMB.todasAsAreas}" paginator="true" rows="10">
  
  				<h:column>
  					<f:facet name="header">

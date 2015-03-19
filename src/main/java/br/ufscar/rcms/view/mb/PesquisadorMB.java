@@ -1,6 +1,7 @@
 package br.ufscar.rcms.view.mb;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,16 +17,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
+import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
-import br.ufscar.rcms.modelo.entidades.Endereco;
+import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
-import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
+import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
@@ -50,14 +52,19 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{lattesService}")
     private LattesService lattesService;
+    
+    @ManagedProperty("#{grandeAreaAtuacaoService}")
+    private GrandeAreaAtuacaoService grandeAreaService;
 
     private Pesquisador pesquisador;
-
+    private transient DataModel<Pesquisador> pesquisadores;
     private transient Part fotoPesquisador;
 
-    private List<Idioma> idiomas;
+    private CompreensaoIdioma compreensaoIdioma;
+    private transient DataModel<CompreensaoIdioma> compreensaoIdiomas;
 
-    private Idioma idiomaSelecionado;
+    private Idioma idioma;
+    private transient List<Idioma> idiomas;
 
     private GrandeAreaAtuacao grandeAreaSelecionada;
     private AreaAtuacao areaAtuacaoSelecionada;
@@ -67,8 +74,7 @@ public class PesquisadorMB extends AbstractMB {
     private EspecializacaoAreaAtuacao especializacaoSelecionada;
     private DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar;
     private AtuacaoPesquisador atuacaoSelecionada;
-
-    private transient DataModel<Pesquisador> pesquisadores;
+    private DataModel<GrandeAreaAtuacao> todasAsGrandeAreas;
 
     @PostConstruct
     public void inicializar() {
@@ -78,23 +84,22 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     protected void carregarDados() {
-
-        // areas = areaAtuacaoService.buscarTodas();
-
-        idiomas = idiomaService.buscarTodas();
-
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
+        idiomas = new ArrayList<Idioma>(idiomaService.buscarTodos());
+        todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaService.buscarTodas());
 
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
+            // TODO PEDRO
+            while (pesquisador.getCompreensaoIdiomas().remove(null)) {
+            }
         }
     }
 
     protected void limparDados() {
         pesquisador = new Pesquisador();
-        // TODO PEDRO
-        pesquisador.setEndereco(new Endereco());
+        compreensaoIdioma = new CompreensaoIdioma();
     }
 
     public String salvar() {
@@ -153,23 +158,17 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public void pesquisar() {
-
     }
 
+    public void adicionarCompreensaoIdioma() {
+        pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(idioma,
+                compreensaoIdioma.getProficiencia(), pesquisador));
+        compreensaoIdioma = new CompreensaoIdioma();
+    }
 
-    // public void addIdioma() {
-    // if (idiomaSelecionado != null) {
-    // pesquisador.getIdiomas().add(idiomaSelecionado);
-    // idiomas.remove(idiomas.indexOf(idiomaSelecionado));
-    // }
-    // }
-    //
-    // public void removerIdioma() {
-    // if (idiomaSelecionado != null) {
-    // pesquisador.getIdiomas().remove(pesquisador.getIdiomas().indexOf(idiomaSelecionado));
-    // idiomas.add(idiomaSelecionado);
-    // }
-    // }
+    public void removerCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
+        pesquisador.removeCompreensaoIdiomas(compreensaoIdioma);
+    }
 
     public String baixarDadosPesquisadorLattes() {
         try {
@@ -182,17 +181,6 @@ public class PesquisadorMB extends AbstractMB {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public void carregarCurriculoLattes() {
-
-        try {
-            PesquisadorLattes pesquisadorLattes = lattesService.carregarCurriculoLattes(pesquisador.getCodigoLattes());
-        } catch (CurriculoLattesNaoEncontradoException e) {
-            // TODO PEDRO
-            LOGGER.error(e.getMessage(), e);
-        }
-
     }
 
     public String salvarDadosLattes(Pesquisador pesquisador) {
@@ -249,8 +237,11 @@ public class PesquisadorMB extends AbstractMB {
     public void adicionarAtuacao(){
 
     	if (grandeAreaSelecionada != null){
-    		AtuacaoPesquisador a = new AtuacaoPesquisador(grandeAreaSelecionada, areaAtuacaoSelecionada,
-    				subAreaAtuacaoSelecionada, especializacaoSelecionada, pesquisador);
+    		areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
+    		subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
+    		especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
+    		
+    		AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
 
         	pesquisador.getAreaAtuacoes().add(a);
     	}
@@ -301,12 +292,12 @@ public class PesquisadorMB extends AbstractMB {
         this.idiomas = idiomas;
     }
 
-    public Idioma getIdiomaSelecionado() {
-        return idiomaSelecionado;
+    public CompreensaoIdioma getCompreensaoIdioma() {
+        return compreensaoIdioma;
     }
 
-    public void setIdiomaSelecionado(Idioma idiomaSelecionado) {
-        this.idiomaSelecionado = idiomaSelecionado;
+    public void setCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
+        this.compreensaoIdioma = compreensaoIdioma;
     }
 
     public IdiomaService getIdiomaService() {
@@ -399,4 +390,35 @@ public class PesquisadorMB extends AbstractMB {
 		this.atuacaoSelecionada = atuacaoSelecionada;
 	}
 
+    public DataModel<CompreensaoIdioma> getCompreensaoIdiomas() {
+        return compreensaoIdiomas;
+    }
+
+    public void setCompreensaoIdiomas(DataModel<CompreensaoIdioma> compreensaoIdiomas) {
+        this.compreensaoIdiomas = compreensaoIdiomas;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
+	public DataModel<GrandeAreaAtuacao> getTodasAsGrandeAreas() {
+		return todasAsGrandeAreas;
+	}
+
+	public GrandeAreaAtuacaoService getGrandeAreaService() {
+		return grandeAreaService;
+	}
+
+	public void setGrandeAreaService(GrandeAreaAtuacaoService grandeAreaService) {
+		this.grandeAreaService = grandeAreaService;
+	}
+
+	public void setTodasAsGrandeAreas(DataModel<GrandeAreaAtuacao> todasAsGrandeAreas) {
+		this.todasAsGrandeAreas = todasAsGrandeAreas;
+	}
 }

@@ -45,11 +45,11 @@
 
 					
 					<div class="text-center">
-					<h:commandButton value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-default">
+					<h:commandButton id="salvar" value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-default">
 						<f:ajax render="@form" execute="@form" />
 					</h:commandButton>&nbsp;
-					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;
-					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{pesquisadorMB.excluir(pesquisador)}" /> &nbsp;
+					<h:commandButton id="editar" value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;
+					<h:commandButton id="excluir" value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{pesquisadorMB.excluir(pesquisador)}" /> &nbsp;
 					</div>
 				</p:column>
 

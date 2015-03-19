@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="modal fade" id="modalIdioma" tabindex="-1" role="dialog" aria-labelledby="modalIdiomaLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 id="modalIdiomalLabel" class="modal-title">#{mensagens['adicionar.idiomas']}</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="selectIdiomas" value="#{mensagens['idiomas']}" />
+							</div>
+							<div class="col-md-6">
+								<h:selectOneMenu id="selectIdiomas" styleClass="form-control" value="#{pesquisadorMB.idioma}"
+									converter="entityConverter">
+									<f:selectItems value="#{pesquisadorMB.idiomas}" var="idioma" itemLabel="#{idioma.descricao}"
+										itemValue="#{idioma}" />
+									<f:ajax />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						<div class="row top-buffer-10 ">
+							<div class="col-md-2">
+								<h:outputLabel for="proficiencia" value="#{mensagens['label.proficiencia']}" />
+							</div>
+							<div class="col-md-10">
+								<h:inputText id="proficiencia" value="#{pesquisadorMB.compreensaoIdioma.proficiencia}"
+									requiredMessage="#{mensagens['proficiencia.nao.preenchido']}"
+									pt:placeholder="#{mensagens['informe.proficiencia']}" styleClass="form-control" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
+					<h:commandButton action="#{pesquisadorMB.adicionarCompreensaoIdioma}" styleClass="btn btn-primary"
+						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalIdioma">
+						<f:ajax execute="painelIdioma" render="painelIdioma" />
+					</h:commandButton>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:composition>

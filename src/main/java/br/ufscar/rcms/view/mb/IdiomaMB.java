@@ -14,99 +14,84 @@ import br.ufscar.rcms.servico.IdiomaService;
 @ManagedBean(name = "idiomaMB")
 public class IdiomaMB extends AbstractMB {
 
-	private static final long serialVersionUID = -7215958678138311243L;
+    private static final long serialVersionUID = -7215958678138311243L;
 
-	private IdiomaService idma;
-	private transient DataModel<Idioma> idiomas;
+    private transient DataModel<Idioma> idiomas;
 
-	@ManagedProperty("#{idiomaService}")
-	private IdiomaService idiomaService;
+    @ManagedProperty("#{idiomaService}")
+    private IdiomaService idiomaService;
 
-	private Idioma idioma;
+    private Idioma idioma;
 
-	@PostConstruct
-	public void inicializar() {
+    @PostConstruct
+    public void inicializar() {
 
-		setIdioma(new Idioma());
-		
-		Idioma idiomaEdicao = (Idioma) getFlashObject(FLASH_KEY_IDIOMA);
-		if (idiomaEdicao != null) {
+        limparDados();
+        carregarDados();
+    }
+
+    protected void limparDados() {
+        idioma = new Idioma();
+    }
+
+    protected void carregarDados() {
+
+        Idioma idiomaEdicao = (Idioma) getFlashObject(FLASH_KEY_IDIOMA);
+        if (idiomaEdicao != null) {
             idioma = idiomaEdicao;
-            
-		}
+        }
 
-		idiomas =new ListDataModel<Idioma>(idiomaService.buscarTodas());
-		
-	}
+        idiomas = new ListDataModel<Idioma>(idiomaService.buscarTodos());
+    }
 
-	public IdiomaService getIdma() {
-		return idma;
-	}
+    public DataModel<Idioma> getIdiomas() {
+        return idiomas;
+    }
 
-	public void setIdma(IdiomaService idma) {
-		this.idma = idma;
-	}
+    public void setIdiomas(DataModel<Idioma> idiomas) {
+        this.idiomas = idiomas;
+    }
 
-	public DataModel<Idioma> getIdiomas() {
-		return idiomas;
-	}
+    public String salvar() {
 
-	public void setIdiomas(DataModel<Idioma> idiomas) {
-		this.idiomas = idiomas;
-	}
+        idiomaService.salvar(idioma);
 
-	public String salvar() {
+        // TODO i18n
+        adicionarMensagemInfo("Idioma " + idioma.getDescricao() + " cadastrado com sucesso!");
 
-		if (getIdioma() != null) {
-			Idioma idiomaExistente = (Idioma) getIdiomaService()
-					.buscarPorDescricao(getIdioma().getDescricao());
+        limparDados();
 
-			if (idiomaExistente == null) {
-				getIdiomaService().salvar(getIdioma());
-				// TODO i18n
-				adicionarMensagemInfo("Idioma " + idioma.getDescricao()
-						+ " cadastrado com sucesso!");
-				idioma = new Idioma();
-			}
+        keepMessagesOnRedirect();
+        return CONSULTA_IDIOMAS;
+    }
 
-			else {
-				adicionarMensagemAlerta("Já existe um idioma com a descrição: "
-						+ idioma.getDescricao());
-			}
+    public String excluirIdioma(Idioma idioma) {
 
-		}
-		return CONSULTA_IDIOMAS;
+        idiomaService.remover(idioma);
 
-	}
+        return CONSULTA_IDIOMAS;
+    }
 
-	public String excluirIdioma(Idioma idioma) {
+    public String editarIdioma(Idioma idioma) {
 
-		idiomaService.remover(idioma);
+        setFlashObject(FLASH_KEY_IDIOMA, idioma);
 
-		return CONSULTA_IDIOMAS;
+        return CADASTRO_IDIOMAS;
+    }
 
-	}
+    public IdiomaService getIdiomaService() {
+        return idiomaService;
+    }
 
-	public String editarIdioma(Idioma idioma) {
+    public void setIdiomaService(IdiomaService idiomaService) {
+        this.idiomaService = idiomaService;
+    }
 
-		setFlashObject(FLASH_KEY_IDIOMA, idioma);
+    public Idioma getIdioma() {
+        return idioma;
+    }
 
-		return CADASTRO_IDIOMAS;
-	}
-
-	public IdiomaService getIdiomaService() {
-		return idiomaService;
-	}
-
-	public void setIdiomaService(IdiomaService idiomaService) {
-		this.idiomaService = idiomaService;
-	}
-
-	public Idioma getIdioma() {
-		return idioma;
-	}
-
-	public void setIdioma(Idioma idioma) {
-		this.idioma = idioma;
-	}
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
 }

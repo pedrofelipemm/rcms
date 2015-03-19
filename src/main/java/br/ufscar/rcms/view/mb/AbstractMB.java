@@ -16,9 +16,14 @@ import javax.faces.context.Flash;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @ManagedBean
 @SuppressWarnings("serial")
 public abstract class AbstractMB implements Serializable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMB.class);
 
     private static final String BUNDLE_NAME = "bundle";
 
@@ -30,15 +35,15 @@ public abstract class AbstractMB implements Serializable {
     public static final String EXIBE_PESQUISADOR = "pesquisador";
 
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
-    
+
     // Idioma
     public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
-    
+
     public static final String CONSULTA_IDIOMAS = "consultaIdiomas";
-    
+
     public static final String FLASH_KEY_IDIOMA = "cadastroIdioma";
 
-    // ¡rea de AtuaÁ„o
+    // √Årea de Atua√ß√£o
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
 
     public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "grandearea";
@@ -86,17 +91,14 @@ public abstract class AbstractMB implements Serializable {
     // protected abstract void carregarDados();
 
     public FacesContext getCurrentInstance() {
-
         return FacesContext.getCurrentInstance();
     }
 
     public UIViewRoot getViewRoot() {
-
         return getCurrentInstance().getViewRoot();
     }
 
     public ExternalContext getExternalContext() {
-
         return getCurrentInstance().getExternalContext();
     }
 
@@ -111,8 +113,8 @@ public abstract class AbstractMB implements Serializable {
         }
 
         if (getFlash() == null) {
-            // TODO PEDRO
-            System.out.println("Internal Framework Problem");
+            // TODO i18n
+            LOGGER.error("Internal Framework Problem");
             return;
         }
         getFlash().put(key, value);
@@ -121,8 +123,8 @@ public abstract class AbstractMB implements Serializable {
     public Object getFlashObject(String key) {
 
         if (getFlash() == null) {
-            // TODO PEDRO
-            System.out.println("Internal Framework Problem");
+            // TODO i18n
+            LOGGER.error("Internal Framework Problem");
             return null;
         }
 

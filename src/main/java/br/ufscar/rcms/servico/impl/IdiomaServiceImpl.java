@@ -21,7 +21,12 @@ public class IdiomaServiceImpl implements IdiomaService {
 
     @Override
     public void salvar(Idioma idioma) {
-        idiomaDAO.salvarOuAtualizar(idioma);
+
+        if (idiomaDAO.buscarPorDescricao(idioma.getDescricao()) == null) {
+            idiomaDAO.salvarOuAtualizar(idioma);
+        } else {
+            // TODO PEDRO
+        }
     }
 
     @Override
@@ -30,23 +35,23 @@ public class IdiomaServiceImpl implements IdiomaService {
     }
 
     @Override
-    public List<Idioma> buscarTodas() {
+    public List<Idioma> buscarTodos() {
         return idiomaDAO.buscarTodos();
     }
-    
+
     @Override
 	public void remover(Idioma idioma) {
-		idiomaDAO.remover(idioma);		
+		idiomaDAO.remover(idioma);
 	}
 
     @Override
     public Idioma buscarPorDescricao(String Descricao) {
         return idiomaDAO.buscarPorDescricao(Descricao);
     }
-    
+
     public List<Idioma> listar()
     {
-    return this.idiomaDAO.listar();
+    return idiomaDAO.listar();
     }
 
 //    @Override

@@ -19,19 +19,19 @@ public class Pesquisador extends Usuario {
 
     private static final long serialVersionUID = 7468024654193724256L;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "codigo_lattes", nullable = false, unique = true)
     private String codigoLattes;
 
-    @Column
+    @Column(name = "sexo")
     private String sexo;
 
-    @Column
+    @Column(name = "foto")
     private byte[] foto;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private Endereco endereco = new Endereco();
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "resumo_profissional", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String resumoProfissional;
 
     @OrderColumn
@@ -71,8 +71,8 @@ public class Pesquisador extends Usuario {
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisadorLinhaPesquisaPK.pesquisador")
-    private List<PesquisadorLinhaPesquisa> pesquisadorLinhaPesquisa = new ArrayList<PesquisadorLinhaPesquisa>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<LinhaDePesquisa> linhasDePesquisa = new ArrayList<LinhaDePesquisa>();
 
     public String getCodigoLattes() {
         return codigoLattes;
@@ -220,12 +220,12 @@ public class Pesquisador extends Usuario {
         this.orientacoes = orientacoes;
     }
 
-    public List<PesquisadorLinhaPesquisa> getPesquisadorLinhaPesquisa() {
-        return pesquisadorLinhaPesquisa;
+    public List<LinhaDePesquisa> getLinhasDePesquisa() {
+        return linhasDePesquisa;
     }
 
-    public void setPesquisadorLinhaPesquisa(List<PesquisadorLinhaPesquisa> pesquisadorLinhaPesquisa) {
-        this.pesquisadorLinhaPesquisa = pesquisadorLinhaPesquisa;
+    public void setLinhasDePesquisa(List<LinhaDePesquisa> linhasDePesquisa) {
+        this.linhasDePesquisa = linhasDePesquisa;
     }
 
     public void addCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {

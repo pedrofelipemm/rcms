@@ -51,7 +51,7 @@ public class GrandeAreaAtuacaoMB extends AbstractMB {
 
 	public void salvar() {
 
-		if (gdeArea.getId() != null) {
+        if (gdeArea.getIdGrandeAreaAtuacao() != null) {
 			getGrandeAreaAtuacaoService().alterar(gdeArea);
 			adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso",
 					gdeArea.getDescricao());

@@ -2,9 +2,11 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,15 +18,17 @@ public class PremioTitulo extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_premio_titulo")
     private Integer idPremioTitulo;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_premio_titulo_pesquisador"))
     private Pesquisador pesquisador;
 
-    @Column(nullable = false)
+    @Column(name = "ano", nullable = false)
     private Integer ano;
 
-    @Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
     public PremioTitulo() {

@@ -161,8 +161,8 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>consultaLinhaPesquisa</from-outcome>
-			<to-view-id>/pages/consulta/linhaPesquisa.xhtml</to-view-id>
+			<from-outcome>consultaLinhaDePesquisa</from-outcome>
+			<to-view-id>/pages/consulta/linhaDePesquisa.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
@@ -170,8 +170,8 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>cadastroLinhaPesquisa</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroLinhaPesquisa.xhtml</to-view-id>
+			<from-outcome>cadastroLinhaDePesquisa</from-outcome>
+			<to-view-id>/pages/cadastro/cadastroLinhaDePesquisa.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>

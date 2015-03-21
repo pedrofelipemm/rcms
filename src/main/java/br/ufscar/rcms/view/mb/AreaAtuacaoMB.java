@@ -52,7 +52,7 @@ public class AreaAtuacaoMB extends AbstractMB {
 
 	public void salvar() {
 
-		if (area.getId() != null) {
+        if (area.getIdAreaAtuacao() != null) {
 			areaAtuacaoService.alterar(area);
 			adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso",
 					area.getDescricao());

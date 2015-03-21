@@ -21,22 +21,23 @@ public class ProjetoPesquisa extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_projeto_de_pesquisa")
     private Integer idProjetoPesquisa;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "nome", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String nome;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "descricao", length = COLUMN_DEFAULT_LENGTH)
     private String descricao;
 
-    @Column
+    @Column(name = "ano_inicio")
     private Integer anoInicio;
 
-    @Column
+    @Column(name = "ano_conclusao")
     private Integer anoConclusao;
 
     // TODO AGUARDANDO VALIDAÇÃO
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "agencia_de_fomento", length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })

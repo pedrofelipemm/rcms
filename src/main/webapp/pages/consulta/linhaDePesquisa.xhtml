@@ -15,41 +15,38 @@
         	</div>
         </div>
 		
-		<h:form id="formLinhaPesquisa">
+		<h:form id="formLinhaDePesquisa">
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
-			<p:dataTable id="tabelaLinhasPesquisa" value="#{linhaPesquisaMB.linhasDePesquisa}" var="linhaPesquisa" styleClass="table table-hover"
+			<p:dataTable id="tabelaLinhasDePesquisa" value="#{linhaDePesquisaMB.linhasDePesquisa}" var="linhaDePesquisa" styleClass="table table-hover"
 				headerClass="col-width-50" rowClasses="col-width-50" 
 				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
-				rendered="#{not empty linhaPesquisaMB.linhasDePesquisa}" paginator="true" rows="10">
+				rendered="#{not empty linhaDePesquisaMB.linhasDePesquisa}" paginator="true" rows="10">
  
  				<p:column width="30">
  					<f:facet name="header">
  						<h:outputLabel value="#"/>
  					</f:facet>
- 					<h:outputLabel value="#{linhaPesquisaMB.linhasDePesquisa.rowIndex + 1}"/>
+ 					<h:outputLabel value="#{linhaDePesquisaMB.linhasDePesquisa.rowIndex + 1}"/>
  				</p:column>
  				
     			<p:column headerClass="col-xs-10">
     				<f:facet name="header">
     					<h:outputLabel value="#{mensagens['descricao']}"/>
     				</f:facet>
-    				<h:outputLabel value="#{linhaPesquisa.descricao}" />
+    				<h:outputLabel value="#{linhaDePesquisa.descricao}" />
     			</p:column>
 
 				<p:column headerClass="text-center">
 					<f:facet name="header">
-						<a href="${request.contextPath}/pages/cadastro/cadastroLinhaPesquisa.xhtml" class="btn btn-default"> #{mensagens['adicionar.linha.de.pesquisa']} </a>
+						<a href="${request.contextPath}/pages/cadastro/cadastroLinhaDePesquisa.xhtml" class="btn btn-default"> #{mensagens['adicionar.linha.de.pesquisa']} </a>
 					</f:facet>
 
 					
 					<div class="text-center">
-					<h:commandButton value="#{mensagens['importar.dados.lattes']}" action="#{linhaPesquisaMB.salvarDadosLattes(linhaPesquisa)}" styleClass="btn btn-default">
-						<f:ajax render="@form" execute="@form" />
-					</h:commandButton>&nbsp;
-					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{linhaPesquisaMB.editar(linhaPesquisa)}" /> &nbsp;
-					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{linhaPesquisaMB.excluir(linhaPesquisa)}" /> &nbsp;
+					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{linhaDePesquisaMB.editar(linhaDePesquisa)}" /> &nbsp;
+					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{linhaDePesquisaMB.excluir(linhaDePesquisa)}" /> &nbsp;
 					</div>
 				</p:column>
 

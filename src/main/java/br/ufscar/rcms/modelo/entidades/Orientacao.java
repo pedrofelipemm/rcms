@@ -2,11 +2,13 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,27 +21,29 @@ public abstract class Orientacao extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_orientacao")
     private Long idOrientacao;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_orientacao_pesquisador"))
     private Pesquisador pesquisador;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "nome_do_aluno", length = COLUMN_DEFAULT_LENGTH)
     private String nomeDoAluno;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "instituicao", length = COLUMN_DEFAULT_LENGTH)
     private String instituicao;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "agencia_de_fomento", length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "tipo_de_orientacao", length = COLUMN_DEFAULT_LENGTH)
     private String tipoDeOrientacao;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "titulo_trabalho", length = COLUMN_DEFAULT_LENGTH)
     private String tituloTrabalho;
 
-    @Column(length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "situacao", length = COLUMN_DEFAULT_LENGTH)
     private String situacao;
 
     public String getTituloTrabalho() {

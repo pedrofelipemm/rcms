@@ -6,9 +6,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,27 +19,29 @@ import javax.persistence.Table;
 @Table(name = "\"AREA_ATUACAO\"")
 public class AreaAtuacao extends Entidade {
 
+    private static final long serialVersionUID = -3948561964306499761L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_area_atuacao")
+    private Integer idAreaAtuacao;
 
-    @Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    private static final long serialVersionUID = -3948561964306499761L;
+    @ManyToOne
+    @JoinColumn(name = "id_grande_area_atuacao", foreignKey = @ForeignKey(name = "fk_area_atuacao_grande_area_atuacao"))
+    private GrandeAreaAtuacao grandeAreaAtuacao;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<SubAreaAtuacao> subAreasAtuacao;
-    
-    @ManyToOne
-    private GrandeAreaAtuacao grandeAreaAtuacao;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdAreaAtuacao() {
+        return idAreaAtuacao;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdAreaAtuacao(Integer idAreaAtuacao) {
+        this.idAreaAtuacao = idAreaAtuacao;
     }
 
     public String getDescricao() {
@@ -61,7 +65,7 @@ public class AreaAtuacao extends Entidade {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((idAreaAtuacao == null) ? 0 : idAreaAtuacao.hashCode());
         return result;
     }
 
@@ -85,11 +89,11 @@ public class AreaAtuacao extends Entidade {
         } else if (!descricao.equals(other.descricao)) {
             return false;
         }
-        if (id == null) {
-            if (other.id != null) {
+        if (idAreaAtuacao == null) {
+            if (other.idAreaAtuacao != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!idAreaAtuacao.equals(other.idAreaAtuacao)) {
             return false;
         }
         return true;
@@ -97,7 +101,7 @@ public class AreaAtuacao extends Entidade {
 
     @Override
     public String toString() {
-        return "AreaAtuacao [Id=" + getId() + ", Descricao=" + getDescricao() + "]";
+        return "AreaAtuacao [Id=" + getIdAreaAtuacao() + ", Descricao=" + getDescricao() + "]";
     }
 
 	public GrandeAreaAtuacao getGrandeAreaAtuacao() {

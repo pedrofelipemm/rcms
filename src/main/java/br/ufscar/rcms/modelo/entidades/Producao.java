@@ -18,24 +18,25 @@ public abstract class Producao extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producao")
     private Integer idProducao;
 
-    @Column(nullable = false)
+    @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @Column
+    @Column(name = "ano")
     private Integer ano;
 
-    @Column
+    @Column(name = "volume")
     private Integer volume;
 
-    @Column
+    @Column(name = "paginas")
     private String paginas;
 
-    @Column
+    @Column(name = "link")
     private String link;
 
-    @Column
+    @Column(name = "pdf")
     private byte[] pdf;
 
     public Integer getIdProducao() {

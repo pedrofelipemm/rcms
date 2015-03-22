@@ -1,179 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     					http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
-	
+	version="2.2">
+
 	<application>
 
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-	
+
 		<resource-bundle>
 			<base-name>bundle</base-name>
 			<var>mensagens</var>
 		</resource-bundle>
-		
+
 		<locale-config>
 			<default-locale>pt_BR</default-locale>
 			<supported-locale>en</supported-locale>
 		</locale-config>
-		
+
 		<action-listener>org.omnifaces.eventlistener.ResetInputAjaxActionListener</action-listener>
-		
+
 	</application>
-	
+
 	<factory>
-    	<exception-handler-factory>org.omnifaces.exceptionhandler.FullAjaxExceptionHandlerFactory</exception-handler-factory>
+		<exception-handler-factory>org.omnifaces.exceptionhandler.FullAjaxExceptionHandlerFactory</exception-handler-factory>
 	</factory>
-	
+
+	<!-- INCIO NAVIGATION RULES -->
+	<!-- INCIO ADMIN - CADASTRO -->
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroPesquisador</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroPesquisador.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/pesquisador/pesquisador.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>consultaPesquisadores</from-outcome>
-			<to-view-id>/pages/consulta/pesquisadores.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>consultaIdiomas</from-outcome>
-			<to-view-id>/pages/consulta/idiomas.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroAreaAtuacao</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroAreaAtuacao.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/area-atuacao/area-atuacao.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>consultaAreaAtuacao</from-outcome>
-			<to-view-id>/pages/consulta/areaAreaAtuacao.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroGrandeAreaAtuacao</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroGrandeAreaAtuacao.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>consultaGrandeAreaAtuacao</from-outcome>
-			<to-view-id>/pages/consulta/grandeAreaAtuacao.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/area-atuacao/grande-area-atuacao.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 
-	
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroIdiomas</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroIdioma.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/idioma/idioma.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>listagemPesquisadores</from-outcome>
-			<to-view-id>/pages/listagem/pesquisadores.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>exibirPesquisador</from-outcome>
-			<to-view-id>/pages/listagem/pesquisador.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
-	
+
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroSubAreaAtuacao</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroSubAreaAtuacao.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/area-atuacao/sub-area-atuacao.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>consultaSubAreaAtuacao</from-outcome>
-			<to-view-id>/pages/consulta/subAreaAtuacao.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroSobreOGrupo</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroSobreOGrupo.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/sobre-o-grupo/sobre-o-grupo.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id></from-view-id>
-		<navigation-case>
-			<from-outcome>sobreOGrupo</from-outcome>
-			<to-view-id>/pages/listagem/sobreOGrupo.xhtml</to-view-id>
-			<redirect/>
-		</navigation-case>
-	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>consultaLinhaDePesquisa</from-outcome>
-			<to-view-id>/pages/consulta/linhaDePesquisa.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/consulta/linha-pesquisa/linhas-pesquisa.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
+	<!-- FIM -ADMIN - CADASTRO -->
+
+	<!-- INCIO - ADMIN - CONSULTA -->
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaPesquisadores</from-outcome>
+			<to-view-id>/paginas/admin/consulta/pesquisador/pesquisadores.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaIdiomas</from-outcome>
+			<to-view-id>/paginas/admin/consulta/idioma/idiomas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaAreaAtuacao</from-outcome>
+			<to-view-id>/paginas/admin/consulta/area-atuacao/areas-atuacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaGrandeAreaAtuacao</from-outcome>
+			<to-view-id>/paginas/admin/consulta/area-atuacao/grandes-area-atuacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaSubAreaAtuacao</from-outcome>
+			<to-view-id>/paginas/admin/consulta/area-atuacao/sub-areas-atuacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroLinhaDePesquisa</from-outcome>
-			<to-view-id>/pages/cadastro/cadastroLinhaDePesquisa.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/paginas/admin/cadastro/linha-pesquisa/linha-pesquisa.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<!-- FIM - ADMIN - CONSULTA -->
+
+	<!-- INCIO - PORTAL - CONSULTA -->
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>listagemPesquisadores</from-outcome>
+			<to-view-id>/paginas/portal/consulta/pesquisador/pesquisadores.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>exibirPesquisador</from-outcome>
+			<to-view-id>/paginas/portal/consulta/pesquisador/pesquisador.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>sobreOGrupo</from-outcome>
+			<to-view-id>/paginas/portal/consulta/sobre-o-grupo/sobre-o-grupo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- FIM - PORTAL - CONSULTA -->
+	<!-- FIM NAVIGATION RULES -->
 
 </faces-config>

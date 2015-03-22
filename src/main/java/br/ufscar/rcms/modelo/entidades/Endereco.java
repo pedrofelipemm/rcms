@@ -23,10 +23,10 @@ public class Endereco extends Entidade {
     private String enderecoProfissional;
 
     @Column(name = "latitude")
-    private double enderecoProfissionalLatitude;
+    private Double enderecoProfissionalLatitude;
 
     @Column(name = "longitude")
-    private double enderecoProfissionalLongitude;
+    private Double enderecoProfissionalLongitude;
 
     @OneToOne
     private Pesquisador pesquisador;
@@ -55,19 +55,19 @@ public class Endereco extends Entidade {
         this.enderecoProfissional = enderecoProfissional;
     }
 
-    public double getEnderecoProfissionalLatitude() {
+    public Double getEnderecoProfissionalLatitude() {
         return enderecoProfissionalLatitude;
     }
 
-    public void setEnderecoProfissionalLatitude(double enderecoProfissionalLatitude) {
+    public void setEnderecoProfissionalLatitude(Double enderecoProfissionalLatitude) {
         this.enderecoProfissionalLatitude = enderecoProfissionalLatitude;
     }
 
-    public double getEnderecoProfissionalLongitude() {
+    public Double getEnderecoProfissionalLongitude() {
         return enderecoProfissionalLongitude;
     }
 
-    public void setEnderecoProfissionalLongitude(double enderecoProfissionalLongitude) {
+    public void setEnderecoProfissionalLongitude(Double enderecoProfissionalLongitude) {
         this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
     }
 

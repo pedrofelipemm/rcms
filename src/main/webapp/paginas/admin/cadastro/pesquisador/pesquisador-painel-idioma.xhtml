@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+			
+				<p:panel id="painelIdioma">
+					<h3>#{mensagens['idiomas']}</h3>
+					<div class="row">
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalIdioma">#{mensagens['adicionar']}</button>
+						</div>
+					</div>
+					<h:dataTable id="tableCompreensaoIdiomas" value="#{pesquisadorMB.pesquisador.compreensaoIdiomas}"
+						var="compreensaoIdioma" styleClass="table table-hover" headerClass="col-width-50" rowClasses="col-width-50">
+						<h:column headerClass="col-xs-3">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['idioma']}" />
+							</f:facet>
+							<h:outputLabel value="#{compreensaoIdioma.compreensaoIdiomaPK.idioma.descricao}"/>
+						</h:column>
+						<h:column headerClass="col-xs-7">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['proficiencia']}" />
+							</f:facet>
+							<h:outputLabel value="#{compreensaoIdioma.proficiencia}"/>
+						</h:column>
+						<h:column headerClass="col-xs-2 text-center">
+							<f:facet name="header">
+							</f:facet>
+							<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-default"
+								action="#{pesquisadorMB.removerCompreensaoIdioma(compreensaoIdioma)}">
+								<f:ajax render=":formPesquisador:painelIdioma" />
+							</h:commandButton>
+						</h:column>
+					</h:dataTable>
+					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-idioma.xhtml" />
+				</p:panel>
+				
+			</div>
+		</div>
+	</div>
+
+</ui:composition>

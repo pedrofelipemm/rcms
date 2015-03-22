@@ -42,7 +42,7 @@
 	</context-param>
 	
   	<welcome-file-list>
-  		<welcome-file>pages/index.xhtml</welcome-file>
+  		<welcome-file>paginas/index.xhtml</welcome-file>
   	</welcome-file-list>
   
   	<context-param>
@@ -62,15 +62,15 @@
   	
   	<error-page>
 		<error-code>404</error-code>
-		<location>/pages/erro/erro.xhtml</location>
+		<location>/paginas/admin/erro/erro.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/pages/erro/erro.xhtml</location>
+		<location>/paginas/admin/erro/erro.xhtml</location>
 	</error-page>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
-		<location>/pages/erro/erro.xhtml</location>
+		<location>/paginas/admin/erro/erro.xhtml</location>
 	</error-page>
   	
 </web-app>

@@ -29,53 +29,35 @@ public abstract class AbstractMB implements Serializable {
 
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
-
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
-
     public static final String EXIBE_PESQUISADOR = "pesquisador";
-
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
 
     // Idioma
     public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
-
     public static final String CONSULTA_IDIOMAS = "consultaIdiomas";
-
     public static final String FLASH_KEY_IDIOMA = "cadastroIdioma";
 
     // Área de Atuação
     public static final String FLASH_KEY_AREA_ATUACAO = "area";
-
     public static final String FLASH_KEY_GRANDE_AREA_ATUACAO = "grandearea";
-
     public static final String CADASTRO_GRANDE_AREA = "cadastroGrandeAreaAtuacao";
-
     public static final String CONSULTA_GRANDE_AREA = "consultaGrandeAreaAtuacao";
-
     public static final String CADASTRO_AREA_ATUACAO = "cadastroAreaAtuacao";
-
     public static final String CONSULTA_AREA_ATUACAO = "consultaAreaAtuacao";
-
     public static final String FLASH_KEY_SUBAREA_ATUACAO = "subarea";
-
     public static final String CADASTRO_SUBAREA_ATUACAO = "cadastroSubAreaAtuacao";
-
     public static final String CONSULTA_SUBAREA_ATUACAO = "constultaSubAreaAtuacao";
 
     // Sobre O Grupo
     public static final String CADASTRO_SOBRE_O_GRUPO = "cadastroSobreOGrupo";
-
     public static final String CONSULTA_SOBRE_O_GRUPO = "consultaSobreOGrupo";
-
     public static final String EXIBE_SOBRE_O_GRUPO = "sobreOGrupo";
-
     public static final String FLASH_KEY_SOBRE_O_GRUPO = "sobreOGrupo";
 
     // Linhas de Pesquisa
     public static final String CADASTRO_LINHA_PESQUISA = "cadastroLinhaDePesquisa";
-
     public static final String CONSULTA_LINHAS_PESQUISA = "consultaLinhaDePesquisa";
-
     public static final String FLASH_KEY_LINHA_PESQUISA = "linhaDePesquisa";
 
     public Map<String, Boolean> getTiposUsuario() {
@@ -109,7 +91,7 @@ public abstract class AbstractMB implements Serializable {
     public void setFlashObject(String key, Object value) {
 
         if (key == null || value == null) {
-            throw new IllegalArgumentException("key.value.nao.nulo");
+            throw new IllegalArgumentException(getMessage("key.value.nao.nulo"));
         }
 
         if (getFlash() == null) {
@@ -149,7 +131,7 @@ public abstract class AbstractMB implements Serializable {
     public String getMessage(String key) {
 
         if (key == null) {
-            throw new IllegalArgumentException("key.nao.nulo");
+            throw new IllegalArgumentException(getMessage("key.nao.nulo"));
         }
 
         return getResourceBundle().getString(key);

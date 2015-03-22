@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
+import br.ufscar.rcms.factory.AtuacaoPesquisadorFactory;
 import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
@@ -93,7 +94,9 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder areaAtuacoes(AreaAtuacaoLattes areaAtuacao) {
-        // TODO Pedro
+        for (String descricao : areaAtuacao.getDescricao()) {
+            pesquisador.addAtuacoesPesquisador(AtuacaoPesquisadorFactory.createAtuacaoPesquisador(pesquisador, descricao));
+        }
         return this;
     }
 

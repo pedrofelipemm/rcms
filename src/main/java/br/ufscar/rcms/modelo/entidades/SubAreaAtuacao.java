@@ -1,5 +1,6 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ public class SubAreaAtuacao
   @Column(nullable=false)
   private String descricao;
   @OneToMany(cascade={javax.persistence.CascadeType.ALL}, fetch=FetchType.EAGER)
-  private List<EspecializacaoAreaAtuacao> especializacoes;
+  private List<EspecializacaoAreaAtuacao> especializacoes = new ArrayList<EspecializacaoAreaAtuacao>();
   @ManyToOne
   private AreaAtuacao areaAtuacao;
 
@@ -65,4 +66,38 @@ public AreaAtuacao getAreaAtuacao() {
 public void setAreaAtuacao(AreaAtuacao areaAtuacao) {
 	this.areaAtuacao = areaAtuacao;
 }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof SubAreaAtuacao)) {
+            return false;
+        }
+        SubAreaAtuacao other = (SubAreaAtuacao) obj;
+        if (descricao == null) {
+            if (other.descricao != null) {
+                return false;
+            }
+        } else if (!descricao.equals(other.descricao)) {
+            return false;
+        }
+        return true;
+    }
+
+    public void addEspecializacao(EspecializacaoAreaAtuacao especializacao) {
+        especializacoes.add(especializacao);
+    }
 }

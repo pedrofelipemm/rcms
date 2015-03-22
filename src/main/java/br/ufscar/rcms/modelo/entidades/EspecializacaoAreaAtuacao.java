@@ -44,12 +44,42 @@ public class EspecializacaoAreaAtuacao extends Entidade {
 	public void setSubAreaAtuacao(SubAreaAtuacao subAreaAtuacao) {
 		this.subAreaAtuacao = subAreaAtuacao;
 	}
-	
-	@Override
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof EspecializacaoAreaAtuacao)) {
+            return false;
+        }
+        EspecializacaoAreaAtuacao other = (EspecializacaoAreaAtuacao) obj;
+        if (descricao == null) {
+            if (other.descricao != null) {
+                return false;
+            }
+        } else if (!descricao.equals(other.descricao)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
 	public String toString(){
-		return "Grande área: " + this.getSubAreaAtuacao().getAreaAtuacao().getGrandeAreaAtuacao().getDescricao() +
-				" / Área: " + this.getSubAreaAtuacao().getAreaAtuacao().getDescricao() +
-				" / Subárea: " + this.getSubAreaAtuacao().getDescricao() +
-				" / Especialização: " + this.getDescricao();
+		return "Grande área: " + getSubAreaAtuacao().getAreaAtuacao().getGrandeAreaAtuacao().getDescricao() +
+				" / Área: " + getSubAreaAtuacao().getAreaAtuacao().getDescricao() +
+				" / Subárea: " + getSubAreaAtuacao().getDescricao() +
+				" / Especialização: " + getDescricao();
 	}
 }

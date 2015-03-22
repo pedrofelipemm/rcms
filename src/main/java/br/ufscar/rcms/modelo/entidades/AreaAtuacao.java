@@ -1,5 +1,6 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,8 +28,8 @@ public class AreaAtuacao extends Entidade {
     private static final long serialVersionUID = -3948561964306499761L;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SubAreaAtuacao> subAreasAtuacao;
-    
+    private List<SubAreaAtuacao> subAreasAtuacao = new ArrayList<SubAreaAtuacao>();
+
     @ManyToOne
     private GrandeAreaAtuacao grandeAreaAtuacao;
 
@@ -61,7 +62,6 @@ public class AreaAtuacao extends Entidade {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -73,23 +73,15 @@ public class AreaAtuacao extends Entidade {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof AreaAtuacao)) {
             return false;
         }
-
         AreaAtuacao other = (AreaAtuacao) obj;
         if (descricao == null) {
             if (other.descricao != null) {
                 return false;
             }
         } else if (!descricao.equals(other.descricao)) {
-            return false;
-        }
-        if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
             return false;
         }
         return true;
@@ -108,4 +100,7 @@ public class AreaAtuacao extends Entidade {
 		this.grandeAreaAtuacao = grandeAreaAtuacao;
 	}
 
+    public void addSubAreaAtuacao(SubAreaAtuacao subAreaAtuacao) {
+        subAreasAtuacao.add(subAreaAtuacao);
+    }
 }

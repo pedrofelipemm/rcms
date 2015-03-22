@@ -52,6 +52,10 @@ public class SubAreaAtuacaoMB extends AbstractMB {
 
 	public void salvar() {
 
+        for (EspecializacaoAreaAtuacao especializacaoAreaAtuacao : subArea.getEspecializacoes()) {
+            especializacaoAreaAtuacao.setSubAreaAtuacao(subArea);
+        }
+
 		if (getSubArea().getId() != null) {
 			getSubAreaAtuacaoService().alterar(getSubArea());
 			adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso",
@@ -85,10 +89,10 @@ public class SubAreaAtuacaoMB extends AbstractMB {
 	}
 
 	public void removerEspecializacao(EspecializacaoAreaAtuacao espec) {
-		this.getSubArea().getEspecializacoes().remove(
-				this.getSubArea().getEspecializacoes().indexOf(espec));
+		getSubArea().getEspecializacoes().remove(
+				getSubArea().getEspecializacoes().indexOf(espec));
 		setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(
-				this.getSubArea().getEspecializacoes()));
+				getSubArea().getEspecializacoes()));
 	}
 
 	public SubAreaAtuacaoService getSubAreaAtuacaoService() {

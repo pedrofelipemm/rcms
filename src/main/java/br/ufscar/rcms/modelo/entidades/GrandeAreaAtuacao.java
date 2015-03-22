@@ -1,5 +1,6 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ public class GrandeAreaAtuacao extends Entidade{
     private String descricao;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<AreaAtuacao> areasDeAtuacao;
+	private List<AreaAtuacao> areasDeAtuacao = new ArrayList<AreaAtuacao>();
 
     public Integer getId() {
         return id;
@@ -52,4 +53,37 @@ public class GrandeAreaAtuacao extends Entidade{
 		this.areasDeAtuacao = areasDeAtuacao;
 	}
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof GrandeAreaAtuacao)) {
+            return false;
+        }
+        GrandeAreaAtuacao other = (GrandeAreaAtuacao) obj;
+        if (descricao == null) {
+            if (other.descricao != null) {
+                return false;
+            }
+        } else if (!descricao.equals(other.descricao)) {
+            return false;
+        }
+        return true;
+    }
+
+    public void addAreaAtuacao(AreaAtuacao areaAtuacao) {
+        areasDeAtuacao.add(areaAtuacao);
+    }
 }

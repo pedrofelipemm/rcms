@@ -105,25 +105,17 @@ public class LattesServiceImpl implements LattesService {
     }
 
     private CurriculoLattes carregarCurriculosLattes() {
-
-        // TODO PEDRO - Em Desenvolvimento
         CurriculoLattes curriculoLattes = new CurriculoLattes();
         try {
-
             InputStream file = new FileInputStream(pastaScriptLates + arquivoCurriculoLattes);
-
-            String test = IOUtils.toString(file, "UTF-8");
             try {
-                curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, test);
-
+                curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, IOUtils.toString(file, "UTF-8"));
             } catch (JAXBException e) {
                 LOGGER.error(e.getMessage(), e);
             }
-
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
         }
-
         return curriculoLattes;
     }
 

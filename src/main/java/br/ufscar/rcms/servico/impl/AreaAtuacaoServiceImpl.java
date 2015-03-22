@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.dao.AreaAtuacaoDAO;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 
 @Service("areaAtuacaoService")
@@ -21,11 +22,13 @@ public class AreaAtuacaoServiceImpl implements AreaAtuacaoService {
 
     @Override
     public void salvar(AreaAtuacao area) {
+        setAreaAtuacao(area);
         areaDAO.salvar(area);
     }
 
     @Override
     public void alterar(AreaAtuacao area) {
+        setAreaAtuacao(area);
         areaDAO.atualizar(area);
     }
 
@@ -39,9 +42,14 @@ public class AreaAtuacaoServiceImpl implements AreaAtuacaoService {
         return areaDAO.buscarPorDescricao(Descricao);
     }
 
-	@Override
-	public void remover(AreaAtuacao area) {
-		areaDAO.remover(area);		
-	}
+    @Override
+    public void remover(AreaAtuacao area) {
+        areaDAO.remover(area);
+    }
 
+    private void setAreaAtuacao(AreaAtuacao areaAtuacao) {
+        for (SubAreaAtuacao subAreaAtuacao : areaAtuacao.getSubAreasAtuacao()) {
+            subAreaAtuacao.setAreaAtuacao(areaAtuacao);
+        }
+    }
 }

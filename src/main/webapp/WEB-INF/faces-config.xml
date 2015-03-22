@@ -91,6 +91,15 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroLinhaDePesquisa</from-outcome>
+			<to-view-id>/paginas/admin/cadastro/linha-pesquisa/linha-pesquisa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	<!-- FIM -ADMIN - CADASTRO -->
 
 	<!-- INCIO - ADMIN - CONSULTA -->
@@ -138,12 +147,12 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-
+	
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>cadastroLinhaDePesquisa</from-outcome>
-			<to-view-id>/paginas/admin/cadastro/linha-pesquisa/linha-pesquisa.xhtml</to-view-id>
+			<from-outcome>consultaSobreOGrupo</from-outcome>
+			<to-view-id>/paginas/admin/consulta/sobre-o-grupo/sobre-o-grupo.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

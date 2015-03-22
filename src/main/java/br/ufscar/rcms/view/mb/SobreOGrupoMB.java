@@ -11,7 +11,7 @@ import br.ufscar.rcms.servico.SobreOGrupoService;
 @ViewScoped
 @ManagedBean(name = "sobreOGrupoMB")
 public class SobreOGrupoMB extends AbstractMB {
-    
+
     private static final long serialVersionUID = -6107710930010996528L;
 
     @ManagedProperty("#{sobreOGrupoService}")
@@ -40,7 +40,7 @@ public class SobreOGrupoMB extends AbstractMB {
         sobreOGrupo = new SobreOGrupo();
     }
 
-    public void salvar() {
+    public String salvar() {
 
         if (sobreOGrupo != null) {
 
@@ -50,6 +50,9 @@ public class SobreOGrupoMB extends AbstractMB {
             sobreOGrupoService.salvar(sobreOGrupo);
             adicionarMensagemInfoByKey("sobre.o.grupo.salvo.sucesso");
         }
+
+        keepMessagesOnRedirect();
+        return CONSULTA_SOBRE_O_GRUPO;
     }
 
     public String exibir(String idioma) {

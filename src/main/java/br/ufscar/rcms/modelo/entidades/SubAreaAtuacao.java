@@ -96,4 +96,8 @@ public class SubAreaAtuacao extends Entidade {
         }
         return true;
     }
+
+    public void addEspecializacao(EspecializacaoAreaAtuacao especializacao) {
+        especializacoes.add(especializacao);
+    }
 }

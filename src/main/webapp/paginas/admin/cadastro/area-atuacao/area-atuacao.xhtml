@@ -35,7 +35,7 @@
 									pt:placeHolder="#{mensagens['label.subarea.placeholder']}"
 									styleClass="form-control" />
 								<span class="input-group-btn"> <h:commandButton
-										value="#{mensagens['adicionar']}" styleClass="btn btn-default"
+										value="#{mensagens['adicionar']}" styleClass="btn btn-primary"
 										action="#{areaAtuacaoMB.adicionarSubAreaAtuacao}" > &nbsp;
 										<f:ajax render="@form" execute="@form" />
 										</h:commandButton>
@@ -66,7 +66,7 @@
 
 						<h:column headerClass="text-center">
 							<h:commandButton value="#{mensagens['excluir']}"
-								styleClass="btn btn-default"
+								styleClass="btn btn-danger"
 								action="#{areaAtuacaoMB.removerSubAreaAtuacao(area)}" >
 							<f:ajax render="@form" execute="@form" />
 							</h:commandButton>
@@ -78,7 +78,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<h:commandButton value="#{mensagens['salvar']}"
-									action="#{areaAtuacaoMB.salvar}" styleClass="btn btn-default">
+									action="#{areaAtuacaoMB.salvar}" styleClass="btn btn-success">
 									<f:ajax render="@form" execute="@form" />
 								</h:commandButton>
 							</div>

@@ -40,11 +40,11 @@
 
 				<p:column headerClass="text-center">
 					<f:facet name="header">
-						<a href="${request.contextPath}/paginas/admin/cadastro/linha-pesquisa/linha-pesquisa.xhtml" class="btn btn-default"> #{mensagens['adicionar.linha.de.pesquisa']} </a>
+						<a href="${request.contextPath}/paginas/admin/cadastro/linha-pesquisa/linha-pesquisa.xhtml" style="color:white;" class="btn btn-primary"> #{mensagens['adicionar.linha.de.pesquisa']} </a>
 					</f:facet>
 
 					<div class="text-center">
-					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-default" action="#{linhaDePesquisaMB.editar(linhaDePesquisa)}" /> &nbsp;
+					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary" action="#{linhaDePesquisaMB.editar(linhaDePesquisa)}" /> &nbsp;
 					<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{linhaDePesquisaMB.excluir(linhaDePesquisa)}" /> &nbsp;
 					</div>
 				</p:column>

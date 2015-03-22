@@ -38,17 +38,14 @@
 
 				<h:column headerClass="text-center">
 					<f:facet name="header">
-						<a href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-default"> #{mensagens['adicionar.idioma']} </a>
+						<a href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-primary"> #{mensagens['adicionar.idioma']} </a>
 					</f:facet>
 
-					<h:commandButton value="#{mensagens['editar']}"
-						styleClass="btn btn-default" style="margin-bottom: 10px;"
+					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
 						action="#{idiomaMB.editarIdioma(idioma)}" /> &nbsp;
 						
-						<h:commandButton value="#{mensagens['excluir']}"
-							styleClass="btn btn-danger"
-							action="#{idiomaMB.excluirIdioma(idioma)}" />
-						&nbsp;
+						<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+						action="#{idiomaMB.excluirIdioma(idioma)}" />
 				</h:column>
 
 			</h:dataTable>

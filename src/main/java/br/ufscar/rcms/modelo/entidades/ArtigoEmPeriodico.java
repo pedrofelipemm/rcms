@@ -10,13 +10,13 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
 
     private static final long serialVersionUID = -6003079801862161779L;
 
-    @Column
+    @Column(name = "doi")
     private String doi;
 
-    @Column
+    @Column(name = "revista")
     private String revista;
 
-    @Column
+    @Column(name = "numero")
     private Integer numero;
 
     public String getDoi() {

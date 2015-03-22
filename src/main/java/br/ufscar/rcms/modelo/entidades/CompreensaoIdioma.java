@@ -16,7 +16,7 @@ public class CompreensaoIdioma extends Entidade{
     @EmbeddedId
     private CompreensaoIdiomaPK compreensaoIdiomaPK;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "proficiencia", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String proficiencia;
 
     public CompreensaoIdiomaPK getCompreensaoIdiomaPK() {

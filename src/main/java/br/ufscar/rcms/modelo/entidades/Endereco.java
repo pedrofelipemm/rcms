@@ -16,15 +16,16 @@ public class Endereco extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_endereco")
     private Long idEndereco;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "endereco_profissional", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String enderecoProfissional;
 
-    @Column
+    @Column(name = "latitude")
     private double enderecoProfissionalLatitude;
 
-    @Column
+    @Column(name = "longitude")
     private double enderecoProfissionalLongitude;
 
     @OneToOne

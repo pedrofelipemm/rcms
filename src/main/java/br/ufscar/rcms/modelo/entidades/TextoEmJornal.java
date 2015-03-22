@@ -12,10 +12,10 @@ public class TextoEmJornal extends ProducaoBibliografica {
 
     private static final long serialVersionUID = 5261866874043980414L;
 
-    @Column
+    @Column(name = "nome_jornal")
     private String nomeJornal;
 
-    @Column
+    @Column(name = "data_publicacao")
     private Date dataPublicacao;
 
     public String getNomeJornal() {

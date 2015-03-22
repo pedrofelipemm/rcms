@@ -9,23 +9,24 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "\"LINHA_PESQUISA\"")
-public class LinhaPesquisa extends Entidade {
+public class LinhaDePesquisa extends Entidade {
 
     private static final long serialVersionUID = 5307316270928132625L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idLinhaPesquisa;
+    @Column(name = "id_linha_de_pesquisa")
+    private Long idLinhaDePesquisa;
 
-    @Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    public Long getIdLinhaPesquisa() {
-        return idLinhaPesquisa;
+    public Long getIdLinhaDePesquisa() {
+        return idLinhaDePesquisa;
     }
 
-    public void setIdLinhaPesquisa(Long idLinhaPesquisa) {
-        this.idLinhaPesquisa = idLinhaPesquisa;
+    public void setIdLinhaDePesquisa(Long idLinhaDePesquisa) {
+        this.idLinhaDePesquisa = idLinhaDePesquisa;
     }
 
     public String getDescricao() {
@@ -40,7 +41,7 @@ public class LinhaPesquisa extends Entidade {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((idLinhaPesquisa == null) ? 0 : idLinhaPesquisa.hashCode());
+        result = prime * result + ((idLinhaDePesquisa == null) ? 0 : idLinhaDePesquisa.hashCode());
         return result;
     }
 
@@ -52,15 +53,15 @@ public class LinhaPesquisa extends Entidade {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof LinhaPesquisa)) {
+        if (!(obj instanceof LinhaDePesquisa)) {
             return false;
         }
-        LinhaPesquisa other = (LinhaPesquisa) obj;
-        if (idLinhaPesquisa == null) {
-            if (other.idLinhaPesquisa != null) {
+        LinhaDePesquisa other = (LinhaDePesquisa) obj;
+        if (idLinhaDePesquisa == null) {
+            if (other.idLinhaDePesquisa != null) {
                 return false;
             }
-        } else if (!idLinhaPesquisa.equals(other.idLinhaPesquisa)) {
+        } else if (!idLinhaDePesquisa.equals(other.idLinhaDePesquisa)) {
             return false;
         }
         return true;
@@ -68,6 +69,6 @@ public class LinhaPesquisa extends Entidade {
 
     @Override
     public String toString() {
-        return "Linha de Pesquisa [idLinhaPesquisa=" + idLinhaPesquisa + ", descricao=" + descricao + "]";
+        return "Linha de Pesquisa [idLinhaDePesquisa=" + idLinhaDePesquisa + ", descricao=" + descricao + "]";
     }
 }

@@ -2,9 +2,11 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,12 +18,14 @@ public class CitacaoBibliografica extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_citacao_bibliografica")
     private Integer idCitacaoBibliografica;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_citacao_bibliografica_pesquisador"))
     private Pesquisador pesquisador;
 
-    @Column(nullable = false)
+    @Column(name = "nome_citacao", nullable = false)
     private String nomeCitacao;
 
     public CitacaoBibliografica() {

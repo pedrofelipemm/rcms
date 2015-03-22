@@ -72,11 +72,11 @@ public abstract class AbstractMB implements Serializable {
     public static final String FLASH_KEY_SOBRE_O_GRUPO = "sobreOGrupo";
 
     // Linhas de Pesquisa
-    public static final String CADASTRO_LINHA_PESQUISA = "cadastroLinhaPesquisa";
+    public static final String CADASTRO_LINHA_PESQUISA = "cadastroLinhaDePesquisa";
 
-    public static final String CONSULTA_LINHAS_PESQUISA = "consultaLinhaPesquisa";
+    public static final String CONSULTA_LINHAS_PESQUISA = "consultaLinhaDePesquisa";
 
-    public static final String FLASH_KEY_LINHA_PESQUISA = "linhaPesquisa";
+    public static final String FLASH_KEY_LINHA_PESQUISA = "linhaDePesquisa";
 
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();

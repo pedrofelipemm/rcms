@@ -26,12 +26,26 @@
 							required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
 							pt:placeholder="#{mensagens['informe.nome.pesquisador']}" styleClass="form-control"/>
 					</div>
+		        	<div class="form-group">
+            			<h:outputLabel for="login" value="#{mensagens['label.login']} " />
+						<h:inputText id="login" value="#{pesquisadorMB.pesquisador.login}"
+							required="true" requiredMessage="#{mensagens['login.nao.preenchido']}"
+							pt:placeholder="#{mensagens['informe.login.pesquisador']}" styleClass="form-control" />
+            		</div>
 					<div class="form-group">
 		            	<h:outputLabel for="senha" value="#{mensagens['label.senha']}" />
 		            	<h:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}"
 							required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
 							pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
 		            </div>
+            		<div class="form-group">
+		              	<label for="confirma-senha">#{mensagens['label.confirmacao.senha']}</label>
+		              	<h:inputText id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
+							required="true" requiredMessage="#{mensagens['confirmacao.senha.nao.preenchido']}"
+							pt:placeholder="#{mensagens['informe.confirmar.senha.pesquisador']}" styleClass="form-control"/>
+		            </div>
+		        </div>
+		        <div class="col-md-4">
 		            <div class="form-group">
             			<h:outputLabel for="email" value="#{mensagens['label.email']}" />
 		            	<h:inputText id="email" value="#{pesquisadorMB.pesquisador.email}"
@@ -41,26 +55,6 @@
 							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						</h:inputText>
             		</div>
-            		<div class="form-group">
-            			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
-            			<h:inputText id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
-            				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
-            				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control"/>
-            		</div>
-		        </div>
-		        <div class="col-md-4">
-		        	<div class="form-group">
-            			<h:outputLabel for="login" value="#{mensagens['label.login']} " />
-						<h:inputText id="login" value="#{pesquisadorMB.pesquisador.login}"
-							required="true" requiredMessage="#{mensagens['login.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.login.pesquisador']}" styleClass="form-control" />
-            		</div>
-            		<div class="form-group">
-		              	<label for="confirma-senha">#{mensagens['label.confirmacao.senha']}</label>
-		              	<h:inputText id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
-							required="true" requiredMessage="#{mensagens['confirmacao.senha.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.confirmar.senha.pesquisador']}" styleClass="form-control"/>
-		            </div>
             		<div class="form-group">
             			<h:outputLabel for="codigoLattes" value="#{mensagens['label.codigo.lattes']} " />
 						<h:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
@@ -85,6 +79,32 @@
             		</div>
           		</div>
         	</div>
+			<div class="row">
+          		<div class="col-md-12">
+            		<div class="form-group">
+              			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
+              			<h:inputTextarea id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
+              				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
+              				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control" rows="5"/>
+            		</div>
+          		</div>
+        	</div>
+        	<div class="row">
+          		<div class="col-md-6">
+            		<div class="form-group">
+              			<h:outputLabel for="enderecoProfissionalLatitude" value="#{mensagens['label.endereco.latitude']}"/>
+              			<h:inputText id="enderecoProfissionalLatitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLatitude}"
+              				styleClass="form-control" />
+            		</div>
+          		</div>
+          		<div class="col-md-6">
+            		<div class="form-group">
+              			<h:outputLabel for="enderecoProfissionalLongitude" value="#{mensagens['label.endereco.longitude']}"/>
+              			<h:inputText id="enderecoProfissionalLongitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLongitude}"
+              				styleClass="form-control" />
+            		</div>
+          		</div>
+        	</div>
         	<div class="row">
           		<div class="col-md-12">
             		<div class="form-group">
@@ -98,51 +118,9 @@
 
 			<ui:include src="/pages/cadastro/painelIdioma.xhtml" />
 
-			<div class="row">
-				<div class="col-md-12">
-            		<div class="form-group">
-						<p:panel id="panelAtuacaoDoPesquisador">
-						
-						<div class="row">
-			        		<div class="col-md-5">
-			        			<h3>#{mensagens['area.de.atuacao']}</h3>
-			        		</div>
-			        	</div>
-			        	<div class="row">
-			        		<div class="col-md-3">
-			        			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">#{mensagens['adicionar']}</button>
-			        		</div>
-			        	</div>
-        
-			
-						<h:dataTable id="atuacaoDoPesquisador" value="#{pesquisadorMB.pesquisador.areaAtuacoes}" var="area" styleClass="table table-hover"
-							headerClass="col-width-50" rowClasses="col-width-50">
-			 				
-			    			<h:column headerClass="col-xs-10">
-			    				<f:facet name="header">
-			    					<h:outputLabel value="#{mensagens['descricao']}"/>
-			    				</f:facet>
-			    				<h:outputLabel value="#{area.especializacao}" />
-			    			</h:column>
-			
-							<h:column headerClass="text-center">
-								<f:facet name="header">
-								</f:facet>
-			
-								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-default" action="#{pesquisadorMB.removerAtuacao}" >
-									<f:ajax render="@form"/>
-									<f:setPropertyActionListener value="#{area}"
-										target="#{pesquisadorMB.atuacaoSelecionada}"></f:setPropertyActionListener>
-								</h:commandButton> 
-							
-							</h:column>
-			
-						</h:dataTable>
-						</p:panel>
-					</div>
-				</div>
-			</div>
+			<ui:include src="/pages/cadastro/painelAreaAtuacao.xhtml" />
 
+			<ui:include src="/pages/cadastro/painelLinhaDePesquisa.xhtml" />
 
 			<div class="row">
 				<div class="col-md-12">
@@ -154,90 +132,6 @@
 				</div>
 			</div>
 			
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">#{mensagens['label.adicionar.area.atuacao']}</h4>
-			      </div>
-			      
-			      <div class="modal-body" >
-			        <div class="panel-body">
-	    				<div class="row">
-			          		<div class="col-md-6">
-			            		<div class="form-group">
-			            		    <h:outputLabel for="selectGrandeAreaAtuacao" value="#{mensagens['grande.area.de.atuacao']}" />
-			            			<h:selectOneMenu id="selectGrandeAreaAtuacao" styleClass="form-control" 
-			            			                 value="#{pesquisadorMB.grandeAreaSelecionada}"
-			            			                 converter="entityConverter">
-			            			    <p:ajax listener="#{pesquisadorMB.changeGrandeAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
-			            				<f:selectItem itemLabel="#{mensagens['label.gdeArea.placeholder']}" itemValue="#{null}"/>
-			            				<f:selectItems value="#{pesquisadorMB.todasAsGrandeAreas}"
-			            				               var="gdeArea" itemLabel="#{gdeArea.descricao}" itemValue="#{gdeArea}" />
-			            			</h:selectOneMenu>            			
-			              		</div>
-			          		</div>
-			          		
-			          		<div class="col-md-6">
-			            		<div class="form-group">
-			            		    <h:outputLabel for="selectAreaAtuacao" value="#{mensagens['area.de.atuacao']}" />
-			            			<h:selectOneMenu id="selectAreaAtuacao" styleClass="form-control" 
-			            			                 value="#{pesquisadorMB.areaAtuacaoSelecionada}"
-			            			                 converter="entityConverter">
-			            			    <p:ajax listener="#{pesquisadorMB.changeAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
-			            				<f:selectItem itemLabel="#{mensagens['label.area.placeholder']}" itemValue="#{null}"/>
-			            				<f:selectItems value="#{pesquisadorMB.areasAtuacaoParaSelecionar}"
-			            				               var="area" itemLabel="#{area.descricao}" itemValue="#{area}" />
-			            			</h:selectOneMenu>            			
-			              		</div>
-			          		</div>
-			        	</div>
-			        	
-			        	<div class= "row">
-			        		<div class="col-md-6">
-			            		<div class="form-group">
-			            		    <h:outputLabel for="selectSubArea" value="#{mensagens['subarea.de.atuacao']}" />
-			            			<h:selectOneMenu id="selectSubArea" styleClass="form-control" 
-			            			                 value="#{pesquisadorMB.subAreaAtuacaoSelecionada}"
-			            			                 converter="entityConverter">
-			            			    <p:ajax listener="#{pesquisadorMB.changeSubAreaSelecionada}" update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
-			            				<f:selectItem itemLabel="#{mensagens['label.subarea.placeholder']}" itemValue="#{null}"/>
-			            				<f:selectItems value="#{pesquisadorMB.subAreasParaSelecionar}"
-			            				               var="subArea" itemLabel="#{subArea.descricao}" itemValue="#{subArea}" />
-			            			</h:selectOneMenu>            			
-			              		</div>
-			          		</div>
-			          		
-			          		<div class="col-md-6">
-			            		<div class="form-group">
-			            		    <h:outputLabel for="selectEspec" value="#{mensagens['especializacao.descricao']}" />
-			            			<h:selectOneMenu id="selectEspec" styleClass="form-control" 
-			            			                 value="#{pesquisadorMB.especializacaoSelecionada}"
-			            			                 converter="entityConverter">
-			            			    <p:ajax  update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
-			            				<f:selectItem itemLabel="#{mensagens['label.especializacao.placeholder']}" itemValue="#{null}"/>
-			            				<f:selectItems value="#{pesquisadorMB.especializacoesParaSelecionar}"
-			            				               var="espec" itemLabel="#{espec.descricao}" itemValue="#{espec}" />
-			            			</h:selectOneMenu>            			
-			              		</div>
-			          		</div>
-			        	</div>
-  					 </div>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
-
-			        <h:commandButton action="#{pesquisadorMB.adicionarAtuacao}" styleClass="btn btn-primary" value="#{mensagens['adicionar']}">
-			          <f:ajax render="atuacaoDoPesquisador" />
-			          <f:passThroughAttribute name="data-toggle" value="modal" />
-                      <f:passThroughAttribute name="data-target" value="#myModal" />
-			        </h:commandButton>
-			      </div>
-			    </div>
-			  </div>
-			</div>
 		</h:form>
 
 				<!-- 

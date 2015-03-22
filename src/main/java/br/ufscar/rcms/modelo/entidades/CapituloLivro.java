@@ -10,13 +10,13 @@ public class CapituloLivro extends ProducaoBibliografica {
 
     private static final long serialVersionUID = -2059134777817514692L;
 
-    @Column
+    @Column(name = "livro")
     private String livro;
 
-    @Column
+    @Column(name = "edicao")
     private String edicao;
 
-    @Column
+    @Column(name = "editora")
     private String editora;
 
     public String getLivro() {

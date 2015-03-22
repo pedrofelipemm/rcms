@@ -14,16 +14,16 @@
         	</div>
         </div>
 		
-		<h:form id="formLinhaPesquisa">
+		<h:form id="formLinhaDePesquisa">
 			
-			<o:messages id="messageBoxValidation" for="formLinhaPesquisa" styleClass="message-box-validation"/>
+			<o:messages id="messageBoxValidation" for="formLinhaDePesquisa" styleClass="message-box-validation"/>
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
 			<div class="row">
 		        <div class="col-md-12">
             		<div class="form-group">
             			<h:outputLabel for="descricao" value="#{mensagens['label.descricao']} " />
-						<h:inputText id="descricao" value="#{linhaPesquisaMB.linhaPesquisa.descricao}"
+						<h:inputText id="descricao" value="#{linhaDePesquisaMB.linhaDePesquisa.descricao}"
 							required="true" requiredMessage="#{mensagens['descricao.vazia']}"
 							styleClass="form-control" />
             		</div>
@@ -32,7 +32,7 @@
         	<div class="row">
           		<div class="col-md-12">
             		<div class="form-group">
-              			<h:commandButton value="#{mensagens['salvar']}" action="#{linhaPesquisaMB.salvar}"
+              			<h:commandButton value="#{mensagens['salvar']}" action="#{linhaDePesquisaMB.salvar}"
 							styleClass="btn btn-default">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>

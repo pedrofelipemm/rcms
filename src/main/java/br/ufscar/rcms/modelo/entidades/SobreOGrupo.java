@@ -12,10 +12,10 @@ public class SobreOGrupo extends Entidade {
     private static final long serialVersionUID = -4195521719596138259L;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "idioma", nullable = false)
     private String idioma;
 
-    @Column(nullable = false, length = 4000)
+    @Column(name = "descricao", nullable = false, length = 4000)
     private String descricao;
 
     public String getIdioma() {

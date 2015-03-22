@@ -13,29 +13,29 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "\"GRANDE_AREA_ATUACAO\"")
-public class GrandeAreaAtuacao extends Entidade{
+public class GrandeAreaAtuacao extends Entidade {
 
-	private static final long serialVersionUID = -3303227387678912075L;
+    private static final long serialVersionUID = -3303227387678912075L;
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_grande_area_atuacao")
+    private Integer idGrandeAreaAtuacao;
 
-	@Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<AreaAtuacao> areasDeAtuacao = new ArrayList<AreaAtuacao>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<AreaAtuacao> areasDeAtuacao = new ArrayList<AreaAtuacao>();
 
-    public Integer getId() {
-        return id;
+    public Integer getIdGrandeAreaAtuacao() {
+        return idGrandeAreaAtuacao;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdGrandeAreaAtuacao(Integer idGrandeAreaAtuacao) {
+        this.idGrandeAreaAtuacao = idGrandeAreaAtuacao;
     }
 
     public String getDescricao() {
@@ -46,12 +46,13 @@ public class GrandeAreaAtuacao extends Entidade{
         this.descricao = descricao;
     }
 
-	public List<AreaAtuacao> getAreasDeAtuacao() {
-		return areasDeAtuacao;
-	}
-	public void setAreasDeAtuacao(List<AreaAtuacao> areasDeAtuacao) {
-		this.areasDeAtuacao = areasDeAtuacao;
-	}
+    public List<AreaAtuacao> getAreasDeAtuacao() {
+        return areasDeAtuacao;
+    }
+
+    public void setAreasDeAtuacao(List<AreaAtuacao> areasDeAtuacao) {
+        this.areasDeAtuacao = areasDeAtuacao;
+    }
 
     @Override
     public int hashCode() {

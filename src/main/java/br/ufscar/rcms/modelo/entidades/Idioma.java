@@ -20,9 +20,10 @@ public class Idioma extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_idioma")
     private Long idIdioma;
 
-    @Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.idioma")

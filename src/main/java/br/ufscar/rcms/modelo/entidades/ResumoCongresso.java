@@ -10,13 +10,13 @@ public class ResumoCongresso extends ProducaoBibliografica {
 
     private static final long serialVersionUID = -2563684451376971183L;
 
-    @Column
+    @Column(name = "doi")
     private String doi;
 
-    @Column
+    @Column(name = "nome_evento")
     private String nomeEvento;
 
-    @Column
+    @Column(name = "numero")
     private Integer numero;
 
     public String getDoi() {

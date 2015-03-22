@@ -14,7 +14,6 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
     private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorDAOImpl.class);
 
     public PesquisadorDAOImpl() {
-
         setClazz(Pesquisador.class);
     }
 }

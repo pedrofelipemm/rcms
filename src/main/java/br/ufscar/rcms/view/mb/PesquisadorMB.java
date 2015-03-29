@@ -25,6 +25,7 @@ import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.LinhaDePesquisa;
+import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
@@ -32,6 +33,7 @@ import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.LinhaDePesquisaService;
+import br.ufscar.rcms.servico.ParticipacaoEventoService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 
@@ -54,12 +56,15 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{lattesService}")
     private LattesService lattesService;
-    
+
     @ManagedProperty("#{grandeAreaAtuacaoService}")
     private GrandeAreaAtuacaoService grandeAreaService;
 
     @ManagedProperty("#{linhaDePesquisaService}")
     private LinhaDePesquisaService linhaDePesquisaService;
+
+    @ManagedProperty("#{participacaoEventoService}")
+    private ParticipacaoEventoService participacaoEventoService;
 
     private Pesquisador pesquisador;
     private transient DataModel<Pesquisador> pesquisadores;
@@ -88,6 +93,10 @@ public class PesquisadorMB extends AbstractMB {
     private LinhaDePesquisa linhaDePesquisaSelecionada;
     private transient List<LinhaDePesquisa> linhasDePesquisa;
 
+    private ParticipacaoEvento participacaoEvento;
+    private transient List<ParticipacaoEvento> participacaoEventos;
+    private List<ParticipacaoEvento> participacaoEventosToDelete;
+
     @PostConstruct
     public void inicializar() {
 
@@ -104,15 +113,15 @@ public class PesquisadorMB extends AbstractMB {
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
-            // TODO PEDRO
-            while (pesquisador.getCompreensaoIdiomas().remove(null)) {
-            }
+            removeNullValues(pesquisador.getCompreensaoIdiomas(), pesquisador.getParticipacaoEventos());
         }
     }
 
     protected void limparDados() {
         pesquisador = new Pesquisador();
         compreensaoIdioma = new CompreensaoIdioma();
+        participacaoEventosToDelete = new ArrayList<ParticipacaoEvento>();
+        participacaoEvento = new ParticipacaoEvento();
     }
 
     public String salvar() {
@@ -124,6 +133,7 @@ public class PesquisadorMB extends AbstractMB {
 
         try {
             pesquisadorService.salvarOuAtualizar(pesquisador);
+            participacaoEventoService.remover(participacaoEventosToDelete);
             adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
 
             limparDados();
@@ -218,9 +228,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public String baixarDadosPesquisadorLattes() {
         try {
-            /*
-             * Random gerador = new Random(); String.valueOf(gerador.nextInt());
-             */
             lattesService.executarComandoLattes(getPesquisador());
             return CONSULTA_PESQUISADORES;
         } catch (IOException e) {
@@ -341,11 +348,22 @@ public class PesquisadorMB extends AbstractMB {
     		areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
     		subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
     		especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
-    		
+
     		AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
 
         	pesquisador.getAreaAtuacoes().add(a);
     	}
+    }
+
+    public void adicionarParticipacaoEvento() {
+        pesquisador.addParticipacaoEventos(participacaoEvento);
+        participacaoEvento.setPesquisador(pesquisador);
+        participacaoEvento = new ParticipacaoEvento();
+    }
+
+    public void removerParticipacaoEvento(ParticipacaoEvento participacaoEvento) {
+        pesquisador.removeParticipacaoEventos(participacaoEvento);
+        participacaoEventosToDelete.add(participacaoEvento);
     }
 
     public AreaAtuacaoService getAreaAtuacaoService() {
@@ -438,7 +456,7 @@ public class PesquisadorMB extends AbstractMB {
 
     // Linha De Pesquisa
     public LinhaDePesquisa getLinhaDePesquisaSelecionada() {
-        return this.linhaDePesquisaSelecionada;
+        return linhaDePesquisaSelecionada;
     }
 
     public void setLinhaDePesquisaSelecionada(LinhaDePesquisa linhaDePesquisaSelecionada) {
@@ -446,7 +464,7 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public List<LinhaDePesquisa> getLinhasDePesquisa() {
-        return this.linhasDePesquisa;
+        return linhasDePesquisa;
     }
 
     public void setLinhasDePesquisa(List<LinhaDePesquisa> linhasDePesquisa) {
@@ -454,7 +472,7 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public LinhaDePesquisaService getLinhaDePesquisaService() {
-        return this.linhaDePesquisaService;
+        return linhaDePesquisaService;
     }
 
     public void setLinhaDePesquisaService(LinhaDePesquisaService linhaDePesquisaService) {
@@ -473,4 +491,35 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador.getLinhasDePesquisa().remove(linhaPesquisa);
     }
 
+    public ParticipacaoEvento getParticipacaoEvento() {
+        return participacaoEvento;
+    }
+
+    public void setParticipacaoEvento(ParticipacaoEvento participacaoEvento) {
+        this.participacaoEvento = participacaoEvento;
+    }
+
+    public List<ParticipacaoEvento> getParticipacaoEventos() {
+        return participacaoEventos;
+    }
+
+    public void setParticipacaoEventos(List<ParticipacaoEvento> participacaoEventos) {
+        this.participacaoEventos = participacaoEventos;
+    }
+
+    public ParticipacaoEventoService getParticipacaoEventoService() {
+        return participacaoEventoService;
+    }
+
+    public void setParticipacaoEventoService(ParticipacaoEventoService participacaoEventoService) {
+        this.participacaoEventoService = participacaoEventoService;
+    }
+
+    public List<ParticipacaoEvento> getParticipacaoEventosToDelete() {
+        return participacaoEventosToDelete;
+    }
+
+    public void setParticipacaoEventosToDelete(List<ParticipacaoEvento> participacaoEventosToDelete) {
+        this.participacaoEventosToDelete = participacaoEventosToDelete;
+    }
 }

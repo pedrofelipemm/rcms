@@ -3,6 +3,7 @@ package br.ufscar.rcms.view.mb;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import br.ufscar.rcms.modelo.entidades.Entidade;
 
 @ManagedBean
 @SuppressWarnings("serial")
@@ -180,5 +183,12 @@ public abstract class AbstractMB implements Serializable {
 
     public void keepMessagesOnRedirect() {
         getFlash().setKeepMessages(true);
+    }
+
+    @SafeVarargs
+    protected final void removeNullValues(final List<? extends Entidade>... lists) {
+        for (List<? extends Entidade> list : lists) {
+            while (list.remove(null)) {}
+        }
     }
 }

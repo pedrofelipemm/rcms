@@ -86,6 +86,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         pesquisador.getOrientacoes().size();
         pesquisador.getParticipacaoEventos().size();
         pesquisador.getLinhasDePesquisa().size();
+        pesquisador.getParticipacaoEventos().size();
         pesquisador.getPremios().size();
         pesquisador.getProjetosPesquisa().size();
     }

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,47 +20,47 @@ public class Pesquisador extends Usuario {
 
     private static final long serialVersionUID = 7468024654193724256L;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "codigo_lattes", nullable = false, unique = true)
     private String codigoLattes;
 
-    @Column
+    @Column(name = "sexo")
     private String sexo;
 
-    @Column
+    @Column(name = "foto")
     private byte[] foto;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private Endereco endereco = new Endereco();
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "resumo_profissional", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String resumoProfissional;
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.pesquisador")
     private List<CompreensaoIdioma> compreensaoIdiomas = new ArrayList<CompreensaoIdioma>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<PremioTitulo> premios = new ArrayList<PremioTitulo>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<ParticipacaoEvento> participacaoEventos = new ArrayList<ParticipacaoEvento>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<OrganizacaoEvento> organizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
     @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisador")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
 
     @OrderColumn(name = "INDEX")
@@ -67,12 +68,11 @@ public class Pesquisador extends Usuario {
     private List<AtuacaoPesquisador> areaAtuacoes = new ArrayList<AtuacaoPesquisador>();
 
     @OrderColumn
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
-    @OrderColumn
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesquisadorLinhaPesquisaPK.pesquisador")
-    private List<PesquisadorLinhaPesquisa> pesquisadorLinhaPesquisa = new ArrayList<PesquisadorLinhaPesquisa>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<LinhaDePesquisa> linhasDePesquisa = new ArrayList<LinhaDePesquisa>();
 
     public String getCodigoLattes() {
         return codigoLattes;
@@ -220,12 +220,12 @@ public class Pesquisador extends Usuario {
         this.orientacoes = orientacoes;
     }
 
-    public List<PesquisadorLinhaPesquisa> getPesquisadorLinhaPesquisa() {
-        return pesquisadorLinhaPesquisa;
+    public List<LinhaDePesquisa> getLinhasDePesquisa() {
+        return linhasDePesquisa;
     }
 
-    public void setPesquisadorLinhaPesquisa(List<PesquisadorLinhaPesquisa> pesquisadorLinhaPesquisa) {
-        this.pesquisadorLinhaPesquisa = pesquisadorLinhaPesquisa;
+    public void setLinhasDePesquisa(List<LinhaDePesquisa> linhasDePesquisa) {
+        this.linhasDePesquisa = linhasDePesquisa;
     }
 
     public void addCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {
@@ -262,6 +262,10 @@ public class Pesquisador extends Usuario {
 
     public void addOrientacoes(List<? extends Orientacao> orientacoes) {
         this.orientacoes.addAll(orientacoes);
+    }
+
+    public void addAtuacoesPesquisador(AtuacaoPesquisador... atuacoesPesquisador) {
+        areaAtuacoes.addAll(Arrays.asList(atuacoesPesquisador));
     }
 
     @Override

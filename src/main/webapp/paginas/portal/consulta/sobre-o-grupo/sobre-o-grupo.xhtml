@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" [
+    <!ENTITY nbsp "&#160;">
+    <!ENTITY amp "&#38;">
+]>
+<ui:composition template="/paginas/portal/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	
+	    <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#">#{mensagens['inicio']}</a></li>
+                        <li class="active">#{mensagens['o.grupo']}</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <h1>#{mensagens['o.grupo']}</h1>
+                    <hr/>
+                    <p><h:outputText value="#{sobreOGrupoMB.sobreOGrupo.descricao}" escape="true" styleClass="preformatted" /></p>
+                </div>
+            </div>
+        </div>
+</ui:define>
+</ui:composition>

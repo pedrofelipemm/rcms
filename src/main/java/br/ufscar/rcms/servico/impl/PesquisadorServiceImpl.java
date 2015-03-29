@@ -56,7 +56,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
         if (pesquisadorToRemove == null) {
 	    // TODO PEDRO TRATAR EXCEPTION
-            throw new RuntimeException("Pesquisador n�o encontrado!");
+            throw new RuntimeException("Pesquisador não encontrado!");
         }
 
         pesquisadorDAO.remover(pesquisador);
@@ -69,6 +69,24 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
     @Override
     public Pesquisador buscarTodosDados(Long idUsuario) {
-        return pesquisadorDAO.buscarTodosDados(idUsuario);
+
+        Pesquisador pesquisador = pesquisadorDAO.buscar(idUsuario);
+        lazyLoadCollections(pesquisador);
+
+        return pesquisador;
+    }
+
+    private void lazyLoadCollections(Pesquisador pesquisador) {
+
+        pesquisador.getAreaAtuacoes().size();
+        pesquisador.getCitacaoBibliograficas().size();
+        pesquisador.getCompreensaoIdiomas().size();
+        pesquisador.getFormacoes().size();
+        pesquisador.getOrganizacaoEventos().size();
+        pesquisador.getOrientacoes().size();
+        pesquisador.getParticipacaoEventos().size();
+        pesquisador.getLinhasDePesquisa().size();
+        pesquisador.getPremios().size();
+        pesquisador.getProjetosPesquisa().size();
     }
 }

@@ -2,9 +2,11 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,24 +18,26 @@ public class FormacaoAcademica extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_formacao_academica")
     private Long idFormacaoAcademica;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_formacao_academica_pesquisador"))
     private Pesquisador pesquisador;
 
-    @Column(nullable = false)
+    @Column(name = "ano_inicio", nullable = false)
     private Integer anoInicio;
 
-    @Column(nullable = false)
+    @Column(name = "ano_conclusao", nullable = false)
     private Integer anoConclusao;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "tipo", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String tipo;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "nome_instituicao", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String nomeInstituicao;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "descricao", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String descricao;
 
     public Long getIdFormacaoAcademica() {

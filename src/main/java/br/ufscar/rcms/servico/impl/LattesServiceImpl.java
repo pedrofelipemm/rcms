@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
@@ -21,10 +22,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
+import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.lattes.CurriculoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
-import br.ufscar.rcms.servico.FormacaoAcademicaService;
+import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
@@ -42,7 +44,7 @@ public class LattesServiceImpl implements LattesService {
     private PesquisadorService pesquisadorService;
 
     @Autowired
-    private FormacaoAcademicaService formacaoService;
+    private GrandeAreaAtuacaoService grandeAreaAtuacaoService;
 
     @Value("${pasta.script.lattes}")
     private String pastaScriptLates;
@@ -83,30 +85,9 @@ public class LattesServiceImpl implements LattesService {
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
                 .build();
 
+        salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
+
         return pesquisadorService.salvarOuAtualizar(novoPesquisador);
-    }
-
-    private CurriculoLattes carregarCurriculosLattes() {
-
-        // TODO PEDRO - Em Desenvolvimento
-        CurriculoLattes curriculoLattes = new CurriculoLattes();
-        try {
-
-            InputStream file = new FileInputStream(pastaScriptLates + arquivoCurriculoLattes);
-
-            String test = IOUtils.toString(file, "UTF-8");
-            try {
-                curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, test);
-
-            } catch (JAXBException e) {
-                LOGGER.error(e.getMessage(), e);
-            }
-
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-
-        return curriculoLattes;
     }
 
     @Override
@@ -121,6 +102,21 @@ public class LattesServiceImpl implements LattesService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private CurriculoLattes carregarCurriculosLattes() {
+        CurriculoLattes curriculoLattes = new CurriculoLattes();
+        try {
+            InputStream file = new FileInputStream(pastaScriptLates + arquivoCurriculoLattes);
+            try {
+                curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, IOUtils.toString(file, "UTF-8"));
+            } catch (JAXBException e) {
+                LOGGER.error(e.getMessage(), e);
+            }
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return curriculoLattes;
     }
 
     private void criarArquivo(String nome, String path, String conteudo) throws IOException {
@@ -170,5 +166,12 @@ public class LattesServiceImpl implements LattesService {
         }
 
         return result.toString();
+    }
+
+    // TODO PEDRO - DUPLICANDO ITENS
+    private void salvarHierarquiaGrandeArea(List<AtuacaoPesquisador> areaAtuacoes) {
+        for (AtuacaoPesquisador atuacaoPesquisador : areaAtuacoes) {
+            grandeAreaAtuacaoService.salvar(atuacaoPesquisador.getEspecializacao().getSubAreaAtuacao().getAreaAtuacao().getGrandeAreaAtuacao());
+        }
     }
 }

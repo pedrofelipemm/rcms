@@ -10,10 +10,10 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
 
     private static final long serialVersionUID = -396352635868864895L;
 
-    @Column
+    @Column(name = "doi")
     private String doi;
 
-    @Column
+    @Column(name = "nome_evento")
     private String nomeEvento;
 
     public String getDoi() {

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/paginas/admin/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:define name="conteudo">
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['o.grupo']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formDescricaoGrupo">
+			
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+			
+			<table class="table table-hover">
+			  <tr>
+				<th>#{mensagens['sobre.o.grupo.idioma']}</th>
+				<th></th>
+			  </tr>
+			  <tr>
+			  	<td>#{mensagens['sobre.o.grupo.portugues']}</td>
+			  	<td class="text-right"><h:commandButton id="editar-pt-br" value="#{mensagens['editar']}" styleClass="btn btn-primary" action="#{sobreOGrupoMB.editar('pt_BR')}" /></td>
+			  </tr>
+			  <tr>
+			  	<td>#{mensagens['sobre.o.grupo.ingles']}</td>
+			  	<td class="text-right"><h:commandButton id="editar-en" value="#{mensagens['editar']}" styleClass="btn btn-primary" action="#{sobreOGrupoMB.editar('en')}" /></td>
+			  </tr>
+			</table>
+        </h:form>
+		
+	</ui:define>
+</ui:composition>

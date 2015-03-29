@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/paginas/admin/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	<ui:define name="conteudo">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>#{mensagens['subarea.de.atuacao']}</h1>
+			</div>
+		</div>
+		<h:form id="formCadSubAreaAtuacao">
+			<o:messages id="messageBoxValidation" for="formCadSubAreaAtuacao"
+				styleClass="message-box-validation" />
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<h2>#{subAreaAtuacaoMB.subArea.descricao}</h2>
+					</div>
+
+
+					<h:panelGroup>
+						<h:column headerClass="text-center">
+							<h:outputLabel for="descricaoEspecializacao"
+								value="#{mensagens['label.especializacao.descricao']} " />
+							<div class="input-group">
+								<h:inputText id="descricaoEspecializacao"
+									value="#{subAreaAtuacaoMB.especializacaoSelecionada.descricao}"
+									pt:placeHolder="#{mensagens['label.especializacao.placeholder']}"
+									styleClass="form-control" />
+								<span class="input-group-btn"> <h:commandButton
+										value="#{mensagens['adicionar']}" styleClass="btn btn-primary"
+										action="#{subAreaAtuacaoMB.adicionarEspecializacao}" > &nbsp;
+										<f:ajax render="@form" execute="@form" />
+										</h:commandButton>
+								</span>
+							</div>
+						</h:column>
+						&nbsp;
+					</h:panelGroup>
+
+					<h:dataTable value="#{subAreaAtuacaoMB.especializacoes}" var="espec"
+						styleClass="table table-hover" headerClass="col-width-50"
+						rowClasses="col-width-50"
+						rendered="#{not empty subAreaAtuacaoMB.especializacoes}">
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputLabel value="#" />
+							</f:facet>
+							<h:outputLabel value="#{subAreaAtuacaoMB.especializacoes.rowIndex + 1}" />
+						</h:column>
+
+						<h:column headerClass="col-xs-10">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['descricao']}" />
+							</f:facet>
+							<h:outputLabel value="#{espec.descricao}" />
+						</h:column>
+
+						<h:column headerClass="text-center">
+							<h:commandButton value="#{mensagens['excluir']}"
+								styleClass="btn btn-danger"
+								action="#{subAreaAtuacaoMB.removerEspecializacao(espec)}" >
+							<f:ajax render="@form" execute="@form" />
+							</h:commandButton>
+						</h:column>
+
+					</h:dataTable>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<h:commandButton value="#{mensagens['salvar']}"
+									action="#{subAreaAtuacaoMB.salvar}" styleClass="btn btn-success">
+									<f:ajax render="@form" execute="@form" />
+								</h:commandButton>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

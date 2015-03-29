@@ -16,119 +16,113 @@ import br.ufscar.rcms.servico.SubAreaAtuacaoService;
 @ManagedBean(name = "subAreaAtuacaoMB")
 public class SubAreaAtuacaoMB extends AbstractMB {
 
-	private static final long serialVersionUID = -1374520348706209763L;
+    private static final long serialVersionUID = -1374520348706209763L;
 
-	@ManagedProperty("#{subAreaAtuacaoService}")
-	private SubAreaAtuacaoService subAreaAtuacaoService;
+    @ManagedProperty("#{subAreaAtuacaoService}")
+    private SubAreaAtuacaoService subAreaAtuacaoService;
 
-	private SubAreaAtuacao subArea;
-	private transient DataModel<EspecializacaoAreaAtuacao> especializacoes;
-	private transient DataModel<SubAreaAtuacao> todasAsSubAreas;
-	private EspecializacaoAreaAtuacao especializacaoSelecionada;
+    private SubAreaAtuacao subArea;
+    private transient DataModel<EspecializacaoAreaAtuacao> especializacoes;
+    private transient DataModel<SubAreaAtuacao> todasAsSubAreas;
+    private EspecializacaoAreaAtuacao especializacaoSelecionada;
 
-	@PostConstruct
-	public void inicializar() {
-		limparDados();
-		carregarDados();
-	}
+    @PostConstruct
+    public void inicializar() {
+        limparDados();
+        carregarDados();
+    }
 
-	private void carregarDados() {
-		setTodasAsSubAreas(new ListDataModel<SubAreaAtuacao>(
-				getSubAreaAtuacaoService().buscarTodas()));
-		setEspecializacaoSelecionada(new EspecializacaoAreaAtuacao());
+    private void carregarDados() {
+        setTodasAsSubAreas(new ListDataModel<SubAreaAtuacao>(getSubAreaAtuacaoService().buscarTodas()));
+        setEspecializacaoSelecionada(new EspecializacaoAreaAtuacao());
 
-		SubAreaAtuacao areaEditar = (SubAreaAtuacao) getFlashObject(FLASH_KEY_SUBAREA_ATUACAO);
-		if (areaEditar != null) {
-			setSubArea(areaEditar);
-			setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(
-					getSubArea().getEspecializacoes()));
-		}
+        SubAreaAtuacao areaEditar = (SubAreaAtuacao) getFlashObject(FLASH_KEY_SUBAREA_ATUACAO);
+        if (areaEditar != null) {
+            setSubArea(areaEditar);
+            setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(getSubArea().getEspecializacoes()));
+        }
 
-	}
+    }
 
-	private void limparDados() {
-		setSubArea(AreaAtuacaoFactory.createSubAreaAtuacaoEmpty());
-	}
+    private void limparDados() {
+        setSubArea(AreaAtuacaoFactory.createSubAreaAtuacaoEmpty());
+    }
 
-	public void salvar() {
+    public void salvar() {
 
-		if (getSubArea().getId() != null) {
-			getSubAreaAtuacaoService().alterar(getSubArea());
-			adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso",
-					getSubArea().getDescricao());
-		} else {
-			getSubAreaAtuacaoService().salvar(getSubArea());
-			adicionarMensagemInfoByKey("area.atuacao.cadastrada.sucesso",
-					getSubArea().getDescricao());
-		}
-		setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(getSubArea().getEspecializacoes()));
+        if (getSubArea().getIdSubAreaAtuacao() != null) {
+            getSubAreaAtuacaoService().alterar(getSubArea());
+            adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso", getSubArea().getDescricao());
+        } else {
+            getSubAreaAtuacaoService().salvar(getSubArea());
+            adicionarMensagemInfoByKey("area.atuacao.cadastrada.sucesso", getSubArea().getDescricao());
+        }
+        setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(getSubArea().getEspecializacoes()));
 
-	}
+    }
 
-	public String editar(SubAreaAtuacao area) {
-		setFlashObject(FLASH_KEY_SUBAREA_ATUACAO, area);
+    public String editar(SubAreaAtuacao area) {
+        setFlashObject(FLASH_KEY_SUBAREA_ATUACAO, area);
 
-		return CADASTRO_SUBAREA_ATUACAO;
-	}
+        return CADASTRO_SUBAREA_ATUACAO;
+    }
 
-	public String excluir(SubAreaAtuacao area) {
+    public String excluir(SubAreaAtuacao area) {
 
-		getSubAreaAtuacaoService().remover(area);
+        getSubAreaAtuacaoService().remover(area);
 
-		return CONSULTA_SUBAREA_ATUACAO;
-	}
+        return CONSULTA_SUBAREA_ATUACAO;
+    }
 
-	public void adicionarEspecializacao() {
-		getSubArea().getEspecializacoes().add(getEspecializacaoSelecionada());
-		setEspecializacaoSelecionada(new EspecializacaoAreaAtuacao());
-		setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(getSubArea().getEspecializacoes()));
-	}
+    public void adicionarEspecializacao() {
+        getSubArea().getEspecializacoes().add(getEspecializacaoSelecionada());
+        setEspecializacaoSelecionada(new EspecializacaoAreaAtuacao());
+        setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(getSubArea().getEspecializacoes()));
+    }
 
-	public void removerEspecializacao(EspecializacaoAreaAtuacao espec) {
-		this.getSubArea().getEspecializacoes().remove(
-				this.getSubArea().getEspecializacoes().indexOf(espec));
-		setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(
-				this.getSubArea().getEspecializacoes()));
-	}
+    public void removerEspecializacao(EspecializacaoAreaAtuacao espec) {
+        getSubArea().getEspecializacoes().remove(getSubArea().getEspecializacoes().indexOf(espec));
+        setEspecializacoes(new ListDataModel<EspecializacaoAreaAtuacao>(getSubArea().getEspecializacoes()));
+    }
 
-	public SubAreaAtuacaoService getSubAreaAtuacaoService() {
-		return subAreaAtuacaoService;
-	}
+    public SubAreaAtuacaoService getSubAreaAtuacaoService() {
+        return subAreaAtuacaoService;
+    }
 
-	public void setSubAreaAtuacaoService(SubAreaAtuacaoService subAreaAtuacaoService) {
-		this.subAreaAtuacaoService = subAreaAtuacaoService;
-	}
+    public void setSubAreaAtuacaoService(SubAreaAtuacaoService subAreaAtuacaoService) {
+        this.subAreaAtuacaoService = subAreaAtuacaoService;
+    }
 
-	public DataModel<EspecializacaoAreaAtuacao> getEspecializacoes() {
-		return especializacoes;
-	}
+    public DataModel<EspecializacaoAreaAtuacao> getEspecializacoes() {
+        return especializacoes;
+    }
 
-	public void setEspecializacoes(DataModel<EspecializacaoAreaAtuacao> especializacoes) {
-		this.especializacoes = especializacoes;
-	}
+    public void setEspecializacoes(DataModel<EspecializacaoAreaAtuacao> especializacoes) {
+        this.especializacoes = especializacoes;
+    }
 
-	public SubAreaAtuacao getSubArea() {
-		return subArea;
-	}
+    public SubAreaAtuacao getSubArea() {
+        return subArea;
+    }
 
-	public void setSubArea(SubAreaAtuacao subArea) {
-		this.subArea = subArea;
-	}
+    public void setSubArea(SubAreaAtuacao subArea) {
+        this.subArea = subArea;
+    }
 
-	public DataModel<SubAreaAtuacao> getTodasAsSubAreas() {
-		return todasAsSubAreas;
-	}
+    public DataModel<SubAreaAtuacao> getTodasAsSubAreas() {
+        return todasAsSubAreas;
+    }
 
-	public void setTodasAsSubAreas(DataModel<SubAreaAtuacao> todasAsSubAreas) {
-		this.todasAsSubAreas = todasAsSubAreas;
-	}
+    public void setTodasAsSubAreas(DataModel<SubAreaAtuacao> todasAsSubAreas) {
+        this.todasAsSubAreas = todasAsSubAreas;
+    }
 
-	public EspecializacaoAreaAtuacao getEspecializacaoSelecionada() {
-		return especializacaoSelecionada;
-	}
+    public EspecializacaoAreaAtuacao getEspecializacaoSelecionada() {
+        return especializacaoSelecionada;
+    }
 
-	public void setEspecializacaoSelecionada(EspecializacaoAreaAtuacao especializacaoSelecionada) {
-		this.especializacaoSelecionada = especializacaoSelecionada;
-	}
+    public void setEspecializacaoSelecionada(EspecializacaoAreaAtuacao especializacaoSelecionada) {
+        this.especializacaoSelecionada = especializacaoSelecionada;
+    }
 
 }

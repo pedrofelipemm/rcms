@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/paginas/admin/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<ui:define name="conteudo">
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['pesquisadores']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formPesquisador">
+			
+			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+			
+			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
+				headerClass="col-width-50" rowClasses="col-width-50" 
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
+				rendered="#{not empty pesquisadorMB.pesquisadores}" paginator="true" rows="10">
+ 
+ 				<p:column width="30">
+ 					<f:facet name="header">
+ 						<h:outputLabel value="#"/>
+ 					</f:facet>
+ 					<h:outputLabel value="#{pesquisadorMB.pesquisadores.rowIndex + 1}"/>
+ 				</p:column>
+ 				
+    			<p:column headerClass="col-xs-10">
+    				<f:facet name="header">
+    					<h:outputLabel value="#{mensagens['nome']}"/>
+    				</f:facet>
+    				<h:outputLabel value="#{pesquisador.nome}" />
+    			</p:column>
+
+				<p:column headerClass="text-center">
+					<f:facet name="header">
+						<a href="${request.contextPath}/paginas/admin/cadastro/pesquisador/pesquisador.xhtml" style="color: white;" class="btn btn-primary"> #{mensagens['adicionar.pesquisador']} </a>
+					</f:facet>
+
+					
+					<div class="text-center">
+					<h:commandButton id="salvar" value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>&nbsp;
+					<h:commandButton id="editar" value="#{mensagens['editar']}" styleClass="btn btn-primary" action="#{pesquisadorMB.editar(pesquisador)}" /> &nbsp;
+					<h:commandButton id="excluir" value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{pesquisadorMB.excluir(pesquisador)}" /> &nbsp;
+					</div>
+				</p:column>
+			</p:dataTable>
+        </h:form>
+		
+	</ui:define>
+</ui:composition>

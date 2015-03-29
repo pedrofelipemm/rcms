@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html template="/paginas/admin/template/template.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:p="http://primefaces.org/ui">
+	
+	<ul>
+		<li>#{mensagens['erro.data.hora']}: #{of:formatDate(now, 'yyyy-MM-dd HH:mm:ss')}</li>
+		<li>#{mensagens['erro.user.agent']}: #{header['user-agent']}</li>
+		<li>#{mensagens['erro.user.ip']}: #{empty header['x-forwarded-for'] ? request.remoteAddr : fn:split(header['x-forwarded-for'], ',')[0]}</li>
+		<li>#{mensagens['erro.uri.requisicao']}: <a href="#{requestScope['javax.servlet.error.request_uri']}">#{requestScope['javax.servlet.error.request_uri']}</a></li>
+		<li>#{mensagens['erro.requisicao.ajax']}: #{facesContext.partialViewContext.ajaxRequest ? 'Yes' : 'No'}</li>
+		<li>#{mensagens['erro.codigo']}: #{requestScope['javax.servlet.error.status_code']}</li>
+		<li>#{mensagens['erro.tipo.excecao']}: #{requestScope['javax.servlet.error.exception_type']}</li>
+		<li>#{mensagens['erro.descricao']}: #{requestScope['javax.servlet.error.message']}</li>
+		<li>#{mensagens['erro.stack.trace']}: <pre><code>#{of:printStackTrace(requestScope['javax.servlet.error.exception'])}</code></pre></li>
+	</ul>
+	
+	<h:outputScript rendered="#{facesContext.partialViewContext.ajaxRequest}">scrollTo(0, 0);</h:outputScript>
+	
+</html>

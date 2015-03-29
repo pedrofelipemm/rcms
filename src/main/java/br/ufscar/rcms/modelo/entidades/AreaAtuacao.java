@@ -1,14 +1,17 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,27 +20,29 @@ import javax.persistence.Table;
 @Table(name = "\"AREA_ATUACAO\"")
 public class AreaAtuacao extends Entidade {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(nullable = false)
-    private String descricao;
-
     private static final long serialVersionUID = -3948561964306499761L;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SubAreaAtuacao> subAreasAtuacao;
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_area_atuacao")
+    private Integer idAreaAtuacao;
+
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
+
     @ManyToOne
+    @JoinColumn(name = "id_grande_area_atuacao", foreignKey = @ForeignKey(name = "fk_area_atuacao_grande_area_atuacao"))
     private GrandeAreaAtuacao grandeAreaAtuacao;
 
-    public Integer getId() {
-        return id;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<SubAreaAtuacao> subAreasAtuacao = new ArrayList<SubAreaAtuacao>();
+
+    public Integer getIdAreaAtuacao() {
+        return idAreaAtuacao;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdAreaAtuacao(Integer idAreaAtuacao) {
+        this.idAreaAtuacao = idAreaAtuacao;
     }
 
     public String getDescricao() {
@@ -61,7 +66,6 @@ public class AreaAtuacao extends Entidade {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -73,10 +77,9 @@ public class AreaAtuacao extends Entidade {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof AreaAtuacao)) {
             return false;
         }
-
         AreaAtuacao other = (AreaAtuacao) obj;
         if (descricao == null) {
             if (other.descricao != null) {
@@ -85,27 +88,23 @@ public class AreaAtuacao extends Entidade {
         } else if (!descricao.equals(other.descricao)) {
             return false;
         }
-        if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "AreaAtuacao [Id=" + getId() + ", Descricao=" + getDescricao() + "]";
+        return "AreaAtuacao [Id=" + getIdAreaAtuacao() + ", Descricao=" + getDescricao() + "]";
     }
 
-	public GrandeAreaAtuacao getGrandeAreaAtuacao() {
-		return grandeAreaAtuacao;
-	}
+    public GrandeAreaAtuacao getGrandeAreaAtuacao() {
+        return grandeAreaAtuacao;
+    }
 
-	public void setGrandeAreaAtuacao(GrandeAreaAtuacao grandeAreaAtuacao) {
-		this.grandeAreaAtuacao = grandeAreaAtuacao;
-	}
+    public void setGrandeAreaAtuacao(GrandeAreaAtuacao grandeAreaAtuacao) {
+        this.grandeAreaAtuacao = grandeAreaAtuacao;
+    }
 
+    public void addSubAreaAtuacao(SubAreaAtuacao subAreaAtuacao) {
+        subAreasAtuacao.add(subAreaAtuacao);
+    }
 }

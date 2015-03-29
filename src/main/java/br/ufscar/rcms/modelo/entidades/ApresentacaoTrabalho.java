@@ -10,7 +10,7 @@ public class ApresentacaoTrabalho extends ProducaoBibliografica {
 
     private static final long serialVersionUID = 5668638568301910798L;
 
-    @Column
+    @Column(name = "natureza")
     private String natureza;
 
     public String getNatureza() {

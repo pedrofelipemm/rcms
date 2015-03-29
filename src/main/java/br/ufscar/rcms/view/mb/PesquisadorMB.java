@@ -24,12 +24,14 @@ import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
+import br.ufscar.rcms.modelo.entidades.LinhaDePesquisa;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
+import br.ufscar.rcms.servico.LinhaDePesquisaService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 
@@ -56,6 +58,9 @@ public class PesquisadorMB extends AbstractMB {
     @ManagedProperty("#{grandeAreaAtuacaoService}")
     private GrandeAreaAtuacaoService grandeAreaService;
 
+    @ManagedProperty("#{linhaDePesquisaService}")
+    private LinhaDePesquisaService linhaDePesquisaService;
+
     private Pesquisador pesquisador;
     private transient DataModel<Pesquisador> pesquisadores;
     private transient Part fotoPesquisador;
@@ -67,14 +72,21 @@ public class PesquisadorMB extends AbstractMB {
     private transient List<Idioma> idiomas;
 
     private GrandeAreaAtuacao grandeAreaSelecionada;
+    private DataModel<GrandeAreaAtuacao> todasAsGrandeAreas;
+
     private AreaAtuacao areaAtuacaoSelecionada;
     private DataModel<AreaAtuacao> areasAtuacaoParaSelecionar;
+
     private SubAreaAtuacao subAreaAtuacaoSelecionada;
     private DataModel<SubAreaAtuacao> subAreasParaSelecionar;
+
     private EspecializacaoAreaAtuacao especializacaoSelecionada;
     private DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar;
+
     private AtuacaoPesquisador atuacaoSelecionada;
-    private DataModel<GrandeAreaAtuacao> todasAsGrandeAreas;
+
+    private LinhaDePesquisa linhaDePesquisaSelecionada;
+    private transient List<LinhaDePesquisa> linhasDePesquisa;
 
     @PostConstruct
     public void inicializar() {
@@ -87,6 +99,7 @@ public class PesquisadorMB extends AbstractMB {
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
         idiomas = new ArrayList<Idioma>(idiomaService.buscarTodos());
         todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaService.buscarTodas());
+        linhasDePesquisa = new ArrayList<LinhaDePesquisa>(linhaDePesquisaService.buscarTodas());
 
         Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
@@ -147,6 +160,43 @@ public class PesquisadorMB extends AbstractMB {
         return CONSULTA_PESQUISADORES;
     }
 
+    public PesquisadorService getPesquisadorService() {
+
+        return pesquisadorService;
+    }
+
+    public void setPesquisadorService(PesquisadorService pesquisadorService) {
+
+        this.pesquisadorService = pesquisadorService;
+    }
+
+    public Pesquisador getPesquisador() {
+
+        return pesquisador;
+    }
+
+    public void setPesquisador(Pesquisador pesquisador) {
+
+        this.pesquisador = pesquisador;
+    }
+
+    public DataModel<Pesquisador> getPesquisadores() {
+        return pesquisadores;
+    }
+
+    public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
+        this.pesquisadores = pesquisadores;
+    }
+
+    // Foto
+    public Part getFotoPesquisador() {
+        return fotoPesquisador;
+    }
+
+    public void setFotoPesquisador(Part fotoPesquisador) {
+        this.fotoPesquisador = fotoPesquisador;
+    }
+
     private void converterFotoPesquisador(Pesquisador pesquisador) {
 
         try {
@@ -157,17 +207,13 @@ public class PesquisadorMB extends AbstractMB {
         }
     }
 
-    public void pesquisar() {
+    // Lattes
+    public LattesService getLattesService() {
+        return lattesService;
     }
 
-    public void adicionarCompreensaoIdioma() {
-        pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(idioma,
-                compreensaoIdioma.getProficiencia(), pesquisador));
-        compreensaoIdioma = new CompreensaoIdioma();
-    }
-
-    public void removerCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
-        pesquisador.removeCompreensaoIdiomas(compreensaoIdioma);
+    public void setLattesService(LattesService lattesService) {
+        this.lattesService = lattesService;
     }
 
     public String baixarDadosPesquisadorLattes() {
@@ -201,6 +247,61 @@ public class PesquisadorMB extends AbstractMB {
         return CONSULTA_PESQUISADORES;
     }
 
+    public void pesquisar() {
+    }
+
+    // Idioma
+    public List<Idioma> getIdiomas() {
+        return idiomas;
+    }
+
+    public void setIdiomas(List<Idioma> idiomas) {
+        this.idiomas = idiomas;
+    }
+
+    public CompreensaoIdioma getCompreensaoIdioma() {
+        return compreensaoIdioma;
+    }
+
+    public void setCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
+        this.compreensaoIdioma = compreensaoIdioma;
+    }
+
+    public IdiomaService getIdiomaService() {
+        return idiomaService;
+    }
+
+    public void setIdiomaService(IdiomaService idiomaService) {
+        this.idiomaService = idiomaService;
+    }
+
+    public void adicionarCompreensaoIdioma() {
+        pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(idioma,
+                compreensaoIdioma.getProficiencia(), pesquisador));
+        compreensaoIdioma = new CompreensaoIdioma();
+    }
+
+    public void removerCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
+        pesquisador.removeCompreensaoIdiomas(compreensaoIdioma);
+    }
+
+    public DataModel<CompreensaoIdioma> getCompreensaoIdiomas() {
+        return compreensaoIdiomas;
+    }
+
+    public void setCompreensaoIdiomas(DataModel<CompreensaoIdioma> compreensaoIdiomas) {
+        this.compreensaoIdiomas = compreensaoIdiomas;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
+    // Área de Atuação
     public void changeGrandeAreaSelecionada(){
     	areasAtuacaoParaSelecionar = null;
 		subAreasParaSelecionar = null;
@@ -247,35 +348,6 @@ public class PesquisadorMB extends AbstractMB {
     	}
     }
 
-
-    public PesquisadorService getPesquisadorService() {
-
-        return pesquisadorService;
-    }
-
-    public void setPesquisadorService(PesquisadorService pesquisadorService) {
-
-        this.pesquisadorService = pesquisadorService;
-    }
-
-    public Pesquisador getPesquisador() {
-
-        return pesquisador;
-    }
-
-    public void setPesquisador(Pesquisador pesquisador) {
-
-        this.pesquisador = pesquisador;
-    }
-
-    public Part getFotoPesquisador() {
-        return fotoPesquisador;
-    }
-
-    public void setFotoPesquisador(Part fotoPesquisador) {
-        this.fotoPesquisador = fotoPesquisador;
-    }
-
     public AreaAtuacaoService getAreaAtuacaoService() {
         return areaAtuacaoService;
     }
@@ -284,141 +356,121 @@ public class PesquisadorMB extends AbstractMB {
         this.areaAtuacaoService = areaAtuacaoService;
     }
 
-    public List<Idioma> getIdiomas() {
-        return idiomas;
-    }
-
-    public void setIdiomas(List<Idioma> idiomas) {
-        this.idiomas = idiomas;
-    }
-
-    public CompreensaoIdioma getCompreensaoIdioma() {
-        return compreensaoIdioma;
-    }
-
-    public void setCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
-        this.compreensaoIdioma = compreensaoIdioma;
-    }
-
-    public IdiomaService getIdiomaService() {
-        return idiomaService;
-    }
-
-    public void setIdiomaService(IdiomaService idiomaService) {
-        this.idiomaService = idiomaService;
-    }
-
-    public LattesService getLattesService() {
-        return lattesService;
-    }
-
-    public void setLattesService(LattesService lattesService) {
-        this.lattesService = lattesService;
-    }
-
-    public DataModel<Pesquisador> getPesquisadores() {
-        return pesquisadores;
-    }
-
-    public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
-        this.pesquisadores = pesquisadores;
-    }
-
     public GrandeAreaAtuacao getGrandeAreaSelecionada() {
-		return grandeAreaSelecionada;
-	}
-
-	public void setGrandeAreaSelecionada(GrandeAreaAtuacao grandeAreaSelecionada) {
-		this.grandeAreaSelecionada = grandeAreaSelecionada;
-	}
-
-	public AreaAtuacao getAreaAtuacaoSelecionada() {
-		return areaAtuacaoSelecionada;
-	}
-
-	public void setAreaAtuacaoSelecionada(AreaAtuacao areaAtuacaoSelecionada) {
-		this.areaAtuacaoSelecionada = areaAtuacaoSelecionada;
-	}
-
-	public DataModel<AreaAtuacao> getAreasAtuacaoParaSelecionar() {
-		return areasAtuacaoParaSelecionar;
-	}
-
-	public void setAreasAtuacaoParaSelecionar(
-			DataModel<AreaAtuacao> areasAtuacaoParaSelecionar) {
-		this.areasAtuacaoParaSelecionar = areasAtuacaoParaSelecionar;
-	}
-
-	public SubAreaAtuacao getSubAreaAtuacaoSelecionada() {
-		return subAreaAtuacaoSelecionada;
-	}
-
-	public void setSubAreaAtuacaoSelecionada(SubAreaAtuacao subAreaAtuacaoSelecionada) {
-		this.subAreaAtuacaoSelecionada = subAreaAtuacaoSelecionada;
-	}
-
-	public DataModel<SubAreaAtuacao> getSubAreasParaSelecionar() {
-		return subAreasParaSelecionar;
-	}
-
-	public void setSubAreasParaSelecionar(DataModel<SubAreaAtuacao> subAreasParaSelecionar) {
-		this.subAreasParaSelecionar = subAreasParaSelecionar;
-	}
-
-	public EspecializacaoAreaAtuacao getEspecializacaoSelecionada() {
-		return especializacaoSelecionada;
-	}
-
-	public void setEspecializacaoSelecionada(EspecializacaoAreaAtuacao especializacaoSelecionada) {
-		this.especializacaoSelecionada = especializacaoSelecionada;
-	}
-
-	public DataModel<EspecializacaoAreaAtuacao> getEspecializacoesParaSelecionar() {
-		return especializacoesParaSelecionar;
-	}
-
-	public void setEspecializacoesParaSelecionar(
-			DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar) {
-		this.especializacoesParaSelecionar = especializacoesParaSelecionar;
-	}
-
-	public AtuacaoPesquisador getAtuacaoSelecionada() {
-		return atuacaoSelecionada;
-	}
-
-	public void setAtuacaoSelecionada(AtuacaoPesquisador atuacaoSelecionada) {
-		this.atuacaoSelecionada = atuacaoSelecionada;
-	}
-
-    public DataModel<CompreensaoIdioma> getCompreensaoIdiomas() {
-        return compreensaoIdiomas;
+        return grandeAreaSelecionada;
     }
 
-    public void setCompreensaoIdiomas(DataModel<CompreensaoIdioma> compreensaoIdiomas) {
-        this.compreensaoIdiomas = compreensaoIdiomas;
+    public void setGrandeAreaSelecionada(GrandeAreaAtuacao grandeAreaSelecionada) {
+        this.grandeAreaSelecionada = grandeAreaSelecionada;
     }
 
-    public Idioma getIdioma() {
-        return idioma;
+    public AreaAtuacao getAreaAtuacaoSelecionada() {
+        return areaAtuacaoSelecionada;
     }
 
-    public void setIdioma(Idioma idioma) {
-        this.idioma = idioma;
+    public void setAreaAtuacaoSelecionada(AreaAtuacao areaAtuacaoSelecionada) {
+        this.areaAtuacaoSelecionada = areaAtuacaoSelecionada;
     }
 
-	public DataModel<GrandeAreaAtuacao> getTodasAsGrandeAreas() {
-		return todasAsGrandeAreas;
-	}
+    public DataModel<AreaAtuacao> getAreasAtuacaoParaSelecionar() {
+        return areasAtuacaoParaSelecionar;
+    }
 
-	public GrandeAreaAtuacaoService getGrandeAreaService() {
-		return grandeAreaService;
-	}
+    public void setAreasAtuacaoParaSelecionar(DataModel<AreaAtuacao> areasAtuacaoParaSelecionar) {
+        this.areasAtuacaoParaSelecionar = areasAtuacaoParaSelecionar;
+    }
 
-	public void setGrandeAreaService(GrandeAreaAtuacaoService grandeAreaService) {
-		this.grandeAreaService = grandeAreaService;
-	}
+    public SubAreaAtuacao getSubAreaAtuacaoSelecionada() {
+        return subAreaAtuacaoSelecionada;
+    }
 
-	public void setTodasAsGrandeAreas(DataModel<GrandeAreaAtuacao> todasAsGrandeAreas) {
-		this.todasAsGrandeAreas = todasAsGrandeAreas;
-	}
+    public void setSubAreaAtuacaoSelecionada(SubAreaAtuacao subAreaAtuacaoSelecionada) {
+        this.subAreaAtuacaoSelecionada = subAreaAtuacaoSelecionada;
+    }
+
+    public DataModel<SubAreaAtuacao> getSubAreasParaSelecionar() {
+        return subAreasParaSelecionar;
+    }
+
+    public void setSubAreasParaSelecionar(DataModel<SubAreaAtuacao> subAreasParaSelecionar) {
+        this.subAreasParaSelecionar = subAreasParaSelecionar;
+    }
+
+    public EspecializacaoAreaAtuacao getEspecializacaoSelecionada() {
+        return especializacaoSelecionada;
+    }
+
+    public void setEspecializacaoSelecionada(EspecializacaoAreaAtuacao especializacaoSelecionada) {
+        this.especializacaoSelecionada = especializacaoSelecionada;
+    }
+
+    public DataModel<EspecializacaoAreaAtuacao> getEspecializacoesParaSelecionar() {
+        return especializacoesParaSelecionar;
+    }
+
+    public void setEspecializacoesParaSelecionar(DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar) {
+        this.especializacoesParaSelecionar = especializacoesParaSelecionar;
+    }
+
+    public AtuacaoPesquisador getAtuacaoSelecionada() {
+        return atuacaoSelecionada;
+    }
+
+    public void setAtuacaoSelecionada(AtuacaoPesquisador atuacaoSelecionada) {
+        this.atuacaoSelecionada = atuacaoSelecionada;
+    }
+
+    public DataModel<GrandeAreaAtuacao> getTodasAsGrandeAreas() {
+        return todasAsGrandeAreas;
+    }
+
+    public GrandeAreaAtuacaoService getGrandeAreaService() {
+        return grandeAreaService;
+    }
+
+    public void setGrandeAreaService(GrandeAreaAtuacaoService grandeAreaService) {
+        this.grandeAreaService = grandeAreaService;
+    }
+
+    public void setTodasAsGrandeAreas(DataModel<GrandeAreaAtuacao> todasAsGrandeAreas) {
+        this.todasAsGrandeAreas = todasAsGrandeAreas;
+    }
+
+    // Linha De Pesquisa
+    public LinhaDePesquisa getLinhaDePesquisaSelecionada() {
+        return this.linhaDePesquisaSelecionada;
+    }
+
+    public void setLinhaDePesquisaSelecionada(LinhaDePesquisa linhaDePesquisaSelecionada) {
+        this.linhaDePesquisaSelecionada = linhaDePesquisaSelecionada;
+    }
+
+    public List<LinhaDePesquisa> getLinhasDePesquisa() {
+        return this.linhasDePesquisa;
+    }
+
+    public void setLinhasDePesquisa(List<LinhaDePesquisa> linhasDePesquisa) {
+        this.linhasDePesquisa = linhasDePesquisa;
+    }
+
+    public LinhaDePesquisaService getLinhaDePesquisaService() {
+        return this.linhaDePesquisaService;
+    }
+
+    public void setLinhaDePesquisaService(LinhaDePesquisaService linhaDePesquisaService) {
+        this.linhaDePesquisaService = linhaDePesquisaService;
+    }
+
+    public void adicionarLinhaDePesquisa() {
+
+        if (linhaDePesquisaSelecionada != null) {
+
+            pesquisador.getLinhasDePesquisa().add(linhaDePesquisaSelecionada);
+        }
+    }
+
+    public void removerLinhaDePesquisa(LinhaDePesquisa linhaPesquisa) {
+        pesquisador.getLinhasDePesquisa().remove(linhaPesquisa);
+    }
+
 }

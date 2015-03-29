@@ -33,6 +33,9 @@ public class PersistenceJPAConfig {
     @Value("${hibernate.dialect}")
     private String hibernateDialect;
 
+    @Value("${hibernate.show_sql}")
+    private String hibernateShowSql;
+
     @Value("${database.driver.class.name}")
     private String databaseDriverClassName;
 
@@ -92,10 +95,10 @@ public class PersistenceJPAConfig {
     }
 
     private Properties additionalProperties() {
-
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", hibernateHBM2DLL);
         properties.setProperty("hibernate.dialect", hibernateDialect);
+        properties.setProperty("hibernate.show_sql", hibernateShowSql);
         return properties;
     }
 }

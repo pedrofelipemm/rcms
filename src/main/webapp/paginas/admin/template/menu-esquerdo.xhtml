@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition>
+	
+		<ul class="nav nav-pills nav-stacked" style="padding: 0;">
+			<li><a href="#">#{mensagens['painel.de.controle']}</a></li>
+			<hr />
+			<li><a href="${request.contextPath}/paginas/admin/consulta/sobre-o-grupo/sobre-o-grupo.xhtml">#{mensagens['o.grupo']}</a></li>
+			<li><a href="${request.contextPath}/paginas/admin/consulta/formacao-academica/formacoes-academica.xhtml">#{mensagens['formacao.academica']}</a></li>
+			<li><a href="${request.contextPath}/paginas/admin/consulta/idioma/idiomas.xhtml">#{mensagens['idiomas']}</a></li>
+			<li><a href="${request.contextPath}/paginas/admin/consulta/pesquisador/pesquisadores.xhtml">#{mensagens['pesquisadores']}</a></li>
+			<li><a href="${request.contextPath}/paginas/admin/consulta/area-atuacao/areas-atuacao-index.xhtml">#{mensagens['area.de.atuacao']}</a></li>
+			<li><a href="${request.contextPath}/paginas/admin/consulta/linha-pesquisa/linhas-pesquisa.xhtml">#{mensagens['linhas.de.pesquisa']}</a></li>
+			<li><a href="#">#{mensagens['projetos.de.pesquisa']}</a></li>
+			<li><a href="#">#{mensagens['publicacoes']}</a></li>
+			<li><a href="#">#{mensagens['indicadores']}</a></li>
+		</ul>
+	
+	</ui:composition>
+</html>

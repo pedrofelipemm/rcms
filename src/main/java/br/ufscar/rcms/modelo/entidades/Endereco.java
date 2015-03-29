@@ -16,16 +16,17 @@ public class Endereco extends Entidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_endereco")
     private Long idEndereco;
 
-    @Column(nullable = false, length = COLUMN_DEFAULT_LENGTH)
+    @Column(name = "endereco_profissional", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String enderecoProfissional;
 
-    @Column
-    private double enderecoProfissionalLatitude;
+    @Column(name = "latitude")
+    private Double enderecoProfissionalLatitude;
 
-    @Column
-    private double enderecoProfissionalLongitude;
+    @Column(name = "longitude")
+    private Double enderecoProfissionalLongitude;
 
     @OneToOne
     private Pesquisador pesquisador;
@@ -54,19 +55,19 @@ public class Endereco extends Entidade {
         this.enderecoProfissional = enderecoProfissional;
     }
 
-    public double getEnderecoProfissionalLatitude() {
+    public Double getEnderecoProfissionalLatitude() {
         return enderecoProfissionalLatitude;
     }
 
-    public void setEnderecoProfissionalLatitude(double enderecoProfissionalLatitude) {
+    public void setEnderecoProfissionalLatitude(Double enderecoProfissionalLatitude) {
         this.enderecoProfissionalLatitude = enderecoProfissionalLatitude;
     }
 
-    public double getEnderecoProfissionalLongitude() {
+    public Double getEnderecoProfissionalLongitude() {
         return enderecoProfissionalLongitude;
     }
 
-    public void setEnderecoProfissionalLongitude(double enderecoProfissionalLongitude) {
+    public void setEnderecoProfissionalLongitude(Double enderecoProfissionalLongitude) {
         this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
     }
 

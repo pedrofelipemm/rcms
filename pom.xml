@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
@@ -22,7 +23,7 @@
 		<org.primefaces.version>5.0</org.primefaces.version>
 		<org.slf4j.version>1.6.3</org.slf4j.version>
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
-        <spring.security.version>3.2.5.RELEASE</spring.security.version>
+        <spring.security.version>4.0.0.RELEASE</spring.security.version>
 		<org.spring-security.version>3.1.0.RELEASE</org.spring-security.version>
 		<postgresql.version>9.1-901-1.jdbc4</postgresql.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

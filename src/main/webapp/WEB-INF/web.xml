@@ -18,10 +18,21 @@
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-  	
-	<context-param>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	  	
+  	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+			/WEB-INF/spring/spring-security.xml
 			classpath:/applicationContext.xml
 		</param-value>
 	</context-param>
@@ -55,6 +66,7 @@
     	<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     	<load-on-startup>1</load-on-startup>
   	</servlet>
+  	
   	<servlet-mapping>
     	<servlet-name>Faces Servlet</servlet-name>
     	<url-pattern>*.xhtml</url-pattern>

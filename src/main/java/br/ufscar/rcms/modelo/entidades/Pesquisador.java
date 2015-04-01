@@ -240,6 +240,10 @@ public class Pesquisador extends Usuario {
         this.participacaoEventos.addAll(Arrays.asList(participacaoEventos));
     }
 
+    public void removeParticipacaoEventos(ParticipacaoEvento... participacaoEventos) {
+        this.participacaoEventos.removeAll(Arrays.asList(participacaoEventos));
+    }
+
     public void addCitacaoBibliograficas(CitacaoBibliografica... citacaoBibliograficas) {
         this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
     }

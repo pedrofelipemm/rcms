@@ -84,8 +84,8 @@
             		<div class="form-group">
               			<h:outputLabel for="enderecoProfissional" value="#{mensagens['label.endereco.profissional']}"/>
               			<h:inputTextarea id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
-              				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
-              				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control" rows="5"/>
+              				required="true" requiredMessage="#{mensagens['endereco.latitude.nao.preenchido']}"
+              				pt:placeholder="#{mensagens['informe.endereco.latitude']}" styleClass="form-control" rows="5"/>
             		</div>
           		</div>
         	</div>
@@ -94,14 +94,16 @@
             		<div class="form-group">
               			<h:outputLabel for="enderecoProfissionalLatitude" value="#{mensagens['label.endereco.latitude']}"/>
               			<h:inputText id="enderecoProfissionalLatitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLatitude}"
-              				styleClass="form-control" />
+              				required="true" requiredMessage="#{mensagens['endereco.longitude.nao.preenchido']}"
+              				pt:placeholder="#{mensagens['informe.endereco.longitude']}" styleClass="form-control" />
             		</div>
           		</div>
           		<div class="col-md-6">
             		<div class="form-group">
               			<h:outputLabel for="enderecoProfissionalLongitude" value="#{mensagens['label.endereco.longitude']}"/>
               			<h:inputText id="enderecoProfissionalLongitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLongitude}"
-              				styleClass="form-control" />
+              				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
+              				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control" />
             		</div>
           		</div>
         	</div>
@@ -119,6 +121,7 @@
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-idioma.xhtml" />
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-area-atuacao.xhtml" />
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-linha-pesquisa.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-participacao-evento.xhtml" />
 
 			<div class="row">
 				<div class="col-md-12">

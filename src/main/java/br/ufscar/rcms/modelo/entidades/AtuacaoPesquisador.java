@@ -2,11 +2,9 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -73,11 +71,9 @@ public class AtuacaoPesquisador extends Entidade{
     private int IdAtuacao;
 	
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_atuacao_pesquisador_pesquisador"))
     private Pesquisador pesquisador;
 	
     @ManyToOne(optional = false)
-    @JoinColumn(name = "id_especializacao", foreignKey = @ForeignKey(name = "fk_atuacao_pesquisador_especializacao"))
     private EspecializacaoAreaAtuacao especializacao;
 	
     public EspecializacaoAreaAtuacao getEspecializacao() {

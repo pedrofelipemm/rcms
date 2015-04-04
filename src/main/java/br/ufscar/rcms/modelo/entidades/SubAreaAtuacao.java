@@ -6,11 +6,9 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,11 +27,9 @@ public class SubAreaAtuacao extends Entidade {
     private String descricao;
 
     @OneToMany(cascade = { javax.persistence.CascadeType.ALL }, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_especializacao", foreignKey = @ForeignKey(name = "fk_sub_area_atuacao_especializacao_area_atuacao"))
     private List<EspecializacaoAreaAtuacao> especializacoes = new ArrayList<EspecializacaoAreaAtuacao>();
 
     @ManyToOne
-    @JoinColumn(name = "id_area_atuacao", foreignKey = @ForeignKey(name = "fk_sub_area_atuacao_area_atuacao"))
     private AreaAtuacao areaAtuacao;
 
     public Integer getIdSubAreaAtuacao() {

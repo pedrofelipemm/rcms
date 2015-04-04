@@ -14,8 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
+
 @Entity
 @Table(name = "\"PESQUISADOR\"")
+@ForeignKey(name = "fk_pesquisador_usuario")
 public class Pesquisador extends Usuario {
 
     private static final long serialVersionUID = 7468024654193724256L;

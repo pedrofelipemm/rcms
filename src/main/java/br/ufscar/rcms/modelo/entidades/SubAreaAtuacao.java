@@ -29,6 +29,7 @@ public class SubAreaAtuacao extends Entidade {
     private String descricao;
 
     @OneToMany(cascade = { javax.persistence.CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_especializacao", foreignKey = @ForeignKey(name = "fk_sub_area_atuacao_especializacao_area_atuacao"))
     private List<EspecializacaoAreaAtuacao> especializacoes = new ArrayList<EspecializacaoAreaAtuacao>();
 
     @ManyToOne

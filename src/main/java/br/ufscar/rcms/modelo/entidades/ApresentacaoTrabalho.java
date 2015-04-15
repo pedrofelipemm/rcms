@@ -4,8 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
+
 @Entity
 @Table(name = "\"APRESENTACAO_TRABALHO\"")
+@ForeignKey(name = "fk_apresentacao_trabalho_producao_bibliografica")
 public class ApresentacaoTrabalho extends ProducaoBibliografica {
 
     private static final long serialVersionUID = 5668638568301910798L;

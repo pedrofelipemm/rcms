@@ -11,11 +11,13 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "\"PESQUISADOR\"")
+@ForeignKey(name = "fk_pesquisador_usuario")
 public class Pesquisador extends Usuario {
 
     private static final long serialVersionUID = 7468024654193724256L;
@@ -35,39 +37,30 @@ public class Pesquisador extends Usuario {
     @Column(name = "resumo_profissional", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String resumoProfissional;
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.pesquisador")
     private List<CompreensaoIdioma> compreensaoIdiomas = new ArrayList<CompreensaoIdioma>();
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<PremioTitulo> premios = new ArrayList<PremioTitulo>();
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<ParticipacaoEvento> participacaoEventos = new ArrayList<ParticipacaoEvento>();
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<OrganizacaoEvento> organizacaoEventos = new ArrayList<OrganizacaoEvento>();
 
-    @OrderColumn
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
 
-    @OrderColumn(name = "INDEX")
     @ManyToMany(cascade = CascadeType.ALL)
     private List<AtuacaoPesquisador> areaAtuacoes = new ArrayList<AtuacaoPesquisador>();
 
-    @OrderColumn
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 

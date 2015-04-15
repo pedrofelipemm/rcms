@@ -10,16 +10,16 @@
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
- 
-  	
-  	  <beans:bean class="org.springframework.security.web.FilterChainProxy" id="springSecurityFilterChain">
-		  <filter-chain-map request-matcher="ant">
-		   <filter-chain filters="securityContextPersistenceFilter" pattern="/*"></filter-chain>
-		  </filter-chain-map>
-		 </beans:bean>
-		 <beans:bean class="org.springframework.security.web.context.SecurityContextPersistenceFilter" id="securityContextPersistenceFilter">
-		  <beans:property name="forceEagerSessionCreation" value="true"></beans:property>
-		 </beans:bean>
+
+
+	<beans:bean class="org.springframework.security.web.FilterChainProxy" id="springSecurityFilterChain">
+		<filter-chain-map request-matcher="ant">
+			<filter-chain filters="securityContextPersistenceFilter" pattern="/*"></filter-chain>
+		</filter-chain-map>
+	</beans:bean>
+	<beans:bean class="org.springframework.security.web.context.SecurityContextPersistenceFilter" id="securityContextPersistenceFilter">
+		<beans:property name="forceEagerSessionCreation" value="true"></beans:property>
+	</beans:bean>
   	
  	<http pattern="/javax.faces.resource/**" security="none"></http>
  	<http pattern="/file/**" security="none"></http>

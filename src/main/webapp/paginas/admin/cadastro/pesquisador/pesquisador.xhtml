@@ -5,6 +5,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="conteudo">
 		
@@ -14,7 +15,7 @@
         	</div>
         </div>
 		
-		<h:form id="formPesquisador" enctype="multipart/form-data">
+		<h:form id="formPesquisador">
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 
@@ -71,14 +72,15 @@
 						</h:selectOneMenu>            		
             		</div>
             	</div>
-            	<div class="col-md-3 text-center"> <h:graphicImage value="/resources/images/default-image.jpg" alt="Imagem para representar foto do pesquisador" />
-            		<div class="form-group">
-              			<label for="foto">#{mensagens['label.enviar.foto']}</label>
-<!--               			<input type="file" id="foto"/> -->
-<!--               			<p class="help-block">Tamanho máximo de 200KB (i18n com tamanho parametrizado) -</p> -->
-            		</div>
-          		</div>
-        	</div>
+				<div class="col-md-3 text-center">
+					<!-- 					<p:graphicImage value="/resources/images/foto-prado.jpg" alt="Imagem para representar foto do pesquisador" /> -->
+					<h:graphicImage value="/resources/images/default-image.jpg" alt="Imagem para representar foto do pesquisador" />
+					<div class="form-group">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFileUpload"
+							style="margin: 10px;">#{mensagens['adicionar']}</button>
+					</div>
+				</div>
+			</div>
 			<div class="row">
           		<div class="col-md-12">
             		<div class="form-group">
@@ -132,7 +134,9 @@
 					</div>
 				</div>
 			</div>
-			
 		</h:form>
+		
+		<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-file-upload.xhtml" />
+
 	</ui:define>
 </ui:composition>

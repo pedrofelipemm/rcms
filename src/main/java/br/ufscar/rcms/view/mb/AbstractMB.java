@@ -14,8 +14,11 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +30,15 @@ import br.ufscar.rcms.modelo.entidades.Entidade;
 public abstract class AbstractMB implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMB.class);
-
     private static final String BUNDLE_NAME = "bundle";
+    private static final String EMPTY_STRING = "";
 
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
     public static final String EXIBE_PESQUISADOR = "pesquisador";
     public static final String FLASH_KEY_PESQUISADOR = "pesquisador";
+    public static final String FLASH_KEY_FOTO_PESQUISADOR = "fotoPesquisador";
 
     // Idioma
     public static final String CADASTRO_IDIOMAS = "cadastroIdiomas";
@@ -75,23 +79,43 @@ public abstract class AbstractMB implements Serializable {
     // protected abstract void limparDados();
     // protected abstract void carregarDados();
 
-    public FacesContext getCurrentInstance() {
+    protected FacesContext getCurrentInstance() {
         return FacesContext.getCurrentInstance();
     }
 
-    public UIViewRoot getViewRoot() {
+    protected ServletContext getContext() {
+        return (ServletContext) getExternalContext().getContext();
+    }
+
+    protected UIViewRoot getViewRoot() {
         return getCurrentInstance().getViewRoot();
     }
 
-    public ExternalContext getExternalContext() {
+    protected ExternalContext getExternalContext() {
         return getCurrentInstance().getExternalContext();
     }
 
-    private Flash getFlash() {
+    protected HttpSession getSession() {
+        return (HttpSession) getExternalContext().getSession(false);
+    }
+
+    protected String getSessionId() {
+        return getSession().getId();
+    }
+
+    protected String getRealPath(String path) {
+        return getContext().getRealPath(path);
+    }
+
+    protected String getRealPath() {
+        return getRealPath(EMPTY_STRING);
+    }
+
+    protected Flash getFlash() {
         return getExternalContext().getFlash();
     }
 
-    public void setFlashObject(String key, Object value) {
+    protected void setFlashObject(String key, Object value) {
 
         if (key == null || value == null) {
             throw new IllegalArgumentException(getMessage("key.value.nao.nulo"));
@@ -105,7 +129,7 @@ public abstract class AbstractMB implements Serializable {
         getFlash().put(key, value);
     }
 
-    public Object getFlashObject(String key) {
+    protected Object getFlashObject(String key) {
 
         if (getFlash() == null) {
             // TODO i18n
@@ -116,22 +140,22 @@ public abstract class AbstractMB implements Serializable {
         return getFlash().get(key);
     }
 
-    public HttpServletRequest getRequest() {
+    protected HttpServletRequest getRequest() {
 
         return (HttpServletRequest) getExternalContext().getRequest();
     }
 
-    public HttpServletResponse getResponse() {
+    protected HttpServletResponse getResponse() {
 
         return (HttpServletResponse) getExternalContext().getResponse();
     }
 
-    public ResourceBundle getResourceBundle() {
+    protected ResourceBundle getResourceBundle() {
 
         return ResourceBundle.getBundle(BUNDLE_NAME, getViewRoot().getLocale());
     }
 
-    public String getMessage(String key) {
+    protected String getMessage(String key) {
 
         if (key == null) {
             throw new IllegalArgumentException(getMessage("key.nao.nulo"));
@@ -140,7 +164,7 @@ public abstract class AbstractMB implements Serializable {
         return getResourceBundle().getString(key);
     }
 
-    public String getMessage(String key, String... parametros) {
+    protected String getMessage(String key, String... parametros) {
 
         String mensagem = getMessage(key);
         if (parametros != null) {
@@ -150,38 +174,31 @@ public abstract class AbstractMB implements Serializable {
         return mensagem;
     }
 
-    public void adicionarMensagemInfo(String texto) {
+    protected void adicionarMensagemInfo(String texto) {
         adicionarMensagem(texto, FacesMessage.SEVERITY_INFO);
     }
 
-    public void adicionarMensagemInfoByKey(String key, String... parameters) {
+    protected void adicionarMensagemInfoByKey(String key, String... parameters) {
         adicionarMensagemByKey(FacesMessage.SEVERITY_INFO, key, parameters);
     }
 
-    public void adicionarMensagemErro(String texto) {
+    protected void adicionarMensagemErro(String texto) {
         adicionarMensagem(texto, FacesMessage.SEVERITY_ERROR);
     }
 
-    public void adicionarMensagemErroByKey(String key, String... parameters) {
+    protected void adicionarMensagemErroByKey(String key, String... parameters) {
         adicionarMensagemByKey(FacesMessage.SEVERITY_ERROR, key, parameters);
     }
 
-    public void adicionarMensagemAlerta(String texto) {
+    protected void adicionarMensagemAlerta(String texto) {
         adicionarMensagem(texto, FacesMessage.SEVERITY_WARN);
     }
 
-    public void adicionarMensagemAlertaByKey(String key, String... parameters) {
+    protected void adicionarMensagemAlertaByKey(String key, String... parameters) {
         adicionarMensagemByKey(FacesMessage.SEVERITY_WARN, key, parameters);
     }
 
-    private void adicionarMensagem(String texto, Severity severity) {
-        getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
-    }
-    private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
-        getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
-    }
-
-    public void keepMessagesOnRedirect() {
+    protected void keepMessagesOnRedirect() {
         getFlash().setKeepMessages(true);
     }
 
@@ -190,5 +207,24 @@ public abstract class AbstractMB implements Serializable {
         for (List<? extends Entidade> list : lists) {
             while (list.remove(null)) {}
         }
+    }
+
+    protected String getFileNameFromPart(Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : partHeader.split(";")) {
+            if (content.trim().startsWith("filename")) {
+                String fileName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+                return fileName;
+            }
+        }
+        return null;
+    }
+
+    private void adicionarMensagem(String texto, Severity severity) {
+        getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
+    }
+
+    private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
+        getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
     }
 }

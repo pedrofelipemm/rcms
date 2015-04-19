@@ -1,6 +1,7 @@
 package br.ufscar.rcms.view.mb;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,11 +127,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public String salvar() {
 
-        // TODO PEDRO TRATAR
-        if (fotoPesquisador != null) {
-            converterFotoPesquisador(pesquisador);
-        }
-
         try {
             pesquisadorService.salvarOuAtualizar(pesquisador);
             participacaoEventoService.remover(participacaoEventosToDelete);
@@ -145,6 +141,18 @@ public class PesquisadorMB extends AbstractMB {
             LOGGER.error(exception.getMessage(), exception);
         }
         return null;
+    }
+
+    public void uploadFile() {
+        try {
+            InputStream inputStream = fotoPesquisador.getInputStream();
+            byte[] byteArray = IOUtils.toByteArray(inputStream);
+            setFlashObject(FLASH_KEY_FOTO_PESQUISADOR, byteArray);
+            pesquisador.setFoto(byteArray);
+        } catch (IOException exception) {
+            adicionarMensagemErroByKey("erro.carregar.foto.pesquisador", pesquisador.getNome());
+            LOGGER.error(exception.getMessage(), exception);
+        }
     }
 
     public String exibir(Pesquisador pesquisador) {
@@ -205,16 +213,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setFotoPesquisador(Part fotoPesquisador) {
         this.fotoPesquisador = fotoPesquisador;
-    }
-
-    private void converterFotoPesquisador(Pesquisador pesquisador) {
-
-        try {
-            pesquisador.setFoto(IOUtils.toByteArray(fotoPesquisador.getInputStream()));
-        } catch (IOException e) {
-            // TODO PEDRO TRATAR EXCEPTION
-            LOGGER.error(e.getMessage(), e);
-        }
     }
 
     // Lattes

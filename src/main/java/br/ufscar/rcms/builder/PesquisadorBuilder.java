@@ -86,16 +86,20 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder projetosPesquisa(ProjetetosPesquisaLattes projetosPesquisa) {
-        for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
-            pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes.getDescricao(),
-                    projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao()));
+        if (projetosPesquisa!=null) {
+            for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
+                pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes.getDescricao(),
+                        projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao()));
+            }
         }
         return this;
     }
 
     public PesquisadorBuilder areaAtuacoes(AreaAtuacaoLattes areaAtuacao) {
-        for (String descricao : areaAtuacao.getDescricao()) {
-            pesquisador.addAtuacoesPesquisador(AtuacaoPesquisadorFactory.createAtuacaoPesquisador(pesquisador, descricao));
+        if (areaAtuacao != null) {
+            for (String descricao : areaAtuacao.getDescricao()) {
+                pesquisador.addAtuacoesPesquisador(AtuacaoPesquisadorFactory.createAtuacaoPesquisador(pesquisador, descricao));
+            }
         }
         return this;
     }
@@ -114,31 +118,39 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder organizacaoEventos(OrganizacaoEventoLattes organizacaoEvento) {
-        for (EventoLatttes eventoLatttes : organizacaoEvento.getEventos()) {
-            pesquisador.addOrgazicaoEventos(new OrganizacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(),
-                    eventoLatttes.getNatureza(), eventoLatttes.getAno()));
+        if (organizacaoEvento != null) {
+            for (EventoLatttes eventoLatttes : organizacaoEvento.getEventos()) {
+                pesquisador.addOrgazicaoEventos(new OrganizacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(),
+                        eventoLatttes.getNatureza(), eventoLatttes.getAno()));
+            }
         }
         return this;
     }
 
     public PesquisadorBuilder participacaoEventos(ParticipacaoEventoLattes participacaoEvento) {
-        for (EventoLatttes eventoLatttes : participacaoEvento.getEventos()) {
-            pesquisador.addParticipacaoEventos(new ParticipacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(), eventoLatttes.getAno()));
+        if (participacaoEvento != null) {
+            for (EventoLatttes eventoLatttes : participacaoEvento.getEventos()) {
+                pesquisador.addParticipacaoEventos(new ParticipacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(), eventoLatttes.getAno()));
+            }
         }
         return this;
     }
 
     public PesquisadorBuilder premios(PremiosLattes premios) {
-        for (PremioLattes premioLattes : premios.getPremio()) {
-            pesquisador.addPremios(new PremioTitulo(cachedPesquisador, premioLattes.getAno(), premioLattes.getDescricao()));
+        if (premios != null) {
+            for (PremioLattes premioLattes : premios.getPremio()) {
+                pesquisador.addPremios(new PremioTitulo(cachedPesquisador, premioLattes.getAno(), premioLattes.getDescricao()));
+            }
         }
         return this;
     }
 
     public PesquisadorBuilder compreensaoIdiomas(IdiomasLattes idiomas) {
-        for (IdiomaLattes idiomaLattes : idiomas.getIdiomas()) {
-            pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(
-                    new Idioma(idiomaLattes.getNome()), idiomaLattes.getProficiencia(), cachedPesquisador));
+        if (idiomas != null) {
+            for (IdiomaLattes idiomaLattes : idiomas.getIdiomas()) {
+                pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(new Idioma(
+                        idiomaLattes.getNome()), idiomaLattes.getProficiencia(), cachedPesquisador));
+            }
         }
         return this;
     }
@@ -154,16 +166,16 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder endereco(EnderecoLattes endereco) {
-
-        if (cachedPesquisador.getEndereco() != null) {
-            pesquisador.setEndereco(EnderecoFactory.createEndereco(cachedPesquisador.getEndereco().getIdEndereco(),
-                    endereco.getEnderecoProfissional(), endereco.getEnderecoProfissionalLatitude(),
-                    endereco.getEnderecoProfissionalLongitude()));
-        } else {
-            pesquisador.setEndereco(EnderecoFactory.createEndereco(endereco.getEnderecoProfissional(),
-                    endereco.getEnderecoProfissionalLatitude(), endereco.getEnderecoProfissionalLongitude()));
+        if (endereco != null) {
+            if (cachedPesquisador.getEndereco() != null) {
+                pesquisador.setEndereco(EnderecoFactory.createEndereco(cachedPesquisador.getEndereco().getIdEndereco(),
+                        endereco.getEnderecoProfissional(), endereco.getEnderecoProfissionalLatitude(),
+                        endereco.getEnderecoProfissionalLongitude()));
+            } else {
+                pesquisador.setEndereco(EnderecoFactory.createEndereco(endereco.getEnderecoProfissional(),
+                        endereco.getEnderecoProfissionalLatitude(), endereco.getEnderecoProfissionalLongitude()));
+            }
         }
-
         return this;
     }
 
@@ -186,24 +198,24 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder formacaoAcademica(FormacoesAcademicaLattes formacoes) {
+        if (formacoes != null) {
+            for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
+                FormacaoAcademica formacao = null;
+                if ((formacao = cachedPesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
+                    pesquisador.getFormacoes().add(
+                            FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
+                                    formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(),
+                                    formacaoLattes.getDescricao(), formacaoLattes.getNomeInstituicao(),
+                                    formacaoLattes.getTipo(), cachedPesquisador));
+                }else{
+                    pesquisador.getFormacoes().add(
+                            FormacaoAcademicaFactory.createFormacaoAcademica(
+                                    formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
+                                    formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), cachedPesquisador));
+                }
 
-        for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
-             FormacaoAcademica formacao = null;
-             if ((formacao = cachedPesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
-                pesquisador.getFormacoes().add(
-                        FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
-                                formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(),
-                                formacaoLattes.getDescricao(), formacaoLattes.getNomeInstituicao(),
-                                formacaoLattes.getTipo(), cachedPesquisador));
-             }else{
-                pesquisador.getFormacoes().add(
-                        FormacaoAcademicaFactory.createFormacaoAcademica(
-                    formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(), formacaoLattes.getDescricao(),
-                    formacaoLattes.getNomeInstituicao(), formacaoLattes.getTipo(), cachedPesquisador));
-             }
-
+            }
         }
-
         return this;
     }
 

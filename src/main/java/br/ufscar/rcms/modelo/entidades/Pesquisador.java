@@ -222,47 +222,69 @@ public class Pesquisador extends Usuario {
     }
 
     public void addCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {
-        this.compreensaoIdiomas.addAll(Arrays.asList(compreensaoIdiomas));
+        if (compreensaoIdiomas != null) {
+            this.compreensaoIdiomas.addAll(Arrays.asList(compreensaoIdiomas));
+        }
     }
 
     public void removeCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {
-        this.compreensaoIdiomas.removeAll(Arrays.asList(compreensaoIdiomas));
+        if (compreensaoIdiomas != null) {
+            this.compreensaoIdiomas.removeAll(Arrays.asList(compreensaoIdiomas));
+        }
     }
 
     public void addParticipacaoEventos(ParticipacaoEvento... participacaoEventos) {
-        this.participacaoEventos.addAll(Arrays.asList(participacaoEventos));
+        if (participacaoEventos != null) {
+            this.participacaoEventos.addAll(Arrays.asList(participacaoEventos));
+        }
     }
 
     public void removeParticipacaoEventos(ParticipacaoEvento... participacaoEventos) {
-        this.participacaoEventos.removeAll(Arrays.asList(participacaoEventos));
+        if (participacaoEventos != null) {
+            this.participacaoEventos.removeAll(Arrays.asList(participacaoEventos));
+        }
     }
 
     public void addCitacaoBibliograficas(CitacaoBibliografica... citacaoBibliograficas) {
-        this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
+        if (citacaoBibliograficas != null) {
+            this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
+        }
     }
 
     public void addPremios(PremioTitulo... premios) {
-        this.premios.addAll(Arrays.asList(premios));
+        if (premios != null) {
+            this.premios.addAll(Arrays.asList(premios));
+        }
     }
 
     public void addOrgazicaoEventos(OrganizacaoEvento... organizacaoEventos) {
-        this.organizacaoEventos.addAll(Arrays.asList(organizacaoEventos));
+        if (organizacaoEventos != null) {
+            this.organizacaoEventos.addAll(Arrays.asList(organizacaoEventos));
+        }
     }
 
     public void addProjetosPesquisa(ProjetoPesquisa... projetosPesquisa) {
-        this.projetosPesquisa.addAll(Arrays.asList(projetosPesquisa));
+        if (projetosPesquisa != null) {
+            this.projetosPesquisa.addAll(Arrays.asList(projetosPesquisa));
+        }
     }
 
     public void addOrientacoes(Orientacao... orientacoes) {
-        this.orientacoes.addAll(Arrays.asList(orientacoes));
+        if (orientacoes != null) {
+            this.orientacoes.addAll(Arrays.asList(orientacoes));
+        }
     }
 
     public void addOrientacoes(List<? extends Orientacao> orientacoes) {
-        this.orientacoes.addAll(orientacoes);
+        if (orientacoes != null) {
+            this.orientacoes.addAll(orientacoes);
+        }
     }
 
     public void addAtuacoesPesquisador(AtuacaoPesquisador... atuacoesPesquisador) {
-        areaAtuacoes.addAll(Arrays.asList(atuacoesPesquisador));
+        if (atuacoesPesquisador != null) {
+            areaAtuacoes.addAll(Arrays.asList(atuacoesPesquisador));
+        }
     }
 
     @Override

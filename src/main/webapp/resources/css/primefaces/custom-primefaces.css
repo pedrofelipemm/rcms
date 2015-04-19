@@ -1,13 +1,21 @@
 .ui-messages.ui-widget {
-    display: inline-block;
-    margin-left: 15px;
+	display: inline-block;
+	margin-left: 15px;
 }
 
 .panelGrid td, .panelGrid tr {
-    border: none !important;
+	border: none !important;
 }
 
-.ui-growl {  
-	z-index:9999 !important;
+.ui-growl {
+	z-index: 9999 !important;
 	margin-top: 5%;
+}
+
+#statusDialog .ui-dialog .ui-dialog-titlebar {
+	display: none !important;
+}
+
+.ui-dialog {
+	z-index: 1031 !important;
 }

@@ -9,34 +9,34 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-				<p:panel id="painelParticipacaoEventos">
-					<h3>#{mensagens['participacao.eventos']}</h3>
-					<div class="row">
-						<div class="col-md-3">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParticipacaoEventos">#{mensagens['adicionar']}</button>
-						</div>
-					</div>
+				<p:panel id="painelParticipacaoEventos" header="#{mensagens['participacao.eventos']}">
 					<h:dataTable id="tableParticipacaoEventos" value="#{pesquisadorMB.pesquisador.participacaoEventos}"
 						var="participacaoEvento" styleClass="table table-hover" headerClass="col-width-50" rowClasses="col-width-50">
 						<h:column headerClass="col-xs-9">
 							<f:facet name="header">
 								<h:outputLabel value="#{mensagens['evento.titulo']}" />
 							</f:facet>
-							<h:outputLabel value="#{participacaoEvento.titulo}"/>
+							<h:outputText value="#{participacaoEvento.titulo}"/>
 						</h:column>
 						<h:column headerClass="col-xs-1">
 							<f:facet name="header">
 								<h:outputLabel value="#{mensagens['evento.ano']}" />
 							</f:facet>
-							<h:outputLabel value="#{participacaoEvento.ano}"/>
+							<h:outputText value="#{participacaoEvento.ano}"/>
 						</h:column>
 						<h:column headerClass="col-xs-3 text-center">
 							<f:facet name="header">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParticipacaoEventos">#{mensagens['adicionar']}</button>
 							</f:facet>
-							<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-								action="#{pesquisadorMB.removerParticipacaoEvento(participacaoEvento)}">
-								<f:ajax render=":formPesquisador:painelParticipacaoEventos" />
-							</h:commandButton>
+							<div class="text-center">
+								<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary">
+									<f:ajax render=":formPesquisador:painelParticipacaoEventos" />
+								</h:commandButton>&nbsp;
+								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+									action="#{pesquisadorMB.removerParticipacaoEvento(participacaoEvento)}">
+									<f:ajax render=":formPesquisador:painelParticipacaoEventos" />
+								</h:commandButton>
+							</div>
 						</h:column>
 					</h:dataTable>
 					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-participacao-evento.xhtml" />

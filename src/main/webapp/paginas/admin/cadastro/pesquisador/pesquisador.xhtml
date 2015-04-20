@@ -9,25 +9,20 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="conteudo">
 		
-		<div class="row">
-        	<div class="col-md-12">
-        		<h1>#{mensagens['pesquisadores']}</h1>
-        	</div>
-        </div>
-		
-		<h:form id="formPesquisador">
+		<h:form id="formPesquisador" prependId="false">
+			
+			<div class="row">
+	        	<div class="col-md-12">
+	        		<h1>#{mensagens['pesquisadores']}</h1>
+	        	</div>
+	        </div>
 			
 			<p:growl id="messageBox" autoUpdate="true" life="5000" />
 			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
-					</div>
-				</div>
-			</div>
+<!-- 			<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success"> -->
+<!-- 				<f:ajax render="@form" execute="@form" /> -->
+<!-- 			</h:commandButton> -->
+			
 			<div class="row">
           		<div class="col-md-5">
             		<div class="form-group">
@@ -82,13 +77,13 @@
             		</div>
             	</div>
 				<div class="col-md-3 text-center">
-					<div id="box-foto-pesquisador" data-animation="pulse">
+					<div id="box-foto-pesquisador">
 						<!-- 					<p:graphicImage value="/resources/images/foto-prado.jpg" alt="Imagem para representar foto do pesquisador" /> -->
 						<h:graphicImage value="/resources/images/default-image.jpg" alt="Imagem para representar foto do pesquisador" />
 					</div>
 					<div class="form-group">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFileUpload"
-							style="margin: 10px;">#{mensagens['adicionar']}</button>
+							style="margin: 10px;">#{mensagens['upload']}</button>
 					</div>
 				</div>
 			</div>
@@ -139,7 +134,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group">
-						<h:commandButton value="#{mensagens['salvar']}" name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
+						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
 					</div>

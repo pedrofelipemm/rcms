@@ -19,3 +19,18 @@
 .ui-dialog {
 	z-index: 1031 !important;
 }
+
+.ui-panel {
+	border-color: #428BCA;
+}
+
+.ui-panel-title {
+	font-size: 25px;
+	color: #FFF;
+}
+
+.ui-panel-titlebar {
+	color: #FFF;
+	background-color: #428BCA;
+	border-color: #FFF
+}

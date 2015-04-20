@@ -15,9 +15,9 @@
         	</div>
         </div>
 		
-		<h:form id="formPesquisador">
+		<h:form id="formPesquisador" prependId="false">
 			
-			<p:growl id="messageBox" autoUpdate="true" life="5000" />
+			<p:growl id="messageBox" autoUpdate="true" life="5000"/>
 			
 			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
 				headerClass="col-width-50" rowClasses="col-width-50"

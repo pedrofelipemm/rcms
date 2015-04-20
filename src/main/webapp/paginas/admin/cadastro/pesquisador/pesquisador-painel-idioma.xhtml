@@ -8,35 +8,34 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-			
-				<p:panel id="painelIdioma">
-					<h3>#{mensagens['idiomas']}</h3>
-					<div class="row">
-						<div class="col-md-3">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalIdioma">#{mensagens['adicionar']}</button>
-						</div>
-					</div>
+				<p:panel id="painelIdioma" header="#{mensagens['idiomas']}">
 					<h:dataTable id="tableCompreensaoIdiomas" value="#{pesquisadorMB.pesquisador.compreensaoIdiomas}"
 						var="compreensaoIdioma" styleClass="table table-hover" headerClass="col-width-50" rowClasses="col-width-50">
 						<h:column headerClass="col-xs-3">
 							<f:facet name="header">
 								<h:outputLabel value="#{mensagens['idioma']}" />
 							</f:facet>
-							<h:outputLabel value="#{compreensaoIdioma.compreensaoIdiomaPK.idioma.descricao}"/>
+							<h:outputText value="#{compreensaoIdioma.compreensaoIdiomaPK.idioma.descricao}"/>
 						</h:column>
 						<h:column headerClass="col-xs-7">
 							<f:facet name="header">
 								<h:outputLabel value="#{mensagens['proficiencia']}" />
 							</f:facet>
-							<h:outputLabel value="#{compreensaoIdioma.proficiencia}"/>
+							<h:outputText value="#{compreensaoIdioma.proficiencia}"/>
 						</h:column>
-						<h:column headerClass="col-xs-2 text-center">
+						<h:column headerClass="col-xs-2 text-center" >
 							<f:facet name="header">
+								<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalIdioma">#{mensagens['adicionar']}</button>
 							</f:facet>
-							<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-default"
-								action="#{pesquisadorMB.removerCompreensaoIdioma(compreensaoIdioma)}">
-								<f:ajax render=":formPesquisador:painelIdioma" />
-							</h:commandButton>
+							<div class="text-center">
+								<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary">
+									<f:ajax render="painelIdioma" />
+								</h:commandButton>&nbsp;
+								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+									action="#{pesquisadorMB.removerCompreensaoIdioma(compreensaoIdioma)}">
+									<f:ajax render="painelIdioma" />
+								</h:commandButton>
+							</div>
 						</h:column>
 					</h:dataTable>
 					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-idioma.xhtml" />

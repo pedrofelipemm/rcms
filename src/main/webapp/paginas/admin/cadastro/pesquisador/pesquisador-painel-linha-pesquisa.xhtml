@@ -8,34 +8,32 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group">
-			
-				<p:panel id="painelLinhaDePesquisa">
-					<h3>#{mensagens['linhas.de.pesquisa']}</h3>
-					<div class="row">
-						<div class="col-md-12">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLinhaDePesquisa">#{mensagens['adicionar']}</button>
-						</div>
-					</div>
+				<p:panel id="painelLinhaDePesquisa" header="#{mensagens['linhas.de.pesquisa']}">
 					<h:dataTable id="tableLinhasDePesquisa" value="#{pesquisadorMB.pesquisador.linhasDePesquisa}" var="linhaDePesquisa" styleClass="table table-hover"
 						headerClass="col-width-50" rowClasses="col-width-50">
 						<h:column headerClass="col-xs-10">
 							<f:facet name="header">
 								<h:outputLabel value="#{mensagens['descricao']}" />
 							</f:facet>
-							<h:outputLabel value="#{linhaDePesquisa.descricao}"/>
+							<h:outputText value="#{linhaDePesquisa.descricao}"/>
 						</h:column>
 						<h:column headerClass="col-xs-2 text-center">
 							<f:facet name="header">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLinhaDePesquisa">#{mensagens['adicionar']}</button>
 							</f:facet>
-							<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-default"
-								action="#{pesquisadorMB.removerLinhaDePesquisa(linhaDePesquisa)}">
-								<f:ajax render=":formPesquisador:painelLinhaDePesquisa" />
-							</h:commandButton>
+							<div class="text-center">
+								<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary">
+									<f:ajax render=":formPesquisador:painelLinhaDePesquisa" />
+								</h:commandButton>&nbsp;
+								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+									action="#{pesquisadorMB.removerLinhaDePesquisa(linhaDePesquisa)}">
+									<f:ajax render=":formPesquisador:painelLinhaDePesquisa" />
+								</h:commandButton>
+							</div>
 						</h:column>
 					</h:dataTable>
 					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-linha-pesquisa.xhtml" />
 				</p:panel>
-				
 			</div>
 		</div>
 	</div>

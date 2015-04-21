@@ -1,7 +1,6 @@
 package br.ufscar.rcms.view.mb;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -45,6 +43,9 @@ public class PesquisadorMB extends AbstractMB {
     private static final long serialVersionUID = 7023051572658948461L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorMB.class);
+
+    @ManagedProperty("#{imageCacheMB}")
+    private ImageCacheMB cache;
 
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
@@ -144,15 +145,7 @@ public class PesquisadorMB extends AbstractMB {
     }
 
     public void uploadFile() {
-        try {
-            InputStream inputStream = fotoPesquisador.getInputStream();
-            byte[] byteArray = IOUtils.toByteArray(inputStream);
-            setFlashObject(FLASH_KEY_FOTO_PESQUISADOR, byteArray);
-            pesquisador.setFoto(byteArray);
-        } catch (IOException exception) {
-            adicionarMensagemErroByKey("erro.carregar.foto.pesquisador", pesquisador.getNome());
-            LOGGER.error(exception.getMessage(), exception);
-        }
+        cache.sendFotoPesquisador(fotoPesquisador);
     }
 
     public String exibir(Pesquisador pesquisador) {
@@ -519,5 +512,13 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setParticipacaoEventosToDelete(List<ParticipacaoEvento> participacaoEventosToDelete) {
         this.participacaoEventosToDelete = participacaoEventosToDelete;
+    }
+
+    public ImageCacheMB getCache() {
+        return cache;
+    }
+
+    public void setCache(ImageCacheMB cache) {
+        this.cache = cache;
     }
 }

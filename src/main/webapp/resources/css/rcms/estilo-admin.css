@@ -72,5 +72,18 @@
 }
 
 .navbar-inverse {
-    background-color: #2F4050;
+	background-color: #2F4050;
+}
+
+.modal-header {
+	background-color: #428bca;
+}
+
+.modal-title {
+	color: #FFF;
+}
+
+.foto-pesquisador, .foto-pesquisador > img {
+	height: 200px;
+	width: 185px;
 }

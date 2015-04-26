@@ -86,4 +86,5 @@
 .foto-pesquisador, .foto-pesquisador > img {
 	height: 200px;
 	width: 185px;
+	margin: auto;
 }

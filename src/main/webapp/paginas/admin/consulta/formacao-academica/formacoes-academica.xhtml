@@ -17,8 +17,6 @@
 
 		<h:form id="formFormacao">
 
-			<p:growl id="messageBox" autoUpdate="true" life="5000" />
-
 			<p:dataTable id="tabelaFormacoes" value="#{formacaoAcademicaMB.formacoes}" var="formacao" styleClass="table table-hover" headerClass="col-width-50" rowClasses="col-width-50" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}" rendered="#{not empty formacaoAcademicaMB.formacoes}" paginator="true" rows="10">
 
 				<p:column width="30">

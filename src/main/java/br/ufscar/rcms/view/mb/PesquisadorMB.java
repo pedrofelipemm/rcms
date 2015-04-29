@@ -24,6 +24,7 @@ import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.LinhaDePesquisa;
+import br.ufscar.rcms.modelo.entidades.OrganizacaoEvento;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
@@ -32,6 +33,7 @@ import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.LinhaDePesquisaService;
+import br.ufscar.rcms.servico.OrganizacaoEventoService;
 import br.ufscar.rcms.servico.ParticipacaoEventoService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
@@ -67,6 +69,9 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{participacaoEventoService}")
     private ParticipacaoEventoService participacaoEventoService;
+    
+    @ManagedProperty("#{organizacaoEventoService}")
+    private OrganizacaoEventoService organizacaoEventoService;
 
     private Pesquisador pesquisador;
     private transient DataModel<Pesquisador> pesquisadores;
@@ -98,6 +103,10 @@ public class PesquisadorMB extends AbstractMB {
     private ParticipacaoEvento participacaoEvento;
     private transient List<ParticipacaoEvento> participacaoEventos;
     private List<ParticipacaoEvento> participacaoEventosToDelete;
+    
+    private OrganizacaoEvento organizacaoEvento;
+    private transient List<OrganizacaoEvento> organizacaoEventos;
+    private List<OrganizacaoEvento> organizacaoEventosToDelete;
 
     @PostConstruct
     public void inicializar() {
@@ -124,6 +133,8 @@ public class PesquisadorMB extends AbstractMB {
         compreensaoIdioma = new CompreensaoIdioma();
         participacaoEventosToDelete = new ArrayList<ParticipacaoEvento>();
         participacaoEvento = new ParticipacaoEvento();
+        organizacaoEvento = new OrganizacaoEvento();
+        organizacaoEventosToDelete = new ArrayList<OrganizacaoEvento>();
     }
 
     public String salvar() {
@@ -131,6 +142,7 @@ public class PesquisadorMB extends AbstractMB {
         try {
             pesquisadorService.salvarOuAtualizar(pesquisador);
             participacaoEventoService.remover(participacaoEventosToDelete);
+            organizacaoEventoService.remover(organizacaoEventosToDelete);
             adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
 
             limparDados();
@@ -356,6 +368,17 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador.removeParticipacaoEventos(participacaoEvento);
         participacaoEventosToDelete.add(participacaoEvento);
     }
+    
+    public void adicionarOrganizacaoEvento(){
+    	pesquisador.addOrgazicaoEventos(organizacaoEvento);
+    	organizacaoEvento.setPesquisador(pesquisador);
+    	organizacaoEvento = new OrganizacaoEvento();
+    }
+    
+    public void removerOrganizacaoEvento(OrganizacaoEvento organizacaoEvento){
+    	pesquisador.removeOrganizacaoEventos(organizacaoEvento);
+    	organizacaoEventosToDelete.add(organizacaoEvento);
+    }
 
     public AreaAtuacaoService getAreaAtuacaoService() {
         return areaAtuacaoService;
@@ -521,4 +544,37 @@ public class PesquisadorMB extends AbstractMB {
     public void setCache(ImageCacheMB cache) {
         this.cache = cache;
     }
+
+	public OrganizacaoEvento getOrganizacaoEvento() {
+		return organizacaoEvento;
+	}
+
+	public void setOrganizacaoEvento(OrganizacaoEvento organizacaoEvento) {
+		this.organizacaoEvento = organizacaoEvento;
+	}
+
+	public List<OrganizacaoEvento> getOrganizacaoEventos() {
+		return organizacaoEventos;
+	}
+
+	public void setOrganizacaoEventos(List<OrganizacaoEvento> organizacaoEventos) {
+		this.organizacaoEventos = organizacaoEventos;
+	}
+
+	public List<OrganizacaoEvento> getOrganizacaoEventosToDelete() {
+		return organizacaoEventosToDelete;
+	}
+
+	public void setOrganizacaoEventosToDelete(
+			List<OrganizacaoEvento> organizacaoEventosToDelete) {
+		this.organizacaoEventosToDelete = organizacaoEventosToDelete;
+	}
+
+	public OrganizacaoEventoService getOrganizacaoEventoService() {
+		return organizacaoEventoService;
+	}
+
+	public void setOrganizacaoEventoService(OrganizacaoEventoService organizacaoEventoService) {
+		this.organizacaoEventoService = organizacaoEventoService;
+	}
 }

@@ -232,6 +232,12 @@ public class Pesquisador extends Usuario {
             this.compreensaoIdiomas.removeAll(Arrays.asList(compreensaoIdiomas));
         }
     }
+    
+    public void removeOrganizacaoEventos(OrganizacaoEvento... organizacaoEventos) {
+		if(organizacaoEventos != null){
+			this.organizacaoEventos.removeAll(Arrays.asList(organizacaoEventos));
+		}
+	}
 
     public void addParticipacaoEventos(ParticipacaoEvento... participacaoEventos) {
         if (participacaoEventos != null) {

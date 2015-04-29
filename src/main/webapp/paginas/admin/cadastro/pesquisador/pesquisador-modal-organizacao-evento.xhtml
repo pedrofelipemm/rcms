@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="modal fade" id="modalOrganizacaoEventos" tabindex="-1" role="dialog" aria-labelledby="modalOrganizacaoEventoLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">#{mensagens['organizacao.de.eventos.adicionar']}</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="textOrgAreaEvento" value="#{mensagens['evento.titulo']}" />
+							</div>
+							<div class="col-md-10">
+								<h:inputTextarea id="textOrgAreaEvento" styleClass="form-control" value="#{pesquisadorMB.organizacaoEvento.titulo}"/>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="textNaturezaOrgEvento" value="#{mensagens['organizacao.de.eventos.natureza']}" />
+							</div>
+							<div class="col-md-10">
+								<h:inputTextarea id="textNaturezaOrgEvento" styleClass="form-control" value="#{pesquisadorMB.organizacaoEvento.natureza}"/>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="organizacaoAno" value="#{mensagens['evento.ano']}" />
+							</div>
+							<div class="col-md-2">
+								<h:inputText id="organizacaoAno" styleClass="form-control" value="#{pesquisadorMB.organizacaoEvento.ano}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
+					<h:commandButton action="#{pesquisadorMB.adicionarOrganizacaoEvento}" styleClass="btn btn-primary"
+						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalOrganizacaoEventos">
+						<f:ajax execute="painelOrganizacaoEventos" render="painelOrganizacaoEventos" />
+					</h:commandButton>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:composition>

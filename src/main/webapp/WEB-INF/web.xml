@@ -56,6 +56,16 @@
 	</context-param> 
   
   	<servlet>
+		<servlet-name>br.ufscar.rcms.config.ApplicationJAXRS</servlet-name>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+  	
+  	<servlet-mapping>
+		<servlet-name>br.ufscar.rcms.config.ApplicationJAXRS</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+  	
+  	<servlet>
 	    <servlet-name>Faces Servlet</servlet-name>
     	<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     	<load-on-startup>1</load-on-startup>

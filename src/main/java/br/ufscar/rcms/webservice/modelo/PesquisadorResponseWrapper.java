@@ -14,14 +14,23 @@ public class PesquisadorResponseWrapper extends Response {
     @XmlElement
     private List<PesquisadorResponse> pesquisadores;
 
+    @XmlElement
+    private int totalRows;
+
     public PesquisadorResponseWrapper() {}
 
-    public PesquisadorResponseWrapper(Status status, List<PesquisadorResponse> pesquisadores) {
+    public PesquisadorResponseWrapper(Status status, int totalRows, List<PesquisadorResponse> pesquisadores) {
         super(status);
+        this.totalRows = totalRows;
         this.pesquisadores = pesquisadores;
     }
 
-    public List<PesquisadorResponse> getObjects() {
+    public List<PesquisadorResponse> getPesquisadores() {
         return pesquisadores;
     }
+
+    public int getTotalRows() {
+        return totalRows;
+    }
+
 }

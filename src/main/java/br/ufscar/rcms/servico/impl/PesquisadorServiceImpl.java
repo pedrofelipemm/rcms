@@ -63,6 +63,18 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
+    public void remover(Long id) {
+
+        Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(id);
+        if (pesquisadorToRemove == null) {
+            // TODO PEDRO TRATAR EXCEPTION
+            throw new RuntimeException("Pesquisador não encontrado!");
+        }
+
+        pesquisadorDAO.remover(id);
+    }
+
+    @Override
     public Pesquisador buscar(Long id) {
         return pesquisadorDAO.buscar(id);
     }

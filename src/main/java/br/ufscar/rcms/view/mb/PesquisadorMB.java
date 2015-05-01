@@ -167,6 +167,7 @@ public class PesquisadorMB extends AbstractMB {
     public String excluir(Pesquisador pesquisador) {
 
         pesquisadorService.remover(pesquisador);
+        getFlash().clear();
 
         return CONSULTA_PESQUISADORES;
     }

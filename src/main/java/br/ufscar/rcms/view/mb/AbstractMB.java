@@ -121,23 +121,26 @@ public abstract class AbstractMB implements Serializable {
             throw new IllegalArgumentException(getMessage("key.value.nao.nulo"));
         }
 
-        if (getFlash() == null) {
+        Flash flash = getFlash();
+        if (flash == null) {
             // TODO i18n
             LOGGER.error("Internal Framework Problem");
             return;
         }
-        getFlash().put(key, value);
+
+        flash.put(key, value);
     }
 
     protected Object getFlashObject(String key) {
 
-        if (getFlash() == null) {
+        Flash flash = getFlash();
+        if (flash == null) {
             // TODO i18n
             LOGGER.error("Internal Framework Problem");
             return null;
         }
 
-        return getFlash().get(key);
+        return flash.get(key);
     }
 
     protected HttpServletRequest getRequest() {

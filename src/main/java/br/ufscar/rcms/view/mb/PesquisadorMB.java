@@ -35,6 +35,7 @@ import br.ufscar.rcms.servico.LinhaDePesquisaService;
 import br.ufscar.rcms.servico.ParticipacaoEventoService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")
@@ -166,7 +167,11 @@ public class PesquisadorMB extends AbstractMB {
 
     public String excluir(Pesquisador pesquisador) {
 
-        pesquisadorService.remover(pesquisador);
+        try {
+            pesquisadorService.remover(pesquisador);
+        } catch (PesquisadorNaoEncontradoException e) {
+            adicionarMensagemErroByKey("pesquisador.nao.econtrado", pesquisador.getNome());
+        }
         getFlash().clear();
 
         return CONSULTA_PESQUISADORES;

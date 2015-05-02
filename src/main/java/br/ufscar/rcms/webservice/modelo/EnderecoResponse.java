@@ -3,8 +3,8 @@ package br.ufscar.rcms.webservice.modelo;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Endereço")
-public class EnderecoResponse extends Response{
+@XmlRootElement(name = "endereço")
+public class EnderecoResponse extends Response {
 
     private static final long serialVersionUID = 1761582940789916976L;
 

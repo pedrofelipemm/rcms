@@ -3,7 +3,7 @@ package br.ufscar.rcms.webservice.modelo;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Pesquisador")
+@XmlRootElement(name = "pesquisador")
 public class PesquisadorResponse extends Response {
 
     private static final long serialVersionUID = 1823269994306988192L;

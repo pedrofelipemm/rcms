@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 
 public interface PesquisadorService extends Serializable {
 
@@ -15,9 +16,11 @@ public interface PesquisadorService extends Serializable {
 
     List<Pesquisador> buscarTodos();
 
-    void remover(Pesquisador pesquisador);
+    List<Pesquisador> buscarTodosOrderByNome();
 
-    void remover(Long id);
+    void remover(Pesquisador pesquisador) throws PesquisadorNaoEncontradoException;
+
+    void remover(Long id) throws PesquisadorNaoEncontradoException;
 
     Pesquisador buscarTodosDados(Long idUsuario);
 }

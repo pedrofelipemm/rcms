@@ -64,7 +64,7 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     public T salvarOuAtualizar(T entidade) {
 
         if (getEntityId(entidade) != null) {
-            atualizar(entidade);
+            entidade = atualizar(entidade);
         } else {
             salvar(entidade);
         }
@@ -81,6 +81,10 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     public void remover(Long id) {
         T entidade = buscar(id);
         remover(entidade);
+    }
+
+    public Class<T> getClazz() {
+        return clazz;
     }
 
     public void setClazz(Class<T> clazz) {

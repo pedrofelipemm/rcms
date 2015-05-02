@@ -1,5 +1,7 @@
 package br.ufscar.rcms.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
@@ -12,5 +14,11 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
 
     public PesquisadorDAOImpl() {
         setClazz(Pesquisador.class);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Pesquisador> buscarTodosOrderByNome() {
+        return createQuery("from " + getClazz().getName() + " order by nome").getResultList();
     }
 }

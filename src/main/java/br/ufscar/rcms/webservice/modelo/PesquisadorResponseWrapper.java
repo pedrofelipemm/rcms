@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "response")
-public class PesquisadorResponseWrapper extends Response {
+public class PesquisadorResponseWrapper extends ResponseWrapper {
 
     private static final long serialVersionUID = -6334447942095520684L;
 
@@ -17,7 +17,12 @@ public class PesquisadorResponseWrapper extends Response {
     @XmlElement
     private int totalRows;
 
-    public PesquisadorResponseWrapper() {}
+    public PesquisadorResponseWrapper() {
+    }
+
+    public PesquisadorResponseWrapper(Status status, String message) {
+        super(status, message);
+    }
 
     public PesquisadorResponseWrapper(Status status, int totalRows, List<PesquisadorResponse> pesquisadores) {
         super(status);

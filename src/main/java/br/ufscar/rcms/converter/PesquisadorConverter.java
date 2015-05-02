@@ -18,7 +18,7 @@ public abstract class PesquisadorConverter {
         return response;
     }
 
-    private static PesquisadorResponse convert(Pesquisador pesquisador) {
+    public static PesquisadorResponse convert(Pesquisador pesquisador) {
 
         PesquisadorResponse response = new PesquisadorResponse();
         response.setCodigoLattes(pesquisador.getCodigoLattes());
@@ -32,5 +32,21 @@ public abstract class PesquisadorConverter {
         response.setSenha(pesquisador.getSenha());
 
         return response;
+    }
+
+    public static Pesquisador convert(PesquisadorResponse pesquisadorResponse) {
+
+        Pesquisador pesquisador = new Pesquisador();
+        pesquisador.setCodigoLattes(pesquisadorResponse.getCodigoLattes());
+        pesquisador.setEmail(pesquisadorResponse.getEmail());
+        pesquisador.setEndereco(EnderecoConverter.convert(pesquisadorResponse.getEndereco(), pesquisador));
+        pesquisador.setFlagAdministrador(pesquisadorResponse.isFlagAdministrador());
+        pesquisador.setIdUsuario(pesquisadorResponse.getIdUsuario());
+        pesquisador.setLogin(pesquisadorResponse.getLogin());
+        pesquisador.setNome(pesquisadorResponse.getNome());
+        pesquisador.setResumoProfissional(pesquisadorResponse.getResumoProfissional());
+        pesquisador.setSenha(pesquisadorResponse.getSenha());
+
+        return pesquisador;
     }
 }

@@ -11,6 +11,8 @@ import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
+import br.ufscar.rcms.util.ExceptionUtils;
 
 @Service("pesquisadorService")
 @Transactional
@@ -42,7 +44,12 @@ public class PesquisadorServiceImpl implements PesquisadorService {
             }
         }
 
-        return pesquisadorDAO.salvarOuAtualizar(pesquisador);
+        try {
+            return pesquisadorDAO.salvarOuAtualizar(pesquisador);
+        } catch (Exception e) {
+            // TODO PEDRO
+            throw new RuntimeException(ExceptionUtils.getInnerCause(e));
+        }
     }
 
     @Override
@@ -51,15 +58,30 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
-    public void remover(Pesquisador pesquisador) {
+    public List<Pesquisador> buscarTodosOrderByNome() {
+        return pesquisadorDAO.buscarTodosOrderByNome();
+    }
+
+    @Override
+    public void remover(Pesquisador pesquisador) throws PesquisadorNaoEncontradoException {
 
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
         if (pesquisadorToRemove == null) {
-	    // TODO PEDRO TRATAR EXCEPTION
-            throw new RuntimeException("Pesquisador não encontrado!");
+            throw new PesquisadorNaoEncontradoException(pesquisador.getIdUsuario());
         }
 
         pesquisadorDAO.remover(pesquisador);
+    }
+
+    @Override
+    public void remover(Long id) throws PesquisadorNaoEncontradoException {
+
+        Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(id);
+        if (pesquisadorToRemove == null) {
+            throw new PesquisadorNaoEncontradoException(id);
+        }
+
+        pesquisadorDAO.remover(id);
     }
 
     @Override

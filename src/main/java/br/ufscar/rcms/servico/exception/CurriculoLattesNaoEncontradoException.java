@@ -1,6 +1,6 @@
 package br.ufscar.rcms.servico.exception;
 
-public class CurriculoLattesNaoEncontradoException extends Exception {
+public class CurriculoLattesNaoEncontradoException extends RCMSException {
 
     private static final long serialVersionUID = 6359380258354609264L;
 

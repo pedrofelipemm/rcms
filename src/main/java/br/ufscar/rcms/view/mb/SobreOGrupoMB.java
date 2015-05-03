@@ -28,8 +28,10 @@ public class SobreOGrupoMB extends AbstractMB {
 
     protected void carregarDados() {
 
-        SobreOGrupo sobreOGrupoEdicao = (SobreOGrupo) getFlashObject(FLASH_KEY_SOBRE_O_GRUPO);
+                                                        // TODO PEDRO
+        sobreOGrupo = sobreOGrupoService.buscarPorIdioma("pt_BR");
 
+        SobreOGrupo sobreOGrupoEdicao = (SobreOGrupo) getFlashObject(FLASH_KEY_SOBRE_O_GRUPO);
         if (sobreOGrupoEdicao != null) {
             sobreOGrupo = sobreOGrupoEdicao;
         }
@@ -53,15 +55,6 @@ public class SobreOGrupoMB extends AbstractMB {
 
         keepMessagesOnRedirect();
         return CONSULTA_SOBRE_O_GRUPO;
-    }
-
-    public String exibir(String idioma) {
-
-        sobreOGrupo = sobreOGrupoService.buscarPorIdioma(idioma);
-
-        setFlashObject(FLASH_KEY_SOBRE_O_GRUPO, sobreOGrupo);
-
-        return EXIBE_SOBRE_O_GRUPO;
     }
 
     public String editar(String idioma) {

@@ -88,3 +88,12 @@
 	width: 185px;
 	margin: auto;
 }
+
+#statusDialog {
+	height: 50px !important;
+	z-index: 10000 !important;
+}
+
+#statusDialog .ui-dialog-titlebar {
+	display: none
+}

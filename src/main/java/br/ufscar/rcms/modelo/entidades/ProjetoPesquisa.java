@@ -36,7 +36,6 @@ public class ProjetoPesquisa extends Entidade {
     @Column(name = "ano_conclusao")
     private Integer anoConclusao;
 
-    // TODO AGUARDANDO VALIDAÇÃO
     @Column(name = "agencia_de_fomento", length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
 

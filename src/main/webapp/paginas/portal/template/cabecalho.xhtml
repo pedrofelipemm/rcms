@@ -79,7 +79,7 @@
 	                    <ul class="nav navbar-nav navbar-right">
 	
 	                        <li class="active"><a href="index.html">#{mensagens['indice']}</a></li>
-	                        <li class="box-hover"><h:commandLink value="#{mensagens['o.grupo']}" action="#{sobreOGrupoMB.exibir('pt_BR')}" /></li>
+	                        <li class="box-hover"><h:link outcome="sobreOGrupo" value="#{mensagens['o.grupo']}" /></li>
 	                        <li class="box-hover"><h:link outcome="listagemPesquisadores" value="#{mensagens['pesquisadores']}"/></li>
 	                        <li class="box-hover"><a href="#">#{mensagens['projetos.de.pesquisa']}</a></li>
 	                        <li class="box-hover"><a href="#">#{mensagens['publicacoes']}</a></li>

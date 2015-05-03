@@ -47,7 +47,7 @@ public class PesquisadorRS {
             throw new ResourceNotFoundException("Nenhum pesquisador encontrado!");
         }
 
-        List<PesquisadorResponse> objects = PesquisadorConverter.convert(pesquisadores);// TODO EXTRACT METHOD?
+        List<PesquisadorResponse> objects = PesquisadorConverter.convert(pesquisadores);
         PesquisadorResponseWrapper response = new PesquisadorResponseWrapper(Status.OK, objects.size(), objects);
 
         return Response.status(Status.OK.getStatusCode()).entity(response).build();

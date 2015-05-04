@@ -86,58 +86,20 @@
             	<div class="col-md-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Linhas de pesquisa</h3>
+                        <h3 class="panel-title">#{mensagens['linhas.de.pesquisa']}</h3>
                       </div>
                       <div class="panel-body">
                         <div class="container-fluid">
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>2.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Engenharia de Software: Reengenharia de Software
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>3.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Engenharia de Software: Reúso de Software
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>4.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Engenharia de Software: Orientação a Aspectos
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>5.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Linguagens de Programação
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>6.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Engenharia de Software na Computação Ubíqua
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>7.</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Engenharia de Software: Desenvolvimento Baseado em Componentes (DBC)
-                                </div>
-                            </div>
+                        	<ui:repeat var="linhaDePesquisa" value="#{pesquisadorMB.pesquisador.linhasDePesquisa}" varStatus="linha">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{linha.index + 1}.</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{linhaDePesquisa.descricao}
+	                                </div>
+	                            </div>
+                            </ui:repeat>
                         </div>
                       </div>
                     </div>
@@ -147,9 +109,11 @@
             	<div class="col-md-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Projetos de pesquisa</h3>
+                        <h3 class="panel-title">#{mensagens['projetos.de.pesquisa']}</h3>
                       </div>
                       <div class="panel-body">
+                      <em>* Pendente</em>
+                      <!-- 
                         <div class="container-fluid">
                         	<div class="row">
                             	<div class="col-md-2 text-right">
@@ -182,6 +146,76 @@
                                 </div>
                             </div>
                         </div>
+                        -->
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">#{mensagens['areas.de.atuacao']}</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<ui:repeat var="area" value="#{pesquisadorMB.pesquisador.areaAtuacoes}" varStatus="linha">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{linha.index + 1}.</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{area.especializacao}
+	                                </div>
+	                            </div>
+                            </ui:repeat>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">#{mensagens['idiomas']}</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<ui:repeat var="compreensaoIdioma" value="#{pesquisadorMB.pesquisador.compreensaoIdiomas}" varStatus="linha">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{compreensaoIdioma.compreensaoIdiomaPK.idioma.descricao}</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{compreensaoIdioma.proficiencia}
+	                                </div>
+	                            </div>
+                            </ui:repeat>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">#{mensagens['premios.e.titulos']}</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<ui:repeat var="premio" value="#{pesquisadorMB.pesquisador.premios}" varStatus="linha">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{premio.ano}</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{premio.descricao}
+	                                </div>
+	                            </div>
+                            </ui:repeat>
+                        </div>
                       </div>
                     </div>
                 </div>
@@ -199,7 +233,9 @@
                                 	<strong>Nome em citações bibliográficas</strong>
                                 </div>
                                 <div class="col-md-10">
-                                    PRADO, A. F.;DO PRADO, A. F.;PRADO, A. F. do;PRADO, ANTONIO F.;DO PRADO, ANTONIO F.;DO PRADO, ANTÔNIO F.;FRANCISCO DO PRADO, ANTONIO<br/><br/>
+		                        	<ui:repeat var="citacaoBibliografica" value="#{pesquisadorMB.pesquisador.citacaoBibliograficas}">
+        	                            #{citacaoBibliografica.nomeCitacao}
+        	                        </ui:repeat>
                                 </div>
                             </div>
                             <div class="row">

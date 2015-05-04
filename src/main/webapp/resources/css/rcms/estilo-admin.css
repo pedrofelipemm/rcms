@@ -97,3 +97,16 @@
 #statusDialog .ui-dialog-titlebar {
 	display: none
 }
+
+.btn.back-to-top {
+    font-size: 21px;
+}
+
+a.back-to-top{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover.back-to-top{
+    text-decoration: none;
+}

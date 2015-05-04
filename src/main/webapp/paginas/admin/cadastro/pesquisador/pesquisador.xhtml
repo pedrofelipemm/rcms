@@ -8,20 +8,16 @@
 	xmlns:o="http://omnifaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="conteudo">
-		
 		<h:form id="formPesquisador" prependId="false">
 
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-10">
 					<div class="form-group">
 						<h1>#{mensagens['pesquisadores']}</h1>
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
+				<div class="col-md-2" style="padding-top: 25px;">
+					<div class="form-group pull-right">
 						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
@@ -29,108 +25,116 @@
 				</div>
 			</div>
 
+			<!-- TODO PEDRO: extract panel -->
 			<div class="row">
-          		<div class="col-md-5">
-            		<div class="form-group">
-            			<p:outputLabel styleClass="control-label" id="nomeLabel" value="#{mensagens['label.nome']}"/>
-						<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" 
-							required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.nome.pesquisador']}" styleClass="form-control"/>
-					</div>
-		        	<div class="form-group">
-            			<p:outputLabel styleClass="control-label" id="loginLabel" value="#{mensagens['label.login']} " />
-						<p:inputText id="login" value="#{pesquisadorMB.pesquisador.login}"
-							required="true" requiredMessage="#{mensagens['login.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.login.pesquisador']}" styleClass="form-control" />
-            		</div>
+				<div class="col-md-12">
 					<div class="form-group">
-		            	<p:outputLabel styleClass="control-label" id="senhaLabel" value="#{mensagens['label.senha']}" />
-		            	<p:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}"
-							required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
-		            </div>
-            		<div class="form-group">
-		              	<p:outputLabel styleClass="control-label" id="confirmarSenhaLabel" value="#{mensagens['label.confirmacao.senha']}"/>
-		              	<p:inputText id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
-							required="true" requiredMessage="#{mensagens['confirmacao.senha.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.confirmar.senha.pesquisador']}" styleClass="form-control"/>
-		            </div>
-		        </div>
-		        <div class="col-md-4">
-		            <div class="form-group">
-            			<p:outputLabel styleClass="control-label" id="emailLabel" value="#{mensagens['label.email']}" />
-		            	<p:inputText id="email" value="#{pesquisadorMB.pesquisador.email}"
-							required="true" requiredMessage="#{mensagens['email.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.email.pesquisador']}" styleClass="form-control"
-							validatorMessage="#{mensagens['email.invalido']}">
-							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-						</p:inputText>
-            		</div>
-            		<div class="form-group">
-            			<p:outputLabel styleClass="control-label" id="codigoLattesLabel" value="#{mensagens['label.codigo.lattes']} " />
-						<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
-							required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
-							pt:placeholder="#{mensagens['informe.codigo.lattes.pesquisador']}" styleClass="form-control" />
-            		</div>
-            		<div class="form-group">
-            			<p:outputLabel styleClass="control-label" id="tipoUsuarioLabel" value="#{mensagens['label.tipo.usuario']} " />
-						<h:selectOneMenu id="tipoUsuario" value="#{pesquisadorMB.pesquisador.flagAdministrador}"
-							required="true" requiredMessage="#{mensagens['flag.tipo.usuario.preenchido']}" 
-							styleClass="form-control">
-							<f:selectItems value="#{pesquisadorMB.tiposUsuario.entrySet()}" var="entry" 
-								itemValue="#{entry.value}" itemLabel="#{entry.key}" />
-						</h:selectOneMenu>            		
-            		</div>
-            	</div>
-				<div class="col-md-3 text-center">
-					<div class="foto-pesquisador">
-						<p:graphicImage value="#{imageCacheMB.fotoPesquisador}"  />
-					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFileUpload"
-							style="margin: 10px;">#{mensagens['upload']}</button>
+						<p:panel id="painelPesquisador" header="#{mensagens['pesquisador']}">
+							<div class="row">
+				          		<div class="col-md-5">
+				            		<div class="form-group">
+				            			<p:outputLabel styleClass="control-label" id="nomeLabel" value="#{mensagens['label.nome']}"/>
+										<p:inputText id="nome" value="#{pesquisadorMB.pesquisador.nome}" 
+											required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.nome.pesquisador']}" styleClass="form-control"/>
+									</div>
+						        	<div class="form-group">
+				            			<p:outputLabel styleClass="control-label" id="loginLabel" value="#{mensagens['label.login']} " />
+										<p:inputText id="login" value="#{pesquisadorMB.pesquisador.login}"
+											required="true" requiredMessage="#{mensagens['login.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.login.pesquisador']}" styleClass="form-control" />
+				            		</div>
+									<div class="form-group">
+						            	<p:outputLabel styleClass="control-label" id="senhaLabel" value="#{mensagens['label.senha']}" />
+						            	<p:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}"
+											required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
+						            </div>
+				            		<div class="form-group">
+						              	<p:outputLabel styleClass="control-label" id="confirmarSenhaLabel" value="#{mensagens['label.confirmacao.senha']}"/>
+						              	<p:inputText id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
+											required="true" requiredMessage="#{mensagens['confirmacao.senha.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.confirmar.senha.pesquisador']}" styleClass="form-control"/>
+						            </div>
+						        </div>
+						        <div class="col-md-4">
+						            <div class="form-group">
+				            			<p:outputLabel styleClass="control-label" id="emailLabel" value="#{mensagens['label.email']}" />
+						            	<p:inputText id="email" value="#{pesquisadorMB.pesquisador.email}"
+											required="true" requiredMessage="#{mensagens['email.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.email.pesquisador']}" styleClass="form-control"
+											validatorMessage="#{mensagens['email.invalido']}">
+											<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+										</p:inputText>
+				            		</div>
+				            		<div class="form-group">
+				            			<p:outputLabel styleClass="control-label" id="codigoLattesLabel" value="#{mensagens['label.codigo.lattes']} " />
+										<p:inputText id="codigoLattes" value="#{pesquisadorMB.pesquisador.codigoLattes}"
+											required="true" requiredMessage="#{mensagens['codigo.lattes.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.codigo.lattes.pesquisador']}" styleClass="form-control" />
+				            		</div>
+				            		<div class="form-group">
+				            			<p:outputLabel styleClass="control-label" id="tipoUsuarioLabel" value="#{mensagens['label.tipo.usuario']} " />
+										<h:selectOneMenu id="tipoUsuario" value="#{pesquisadorMB.pesquisador.flagAdministrador}"
+											required="true" requiredMessage="#{mensagens['flag.tipo.usuario.preenchido']}" 
+											styleClass="form-control">
+											<f:selectItems value="#{pesquisadorMB.tiposUsuario.entrySet()}" var="entry" 
+												itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+										</h:selectOneMenu>            		
+				            		</div>
+				            	</div>
+								<div class="col-md-3 text-center">
+									<div class="foto-pesquisador">
+										<p:graphicImage value="#{imageCacheMB.fotoPesquisador}"  />
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFileUpload"
+											style="margin: 10px;">#{mensagens['upload']}</button>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+				          		<div class="col-md-12">
+				            		<div class="form-group">
+				              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLabel" value="#{mensagens['label.endereco.profissional']}"/>
+				              			<p:inputTextarea id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
+				              				required="true" requiredMessage="#{mensagens['endereco.latitude.nao.preenchido']}"
+				              				pt:placeholder="#{mensagens['informe.endereco.latitude']}" styleClass="form-control" rows="3"/>
+				            		</div>
+				          		</div>
+				        	</div>
+				        	<div class="row">
+				          		<div class="col-md-6">
+				            		<div class="form-group">
+				              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLatitudeLabel" value="#{mensagens['label.endereco.latitude']}"/>
+				              			<p:inputText id="enderecoProfissionalLatitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLatitude}"
+				              				required="true" requiredMessage="#{mensagens['endereco.longitude.nao.preenchido']}"
+				              				pt:placeholder="#{mensagens['informe.endereco.longitude']}" styleClass="form-control" />
+				            		</div>
+				          		</div>
+				          		<div class="col-md-6">
+				            		<div class="form-group">
+				              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLongitudeLabel" value="#{mensagens['label.endereco.longitude']}"/>
+				              			<p:inputText id="enderecoProfissionalLongitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLongitude}"
+				              				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
+				              				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control" />
+				            		</div>
+				          		</div>
+				        	</div>
+				        	<div class="row">
+				          		<div class="col-md-12">
+				            		<div class="form-group">
+				              			<p:outputLabel styleClass="control-label" id="resumoProfissionalLabel" value="#{mensagens['label.resumo.profissional']}"/>
+				              			<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
+				              				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
+				              				pt:placeholder="#{mensagens['informe.resumo.profissional.pesquisador']}" styleClass="form-control" rows="5"/>
+				            		</div>
+				          		</div>
+        					</div>
+						</p:panel>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-          		<div class="col-md-12">
-            		<div class="form-group">
-              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLabel" value="#{mensagens['label.endereco.profissional']}"/>
-              			<p:inputTextarea id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
-              				required="true" requiredMessage="#{mensagens['endereco.latitude.nao.preenchido']}"
-              				pt:placeholder="#{mensagens['informe.endereco.latitude']}" styleClass="form-control" rows="3"/>
-            		</div>
-          		</div>
-        	</div>
-        	<div class="row">
-          		<div class="col-md-6">
-            		<div class="form-group">
-              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLatitudeLabel" value="#{mensagens['label.endereco.latitude']}"/>
-              			<p:inputText id="enderecoProfissionalLatitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLatitude}"
-              				required="true" requiredMessage="#{mensagens['endereco.longitude.nao.preenchido']}"
-              				pt:placeholder="#{mensagens['informe.endereco.longitude']}" styleClass="form-control" />
-            		</div>
-          		</div>
-          		<div class="col-md-6">
-            		<div class="form-group">
-              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLongitudeLabel" value="#{mensagens['label.endereco.longitude']}"/>
-              			<p:inputText id="enderecoProfissionalLongitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLongitude}"
-              				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
-              				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control" />
-            		</div>
-          		</div>
-        	</div>
-        	<div class="row">
-          		<div class="col-md-12">
-            		<div class="form-group">
-              			<p:outputLabel styleClass="control-label" id="resumoProfissionalLabel" value="#{mensagens['label.resumo.profissional']}"/>
-              			<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
-              				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
-              				pt:placeholder="#{mensagens['informe.resumo.profissional.pesquisador']}" styleClass="form-control" rows="5"/>
-            		</div>
-          		</div>
-        	</div>
-
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-idioma.xhtml" />
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-area-atuacao.xhtml" />
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-linha-pesquisa.xhtml" />
@@ -138,11 +142,16 @@
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-organizacao-evento.xhtml"/>
 
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-10">
 					<div class="form-group">
+					</div>
+				</div>
+				<div class="col-md-2" style="padding-top: 25px;">
+					<div class="form-group pull-right">
 						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
+						<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top" ></a>
 					</div>
 				</div>
 			</div>

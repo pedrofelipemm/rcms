@@ -18,7 +18,8 @@
 				</div>
 				<div class="col-md-2" style="padding-top: 25px;">
 					<div class="form-group pull-right">
-						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
+						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}"
+							styleClass="btn btn-success">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
 					</div>
@@ -88,8 +89,8 @@
 										<p:graphicImage value="#{imageCacheMB.fotoPesquisador}"  />
 									</div>
 									<div class="form-group">
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFileUpload"
-											style="margin: 10px;">#{mensagens['upload']}</button>
+										<button type="button" class="btn btn-primary fa fa-upload" data-toggle="modal" data-target="#modalFileUpload"
+											style="margin: 10px; font-family: FontAwesome">&nbsp;#{mensagens['upload']}</button>
 									</div>
 								</div>
 							</div>
@@ -148,10 +149,11 @@
 				</div>
 				<div class="col-md-2" style="padding-top: 25px;">
 					<div class="form-group pull-right">
-						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
+						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}"
+							styleClass="btn btn-success">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
-						<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top" ></a>
+						<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top"></a>
 					</div>
 				</div>
 			</div>

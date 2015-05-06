@@ -70,7 +70,7 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{participacaoEventoService}")
     private ParticipacaoEventoService participacaoEventoService;
-    
+
     @ManagedProperty("#{organizacaoEventoService}")
     private OrganizacaoEventoService organizacaoEventoService;
 
@@ -104,7 +104,7 @@ public class PesquisadorMB extends AbstractMB {
     private ParticipacaoEvento participacaoEvento;
     private transient List<ParticipacaoEvento> participacaoEventos;
     private List<ParticipacaoEvento> participacaoEventosToDelete;
-    
+
     private OrganizacaoEvento organizacaoEvento;
     private transient List<OrganizacaoEvento> organizacaoEventos;
     private List<OrganizacaoEvento> organizacaoEventosToDelete;
@@ -136,6 +136,7 @@ public class PesquisadorMB extends AbstractMB {
         participacaoEvento = new ParticipacaoEvento();
         organizacaoEvento = new OrganizacaoEvento();
         organizacaoEventosToDelete = new ArrayList<OrganizacaoEvento>();
+        getFlash().clear();
     }
 
     public String salvar() {
@@ -154,7 +155,7 @@ public class PesquisadorMB extends AbstractMB {
             adicionarMensagemErroByKey("erro.salvar.pesquisador", pesquisador.getNome());
             LOGGER.error(exception.getMessage(), exception);
         }
-        return null;
+        return CONSULTA_PESQUISADORES;
     }
 
     public void uploadFile() {
@@ -184,7 +185,7 @@ public class PesquisadorMB extends AbstractMB {
         } catch (PesquisadorNaoEncontradoException e) {
             adicionarMensagemErroByKey("pesquisador.nao.econtrado", pesquisador.getNome());
         }
-        getFlash().clear();
+        limparDados();
 
         return CONSULTA_PESQUISADORES;
     }
@@ -374,13 +375,13 @@ public class PesquisadorMB extends AbstractMB {
         pesquisador.removeParticipacaoEventos(participacaoEvento);
         participacaoEventosToDelete.add(participacaoEvento);
     }
-    
+
     public void adicionarOrganizacaoEvento(){
     	pesquisador.addOrgazicaoEventos(organizacaoEvento);
     	organizacaoEvento.setPesquisador(pesquisador);
     	organizacaoEvento = new OrganizacaoEvento();
     }
-    
+
     public void removerOrganizacaoEvento(OrganizacaoEvento organizacaoEvento){
     	pesquisador.removeOrganizacaoEventos(organizacaoEvento);
     	organizacaoEventosToDelete.add(organizacaoEvento);

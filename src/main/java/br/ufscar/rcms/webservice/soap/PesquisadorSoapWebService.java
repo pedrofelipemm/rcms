@@ -7,8 +7,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,24 +16,27 @@ import br.ufscar.rcms.converter.PesquisadorConverter;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.webservice.modelo.PesquisadorResponse;
-import br.ufscar.rcms.webservice.modelo.PesquisadorResponseWrapper;
+import br.ufscar.rcms.webservice.modelo.PesquisadorSoapResponseWrapper;
 
 @Component
 @WebService
-@Produces(MediaType.APPLICATION_XML)
 public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
+	
+	public PesquisadorSoapWebService() {
+	}
 	
 	@Autowired(required = true)
 	private PesquisadorService pesquisadorService;
 	
 	@WebMethod
-	public Response getPesquisadorPorId(Long pesquisadorId){
+	@Produces(MediaType.APPLICATION_XML)
+	public PesquisadorSoapResponseWrapper getPesquisadorPorId(Long pesquisadorId){
 		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
 		
 		List<PesquisadorResponse> objects = PesquisadorConverter.convert(Arrays.asList(pesquisador));
-        PesquisadorResponseWrapper response = new PesquisadorResponseWrapper(Status.OK, objects.size(), objects);
+		PesquisadorSoapResponseWrapper response = new PesquisadorSoapResponseWrapper(objects.size(),objects.toArray(new PesquisadorResponse[]{}));
 
-        return Response.status(Status.OK.getStatusCode()).entity(response).build();
+        return response;
 	}
 
 	public PesquisadorService getPesquisadorService() {

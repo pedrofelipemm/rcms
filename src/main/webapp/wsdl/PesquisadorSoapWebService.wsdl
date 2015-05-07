@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://soap.webservice.rcms.ufscar.br" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.webservice.rcms.ufscar.br" xmlns:intf="http://soap.webservice.rcms.ufscar.br" xmlns:tns1="http://core.rs.ws.javax" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://soap.webservice.rcms.ufscar.br" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://soap.webservice.rcms.ufscar.br" xmlns:intf="http://soap.webservice.rcms.ufscar.br" xmlns:tns1="http://modelo.webservice.rcms.ufscar.br" xmlns:tns2="http://core.rs.ws.javax" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://soap.webservice.rcms.ufscar.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://modelo.webservice.rcms.ufscar.br"/>
    <import namespace="http://core.rs.ws.javax"/>
    <element name="getPesquisadorPorId">
     <complexType>
@@ -15,10 +16,34 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="getPesquisadorPorIdResponse">
     <complexType>
      <sequence>
-      <element name="getPesquisadorPorIdReturn" type="xsd:anyType"/>
+      <element name="getPesquisadorPorIdReturn" type="tns1:PesquisadorResponseWrapper"/>
      </sequence>
     </complexType>
    </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://modelo.webservice.rcms.ufscar.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://core.rs.ws.javax"/>
+   <complexType name="Response">
+    <sequence/>
+   </complexType>
+   <complexType name="ResponseWrapper">
+    <complexContent>
+     <extension base="tns1:Response">
+      <sequence>
+       <element name="status" nillable="true" type="xsd:anyType"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="PesquisadorResponseWrapper">
+    <complexContent>
+     <extension base="tns1:ResponseWrapper">
+      <sequence>
+       <element name="totalRows" type="xsd:int"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
   </schema>
  </wsdl:types>
 

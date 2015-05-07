@@ -210,6 +210,16 @@
 			<artifactId>jersey-spring3</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.rpc</groupId>
+			<artifactId>javax.xml.rpc-api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

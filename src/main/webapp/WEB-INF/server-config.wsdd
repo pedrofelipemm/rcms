@@ -33,10 +33,14 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="PesquisadorSoapWebService" provider="java:RPC" style="wrapped" use="literal">
-  <ns3:operation name="getPesquisadorPorId" qname="ns1:getPesquisadorPorId" returnQName="ns1:getPesquisadorPorIdReturn" returnType="ns2:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns1="http://soap.webservice.rcms.ufscar.br" xmlns:ns2="http://modelo.webservice.rcms.ufscar.br" xmlns:ns3="http://xml.apache.org/axis/wsdd/">
-   <ns3:parameter qname="ns1:pesquisadorId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns3:operation>
-  <ns1:parameter name="allowedMethods" value="getPesquisadorPorId"/>
+  <ns3:operation name="getPesquisadores" qname="ns1:getPesquisadores" returnQName="ns1:getPesquisadoresReturn" returnType="ns2:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns1="http://soap.webservice.rcms.ufscar.br" xmlns:ns2="http://modelo.webservice.rcms.ufscar.br" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="getPesquisadorPorId" qname="ns3:getPesquisadorPorId" returnQName="ns3:getPesquisadorPorIdReturn" returnType="ns4:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns3="http://soap.webservice.rcms.ufscar.br" xmlns:ns4="http://modelo.webservice.rcms.ufscar.br">
+   <ns1:parameter qname="ns3:pesquisadorId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="deletePorId" qname="ns5:deletePorId" returnQName="ns5:deletePorIdReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://soap.webservice.rcms.ufscar.br" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:pesquisadorId" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getPesquisadores getPesquisadorPorId deletePorId"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="PesquisadorSoapWebService"/>
   <ns1:parameter name="className" value="br.ufscar.rcms.webservice.soap.PesquisadorSoapWebService"/>
@@ -44,11 +48,11 @@
   <ns1:parameter name="schemaQualified" value="http://soap.webservice.rcms.ufscar.br,http://modelo.webservice.rcms.ufscar.br"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://soap.webservice.rcms.ufscar.br"/>
   <ns1:parameter name="wsdlServiceElement" value="PesquisadorSoapWebServiceService"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns3:EnderecoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.EnderecoResponse" xmlns:ns3="http://modelo.webservice.rcms.ufscar.br"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns4:PesquisadorSoapResponseWrapper" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorSoapResponseWrapper" xmlns:ns4="http://modelo.webservice.rcms.ufscar.br"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns5:Response" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.Response" xmlns:ns5="http://modelo.webservice.rcms.ufscar.br"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns6:PesquisadorResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorResponse" xmlns:ns6="http://modelo.webservice.rcms.ufscar.br"/>
-  <ns1:arrayMapping innerType="ns8:PesquisadorResponse" languageSpecificType="java:br.ufscar.rcms.webservice.modelo.PesquisadorResponse[]" qname="ns7:ArrayOf_tns1_PesquisadorResponse" xmlns:ns7="http://soap.webservice.rcms.ufscar.br" xmlns:ns8="http://modelo.webservice.rcms.ufscar.br"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns6:EnderecoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.EnderecoResponse" xmlns:ns6="http://modelo.webservice.rcms.ufscar.br"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns7:PesquisadorSoapResponseWrapper" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorSoapResponseWrapper" xmlns:ns7="http://modelo.webservice.rcms.ufscar.br"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns8:Response" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.Response" xmlns:ns8="http://modelo.webservice.rcms.ufscar.br"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns9:PesquisadorResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorResponse" xmlns:ns9="http://modelo.webservice.rcms.ufscar.br"/>
+  <ns1:arrayMapping innerType="ns11:PesquisadorResponse" languageSpecificType="java:br.ufscar.rcms.webservice.modelo.PesquisadorResponse[]" qname="ns10:ArrayOf_tns1_PesquisadorResponse" xmlns:ns10="http://soap.webservice.rcms.ufscar.br" xmlns:ns11="http://modelo.webservice.rcms.ufscar.br"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

@@ -13,7 +13,7 @@ public class PesquisadorSoapResponseWrapper extends Response implements Serializ
 	private static final long serialVersionUID = -7667129522078839507L;
 
 	@XmlElement
-    private PesquisadorResponse[] pesquisadores;
+    private PesquisadorResponse[] pesquisador;
 
     @XmlElement
     private int totalRows;
@@ -23,7 +23,7 @@ public class PesquisadorSoapResponseWrapper extends Response implements Serializ
 
     public PesquisadorSoapResponseWrapper(int totalRows, PesquisadorResponse[] pesquisadores) {
         this.totalRows = totalRows;
-        this.pesquisadores = pesquisadores;
+        this.pesquisador = pesquisadores;
     }
 
     public int getTotalRows() {
@@ -34,12 +34,11 @@ public class PesquisadorSoapResponseWrapper extends Response implements Serializ
 		this.totalRows = totalRows;
 	}
 
-	public PesquisadorResponse[] getPesquisadores() {
-		return pesquisadores;
+	public PesquisadorResponse[] getPesquisador() {
+		return pesquisador;
 	}
 
-	public void setPesquisadores(PesquisadorResponse[] pesquisadores) {
-		this.pesquisadores = pesquisadores;
+	public void setPesquisador(PesquisadorResponse[] pesquisador) {
+		this.pesquisador = pesquisador;
 	}
-
 }

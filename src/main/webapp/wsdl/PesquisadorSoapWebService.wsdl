@@ -5,21 +5,20 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://soap.webservice.rcms.ufscar.br" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://modelo.webservice.rcms.ufscar.br"/>
-   <element name="getPesquisadores">
-    <complexType/>
-   </element>
-   <element name="getPesquisadoresResponse">
+   <element name="deletePorId">
     <complexType>
      <sequence>
-      <element name="getPesquisadoresReturn" type="tns1:PesquisadorSoapResponseWrapper"/>
+      <element name="pesquisadorId" type="xsd:long"/>
      </sequence>
     </complexType>
    </element>
-   <complexType name="ArrayOf_tns1_PesquisadorResponse">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:PesquisadorResponse"/>
-    </sequence>
-   </complexType>
+   <element name="deletePorIdResponse">
+    <complexType>
+     <sequence>
+      <element name="deletePorIdReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="getPesquisadorPorId">
     <complexType>
      <sequence>
@@ -34,17 +33,32 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="deletePorId">
+   <complexType name="ArrayOf_tns1_PesquisadorResponse">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:PesquisadorResponse"/>
+    </sequence>
+   </complexType>
+   <element name="isUsuarioAdministrador">
     <complexType>
      <sequence>
       <element name="pesquisadorId" type="xsd:long"/>
      </sequence>
     </complexType>
    </element>
-   <element name="deletePorIdResponse">
+   <element name="isUsuarioAdministradorResponse">
     <complexType>
      <sequence>
-      <element name="deletePorIdReturn" type="xsd:string"/>
+      <element name="isUsuarioAdministradorReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPesquisadores">
+    <complexType/>
+   </element>
+   <element name="getPesquisadoresResponse">
+    <complexType>
+     <sequence>
+      <element name="getPesquisadoresReturn" type="tns1:PesquisadorSoapResponseWrapper"/>
      </sequence>
     </complexType>
    </element>
@@ -87,7 +101,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexContent>
      <extension base="tns1:Response">
       <sequence>
-       <element name="pesquisadores" nillable="true" type="impl:ArrayOf_tns1_PesquisadorResponse"/>
+       <element name="pesquisador" nillable="true" type="impl:ArrayOf_tns1_PesquisadorResponse"/>
        <element name="totalRows" type="xsd:int"/>
       </sequence>
      </extension>
@@ -104,14 +118,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getPesquisadorPorIdRequest">
-
-      <wsdl:part element="impl:getPesquisadorPorId" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="deletePorIdRequest">
 
       <wsdl:part element="impl:deletePorId" name="parameters">
@@ -120,9 +126,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getPesquisadorPorIdRequest">
+
+      <wsdl:part element="impl:getPesquisadorPorId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="getPesquisadorPorIdResponse">
 
       <wsdl:part element="impl:getPesquisadorPorIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isUsuarioAdministradorResponse">
+
+      <wsdl:part element="impl:isUsuarioAdministradorResponse" name="parameters">
 
       </wsdl:part>
 
@@ -144,15 +166,23 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="isUsuarioAdministradorRequest">
+
+      <wsdl:part element="impl:isUsuarioAdministrador" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="PesquisadorSoapWebService">
 
-      <wsdl:operation name="getPesquisadores">
+      <wsdl:operation name="deletePorId">
 
-         <wsdl:input message="impl:getPesquisadoresRequest" name="getPesquisadoresRequest">
+         <wsdl:input message="impl:deletePorIdRequest" name="deletePorIdRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getPesquisadoresResponse" name="getPesquisadoresResponse">
+         <wsdl:output message="impl:deletePorIdResponse" name="deletePorIdResponse">
 
        </wsdl:output>
 
@@ -170,13 +200,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="deletePorId">
+      <wsdl:operation name="isUsuarioAdministrador">
 
-         <wsdl:input message="impl:deletePorIdRequest" name="deletePorIdRequest">
+         <wsdl:input message="impl:isUsuarioAdministradorRequest" name="isUsuarioAdministradorRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:deletePorIdResponse" name="deletePorIdResponse">
+         <wsdl:output message="impl:isUsuarioAdministradorResponse" name="isUsuarioAdministradorResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPesquisadores">
+
+         <wsdl:input message="impl:getPesquisadoresRequest" name="getPesquisadoresRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPesquisadoresResponse" name="getPesquisadoresResponse">
 
        </wsdl:output>
 
@@ -188,17 +230,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="getPesquisadores">
+      <wsdl:operation name="deletePorId">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getPesquisadoresRequest">
+         <wsdl:input name="deletePorIdRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getPesquisadoresResponse">
+         <wsdl:output name="deletePorIdResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -224,17 +266,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="deletePorId">
+      <wsdl:operation name="isUsuarioAdministrador">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="deletePorIdRequest">
+         <wsdl:input name="isUsuarioAdministradorRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="deletePorIdResponse">
+         <wsdl:output name="isUsuarioAdministradorResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPesquisadores">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPesquisadoresRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPesquisadoresResponse">
 
             <wsdlsoap:body use="literal"/>
 

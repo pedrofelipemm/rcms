@@ -37,10 +37,25 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 	public PesquisadorSoapResponseWrapper getPesquisadorPorId(Long pesquisadorId){
 		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
 		
+		if (pesquisador == null){
+			return new PesquisadorSoapResponseWrapper();
+		}
 		List<PesquisadorResponse> objects = PesquisadorConverter.convert(Arrays.asList(pesquisador));
 		PesquisadorSoapResponseWrapper response = new PesquisadorSoapResponseWrapper(objects.size(),objects.toArray(new PesquisadorResponse[]{}));
 
         return response;
+	}
+	
+	@WebMethod
+	@Produces(MediaType.APPLICATION_XML)
+	public Boolean isUsuarioAdministrador(Long pesquisadorId) {
+		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
+		
+		if (pesquisador == null){
+			return false;
+		}
+		
+        return pesquisador.getFlagAdministrador() ? true : false;
 	}
 	
     @WebMethod

@@ -10,15 +10,18 @@
       <parameter name="className" value="br.ufscar.rcms.webservice.soap.PesquisadorSoapWebService"/>
       <parameter name="wsdlPortType" value="PesquisadorSoapWebService"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://modelo.webservice.rcms.ufscar.br" name="getPesquisadores" qname="operNS:getPesquisadores" returnQName="retNS:getPesquisadoresReturn" returnType="rtns:PesquisadorSoapResponseWrapper" soapAction="">
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deletePorId" qname="operNS:deletePorId" returnQName="retNS:deletePorIdReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://soap.webservice.rcms.ufscar.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pesquisadorId" type="tns:long"/>
       </operation>
       <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://modelo.webservice.rcms.ufscar.br" name="getPesquisadorPorId" qname="operNS:getPesquisadorPorId" returnQName="retNS:getPesquisadorPorIdReturn" returnType="rtns:PesquisadorSoapResponseWrapper" soapAction="">
         <parameter xmlns:pns="http://soap.webservice.rcms.ufscar.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pesquisadorId" type="tns:long"/>
       </operation>
-      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deletePorId" qname="operNS:deletePorId" returnQName="retNS:deletePorIdReturn" returnType="rtns:string" soapAction="">
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="isUsuarioAdministrador" qname="operNS:isUsuarioAdministrador" returnQName="retNS:isUsuarioAdministradorReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://soap.webservice.rcms.ufscar.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pesquisadorId" type="tns:long"/>
       </operation>
-      <parameter name="allowedMethods" value="getPesquisadores getPesquisadorPorId deletePorId"/>
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://modelo.webservice.rcms.ufscar.br" name="getPesquisadores" qname="operNS:getPesquisadores" returnQName="retNS:getPesquisadoresReturn" returnType="rtns:PesquisadorSoapResponseWrapper" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="getPesquisadores isUsuarioAdministrador getPesquisadorPorId deletePorId"/>
 
       <typeMapping xmlns:ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:EnderecoResponse" type="java:br.ufscar.rcms.webservice.modelo.EnderecoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
       <typeMapping xmlns:ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:PesquisadorSoapResponseWrapper" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorSoapResponseWrapper" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>

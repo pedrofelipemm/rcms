@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PesquisadorSoapWebServiceService WSDL service -->
+
+  <service name="PesquisadorSoapWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap.webservice.rcms.ufscar.br"/>
+      <parameter name="wsdlServiceElement" value="PesquisadorSoapWebServiceService"/>
+      <parameter name="schemaQualified" value="http://soap.webservice.rcms.ufscar.br,http://modelo.webservice.rcms.ufscar.br"/>
+      <parameter name="wsdlServicePort" value="PesquisadorSoapWebService"/>
+      <parameter name="className" value="br.ufscar.rcms.webservice.soap.PesquisadorSoapWebService"/>
+      <parameter name="wsdlPortType" value="PesquisadorSoapWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deletePorId" qname="operNS:deletePorId" returnQName="retNS:deletePorIdReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://soap.webservice.rcms.ufscar.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pesquisadorId" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://modelo.webservice.rcms.ufscar.br" name="getPesquisadorPorId" qname="operNS:getPesquisadorPorId" returnQName="retNS:getPesquisadorPorIdReturn" returnType="rtns:PesquisadorSoapResponseWrapper" soapAction="">
+        <parameter xmlns:pns="http://soap.webservice.rcms.ufscar.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pesquisadorId" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="isUsuarioAdministrador" qname="operNS:isUsuarioAdministrador" returnQName="retNS:isUsuarioAdministradorReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://soap.webservice.rcms.ufscar.br" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pesquisadorId" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://soap.webservice.rcms.ufscar.br" xmlns:retNS="http://soap.webservice.rcms.ufscar.br" xmlns:rtns="http://modelo.webservice.rcms.ufscar.br" name="getPesquisadores" qname="operNS:getPesquisadores" returnQName="retNS:getPesquisadoresReturn" returnType="rtns:PesquisadorSoapResponseWrapper" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="getPesquisadores isUsuarioAdministrador getPesquisadorPorId deletePorId"/>
+
+      <typeMapping xmlns:ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:EnderecoResponse" type="java:br.ufscar.rcms.webservice.modelo.EnderecoResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:PesquisadorSoapResponseWrapper" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorSoapResponseWrapper" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://soap.webservice.rcms.ufscar.br" xmlns:cmp-ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:ArrayOf_tns1_PesquisadorResponse" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorResponse[]" innerType="cmp-ns:PesquisadorResponse" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:Response" type="java:br.ufscar.rcms.webservice.modelo.Response" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://modelo.webservice.rcms.ufscar.br" qname="ns:PesquisadorResponse" type="java:br.ufscar.rcms.webservice.modelo.PesquisadorResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

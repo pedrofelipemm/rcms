@@ -14,7 +14,7 @@
 			</div>
 		</div>
 
-		<h:form id="formIdma">
+		<h:form id="formIdioma" prependId="false">
 
 			<h:dataTable id="tabelaIdiomas" value="#{idiomaMB.idiomas}"
 				var="idioma" styleClass="table table-hover"
@@ -38,12 +38,12 @@
 					<f:facet name="header">
 						<a href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-primary"> #{mensagens['adicionar.idioma']} </a>
 					</f:facet>
-
-					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
-						action="#{idiomaMB.editarIdioma(idioma)}" /> &nbsp;
-						
+					<div class="text-center">
+						<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
+							action="#{idiomaMB.editarIdioma(idioma)}" /> &nbsp;
 						<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-						action="#{idiomaMB.excluirIdioma(idioma)}" />
+							action="#{idiomaMB.excluirIdioma(idioma)}" />
+					</div>
 				</h:column>
 
 			</h:dataTable>

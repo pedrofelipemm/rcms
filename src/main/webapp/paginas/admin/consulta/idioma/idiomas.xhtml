@@ -1,10 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition template="/paginas/admin/template/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
 
 	<ui:define name="conteudo">
 
@@ -16,37 +18,54 @@
 
 		<h:form id="formIdioma" prependId="false">
 
-			<h:dataTable id="tabelaIdiomas" value="#{idiomaMB.idiomas}"
-				var="idioma" styleClass="table table-hover"
-				headerClass="col-width-50" rowClasses="col-width-50">
-
-				<h:column>
-					<f:facet name="header">
-						<h:outputLabel value="#" />
-					</f:facet>
-					<h:outputLabel value="#{idiomaMB.idiomas.rowIndex + 1}" />
-				</h:column>
-
-				<h:column headerClass="col-xs-10">
-					<f:facet name="header">
-						<h:outputLabel value="#{mensagens['descricao']}" />
-					</f:facet>
-					<h:outputLabel value="#{idioma.descricao}" />
-				</h:column>
-
-				<h:column headerClass="text-center">
-					<f:facet name="header">
-						<a href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-primary"> #{mensagens['adicionar.idioma']} </a>
-					</f:facet>
-					<div class="text-center">
-						<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
-							action="#{idiomaMB.editarIdioma(idioma)}" /> &nbsp;
-						<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-							action="#{idiomaMB.excluirIdioma(idioma)}" />
+			<div class="rcms-table rcms-table-hover">
+				<div class="rcms-table-thead">
+			  		<div class="rcms-table-tr">
+						<div class="rcms-table-th col-" >
+							<h:outputText value="#" />
+						</div>
+						<div class="rcms-table-th col-xs-10" >
+							<span>
+								<h:outputText value="#{mensagens['descricao']}" />
+							</span>
+						</div>
+						<div class="rcms-table-th col-xs-2 text-center" >
+							<span>
+								<a rel="next" title="#{mensagens['adicionar.idioma']}" href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-primary">
+									#{mensagens['adicionar.idioma']}
+								</a>			
+							</span>
+				  		</div>
 					</div>
-				</h:column>
-
-			</h:dataTable>
+				</div>
+				<div class="rcms-table-tbody">
+					<ui:repeat id="gridIdiomas" pt:name="gridIdiomas" varStatus="status" var="idioma" value="#{idiomaMB.idiomas}" >
+						<div class="rcms-table-tr col-">
+							<div class="rcms-table-td">
+								<span>
+									<h:outputText id="outputTextRowIndex" value="#{status.index+1}" />
+								</span>
+							</div>
+							<div class="rcms-table-td">
+								<span>
+									<h:outputText id="outputTextDescricao" value="#{idioma.descricao}" />
+								</span>
+							</div>
+							<div class="rcms-table-td">
+								<div class="text-center" >
+									<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
+										action="#{idiomaMB.editarIdioma(idioma)}" pt:title="#{mensagens['editar']}"/>
+									<p:spacer id="spacer" width="20" pt:alt="#{mensagens['spacer.mensagem']}"
+										pt:title="#{mensagens['spacer.titutlo']}" />
+									<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+										action="#{idiomaMB.excluirIdioma(idioma)}" pt:title="#{mensagens['excluir']}" />
+								</div>
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
+			</div>
+			
 		</h:form>
 
 	</ui:define>

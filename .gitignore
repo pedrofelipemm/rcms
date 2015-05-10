@@ -47,6 +47,7 @@ test-output/
 .metadata/
 .settings/
 
+
 # Eclipse.gitinore #
 ####################
 *.pydevproject
@@ -63,6 +64,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+.eclipse-pmd
 
 # External tool builders
 .externalToolBuilders/
@@ -75,8 +77,7 @@ local.properties
 
 # PDT-specific
 .buildpath
-/target
-/target/
-/target/
-/target/
-.eclipse-pmd
+
+# Custom files
+*.cmd
+*.sh

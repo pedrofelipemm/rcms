@@ -1,20 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html lang="pt-br" xml:lang="pt-br"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui" >
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
 
 	<h:head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>#{mensagens['titulo.sistema']}</title>
+		<f:facet name="first">
+	       	<meta charset="utf-8" />
+	        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	        <title>#{mensagens['titulo.sistema']}</title>
+	    </f:facet>
 	</h:head >
 	
 	<h:body styleClass="admin-bg">
 
-        <noscript>Seu browser não suporta javascript</noscript>
+		<noscript>
+			<p>Seu browser não suporta javascript</p>
+		</noscript>
 
 		<h:panelGroup id="page" layout="block">
  
@@ -53,6 +60,7 @@
         <h:outputStylesheet name="primefaces/custom-primefaces.css" library="css"/>
         <h:outputStylesheet name="font-awesome/font-awesome.min.css" library="css"/>
         <h:outputStylesheet name="rcms/estilo-admin.css" library="css"/>
+        <h:outputStylesheet name="rcms/rcms-table.css" library="css" />
         <h:outputStylesheet name="rcms/animation.css" library="css"/>
         
         <h:outputScript name="jquery/jquery-1.11.1.min.js" library="js"/>
@@ -64,5 +72,5 @@
 		<h:outputScript name="rcms/rcms.js" library="js"/>
 		<h:outputScript name="rcms/rcms-admin.js" library="js"/>
 		
-</h:body>
+	</h:body>
 </html>

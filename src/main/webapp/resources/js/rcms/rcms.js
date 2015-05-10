@@ -1,7 +1,9 @@
 var rcms = (function() {
 	return {
 		setFocusFirstElement : function() {
-			$(":input:visible:enabled:first").focus();
+			var firstInputText = $(":input[type='text']:visible:enabled:first")[0];
+			var firstBtn = $(".btn:first");
+			(firstInputText != undefined) ? firstInputText.focus() : firstBtn.focus();;
 		},
 		applyNiceScroll : function(elements) {
 			elements.forEach(function(element) {

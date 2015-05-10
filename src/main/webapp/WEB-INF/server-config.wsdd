@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -33,16 +33,16 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="PesquisadorSoapWebService" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="deletePorId" qname="ns1:deletePorId" returnQName="ns1:deletePorIdReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://soap.webservice.rcms.ufscar.br" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:pesquisadorId" type="xsd:long"/>
-  </ns2:operation>
-  <ns1:operation name="getPesquisadorPorId" qname="ns2:getPesquisadorPorId" returnQName="ns2:getPesquisadorPorIdReturn" returnType="ns3:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns2="http://soap.webservice.rcms.ufscar.br" xmlns:ns3="http://modelo.webservice.rcms.ufscar.br">
-   <ns1:parameter qname="ns2:pesquisadorId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns3:operation name="getPesquisadores" qname="ns1:getPesquisadores" returnQName="ns1:getPesquisadoresReturn" returnType="ns2:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns1="http://soap.webservice.rcms.ufscar.br" xmlns:ns2="http://modelo.webservice.rcms.ufscar.br" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="deletePorId" qname="ns3:deletePorId" returnQName="ns3:deletePorIdReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://soap.webservice.rcms.ufscar.br" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:pesquisadorId" type="xsd:long"/>
   </ns1:operation>
   <ns1:operation name="isUsuarioAdministrador" qname="ns4:isUsuarioAdministrador" returnQName="ns4:isUsuarioAdministradorReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://soap.webservice.rcms.ufscar.br" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <ns1:parameter qname="ns4:pesquisadorId" type="xsd:long"/>
   </ns1:operation>
-  <ns1:operation name="getPesquisadores" qname="ns5:getPesquisadores" returnQName="ns5:getPesquisadoresReturn" returnType="ns6:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns5="http://soap.webservice.rcms.ufscar.br" xmlns:ns6="http://modelo.webservice.rcms.ufscar.br"/>
+  <ns1:operation name="getPesquisadorPorId" qname="ns5:getPesquisadorPorId" returnQName="ns5:getPesquisadorPorIdReturn" returnType="ns6:PesquisadorSoapResponseWrapper" soapAction="" xmlns:ns5="http://soap.webservice.rcms.ufscar.br" xmlns:ns6="http://modelo.webservice.rcms.ufscar.br">
+   <ns1:parameter qname="ns5:pesquisadorId" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
   <ns1:parameter name="allowedMethods" value="getPesquisadores isUsuarioAdministrador getPesquisadorPorId deletePorId"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="PesquisadorSoapWebService"/>

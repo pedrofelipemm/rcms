@@ -5,6 +5,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://soap.webservice.rcms.ufscar.br" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://modelo.webservice.rcms.ufscar.br"/>
+   <element name="getPesquisadores">
+    <complexType/>
+   </element>
+   <element name="getPesquisadoresResponse">
+    <complexType>
+     <sequence>
+      <element name="getPesquisadoresReturn" type="tns1:PesquisadorSoapResponseWrapper"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns1_PesquisadorResponse">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:PesquisadorResponse"/>
+    </sequence>
+   </complexType>
    <element name="deletePorId">
     <complexType>
      <sequence>
@@ -19,25 +34,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="getPesquisadorPorId">
-    <complexType>
-     <sequence>
-      <element name="pesquisadorId" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getPesquisadorPorIdResponse">
-    <complexType>
-     <sequence>
-      <element name="getPesquisadorPorIdReturn" type="tns1:PesquisadorSoapResponseWrapper"/>
-     </sequence>
-    </complexType>
-   </element>
-   <complexType name="ArrayOf_tns1_PesquisadorResponse">
-    <sequence>
-     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:PesquisadorResponse"/>
-    </sequence>
-   </complexType>
    <element name="isUsuarioAdministrador">
     <complexType>
      <sequence>
@@ -52,13 +48,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="getPesquisadores">
-    <complexType/>
-   </element>
-   <element name="getPesquisadoresResponse">
+   <element name="getPesquisadorPorId">
     <complexType>
      <sequence>
-      <element name="getPesquisadoresReturn" type="tns1:PesquisadorSoapResponseWrapper"/>
+      <element name="pesquisadorId" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPesquisadorPorIdResponse">
+    <complexType>
+     <sequence>
+      <element name="getPesquisadorPorIdReturn" type="tns1:PesquisadorSoapResponseWrapper"/>
      </sequence>
     </complexType>
    </element>
@@ -176,6 +176,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:portType name="PesquisadorSoapWebService">
 
+      <wsdl:operation name="getPesquisadores">
+
+         <wsdl:input message="impl:getPesquisadoresRequest" name="getPesquisadoresRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPesquisadoresResponse" name="getPesquisadoresResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="deletePorId">
 
          <wsdl:input message="impl:deletePorIdRequest" name="deletePorIdRequest">
@@ -183,18 +195,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:deletePorIdResponse" name="deletePorIdResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getPesquisadorPorId">
-
-         <wsdl:input message="impl:getPesquisadorPorIdRequest" name="getPesquisadorPorIdRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getPesquisadorPorIdResponse" name="getPesquisadorPorIdResponse">
 
        </wsdl:output>
 
@@ -212,13 +212,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getPesquisadores">
+      <wsdl:operation name="getPesquisadorPorId">
 
-         <wsdl:input message="impl:getPesquisadoresRequest" name="getPesquisadoresRequest">
+         <wsdl:input message="impl:getPesquisadorPorIdRequest" name="getPesquisadorPorIdRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getPesquisadoresResponse" name="getPesquisadoresResponse">
+         <wsdl:output message="impl:getPesquisadorPorIdResponse" name="getPesquisadorPorIdResponse">
 
        </wsdl:output>
 
@@ -229,6 +229,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:binding name="PesquisadorSoapWebServiceSoapBinding" type="impl:PesquisadorSoapWebService">
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getPesquisadores">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPesquisadoresRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPesquisadoresResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="deletePorId">
 
@@ -241,24 +259,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="deletePorIdResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getPesquisadorPorId">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getPesquisadorPorIdRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getPesquisadorPorIdResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -284,17 +284,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getPesquisadores">
+      <wsdl:operation name="getPesquisadorPorId">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getPesquisadoresRequest">
+         <wsdl:input name="getPesquisadorPorIdRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getPesquisadoresResponse">
+         <wsdl:output name="getPesquisadorPorIdResponse">
 
             <wsdlsoap:body use="literal"/>
 

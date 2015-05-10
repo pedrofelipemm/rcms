@@ -33,7 +33,6 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 	private PesquisadorService pesquisadorService;
 	
 	@WebMethod
-	@Produces(MediaType.APPLICATION_XML)
 	public PesquisadorSoapResponseWrapper getPesquisadorPorId(Long pesquisadorId){
 		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
 		
@@ -47,7 +46,6 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 	}
 	
 	@WebMethod
-	@Produces(MediaType.APPLICATION_XML)
 	public Boolean isUsuarioAdministrador(Long pesquisadorId) {
 		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
 		
@@ -59,7 +57,6 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 	}
 	
     @WebMethod
-    @Produces(MediaType.APPLICATION_XML)
     public PesquisadorSoapResponseWrapper getPesquisadores() {
 
         List<Pesquisador> pesquisadores = pesquisadorService.buscarTodosOrderByNome();
@@ -76,7 +73,6 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 
 	
 	@WebMethod
-	@Produces(MediaType.APPLICATION_XML)
 	public String deletePorId(Long pesquisadorId){
 		try {
 			getPesquisadorService().remover(pesquisadorId);

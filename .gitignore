@@ -80,3 +80,5 @@ local.properties
 # Custom files
 *.cmd
 *.sh
+*.classpath
+*.project

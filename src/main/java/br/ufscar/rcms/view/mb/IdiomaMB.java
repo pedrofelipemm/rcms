@@ -9,6 +9,7 @@ import javax.faces.model.ListDataModel;
 
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.servico.IdiomaService;
+import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 
 @ViewScoped
 @ManagedBean(name = "idiomaMB")
@@ -30,10 +31,12 @@ public class IdiomaMB extends AbstractMB {
         carregarDados();
     }
 
+    @Override
     protected void limparDados() {
         idioma = new Idioma();
     }
 
+    @Override
     protected void carregarDados() {
 
         Idioma idiomaEdicao = (Idioma) getFlashObject(FLASH_KEY_IDIOMA);
@@ -66,8 +69,15 @@ public class IdiomaMB extends AbstractMB {
 
     public String excluirIdioma(Idioma idioma) {
 
-        idiomaService.remover(idioma);
+        try {
+            idiomaService.remover(idioma);
+            adicionarMensagemInfoByKey("idioma.removido.sucesso", idioma.getDescricao());
+        } catch (IdiomaNaoEncontradoException e) {
+            adicionarMensagemErroByKey("idioma.nao.econtrado", idioma.getDescricao());
+        }
+        limparDados();
 
+        keepMessagesOnRedirect();
         return CONSULTA_IDIOMAS;
     }
 

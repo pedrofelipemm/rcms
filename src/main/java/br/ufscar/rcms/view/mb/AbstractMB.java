@@ -14,6 +14,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.context.PartialViewContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -90,6 +91,10 @@ public abstract class AbstractMB implements Serializable {
 
     protected FacesContext getCurrentInstance() {
         return FacesContext.getCurrentInstance();
+    }
+
+    protected PartialViewContext getPartialViewContext() {
+        return getCurrentInstance().getPartialViewContext();
     }
 
     protected ServletContext getContext() {

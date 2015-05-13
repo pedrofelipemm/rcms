@@ -116,6 +116,7 @@ public class PesquisadorMB extends AbstractMB {
         carregarDados();
     }
 
+    @Override
     protected void carregarDados() {
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
         idiomas = new ArrayList<Idioma>(idiomaService.buscarTodos());
@@ -129,6 +130,7 @@ public class PesquisadorMB extends AbstractMB {
         }
     }
 
+    @Override
     protected void limparDados() {
         pesquisador = new Pesquisador();
         compreensaoIdioma = new CompreensaoIdioma();
@@ -182,11 +184,13 @@ public class PesquisadorMB extends AbstractMB {
 
         try {
             pesquisadorService.remover(pesquisador);
+            adicionarMensagemInfoByKey("pesquisador.removido.sucesso", pesquisador.getNome());
         } catch (PesquisadorNaoEncontradoException e) {
             adicionarMensagemErroByKey("pesquisador.nao.econtrado", pesquisador.getNome());
         }
         limparDados();
 
+        keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
 

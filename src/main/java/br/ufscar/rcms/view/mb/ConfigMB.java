@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.PartialViewContext;
 
 @ManagedBean(name = "configMB")
 @SessionScoped
@@ -40,10 +41,21 @@ public class ConfigMB extends AbstractMB{
     }
 
     public void alterarIdioma() {
-        //TODO PEDRO REFACTOR
-        getCurrentInstance().getPartialViewContext().getRenderIds().addAll(getCurrentInstance().getPartialViewContext().getExecuteIds());
+
+        PartialViewContext partialViewContext = getPartialViewContext();
+        partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         getViewRoot().setLocale(new Locale(lingua));
+
+        salvarConfiguracoes();
+    }
+
+    public String salvarConfiguracoes() {
+
         // TODO PEDRO SAVE CONFIG TABLE
+
+        limparDados();
+        adicionarMensagemInfo("");
+        return PAINEL_CONTROLE;
     }
 
     public String getLingua() {

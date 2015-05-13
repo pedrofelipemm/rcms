@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.servico.IdiomaService;
+import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 
 @Service("idiomaService")
 @Transactional
@@ -26,6 +27,7 @@ public class IdiomaServiceImpl implements IdiomaService {
             idiomaDAO.salvarOuAtualizar(idioma);
         } else {
             // TODO PEDRO
+
         }
     }
 
@@ -40,23 +42,28 @@ public class IdiomaServiceImpl implements IdiomaService {
     }
 
     @Override
-	public void remover(Idioma idioma) {
-		idiomaDAO.remover(idioma);
-	}
+    public void remover(Idioma idioma) throws IdiomaNaoEncontradoException {
+
+        Idioma idiomaToRemove = idiomaDAO.buscar(idioma.getIdIdioma());
+        if (idiomaToRemove == null) {
+            throw new IdiomaNaoEncontradoException(idioma.getDescricao());
+        }
+
+        idiomaDAO.remover(idioma);
+    }
 
     @Override
     public Idioma buscarPorDescricao(String Descricao) {
         return idiomaDAO.buscarPorDescricao(Descricao);
     }
 
-    public List<Idioma> listar()
-    {
-    return idiomaDAO.listar();
+    public List<Idioma> listar() {
+        return idiomaDAO.listar();
     }
 
-//    @Override
-//    public List<Idioma> buscarPorDescricao(String Descricao) {
-//        return idiomaDAO.buscarPorDescricao(Descricao);
-//    }
+    // @Override
+    // public List<Idioma> buscarPorDescricao(String Descricao) {
+    // return idiomaDAO.buscarPorDescricao(Descricao);
+    // }
 
 }

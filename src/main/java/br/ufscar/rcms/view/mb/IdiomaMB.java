@@ -56,8 +56,7 @@ public class IdiomaMB extends AbstractMB {
 
         idiomaService.salvar(idioma);
 
-        // TODO i18n
-        adicionarMensagemInfo("Idioma " + idioma.getDescricao() + " cadastrado com sucesso!");
+        adicionarMensagemInfoByKey("idioma.salvo.sucesso", idioma.getDescricao());
 
         limparDados();
 

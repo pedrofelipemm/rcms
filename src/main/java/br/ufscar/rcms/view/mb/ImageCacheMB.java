@@ -50,8 +50,7 @@ public class ImageCacheMB extends AbstractMB {
             }
         } catch (IOException exception) {
             LOGGER.error(exception.getMessage(), exception);
-            // TODO i18n
-            adicionarMensagemErro("Falha ao enviar imagem");
+            adicionarMensagemErro("falha.enviar.arquivo");
         }
         return fotoPesquisador;
     }

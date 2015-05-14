@@ -35,7 +35,8 @@ public class GrandeAreaAtuacaoMB extends AbstractMB {
         carregarDados();
     }
 
-    private void carregarDados() {
+    @Override
+    protected void carregarDados() {
         todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaAtuacaoService.buscarTodas());
         GrandeAreaAtuacao gdeareaEditar = (GrandeAreaAtuacao) getFlashObject(FLASH_KEY_GRANDE_AREA_ATUACAO);
         if (gdeareaEditar != null) {
@@ -44,7 +45,8 @@ public class GrandeAreaAtuacaoMB extends AbstractMB {
         }
     }
 
-    private void limparDados() {
+    @Override
+    protected void limparDados() {
         gdeArea = AreaAtuacaoFactory.createGrandeAreaEmpty();
         areaSelecionada = AreaAtuacaoFactory.createAreaAtuacaoEmpty();
     }

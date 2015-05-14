@@ -51,7 +51,7 @@ public class ConfigMB extends AbstractMB{
 
     public String salvarConfiguracoes() {
 
-        // TODO PEDRO SAVE CONFIG TABLE
+        // TODO PEDRO - SAVE CONFIG TABLE - AGUARDANDO IMPLEMENTAÇÃO DE SPRING SECURITY
 
         limparDados();
         adicionarMensagemInfo("");

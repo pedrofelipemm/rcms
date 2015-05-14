@@ -32,7 +32,17 @@ public class ImageCacheMB extends AbstractMB {
 
     @PostConstruct
     public void inicializar() {
+        limparDados();
+        carregarDados();
+    }
+
+    @Override
+    protected void limparDados() {
         sendFotoPesquisador(null);
+    }
+
+    @Override
+    protected void carregarDados() {
     }
 
     public void sendFotoPesquisador(Part imagem) {

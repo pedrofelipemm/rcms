@@ -71,6 +71,20 @@ public class ProjetoPesquisa extends Entidade {
         this.midia = midia;
         this.pesquisadores = pesquisadores;
     }
+    
+    public void adicionarPesquisador(Pesquisador pesquisador){
+    	if(!this.getPesquisadores().contains(pesquisador)){
+    		this.pesquisadores.add(pesquisador);
+    		pesquisador.addProjetosPesquisa(this);
+    	}
+    }
+    
+    public void removerPesquisador(Pesquisador pesquisador){
+    	if(this.getPesquisadores().contains(pesquisador)){
+    		this.pesquisadores.remove(pesquisador);
+    		pesquisador.getProjetosPesquisa().remove(this);
+    	}
+    }
 
     public List<Producao> getProducoes() {
         return producoes;

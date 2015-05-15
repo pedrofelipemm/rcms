@@ -98,7 +98,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         return pesquisador;
     }
 
-    private void lazyLoadCollections(Pesquisador pesquisador) {
+    public void lazyLoadCollections(Pesquisador pesquisador) {
 
         pesquisador.getAreaAtuacoes().size();
         pesquisador.getCitacaoBibliograficas().size();

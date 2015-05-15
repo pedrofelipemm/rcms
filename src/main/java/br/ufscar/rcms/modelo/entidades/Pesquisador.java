@@ -270,9 +270,13 @@ public class Pesquisador extends Usuario {
     }
 
     public void addProjetosPesquisa(ProjetoPesquisa... projetosPesquisa) {
-        if (projetosPesquisa != null) {
-            this.projetosPesquisa.addAll(Arrays.asList(projetosPesquisa));
-        }
+    	
+    	for(ProjetoPesquisa p : projetosPesquisa){
+    		if (!this.projetosPesquisa.contains(p)){
+    			this.projetosPesquisa.add(p);
+    			p.adicionarPesquisador(this);
+    		}
+    	}
     }
 
     public void addOrientacoes(Orientacao... orientacoes) {

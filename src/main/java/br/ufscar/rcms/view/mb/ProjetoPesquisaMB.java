@@ -119,8 +119,8 @@ public class ProjetoPesquisaMB extends AbstractMB {
     
     public void adicionarPequisador() {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
-    	projetoPesquisa.getPesquisadores().add(getPesquisador());
-    	//pesquisador.getProjetosPesquisa().add(projetoPesquisa);
+    	projetoPesquisa.adicionarPesquisador(getPesquisador());
+    	pesquisadorService.salvarOuAtualizar(pesquisador);
     	setPesquisador(new Pesquisador());
     }
 

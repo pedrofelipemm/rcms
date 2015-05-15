@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.ProjetoPesquisaDAO;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
@@ -21,9 +20,6 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
     @Autowired
     private ProjetoPesquisaDAO projetoPesquisaDAO;
-
-    @Autowired
-    private IdiomaDAO idiomaDAO;
 
     @Override
     public void salvar(ProjetoPesquisa projetoPesquisa) {
@@ -90,4 +86,12 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
     private void lazyLoadCollections(ProjetoPesquisa projetoPesquisa) {
     	projetoPesquisa.getPesquisadores().size();	
     }
+
+	public ProjetoPesquisaDAO getProjetoPesquisaDAO() {
+		return projetoPesquisaDAO;
+	}
+
+	public void setProjetoPesquisaDAO(ProjetoPesquisaDAO projetoPesquisaDAO) {
+		this.projetoPesquisaDAO = projetoPesquisaDAO;
+	}
 }

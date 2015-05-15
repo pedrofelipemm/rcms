@@ -100,6 +100,24 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroProjetoPesquisa</from-outcome>
+			<to-view-id>/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaProjetoPesquisa</from-outcome>
+			<to-view-id>/paginas/admin/consulta/projetos-pesquisa/projetos-pesquisa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	<!-- FIM -ADMIN - CADASTRO -->
 
 	<!-- INCIO - ADMIN - CONSULTA -->

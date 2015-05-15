@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class ProjetoPesquisa extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_projeto_de_pesquisa")
-    private Integer idProjetoPesquisa;
+    private Long idProjetoPesquisa;
 
     @Column(name = "nome", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String nome;
@@ -44,6 +45,9 @@ public class ProjetoPesquisa extends Entidade {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
     private List<Midia> midia = new ArrayList<Midia>();
+    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    private List<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
 
     public ProjetoPesquisa() {
     }
@@ -53,11 +57,11 @@ public class ProjetoPesquisa extends Entidade {
     }
 
     public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao, String agenciaDeFomento) {
-        this(nome, descricao, anoInicio, anoConclusao, agenciaDeFomento, new ArrayList<Producao>(), new ArrayList<Midia>());
+        this(nome, descricao, anoInicio, anoConclusao, agenciaDeFomento, new ArrayList<Producao>(), new ArrayList<Midia>(), new ArrayList<Pesquisador>());
     }
 
     public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao,
-            String agenciaDeFomento, List<Producao> producoes, List<Midia> midia) {
+            String agenciaDeFomento, List<Producao> producoes, List<Midia> midia, List<Pesquisador> pesquisadores) {
         this.nome = nome;
         this.descricao = descricao;
         this.anoInicio = anoInicio;
@@ -65,6 +69,7 @@ public class ProjetoPesquisa extends Entidade {
         this.agenciaDeFomento = agenciaDeFomento;
         this.producoes = producoes;
         this.midia = midia;
+        this.pesquisadores = pesquisadores;
     }
 
     public List<Producao> getProducoes() {
@@ -83,11 +88,11 @@ public class ProjetoPesquisa extends Entidade {
         this.midia = midia;
     }
 
-    public Integer getIdProjetoPesquisa() {
+    public Long getIdProjetoPesquisa() {
         return idProjetoPesquisa;
     }
 
-    public void setIdProjetoPesquisa(Integer idProjetoPesquisa) {
+    public void setIdProjetoPesquisa(Long idProjetoPesquisa) {
         this.idProjetoPesquisa = idProjetoPesquisa;
     }
 
@@ -130,6 +135,14 @@ public class ProjetoPesquisa extends Entidade {
     public void setAgenciaDeFomento(String agenciaDeFomento) {
         this.agenciaDeFomento = agenciaDeFomento;
     }
+    
+    public List<Pesquisador> getPesquisadores() {
+		return pesquisadores;
+	}
+
+	public void setPesquisadores(List<Pesquisador> pesquisadores) {
+		this.pesquisadores = pesquisadores;
+	}
 
     @Override
     public int hashCode() {
@@ -160,5 +173,4 @@ public class ProjetoPesquisa extends Entidade {
         }
         return true;
     }
-
 }

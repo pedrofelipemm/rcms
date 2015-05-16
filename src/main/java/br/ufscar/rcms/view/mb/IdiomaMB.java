@@ -9,6 +9,7 @@ import javax.faces.model.ListDataModel;
 
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.servico.IdiomaService;
+import br.ufscar.rcms.servico.exception.IdiomaEmUsoException;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 
@@ -79,8 +80,12 @@ public class IdiomaMB extends AbstractMB {
             limparDados();
             keepMessagesOnRedirect();
             return CONSULTA_IDIOMAS;
-        } catch (IdiomaNaoEncontradoException e) {
-            adicionarMensagemErroByKey("idioma.nao.econtrado", idioma.getDescricao());
+        } catch (RCMSException exception) {
+            if (exception instanceof IdiomaNaoEncontradoException) {
+                adicionarMensagemErroByKey("idioma.nao.econtrado", idioma.getDescricao());
+            } else if (exception instanceof IdiomaEmUsoException) {
+                adicionarMensagemErro(exception.getMessage());
+            }
             return PERMANECER_PAGINA;
         }
     }

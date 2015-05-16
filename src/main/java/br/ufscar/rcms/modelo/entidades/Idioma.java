@@ -1,15 +1,10 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,22 +21,11 @@ public class Idioma extends Entidade {
     @Column(name = "descricao", nullable = false, unique = true)
     private String descricao;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.idioma")
-    private List<CompreensaoIdioma> compreensaoIdiomas = new ArrayList<CompreensaoIdioma>();
-
     public Idioma() {
     }
 
     public Idioma(String descricao) {
         this.descricao = descricao;
-    }
-
-    public List<CompreensaoIdioma> getCompreensaoIdiomas() {
-        return compreensaoIdiomas;
-    }
-
-    public void setCompreensaoIdiomas(List<CompreensaoIdioma> compreensaoIdiomas) {
-        this.compreensaoIdiomas = compreensaoIdiomas;
     }
 
     public String getDescricao() {
@@ -89,5 +73,4 @@ public class Idioma extends Entidade {
         }
         return true;
     }
-
 }

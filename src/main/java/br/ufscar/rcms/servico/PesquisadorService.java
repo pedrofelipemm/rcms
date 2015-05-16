@@ -18,6 +18,8 @@ public interface PesquisadorService extends Serializable {
 
     List<Pesquisador> buscarTodosOrderByNome();
 
+    List<Pesquisador> buscarTodosComIdioma(Long idIdioma);
+
     void remover(Pesquisador pesquisador) throws PesquisadorNaoEncontradoException;
 
     void remover(Long id) throws PesquisadorNaoEncontradoException;

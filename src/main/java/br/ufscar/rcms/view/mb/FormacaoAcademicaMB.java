@@ -31,6 +31,15 @@ public class FormacaoAcademicaMB extends AbstractMB {
     private FormacaoAcademica formacaoAcademica;
 
     @PostConstruct
+    public void inicializar() {
+        limparDados();
+        carregarDados();
+    }
+
+    @Override
+    protected void limparDados() {}
+
+    @Override
     public void carregarDados() {
         pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
         formacoes = new ListDataModel<FormacaoAcademica>(formacaoAcademicaService.buscarTodos());
@@ -83,5 +92,4 @@ public class FormacaoAcademicaMB extends AbstractMB {
     public void setFormacoes(DataModel<FormacaoAcademica> formacoes) {
         this.formacoes = formacoes;
     }
-
 }

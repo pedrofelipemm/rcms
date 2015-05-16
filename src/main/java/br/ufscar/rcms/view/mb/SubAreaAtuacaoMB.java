@@ -32,7 +32,8 @@ public class SubAreaAtuacaoMB extends AbstractMB {
         carregarDados();
     }
 
-    private void carregarDados() {
+    @Override
+    protected void carregarDados() {
         setTodasAsSubAreas(new ListDataModel<SubAreaAtuacao>(getSubAreaAtuacaoService().buscarTodas()));
         setEspecializacaoSelecionada(new EspecializacaoAreaAtuacao());
 
@@ -44,7 +45,8 @@ public class SubAreaAtuacaoMB extends AbstractMB {
 
     }
 
-    private void limparDados() {
+    @Override
+    protected void limparDados() {
         setSubArea(AreaAtuacaoFactory.createSubAreaAtuacaoEmpty());
     }
 

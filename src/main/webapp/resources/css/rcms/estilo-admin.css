@@ -39,6 +39,8 @@
 }
 
 #admin-menu-left {
+	/* Temporário */
+	min-width: 197px; 
 	top: 53px;
 	position: fixed;
 	height: 100%;

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -61,6 +62,13 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     }
 
     @Override
+    public void saveOrUpdate(T entidade) {
+        getSession().saveOrUpdate(entidade);
+    }
+
+    // TODO PEDRO
+    @Deprecated
+    @Override
     public T salvarOuAtualizar(T entidade) {
 
         if (getEntityId(entidade) != null) {
@@ -97,6 +105,10 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
 
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
     }
 
     private Long getEntityId(T entidade) {

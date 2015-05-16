@@ -15,6 +15,13 @@ public interface BaseDAO<T, K extends Serializable> extends Serializable {
 
     T atualizar(T entidade);
 
+    /**
+     * Wrapper method: {@link Session#saveOrUpdate(Object)}
+     */
+    void saveOrUpdate(T entidade);
+
+    // TODO PEDRO
+    @Deprecated
     T salvarOuAtualizar(T entidade);
 
     void remover(T entidade);

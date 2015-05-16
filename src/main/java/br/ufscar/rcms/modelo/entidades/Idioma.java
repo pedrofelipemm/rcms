@@ -23,7 +23,7 @@ public class Idioma extends Entidade {
     @Column(name = "id_idioma")
     private Long idIdioma;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao", nullable = false, unique = true)
     private String descricao;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.idioma")
@@ -64,7 +64,7 @@ public class Idioma extends Entidade {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((idIdioma == null) ? 0 : idIdioma.hashCode());
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
         return result;
     }
 
@@ -80,11 +80,11 @@ public class Idioma extends Entidade {
             return false;
         }
         Idioma other = (Idioma) obj;
-        if (idIdioma == null) {
-            if (other.idIdioma != null) {
+        if (descricao == null) {
+            if (other.descricao != null) {
                 return false;
             }
-        } else if (!idIdioma.equals(other.idIdioma)) {
+        } else if (!descricao.equals(other.descricao)) {
             return false;
         }
         return true;

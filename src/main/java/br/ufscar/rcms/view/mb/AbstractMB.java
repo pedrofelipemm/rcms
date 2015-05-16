@@ -14,6 +14,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.faces.context.PartialViewContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,8 @@ public abstract class AbstractMB implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMB.class);
     private static final String BUNDLE_NAME = "bundle";
     private static final String EMPTY_STRING = "";
+
+    public static final String PERMANECER_PAGINA = null;
 
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
@@ -73,6 +76,9 @@ public abstract class AbstractMB implements Serializable {
     public static final String FLASH_KEY_PROJETO_PESQUISA = "projetoPesquisa";
     public static final String EXIBE_PROJETO_PESQUISA = "projetoPesquisa";
 
+    // Painel de Controle
+    public static final String PAINEL_CONTROLE = "painelControle";
+
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put(getMessage("pesquisador"), false);
@@ -81,12 +87,22 @@ public abstract class AbstractMB implements Serializable {
     }
 
     // TODO PEDRO
-    // public abstract void inicializar();
-    // protected abstract void limparDados();
-    // protected abstract void carregarDados();
+    // @PostConstruct
+    // public void inicializar() {
+    // limparDados();
+    // carregarDados();
+    // };
+
+    protected abstract void limparDados();
+
+    protected abstract void carregarDados();
 
     protected FacesContext getCurrentInstance() {
         return FacesContext.getCurrentInstance();
+    }
+
+    protected PartialViewContext getPartialViewContext() {
+        return getCurrentInstance().getPartialViewContext();
     }
 
     protected ServletContext getContext() {
@@ -129,8 +145,7 @@ public abstract class AbstractMB implements Serializable {
 
         Flash flash = getFlash();
         if (flash == null) {
-            // TODO i18n
-            LOGGER.error("Internal Framework Problem");
+            LOGGER.error(getMessage("flash.null"));
             return;
         }
 
@@ -141,8 +156,7 @@ public abstract class AbstractMB implements Serializable {
 
         Flash flash = getFlash();
         if (flash == null) {
-            // TODO i18n
-            LOGGER.error("Internal Framework Problem");
+            LOGGER.error(getMessage("flash.null"));
             return null;
         }
 

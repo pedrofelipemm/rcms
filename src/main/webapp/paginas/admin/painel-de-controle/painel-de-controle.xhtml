@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/admin/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+	
+	<ui:define name="conteudo">
+	
+		<h:form id="formPainelControle" prependId="false">
+			
+			<div class="row">
+				<div class="col-md-10">
+					<div class="form-group">
+						<h1>#{mensagens['painel.de.controle']}</h1>
+					</div>
+				</div>
+				<div class="col-md-2" style="padding-top: 25px;">
+					<div class="form-group pull-right">
+						<!-- some content -->
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<p:panel id="painelPesquisador" header="#{mensagens['configuracoes']}">
+							<div class="row">
+				          		<div class="col-md-4">
+				            		<div class="form-group">
+				            			<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<h:outputLabel for="selectOneMenuIdioma" pt:name="selectOneMenuIdioma" />
+													<h:selectOneMenu id="selectOneMenuIdioma" pt:name="selectOneMenuIdioma" value="#{configMB.lingua}"
+														styleClass="form-control">
+														<f:selectItems value="#{configMB.linguas.entrySet()}" var="entry" itemValue="#{entry.value}"
+															itemLabel="#{entry.key}" />
+														<f:ajax listener="#{configMB.alterarIdioma}" render="@all" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</p:panel>
+					</div>
+				</div>
+			</div>
+									
+		</h:form>
+	</ui:define>
+</ui:composition>

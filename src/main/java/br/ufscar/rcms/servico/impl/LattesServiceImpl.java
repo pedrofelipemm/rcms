@@ -23,10 +23,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
+import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.pk.CompreensaoIdiomaPK;
 import br.ufscar.rcms.modelo.lattes.CurriculoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
+import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
@@ -42,6 +46,9 @@ public class LattesServiceImpl implements LattesService {
 
     @Autowired
     private PesquisadorService pesquisadorService;
+
+    @Autowired
+    private IdiomaService idiomaService;
 
     @Autowired
     private GrandeAreaAtuacaoService grandeAreaAtuacaoService;
@@ -85,6 +92,7 @@ public class LattesServiceImpl implements LattesService {
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
                 .build();
 
+        normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
 
         return pesquisadorService.salvarOuAtualizar(novoPesquisador);
@@ -172,6 +180,18 @@ public class LattesServiceImpl implements LattesService {
     private void salvarHierarquiaGrandeArea(List<AtuacaoPesquisador> areaAtuacoes) {
         for (AtuacaoPesquisador atuacaoPesquisador : areaAtuacoes) {
             grandeAreaAtuacaoService.salvar(atuacaoPesquisador.getEspecializacao().getSubAreaAtuacao().getAreaAtuacao().getGrandeAreaAtuacao());
+        }
+    }
+
+    private void normalizarIdiomas(List<CompreensaoIdioma> compreensaoIdiomas) {
+        for (CompreensaoIdioma compreensaoIdioma : compreensaoIdiomas) {
+            Idioma idioma = compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma();
+            Idioma idiomaExistente = idiomaService.buscarPorDescricao(idioma.getDescricao());
+            if (idiomaExistente != null) {
+                Pesquisador pesquisador = compreensaoIdioma.getCompreensaoIdiomaPK().getPesquisador();
+                CompreensaoIdiomaPK compreensaoIdiomaPK = new CompreensaoIdiomaPK(idiomaExistente, pesquisador);
+                compreensaoIdioma.setCompreensaoIdiomaPK(compreensaoIdiomaPK);
+            }
         }
     }
 }

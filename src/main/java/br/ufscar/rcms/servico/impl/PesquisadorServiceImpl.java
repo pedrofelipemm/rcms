@@ -3,6 +3,7 @@ package br.ufscar.rcms.servico.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +13,11 @@ import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.ExceptionUtils;
 
 @Service("pesquisadorService")
-@Transactional
+@Transactional(rollbackFor = RCMSException.class)
 public class PesquisadorServiceImpl implements PesquisadorService {
 
     private static final long serialVersionUID = 4593268685421323315L;
@@ -32,29 +34,38 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
+    // TODO PEDRO save or update
     public Pesquisador salvarOuAtualizar(Pesquisador pesquisador) {
-
+        try {
         pesquisador.getEndereco().setPesquisador(pesquisador);
 
+            // TODO PEDRO VALIDATE
         for (CompreensaoIdioma compreensaoIdioma : pesquisador.getCompreensaoIdiomas()) {
             if (compreensaoIdioma.getCompreensaoIdiomaPK() != null
                     && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma() != null
                     && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma().getIdIdioma() == null) {
-                idiomaDAO.salvar(compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma());
+                    idiomaDAO.saveOrUpdate(compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma());
             }
         }
 
-        try {
+
             return pesquisadorDAO.salvarOuAtualizar(pesquisador);
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException exception) {
+            Throwable throwable = ExceptionUtils.getInnerCause(exception);
             // TODO PEDRO
-            throw new RuntimeException(ExceptionUtils.getInnerCause(e));
+            // throw new RCMSException(throwable.getMessage(), throwable);
+            throw new RuntimeException(throwable.getMessage(), throwable);
         }
     }
 
     @Override
     public List<Pesquisador> buscarTodos() {
         return pesquisadorDAO.buscarTodos();
+    }
+
+    @Override
+    public List<Pesquisador> buscarTodosComIdioma(Long idIdioma) {
+        return pesquisadorDAO.buscarTodosComIdioma(idIdioma);
     }
 
     @Override

@@ -34,6 +34,8 @@ public abstract class AbstractMB implements Serializable {
     private static final String BUNDLE_NAME = "bundle";
     private static final String EMPTY_STRING = "";
 
+    public static final String PERMANECER_PAGINA = null;
+
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";

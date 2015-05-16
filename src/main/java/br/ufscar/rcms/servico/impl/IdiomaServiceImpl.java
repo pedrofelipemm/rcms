@@ -3,6 +3,7 @@ package br.ufscar.rcms.servico.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,9 +11,11 @@ import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
+import br.ufscar.rcms.util.ExceptionUtils;
 
 @Service("idiomaService")
-@Transactional
+@Transactional(rollbackFor = RCMSException.class)
 public class IdiomaServiceImpl implements IdiomaService {
 
     private static final long serialVersionUID = -7021575025108522991L;
@@ -21,19 +24,15 @@ public class IdiomaServiceImpl implements IdiomaService {
     private IdiomaDAO idiomaDAO;
 
     @Override
-    public void salvar(Idioma idioma) {
-
-        if (idiomaDAO.buscarPorDescricao(idioma.getDescricao()) == null) {
-            idiomaDAO.salvarOuAtualizar(idioma);
-        } else {
-            // TODO PEDRO
-
+    // TODO PEDRO GLOBAL HANDLER
+    public void saveOrUpdate(Idioma idioma) throws RCMSException {
+        try {
+            idiomaDAO.saveOrUpdate(idioma);
+        } catch (DataIntegrityViolationException exception) {
+            // TODO PEDRO GLOBAL HANDLER
+            Throwable throwable = ExceptionUtils.getInnerCause(exception);
+            throw new RCMSException(throwable.getMessage(), throwable);
         }
-    }
-
-    @Override
-    public void alterar(Idioma idioma) {
-        idiomaDAO.atualizar(idioma);
     }
 
     @Override
@@ -60,10 +59,4 @@ public class IdiomaServiceImpl implements IdiomaService {
     public List<Idioma> listar() {
         return idiomaDAO.listar();
     }
-
-    // @Override
-    // public List<Idioma> buscarPorDescricao(String Descricao) {
-    // return idiomaDAO.buscarPorDescricao(Descricao);
-    // }
-
 }

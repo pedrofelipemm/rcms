@@ -10,6 +10,7 @@ import javax.faces.model.ListDataModel;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 
 @ViewScoped
 @ManagedBean(name = "idiomaMB")
@@ -43,7 +44,6 @@ public class IdiomaMB extends AbstractMB {
         if (idiomaEdicao != null) {
             idioma = idiomaEdicao;
         }
-
         idiomas = new ListDataModel<Idioma>(idiomaService.buscarTodos());
     }
 
@@ -57,14 +57,17 @@ public class IdiomaMB extends AbstractMB {
 
     public String salvar() {
 
-        idiomaService.salvar(idioma);
+        try {
+            idiomaService.saveOrUpdate(idioma);
+            adicionarMensagemInfoByKey("idioma.salvo.sucesso", idioma.getDescricao());
 
-        adicionarMensagemInfoByKey("idioma.salvo.sucesso", idioma.getDescricao());
-
-        limparDados();
-
-        keepMessagesOnRedirect();
-        return CONSULTA_IDIOMAS;
+            limparDados();
+            keepMessagesOnRedirect();
+            return CONSULTA_IDIOMAS;
+        } catch (RCMSException e) {
+            adicionarMensagemErro(e.getMessage());
+            return PERMANECER_PAGINA;
+        }
     }
 
     public String excluirIdioma(Idioma idioma) {
@@ -72,13 +75,14 @@ public class IdiomaMB extends AbstractMB {
         try {
             idiomaService.remover(idioma);
             adicionarMensagemInfoByKey("idioma.removido.sucesso", idioma.getDescricao());
+
+            limparDados();
+            keepMessagesOnRedirect();
+            return CONSULTA_IDIOMAS;
         } catch (IdiomaNaoEncontradoException e) {
             adicionarMensagemErroByKey("idioma.nao.econtrado", idioma.getDescricao());
+            return PERMANECER_PAGINA;
         }
-        limparDados();
-
-        keepMessagesOnRedirect();
-        return CONSULTA_IDIOMAS;
     }
 
     public String editarIdioma(Idioma idioma) {

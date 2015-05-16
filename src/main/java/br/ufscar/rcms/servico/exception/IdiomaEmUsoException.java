@@ -10,7 +10,7 @@ public class IdiomaEmUsoException extends RCMSException{
     private static final long serialVersionUID = 4667618302407268820L;
 
     public IdiomaEmUsoException(final List<Pesquisador> pesquisadores) {
-        super("Idioma usado pelos pesquisadores:\n"
+        super("Não é possível excluir idioma, ainda é utilizado pelos seguintes pesquisadores:\n"
                 + pesquisadores.stream().map(Pesquisador::getNome).collect(Collectors.joining("\n")));
     }
 }

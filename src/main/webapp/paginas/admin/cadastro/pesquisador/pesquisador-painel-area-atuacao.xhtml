@@ -1,9 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" 
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<div class="row">
 		<div class="col-md-12">
@@ -24,7 +26,9 @@
 							<div class="text-center">
 								<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary">
 									<f:ajax render="panelAtuacaoDoPesquisador" />
-								</h:commandButton>&nbsp;
+								</h:commandButton>
+								<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
+									pt:title="#{mensagens['spacer.titutlo']}"/>
 								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger" action="#{pesquisadorMB.removerAtuacao}" >
 									<f:ajax render="panelAtuacaoDoPesquisador"/>
 									<f:setPropertyActionListener value="#{area}" target="#{pesquisadorMB.atuacaoSelecionada}"/>

@@ -1,11 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition template="/paginas/admin/template/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui">
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="conteudo">
 
@@ -60,13 +61,6 @@
 					</f:facet>
 					<h:outputLabel value="#{formacao.anoConclusao}" />
 				</p:column>
-
-				<!-- 				<p:column headerClass="text-center"> -->
-				<!-- 					<f:facet name="header"> -->
-				<!-- 						<a href="${request.contextPath}/pages/cadastro/cadastroFormacaoAcademica.xhtml" class="btn btn-default"> #{mensagens['adicionar.formcacao.academica']} </a> -->
-				<!-- 					</f:facet> -->
-
-				<!-- 				</p:column> -->
 
 			</p:dataTable>
 		</h:form>

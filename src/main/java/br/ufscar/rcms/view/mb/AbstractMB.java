@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
+import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
@@ -101,6 +103,14 @@ public abstract class AbstractMB implements Serializable {
         return FacesContext.getCurrentInstance();
     }
 
+    protected Application getApplication() {
+        return getCurrentInstance().getApplication();
+    }
+
+    protected ViewHandler getViewHandler() {
+        return getApplication().getViewHandler();
+    }
+
     protected PartialViewContext getPartialViewContext() {
         return getCurrentInstance().getPartialViewContext();
     }
@@ -111,6 +121,10 @@ public abstract class AbstractMB implements Serializable {
 
     protected UIViewRoot getViewRoot() {
         return getCurrentInstance().getViewRoot();
+    }
+
+    protected String getViewId() {
+        return getViewRoot().getViewId();
     }
 
     protected ExternalContext getExternalContext() {
@@ -223,6 +237,19 @@ public abstract class AbstractMB implements Serializable {
 
     protected void keepMessagesOnRedirect() {
         getFlash().setKeepMessages(true);
+    }
+
+    protected void noCacheRefresh() {
+        FacesContext context = getCurrentInstance();
+        String viewId = getViewId();
+        ViewHandler handler = getViewHandler();
+        UIViewRoot root = handler.createView(context, viewId);
+        root.setViewId(viewId);
+        context.setViewRoot(root);
+        HttpServletResponse response = getResponse();
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
     }
 
     @SafeVarargs

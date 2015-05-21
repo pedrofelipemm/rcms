@@ -24,7 +24,7 @@
 								<h:outputLabel for="nome" value="#{mensagens['label.nome']}" />
 							</div>
 							<div class="col-md-10">
-								<h:selectOneMenu id="selectIdiomas" styleClass="form-control" value="#{projetoPesquisaMB.pesquisador}"
+								<h:selectOneMenu id="selectPesquisadores" styleClass="form-control" value="#{projetoPesquisaMB.pesquisador}"
 									converter="entityConverter">
 									<f:selectItems value="#{projetoPesquisaMB.pesquisadores}" var="pesquisador" itemLabel="#{pesquisador.nome}"
 										itemValue="#{pesquisador}" />

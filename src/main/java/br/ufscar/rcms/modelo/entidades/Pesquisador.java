@@ -58,10 +58,10 @@ public class Pesquisador extends Usuario {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<AtuacaoPesquisador> areaAtuacoes = new ArrayList<AtuacaoPesquisador>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="pesquisadores")
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -274,8 +274,16 @@ public class Pesquisador extends Usuario {
     	for(ProjetoPesquisa p : projetosPesquisa){
     		if (!this.projetosPesquisa.contains(p)){
     			this.projetosPesquisa.add(p);
-    			p.adicionarPesquisador(this);
     		}
+    	}
+    }
+    
+    public void removeProjetosPesquisa(ProjetoPesquisa... projetosPesquisa) {
+    	
+    	for(ProjetoPesquisa p : projetosPesquisa){
+    		if(this.getProjetosPesquisa().contains(p)){
+        		this.getProjetosPesquisa().remove(p);
+        	}
     	}
     }
 

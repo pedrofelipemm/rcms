@@ -53,15 +53,14 @@
 							</div>
 							<div class="rcms-table-td">
 								<div class="text-center">
-									<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
-										action="#{projetoPesquisaMB.adicionarPequisador(pesquisador)}"
+									<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary"
 										pt:title="#{mensagens['editar']}" >
-										<f:ajax render="painelIdioma" />
+										<f:ajax render="painelProjetoPesquisa" />
 									</h:commandButton>
 									<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />
 									<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
 										action="#{projetoPesquisaMB.excluir(projeto)}">
-										<f:ajax render="painelIdioma" />
+										<f:ajax render="painelProjetoPesquisa" />
 									</h:commandButton>
 								</div>
 							</div>

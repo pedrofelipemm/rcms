@@ -46,7 +46,7 @@ public class ProjetoPesquisa extends Entidade {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
     private List<Midia> midia = new ArrayList<Midia>();
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
 
     public ProjetoPesquisa() {
@@ -75,14 +75,12 @@ public class ProjetoPesquisa extends Entidade {
     public void adicionarPesquisador(Pesquisador pesquisador){
     	if(!this.getPesquisadores().contains(pesquisador)){
     		this.pesquisadores.add(pesquisador);
-    		pesquisador.addProjetosPesquisa(this);
     	}
     }
     
     public void removerPesquisador(Pesquisador pesquisador){
     	if(this.getPesquisadores().contains(pesquisador)){
     		this.pesquisadores.remove(pesquisador);
-    		pesquisador.getProjetosPesquisa().remove(this);
     	}
     }
 

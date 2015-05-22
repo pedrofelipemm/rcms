@@ -18,7 +18,13 @@ import br.ufscar.rcms.modelo.entidades.Entidade;
 public class AbstractDAOTestBase extends AbstractTransactionalJUnit4SpringContextTests {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
+
+    public Entidade salvar(Entidade entidade) {
+        entidade = entityManager.merge(entidade);
+        entityManager.flush();
+        return entidade;
+    }
 
     public void salvar(Entidade... entidades) {
         for (Entidade entidade : entidades) {

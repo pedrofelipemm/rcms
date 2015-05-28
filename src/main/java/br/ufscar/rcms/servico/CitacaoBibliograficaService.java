@@ -7,6 +7,8 @@ import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 
 public interface CitacaoBibliograficaService extends Serializable {
 
-    List<CitacaoBibliografica> buscarCitacaoBibliografica(Long idPesquisador);
+    void remover(List<CitacaoBibliografica> citacoesBibliograficas);
+
+    void remover(CitacaoBibliografica citacaoBibliografica);
 
 }

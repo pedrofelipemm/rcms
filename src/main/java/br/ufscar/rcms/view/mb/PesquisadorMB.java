@@ -19,6 +19,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
@@ -29,6 +30,7 @@ import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
+import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
@@ -68,6 +70,9 @@ public class PesquisadorMB extends AbstractMB {
     @ManagedProperty("#{linhaDePesquisaService}")
     private LinhaDePesquisaService linhaDePesquisaService;
 
+    @ManagedProperty("#{citacaoBibliograficaService}")
+    private CitacaoBibliograficaService citacaoBibliograficaService;
+
     @ManagedProperty("#{participacaoEventoService}")
     private ParticipacaoEventoService participacaoEventoService;
 
@@ -100,6 +105,10 @@ public class PesquisadorMB extends AbstractMB {
 
     private LinhaDePesquisa linhaDePesquisaSelecionada;
     private transient List<LinhaDePesquisa> linhasDePesquisa;
+
+    private CitacaoBibliografica citacaoBibliografica;
+    private transient List<CitacaoBibliografica> citacoesBibliograficas;
+    private List<CitacaoBibliografica> citacoesBibliograficasToDelete;
 
     private ParticipacaoEvento participacaoEvento;
     private transient List<ParticipacaoEvento> participacaoEventos;
@@ -134,6 +143,8 @@ public class PesquisadorMB extends AbstractMB {
     protected void limparDados() {
         pesquisador = new Pesquisador();
         compreensaoIdioma = new CompreensaoIdioma();
+        citacoesBibliograficasToDelete = new ArrayList<CitacaoBibliografica>();
+        citacaoBibliografica = new CitacaoBibliografica();
         participacaoEventosToDelete = new ArrayList<ParticipacaoEvento>();
         participacaoEvento = new ParticipacaoEvento();
         organizacaoEvento = new OrganizacaoEvento();
@@ -145,6 +156,7 @@ public class PesquisadorMB extends AbstractMB {
 
         try {
             pesquisadorService.salvarOuAtualizar(pesquisador);
+            citacaoBibliograficaService.remover(citacoesBibliograficasToDelete);
             participacaoEventoService.remover(participacaoEventosToDelete);
             organizacaoEventoService.remover(organizacaoEventosToDelete);
             adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
@@ -369,6 +381,17 @@ public class PesquisadorMB extends AbstractMB {
     	}
     }
 
+    public void adicionarCitacaoBibliografica() {
+        pesquisador.addCitacaoBibliografica(citacaoBibliografica);
+        citacaoBibliografica.setPesquisador(pesquisador);
+        citacaoBibliografica = new CitacaoBibliografica();
+    }
+
+    public void removerCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
+        pesquisador.removeCitacaoBibliografica(citacaoBibliografica);
+        citacoesBibliograficasToDelete.add(citacaoBibliografica);
+    }
+
     public void adicionarParticipacaoEvento() {
         pesquisador.addParticipacaoEventos(participacaoEvento);
         participacaoEvento.setPesquisador(pesquisador);
@@ -514,6 +537,38 @@ public class PesquisadorMB extends AbstractMB {
 
     public void removerLinhaDePesquisa(LinhaDePesquisa linhaPesquisa) {
         pesquisador.getLinhasDePesquisa().remove(linhaPesquisa);
+    }
+
+    public CitacaoBibliografica getCitacaoBibliografica() {
+        return citacaoBibliografica;
+    }
+
+    public void setCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
+        this.citacaoBibliografica = citacaoBibliografica;
+    }
+
+    public List<CitacaoBibliografica> getCitacoesBibliograficas() {
+        return citacoesBibliograficas;
+    }
+
+    public void setCitacoesBibliograficas(List<CitacaoBibliografica> citacoesBibliograficas) {
+        this.citacoesBibliograficas = citacoesBibliograficas;
+    }
+
+    public CitacaoBibliograficaService getCitacaoBibliograficaService() {
+        return citacaoBibliograficaService;
+    }
+
+    public void setCitacaoBibliograficaService(CitacaoBibliograficaService citacaoBibliograficaService) {
+        this.citacaoBibliograficaService = citacaoBibliograficaService;
+    }
+
+    public List<CitacaoBibliografica> getCitacoesBibliograficasToDelete() {
+        return citacoesBibliograficasToDelete;
+    }
+
+    public void setCitacoesBibliograficasToDelete(List<CitacaoBibliografica> citacoesBibliograficasToDelete) {
+        this.citacoesBibliograficasToDelete = citacoesBibliograficasToDelete;
     }
 
     public ParticipacaoEvento getParticipacaoEvento() {

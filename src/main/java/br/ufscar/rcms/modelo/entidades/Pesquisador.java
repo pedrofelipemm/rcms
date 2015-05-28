@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -65,6 +67,8 @@ public class Pesquisador extends Usuario {
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(joinColumns = { @JoinColumn(name = "id_usuario") }, inverseJoinColumns = { @JoinColumn(name = "id_linha_pesquisa") })
+    @org.hibernate.annotations.ForeignKey(name = "fk_pesquisador_linha_pesquisa_pesquisador", inverseName = "fk_pesquisador_linha_pesquisa_linha_pesquisa")
     private List<LinhaDePesquisa> linhasDePesquisa = new ArrayList<LinhaDePesquisa>();
 
     public String getCodigoLattes() {
@@ -230,6 +234,18 @@ public class Pesquisador extends Usuario {
     public void removeCompreensaoIdiomas(CompreensaoIdioma... compreensaoIdiomas) {
         if (compreensaoIdiomas != null) {
             this.compreensaoIdiomas.removeAll(Arrays.asList(compreensaoIdiomas));
+        }
+    }
+
+    public void addCitacaoBibliografica(CitacaoBibliografica... citacaoBibliografica) {
+        if (citacaoBibliografica != null) {
+            this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliografica));
+        }
+    }
+
+    public void removeCitacaoBibliografica(CitacaoBibliografica... citacaoBibliografica) {
+        if (citacaoBibliografica != null) {
+            this.citacaoBibliograficas.removeAll(Arrays.asList(citacaoBibliografica));
         }
     }
     

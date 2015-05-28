@@ -27,7 +27,7 @@
 								<h:selectOneMenu id="selectLinhaDePesquisa" styleClass="form-control" value="#{pesquisadorMB.linhaDePesquisaSelecionada}"
 									converter="entityConverter">
 									<f:selectItems value="#{pesquisadorMB.linhasDePesquisa}" var="linhaDePesquisa" itemLabel="#{linhaDePesquisa.descricao}"
-										itemValue="#{idioma}" />
+										itemValue="#{linhaDePesquisa}" />
 									<f:ajax />
 								</h:selectOneMenu>
 							</div>

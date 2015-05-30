@@ -31,7 +31,7 @@ public class AreaAtuacao extends Entidade {
     @ManyToOne
     private GrandeAreaAtuacao grandeAreaAtuacao;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy ="areaAtuacao")
     private List<SubAreaAtuacao> subAreasAtuacao = new ArrayList<SubAreaAtuacao>();
 
     public Integer getIdAreaAtuacao() {

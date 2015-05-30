@@ -27,7 +27,7 @@ public class GrandeAreaAtuacao extends Entidade {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "grandeAreaAtuacao")
     private List<AreaAtuacao> areasDeAtuacao = new ArrayList<AreaAtuacao>();
 
     public Integer getIdGrandeAreaAtuacao() {

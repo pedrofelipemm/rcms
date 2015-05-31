@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,12 +43,16 @@ public class ProjetoPesquisa extends Entidade {
     private String agenciaDeFomento;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinTable(joinColumns = { @JoinColumn(name = "id_projeto_de_pesquisa") }, inverseJoinColumns = { @JoinColumn(name = "id_producao") })
+    @org.hibernate.annotations.ForeignKey(name = "fk_projeto_pesquisa_producao_projeto_pesquisa", inverseName = "fk_projeto_pesquisa_producao_producao")
     private List<Producao> producoes = new ArrayList<Producao>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
     private List<Midia> midia = new ArrayList<Midia>();
     
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(joinColumns = { @JoinColumn(name = "id_projeto_de_pesquisa") }, inverseJoinColumns = { @JoinColumn(name = "id_usuario") })
+    @org.hibernate.annotations.ForeignKey(name = "fk_projeto_pesquisa_pesquisador_projeto_pesquisa", inverseName = "fk_projeto_pesquisa_pesquisador_pesquisador")
     private List<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
 
     public ProjetoPesquisa() {

@@ -82,3 +82,4 @@ local.properties
 *.sh
 *.classpath
 *.project
+.idea/

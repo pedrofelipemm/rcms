@@ -7,9 +7,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,6 +31,7 @@ public class AreaAtuacao extends Entidade {
     private String descricao;
 
     @ManyToOne
+    @JoinColumn(name = "id_grande_area_atuacao", foreignKey = @ForeignKey(name = "fk_area_atuacao_grande_area_atuacao"))
     private GrandeAreaAtuacao grandeAreaAtuacao;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy ="areaAtuacao")

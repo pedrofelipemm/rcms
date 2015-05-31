@@ -1,6 +1,8 @@
 package br.ufscar.rcms.modelo.entidades.pk;
 
 import javax.persistence.Embeddable;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import br.ufscar.rcms.modelo.entidades.Entidade;
@@ -13,9 +15,11 @@ public class CompreensaoIdiomaPK extends Entidade {
     private static final long serialVersionUID = 2780034034995542636L;
 
     @ManyToOne
+    @JoinColumn(name = "id_idioma", foreignKey = @ForeignKey(name = "fk_compreensao_idioma_idioma"))
     private Idioma idioma;
 
     @ManyToOne
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_compreensao_idioma_pesquisador"))
     private Pesquisador pesquisador;
 
     public CompreensaoIdiomaPK() {

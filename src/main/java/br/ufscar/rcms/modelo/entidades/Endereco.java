@@ -2,9 +2,11 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,6 +31,7 @@ public class Endereco extends Entidade {
     private Double enderecoProfissionalLongitude;
 
     @OneToOne
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_endereco_pesquisador"))
     private Pesquisador pesquisador;
 
     public Pesquisador getPesquisador() {

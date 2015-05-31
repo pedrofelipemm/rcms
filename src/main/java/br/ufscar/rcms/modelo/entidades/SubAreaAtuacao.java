@@ -1,16 +1,13 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,10 +23,12 @@ public class SubAreaAtuacao extends Entidade {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @OneToMany(cascade = { javax.persistence.CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "subAreaAtuacao")
-    private List<EspecializacaoAreaAtuacao> especializacoes = new ArrayList<EspecializacaoAreaAtuacao>();
-
+    /*
+     * @OneToMany(cascade = { javax.persistence.CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "subAreaAtuacao")
+     * private List<EspecializacaoAreaAtuacao> especializacoes = new ArrayList<EspecializacaoAreaAtuacao>();
+     */
     @ManyToOne
+    @JoinColumn(name = "id_area_atuacao", foreignKey = @ForeignKey(name = "fk_sub_area_atuacao_area_atuacao"))
     private AreaAtuacao areaAtuacao;
 
     public Integer getIdSubAreaAtuacao() {
@@ -48,14 +47,12 @@ public class SubAreaAtuacao extends Entidade {
         this.descricao = descricao;
     }
 
-    public List<EspecializacaoAreaAtuacao> getEspecializacoes() {
-        return especializacoes;
-    }
-
-    public void setEspecializacoes(List<EspecializacaoAreaAtuacao> especializacoes) {
-        this.especializacoes = especializacoes;
-    }
-
+    /*
+     * public List<EspecializacaoAreaAtuacao> getEspecializacoes() { return especializacoes; }
+     * 
+     * public void setEspecializacoes(List<EspecializacaoAreaAtuacao> especializacoes) { this.especializacoes =
+     * especializacoes; }
+     */
     public AreaAtuacao getAreaAtuacao() {
         return areaAtuacao;
     }
@@ -93,8 +90,7 @@ public class SubAreaAtuacao extends Entidade {
         }
         return true;
     }
-
-    public void addEspecializacao(EspecializacaoAreaAtuacao especializacao) {
-        especializacoes.add(especializacao);
-    }
+    /*
+     * public void addEspecializacao(EspecializacaoAreaAtuacao especializacao) { especializacoes.add(especializacao); }
+     */
 }

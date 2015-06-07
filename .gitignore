@@ -83,3 +83,5 @@ local.properties
 *.classpath
 *.project
 .idea/
+*.iml
+trace.txt

@@ -271,11 +271,13 @@ public class PesquisadorMB extends AbstractMB {
             limparDados();
 
         } catch (InvalidDataAccessApiUsageException e) {
-            // TODO PEDRO
+            LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemAlerta("Currículo lattes já importado!");
         } catch (CurriculoLattesNaoEncontradoException e) {
+            LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemErro(e.getMessage());
         } catch (ArquivoNaoEncontradoException e) {
+            LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemErro(e.getMessage());
         }
 

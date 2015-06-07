@@ -28,7 +28,7 @@ public class RunScriptLattes implements Runnable {
 			ProcessBuilder pb = new ProcessBuilder(commands);
 			pb.directory(new File(pastaScriptLates));
 
-			pb.redirectErrorStream(true);
+			pb.inheritIO();
 
 			Process proc = pb.start();
 

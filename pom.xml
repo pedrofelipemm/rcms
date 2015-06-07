@@ -19,10 +19,11 @@
 		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
 		<javax.enterprise.cdi.version>1.2</javax.enterprise.cdi.version>
 		<jersey.version>2.13</jersey.version>
+		<java.version>1.8</java.version>
 		<javax.xml.rpc.version>1.1.1</javax.xml.rpc.version>
 		<junit.version>4.11</junit.version>
 		<org.apache.axis.version>1.4</org.apache.axis.version>
-		<org.apache.loggin.log4j.version>2.3</org.apache.loggin.log4j.version>
+		<org.apache.logging.log4j.version>2.3</org.apache.logging.log4j.version>
 		<org.hibernate.version>4.3.6.Final</org.hibernate.version>
 		<org.omnifaces.version>1.10</org.omnifaces.version>
 		<org.primefaces.version>5.2</org.primefaces.version>
@@ -156,22 +157,22 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
-			<version>${org.apache.loggin.log4j.version}</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>${org.apache.loggin.log4j.version}</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${org.apache.loggin.log4j.version}</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-web</artifactId>
-			<version>${org.apache.loggin.log4j.version}</version>
+			<version>${org.apache.logging.log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.lmax</groupId>
@@ -247,8 +248,8 @@
 				<version>3.1</version>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>

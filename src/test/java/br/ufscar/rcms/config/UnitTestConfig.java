@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,32 +21,34 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("br.ufscar.rcms")
 @EnableTransactionManagement
-// TODO: PEDRO - load from properties
-@PropertySource("classpath:application-unit.properties")
+@ComponentScan("br.ufscar.rcms")
+@PropertySource("file:${user.home}/RCMS/config/application.properties")
 public class UnitTestConfig {
 
-    // @Value("${spring.packages.to.scan}")
-    private String[] packesToScan = new String[] { "br.ufscar.rcms.modelo.entidades" };
+    @Value("${spring.packages.to.scan}")
+    private String[] packesToScan;
 
-    // @Value("${hibernate.hbm2ddl.auto}")
-    private String hibernateHBM2DLL = "create";
+    @Value("${unit.test.hibernate.hbm2ddl.auto}")
+    private String hibernateHBM2DLL;
 
-    // @Value("${hibernate.dialect}")
-    private String hibernateDialect = "org.hibernate.dialect.PostgreSQLDialect";
+    @Value("${hibernate.dialect}")
+    private String hibernateDialect;
 
-    // @Value("${database.driver.class.name}")
-    private String databaseDriverClassName = "org.postgresql.Driver";
+    @Value("${hibernate.show_sql}")
+    private String hibernateShowSql;
 
-    // @Value("${database.test.url}")
-    private String databaseUrl = "jdbc:postgresql://127.0.0.1:5432/rcmsTest";
+    @Value("${database.driver.class.name}")
+    private String databaseDriverClassName;
 
-    // @Value("${database.test.username}")
-    private String databaseUsername = "postgres";
+    @Value("${unit.test.database.url}")
+    private String databaseUrl;
 
-    // @Value("${database.test.password}")
-    private String databasePassword = "postgres";
+    @Value("${database.username}")
+    private String databaseUsername;
+
+    @Value("${database.password}")
+    private String databasePassword;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -98,6 +101,7 @@ public class UnitTestConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", hibernateHBM2DLL);
         properties.setProperty("hibernate.dialect", hibernateDialect);
+        properties.setProperty("hibernate.show_sql", hibernateShowSql);
         return properties;
     }
 }

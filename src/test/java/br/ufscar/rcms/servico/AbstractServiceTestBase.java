@@ -12,4 +12,7 @@ import br.ufscar.rcms.config.UnitTestConfig;
 @ContextConfiguration(classes = { UnitTestConfig.class })
 @Transactional
 public class AbstractServiceTestBase extends AbstractTransactionalJUnit4SpringContextTests {
+    static {
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+    }
 }

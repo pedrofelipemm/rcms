@@ -15,9 +15,5 @@
         				   http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
         				   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-	
-	<context:annotation-config />
 	<context:component-scan base-package="br.ufscar.rcms" />
-
 </beans>

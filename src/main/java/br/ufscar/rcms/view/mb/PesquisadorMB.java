@@ -38,6 +38,7 @@ import br.ufscar.rcms.servico.LinhaDePesquisaService;
 import br.ufscar.rcms.servico.OrganizacaoEventoService;
 import br.ufscar.rcms.servico.ParticipacaoEventoService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 
@@ -120,7 +121,6 @@ public class PesquisadorMB extends AbstractMB {
 
     @PostConstruct
     public void inicializar() {
-
         limparDados();
         carregarDados();
     }
@@ -271,8 +271,11 @@ public class PesquisadorMB extends AbstractMB {
             limparDados();
 
         } catch (InvalidDataAccessApiUsageException e) {
+            // TODO PEDRO
             adicionarMensagemAlerta("Currículo lattes já importado!");
         } catch (CurriculoLattesNaoEncontradoException e) {
+            adicionarMensagemErro(e.getMessage());
+        } catch (ArquivoNaoEncontradoException e) {
             adicionarMensagemErro(e.getMessage());
         }
 

@@ -9,25 +9,29 @@
 
 	<properties>
 		<apache.commons.lang3.version>3.3.2</apache.commons.lang3.version>
+		<asm.version>2.2.3</asm.version>
 		<c3p0.version>0.9.1.2</c3p0.version>
+		<com.lmax.version>3.3.2</com.lmax.version>
 		<commons-fileupload.version>1.3.1</commons-fileupload.version>
 		<commons-io.version>2.4</commons-io.version>
-		<cxf.version>2.7.7</cxf.version>
 		<javax.faces.version>2.2.10</javax.faces.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
 		<javax.enterprise.cdi.version>1.2</javax.enterprise.cdi.version>
 		<jersey.version>2.13</jersey.version>
+		<javax.xml.rpc.version>1.1.1</javax.xml.rpc.version>
 		<junit.version>4.11</junit.version>
-		<log4j.version>1.2.17</log4j.version>
+		<org.apache.axis.version>1.4</org.apache.axis.version>
+		<org.apache.loggin.log4j.version>2.3</org.apache.loggin.log4j.version>
 		<org.hibernate.version>4.3.6.Final</org.hibernate.version>
 		<org.omnifaces.version>1.10</org.omnifaces.version>
 		<org.primefaces.version>5.2</org.primefaces.version>
-		<org.slf4j.version>1.6.3</org.slf4j.version>
+		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
 		<org.spring-security.version>3.1.0.RELEASE</org.spring-security.version>
 		<postgresql.version>9.1-901-1.jdbc4</postgresql.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<slf4j.version>1.7.12</slf4j.version>
 	</properties>
 
 	<repositories>
@@ -117,7 +121,7 @@
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
-			<version>1.0.10</version>
+			<version>${org.primefaces.themes.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.omnifaces</groupId>
@@ -137,23 +141,42 @@
 		<dependency>
 			<groupId>asm</groupId>
 			<artifactId>asm-all</artifactId>
-			<version>2.2.3</version>
+			<version>${asm.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>slf4j-api</artifactId>
 			<groupId>org.slf4j</groupId>
-			<version>1.7.5</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${org.apache.loggin.log4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-			<scope>compile</scope>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${org.apache.loggin.log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${org.apache.loggin.log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>${org.apache.loggin.log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>${com.lmax.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -203,12 +226,12 @@
 		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis</artifactId>
-			<version>1.4</version>
+			<version>${org.apache.axis.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.xml.rpc</groupId>
 			<artifactId>javax.xml.rpc-api</artifactId>
-			<version>1.1.1</version>
+			<version>${javax.xml.rpc.version}</version>
 		</dependency>
 	</dependencies>
 

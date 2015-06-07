@@ -5,8 +5,11 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -20,9 +23,16 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
-@PropertySource("classpath:application.properties")
-public class PersistenceJPAConfig {
+@ComponentScan("br.ufscar.rcms")
+@EnableTransactionManagement(proxyTargetClass = true)
+@PropertySource("file:${user.home}/RCMS/config/application.properties")
+public class ApplicationConfig {
+
+    static {
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+    }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
     @Value("${spring.packages.to.scan}")
     private String[] packesToScan;
@@ -47,6 +57,16 @@ public class PersistenceJPAConfig {
 
     @Value("${database.password}")
     private String databasePassword;
+
+    public ApplicationConfig() {
+        LOGGER.info("User:" + System.getProperty("user.name"));
+        LOGGER.error("Java Virtual Machine:" + System.getProperty("java.vm.vendor") + " - " + System.getProperty("java.vm.name"));
+        LOGGER.error("Java Runtime:" + System.getProperty("java.runtime.version"));
+        LOGGER.info("User Country" + System.getProperty("user.country"));
+        LOGGER.info("User Language:" + System.getProperty("user.language"));
+        LOGGER.info("Operational System:" + System.getProperty("os.name"));
+        LOGGER.info("JNU Encoding:" + System.getProperty("sun.jnu.encoding"));
+    }
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

@@ -17,6 +17,10 @@ import br.ufscar.rcms.modelo.entidades.Entidade;
 @Transactional
 public class AbstractDAOTestBase extends AbstractTransactionalJUnit4SpringContextTests {
 
+    static {
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+    }
+
     @PersistenceContext
     private EntityManager entityManager;
 

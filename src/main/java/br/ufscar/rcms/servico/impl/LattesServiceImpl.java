@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,12 +32,12 @@ import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.util.XMLUtils;
 
 @Service("lattesService")
 @Transactional
-@PropertySource("classpath:application.properties")
 public class LattesServiceImpl implements LattesService {
 
     private static final long serialVersionUID = 4593268685421323315L;
@@ -63,7 +62,8 @@ public class LattesServiceImpl implements LattesService {
     private String arquivoCurriculoLattes;
 
     @Override
-    public PesquisadorLattes carregarCurriculoLattes(String codigoLattes) throws CurriculoLattesNaoEncontradoException {
+    public PesquisadorLattes carregarCurriculoLattes(String codigoLattes) throws CurriculoLattesNaoEncontradoException,
+            ArquivoNaoEncontradoException {
 
         CurriculoLattes curriculos = carregarCurriculosLattes();
         for (PesquisadorLattes pesquisador : curriculos.getPesquisadores()) {
@@ -76,7 +76,8 @@ public class LattesServiceImpl implements LattesService {
     }
 
     @Override
-    public Pesquisador salvarDadosLattes(Pesquisador pesquisador) throws CurriculoLattesNaoEncontradoException {
+    public Pesquisador salvarDadosLattes(Pesquisador pesquisador) throws CurriculoLattesNaoEncontradoException,
+            ArquivoNaoEncontradoException {
 
         PesquisadorLattes pesquisadorLattes = null;
 
@@ -112,7 +113,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private CurriculoLattes carregarCurriculosLattes() {
+    private CurriculoLattes carregarCurriculosLattes() throws ArquivoNaoEncontradoException {
         CurriculoLattes curriculoLattes = new CurriculoLattes();
         try {
             InputStream file = new FileInputStream(pastaScriptLates + arquivoCurriculoLattes);
@@ -123,6 +124,7 @@ public class LattesServiceImpl implements LattesService {
             }
         } catch (IOException e) {
             LOGGER.error(e.getMessage(), e);
+            throw new ArquivoNaoEncontradoException(pastaScriptLates + arquivoCurriculoLattes);
         }
         return curriculoLattes;
     }

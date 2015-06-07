@@ -35,7 +35,7 @@ import br.ufscar.rcms.webservice.modelo.PesquisadorResponseWrapper;
 @Produces(MediaType.APPLICATION_JSON)
 public class PesquisadorRS {
 
-    @Autowired(required = true)
+    @Autowired
     private PesquisadorService pesquisadorService;
 
     @GET

@@ -1,10 +1,16 @@
 package br.ufscar.rcms.config;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.PersonIdent;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,6 +65,7 @@ public class ApplicationConfig {
     private String databasePassword;
 
     public ApplicationConfig() {
+        LOGGER.info(commitInfo());
         LOGGER.info("User:" + System.getProperty("user.name"));
         LOGGER.error("Java Virtual Machine:" + System.getProperty("java.vm.vendor") + " - " + System.getProperty("java.vm.name"));
         LOGGER.error("Java Runtime:" + System.getProperty("java.runtime.version"));
@@ -120,5 +127,30 @@ public class ApplicationConfig {
         properties.setProperty("hibernate.dialect", hibernateDialect);
         properties.setProperty("hibernate.show_sql", hibernateShowSql);
         return properties;
+    }
+
+    private String commitInfo() {
+        String result = "";
+        try {
+            File gitWorkDir = new File("./");
+            Git git = Git.open(gitWorkDir);
+            Iterable<RevCommit> log = git.log().call();
+            for (Iterator<RevCommit> iterator = log.iterator(); iterator.hasNext();) {
+                RevCommit rev = iterator.next();
+                PersonIdent author = rev.getAuthorIdent();
+                String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(author.getWhen());
+                String message = rev.getFullMessage();
+                String name = author.getName();
+                StringBuilder builder = new StringBuilder("\n### Current Version ###");
+                builder.append("\nCommit Date: ").append(date);
+                builder.append("\nCommit Author: ").append(name);
+                builder.append("\nCommit Message: ").append(message);
+                result = builder.toString();
+                break;
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error in attempt to retrieve commit info: ", e);
+        }
+        return result;
     }
 }

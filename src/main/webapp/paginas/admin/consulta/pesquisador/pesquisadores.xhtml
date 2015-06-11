@@ -44,7 +44,7 @@
 
 					
 					<div class="text-center">
-					<h:commandButton id="salvar" value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info">
+					<h:commandButton id="salvar" value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.baixarDadosPesquisadorLattes(pesquisador)}" styleClass="btn btn-info">
 						<f:ajax render="@form" execute="@form" />
 					</h:commandButton>
 					<p:spacer id="spacer1" width="20" pt:alt="#{mensagens['spacer.mensagem']}"

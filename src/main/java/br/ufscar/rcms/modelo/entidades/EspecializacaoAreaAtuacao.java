@@ -21,7 +21,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
     @Column(name = "id_especializacao")
     private int idEspecializacao;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @ManyToOne
@@ -32,7 +32,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
         return idEspecializacao;
     }
 
-    public void setIdEspecializacao(int idEspecializacao) {
+    public void setIdEspecializacao(final int idEspecializacao) {
         this.idEspecializacao = idEspecializacao;
     }
 
@@ -40,7 +40,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -48,7 +48,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
         return subAreaAtuacao;
     }
 
-    public void setSubAreaAtuacao(SubAreaAtuacao subAreaAtuacao) {
+    public void setSubAreaAtuacao(final SubAreaAtuacao subAreaAtuacao) {
         this.subAreaAtuacao = subAreaAtuacao;
     }
 
@@ -61,7 +61,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -71,7 +71,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
         if (!(obj instanceof EspecializacaoAreaAtuacao)) {
             return false;
         }
-        EspecializacaoAreaAtuacao other = (EspecializacaoAreaAtuacao) obj;
+        final EspecializacaoAreaAtuacao other = (EspecializacaoAreaAtuacao) obj;
         if (descricao == null) {
             if (other.descricao != null) {
                 return false;

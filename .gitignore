@@ -81,7 +81,12 @@ local.properties
 *.cmd
 *.sh
 *.classpath
+.classpath
 *.project
 .idea/
 *.iml
 trace.txt
+/target/
+/target/
+/target/
+/target/

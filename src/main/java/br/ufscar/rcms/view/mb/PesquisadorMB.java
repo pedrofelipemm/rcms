@@ -252,9 +252,10 @@ public class PesquisadorMB extends AbstractMB {
         this.lattesService = lattesService;
     }
 
-    public String baixarDadosPesquisadorLattes(Pesquisador pesquisador) {
+    public String importarDadosPesquisadorLattes(Pesquisador pesquisador) {
         try {
             lattesService.executarComandoLattes(pesquisador);
+            
             return CONSULTA_PESQUISADORES;
         } catch (IOException e) {
             e.printStackTrace();

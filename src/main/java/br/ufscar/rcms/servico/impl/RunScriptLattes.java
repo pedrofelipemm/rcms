@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 public class RunScriptLattes implements Runnable {
 
-	private String hash;
-	
-    private String pastaScriptLates;
-	
-	public RunScriptLattes(String hash, String pastaScriptLates) {
+	private final String hash;
+
+    private final String pastaScriptLates;
+
+	public RunScriptLattes(final String hash, final String pastaScriptLates) {
 		super();
 		this.hash = hash;
 		this.pastaScriptLates = pastaScriptLates;
@@ -25,23 +25,23 @@ public class RunScriptLattes implements Runnable {
 			commands.add(pastaScriptLates + "runScriptLattes.sh");
 			commands.add(hash + ".config");
 
-			ProcessBuilder pb = new ProcessBuilder(commands);
+			final ProcessBuilder pb = new ProcessBuilder(commands);
 			pb.directory(new File(pastaScriptLates));
 
 			pb.inheritIO();
 
-			Process proc = pb.start();
+			final Process proc = pb.start();
 
 			proc.getOutputStream().close();
 
-			InputStream inputstream = proc.getInputStream();
-	        InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
-	        BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
-	        
+			final InputStream inputstream = proc.getInputStream();
+	        final InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
+	        final BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
+
 	        proc.waitFor();
-	        
+
 	        String line;
-	        StringBuilder output = new StringBuilder();
+	        final StringBuilder output = new StringBuilder();
 	        while ((line = bufferedreader.readLine()) != null) {
 	            output.append(line);
 	        }
@@ -50,9 +50,11 @@ public class RunScriptLattes implements Runnable {
 
 			proc.destroy();
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+
+        // TODO PEDRO CLEAN TEMP FILES
 
 	}
 

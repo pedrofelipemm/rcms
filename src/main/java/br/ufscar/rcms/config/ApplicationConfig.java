@@ -1,16 +1,10 @@
 package br.ufscar.rcms.config;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Iterator;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.lib.PersonIdent;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,14 +59,14 @@ public class ApplicationConfig {
     private String databasePassword;
 
     public ApplicationConfig() {
-        LOGGER.info(commitInfo());
-        LOGGER.info("User:" + System.getProperty("user.name"));
-        LOGGER.error("Java Virtual Machine:" + System.getProperty("java.vm.vendor") + " - " + System.getProperty("java.vm.name"));
-        LOGGER.error("Java Runtime:" + System.getProperty("java.runtime.version"));
-        LOGGER.info("User Country" + System.getProperty("user.country"));
-        LOGGER.info("User Language:" + System.getProperty("user.language"));
-        LOGGER.info("Operational System:" + System.getProperty("os.name"));
-        LOGGER.info("JNU Encoding:" + System.getProperty("sun.jnu.encoding"));
+        // LOGGER.info(commitInfo());
+        LOGGER.info("User: " + System.getProperty("user.name"));
+        LOGGER.info("Java Virtual Machine: " + System.getProperty("java.vm.vendor") + " - " + System.getProperty("java.vm.name"));
+        LOGGER.info("Java Runtime: " + System.getProperty("java.runtime.version"));
+        LOGGER.info("User Country: " + System.getProperty("user.country"));
+        LOGGER.info("User Language: " + System.getProperty("user.language"));
+        LOGGER.info("Operational System: " + System.getProperty("os.name"));
+        LOGGER.info("JNU Encoding: " + System.getProperty("sun.jnu.encoding"));
     }
 
     @Bean
@@ -83,11 +77,11 @@ public class ApplicationConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
         em.setPackagesToScan(packesToScan);
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        final JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
 
@@ -97,7 +91,7 @@ public class ApplicationConfig {
     @Bean
     public DataSource dataSource() {
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(databaseDriverClassName);
         dataSource.setUrl(databaseUrl);
         dataSource.setUsername(databaseUsername);
@@ -107,9 +101,9 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+    public PlatformTransactionManager transactionManager(final EntityManagerFactory emf) {
 
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
 
         return transactionManager;
@@ -122,35 +116,35 @@ public class ApplicationConfig {
     }
 
     private Properties additionalProperties() {
-        Properties properties = new Properties();
+        final Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", hibernateHBM2DLL);
         properties.setProperty("hibernate.dialect", hibernateDialect);
         properties.setProperty("hibernate.show_sql", hibernateShowSql);
         return properties;
     }
 
-    private String commitInfo() {
-        String result = "";
-        try {
-            File gitWorkDir = new File("./");
-            Git git = Git.open(gitWorkDir);
-            Iterable<RevCommit> log = git.log().call();
-            for (Iterator<RevCommit> iterator = log.iterator(); iterator.hasNext();) {
-                RevCommit rev = iterator.next();
-                PersonIdent author = rev.getAuthorIdent();
-                String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(author.getWhen());
-                String message = rev.getFullMessage();
-                String name = author.getName();
-                StringBuilder builder = new StringBuilder("\n### Current Version ###");
-                builder.append("\nCommit Date: ").append(date);
-                builder.append("\nCommit Author: ").append(name);
-                builder.append("\nCommit Message: ").append(message);
-                result = builder.toString();
-                break;
-            }
-        } catch (Exception e) {
-            LOGGER.error("Error in attempt to retrieve commit info: ", e);
-        }
-        return result;
-    }
+//    private String commitInfo() {
+//        String result = "";
+//        try {
+//            final File gitWorkDir = new File("./");
+//            final Git git = Git.open(gitWorkDir);
+//            final Iterable<RevCommit> log = git.log().call();
+//            for (final Iterator<RevCommit> iterator = log.iterator(); iterator.hasNext();) {
+//                final RevCommit rev = iterator.next();
+//                final PersonIdent author = rev.getAuthorIdent();
+//                final String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(author.getWhen());
+//                final String message = rev.getFullMessage();
+//                final String name = author.getName();
+//                final StringBuilder builder = new StringBuilder("\n### Current Version ###");
+//                builder.append("\nCommit Date: ").append(date);
+//                builder.append("\nCommit Author: ").append(name);
+//                builder.append("\nCommit Message: ").append(message);
+//                result = builder.toString();
+//                break;
+//            }
+//        } catch (final Exception e) {
+//            LOGGER.error("Error in attempt to retrieve commit info: ", e);
+//        }
+//        return result;
+//    }
 }

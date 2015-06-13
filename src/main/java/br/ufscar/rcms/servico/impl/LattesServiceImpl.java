@@ -1,5 +1,6 @@
 package br.ufscar.rcms.servico.impl;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -23,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.builder.PesquisadorBuilder;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
+import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.pk.CompreensaoIdiomaPK;
@@ -42,6 +46,7 @@ public class LattesServiceImpl implements LattesService {
 
     private static final long serialVersionUID = 4593268685421323315L;
     private static final Logger LOGGER = LoggerFactory.getLogger(LattesServiceImpl.class);
+    private static final String SUFFIX_XML = "-database.xml";
 
     @Autowired
     private PesquisadorService pesquisadorService;
@@ -62,11 +67,11 @@ public class LattesServiceImpl implements LattesService {
     private String arquivoCurriculoLattes;
 
     @Override
-    public PesquisadorLattes carregarCurriculoLattes(String codigoLattes) throws CurriculoLattesNaoEncontradoException,
+    public PesquisadorLattes carregarCurriculoLattes(final String codigoLattes) throws CurriculoLattesNaoEncontradoException,
             ArquivoNaoEncontradoException {
 
-        CurriculoLattes curriculos = carregarCurriculosLattes();
-        for (PesquisadorLattes pesquisador : curriculos.getPesquisadores()) {
+        final CurriculoLattes curriculos = carregarCurriculosLattes(codigoLattes);// TODO PEDRO
+        for (final PesquisadorLattes pesquisador : curriculos.getPesquisadores()) {
             if (pesquisador.getCodigoLattes().equals(codigoLattes)) {
                 return pesquisador;
             }
@@ -76,12 +81,15 @@ public class LattesServiceImpl implements LattesService {
     }
 
     @Override
-    public Pesquisador salvarDadosLattes(Pesquisador pesquisador) throws CurriculoLattesNaoEncontradoException,
+    public synchronized Pesquisador salvarDadosLattes(final Pesquisador pesquisador) throws CurriculoLattesNaoEncontradoException,
             ArquivoNaoEncontradoException {
 
         PesquisadorLattes pesquisadorLattes = null;
 
+        executarComandoLattes(pesquisador);
         pesquisadorLattes = carregarCurriculoLattes(pesquisador.getCodigoLattes());
+        cleanUpFiles(pesquisador.getCodigoLattes());
+
         Pesquisador novoPesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
 
         novoPesquisador = new PesquisadorBuilder(pesquisadorLattes, novoPesquisador)
@@ -100,98 +108,163 @@ public class LattesServiceImpl implements LattesService {
     }
 
     @Override
-    public void executarComandoLattes(Pesquisador pesquisador) throws IOException {
-        String hash = pesquisador.getCodigoLattes();
-        String nome = pesquisador.getNome();
+    public void executarComandoLattes(final Pesquisador pesquisador) {
+
+        final String hash = pesquisador.getCodigoLattes();
+        final String nome = pesquisador.getNome();
+
         criarArquivo(nome, hash, getConteudo(hash));
+        runScript(hash);
+    }
+
+    private void cleanUpFiles(final String codigoLattes) {
+        final ArrayList<String> commands = new ArrayList<String>();
+        commands.add("rm");
+        commands.add("-R");
+        commands.add(codigoLattes);
+
+        commands.add("rm");
+        commands.add(codigoLattes + ".list");
+
+        commands.add("rm");
+        commands.add(codigoLattes + ".config");
 
         try {
-            new Thread(new RunScriptLattes(hash, pastaScriptLates)).start();
+            final Process process = new ProcessBuilder(commands).directory(new File(pastaScriptLates)).inheritIO().start();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                LOGGER.info(line);
+            }
+
+            reader.close();
+
+            process.waitFor();
+            process.destroy();
+        } catch (final Exception e) {
+            LOGGER.error(String.format("Erro ao limpar arquivos gerado pelo script lattes, codigo lattes: %s", codigoLattes), e);
         }
     }
 
-    private CurriculoLattes carregarCurriculosLattes() throws ArquivoNaoEncontradoException {
+    private void runScript(final String hash) {
+
+        try {
+            final ArrayList<String> commands = new ArrayList<String>();
+            commands.add("/bin/bash");
+            commands.add(pastaScriptLates + "runScriptLattes.sh");
+            commands.add(hash + ".config");
+
+            LOGGER.info("BEGIN runScript()");
+            final Process process = new ProcessBuilder(commands).directory(new File(pastaScriptLates)).inheritIO().start();
+
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                LOGGER.info(line);
+            }
+
+            reader.close();
+            process.waitFor();
+            process.destroy();
+
+        } catch (final Exception e) {
+            LOGGER.error(String.format("Erro ao executar script lattes, codigo lattes: %s", hash), e);
+        }
+        LOGGER.info("END runScript()");
+    }
+
+    private CurriculoLattes carregarCurriculosLattes(final String codigoLattes) throws ArquivoNaoEncontradoException {
         CurriculoLattes curriculoLattes = new CurriculoLattes();
         try {
-            InputStream file = new FileInputStream(pastaScriptLates + arquivoCurriculoLattes);
+            final String fileName = pastaScriptLates + File.separator + codigoLattes + File.separator + codigoLattes + SUFFIX_XML;
+            final InputStream file = new FileInputStream(fileName);
             try {
                 curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, IOUtils.toString(file, "UTF-8"));
-            } catch (JAXBException e) {
+            } catch (final JAXBException e) {
                 LOGGER.error(e.getMessage(), e);
             }
-        } catch (IOException e) {
+        } catch (final IOException e) {
             LOGGER.error(e.getMessage(), e);
             throw new ArquivoNaoEncontradoException(pastaScriptLates + arquivoCurriculoLattes);
         }
         return curriculoLattes;
     }
 
-    private void criarArquivo(String nome, String path, String conteudo) throws IOException {
-        File list = new File(pastaScriptLates + path + ".list");
+    private void criarArquivo(final String nome, final String path, final String conteudo) {
 
-        // if file doesnt exists, then create it
-        if (!list.exists()) {
-            list.createNewFile();
+        try {
+            final File list = new File(pastaScriptLates + path + ".list");
+
+            // if file doesnt exists, then create it
+            if (!list.exists()) {
+                list.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(list.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(path + ", " + nome);
+            bw.flush();
+            bw.close();
+
+            final File file = new File(pastaScriptLates + path + ".config");
+
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            fw = new FileWriter(file.getAbsoluteFile());
+            bw = new BufferedWriter(fw);
+            bw.write(conteudo);
+
+            bw.flush();
+            bw.close();
+        } catch (final IOException exception) {
+            LOGGER.error(String.format("Erro ao criar arquivo lattes, nome: %s path: %s ", nome, path), exception);
+            throw new RuntimeException(exception);
         }
-
-        FileWriter fw = new FileWriter(list.getAbsoluteFile());
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(path + ", " + nome);
-        bw.flush();
-        bw.close();
-
-        File file = new File(pastaScriptLates + path + ".config");
-
-        // if file doesnt exists, then create it
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        fw = new FileWriter(file.getAbsoluteFile());
-        bw = new BufferedWriter(fw);
-        bw.write(conteudo);
-        bw.flush();
-        bw.close();
     }
 
-    private String getConteudo(String hash) {
+    private String getConteudo(final String hash) {
 
-        StringBuilder result = new StringBuilder("");
-        result.append("global-arquivo_de_entrada  = " + hash + ".list\n");
-        result.append("global-diretorio_de_saida  = " + hash + "/\n");
-
-        // Get file from resources folder
-        ClassLoader classLoader = getClass().getClassLoader();
+        final ClassLoader classLoader = getClass().getClassLoader();
         File file;
         try {
             file = new File(classLoader.getResource(arquivoConfig).getPath());
-            result.append(FileUtils.readFileToString(file));
-        } catch (FileNotFoundException fileNotFoundException) {
+            return FileUtils.readFileToString(file).replaceAll("\\{codigoLattes\\}", hash);
+        } catch (final FileNotFoundException fileNotFoundException) {
             LOGGER.error(fileNotFoundException.getMessage(), fileNotFoundException);
-        } catch (IOException ioException) {
+        } catch (final IOException ioException) {
             LOGGER.error(ioException.getMessage(), ioException);
         }
-
-        return result.toString();
+        // TODO PEDRO
+        return null;
     }
 
     // TODO PEDRO - DUPLICANDO ITENS
-    private void salvarHierarquiaGrandeArea(List<AtuacaoPesquisador> areaAtuacoes) {
-        for (AtuacaoPesquisador atuacaoPesquisador : areaAtuacoes) {
-            grandeAreaAtuacaoService.salvar(atuacaoPesquisador.getEspecializacao().getSubAreaAtuacao().getAreaAtuacao().getGrandeAreaAtuacao());
+    private void salvarHierarquiaGrandeArea(final List<AtuacaoPesquisador> areaAtuacoes) {
+        for (final AtuacaoPesquisador atuacaoPesquisador : areaAtuacoes) {
+            try {
+                final GrandeAreaAtuacao grandeAreaAtuacao = atuacaoPesquisador.getEspecializacao().getSubAreaAtuacao().getAreaAtuacao().getGrandeAreaAtuacao();
+                grandeAreaAtuacaoService.saveOrUpdate(grandeAreaAtuacao);
+            } catch (final Exception e) {
+                LOGGER.error(String.format("Erro ao salvar Hierarquia de área de atuação, especialização: %s ", atuacaoPesquisador.getEspecializacao().getDescricao()), e);
+            }
         }
     }
 
-    private void normalizarIdiomas(List<CompreensaoIdioma> compreensaoIdiomas) {
-        for (CompreensaoIdioma compreensaoIdioma : compreensaoIdiomas) {
-            Idioma idioma = compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma();
-            Idioma idiomaExistente = idiomaService.buscarPorDescricao(idioma.getDescricao());
+    private void normalizarIdiomas(final List<CompreensaoIdioma> compreensaoIdiomas) {
+        for (final CompreensaoIdioma compreensaoIdioma : compreensaoIdiomas) {
+            final Idioma idioma = compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma();
+            final Idioma idiomaExistente = idiomaService.buscarPorDescricao(idioma.getDescricao());
             if (idiomaExistente != null) {
-                Pesquisador pesquisador = compreensaoIdioma.getCompreensaoIdiomaPK().getPesquisador();
-                CompreensaoIdiomaPK compreensaoIdiomaPK = new CompreensaoIdiomaPK(idiomaExistente, pesquisador);
+                final Pesquisador pesquisador = compreensaoIdioma.getCompreensaoIdiomaPK().getPesquisador();
+                final CompreensaoIdiomaPK compreensaoIdiomaPK = new CompreensaoIdiomaPK(idiomaExistente, pesquisador);
                 compreensaoIdioma.setCompreensaoIdiomaPK(compreensaoIdiomaPK);
             }
         }

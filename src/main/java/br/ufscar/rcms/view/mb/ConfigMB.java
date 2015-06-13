@@ -30,7 +30,8 @@ public class ConfigMB extends AbstractMB{
     public void inicializar() {
         limparDados();
         carregarDados();
-    };
+
+    }
 
     @Override
     protected void limparDados() {}
@@ -44,7 +45,7 @@ public class ConfigMB extends AbstractMB{
     }
 
     public void alterarIdioma() {
-        PartialViewContext partialViewContext = getPartialViewContext();
+        final PartialViewContext partialViewContext = getPartialViewContext();
         partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         getViewRoot().setLocale(new Locale(idioma));
     }
@@ -96,7 +97,7 @@ public class ConfigMB extends AbstractMB{
         return idioma;
     }
 
-    public void setIdioma(String idioma) {
+    public void setIdioma(final String idioma) {
         this.idioma = idioma;
     }
 
@@ -104,7 +105,7 @@ public class ConfigMB extends AbstractMB{
         return idiomas;
     }
 
-    public void setIdiomas(Map<String, String> idiomas) {
+    public void setIdiomas(final Map<String, String> idiomas) {
         this.idiomas = idiomas;
     }
 
@@ -112,7 +113,7 @@ public class ConfigMB extends AbstractMB{
         return tema;
     }
 
-    public void setTema(String tema) {
+    public void setTema(final String tema) {
         this.tema = tema;
     }
 
@@ -120,7 +121,7 @@ public class ConfigMB extends AbstractMB{
         return temas;
     }
 
-    public void setTemas(Map<String, String> temas) {
+    public void setTemas(final Map<String, String> temas) {
         this.temas = temas;
     }
 
@@ -128,7 +129,7 @@ public class ConfigMB extends AbstractMB{
         return estilo;
     }
 
-    public void setEstilo(String estilo) {
+    public void setEstilo(final String estilo) {
         this.estilo = estilo;
     }
 
@@ -136,7 +137,7 @@ public class ConfigMB extends AbstractMB{
         return estilos;
     }
 
-    public void setEstilos(Map<String, String> estilos) {
+    public void setEstilos(final Map<String, String> estilos) {
         this.estilos = estilos;
     }
 }

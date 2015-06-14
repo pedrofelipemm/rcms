@@ -23,8 +23,6 @@ public class ImageCacheMB extends AbstractMB {
     private static final long serialVersionUID = -8022956061914668709L;
     private static final Logger LOGGER = LoggerFactory.getLogger(ImageCacheMB.class);
 
-    private static final String DEFAULT_IMAGE = "/images/person.png";
-
     private StreamedContent fotoPesquisador;
     private Part fotoPesquisadorPart;
 
@@ -45,7 +43,7 @@ public class ImageCacheMB extends AbstractMB {
     protected void carregarDados() {
     }
 
-    public void sendFotoPesquisador(Part imagem) {
+    public void sendFotoPesquisador(final Part imagem) {
         fotoPesquisadorPart = imagem;
 
     }
@@ -65,6 +63,6 @@ public class ImageCacheMB extends AbstractMB {
         return fotoPesquisador;
     }
 
-    public void setFotoPesquisador(StreamedContent fotoPesquisador) {
+    public void setFotoPesquisador(final StreamedContent fotoPesquisador) {
     }
 }

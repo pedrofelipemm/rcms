@@ -24,6 +24,7 @@ import br.ufscar.rcms.converter.PesquisadorConverter;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.webservice.exception.ResourceAlreadyCreatedException;
 import br.ufscar.rcms.webservice.exception.ResourceNotFoundException;
 import br.ufscar.rcms.webservice.modelo.PesquisadorResponse;
@@ -55,7 +56,7 @@ public class PesquisadorRS {
 
     @GET
     @Path("{id}")
-    public Response getPesquisador(@PathParam("id") Long id) {
+    public Response getPesquisador(@PathParam("id") final Long id) {
 
         Pesquisador pesquisador = pesquisadorService.buscar(id);
 
@@ -82,7 +83,12 @@ public class PesquisadorRS {
             }
         }
 
-        pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
+        try {
+            pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
+        } catch (RCMSException e) {
+            // TODO PEDRO
+            e.printStackTrace();
+        }
         pesquisadorResponse = PesquisadorConverter.convert(pesquisador);
 
         return Response.status(Status.CREATED.getStatusCode()).entity(pesquisadorResponse).build();
@@ -98,7 +104,12 @@ public class PesquisadorRS {
             throw new ResourceNotFoundException(message);
         }
 
-        pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
+        try {
+            pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
+        } catch (RCMSException e) {
+            // TODO PEDRO
+            e.printStackTrace();
+        }
         pesquisadorResponse = PesquisadorConverter.convert(pesquisador);
 
         return Response.status(Status.OK.getStatusCode()).entity(pesquisadorResponse).build();
@@ -106,7 +117,7 @@ public class PesquisadorRS {
 
     @DELETE
     @Path("{id}")
-    public Response deletePesquisador(@PathParam("id") Long id) {
+    public Response deletePesquisador(@PathParam("id") final Long id) {
 
         try {
             pesquisadorService.remover(id);

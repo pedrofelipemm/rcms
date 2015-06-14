@@ -1,7 +1,5 @@
 package br.ufscar.rcms.servico;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,8 @@ import br.ufscar.rcms.builder.PesquisadorBuilder;
 import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.servico.exception.RCMSException;
+import static org.junit.Assert.assertNotNull;
 
 public class PesquisadorServiceTest extends AbstractServiceTestBase {
 
@@ -19,7 +19,7 @@ public class PesquisadorServiceTest extends AbstractServiceTestBase {
     // TOOD PEDRO
     @Ignore
     @Test
-    public void salvarOuAtualizarApenasPesquisadorTest() {
+    public void salvarOuAtualizarApenasPesquisadorTest() throws RCMSException {
 
         Pesquisador pesquisador = new PesquisadorBuilder("jubileu@ufscar.br", "Jubileu", "juju", "3464618468",
                 "jubileu@ufscar.br", true, "Lorem Ipsum").build();
@@ -34,7 +34,7 @@ public class PesquisadorServiceTest extends AbstractServiceTestBase {
     // TOOD PEDRO
     @Ignore
     @Test
-    public void salvarOuAtualizarPesquisadorComEnderecoTest() {
+    public void salvarOuAtualizarPesquisadorComEnderecoTest() throws RCMSException {
 
         Endereco endereco = EnderecoFactory.createEndereco("Rua número zê", 10D, -20D);
 

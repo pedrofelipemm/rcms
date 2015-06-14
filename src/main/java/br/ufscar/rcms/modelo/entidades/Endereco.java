@@ -38,7 +38,7 @@ public class Endereco extends Entidade {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -46,7 +46,7 @@ public class Endereco extends Entidade {
         return idEndereco;
     }
 
-    public void setIdEndereco(Long idEndereco) {
+    public void setIdEndereco(final Long idEndereco) {
         this.idEndereco = idEndereco;
     }
 
@@ -54,7 +54,7 @@ public class Endereco extends Entidade {
         return enderecoProfissional;
     }
 
-    public void setEnderecoProfissional(String enderecoProfissional) {
+    public void setEnderecoProfissional(final String enderecoProfissional) {
         this.enderecoProfissional = enderecoProfissional;
     }
 
@@ -62,7 +62,7 @@ public class Endereco extends Entidade {
         return enderecoProfissionalLatitude;
     }
 
-    public void setEnderecoProfissionalLatitude(Double enderecoProfissionalLatitude) {
+    public void setEnderecoProfissionalLatitude(final Double enderecoProfissionalLatitude) {
         this.enderecoProfissionalLatitude = enderecoProfissionalLatitude;
     }
 
@@ -70,7 +70,7 @@ public class Endereco extends Entidade {
         return enderecoProfissionalLongitude;
     }
 
-    public void setEnderecoProfissionalLongitude(Double enderecoProfissionalLongitude) {
+    public void setEnderecoProfissionalLongitude(final Double enderecoProfissionalLongitude) {
         this.enderecoProfissionalLongitude = enderecoProfissionalLongitude;
     }
 
@@ -83,7 +83,7 @@ public class Endereco extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

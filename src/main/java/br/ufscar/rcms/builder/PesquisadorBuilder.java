@@ -53,13 +53,13 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     private Pesquisador pesquisador;
     private Pesquisador cachedPesquisador;
 
-    public PesquisadorBuilder(String login, String nome, String senha, String codigoLattes, String email,
-            boolean flagAdministrador, String resumoProfissional) {
+    public PesquisadorBuilder(final String login, final String nome, final String senha, final String codigoLattes, final String email,
+            final boolean flagAdministrador, final String resumoProfissional) {
         this(null, login, nome, senha, codigoLattes, email, flagAdministrador, resumoProfissional);
     }
 
-    public PesquisadorBuilder(Long idUsuario, String login, String nome, String senha, String codigoLattes,
-            String email, boolean flagAdministrador, String resumoProfissional) {
+    public PesquisadorBuilder(final Long idUsuario, final String login, final String nome, final String senha, final String codigoLattes,
+            final String email, final boolean flagAdministrador, final String resumoProfissional) {
 
         pesquisador = new Pesquisador();
         pesquisador.setIdUsuario(idUsuario);
@@ -74,7 +74,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         validatePesquisador(pesquisador);
     }
 
-    public PesquisadorBuilder(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
+    public PesquisadorBuilder(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
                 pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), pesquisador.getFlagAdministrador(),
@@ -85,7 +85,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         cachedPesquisador = pesquisador;
     }
 
-    public PesquisadorBuilder projetosPesquisa(ProjetetosPesquisaLattes projetosPesquisa) {
+    public PesquisadorBuilder projetosPesquisa(final ProjetetosPesquisaLattes projetosPesquisa) {
         if (projetosPesquisa!=null) {
             for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
                 pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes.getDescricao(),
@@ -95,7 +95,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder areaAtuacoes(AreaAtuacaoLattes areaAtuacao) {
+    public PesquisadorBuilder areaAtuacoes(final AreaAtuacaoLattes areaAtuacao) {
         if (areaAtuacao != null) {
             for (String descricao : areaAtuacao.getDescricao()) {
                 pesquisador.addAtuacoesPesquisador(AtuacaoPesquisadorFactory.createAtuacaoPesquisador(pesquisador, descricao));
@@ -104,7 +104,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder orientacoes(PesquisadorLattes pesquisadorLattes) {
+    public PesquisadorBuilder orientacoes(final PesquisadorLattes pesquisadorLattes) {
 
         pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoDoutoradoAndamento().getTeses(), Doutorado.class));
         pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoDoutoradoConcluido().getTeses(), Doutorado.class));
@@ -117,7 +117,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder organizacaoEventos(OrganizacaoEventoLattes organizacaoEvento) {
+    public PesquisadorBuilder organizacaoEventos(final OrganizacaoEventoLattes organizacaoEvento) {
         if (organizacaoEvento != null) {
             for (EventoLatttes eventoLatttes : organizacaoEvento.getEventos()) {
                 pesquisador.addOrgazicaoEventos(new OrganizacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(),
@@ -127,7 +127,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder participacaoEventos(ParticipacaoEventoLattes participacaoEvento) {
+    public PesquisadorBuilder participacaoEventos(final ParticipacaoEventoLattes participacaoEvento) {
         if (participacaoEvento != null) {
             for (EventoLatttes eventoLatttes : participacaoEvento.getEventos()) {
                 pesquisador.addParticipacaoEventos(new ParticipacaoEvento(cachedPesquisador, eventoLatttes.getTitulo(), eventoLatttes.getAno()));
@@ -136,7 +136,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder premios(PremiosLattes premios) {
+    public PesquisadorBuilder premios(final PremiosLattes premios) {
         if (premios != null) {
             for (PremioLattes premioLattes : premios.getPremio()) {
                 pesquisador.addPremios(new PremioTitulo(cachedPesquisador, premioLattes.getAno(), premioLattes.getDescricao()));
@@ -145,7 +145,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder compreensaoIdiomas(IdiomasLattes idiomas) {
+    public PesquisadorBuilder compreensaoIdiomas(final IdiomasLattes idiomas) {
         if (idiomas != null) {
             for (IdiomaLattes idiomaLattes : idiomas.getIdiomas()) {
                 pesquisador.addCompreensaoIdiomas(CompreensaoIdiomaFactory.createCompreensaoIdioma(new Idioma(
@@ -155,7 +155,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder citacaoBibliografica(IdentificacaoLattes identificacao) {
+    public PesquisadorBuilder citacaoBibliografica(final IdentificacaoLattes identificacao) {
         if (identificacao != null) {
             String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
             for (String citacao : citacoes) {
@@ -165,7 +165,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder endereco(EnderecoLattes endereco) {
+    public PesquisadorBuilder endereco(final EnderecoLattes endereco) {
         if (endereco != null) {
             if (cachedPesquisador.getEndereco() != null) {
                 pesquisador.setEndereco(EnderecoFactory.createEndereco(cachedPesquisador.getEndereco().getIdEndereco(),
@@ -179,25 +179,25 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder endereco(Endereco endereco) {
+    public PesquisadorBuilder endereco(final Endereco endereco) {
 
         pesquisador.setEndereco(endereco);
         return this;
     }
 
-    public PesquisadorBuilder formacaoAcademica(FormacaoAcademica... formacao) {
+    public PesquisadorBuilder formacaoAcademica(final FormacaoAcademica... formacao) {
 
         pesquisador.setFormacoes(Arrays.asList(formacao));
         return this;
     }
 
-    public PesquisadorBuilder formacaoAcademica(List<FormacaoAcademica> formacoes) {
+    public PesquisadorBuilder formacaoAcademica(final List<FormacaoAcademica> formacoes) {
 
         pesquisador.setFormacoes(formacoes);
         return this;
     }
 
-    public PesquisadorBuilder formacaoAcademica(FormacoesAcademicaLattes formacoes) {
+    public PesquisadorBuilder formacaoAcademica(final FormacoesAcademicaLattes formacoes) {
         if (formacoes != null) {
             for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
                 FormacaoAcademica formacao = null;
@@ -224,7 +224,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return pesquisador;
     }
 
-    private void validatePesquisador(Pesquisador pesquisador) {
+    private void validatePesquisador(final Pesquisador pesquisador) {
         Validate.notBlank(pesquisador.getLogin());
         Validate.notBlank(pesquisador.getNome());
         Validate.notBlank(pesquisador.getSenha());
@@ -234,7 +234,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         Validate.notNull(pesquisador.getFlagAdministrador());
     }
 
-    private void validatePesquisador(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
+    private void validatePesquisador(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         validatePesquisador(pesquisador);
 
@@ -243,7 +243,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         }
     }
 
-    private List<? extends Orientacao> buildOrientacao(List<? extends OrientacaoLattes> orientacoes, Class<? extends Orientacao> clazz) {
+    private List<? extends Orientacao> buildOrientacao(final List<? extends OrientacaoLattes> orientacoes, final Class<? extends Orientacao> clazz) {
 
         if (CollectionUtils.isEmpty(orientacoes)) {
             return null;

@@ -40,7 +40,7 @@ public class Usuario extends Entidade {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(final Long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -48,7 +48,7 @@ public class Usuario extends Entidade {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(final String nome) {
         this.nome = nome;
     }
 
@@ -56,7 +56,7 @@ public class Usuario extends Entidade {
         return flagAdministrador;
     }
 
-    public void setFlagAdministrador(Boolean flagAdministrador) {
+    public void setFlagAdministrador(final Boolean flagAdministrador) {
         this.flagAdministrador = flagAdministrador;
     }
 
@@ -64,7 +64,7 @@ public class Usuario extends Entidade {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 
@@ -72,7 +72,7 @@ public class Usuario extends Entidade {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(final String senha) {
         this.senha = senha;
     }
 
@@ -80,7 +80,7 @@ public class Usuario extends Entidade {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -93,7 +93,7 @@ public class Usuario extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

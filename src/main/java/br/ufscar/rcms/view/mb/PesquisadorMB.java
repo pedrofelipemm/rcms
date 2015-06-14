@@ -12,10 +12,14 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
+import br.ufscar.rcms.comparator.PesquisadorComparator;
 import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
@@ -41,6 +45,10 @@ import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
+import br.ufscar.rcms.view.model.SortableDataModel;
+
+import static br.ufscar.rcms.util.FileUtils.extractFileExtension;
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")
@@ -109,15 +117,12 @@ public class PesquisadorMB extends AbstractMB {
 
     private CitacaoBibliografica citacaoBibliografica;
     private transient List<CitacaoBibliografica> citacoesBibliograficas;
-    private List<CitacaoBibliografica> citacoesBibliograficasToDelete;
 
     private ParticipacaoEvento participacaoEvento;
     private transient List<ParticipacaoEvento> participacaoEventos;
-    private List<ParticipacaoEvento> participacaoEventosToDelete;
 
     private OrganizacaoEvento organizacaoEvento;
     private transient List<OrganizacaoEvento> organizacaoEventos;
-    private List<OrganizacaoEvento> organizacaoEventosToDelete;
 
     @PostConstruct
     public void inicializar() {
@@ -127,12 +132,13 @@ public class PesquisadorMB extends AbstractMB {
 
     @Override
     protected void carregarDados() {
-        pesquisadores = new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos());
+        pesquisadores = new SortableDataModel<Pesquisador>(new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos()));
+        ((SortableDataModel<Pesquisador>) pesquisadores).sortBy(new PesquisadorComparator());
         idiomas = new ArrayList<Idioma>(idiomaService.buscarTodos());
         todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaService.buscarTodas());
         linhasDePesquisa = new ArrayList<LinhaDePesquisa>(linhaDePesquisaService.buscarTodas());
 
-        Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
+        final Pesquisador pesquisadorEdicao = (Pesquisador) getFlashObject(FLASH_KEY_PESQUISADOR);
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
             removeNullValues(pesquisador.getCompreensaoIdiomas(), pesquisador.getParticipacaoEventos());
@@ -143,37 +149,38 @@ public class PesquisadorMB extends AbstractMB {
     protected void limparDados() {
         pesquisador = new Pesquisador();
         compreensaoIdioma = new CompreensaoIdioma();
-        citacoesBibliograficasToDelete = new ArrayList<CitacaoBibliografica>();
         citacaoBibliografica = new CitacaoBibliografica();
-        participacaoEventosToDelete = new ArrayList<ParticipacaoEvento>();
         participacaoEvento = new ParticipacaoEvento();
         organizacaoEvento = new OrganizacaoEvento();
-        organizacaoEventosToDelete = new ArrayList<OrganizacaoEvento>();
         getFlash().clear();
     }
 
     public String salvar() {
 
         try {
-            pesquisadorService.salvarOuAtualizar(pesquisador);
-            citacaoBibliograficaService.remover(citacoesBibliograficasToDelete);
-            participacaoEventoService.remover(participacaoEventosToDelete);
-            organizacaoEventoService.remover(organizacaoEventosToDelete);
+            pesquisador = pesquisadorService.salvarOuAtualizar(pesquisador);
             adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
 
             limparDados();
 
-            keepMessagesOnRedirect();
-            return CONSULTA_PESQUISADORES;
-        } catch (Exception exception) {
+        } catch (final Exception exception) {
             adicionarMensagemErroByKey("erro.salvar.pesquisador", pesquisador.getNome());
             LOGGER.error(exception.getMessage(), exception);
         }
+        keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
     }
 
     public void uploadFile() {
-        cache.sendFotoPesquisador(fotoPesquisador);
+        if (!isEmpty(fotoPesquisador)) {
+            try {
+                pesquisador.getFoto().setFile(IOUtils.toByteArray(fotoPesquisador.getInputStream()));
+                pesquisador.getFoto().setFileExtension(extractFileExtension(fotoPesquisador.getSubmittedFileName()));
+            } catch (final IOException ioException) {
+                LOGGER.error(String.format("Erro ao realizar upload de imagem para o pesquisador: %s", pesquisador.getNome()), ioException);
+                adicionarMensagemErroByKey("erro.enviar.imagem");
+            }
+        }
     }
 
     public String exibir(Pesquisador pesquisador) {
@@ -185,19 +192,19 @@ public class PesquisadorMB extends AbstractMB {
         return EXIBE_PESQUISADOR;
     }
 
-    public String editar(Pesquisador pesquisador) {
+    public String editar(final Pesquisador pesquisador) {
 
         setFlashObject(FLASH_KEY_PESQUISADOR, pesquisador);
 
         return CADASTRO_PESQUISADOR;
     }
 
-    public String excluir(Pesquisador pesquisador) {
+    public String excluir(final Pesquisador pesquisador) {
 
         try {
             pesquisadorService.remover(pesquisador);
             adicionarMensagemInfoByKey("pesquisador.removido.sucesso", pesquisador.getNome());
-        } catch (PesquisadorNaoEncontradoException e) {
+        } catch (final PesquisadorNaoEncontradoException e) {
             adicionarMensagemErroByKey("pesquisador.nao.econtrado", pesquisador.getNome());
         }
         limparDados();
@@ -206,12 +213,16 @@ public class PesquisadorMB extends AbstractMB {
         return CONSULTA_PESQUISADORES;
     }
 
+    public StreamedContent getFoto() {
+        return new DefaultStreamedContent();
+    }
+
     public PesquisadorService getPesquisadorService() {
 
         return pesquisadorService;
     }
 
-    public void setPesquisadorService(PesquisadorService pesquisadorService) {
+    public void setPesquisadorService(final PesquisadorService pesquisadorService) {
 
         this.pesquisadorService = pesquisadorService;
     }
@@ -221,7 +232,7 @@ public class PesquisadorMB extends AbstractMB {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
 
         this.pesquisador = pesquisador;
     }
@@ -230,7 +241,7 @@ public class PesquisadorMB extends AbstractMB {
         return pesquisadores;
     }
 
-    public void setPesquisadores(DataModel<Pesquisador> pesquisadores) {
+    public void setPesquisadores(final DataModel<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
     }
 
@@ -239,7 +250,7 @@ public class PesquisadorMB extends AbstractMB {
         return fotoPesquisador;
     }
 
-    public void setFotoPesquisador(Part fotoPesquisador) {
+    public void setFotoPesquisador(final Part fotoPesquisador) {
         this.fotoPesquisador = fotoPesquisador;
     }
 
@@ -248,22 +259,22 @@ public class PesquisadorMB extends AbstractMB {
         return lattesService;
     }
 
-    public void setLattesService(LattesService lattesService) {
+    public void setLattesService(final LattesService lattesService) {
         this.lattesService = lattesService;
     }
 
-    public String importarDadosPesquisadorLattes(Pesquisador pesquisador) {
+    public String importarDadosPesquisadorLattes(final Pesquisador pesquisador) {
         try {
             lattesService.executarComandoLattes(pesquisador);
-            
+
             return CONSULTA_PESQUISADORES;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String salvarDadosLattes(Pesquisador pesquisador) {
+    public String salvarDadosLattes(final Pesquisador pesquisador) {
 
         try {
 
@@ -271,15 +282,18 @@ public class PesquisadorMB extends AbstractMB {
             adicionarMensagemInfoByKey("pesquisador.importacao.sucesso", this.pesquisador.getNome());
             limparDados();
 
-        } catch (InvalidDataAccessApiUsageException e) {
+        } catch (final InvalidDataAccessApiUsageException e) {
             LOGGER.error("Erro ao salvar dados do lattes", e);
-            adicionarMensagemAlerta("Currículo lattes já importado!");
-        } catch (CurriculoLattesNaoEncontradoException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);
-            adicionarMensagemErro(e.getMessage());
-        } catch (ArquivoNaoEncontradoException e) {
+            adicionarMensagemAlerta(String.format("Erro ao salvar dados importados do Lattes, pesquisador: %s ", pesquisador.getNome()));
+        } catch (final CurriculoLattesNaoEncontradoException e) {
             LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemErro(e.getMessage());
+        } catch (final ArquivoNaoEncontradoException e) {
+            LOGGER.error("Erro ao salvar dados do lattes", e);
+            adicionarMensagemErro(e.getMessage());
+        } catch (final Exception exception) {
+            adicionarMensagemErroByKey("erro.salvar.pesquisador", pesquisador.getNome());
+            LOGGER.error(exception.getMessage(), exception);
         }
 
         keepMessagesOnRedirect();
@@ -294,7 +308,7 @@ public class PesquisadorMB extends AbstractMB {
         return idiomas;
     }
 
-    public void setIdiomas(List<Idioma> idiomas) {
+    public void setIdiomas(final List<Idioma> idiomas) {
         this.idiomas = idiomas;
     }
 
@@ -302,7 +316,7 @@ public class PesquisadorMB extends AbstractMB {
         return compreensaoIdioma;
     }
 
-    public void setCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
+    public void setCompreensaoIdioma(final CompreensaoIdioma compreensaoIdioma) {
         this.compreensaoIdioma = compreensaoIdioma;
     }
 
@@ -310,7 +324,7 @@ public class PesquisadorMB extends AbstractMB {
         return idiomaService;
     }
 
-    public void setIdiomaService(IdiomaService idiomaService) {
+    public void setIdiomaService(final IdiomaService idiomaService) {
         this.idiomaService = idiomaService;
     }
 
@@ -320,7 +334,7 @@ public class PesquisadorMB extends AbstractMB {
         compreensaoIdioma = new CompreensaoIdioma();
     }
 
-    public void removerCompreensaoIdioma(CompreensaoIdioma compreensaoIdioma) {
+    public void removerCompreensaoIdioma(final CompreensaoIdioma compreensaoIdioma) {
         pesquisador.removeCompreensaoIdiomas(compreensaoIdioma);
     }
 
@@ -328,7 +342,7 @@ public class PesquisadorMB extends AbstractMB {
         return compreensaoIdiomas;
     }
 
-    public void setCompreensaoIdiomas(DataModel<CompreensaoIdioma> compreensaoIdiomas) {
+    public void setCompreensaoIdiomas(final DataModel<CompreensaoIdioma> compreensaoIdiomas) {
         this.compreensaoIdiomas = compreensaoIdiomas;
     }
 
@@ -336,7 +350,7 @@ public class PesquisadorMB extends AbstractMB {
         return idioma;
     }
 
-    public void setIdioma(Idioma idioma) {
+    public void setIdioma(final Idioma idioma) {
         this.idioma = idioma;
     }
 
@@ -381,7 +395,7 @@ public class PesquisadorMB extends AbstractMB {
     		subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
     		especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
 
-    		AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
+            final AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
 
         	pesquisador.getAreaAtuacoes().add(a);
     	}
@@ -393,9 +407,8 @@ public class PesquisadorMB extends AbstractMB {
         citacaoBibliografica = new CitacaoBibliografica();
     }
 
-    public void removerCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
+    public void removerCitacaoBibliografica(final CitacaoBibliografica citacaoBibliografica) {
         pesquisador.removeCitacaoBibliografica(citacaoBibliografica);
-        citacoesBibliograficasToDelete.add(citacaoBibliografica);
     }
 
     public void adicionarParticipacaoEvento() {
@@ -404,9 +417,8 @@ public class PesquisadorMB extends AbstractMB {
         participacaoEvento = new ParticipacaoEvento();
     }
 
-    public void removerParticipacaoEvento(ParticipacaoEvento participacaoEvento) {
+    public void removerParticipacaoEvento(final ParticipacaoEvento participacaoEvento) {
         pesquisador.removeParticipacaoEventos(participacaoEvento);
-        participacaoEventosToDelete.add(participacaoEvento);
     }
 
     public void adicionarOrganizacaoEvento(){
@@ -415,16 +427,15 @@ public class PesquisadorMB extends AbstractMB {
     	organizacaoEvento = new OrganizacaoEvento();
     }
 
-    public void removerOrganizacaoEvento(OrganizacaoEvento organizacaoEvento){
+    public void removerOrganizacaoEvento(final OrganizacaoEvento organizacaoEvento){
     	pesquisador.removeOrganizacaoEventos(organizacaoEvento);
-    	organizacaoEventosToDelete.add(organizacaoEvento);
     }
 
     public AreaAtuacaoService getAreaAtuacaoService() {
         return areaAtuacaoService;
     }
 
-    public void setAreaAtuacaoService(AreaAtuacaoService areaAtuacaoService) {
+    public void setAreaAtuacaoService(final AreaAtuacaoService areaAtuacaoService) {
         this.areaAtuacaoService = areaAtuacaoService;
     }
 
@@ -432,7 +443,7 @@ public class PesquisadorMB extends AbstractMB {
         return grandeAreaSelecionada;
     }
 
-    public void setGrandeAreaSelecionada(GrandeAreaAtuacao grandeAreaSelecionada) {
+    public void setGrandeAreaSelecionada(final GrandeAreaAtuacao grandeAreaSelecionada) {
         this.grandeAreaSelecionada = grandeAreaSelecionada;
     }
 
@@ -440,7 +451,7 @@ public class PesquisadorMB extends AbstractMB {
         return areaAtuacaoSelecionada;
     }
 
-    public void setAreaAtuacaoSelecionada(AreaAtuacao areaAtuacaoSelecionada) {
+    public void setAreaAtuacaoSelecionada(final AreaAtuacao areaAtuacaoSelecionada) {
         this.areaAtuacaoSelecionada = areaAtuacaoSelecionada;
     }
 
@@ -448,7 +459,7 @@ public class PesquisadorMB extends AbstractMB {
         return areasAtuacaoParaSelecionar;
     }
 
-    public void setAreasAtuacaoParaSelecionar(DataModel<AreaAtuacao> areasAtuacaoParaSelecionar) {
+    public void setAreasAtuacaoParaSelecionar(final DataModel<AreaAtuacao> areasAtuacaoParaSelecionar) {
         this.areasAtuacaoParaSelecionar = areasAtuacaoParaSelecionar;
     }
 
@@ -456,7 +467,7 @@ public class PesquisadorMB extends AbstractMB {
         return subAreaAtuacaoSelecionada;
     }
 
-    public void setSubAreaAtuacaoSelecionada(SubAreaAtuacao subAreaAtuacaoSelecionada) {
+    public void setSubAreaAtuacaoSelecionada(final SubAreaAtuacao subAreaAtuacaoSelecionada) {
         this.subAreaAtuacaoSelecionada = subAreaAtuacaoSelecionada;
     }
 
@@ -464,7 +475,7 @@ public class PesquisadorMB extends AbstractMB {
         return subAreasParaSelecionar;
     }
 
-    public void setSubAreasParaSelecionar(DataModel<SubAreaAtuacao> subAreasParaSelecionar) {
+    public void setSubAreasParaSelecionar(final DataModel<SubAreaAtuacao> subAreasParaSelecionar) {
         this.subAreasParaSelecionar = subAreasParaSelecionar;
     }
 
@@ -472,7 +483,7 @@ public class PesquisadorMB extends AbstractMB {
         return especializacaoSelecionada;
     }
 
-    public void setEspecializacaoSelecionada(EspecializacaoAreaAtuacao especializacaoSelecionada) {
+    public void setEspecializacaoSelecionada(final EspecializacaoAreaAtuacao especializacaoSelecionada) {
         this.especializacaoSelecionada = especializacaoSelecionada;
     }
 
@@ -480,7 +491,7 @@ public class PesquisadorMB extends AbstractMB {
         return especializacoesParaSelecionar;
     }
 
-    public void setEspecializacoesParaSelecionar(DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar) {
+    public void setEspecializacoesParaSelecionar(final DataModel<EspecializacaoAreaAtuacao> especializacoesParaSelecionar) {
         this.especializacoesParaSelecionar = especializacoesParaSelecionar;
     }
 
@@ -488,7 +499,7 @@ public class PesquisadorMB extends AbstractMB {
         return atuacaoSelecionada;
     }
 
-    public void setAtuacaoSelecionada(AtuacaoPesquisador atuacaoSelecionada) {
+    public void setAtuacaoSelecionada(final AtuacaoPesquisador atuacaoSelecionada) {
         this.atuacaoSelecionada = atuacaoSelecionada;
     }
 
@@ -500,11 +511,11 @@ public class PesquisadorMB extends AbstractMB {
         return grandeAreaService;
     }
 
-    public void setGrandeAreaService(GrandeAreaAtuacaoService grandeAreaService) {
+    public void setGrandeAreaService(final GrandeAreaAtuacaoService grandeAreaService) {
         this.grandeAreaService = grandeAreaService;
     }
 
-    public void setTodasAsGrandeAreas(DataModel<GrandeAreaAtuacao> todasAsGrandeAreas) {
+    public void setTodasAsGrandeAreas(final DataModel<GrandeAreaAtuacao> todasAsGrandeAreas) {
         this.todasAsGrandeAreas = todasAsGrandeAreas;
     }
 
@@ -513,7 +524,7 @@ public class PesquisadorMB extends AbstractMB {
         return linhaDePesquisaSelecionada;
     }
 
-    public void setLinhaDePesquisaSelecionada(LinhaDePesquisa linhaDePesquisaSelecionada) {
+    public void setLinhaDePesquisaSelecionada(final LinhaDePesquisa linhaDePesquisaSelecionada) {
         this.linhaDePesquisaSelecionada = linhaDePesquisaSelecionada;
     }
 
@@ -521,7 +532,7 @@ public class PesquisadorMB extends AbstractMB {
         return linhasDePesquisa;
     }
 
-    public void setLinhasDePesquisa(List<LinhaDePesquisa> linhasDePesquisa) {
+    public void setLinhasDePesquisa(final List<LinhaDePesquisa> linhasDePesquisa) {
         this.linhasDePesquisa = linhasDePesquisa;
     }
 
@@ -529,7 +540,7 @@ public class PesquisadorMB extends AbstractMB {
         return linhaDePesquisaService;
     }
 
-    public void setLinhaDePesquisaService(LinhaDePesquisaService linhaDePesquisaService) {
+    public void setLinhaDePesquisaService(final LinhaDePesquisaService linhaDePesquisaService) {
         this.linhaDePesquisaService = linhaDePesquisaService;
     }
 
@@ -541,7 +552,7 @@ public class PesquisadorMB extends AbstractMB {
         }
     }
 
-    public void removerLinhaDePesquisa(LinhaDePesquisa linhaPesquisa) {
+    public void removerLinhaDePesquisa(final LinhaDePesquisa linhaPesquisa) {
         pesquisador.getLinhasDePesquisa().remove(linhaPesquisa);
     }
 
@@ -549,7 +560,7 @@ public class PesquisadorMB extends AbstractMB {
         return citacaoBibliografica;
     }
 
-    public void setCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
+    public void setCitacaoBibliografica(final CitacaoBibliografica citacaoBibliografica) {
         this.citacaoBibliografica = citacaoBibliografica;
     }
 
@@ -557,7 +568,7 @@ public class PesquisadorMB extends AbstractMB {
         return citacoesBibliograficas;
     }
 
-    public void setCitacoesBibliograficas(List<CitacaoBibliografica> citacoesBibliograficas) {
+    public void setCitacoesBibliograficas(final List<CitacaoBibliografica> citacoesBibliograficas) {
         this.citacoesBibliograficas = citacoesBibliograficas;
     }
 
@@ -565,23 +576,15 @@ public class PesquisadorMB extends AbstractMB {
         return citacaoBibliograficaService;
     }
 
-    public void setCitacaoBibliograficaService(CitacaoBibliograficaService citacaoBibliograficaService) {
+    public void setCitacaoBibliograficaService(final CitacaoBibliograficaService citacaoBibliograficaService) {
         this.citacaoBibliograficaService = citacaoBibliograficaService;
-    }
-
-    public List<CitacaoBibliografica> getCitacoesBibliograficasToDelete() {
-        return citacoesBibliograficasToDelete;
-    }
-
-    public void setCitacoesBibliograficasToDelete(List<CitacaoBibliografica> citacoesBibliograficasToDelete) {
-        this.citacoesBibliograficasToDelete = citacoesBibliograficasToDelete;
     }
 
     public ParticipacaoEvento getParticipacaoEvento() {
         return participacaoEvento;
     }
 
-    public void setParticipacaoEvento(ParticipacaoEvento participacaoEvento) {
+    public void setParticipacaoEvento(final ParticipacaoEvento participacaoEvento) {
         this.participacaoEvento = participacaoEvento;
     }
 
@@ -589,7 +592,7 @@ public class PesquisadorMB extends AbstractMB {
         return participacaoEventos;
     }
 
-    public void setParticipacaoEventos(List<ParticipacaoEvento> participacaoEventos) {
+    public void setParticipacaoEventos(final List<ParticipacaoEvento> participacaoEventos) {
         this.participacaoEventos = participacaoEventos;
     }
 
@@ -597,56 +600,39 @@ public class PesquisadorMB extends AbstractMB {
         return participacaoEventoService;
     }
 
-    public void setParticipacaoEventoService(ParticipacaoEventoService participacaoEventoService) {
+    public void setParticipacaoEventoService(final ParticipacaoEventoService participacaoEventoService) {
         this.participacaoEventoService = participacaoEventoService;
-    }
-
-    public List<ParticipacaoEvento> getParticipacaoEventosToDelete() {
-        return participacaoEventosToDelete;
-    }
-
-    public void setParticipacaoEventosToDelete(List<ParticipacaoEvento> participacaoEventosToDelete) {
-        this.participacaoEventosToDelete = participacaoEventosToDelete;
     }
 
     public ImageCacheMB getCache() {
         return cache;
     }
 
-    public void setCache(ImageCacheMB cache) {
+    public void setCache(final ImageCacheMB cache) {
         this.cache = cache;
     }
 
-	public OrganizacaoEvento getOrganizacaoEvento() {
-		return organizacaoEvento;
-	}
+    public OrganizacaoEvento getOrganizacaoEvento() {
+        return organizacaoEvento;
+    }
 
-	public void setOrganizacaoEvento(OrganizacaoEvento organizacaoEvento) {
-		this.organizacaoEvento = organizacaoEvento;
-	}
+    public void setOrganizacaoEvento(final OrganizacaoEvento organizacaoEvento) {
+        this.organizacaoEvento = organizacaoEvento;
+    }
 
-	public List<OrganizacaoEvento> getOrganizacaoEventos() {
-		return organizacaoEventos;
-	}
+    public List<OrganizacaoEvento> getOrganizacaoEventos() {
+        return organizacaoEventos;
+    }
 
-	public void setOrganizacaoEventos(List<OrganizacaoEvento> organizacaoEventos) {
-		this.organizacaoEventos = organizacaoEventos;
-	}
+    public void setOrganizacaoEventos(final List<OrganizacaoEvento> organizacaoEventos) {
+        this.organizacaoEventos = organizacaoEventos;
+    }
 
-	public List<OrganizacaoEvento> getOrganizacaoEventosToDelete() {
-		return organizacaoEventosToDelete;
-	}
+    public OrganizacaoEventoService getOrganizacaoEventoService() {
+        return organizacaoEventoService;
+    }
 
-	public void setOrganizacaoEventosToDelete(
-			List<OrganizacaoEvento> organizacaoEventosToDelete) {
-		this.organizacaoEventosToDelete = organizacaoEventosToDelete;
-	}
-
-	public OrganizacaoEventoService getOrganizacaoEventoService() {
-		return organizacaoEventoService;
-	}
-
-	public void setOrganizacaoEventoService(OrganizacaoEventoService organizacaoEventoService) {
-		this.organizacaoEventoService = organizacaoEventoService;
-	}
+    public void setOrganizacaoEventoService(final OrganizacaoEventoService organizacaoEventoService) {
+        this.organizacaoEventoService = organizacaoEventoService;
+    }
 }

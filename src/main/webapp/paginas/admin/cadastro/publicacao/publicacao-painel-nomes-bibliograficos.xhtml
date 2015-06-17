@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<p:panel id="painelCitacaoBibliografica" header="#{mensagens['publicacao.participantes']}">
+					<div class="rcms-table rcms-table-hover">
+				<div class="rcms-table-thead">
+					<div class="rcms-table-tr">
+						<div class="rcms-table-th col-xs-4">
+							<span> <h:outputText value="#{mensagens['nome']}" />
+							</span>
+						</div>
+						<div class="rcms-table-th col-xs-3">
+							<span> <h:outputText value="#{mensagens['citacao.bibliografica.nome.em.citacao']}" />
+							</span>
+						</div>
+						<!-- 
+						<div class="rcms-table-th col-xs-3">
+							<span> <h:outputText value="#{mensagens['label.codigo.lattes']}" />
+							</span>
+						</div> -->
+						
+						<div class="rcms-table-th col-xs-2 text-center">
+							<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalNomesCitacao">#{mensagens['adicionar']}</button>
+						</div>
+					</div>
+				</div>
+				<div class="rcms-table-tbody">
+					<ui:repeat id="gridPublicacaoNomeCitacao" pt:name="gridPublicacaoNomeCitacao"
+						varStatus="status" var="nomeCitacao" value="#{publicacaoMB.publicacao.citacaoBibliograficas}">
+						<div class="rcms-table-tr col-">
+							<div class="rcms-table-td">
+								<span> <h:outputText id="outputTextNome"
+										value="#{nomeCitacao.pesquisador.nome}" />
+								</span>
+							</div>
+							<div class="rcms-table-td">
+								<span> <h:outputText id="outputTextDescricao"
+										value="#{nomeCitacao.nomeCitacao}" />
+								</span>
+							</div>
+							<!-- <div class="rcms-table-td">
+								<span> <h:outputText id="outputTextAnoInicio"
+										value="#{pesquisador.codigoLattes}" />
+								</span>
+							</div> -->
+							<div class="rcms-table-td">
+								<div class="text-center">
+									<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary"
+										pt:title="#{mensagens['editar']}" >
+										<f:ajax render="painelCitacaoBibliografica" />
+									</h:commandButton>
+									<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />
+									<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+										action="#{publicacaoMB.excluirNomeCitacao(nomeCitacao)}">
+										<f:ajax render="painelCitacaoBibliografica" />
+									</h:commandButton>
+								</div>
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
+				</div>
+					<ui:include src="/paginas/admin/cadastro/publicacao/publicacao-modal-nomes-bibliograficos.xhtml" />
+				</p:panel>
+				
+			</div>
+		</div>
+	</div>
+
+</ui:composition>

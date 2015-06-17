@@ -28,5 +28,9 @@ public class CitacaoBibliograficaServiceImpl implements CitacaoBibliograficaServ
     public void remover(CitacaoBibliografica citacaoBibliografica) {
         citacaoBibliograficaDAO.remover(citacaoBibliografica);
     }
+    
+    public List<CitacaoBibliografica> buscarTodas(){
+    	return citacaoBibliograficaDAO.buscarTodos();
+    }
 
 }

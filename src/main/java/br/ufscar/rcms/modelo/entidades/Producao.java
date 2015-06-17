@@ -1,12 +1,19 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +26,7 @@ public abstract class Producao extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producao")
-    private Integer idProducao;
+    private Long idProducao;
 
     @Column(name = "titulo", nullable = false)
     private String titulo;
@@ -38,12 +45,16 @@ public abstract class Producao extends Entidade {
 
     @Column(name = "pdf")
     private byte[] pdf;
+    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
+   
 
-    public Integer getIdProducao() {
+    public Long getIdProducao() {
         return idProducao;
     }
 
-    public void setIdProducao(Integer idProducao) {
+    public void setIdProducao(Long idProducao) {
         this.idProducao = idProducao;
     }
 
@@ -140,4 +151,24 @@ public abstract class Producao extends Entidade {
         }
         return true;
     }
+    
+    public Producao CloneTo(Producao publicacaoDestino){
+    	publicacaoDestino.setAno(ano);
+    	publicacaoDestino.setCitacaoBibliograficas(citacaoBibliograficas);
+    	publicacaoDestino.setIdProducao(idProducao);
+    	publicacaoDestino.setLink(link);
+    	publicacaoDestino.setPaginas(paginas);
+    	publicacaoDestino.setPdf(pdf);
+    	publicacaoDestino.setTitulo(titulo);
+    	publicacaoDestino.setVolume(volume);
+    	return publicacaoDestino;
+    }
+
+	public List<CitacaoBibliografica> getCitacaoBibliograficas() {
+		return citacaoBibliograficas;
+	}
+
+	public void setCitacaoBibliograficas(List<CitacaoBibliografica> citacaoBibliograficas) {
+		this.citacaoBibliograficas = citacaoBibliograficas;
+	}
 }

@@ -77,10 +77,15 @@ public abstract class AbstractMB implements Serializable {
     public static final String CONSULTA_PROJETO_PESQUISA = "consultaProjetoPesquisa";
     public static final String FLASH_KEY_PROJETO_PESQUISA = "projetoPesquisa";
     public static final String EXIBE_PROJETO_PESQUISA = "projetoPesquisa";
-
+    
     // Painel de Controle
     public static final String PAINEL_CONTROLE = "painelControle";
-
+    
+    //Publicacoes
+    public static final String CONSULTA_PUBLICACAO = "consultaPublicacao";
+    public static final String CADASTRO_PUBLICACAO = "cadastroPublicacao";
+    public static final String FLASH_KEY_PUBLICACAO = "publicacao";
+    
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put(getMessage("pesquisador"), false);

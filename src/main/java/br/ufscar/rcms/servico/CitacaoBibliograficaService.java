@@ -10,5 +10,7 @@ public interface CitacaoBibliograficaService extends Serializable {
     void remover(List<CitacaoBibliografica> citacoesBibliograficas);
 
     void remover(CitacaoBibliografica citacaoBibliografica);
+    
+    List<CitacaoBibliografica> buscarTodas();
 
 }

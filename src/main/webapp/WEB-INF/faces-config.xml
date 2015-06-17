@@ -126,6 +126,15 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>cadastroPublicacao</from-outcome>
+			<to-view-id>/paginas/admin/cadastro/publicacao/publicacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	<!-- FIM -ADMIN - CADASTRO -->
 
 	<!-- INCIO - ADMIN - CONSULTA -->
@@ -182,6 +191,16 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>consultaPublicacao</from-outcome>
+			<to-view-id>/paginas/admin/consulta/publicacao/publicacao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
 	<!-- FIM - ADMIN - CONSULTA -->
 
 	<!-- INCIO - PORTAL - CONSULTA -->

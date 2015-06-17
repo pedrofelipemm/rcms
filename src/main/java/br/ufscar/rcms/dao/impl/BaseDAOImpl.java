@@ -36,7 +36,7 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     }
 
     @Override
-    public T buscar(Long id) {
+    public T buscar(final Long id) {
         return entityManager.find(clazz, id);
     }
 
@@ -52,18 +52,19 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     }
 
     @Override
-    public void salvar(T entidade) {
+    public void salvar(final T entidade) {
         entityManager.persist(entidade);
     }
 
     @Override
-    public T atualizar(T entidade) {
+    public T atualizar(final T entidade) {
         return entityManager.merge(entidade);
     }
 
     @Override
-    public void saveOrUpdate(T entidade) {
+    public T saveOrUpdate(final T entidade) {
         getSession().saveOrUpdate(entidade);
+        return entidade;
     }
 
     // TODO PEDRO
@@ -81,12 +82,12 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
     }
 
     @Override
-    public void remover(T entidade) {
+    public void remover(final T entidade) {
         entityManager.remove(entityManager.contains(entidade) ? entidade : entityManager.merge(entidade));
     }
 
     @Override
-    public void remover(Long id) {
+    public void remover(final Long id) {
         T entidade = buscar(id);
         remover(entidade);
     }
@@ -95,11 +96,11 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
         return clazz;
     }
 
-    public void setClazz(Class<T> clazz) {
+    public void setClazz(final Class<T> clazz) {
         this.clazz = clazz;
     }
 
-    public Query createQuery(String query) {
+    public Query createQuery(final String query) {
         return entityManager.createQuery(query);
     }
 
@@ -111,11 +112,11 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
         return entityManager.unwrap(Session.class);
     }
 
-    private Long getEntityId(T entidade) {
+    private Long getEntityId(final T entidade) {
         return getEntityId(entidade, entidade.getClass());
     }
 
-    private Long getEntityId(T entidade, Class<?> clazz) {
+    private Long getEntityId(final T entidade, final Class<?> clazz) {
         Object id = null;
         try {
             for (Field field : clazz.getDeclaredFields()) {

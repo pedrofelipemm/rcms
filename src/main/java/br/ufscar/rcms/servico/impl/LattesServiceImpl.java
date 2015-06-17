@@ -38,7 +38,9 @@ import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.XMLUtils;
+
 
 @Service("lattesService")
 @Transactional
@@ -70,7 +72,7 @@ public class LattesServiceImpl implements LattesService {
     public PesquisadorLattes carregarCurriculoLattes(final String codigoLattes) throws CurriculoLattesNaoEncontradoException,
             ArquivoNaoEncontradoException {
 
-        final CurriculoLattes curriculos = carregarCurriculosLattes(codigoLattes);// TODO PEDRO
+        final CurriculoLattes curriculos = carregarCurriculosLattes(codigoLattes);
         for (final PesquisadorLattes pesquisador : curriculos.getPesquisadores()) {
             if (pesquisador.getCodigoLattes().equals(codigoLattes)) {
                 return pesquisador;
@@ -81,8 +83,7 @@ public class LattesServiceImpl implements LattesService {
     }
 
     @Override
-    public synchronized Pesquisador salvarDadosLattes(final Pesquisador pesquisador) throws CurriculoLattesNaoEncontradoException,
-            ArquivoNaoEncontradoException {
+    public synchronized Pesquisador salvarDadosLattes(final Pesquisador pesquisador) throws RCMSException {
 
         PesquisadorLattes pesquisadorLattes = null;
 
@@ -183,10 +184,14 @@ public class LattesServiceImpl implements LattesService {
         try {
             final String fileName = pastaScriptLates + File.separator + codigoLattes + File.separator + codigoLattes + SUFFIX_XML;
             final InputStream file = new FileInputStream(fileName);
+            final String CurriculoAsString = IOUtils.toString(file, "UTF-8");
+
             try {
-                curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, IOUtils.toString(file, "UTF-8"));
+                curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, XMLUtils.stripSpecialChars(CurriculoAsString));
             } catch (final JAXBException e) {
-                LOGGER.error(e.getMessage(), e);
+                LOGGER.error("Erro ao converter XML, código lattes: %s", codigoLattes, e);
+                // TODO PEDRO
+                throw new RuntimeException(e);
             }
         } catch (final IOException e) {
             LOGGER.error(e.getMessage(), e);

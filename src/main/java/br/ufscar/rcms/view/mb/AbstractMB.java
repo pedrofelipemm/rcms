@@ -38,6 +38,8 @@ public abstract class AbstractMB implements Serializable {
 
     public static final String PERMANECER_PAGINA = null;
 
+    protected static final String DEFAULT_IMAGE = "/images/person.png";
+
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
     public static final String CONSULTA_PESQUISADORES = "consultaPesquisadores";
@@ -71,7 +73,7 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_LINHA_PESQUISA = "cadastroLinhaDePesquisa";
     public static final String CONSULTA_LINHAS_PESQUISA = "consultaLinhaDePesquisa";
     public static final String FLASH_KEY_LINHA_PESQUISA = "linhaDePesquisa";
-    
+
     //Projetos de Pesquisa
     public static final String CADASTRO_PROJETO_PESQUISA = "cadastroProjetoPesquisa";
     public static final String CONSULTA_PROJETO_PESQUISA = "consultaProjetoPesquisa";
@@ -144,7 +146,7 @@ public abstract class AbstractMB implements Serializable {
         return getSession().getId();
     }
 
-    protected String getRealPath(String path) {
+    protected String getRealPath(final String path) {
         return getContext().getRealPath(path);
     }
 
@@ -156,7 +158,7 @@ public abstract class AbstractMB implements Serializable {
         return getExternalContext().getFlash();
     }
 
-    protected void setFlashObject(String key, Object value) {
+    protected void setFlashObject(final String key, final Object value) {
 
         if (key == null || value == null) {
             throw new IllegalArgumentException(getMessage("key.value.nao.nulo"));
@@ -171,7 +173,7 @@ public abstract class AbstractMB implements Serializable {
         flash.put(key, value);
     }
 
-    protected Object getFlashObject(String key) {
+    protected Object getFlashObject(final String key) {
 
         Flash flash = getFlash();
         if (flash == null) {
@@ -197,7 +199,7 @@ public abstract class AbstractMB implements Serializable {
         return ResourceBundle.getBundle(BUNDLE_NAME, getViewRoot().getLocale());
     }
 
-    protected String getMessage(String key) {
+    protected String getMessage(final String key) {
 
         if (key == null) {
             throw new IllegalArgumentException(getMessage("key.nao.nulo"));
@@ -206,7 +208,7 @@ public abstract class AbstractMB implements Serializable {
         return getResourceBundle().getString(key);
     }
 
-    protected String getMessage(String key, String... parametros) {
+    protected String getMessage(final String key, final String... parametros) {
 
         String mensagem = getMessage(key);
         if (parametros != null) {
@@ -216,27 +218,27 @@ public abstract class AbstractMB implements Serializable {
         return mensagem;
     }
 
-    protected void adicionarMensagemInfo(String texto) {
+    protected void adicionarMensagemInfo(final String texto) {
         adicionarMensagem(texto, FacesMessage.SEVERITY_INFO);
     }
 
-    protected void adicionarMensagemInfoByKey(String key, String... parameters) {
+    protected void adicionarMensagemInfoByKey(final String key, final String... parameters) {
         adicionarMensagemByKey(FacesMessage.SEVERITY_INFO, key, parameters);
     }
 
-    protected void adicionarMensagemErro(String texto) {
+    protected void adicionarMensagemErro(final String texto) {
         adicionarMensagem(texto, FacesMessage.SEVERITY_ERROR);
     }
 
-    protected void adicionarMensagemErroByKey(String key, String... parameters) {
+    protected void adicionarMensagemErroByKey(final String key, final String... parameters) {
         adicionarMensagemByKey(FacesMessage.SEVERITY_ERROR, key, parameters);
     }
 
-    protected void adicionarMensagemAlerta(String texto) {
+    protected void adicionarMensagemAlerta(final String texto) {
         adicionarMensagem(texto, FacesMessage.SEVERITY_WARN);
     }
 
-    protected void adicionarMensagemAlertaByKey(String key, String... parameters) {
+    protected void adicionarMensagemAlertaByKey(final String key, final String... parameters) {
         adicionarMensagemByKey(FacesMessage.SEVERITY_WARN, key, parameters);
     }
 
@@ -264,7 +266,7 @@ public abstract class AbstractMB implements Serializable {
         }
     }
 
-    protected String getFileNameFromPart(Part part) {
+    protected String getFileNameFromPart(final Part part) {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : partHeader.split(";")) {
             if (content.trim().startsWith("filename")) {
@@ -275,11 +277,11 @@ public abstract class AbstractMB implements Serializable {
         return null;
     }
 
-    private void adicionarMensagem(String texto, Severity severity) {
+    private void adicionarMensagem(final String texto, final Severity severity) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, texto, null));
     }
 
-    private void adicionarMensagemByKey(Severity severity, String key, String... parameters) {
+    private void adicionarMensagemByKey(final Severity severity, final String key, final String... parameters) {
         getCurrentInstance().addMessage(null, new FacesMessage(severity, getMessage(key, parameters), null));
     }
 }

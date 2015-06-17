@@ -24,7 +24,7 @@
 		<junit.version>4.11</junit.version>
 		<org.apache.axis.version>1.4</org.apache.axis.version>
 		<org.apache.logging.log4j.version>2.3</org.apache.logging.log4j.version>
-		<org.hibernate.version>4.3.6.Final</org.hibernate.version>
+		<org.hibernate.version>4.3.10.Final</org.hibernate.version>
 		<org.omnifaces.version>1.10</org.omnifaces.version>
 		<org.primefaces.version>5.2</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>

@@ -86,7 +86,5 @@ local.properties
 .idea/
 *.iml
 trace.txt
-/target/
-/target/
-/target/
+
 /target/

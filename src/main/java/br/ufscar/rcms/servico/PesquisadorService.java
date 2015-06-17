@@ -5,12 +5,11 @@ import java.util.List;
 
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 
 public interface PesquisadorService extends Serializable {
 
-    void salvar(Pesquisador pesquisador);
-
-    Pesquisador salvarOuAtualizar(Pesquisador pesquisador);
+    Pesquisador salvarOuAtualizar(Pesquisador pesquisador) throws RCMSException;
 
     Pesquisador buscar(Long id);
 

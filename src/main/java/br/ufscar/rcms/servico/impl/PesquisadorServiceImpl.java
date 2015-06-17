@@ -1,26 +1,38 @@
 package br.ufscar.rcms.servico.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.dao.EnderecoDAO;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.ExceptionUtils;
 
+import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 @Service("pesquisadorService")
-@Transactional(rollbackFor = RCMSException.class)
+@Transactional(rollbackFor = { RCMSException.class })
 public class PesquisadorServiceImpl implements PesquisadorService {
 
     private static final long serialVersionUID = 4593268685421323315L;
+    private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorServiceImpl.class);
 
     @Autowired
     private PesquisadorDAO pesquisadorDAO;
@@ -28,33 +40,50 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     @Autowired
     private IdiomaDAO idiomaDAO;
 
-    @Override
-    public void salvar(Pesquisador pesquisador) {
-        pesquisadorDAO.salvar(pesquisador);
-    }
+    @Autowired
+    private EnderecoDAO enderecoDAO;
+
+    @Value("${pasta.script.foto.pesquisador}")
+    private String pastaFotosPesquisadores;
 
     @Override
-    // TODO PEDRO save or update
-    public Pesquisador salvarOuAtualizar(Pesquisador pesquisador) {
+    public Pesquisador salvarOuAtualizar(final Pesquisador pesquisador) throws RCMSException {
         try {
-        pesquisador.getEndereco().setPesquisador(pesquisador);
+            pesquisador.getEndereco().setPesquisador(pesquisador);
 
-            // TODO PEDRO VALIDATE
-        for (CompreensaoIdioma compreensaoIdioma : pesquisador.getCompreensaoIdiomas()) {
-            if (compreensaoIdioma.getCompreensaoIdiomaPK() != null
-                    && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma() != null
-                    && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma().getIdIdioma() == null) {
+            for (CompreensaoIdioma compreensaoIdioma : pesquisador.getCompreensaoIdiomas()) {
+                if (compreensaoIdioma.getCompreensaoIdiomaPK() != null
+                        && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma() != null
+                        && compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma().getIdIdioma() == null) {
                     idiomaDAO.saveOrUpdate(compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma());
+                }
             }
-        }
 
+            Pesquisador savedPesquisador = pesquisadorDAO.salvarOuAtualizar(pesquisador);
 
-            return pesquisadorDAO.salvarOuAtualizar(pesquisador);
+            if (!isEmpty(pesquisador.getFoto())) {
+                salvarFotoPesquisador(pesquisador);
+            }
+            return savedPesquisador;
         } catch (DataIntegrityViolationException exception) {
             Throwable throwable = ExceptionUtils.getInnerCause(exception);
-            // TODO PEDRO
-            // throw new RCMSException(throwable.getMessage(), throwable);
-            throw new RuntimeException(throwable.getMessage(), throwable);
+            throw new RCMSException(throwable.getMessage(), throwable);
+        }
+    }
+
+    private void salvarFotoPesquisador(final Pesquisador pesquisador) throws RCMSException {
+
+        try {
+
+            TransientFile foto = pesquisador.getFoto();
+            String fileName = generateReasearcherPhotoName(pastaFotosPesquisadores, pesquisador.getCodigoLattes(), foto.getFileExtension());
+            File file = new File(fileName);
+
+            FileUtils.writeByteArrayToFile(file, foto.getFile());
+        } catch (IOException e) {
+            String message = String.format("Erro ao salvar foto do pesquisador: %s", pesquisador.getNome());
+            LOGGER.error(message, e);
+            throw new RCMSException(message, e);
         }
     }
 
@@ -64,7 +93,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
-    public List<Pesquisador> buscarTodosComIdioma(Long idIdioma) {
+    public List<Pesquisador> buscarTodosComIdioma(final Long idIdioma) {
         return pesquisadorDAO.buscarTodosComIdioma(idIdioma);
     }
 
@@ -74,7 +103,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
-    public void remover(Pesquisador pesquisador) throws PesquisadorNaoEncontradoException {
+    public void remover(final Pesquisador pesquisador) throws PesquisadorNaoEncontradoException {
 
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(pesquisador.getIdUsuario());
         if (pesquisadorToRemove == null) {
@@ -85,7 +114,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
-    public void remover(Long id) throws PesquisadorNaoEncontradoException {
+    public void remover(final Long id) throws PesquisadorNaoEncontradoException {
 
         Pesquisador pesquisadorToRemove = pesquisadorDAO.buscar(id);
         if (pesquisadorToRemove == null) {
@@ -96,12 +125,12 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
-    public Pesquisador buscar(Long id) {
+    public Pesquisador buscar(final Long id) {
         return pesquisadorDAO.buscar(id);
     }
 
     @Override
-    public Pesquisador buscarTodosDados(Long idUsuario) {
+    public Pesquisador buscarTodosDados(final Long idUsuario) {
 
         Pesquisador pesquisador = pesquisadorDAO.buscar(idUsuario);
         lazyLoadCollections(pesquisador);
@@ -109,7 +138,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         return pesquisador;
     }
 
-    public void lazyLoadCollections(Pesquisador pesquisador) {
+    public void lazyLoadCollections(final Pesquisador pesquisador) {
 
         pesquisador.getAreaAtuacoes().size();
         pesquisador.getCitacaoBibliograficas().size();

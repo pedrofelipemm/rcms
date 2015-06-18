@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -86,10 +84,12 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
         
 	}
 
+	@WebMethod(exclude=true)
 	public PesquisadorService getPesquisadorService() {
 		return pesquisadorService;
 	}
 
+	@WebMethod(exclude=true)
 	public void setPesquisadorService(PesquisadorService pesquisadorService) {
 		this.pesquisadorService = pesquisadorService;
 	}

@@ -10,25 +10,27 @@
 	
 	<ui:define name="conteudo">
 		
-	<div class="container">
-        <h:form  id="loginFormId" prependId="false">
-                <div id="loginFieldsPnlId">
-                    <div id="loginFieldUsrContId">
-                        <h:outputText id="outTxtUserNameId" value="Username:" name="outTxtUserNameNm"></h:outputText>
-                        <h:inputText id="userName" required="true" value="#{loginMB.userName}" requiredMessage="Please enter username"></h:inputText>
-                        <h:outputLabel id="outLblUserNameId" for="userName" name="outLblUserNameNm"></h:outputLabel>
-                    </div>
-                    <div id="loginFieldPassContId">
-                        <h:outputText id="outTxtPasswordId" value="Password:" name="outTxtPasswordNm"></h:outputText>
-                        <h:inputSecret id="password"  required="true" value="#{loginMB.password}" requiredMessage="Please enter password" name="inTxtPasswordNm"></h:inputSecret>
-                        <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm"></h:outputLabel>
-                    </div>
-                </div>
-                <div id="loginBtnPanelId">
-                    <h:commandButton id="btnLoginId" value="Login" action="#{loginMB.login}" styleClass="loginPanelBtn"></h:commandButton>
-                    <h:commandButton id="btnCancelId" value="Cancel" action="#{loginMB.cancel}" styleClass="loginPanelBtn" immediate="true" update="loginFormId"></h:commandButton>
-                </div>
-        </h:form>
+	<div class="container login-bx" >
+	       <h:form  id="loginFormId" prependId="false" class="form-signin well">
+	       		<h2 class="form-signin-heading">Login</h2>
+	               <div>
+	                   <div id="loginUser" >
+	                       <h:outputText id="outTxtUserNameId" value="Username:" name="outTxtUserNameNm"></h:outputText>
+	                       <h:inputText id="userName" required="true" value="#{loginMB.userName}" 
+	                       		requiredMessage="Please enter username" class="form-control" placeholder="Username" ></h:inputText>
+	                       <h:outputLabel id="outLblUserNameId" for="userName" name="outLblUserNameNm"></h:outputLabel>
+	                   </div>
+	                   <div id="loginPass">
+	                       <h:outputText id="outTxtPasswordId" value="Password:" name="outTxtPasswordNm"></h:outputText>
+	                       <h:inputSecret id="password"  required="true" value="#{loginMB.password}" 
+	                       		requiredMessage="Please enter password" name="inTxtPasswordNm" class="form-control" placeholder="Password"></h:inputSecret>
+	                       <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm"></h:outputLabel>
+	                   </div>
+	               </div>
+	               <div id="loginBtns">
+	                   <h:commandButton id="btnLoginId" value="Login" action="#{loginMB.login}" class="btn btn-lg btn-primary btn-block"></h:commandButton>
+	               </div>
+	       </h:form>
     </div>
 		
 	</ui:define>

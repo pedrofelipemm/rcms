@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+	<beans:bean class="org.springframework.security.web.FilterChainProxy" id="springSecurityFilterChain">
+		<filter-chain-map request-matcher="ant">
+			<filter-chain filters="securityContextPersistenceFilter" pattern="/*"></filter-chain>
+		</filter-chain-map>
+	</beans:bean>
+	<beans:bean class="org.springframework.security.web.context.SecurityContextPersistenceFilter" id="securityContextPersistenceFilter">
+		<beans:property name="forceEagerSessionCreation" value="true"></beans:property>
+	</beans:bean>
+  	
+ 	<http pattern="/javax.faces.resource/**" security="none"></http>
+ 	<http pattern="/file/**" security="none"></http>
+ 
+	<http auto-config="true">
+		<csrf disabled="true"/>
+		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_USER')"/>
+		<form-login login-page="/paginas/portal/login/login.xhtml"  />
+	</http>	
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_USER"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	
+	 		
+</beans:beans>
+

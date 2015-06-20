@@ -30,7 +30,11 @@ public class CitacaoBibliograficaServiceImpl implements CitacaoBibliograficaServ
     }
     
     public List<CitacaoBibliografica> buscarTodas(){
-    	return citacaoBibliograficaDAO.buscarTodos();
+        return citacaoBibliograficaDAO.buscarTodos();
+    }
+
+    public CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao) {
+        return citacaoBibliograficaDAO.buscarPorNomeCitacao(nomeCitacao);
     }
 
 }

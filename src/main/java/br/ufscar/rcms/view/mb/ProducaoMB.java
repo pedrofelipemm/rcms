@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.ufscar.rcms.factory.PublicacaoFactory;
+import br.ufscar.rcms.factory.ProducaoFactory;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
@@ -22,7 +22,7 @@ import br.ufscar.rcms.servico.PublicacaoService;
 
 @ViewScoped
 @ManagedBean(name = "publicacaoMB")
-public class PublicacaoMB extends AbstractMB {
+public class ProducaoMB extends AbstractMB {
 
 	@ManagedProperty("#{pesquisadorService}")
 	private PesquisadorService pesquisadorService;
@@ -30,7 +30,7 @@ public class PublicacaoMB extends AbstractMB {
 	private PublicacaoService publicacaoService;
 
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(PublicacaoMB.class);
+			.getLogger(ProducaoMB.class);
 
 	private static final long serialVersionUID = -3678684230889264324L;
 	private List<Pesquisador> todosPesquisadores;
@@ -61,7 +61,7 @@ public class PublicacaoMB extends AbstractMB {
 		try {
 
 			if (publicacao != null) {
-				Producao publicacaoTipada = PublicacaoFactory.CastProducaoByTipo(tipoPublicacao, publicacao);
+				Producao publicacaoTipada = ProducaoFactory.CastProducaoByTipo(tipoPublicacao, publicacao);
 
 				getPublicacaoService().saveOrUpdate(publicacaoTipada);
 

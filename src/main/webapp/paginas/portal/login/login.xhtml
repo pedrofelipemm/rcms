@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/portal/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+	<ui:define name="conteudo">
+		
+	<div class="container login-bx" >
+	       <h:form  id="loginFormId" prependId="false" class="form-signin well">
+	       		<h2 class="form-signin-heading">Login</h2>
+	               <div>
+	                   <div id="loginUser" >
+	                       <h:outputText id="outTxtUserNameId" value="Username:" name="outTxtUserNameNm"></h:outputText>
+	                       <h:inputText id="userName" required="true" value="#{loginMB.userName}" 
+	                       		requiredMessage="Please enter username" class="form-control" placeholder="Username" ></h:inputText>
+	                       <h:outputLabel id="outLblUserNameId" for="userName" name="outLblUserNameNm"></h:outputLabel>
+	                   </div>
+	                   <div id="loginPass">
+	                       <h:outputText id="outTxtPasswordId" value="Password:" name="outTxtPasswordNm"></h:outputText>
+	                       <h:inputSecret id="password"  required="true" value="#{loginMB.password}" 
+	                       		requiredMessage="Please enter password" name="inTxtPasswordNm" class="form-control" placeholder="Password"></h:inputSecret>
+	                       <h:outputLabel id="outLblPasswordId" for="password" name="outLblPasswordNm"></h:outputLabel>
+	                   </div>
+	               </div>
+	               <div id="loginBtns">
+	                   <h:commandButton id="btnLoginId" value="Login" action="#{loginMB.login}" class="btn btn-lg btn-primary btn-block"></h:commandButton>
+	               </div>
+	       </h:form>
+    </div>
+		
+	</ui:define>
+</ui:composition>

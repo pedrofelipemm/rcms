@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.rcms.dao.PublicacaoDAO;
+import br.ufscar.rcms.dao.ProducaoDAO;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.servico.PublicacaoService;
 
 @Service("publicacaoService")
 @Transactional
-public class PublicacaoServiceImpl implements PublicacaoService{
+public class ProducaoServiceImpl implements PublicacaoService{
 
 	private static final long serialVersionUID = -3551699743568411854L;
 	
 	@Autowired
-	private PublicacaoDAO publicacaoDAO;
+	private ProducaoDAO publicacaoDAO;
 		
 	@Override
 	public void saveOrUpdate(Producao producao) {

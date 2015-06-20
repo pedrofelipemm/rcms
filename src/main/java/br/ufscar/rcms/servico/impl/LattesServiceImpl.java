@@ -100,6 +100,7 @@ public class LattesServiceImpl implements LattesService {
                 .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento())
                 .projetosPesquisa(pesquisadorLattes.getProjetosPesquisa()).orientacoes(pesquisadorLattes)
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
+                .producao(pesquisadorLattes)
                 .build();
 
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());

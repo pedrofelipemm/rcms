@@ -32,6 +32,7 @@
 		<org.primefaces.version>5.2</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
+		<spring.security.version>4.0.0.RELEASE</spring.security.version>
 		<org.spring-security.version>3.1.0.RELEASE</org.spring-security.version>
 		<postgresql.version>9.1-901-1.jdbc4</postgresql.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,6 +93,21 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
+		 <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>

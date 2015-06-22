@@ -45,11 +45,11 @@
                     <h:form id="formMenu">
 	                    <ul class="nav navbar-nav navbar-right">
 	
-	                        <li class="active"><a href="index.html">#{mensagens['indice']}</a></li>
+	                        <li class="active"><a href="#{request.contextPath}/paginas/index.xhtml">#{mensagens['indice']}</a></li>
 	                        <li class="box-hover"><h:link outcome="sobreOGrupo" value="#{mensagens['o.grupo']}" /></li>
 	                        <li class="box-hover"><h:link outcome="listagemPesquisadores" value="#{mensagens['pesquisadores']}"/></li>
 	                        <li class="box-hover"><a href="#">#{mensagens['projetos.de.pesquisa']}</a></li>
-	                        <li class="box-hover"><h:link outcome="listagemPublicacoes" value="#{mensagens['publicacoes']}"/></li>
+<!-- 	                        <li class="box-hover"><h:link outcome="listagemPublicacoes" value="#{mensagens['publicacoes']}"/></li> -->
 	                        <li class="box-hover"><a href="#">#{mensagens['indicadores']}</a></li>
 	                    </ul>
                     </h:form>

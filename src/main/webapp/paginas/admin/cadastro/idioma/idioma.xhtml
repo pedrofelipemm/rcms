@@ -13,17 +13,9 @@
 		<h:form id="formIdioma" prependId="false">
 			
 			<div class="row">
-				<div class="col-md-10">
+				<div class="col-md-12">
 					<div class="form-group">
 						<h1>#{mensagens['cadastro.idiomas']}</h1>
-					</div>
-				</div>
-				<div class="col-md-2" style="padding-top: 25px;">
-					<div class="form-group pull-right">
-						<h:commandButton pt:name="#{mensagens['salvar']}" value="#{mensagens['salvar']}"
-							action="#{idiomaMB.salvar}" styleClass="btn btn-success" title="#{mensagens['salvar']}">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
 					</div>
 				</div>
 			</div>
@@ -53,7 +45,18 @@
 					</div>
 				</div>
 			</div>
-									
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<h:commandButton pt:name="#{mensagens['salvar']}" value="#{mensagens['salvar']}"
+							action="#{idiomaMB.salvar}" styleClass="btn btn-success" title="#{mensagens['salvar']}">
+							<f:ajax render="@form" execute="@form" />
+						</h:commandButton>
+					</div>
+				</div>
+			</div>
+						
 		</h:form>
 	</ui:define>
 </ui:composition>

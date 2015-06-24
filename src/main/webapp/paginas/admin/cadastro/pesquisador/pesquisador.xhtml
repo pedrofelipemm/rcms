@@ -12,17 +12,9 @@
 		<h:form id="formPesquisador" prependId="false">
 
 			<div class="row">
-				<div class="col-md-10">
+				<div class="col-md-12">
 					<div class="form-group">
 						<h1>#{mensagens['pesquisadores']}</h1>
-					</div>
-				</div>
-				<div class="col-md-2" style="padding-top: 25px;">
-					<div class="form-group pull-right">
-						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}"
-							styleClass="btn btn-success">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
 					</div>
 				</div>
 			</div>
@@ -50,9 +42,9 @@
 					</div>
 				</div>
 			</div>
+			
 		</h:form>
-		
-		<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-file-upload.xhtml" />
 
+		<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-file-upload.xhtml" />
 	</ui:define>
 </ui:composition>

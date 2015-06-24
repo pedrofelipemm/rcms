@@ -13,8 +13,6 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -58,9 +56,6 @@ public class PesquisadorMB extends AbstractMB {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorMB.class);
 
-    @ManagedProperty("#{imageCacheMB}")
-    private ImageCacheMB cache;
-
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
 
@@ -89,8 +84,8 @@ public class PesquisadorMB extends AbstractMB {
     private OrganizacaoEventoService organizacaoEventoService;
 
     private Pesquisador pesquisador;
-    private transient DataModel<Pesquisador> pesquisadores;
-    private transient Part fotoPesquisador;
+    private DataModel<Pesquisador> pesquisadores;
+    private Part fotoPesquisador;
 
     private CompreensaoIdioma compreensaoIdioma;
     private transient DataModel<CompreensaoIdioma> compreensaoIdiomas;
@@ -211,10 +206,6 @@ public class PesquisadorMB extends AbstractMB {
 
         keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
-    }
-
-    public StreamedContent getFoto() {
-        return new DefaultStreamedContent();
     }
 
     public PesquisadorService getPesquisadorService() {
@@ -602,14 +593,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setParticipacaoEventoService(final ParticipacaoEventoService participacaoEventoService) {
         this.participacaoEventoService = participacaoEventoService;
-    }
-
-    public ImageCacheMB getCache() {
-        return cache;
-    }
-
-    public void setCache(final ImageCacheMB cache) {
-        this.cache = cache;
     }
 
     public OrganizacaoEvento getOrganizacaoEvento() {

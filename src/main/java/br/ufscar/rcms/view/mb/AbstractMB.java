@@ -17,12 +17,14 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.faces.context.PartialViewContext;
+import javax.faces.event.PhaseId;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,11 +36,8 @@ public abstract class AbstractMB implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMB.class);
     private static final String BUNDLE_NAME = "bundle";
-    private static final String EMPTY_STRING = "";
 
     public static final String PERMANECER_PAGINA = null;
-
-    protected static final String DEFAULT_IMAGE = "/images/person.png";
 
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";
@@ -79,15 +78,15 @@ public abstract class AbstractMB implements Serializable {
     public static final String CONSULTA_PROJETO_PESQUISA = "consultaProjetoPesquisa";
     public static final String FLASH_KEY_PROJETO_PESQUISA = "projetoPesquisa";
     public static final String EXIBE_PROJETO_PESQUISA = "projetoPesquisa";
-    
+
     // Painel de Controle
     public static final String PAINEL_CONTROLE = "painelControle";
-    
+
     //Publicacoes
     public static final String CONSULTA_PUBLICACAO = "consultaPublicacao";
     public static final String CADASTRO_PUBLICACAO = "cadastroPublicacao";
     public static final String FLASH_KEY_PUBLICACAO = "publicacao";
-    
+
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put(getMessage("pesquisador"), false);
@@ -108,6 +107,10 @@ public abstract class AbstractMB implements Serializable {
 
     protected FacesContext getCurrentInstance() {
         return FacesContext.getCurrentInstance();
+    }
+
+    protected PhaseId getCurrentPhaseId() {
+        return getCurrentInstance().getCurrentPhaseId();
     }
 
     protected Application getApplication() {
@@ -151,7 +154,7 @@ public abstract class AbstractMB implements Serializable {
     }
 
     protected String getRealPath() {
-        return getRealPath(EMPTY_STRING);
+        return getRealPath(StringUtils.EMPTY);
     }
 
     protected Flash getFlash() {

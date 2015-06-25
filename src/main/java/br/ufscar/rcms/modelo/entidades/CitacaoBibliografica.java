@@ -21,8 +21,8 @@ public class CitacaoBibliografica extends Entidade {
     @Column(name = "id_citacao_bibliografica")
     private Integer idCitacaoBibliografica;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_citacao_bibliografica_pesquisador"))
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_citacao_bibliografica_pesquisador"), nullable = true)
     private Pesquisador pesquisador;
 
     @Column(name = "nome_citacao", nullable = false)

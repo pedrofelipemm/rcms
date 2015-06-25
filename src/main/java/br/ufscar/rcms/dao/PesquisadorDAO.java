@@ -2,6 +2,7 @@ package br.ufscar.rcms.dao;
 
 import java.util.List;
 
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 
 public interface PesquisadorDAO extends BaseDAO<Pesquisador, Long> {
@@ -10,4 +11,5 @@ public interface PesquisadorDAO extends BaseDAO<Pesquisador, Long> {
 
     List<Pesquisador> buscarTodosComIdioma(Long idIdioma);
 
+    List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(Long idUsuario);
 }

@@ -9,6 +9,8 @@ public interface CitacaoBibliograficaService extends Serializable {
 
     CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao);
 
+    void salvar(CitacaoBibliografica citacaoBibliografica);
+
     void remover(List<CitacaoBibliografica> citacoesBibliograficas);
 
     void remover(CitacaoBibliografica citacaoBibliografica);

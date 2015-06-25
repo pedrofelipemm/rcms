@@ -4,18 +4,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "artigo")
-public class ArtigoLattes extends BaseLattes {
+public class ArtigoLattes extends ProducaoLattes {
 
     private static final long serialVersionUID = 3706515736811497699L;
 
     @XmlElement
     private String doi;
-
-    @XmlElement
-    private String titulo;
-
-    @XmlElement
-    private String autores;
 
     @XmlElement
     private String revista;
@@ -29,19 +23,8 @@ public class ArtigoLattes extends BaseLattes {
     @XmlElement
     private Integer numero;
 
-    @XmlElement
-    private Integer ano;
-
     public String getDoi() {
         return doi;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getAutores() {
-        return autores;
     }
 
     public String getRevista() {
@@ -58,9 +41,5 @@ public class ArtigoLattes extends BaseLattes {
 
     public Integer getNumero() {
         return numero;
-    }
-
-    public Integer getAno() {
-        return ano;
     }
 }

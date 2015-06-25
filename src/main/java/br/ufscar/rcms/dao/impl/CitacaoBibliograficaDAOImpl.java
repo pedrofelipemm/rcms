@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.CitacaoBibliograficaDAO;
@@ -15,18 +17,16 @@ public class CitacaoBibliograficaDAOImpl extends BaseDAOImpl<CitacaoBibliografic
         CitacaoBibliograficaDAO {
 
     private static final long serialVersionUID = 8690233515966857478L;
+    private static final Logger LOGGER = LoggerFactory.getLogger(IdiomaDAOImpl.class);
 
     public CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao) {
-        Query q = getEntityManager().createQuery("SELECT c from CitacaoBibliografica AS c WHERE c.nomeCitacao = ':n'");
+        Query q = getEntityManager().createQuery("SELECT c from CitacaoBibliografica AS c WHERE c.nomeCitacao = :n");
         q.setParameter("n", nomeCitacao);
 
         try {
-            Object c = q.getResultList();
-            if (c != null)
-                return (CitacaoBibliografica) c;
-            else
-                return null;
+            return (CitacaoBibliografica) q.getSingleResult();
         } catch (NoResultException noResultException) {
+            LOGGER.debug("Nenhuma citacao encontrada com o nome \"%s\"", nomeCitacao, noResultException);
             return null;
         }
     }

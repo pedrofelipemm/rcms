@@ -3,6 +3,7 @@ package br.ufscar.rcms.servico;
 import java.io.Serializable;
 import java.util.List;
 
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
@@ -25,6 +26,8 @@ public interface PesquisadorService extends Serializable {
     void remover(Long id) throws PesquisadorNaoEncontradoException;
 
     Pesquisador buscarTodosDados(Long idUsuario);
+
+    List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario);
 
     TransientFile buscarFoto(Pesquisador pesquisador);
 

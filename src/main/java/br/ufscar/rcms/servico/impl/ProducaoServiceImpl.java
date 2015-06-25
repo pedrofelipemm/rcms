@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.dao.ProducaoDAO;
 import br.ufscar.rcms.modelo.entidades.Producao;
-import br.ufscar.rcms.servico.PublicacaoService;
+import br.ufscar.rcms.servico.ProducaoService;
 
 @Service("publicacaoService")
 @Transactional
-public class ProducaoServiceImpl implements PublicacaoService{
+public class ProducaoServiceImpl implements ProducaoService{
 
 	private static final long serialVersionUID = -3551699743568411854L;
 	

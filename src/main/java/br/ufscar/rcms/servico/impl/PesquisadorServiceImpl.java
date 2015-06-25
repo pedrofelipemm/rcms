@@ -1,5 +1,8 @@
 package br.ufscar.rcms.servico.impl;
 
+import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.dao.EnderecoDAO;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
@@ -23,9 +27,6 @@ import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.ExceptionUtils;
-
-import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 @Service("pesquisadorService")
 @Transactional(rollbackFor = { RCMSException.class })
@@ -136,6 +137,13 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         lazyLoadCollections(pesquisador);
 
         return pesquisador;
+    }
+
+    @Override
+    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
+
+        return pesquisadorDAO.buscarArtigosEmPeriodicos(idUsuario);
+
     }
 
     public void lazyLoadCollections(final Pesquisador pesquisador) {

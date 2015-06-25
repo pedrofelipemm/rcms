@@ -24,18 +24,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
+import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.CapituloLivro;
+import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.pk.CompreensaoIdiomaPK;
+import br.ufscar.rcms.modelo.lattes.ArtigoLattes;
+import br.ufscar.rcms.modelo.lattes.CapituloLattes;
 import br.ufscar.rcms.modelo.lattes.CurriculoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
+import br.ufscar.rcms.modelo.lattes.TrabalhoApresentadoLattes;
+import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.ProducaoService;
 import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
@@ -58,6 +67,12 @@ public class LattesServiceImpl implements LattesService {
 
     @Autowired
     private GrandeAreaAtuacaoService grandeAreaAtuacaoService;
+
+    @Autowired
+    private CitacaoBibliograficaService citacaoBibliograficaService;
+
+    @Autowired
+    private ProducaoService producaoService;
 
     @Value("${pasta.script.lattes}")
     private String pastaScriptLates;
@@ -100,11 +115,12 @@ public class LattesServiceImpl implements LattesService {
                 .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento())
                 .projetosPesquisa(pesquisadorLattes.getProjetosPesquisa()).orientacoes(pesquisadorLattes)
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
-                .producao(pesquisadorLattes)
                 .build();
 
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
+
+        salvarProducoes(pesquisadorLattes);
 
         return pesquisadorService.salvarOuAtualizar(novoPesquisador);
     }
@@ -275,4 +291,61 @@ public class LattesServiceImpl implements LattesService {
             }
         }
     }
+
+    private void salvarProducoes(PesquisadorLattes pesquisadorLattes) {
+
+        addArtigoEmPeriodico(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
+        // addApresentacaoTrabalho(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
+        addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
+    }
+
+    public void addArtigoEmPeriodico(List<ArtigoLattes> artigosPeriodicosLattes) {
+
+        for (ArtigoLattes producao : artigosPeriodicosLattes) {
+            ArtigoEmPeriodico artigo = new ArtigoEmPeriodico(producao.getTitulo(),
+                    this.getListaCitacoesBibliografica(producao
+                    .getAutores()), producao.getAno(), producao.getVolume(), producao.getPaginas(), producao.getDoi(),
+                    producao.getRevista(), producao.getNumero());
+            producaoService.saveOrUpdate(artigo);
+        }
+    }
+
+    public void addApresentacaoTrabalho(List<TrabalhoApresentadoLattes> apresentacaoTrabalhoLattes) {
+
+        for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
+            ApresentacaoTrabalho artigo = new ApresentacaoTrabalho(producao.getTitulo(),
+                    this.getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
+                    producao.getNatureza());
+            producaoService.saveOrUpdate(artigo);
+        }
+    }
+
+    public void addCapituloLivro(List<CapituloLattes> capitulosLivrosLattes) {
+
+        for (CapituloLattes producao : capitulosLivrosLattes) {
+            CapituloLivro artigo = new CapituloLivro(producao.getTitulo(), this.getListaCitacoesBibliografica(producao
+                    .getAutores()), producao.getAno(), producao.getLivro(), producao.getEdicao(), producao.getEditora());
+            producaoService.saveOrUpdate(artigo);
+        }
+    }
+
+    public List<CitacaoBibliografica> getListaCitacoesBibliografica(String autores) {
+
+        List<CitacaoBibliografica> listaCitacoes = new ArrayList<CitacaoBibliografica>();
+
+        String[] citacoes = autores.split(";");
+        for (String nomeCitacao : citacoes) {
+            CitacaoBibliografica citacaoExistente = citacaoBibliograficaService.buscarPorNomeCitacao(nomeCitacao);
+            if (citacaoExistente != null) {
+                listaCitacoes.add(citacaoExistente);
+            } else {
+                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao);
+                citacaoBibliograficaService.salvar(novaCitacao);
+                listaCitacoes.add(novaCitacao);
+            }
+        }
+        
+        return listaCitacoes;
+    }
+
 }

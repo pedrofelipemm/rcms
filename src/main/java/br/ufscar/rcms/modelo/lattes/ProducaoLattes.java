@@ -17,9 +17,6 @@ public class ProducaoLattes extends BaseLattes{
     @XmlElement
     private Integer ano;
 
-    @XmlElement
-    private String natureza;
-
     public String getTitulo() {
         return titulo;
     }
@@ -30,9 +27,5 @@ public class ProducaoLattes extends BaseLattes{
 
     public Integer getAno() {
         return ano;
-    }
-
-    public String getNatureza() {
-        return natureza;
     }
 }

@@ -2,6 +2,8 @@ package br.ufscar.rcms.modelo.entidades;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class TransientFile implements Serializable{
 
     private static final long serialVersionUID = 2778879220299272904L;
@@ -57,5 +59,10 @@ public class TransientFile implements Serializable{
 
     public void setFileExtension(final String fileExtension) {
         this.fileExtension = fileExtension;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

@@ -28,24 +28,21 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProjetoPesquisaMB.class);
 
-    @ManagedProperty("#{imageCacheMB}")
-    private ImageCacheMB cache;
-
     @ManagedProperty("#{projetoPesquisaService}")
     private ProjetoPesquisaService projetoPesquisaService;
-    
+
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
-    
+
     private transient List<Pesquisador> pesquisadores;
-    
+
     private Pesquisador pesquisador;
 
     private ProjetoPesquisa projetoPesquisa;
     private transient DataModel<ProjetoPesquisa> projetosPesquisa;
-    
+
     private transient Part fotoProjetoPesquisa;
-    
+
     @PostConstruct
     public void inicializar() {
 
@@ -53,6 +50,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
         carregarDados();
     }
 
+    @Override
     protected void carregarDados() {
     	projetosPesquisa = new ListDataModel<ProjetoPesquisa>(projetoPesquisaService.buscarTodos());
     	pesquisadores = new ArrayList<Pesquisador>(pesquisadorService.buscarTodos());
@@ -63,6 +61,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
         }
     }
 
+    @Override
     protected void limparDados() {
         projetoPesquisa = new ProjetoPesquisa();
         getFlash().clear();
@@ -85,9 +84,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return CONSULTA_PROJETO_PESQUISA;
     }
 
-    public void uploadFile() {
-        cache.sendFotoPesquisador(fotoProjetoPesquisa);
-    }
+    public void uploadFile() {}
 
     public String exibir(ProjetoPesquisa projetoPesquisa) {
 
@@ -98,14 +95,14 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return EXIBE_PROJETO_PESQUISA;
     }
 
-    public String editar(ProjetoPesquisa projetoPesquisa) {
+    public String editar(final ProjetoPesquisa projetoPesquisa) {
 
         setFlashObject(FLASH_KEY_PROJETO_PESQUISA, projetoPesquisa);
 
         return CADASTRO_PROJETO_PESQUISA;
     }
 
-    public String excluir(ProjetoPesquisa projetoPesquisa) {
+    public String excluir(final ProjetoPesquisa projetoPesquisa) {
 
         try {
             projetoPesquisaService.remover(projetoPesquisa);
@@ -116,13 +113,13 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
         return CONSULTA_PROJETO_PESQUISA;
     }
-    
+
     public void adicionarPequisador() {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
     	projetoPesquisa.adicionarPesquisador(getPesquisador());
     	setPesquisador(new Pesquisador());
     }
-    
+
     public void removerPequisador(Pesquisador pesquisador) {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
     	projetoPesquisa.removerPesquisador(pesquisador);
@@ -131,20 +128,12 @@ public class ProjetoPesquisaMB extends AbstractMB {
     public void pesquisar() {
     }
 
-	public ImageCacheMB getCache() {
-		return cache;
-	}
-
-	public void setCache(ImageCacheMB cache) {
-		this.cache = cache;
-	}
-
 	public ProjetoPesquisaService getProjetoPesquisaService() {
 		return projetoPesquisaService;
 	}
 
 	public void setProjetoPesquisaService(
-			ProjetoPesquisaService projetoPesquisaService) {
+			final ProjetoPesquisaService projetoPesquisaService) {
 		this.projetoPesquisaService = projetoPesquisaService;
 	}
 
@@ -152,7 +141,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return projetoPesquisa;
 	}
 
-	public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+	public void setProjetoPesquisa(final ProjetoPesquisa projetoPesquisa) {
 		this.projetoPesquisa = projetoPesquisa;
 	}
 
@@ -160,7 +149,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return projetosPesquisa;
 	}
 
-	public void setProjetosPesquisa(DataModel<ProjetoPesquisa> projetosPesquisa) {
+	public void setProjetosPesquisa(final DataModel<ProjetoPesquisa> projetosPesquisa) {
 		this.projetosPesquisa = projetosPesquisa;
 	}
 
@@ -168,7 +157,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return fotoProjetoPesquisa;
 	}
 
-	public void setFotoProjetoPesquisa(Part fotoProjetoPesquisa) {
+	public void setFotoProjetoPesquisa(final Part fotoProjetoPesquisa) {
 		this.fotoProjetoPesquisa = fotoProjetoPesquisa;
 	}
 
@@ -176,7 +165,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return pesquisador;
 	}
 
-	public void setPesquisador(Pesquisador pesquisador) {
+	public void setPesquisador(final Pesquisador pesquisador) {
 		this.pesquisador = pesquisador;
 	}
 
@@ -184,7 +173,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return pesquisadorService;
 	}
 
-	public void setPesquisadorService(PesquisadorService pesquisadorService) {
+	public void setPesquisadorService(final PesquisadorService pesquisadorService) {
 		this.pesquisadorService = pesquisadorService;
 	}
 
@@ -192,7 +181,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return pesquisadores;
 	}
 
-	public void setPesquisadores(List<Pesquisador> pesquisadores) {
+	public void setPesquisadores(final List<Pesquisador> pesquisadores) {
 		this.pesquisadores = pesquisadores;
 	}
 }

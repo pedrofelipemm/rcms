@@ -306,6 +306,15 @@ public class Pesquisador extends Usuario {
         }
     }
 
+    public void addProducoes(final List<? extends Producao> producoes) {
+        if (producoes != null) {
+
+            for (Producao producao : producoes) {
+
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Pesquisador [idUsuario=" + getIdUsuario() + ", nome=" + getNome() + ", codigoLattes=" + codigoLattes

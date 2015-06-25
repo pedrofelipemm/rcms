@@ -18,7 +18,7 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.TextoEmJornal;
 import br.ufscar.rcms.servico.PesquisadorService;
-import br.ufscar.rcms.servico.PublicacaoService;
+import br.ufscar.rcms.servico.ProducaoService;
 
 @ViewScoped
 @ManagedBean(name = "publicacaoMB")
@@ -27,7 +27,7 @@ public class ProducaoMB extends AbstractMB {
 	@ManagedProperty("#{pesquisadorService}")
 	private PesquisadorService pesquisadorService;
 	@ManagedProperty("#{publicacaoService}")
-	private PublicacaoService publicacaoService;
+	private ProducaoService publicacaoService;
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ProducaoMB.class);
@@ -184,11 +184,11 @@ public class ProducaoMB extends AbstractMB {
 		this.tipoPublicacao = tipoPublicacao;
 	}
 
-	public PublicacaoService getPublicacaoService() {
+	public ProducaoService getPublicacaoService() {
 		return publicacaoService;
 	}
 
-	public void setPublicacaoService(PublicacaoService publicacaoService) {
+	public void setPublicacaoService(ProducaoService publicacaoService) {
 		this.publicacaoService = publicacaoService;
 	}
 

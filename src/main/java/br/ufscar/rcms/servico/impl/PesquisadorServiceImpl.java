@@ -1,10 +1,16 @@
 package br.ufscar.rcms.servico.impl;
 
+import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.dao.EnderecoDAO;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
@@ -23,9 +30,7 @@ import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.ExceptionUtils;
-
-import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+import br.ufscar.rcms.util.SupportedImageTypes;
 
 @Service("pesquisadorService")
 @Transactional(rollbackFor = { RCMSException.class })
@@ -71,8 +76,8 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         }
     }
 
-    private void salvarFotoPesquisador(final Pesquisador pesquisador) throws RCMSException {
-
+    @Override
+    public void salvarFotoPesquisador(final Pesquisador pesquisador) throws RCMSException {
         try {
 
             TransientFile foto = pesquisador.getFoto();
@@ -134,12 +139,58 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
         Pesquisador pesquisador = pesquisadorDAO.buscar(idUsuario);
         lazyLoadCollections(pesquisador);
+        loadPhoto(pesquisador);
 
         return pesquisador;
     }
 
-    public void lazyLoadCollections(final Pesquisador pesquisador) {
+    @Override
+    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
+        return pesquisadorDAO.buscarArtigosEmPeriodicos(idUsuario);
+    }
 
+    public TransientFile buscarFoto(final Pesquisador pesquisador) {
+        Pesquisador pesquisadorTemp = new Pesquisador();
+        pesquisadorTemp.setCodigoLattes(pesquisador.getCodigoLattes());
+        loadPhoto(pesquisadorTemp);
+        return pesquisadorTemp.getFoto();
+    }
+
+    @Override
+    public TransientFile buscarFoto(final Long idUsuario) {
+        return buscarFoto(buscar(idUsuario));
+    }
+
+    private void loadPhoto(final Pesquisador pesquisador) {
+        try {
+            String fileExtension = getFileExtension(pesquisador);
+            if (!isEmpty(fileExtension)) {
+                String fileName = pesquisador.getCodigoLattes() + "." + fileExtension;
+                byte[] foto = Files.readAllBytes(Paths.get(pastaFotosPesquisadores + fileName));
+
+                TransientFile file = new TransientFile();
+                file.setFile(foto);
+                file.setFileExtension("png");
+                file.setFileLocation(pastaFotosPesquisadores);
+                file.setFileName(fileName);
+
+                pesquisador.setFoto(file);
+            }
+        } catch (IOException exception) {
+            LOGGER.error(String.format("Erro ao carregar ao carregar foto do pesquisador: %s", pesquisador.getNome()), exception);
+        }
+    }
+
+    private String getFileExtension(final Pesquisador pesquisador) {
+        for (SupportedImageTypes supportedImageTypes : SupportedImageTypes.values()) {
+            if (Files.exists(Paths.get(pastaFotosPesquisadores + pesquisador.getCodigoLattes() + "." + supportedImageTypes.getFileType()))) {
+                return supportedImageTypes.getFileType();
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private void lazyLoadCollections(final Pesquisador pesquisador) {
         pesquisador.getAreaAtuacoes().size();
         pesquisador.getCitacaoBibliograficas().size();
         pesquisador.getCompreensaoIdiomas().size();

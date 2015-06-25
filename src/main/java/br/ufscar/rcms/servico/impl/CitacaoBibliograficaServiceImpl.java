@@ -20,6 +20,11 @@ public class CitacaoBibliograficaServiceImpl implements CitacaoBibliograficaServ
     private CitacaoBibliograficaDAO citacaoBibliograficaDAO;
 
     @Override
+    public void salvar(CitacaoBibliografica citacaoBibliografica) {
+        citacaoBibliograficaDAO.salvar(citacaoBibliografica);
+    }
+
+    @Override
     public void remover(List<CitacaoBibliografica> citacoesBibliograficas) {
         citacaoBibliograficaDAO.remover(citacoesBibliograficas);
     }

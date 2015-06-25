@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,12 +33,6 @@ public abstract class Producao extends Entidade {
     @Column(name = "ano")
     private Integer ano;
 
-    @Column(name = "volume")
-    private Integer volume;
-
-    @Column(name = "paginas")
-    private String paginas;
-
     @Column(name = "link")
     private String link;
 
@@ -48,7 +41,7 @@ public abstract class Producao extends Entidade {
     
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
-   
+
 
     public Long getIdProducao() {
         return idProducao;
@@ -72,22 +65,6 @@ public abstract class Producao extends Entidade {
 
     public void setAno(Integer ano) {
         this.ano = ano;
-    }
-
-    public Integer getVolume() {
-        return volume;
-    }
-
-    public void setVolume(Integer volume) {
-        this.volume = volume;
-    }
-
-    public String getPaginas() {
-        return paginas;
-    }
-
-    public void setPaginas(String paginas) {
-        this.paginas = paginas;
     }
 
     public String getLink() {
@@ -157,10 +134,8 @@ public abstract class Producao extends Entidade {
     	publicacaoDestino.setCitacaoBibliograficas(citacaoBibliograficas);
     	publicacaoDestino.setIdProducao(idProducao);
     	publicacaoDestino.setLink(link);
-    	publicacaoDestino.setPaginas(paginas);
     	publicacaoDestino.setPdf(pdf);
     	publicacaoDestino.setTitulo(titulo);
-    	publicacaoDestino.setVolume(volume);
     	return publicacaoDestino;
     }
 

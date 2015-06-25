@@ -1,12 +1,9 @@
 package br.ufscar.rcms.factory;
 
-import java.util.List;
-
 import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoAceitoParaPublicacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
-import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.LivroPublicado;
 import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.OutraProducaoTecnica;
@@ -56,15 +53,4 @@ public abstract class ProducaoFactory {
 		}
 	}
 
-    public static Producao createProducao(String titulo, List<CitacaoBibliografica> citacaoBibliograficas, Integer ano,
-            Class<? extends Producao> clazz) throws InstantiationException,
-            IllegalAccessException {
-
-        Producao producao = clazz.newInstance();
-        producao.setTitulo(titulo);
-        producao.setCitacaoBibliograficas(citacaoBibliograficas);
-        producao.setAno(ano);
-
-        return producao;
-    }
 }

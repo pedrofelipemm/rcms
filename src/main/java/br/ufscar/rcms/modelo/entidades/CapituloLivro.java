@@ -1,5 +1,7 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -21,6 +23,20 @@ public class CapituloLivro extends ProducaoBibliografica {
 
     @Column(name = "editora")
     private String editora;
+
+    public CapituloLivro() {
+    }
+
+    public CapituloLivro(String titulo, List<CitacaoBibliografica> autores, Integer ano, String livro, String edicao,
+            String editora) {
+
+        super.setTitulo(titulo);
+        super.setCitacaoBibliograficas(autores);
+        super.setAno(ano);
+        this.livro = livro;
+        this.edicao = edicao;
+        this.editora = editora;
+    }
 
     public String getLivro() {
         return livro;

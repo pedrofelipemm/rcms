@@ -1,5 +1,7 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,6 +18,16 @@ public class ApresentacaoTrabalho extends ProducaoBibliografica {
     @Column(name = "natureza")
     private String natureza;
 
+    public ApresentacaoTrabalho() {
+    }
+
+    public ApresentacaoTrabalho(String titulo, List<CitacaoBibliografica> autores, Integer ano, String natureza) {
+
+        super.setTitulo(titulo);
+        super.setCitacaoBibliograficas(autores);
+        super.setAno(ano);
+        this.natureza = natureza;
+    }
     public String getNatureza() {
         return natureza;
     }

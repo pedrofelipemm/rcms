@@ -45,7 +45,12 @@
 															itemLabel="#{entry.key}" />
 														<f:ajax listener="#{configMB.alterarIdioma}" />
 													</h:selectOneMenu>
-													
+												</div>
+											</div>
+										</div>
+				            			<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
 													<h:outputLabel for="selectOneMenuEstilo" pt:name="selectOneMenuEstiloLabel" value="#{mensagens['estilos']}" />
 													<h:selectOneMenu id="selectOneMenuEstilo" pt:name="selectOneMenuEstilo" value="#{configMB.estilo}"
 														styleClass="form-control">
@@ -53,14 +58,19 @@
 															itemLabel="#{entry.key}" />
 														<f:ajax listener="#{configMB.alterarEstilo}"/>
 													</h:selectOneMenu>
-													
-<!-- 													<h:outputLabel for="selectOneMenuTema" pt:name="selectOneMenuTemaLabel" value="#{mensagens['temas']}" /> -->
-<!-- 													<h:selectOneMenu id="selectOneMenuTema" pt:name="selectOneMenuTema" value="#{configMB.tema}" -->
-<!-- 														styleClass="form-control"> -->
-<!-- 														<f:selectItems value="#{configMB.temas.entrySet()}" var="entry" itemValue="#{entry.value}" -->
-<!-- 															itemLabel="#{entry.key}" /> -->
-<!-- 														<f:ajax listener="#{configMB.alterarTema}" render="@all" /> -->
-<!-- 													</h:selectOneMenu> -->
+												</div>
+											</div>
+										</div>
+				            			<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<h:outputLabel for="selectOneMenuTema" pt:name="selectOneMenuTemaLabel" value="#{mensagens['temas']}" />
+													<h:selectOneMenu id="selectOneMenuTema" pt:name="selectOneMenuTema" value="#{configMB.tema}"
+														styleClass="form-control">
+														<f:selectItems value="#{configMB.temas.entrySet()}" var="entry" itemValue="#{entry.value}"
+															itemLabel="#{entry.key}" />
+														<f:ajax listener="#{configMB.alterarTema}" render="@all" />
+													</h:selectOneMenu>
 												</div>
 											</div>
 										</div>

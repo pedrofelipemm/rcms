@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.bean.ManagedProperty;
-
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +14,6 @@ import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.factory.OrientacaoFactory;
-import br.ufscar.rcms.factory.ProducaoFactory;
-import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.Doutorado;
 import br.ufscar.rcms.modelo.entidades.Endereco;
@@ -31,11 +27,9 @@ import br.ufscar.rcms.modelo.entidades.OrientacaoOutroTipo;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.PremioTitulo;
-import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.modelo.entidades.TCC;
 import br.ufscar.rcms.modelo.lattes.AreaAtuacaoLattes;
-import br.ufscar.rcms.modelo.lattes.ArtigoLattes;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
 import br.ufscar.rcms.modelo.lattes.EventoLatttes;
 import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
@@ -51,14 +45,10 @@ import br.ufscar.rcms.modelo.lattes.PremioLattes;
 import br.ufscar.rcms.modelo.lattes.PremiosLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
-import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorBuilder.class);
-
-    @ManagedProperty("#{citacaoBibliograficaService}")
-    private CitacaoBibliograficaService citacaoBibliograficaService;
 
     private Pesquisador pesquisador;
     private Pesquisador cachedPesquisador;
@@ -166,6 +156,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     }
 
     public PesquisadorBuilder citacaoBibliografica(final IdentificacaoLattes identificacao) {
+
         if (identificacao != null) {
             String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
             for (String citacao : citacoes) {
@@ -186,25 +177,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
                         endereco.getEnderecoProfissionalLatitude(), endereco.getEnderecoProfissionalLongitude()));
             }
         }
-        return this;
-    }
-
-    public PesquisadorBuilder producao(final PesquisadorLattes pesquisadorLattes) {
-        /*
-         * pesquisador.get.addProducao(buildProducao(pesquisadorLattes.getArtigosPeriodicos().getArtigos(),
-         * ArtigoEmPeriodico.class)); /*
-         * pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoDoutoradoConcluido().getTeses(),
-         * Doutorado.class));
-         * pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoIniciacaoCientificaConcluido()
-         * .getIniciacaoCientifica(), IniciacaoCientifica.class)); pesquisador.addOrientacoes(buildOrientacao(
-         * pesquisadorLattes.getOrientacaoMestradoAndamento().getDissertacoes(), Mestrado.class));
-         * pesquisador.addOrientacoes(buildOrientacao(
-         * pesquisadorLattes.getOrientacaoMestradoConcluido().getDissertacoes(), Mestrado.class));
-         * pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoOutrosTipoConcluido()
-         * .getOrientacaoOutra(), OrientacaoOutroTipo.class));
-         * pesquisador.addOrientacoes(buildOrientacao(pesquisadorLattes.getOrientacaoTCCConcluido().getTccs(),
-         * TCC.class));
-         */
         return this;
     }
 
@@ -288,39 +260,5 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
             }
         }
         return orientacaoList;
-    }
-
-    private List<? extends Producao> buildProducao(final List<? extends ArtigoLattes> producoes,
-            final Class<? extends ArtigoEmPeriodico> clazz) {
-
-        if (CollectionUtils.isEmpty(producoes)) {
-            return null;
-        }
-
-        List<Producao> producaoList = new ArrayList<Producao>();
-        for (ArtigoLattes producao : producoes) {
-
-            String[] citacoes = producao.getAutores().split(";");
-            List<CitacaoBibliografica> autores = null;
-            for (String citacao : citacoes) {
-                autores.add(citacaoBibliograficaService.buscarPorNomeCitacao(citacao));
-            }
-
-            try {
-                producaoList
-                        .add(ProducaoFactory.createProducao(producao.getTitulo(), autores, producao.getAno(), clazz));
-            } catch (InstantiationException | IllegalAccessException e) {
-                LOGGER.error(e.getMessage(), e);
-            }
-        }
-        return producaoList;
-    }
-
-    private CitacaoBibliograficaService getCitacaoBibliograficaService() {
-        return citacaoBibliograficaService;
-    }
-
-    private void setCitacaoBibliograficaService(CitacaoBibliograficaService citacaoBibliograficaService) {
-        this.citacaoBibliograficaService = citacaoBibliograficaService;
     }
 }

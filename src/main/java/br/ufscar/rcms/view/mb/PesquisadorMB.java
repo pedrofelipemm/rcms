@@ -1,5 +1,8 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.util.FileUtils.extractFileExtension;
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +16,6 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -22,6 +23,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import br.ufscar.rcms.comparator.PesquisadorComparator;
 import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
@@ -47,9 +49,6 @@ import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 import br.ufscar.rcms.view.model.SortableDataModel;
 
-import static br.ufscar.rcms.util.FileUtils.extractFileExtension;
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
-
 @ViewScoped
 @ManagedBean(name = "pesquisadorMB")
 public class PesquisadorMB extends AbstractMB {
@@ -57,9 +56,6 @@ public class PesquisadorMB extends AbstractMB {
     private static final long serialVersionUID = 7023051572658948461L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorMB.class);
-
-    @ManagedProperty("#{imageCacheMB}")
-    private ImageCacheMB cache;
 
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
@@ -89,8 +85,8 @@ public class PesquisadorMB extends AbstractMB {
     private OrganizacaoEventoService organizacaoEventoService;
 
     private Pesquisador pesquisador;
-    private transient DataModel<Pesquisador> pesquisadores;
-    private transient Part fotoPesquisador;
+    private DataModel<Pesquisador> pesquisadores;
+    private Part fotoPesquisador;
 
     private CompreensaoIdioma compreensaoIdioma;
     private transient DataModel<CompreensaoIdioma> compreensaoIdiomas;
@@ -124,6 +120,8 @@ public class PesquisadorMB extends AbstractMB {
     private OrganizacaoEvento organizacaoEvento;
     private transient List<OrganizacaoEvento> organizacaoEventos;
 
+    private transient List<ArtigoEmPeriodico> listaArtigoEmPeriodico;
+
     @PostConstruct
     public void inicializar() {
         limparDados();
@@ -142,6 +140,7 @@ public class PesquisadorMB extends AbstractMB {
         if (pesquisadorEdicao != null) {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
             removeNullValues(pesquisador.getCompreensaoIdiomas(), pesquisador.getParticipacaoEventos());
+
         }
     }
 
@@ -211,10 +210,6 @@ public class PesquisadorMB extends AbstractMB {
 
         keepMessagesOnRedirect();
         return CONSULTA_PESQUISADORES;
-    }
-
-    public StreamedContent getFoto() {
-        return new DefaultStreamedContent();
     }
 
     public PesquisadorService getPesquisadorService() {
@@ -604,14 +599,6 @@ public class PesquisadorMB extends AbstractMB {
         this.participacaoEventoService = participacaoEventoService;
     }
 
-    public ImageCacheMB getCache() {
-        return cache;
-    }
-
-    public void setCache(final ImageCacheMB cache) {
-        this.cache = cache;
-    }
-
     public OrganizacaoEvento getOrganizacaoEvento() {
         return organizacaoEvento;
     }
@@ -634,5 +621,16 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setOrganizacaoEventoService(final OrganizacaoEventoService organizacaoEventoService) {
         this.organizacaoEventoService = organizacaoEventoService;
+    }
+
+    public List<ArtigoEmPeriodico> getListaArtigoEmPeriodico() {
+
+        this.listaArtigoEmPeriodico = this.pesquisadorService.buscarArtigosEmPeriodicos(pesquisador.getIdUsuario());
+
+        return listaArtigoEmPeriodico;
+    }
+
+    public void setListaArtigoEmPeriodico(List<ArtigoEmPeriodico> listaArtigoEmPeriodico) {
+        this.listaArtigoEmPeriodico = listaArtigoEmPeriodico;
     }
 }

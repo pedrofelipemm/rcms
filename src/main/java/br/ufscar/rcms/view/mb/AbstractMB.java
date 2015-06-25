@@ -76,8 +76,9 @@ public abstract class AbstractMB implements Serializable {
     //Projetos de Pesquisa
     public static final String CADASTRO_PROJETO_PESQUISA = "cadastroProjetoPesquisa";
     public static final String CONSULTA_PROJETO_PESQUISA = "consultaProjetoPesquisa";
-    public static final String FLASH_KEY_PROJETO_PESQUISA = "projetoPesquisa";
     public static final String EXIBE_PROJETO_PESQUISA = "projetoPesquisa";
+    public static final String FLASH_KEY_PROJETO_PESQUISA = "projetoPesquisa";
+
 
     // Painel de Controle
     public static final String PAINEL_CONTROLE = "painelControle";

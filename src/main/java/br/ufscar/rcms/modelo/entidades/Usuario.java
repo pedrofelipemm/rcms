@@ -39,8 +39,8 @@ public class Usuario extends Entidade {
     @Column(name = "email", nullable = false)
     private String email;
     
-    @Column
-    private boolean enable;
+    @Column(columnDefinition = "boolean default true")
+    private boolean enabled;
     
     @OneToMany
     private List<Autorizacao> autorizacoes;
@@ -51,14 +51,6 @@ public class Usuario extends Entidade {
 
 	public void setAutorizacoes(List<Autorizacao> autorizacoes) {
 		this.autorizacoes = autorizacoes;
-	}
-
-	public boolean isEnable() {
-		return enable;
-	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
 	}
 
 	public Long getIdUsuario() {

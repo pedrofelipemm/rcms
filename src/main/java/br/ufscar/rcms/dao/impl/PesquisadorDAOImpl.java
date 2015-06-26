@@ -27,7 +27,7 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Pesquisador> buscarTodosComIdioma(Long idIdioma) {
+    public List<Pesquisador> buscarTodosComIdioma(final Long idIdioma) {
 
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT P FROM " + getClazz().getName() + " P ");
@@ -48,7 +48,8 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(Long idUsuario) {
+    // TODO mover para ProducaoDAOImpl
+    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
 
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT AP FROM " + ArtigoEmPeriodico.class.getName() + " AP ");

@@ -88,4 +88,4 @@ local.properties
 trace.txt
 .springBeans
 
-/target/
+/target//target

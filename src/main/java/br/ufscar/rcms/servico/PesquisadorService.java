@@ -27,6 +27,7 @@ public interface PesquisadorService extends Serializable {
 
     Pesquisador buscarTodosDados(Long idUsuario);
 
+    // TODO mover para ProducaoService
     List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario);
 
     TransientFile buscarFoto(Pesquisador pesquisador);

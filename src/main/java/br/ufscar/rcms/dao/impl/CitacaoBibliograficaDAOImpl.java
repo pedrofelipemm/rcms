@@ -17,9 +17,10 @@ public class CitacaoBibliograficaDAOImpl extends BaseDAOImpl<CitacaoBibliografic
         CitacaoBibliograficaDAO {
 
     private static final long serialVersionUID = 8690233515966857478L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(IdiomaDAOImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CitacaoBibliograficaDAOImpl.class);
 
-    public CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao) {
+    @Override
+    public CitacaoBibliografica buscarPorNomeCitacao(final String nomeCitacao) {
         Query q = getEntityManager().createQuery("SELECT c from CitacaoBibliografica AS c WHERE c.nomeCitacao = :n");
         q.setParameter("n", nomeCitacao);
 
@@ -32,7 +33,7 @@ public class CitacaoBibliograficaDAOImpl extends BaseDAOImpl<CitacaoBibliografic
     }
 
     @Override
-    public void remover(List<CitacaoBibliografica> citacoesBibliograficas) {
+    public void remover(final List<CitacaoBibliografica> citacoesBibliograficas) {
         for (CitacaoBibliografica citacaoBibliografica : citacoesBibliograficas) {
             remover(citacaoBibliografica);
         }

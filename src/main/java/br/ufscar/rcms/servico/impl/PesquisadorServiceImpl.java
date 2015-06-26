@@ -78,6 +78,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
     @Override
     public void salvarFotoPesquisador(final Pesquisador pesquisador) throws RCMSException {
+        LOGGER.debug("BEGIN - salvarFotoPesquisador() - {0}", pesquisador);
         try {
 
             TransientFile foto = pesquisador.getFoto();
@@ -90,6 +91,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
             LOGGER.error(message, e);
             throw new RCMSException(message, e);
         }
+        LOGGER.debug("END - salvarFotoPesquisador() - {0}", pesquisador);
     }
 
     @Override
@@ -145,14 +147,18 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     }
 
     @Override
+    // TODO mover para ProducaoServiceImpl
     public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
         return pesquisadorDAO.buscarArtigosEmPeriodicos(idUsuario);
     }
 
+    @Override
     public TransientFile buscarFoto(final Pesquisador pesquisador) {
         Pesquisador pesquisadorTemp = new Pesquisador();
-        pesquisadorTemp.setCodigoLattes(pesquisador.getCodigoLattes());
-        loadPhoto(pesquisadorTemp);
+        if (!isEmpty(pesquisador)) {
+            pesquisadorTemp.setCodigoLattes(pesquisador.getCodigoLattes());
+            loadPhoto(pesquisadorTemp);
+        }
         return pesquisadorTemp.getFoto();
     }
 

@@ -11,5 +11,6 @@ public interface PesquisadorDAO extends BaseDAO<Pesquisador, Long> {
 
     List<Pesquisador> buscarTodosComIdioma(Long idIdioma);
 
+    // TODO mover para ProducaoDAO
     List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(Long idUsuario);
 }

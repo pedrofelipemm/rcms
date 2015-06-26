@@ -57,7 +57,8 @@ public class ImageServlet extends HttpServlet {
     }
 
     private Long extractUserId(final HttpServletRequest request) {
-        return Long.valueOf(request.getPathInfo().substring(1));
+        String id = request.getPathInfo().substring(1);
+        return !isEmpty(id) ? Long.valueOf(id) : Long.valueOf(-1);
     }
 
     private byte[] loadImage(final TransientFile file) {

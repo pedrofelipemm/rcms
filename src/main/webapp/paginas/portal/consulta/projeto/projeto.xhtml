@@ -74,6 +74,20 @@
                       <div class="panel-heading">
                         <h3 class="panel-title">#{mensagens['exibir.projeto.pesquisadores']}</h3>
                       </div>
+                      <div class="panel-body">
+                        <div class="container-fluid">
+                        	<ui:repeat var="pesquisador" value="#{projetoPesquisaMB.projetoPesquisa.pesquisadores}" varStatus="linha">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{linha.index + 1}.</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{pesquisador.nome}
+	                                </div>
+	                            </div>
+                            </ui:repeat>
+                        </div>
+                      </div>
                       
                     </div>
                 </div>

@@ -28,7 +28,9 @@
                     <p>#{pesquisadorMB.pesquisador.resumoProfissional}</p>
                 </div>
                 <div class="col-md-3 text-right">
-                	<h:graphicImage value="/resources/images/person.png" alt="#{pesquisadorMB.pesquisador.nome}" />
+                	<div class="foto-pesquisador">
+                		<img title="#{mensagens['foto.pesquisador']}" src="#{request.contextPath}/images/#{pesquisadorMB.pesquisador.idUsuario}"></img>
+                	</div>
                     <p><a href="http://lattes.cnpq.br/#{pesquisadorMB.pesquisador.codigoLattes}" class="lnk-lattes" target="_blank">Currículo Lattes</a></p>
                 </div>
             </div>

@@ -177,3 +177,9 @@ ol.listas-numeradas > li:before {
 	margin-top: 20px;
 	margin-bottom: 100px;
 }
+
+.foto-pesquisador, .foto-pesquisador > img {
+	height: 200px;
+	width: 185px;
+	margin: auto;
+}

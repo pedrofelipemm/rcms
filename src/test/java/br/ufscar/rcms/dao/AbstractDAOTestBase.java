@@ -32,15 +32,27 @@ public class AbstractDAOTestBase extends AbstractTransactionalJUnit4SpringContex
         assertEquals("org.apache.logging.log4j.core.async.AsyncLoggerContextSelector", System.getProperty("Log4jContextSelector"));
     }
 
-    protected Entidade salvar(Entidade entidade) {
-        entidade = entityManager.merge(entidade);
+    protected Entidade merge(final Entidade entidade) {
+        Entidade entidadeSalva = entityManager.merge(entidade);
         entityManager.flush();
-        return entidade;
+        return entidadeSalva;
+    }
+
+    protected void merge(final Entidade... entidades) {
+        for (Entidade entidade : entidades) {
+            entityManager.merge(entidade);
+        }
+        entityManager.flush();
+    }
+
+    protected void salvar(final Entidade entidade) {
+        entityManager.persist(entidade);
+        entityManager.flush();
     }
 
     protected void salvar(final Entidade... entidades) {
         for (Entidade entidade : entidades) {
-            entityManager.merge(entidade);
+            entityManager.persist(entidade);
         }
         entityManager.flush();
     }

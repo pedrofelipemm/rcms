@@ -28,10 +28,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("file:${user.home}/RCMS/config/application.properties")
 public class ApplicationConfig {
 
-    static {
-        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
-    }
-
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
     @Value("${spring.packages.to.scan}")
@@ -57,6 +53,10 @@ public class ApplicationConfig {
 
     @Value("${database.password}")
     private String databasePassword;
+
+    static {
+        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+    }
 
     public ApplicationConfig() {
         // LOGGER.info(commitInfo());

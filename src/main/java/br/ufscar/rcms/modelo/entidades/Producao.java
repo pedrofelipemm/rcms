@@ -38,8 +38,8 @@ public abstract class Producao extends Entidade {
 
     @Column(name = "pdf")
     private byte[] pdf;
-    
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
 
 
@@ -47,7 +47,7 @@ public abstract class Producao extends Entidade {
         return idProducao;
     }
 
-    public void setIdProducao(Long idProducao) {
+    public void setIdProducao(final Long idProducao) {
         this.idProducao = idProducao;
     }
 
@@ -55,7 +55,7 @@ public abstract class Producao extends Entidade {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
+    public void setTitulo(final String titulo) {
         this.titulo = titulo;
     }
 
@@ -63,7 +63,7 @@ public abstract class Producao extends Entidade {
         return ano;
     }
 
-    public void setAno(Integer ano) {
+    public void setAno(final Integer ano) {
         this.ano = ano;
     }
 
@@ -71,7 +71,7 @@ public abstract class Producao extends Entidade {
         return link;
     }
 
-    public void setLink(String link) {
+    public void setLink(final String link) {
         this.link = link;
     }
 
@@ -87,7 +87,7 @@ public abstract class Producao extends Entidade {
         return copyOfPdf;
     }
 
-    public void setPdf(byte[] pdf) {
+    public void setPdf(final byte[] pdf) {
 
         if (pdf == null) {
             return;
@@ -108,7 +108,7 @@ public abstract class Producao extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -128,8 +128,8 @@ public abstract class Producao extends Entidade {
         }
         return true;
     }
-    
-    public Producao CloneTo(Producao publicacaoDestino){
+
+    public Producao CloneTo(final Producao publicacaoDestino){
     	publicacaoDestino.setAno(ano);
     	publicacaoDestino.setCitacaoBibliograficas(citacaoBibliograficas);
     	publicacaoDestino.setIdProducao(idProducao);
@@ -143,7 +143,7 @@ public abstract class Producao extends Entidade {
 		return citacaoBibliograficas;
 	}
 
-	public void setCitacaoBibliograficas(List<CitacaoBibliografica> citacaoBibliograficas) {
+	public void setCitacaoBibliograficas(final List<CitacaoBibliografica> citacaoBibliograficas) {
 		this.citacaoBibliograficas = citacaoBibliograficas;
 	}
 }

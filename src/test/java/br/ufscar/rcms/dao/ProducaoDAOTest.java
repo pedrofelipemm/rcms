@@ -1,5 +1,6 @@
 package br.ufscar.rcms.dao;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class ProducaoDAOTest extends AbstractDAOTestBase {
     public void init() {
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional("Teste");
-        salvar(new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", true, "resumoProfissional").endereco(endereco).build());
+        merge(new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", true, "resumoProfissional").endereco(endereco).build());
     }
 
     @Test
@@ -38,10 +39,12 @@ public class ProducaoDAOTest extends AbstractDAOTestBase {
         List<CitacaoBibliografica> autores = Arrays.asList(new CitacaoBibliografica(pesquisador, pesquisador.getNome() + " citacação"));
         ArtigoEmPeriodico artigoEmPeriodico = new ArtigoEmPeriodico("titulo", autores, 2000, "vol.1", "200", "doi", "revista", 1);
 
-        salvar(artigoEmPeriodico);
+        merge(artigoEmPeriodico);
 
      // List<ArtigoEmPeriodico> artigos = producaoDAO.buscarArtigosEmPeriodicos(pesquisador.getIdUsuario());
         List<ArtigoEmPeriodico> artigos = pesquisadorDAO.buscarArtigosEmPeriodicos(pesquisador.getIdUsuario());
+        assertEquals(1, artigos.size());
+
         for (ArtigoEmPeriodico artigo : artigos) {
             assertNotNull(artigo.getAno());
             assertNotNull(artigo.getDoi());

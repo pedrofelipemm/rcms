@@ -120,7 +120,7 @@ public class LattesServiceImpl implements LattesService {
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
 
-        // salvarProducoes(pesquisadorLattes);
+        salvarProducoes(pesquisadorLattes);
 
         return pesquisadorService.salvarOuAtualizar(novoPesquisador);
     }

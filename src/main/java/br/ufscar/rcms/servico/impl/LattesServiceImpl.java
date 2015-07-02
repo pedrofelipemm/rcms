@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
-import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
@@ -120,9 +119,11 @@ public class LattesServiceImpl implements LattesService {
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
 
+        Pesquisador pesquisadorSalvo = pesquisadorService.salvarOuAtualizar(novoPesquisador);
+
         salvarProducoes(pesquisadorLattes);
 
-        return pesquisadorService.salvarOuAtualizar(novoPesquisador);
+        return pesquisadorSalvo;
     }
 
     @Override
@@ -294,9 +295,17 @@ public class LattesServiceImpl implements LattesService {
 
     private void salvarProducoes(final PesquisadorLattes pesquisadorLattes) {
 
-        addArtigoEmPeriodico(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
-        // addApresentacaoTrabalho(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
-        addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
+        // Artigos em Periódicos
+        if (pesquisadorLattes.getArtigosPeriodicos() != null)
+            addArtigoEmPeriodico(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
+
+        // Apresentação de Trabalhos
+        if (pesquisadorLattes.getApresentacaoTrabalho() != null)
+            addApresentacaoTrabalho(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
+
+        // Capítulos de Livros
+        if (pesquisadorLattes.getCapitulosLivros() != null)
+            addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
     }
 
     public void addArtigoEmPeriodico(final List<ArtigoLattes> artigosPeriodicosLattes) {
@@ -312,12 +321,12 @@ public class LattesServiceImpl implements LattesService {
 
     public void addApresentacaoTrabalho(final List<TrabalhoApresentadoLattes> apresentacaoTrabalhoLattes) {
 
-        for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
-            ApresentacaoTrabalho artigo = new ApresentacaoTrabalho(producao.getTitulo(),
-                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
-                    producao.getNatureza());
-            producaoService.saveOrUpdate(artigo);
-        }
+        // for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
+        // ApresentacaoTrabalho artigo = new ApresentacaoTrabalho(producao.getTitulo(),
+        // getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
+        // producao.getNatureza());
+        // producaoService.saveOrUpdate(artigo);
+        // }
     }
 
     public void addCapituloLivro(final List<CapituloLattes> capitulosLivrosLattes) {
@@ -335,11 +344,12 @@ public class LattesServiceImpl implements LattesService {
 
         String[] citacoes = autores.split(";");
         for (String nomeCitacao : citacoes) {
-            CitacaoBibliografica citacaoExistente = citacaoBibliograficaService.buscarPorNomeCitacao(nomeCitacao);
+            CitacaoBibliografica citacaoExistente = citacaoBibliograficaService
+                    .buscarPorNomeCitacao(nomeCitacao.trim());
             if (citacaoExistente != null) {
                 listaCitacoes.add(citacaoExistente);
             } else {
-                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao);
+                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao.trim());
                 citacaoBibliograficaService.salvar(novaCitacao);
                 listaCitacoes.add(novaCitacao);
             }

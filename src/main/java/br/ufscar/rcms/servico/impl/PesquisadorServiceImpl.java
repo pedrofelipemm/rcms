@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.dao.EnderecoDAO;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
-import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
@@ -144,12 +143,6 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         loadPhoto(pesquisador);
 
         return pesquisador;
-    }
-
-    @Override
-    // TODO mover para ProducaoServiceImpl
-    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
-        return pesquisadorDAO.buscarArtigosEmPeriodicos(idUsuario);
     }
 
     @Override

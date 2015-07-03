@@ -44,35 +44,35 @@
 				</div>
 				<div class="rcms-table-tbody">
 					<ui:repeat id="gridPublicacao" pt:name="gridPublicacao"
-						varStatus="status" var="publicacao" value="#{publicacaoMB.publicacoes}">
+						varStatus="status" var="producao" value="#{producaoMB.producoes}">
 						<div class="rcms-table-tr col-">
 							<div class="rcms-table-td">
 								<span> <h:outputText id="outputTextId"
-										value="#{publicacao.idProducao}" />
+										value="#{producao.idProducao}" />
 								</span>
 							</div>
 							<div class="rcms-table-td">
 								<span> <h:outputText id="outputTextTitulo"
-										value="#{publicacao.titulo}" />
+										value="#{producao.titulo}" />
 								</span>
 							</div>
 							<div class="rcms-table-td">
 								<span> <h:outputText id="outputTextAno"
-										value="#{publicacao.ano}" />
+										value="#{producao.ano}" />
 								</span>
 							</div>
 							<div class="rcms-table-td">
 								<div class="text-center">
 									<h:commandButton value="#{mensagens['editar']}"
 										styleClass="btn btn-primary"
-										action="#{publicacaoMB.editar(publicacao)}"
+										action="#{producaoMB.editar(producao)}"
 										pt:title="#{mensagens['editar']}" />
 									<p:spacer id="spacer" width="20"
 										pt:alt="#{mensagens['spacer.mensagem']}"
 										pt:title="#{mensagens['spacer.titutlo']}" />
 									<h:commandButton value="#{mensagens['excluir']}"
 										styleClass="btn btn-danger"
-										action="#{publicacaoMB.excluir(publicacao)}"
+										action="#{producaoMB.excluir(producao)}"
 										pt:title="#{mensagens['excluir']}" />
 								</div>
 							</div>

@@ -7,7 +7,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
-import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 
 @Repository
@@ -41,28 +40,6 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
         Query query = createQuery(jpql.toString());
         if (idIdioma != null) {
             query.setParameter("idIdioma", idIdioma);
-        }
-
-        return query.getResultList();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    // TODO mover para ProducaoDAOImpl
-    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
-
-        StringBuilder jpql = new StringBuilder();
-        jpql.append(" SELECT AP FROM " + ArtigoEmPeriodico.class.getName() + " AP ");
-        jpql.append(" JOIN AP.citacaoBibliograficas CB ");
-        jpql.append(" JOIN CB.pesquisador P ");
-        if (idUsuario != null) {
-            jpql.append(" WHERE P.idUsuario = :idUsuario");
-        }
-        jpql.append(" ORDER BY ano, titulo");
-
-        Query query = createQuery(jpql.toString());
-        if (idUsuario != null) {
-            query.setParameter("idUsuario", idUsuario);
         }
 
         return query.getResultList();

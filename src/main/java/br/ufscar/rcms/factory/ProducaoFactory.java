@@ -18,38 +18,38 @@ import br.ufscar.rcms.modelo.entidades.TrabalhoTecnico;
 
 public abstract class ProducaoFactory {
 	
-	public static Producao CastProducaoByTipo(String tipo, Producao publicacaoBase){
+    public static Producao CastProducaoByTipo(String tipo, Producao producaoBase) {
 		switch(tipo){
 		case "artigoEmPeriodico":
-			return publicacaoBase.CloneTo(new ArtigoEmPeriodico());
+            return producaoBase.CloneTo(new ArtigoEmPeriodico());
 		case "artigoAceitoPublicacao":
-			return publicacaoBase.CloneTo(new ArtigoAceitoParaPublicacao());
+            return producaoBase.CloneTo(new ArtigoAceitoParaPublicacao());
 		case "livroPublicado":
-			return publicacaoBase.CloneTo(new LivroPublicado());
+            return producaoBase.CloneTo(new LivroPublicado());
 		case "apresentacaoTrabalho":
-			return publicacaoBase.CloneTo(new ApresentacaoTrabalho());
+            return producaoBase.CloneTo(new ApresentacaoTrabalho());
 		case "capituloLivro":
-			return publicacaoBase.CloneTo(new CapituloLivro());
+            return producaoBase.CloneTo(new CapituloLivro());
 		case "resumoCongresso":
-			return publicacaoBase.CloneTo(new ResumoCongresso());
+            return producaoBase.CloneTo(new ResumoCongresso());
 		case "textoJornal":
-			return publicacaoBase.CloneTo(new TextoEmJornal());
+            return producaoBase.CloneTo(new TextoEmJornal());
 		case "resumoExpandidoCongresso":
-			return publicacaoBase.CloneTo(new ResumoExpandidoCongresso());
+            return producaoBase.CloneTo(new ResumoExpandidoCongresso());
 		case "trabalhoCompletoCongresso":
-			return publicacaoBase.CloneTo(new TrabalhoCompletoCongresso());
+            return producaoBase.CloneTo(new TrabalhoCompletoCongresso());
 		case "outraProducaoBibliografica":
-			return publicacaoBase.CloneTo(new OutraProducaoBibliografica());
+            return producaoBase.CloneTo(new OutraProducaoBibliografica());
 		case "trabalhoTecnico":
-			return publicacaoBase.CloneTo(new TrabalhoTecnico());
+            return producaoBase.CloneTo(new TrabalhoTecnico());
 		case "outraProducaoTecnica":
-			return publicacaoBase.CloneTo(new OutraProducaoTecnica());
+            return producaoBase.CloneTo(new OutraProducaoTecnica());
 		case "produtoTecnologico":
-			return publicacaoBase.CloneTo(new ProdutoTecnologico());
+            return producaoBase.CloneTo(new ProdutoTecnologico());
 		case "processoOuTecnica":
-			return publicacaoBase.CloneTo(new ProcessoOuTecnica());
+            return producaoBase.CloneTo(new ProcessoOuTecnica());
 		default:
-			return publicacaoBase;
+            return producaoBase;
 		}
 	}
 

@@ -73,7 +73,7 @@ public abstract class AbstractMB implements Serializable {
     public static final String CONSULTA_LINHAS_PESQUISA = "consultaLinhaDePesquisa";
     public static final String FLASH_KEY_LINHA_PESQUISA = "linhaDePesquisa";
 
-    //Projetos de Pesquisa
+    // Projetos de Pesquisa
     public static final String CADASTRO_PROJETO_PESQUISA = "cadastroProjetoPesquisa";
     public static final String CONSULTA_PROJETO_PESQUISA = "consultaProjetoPesquisa";
     public static final String EXIBE_PROJETO_PESQUISA = "projetoPesquisa";
@@ -83,10 +83,10 @@ public abstract class AbstractMB implements Serializable {
     // Painel de Controle
     public static final String PAINEL_CONTROLE = "painelControle";
 
-    //Publicacoes
-    public static final String CONSULTA_PUBLICACAO = "consultaPublicacao";
-    public static final String CADASTRO_PUBLICACAO = "cadastroPublicacao";
-    public static final String FLASH_KEY_PUBLICACAO = "publicacao";
+    // Produções
+    public static final String CONSULTA_PRODUCAO = "consultaProducao";
+    public static final String CADASTRO_PRODUCAO = "cadastroProducao";
+    public static final String FLASH_KEY_PRODUCAO = "producao";
 
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();

@@ -244,14 +244,8 @@
                                 	<h4>Artigos completos publicados em periódicos</h4>
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaArtigoEmPeriodico}">
-	        	                            #{producao.titulo}
+	        	                            <li><ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat> . #{producao.titulo}. #{producao.revista}, p. #{producao.paginas}, #{producao.ano}.</li>
 	        	                        </ui:repeat>
-                                    	<li>PRADO, A. F. ; PAPOTTI, P. E. . Reengenharia e Reutilização de Software. Revista TIS - Tecnologias, Infraestrutura e Software, v. 2, p. 1-10, 2013.</li>
-                                    	<li>VIANA, MATHEUS C. ; PENTEADO, ROSÂNGELA A.D. ; DO PRADO, ANTÔNIO F. . Domain-Specific Modeling Languages to improve framework instantiation. The Journal of Systems and Software, v. 86, p. 3123-3139, 2013.</li>
-                                    	<li>FORTE, Marcos ; DE SOUZA, WANDERLEY L. ; DA SILVA, ROSELI F. ; DO PRADO, ANTONIO F. ; RODRIGUES, JOSE F. . A Ubiquitous Reflective E-Portfolio Architecture. International Journal of Medical Informatics, v. 82, p. 1111-1122, 2013.</li>
-                                    	<li>CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; ZAINA, L. A. M. ; RODRIGUES JUNIOR, J. F. . Towards a Hybrid Approach for Adapting Web Graphical User Interfaces to Heterogeneous Devices using Context. International Journal of Software Engineering and Knowledge Engineering, p. 1-32, 2012.</li>
-                                    	<li>GASPAR, T. C. ; TEIXEIRA, C. A. C. ; PRADO, A. F. . Component Reuse in Synchronous Collaborative Web 2.0 Applications. European Journal for the Informatics Professional, v. XII, p. 15-25, 2011.</li>
-                                    	<li>PEREIRA, V. ; PRADO, A. F. . RAMBUS: An Agile Process for Developing Web Applications. Journal of Intelligent Computing, v. 2, p. 42-53, 2011.</li>
                                     </ol>
                                 </div>
                             </div>

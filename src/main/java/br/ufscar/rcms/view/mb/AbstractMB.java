@@ -37,7 +37,7 @@ public abstract class AbstractMB implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMB.class);
     private static final String BUNDLE_NAME = "bundle";
 
-    public static final String PERMANECER_PAGINA = null;
+    public static final String PAGINA_ATUAL = null;
 
     // Pesquisador
     public static final String CADASTRO_PESQUISADOR = "cadastroPesquisador";

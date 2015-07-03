@@ -21,10 +21,9 @@ public class Idioma extends Entidade {
     @Column(name = "descricao", nullable = false, unique = true)
     private String descricao;
 
-    public Idioma() {
-    }
+    public Idioma() {/* Serialization */}
 
-    public Idioma(String descricao) {
+    public Idioma(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -36,11 +35,11 @@ public class Idioma extends Entidade {
         return idIdioma;
     }
 
-    public void setIdIdioma(Long idIdioma) {
+    public void setIdIdioma(final Long idIdioma) {
         this.idIdioma = idIdioma;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -53,7 +52,7 @@ public class Idioma extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

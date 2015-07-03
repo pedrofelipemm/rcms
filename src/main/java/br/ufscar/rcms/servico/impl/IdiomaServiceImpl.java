@@ -17,6 +17,8 @@ import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.ExceptionUtils;
 
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 @Service("idiomaService")
 @Transactional(rollbackFor = RCMSException.class)
 public class IdiomaServiceImpl implements IdiomaService {
@@ -30,7 +32,7 @@ public class IdiomaServiceImpl implements IdiomaService {
     private PesquisadorDAO pesquisadorDAO;
 
     @Override
-    public void saveOrUpdate(Idioma idioma) throws RCMSException {
+    public void saveOrUpdate(final Idioma idioma) throws RCMSException {
         try {
             idiomaDAO.saveOrUpdate(idioma);
         } catch (DataIntegrityViolationException exception) {
@@ -45,21 +47,21 @@ public class IdiomaServiceImpl implements IdiomaService {
     }
 
     @Override
-    public void remover(Idioma idioma) throws IdiomaNaoEncontradoException, IdiomaEmUsoException {
+    public void remover(final Idioma idioma) throws IdiomaNaoEncontradoException, IdiomaEmUsoException {
 
         validateRemove(idioma);
         idiomaDAO.remover(idioma);
     }
 
     @Override
-    public Idioma buscarPorDescricao(String Descricao) {
+    public Idioma buscarPorDescricao(final String Descricao) {
         return idiomaDAO.buscarPorDescricao(Descricao);
     }
 
-    private void validateRemove(Idioma idioma) throws IdiomaNaoEncontradoException, IdiomaEmUsoException {
+    private void validateRemove(final Idioma idioma) throws IdiomaNaoEncontradoException, IdiomaEmUsoException {
 
         Idioma idiomaToRemove = idiomaDAO.buscar(idioma.getIdIdioma());
-        if (idiomaToRemove == null) {
+        if (isEmpty(idiomaToRemove)) {
             throw new IdiomaNaoEncontradoException(idioma.getDescricao());
         }
 

@@ -11,8 +11,7 @@
 	<!-- </parent> -->
 
 	<properties>
-		<apache.commons.lang3.version>3.3.2</apache.commons.lang3.version><!-- 
-			parent -->
+		<apache.commons.lang3.version>3.3.2</apache.commons.lang3.version><!-- parent -->
 		<!-- <asm.version>2.2.3</asm.version> -->
 		<!-- <c3p0.version>0.9.1.2</c3p0.version> -->
 		<com.lmax.version>3.3.2</com.lmax.version><!-- parent -->
@@ -28,19 +27,16 @@
 		<javax.xml.rpc.version>1.1.1</javax.xml.rpc.version>
 		<junit.version>4.12</junit.version><!-- parent -->
 		<org.apache.axis.version>1.4</org.apache.axis.version>
-		<org.apache.logging.log4j.version>2.3</org.apache.logging.log4j.version><!-- 
-			parent -->
+		<org.apache.logging.log4j.version>2.3</org.apache.logging.log4j.version><!-- parent -->
 		<org.hibernate.version>4.3.10.Final</org.hibernate.version><!-- parent -->
 		<org.omnifaces.version>1.10</org.omnifaces.version>
 		<org.primefaces.version>5.2</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
-		<org.springframework.version>4.0.6.RELEASE</org.springframework.version><!-- 
-			parent -->
-		<spring.security.version>4.0.0.RELEASE</spring.security.version>
+		<org.springframework.version>4.0.6.RELEASE</org.springframework.version><!-- parent -->
+		<spring.security.version>4.0.0.RELEASE</spring.security.version><!-- parent -->
 		<!-- <org.spring-security.version>3.1.0.RELEASE</org.spring-security.version> -->
 		<postgresql.version>9.1-901-1.jdbc4</postgresql.version><!-- parent -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 
-			parent -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- parent -->
 		<slf4j.version>1.7.12</slf4j.version><!-- parent -->
 	</properties>
 
@@ -102,17 +98,17 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>${spring.security.version}</version>
+			<version>${spring.security.version}</version><!-- parent -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>${spring.security.version}</version>
+			<version>${spring.security.version}</version><!-- parent -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>${spring.security.version}</version>
+			<version>${spring.security.version}</version><!-- parent -->
 		</dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -121,8 +117,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<!-- <groupId>com.sun.faces</groupId> -->
-			<!-- <artifactId>jsf-impl</artifactId> -->
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.faces</artifactId>
 			<version>${javax.faces.version}</version>
@@ -376,7 +370,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>2.1</version>
+				<version>2.6</version>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,5 +1,7 @@
 package br.ufscar.rcms.webservice.restful;
 
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -35,6 +39,8 @@ import br.ufscar.rcms.webservice.modelo.PesquisadorResponseWrapper;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PesquisadorRS {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PesquisadorRS.class);
 
     @Autowired
     private PesquisadorService pesquisadorService;
@@ -60,7 +66,7 @@ public class PesquisadorRS {
 
         Pesquisador pesquisador = pesquisadorService.buscar(id);
 
-        if (pesquisador == null) {
+        if (isEmpty(pesquisador)) {
             String message = MessageFormat.format("Pesquisador com o código {0} não encontrado!", id);
             throw new ResourceNotFoundException(message);
         }
@@ -72,47 +78,46 @@ public class PesquisadorRS {
     }
 
     @POST
-    public Response addPesquisador(PesquisadorResponse pesquisadorResponse) {
+    public Response addPesquisador(final PesquisadorResponse pesquisadorResponse) {
 
-        Pesquisador pesquisador = null;
-        if (pesquisadorResponse.getIdUsuario() != null) {
-            pesquisador = pesquisadorService.buscar(pesquisadorResponse.getIdUsuario());
-            if (pesquisador != null) {
-                throw new ResourceAlreadyCreatedException(MessageFormat.format("Pesquisador {0} já existente!",
-                        pesquisador.getNome()));
+        if (!isEmpty(pesquisadorResponse.getIdUsuario())) {
+            Pesquisador pesquisador = pesquisadorService.buscar(pesquisadorResponse.getIdUsuario());
+            if (!isEmpty(pesquisador)) {
+                throw new ResourceAlreadyCreatedException(MessageFormat.format("Pesquisador {0} já existente!", pesquisador.getNome()));
             }
         }
 
+        PesquisadorResponse result = new PesquisadorResponse();
         try {
-            pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
-        } catch (RCMSException e) {
-            // TODO PEDRO
-            e.printStackTrace();
+            Pesquisador pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
+            result = PesquisadorConverter.convert(pesquisador);
+        } catch (RCMSException exception) {
+            LOGGER.debug(exception.getMessage(), exception);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
-        pesquisadorResponse = PesquisadorConverter.convert(pesquisador);
 
-        return Response.status(Status.CREATED.getStatusCode()).entity(pesquisadorResponse).build();
+        return Response.status(Status.CREATED.getStatusCode()).entity(result).build();
     }
 
     @PUT
-    public Response updatePesquisador(PesquisadorResponse pesquisadorResponse) {
+    public Response updatePesquisador(final PesquisadorResponse pesquisadorResponse) {
 
         Pesquisador pesquisador = pesquisadorService.buscar(pesquisadorResponse.getIdUsuario());
-
-        if (pesquisador == null) {
+        if (isEmpty(pesquisador)) {
             String message = MessageFormat.format("Pesquisador com o código {0} não encontrado!", pesquisadorResponse.getIdUsuario());
             throw new ResourceNotFoundException(message);
         }
 
         try {
             pesquisador = pesquisadorService.salvarOuAtualizar(PesquisadorConverter.convert(pesquisadorResponse));
-        } catch (RCMSException e) {
-            // TODO PEDRO
-            e.printStackTrace();
+        } catch (RCMSException exception) {
+            LOGGER.debug(exception.getMessage(), exception);
+            return Response.status(Status.INTERNAL_SERVER_ERROR).build();
         }
-        pesquisadorResponse = PesquisadorConverter.convert(pesquisador);
 
-        return Response.status(Status.OK.getStatusCode()).entity(pesquisadorResponse).build();
+        PesquisadorResponse result = PesquisadorConverter.convert(pesquisador);
+
+        return Response.status(Status.OK.getStatusCode()).entity(result).build();
     }
 
     @DELETE

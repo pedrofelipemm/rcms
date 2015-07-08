@@ -22,8 +22,8 @@
 					<h:form id="formProjetos">
 
 						<ul class="listas">
-							<ui:repeat var="projeto" value="#{projetoPesquisaMB.projetoPesquisa}">
-								<li><h:commandLink action="#{projetoPesquisaMB.exibir(projeto)}" value="#{projeto.nome}" /></li>
+							<ui:repeat var="projetoPesquisa" value="#{projetoPesquisaMB.projetosPesquisa}">
+								<li><h:commandLink action="#{projetoPesquisaMB.exibir(projetoPesquisa)}" value="#{projetoPesquisa.nome}" /></li>
 							</ui:repeat>
 						</ul>
 

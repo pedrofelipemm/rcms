@@ -7,42 +7,48 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.dao.ProducaoDAO;
+import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.servico.ProducaoService;
 
-@Service("publicacaoService")
+@Service("producaoService")
 @Transactional
-public class ProducaoServiceImpl implements ProducaoService{
+public class ProducaoServiceImpl implements ProducaoService {
 
-	private static final long serialVersionUID = -3551699743568411854L;
-	
-	@Autowired
-	private ProducaoDAO publicacaoDAO;
-		
-	@Override
-	public void saveOrUpdate(Producao producao) {
-		publicacaoDAO.saveOrUpdate(producao);
-	}
+    private static final long serialVersionUID = -3551699743568411854L;
 
-	@Override
-	public void remove(Producao producao) {
-		publicacaoDAO.remover(producao);
-	}
+    @Autowired
+    private ProducaoDAO producaoDAO;
 
-	@Override
-	public List<Producao> buscarTodas() {
-		return publicacaoDAO.buscarTodos();
-	}
+    @Override
+    public void saveOrUpdate(Producao producao) {
+        producaoDAO.saveOrUpdate(producao);
+    }
 
-	@Override
-	public Producao buscarPorId(Long id) {
-		Producao p = publicacaoDAO.buscar(id);
-		loadLazyDependencies(p);
-		return p;
-	}
-	
-	private void loadLazyDependencies(Producao p){
-		p.getCitacaoBibliograficas().size();
-	}
+    @Override
+    public void remove(Producao producao) {
+        producaoDAO.remover(producao);
+    }
+
+    @Override
+    public List<Producao> buscarTodas() {
+        return producaoDAO.buscarTodos();
+    }
+
+    @Override
+    public Producao buscarPorId(Long id) {
+        Producao p = producaoDAO.buscar(id);
+        loadLazyDependencies(p);
+        return p;
+    }
+
+    @Override
+    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
+        return producaoDAO.buscarArtigosEmPeriodicos(idUsuario);
+    }
+
+    private void loadLazyDependencies(Producao p) {
+        p.getCitacaoBibliograficas().size();
+    }
 
 }

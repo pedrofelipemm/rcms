@@ -34,6 +34,7 @@ import br.ufscar.rcms.modelo.entidades.LinhaDePesquisa;
 import br.ufscar.rcms.modelo.entidades.OrganizacaoEvento;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.CitacaoBibliograficaService;
@@ -44,6 +45,7 @@ import br.ufscar.rcms.servico.LinhaDePesquisaService;
 import br.ufscar.rcms.servico.OrganizacaoEventoService;
 import br.ufscar.rcms.servico.ParticipacaoEventoService;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.ProducaoService;
 import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
@@ -84,6 +86,9 @@ public class PesquisadorMB extends AbstractMB {
     @ManagedProperty("#{organizacaoEventoService}")
     private OrganizacaoEventoService organizacaoEventoService;
 
+    @ManagedProperty("#{producaoService}")
+    private ProducaoService producaoService;
+
     private Pesquisador pesquisador;
     private DataModel<Pesquisador> pesquisadores;
     private Part fotoPesquisador;
@@ -122,6 +127,8 @@ public class PesquisadorMB extends AbstractMB {
 
     private transient List<ArtigoEmPeriodico> listaArtigoEmPeriodico;
 
+    private transient List<Producao> listaProducoes;
+
     @PostConstruct
     public void inicializar() {
         limparDados();
@@ -141,6 +148,7 @@ public class PesquisadorMB extends AbstractMB {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
             removeNullValues(pesquisador.getCompreensaoIdiomas(), pesquisador.getParticipacaoEventos());
 
+            this.setListaArtigoEmPeriodico(this.producaoService.buscarArtigosEmPeriodicos(pesquisador.getIdUsuario()));
         }
     }
 
@@ -623,14 +631,32 @@ public class PesquisadorMB extends AbstractMB {
         this.organizacaoEventoService = organizacaoEventoService;
     }
 
+    public ProducaoService getProducaoService() {
+        return producaoService;
+    }
+
+    public void setProducaoService(final ProducaoService producaoService) {
+        this.producaoService = producaoService;
+    }
+
     public List<ArtigoEmPeriodico> getListaArtigoEmPeriodico() {
-
-        this.listaArtigoEmPeriodico = this.pesquisadorService.buscarArtigosEmPeriodicos(pesquisador.getIdUsuario());
-
         return listaArtigoEmPeriodico;
     }
 
     public void setListaArtigoEmPeriodico(List<ArtigoEmPeriodico> listaArtigoEmPeriodico) {
         this.listaArtigoEmPeriodico = listaArtigoEmPeriodico;
+    }
+
+    public List<Producao> getListaProducoes() {
+        return listaProducoes;
+    }
+
+    public void setListaProducoes(List<Producao> listaProducoes) {
+        this.listaProducoes = listaProducoes;
+    }
+
+    public List<CitacaoBibliografica> listarCitacoes(Producao producao) {
+
+        return producaoService.buscarPorId(producao.getIdProducao()).getCitacaoBibliograficas();
     }
 }

@@ -35,7 +35,7 @@
 				</div>
 				<div class="rcms-table-tbody">
 					<ui:repeat id="gridPublicacaoNomeCitacao" pt:name="gridPublicacaoNomeCitacao"
-						varStatus="status" var="nomeCitacao" value="#{publicacaoMB.publicacao.citacaoBibliograficas}">
+						varStatus="status" var="nomeCitacao" value="#{producaoMB.producao.citacaoBibliograficas}">
 						<div class="rcms-table-tr col-">
 							<div class="rcms-table-td">
 								<span> <h:outputText id="outputTextNome"
@@ -60,7 +60,7 @@
 									</h:commandButton>
 									<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />
 									<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-										action="#{publicacaoMB.excluirNomeCitacao(nomeCitacao)}">
+										action="#{producaoMB.excluirNomeCitacao(nomeCitacao)}">
 										<f:ajax render="painelCitacaoBibliografica" />
 									</h:commandButton>
 								</div>

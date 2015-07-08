@@ -67,7 +67,7 @@ public class Pesquisador extends Usuario {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="pesquisadores")
     private List<ProjetoPesquisa> projetosPesquisa = new ArrayList<ProjetoPesquisa>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
     @JoinTable(joinColumns = { @JoinColumn(name = "id_usuario") }, inverseJoinColumns = { @JoinColumn(name = "id_linha_pesquisa") })
     @org.hibernate.annotations.ForeignKey(name = "fk_pesquisador_linha_pesquisa_pesquisador", inverseName = "fk_pesquisador_linha_pesquisa_linha_pesquisa")
     private List<LinhaDePesquisa> linhasDePesquisa = new ArrayList<LinhaDePesquisa>();

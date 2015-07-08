@@ -16,187 +16,180 @@ import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.Producao;
-import br.ufscar.rcms.modelo.entidades.TextoEmJornal;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.ProducaoService;
 
 @ViewScoped
-@ManagedBean(name = "publicacaoMB")
+@ManagedBean(name = "producaoMB")
 public class ProducaoMB extends AbstractMB {
 
-	@ManagedProperty("#{pesquisadorService}")
-	private PesquisadorService pesquisadorService;
-	@ManagedProperty("#{publicacaoService}")
-	private ProducaoService publicacaoService;
+    @ManagedProperty("#{pesquisadorService}")
+    private PesquisadorService pesquisadorService;
+    @ManagedProperty("#{producaoService}")
+    private ProducaoService producaoService;
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ProducaoMB.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProducaoMB.class);
 
-	private static final long serialVersionUID = -3678684230889264324L;
-	private List<Pesquisador> todosPesquisadores;
-	private List<CitacaoBibliografica> todasCitacoesDoPesquisador;
-	private CitacaoBibliografica nomeCitacao;
-	private Producao publicacao;
-	private Pesquisador pesquisadorSelecionado;
-	private String tipoPublicacao;
-	private List<Producao> publicacoes;
+    private static final long serialVersionUID = -3678684230889264324L;
+    private List<Pesquisador> todosPesquisadores;
+    private List<CitacaoBibliografica> todasCitacoesDoPesquisador;
+    private CitacaoBibliografica nomeCitacao;
+    private Producao producao;
+    private Pesquisador pesquisadorSelecionado;
+    private String tipoProducao;
+    private List<Producao> producoes;
 
-	@PostConstruct
-	public void inicializar() {
-		limparDados();
-		carregarDados();
-	}
+    @PostConstruct
+    public void inicializar() {
+        limparDados();
+        carregarDados();
+    }
 
-	public void adicionarNomeCitacao() {
-		if(nomeCitacao != null){
-			publicacao.getCitacaoBibliograficas().add(nomeCitacao);
-		}
-	}
+    public void adicionarNomeCitacao() {
+        if (nomeCitacao != null) {
+            producao.getCitacaoBibliograficas().add(nomeCitacao);
+        }
+    }
 
-	public void excluirNomeCitacao(CitacaoBibliografica citacao) {
-		publicacao.getCitacaoBibliograficas().remove(citacao);
-	}
+    public void excluirNomeCitacao(CitacaoBibliografica citacao) {
+        producao.getCitacaoBibliograficas().remove(citacao);
+    }
 
-	public String salvar() {
-		try {
+    public String salvar() {
+        try {
 
-			if (publicacao != null) {
-				Producao publicacaoTipada = ProducaoFactory.CastProducaoByTipo(tipoPublicacao, publicacao);
+            if (producao != null) {
+                Producao producaoTipada = ProducaoFactory.CastProducaoByTipo(tipoProducao, producao);
 
-				getPublicacaoService().saveOrUpdate(publicacaoTipada);
+                getProducaoService().saveOrUpdate(producaoTipada);
 
-				adicionarMensagemInfoByKey("publicacao.salva.sucesso",
-						publicacao.getTitulo());
+                adicionarMensagemInfoByKey("publicacao.salva.sucesso", producao.getTitulo());
 
-				limparDados();
+                limparDados();
 
-				keepMessagesOnRedirect();
-			}
+                keepMessagesOnRedirect();
+            }
 
-		} catch (Exception exception) {
-			adicionarMensagemErroByKey("erro.salvar.publicacao",
-					publicacao.getTitulo());
-			LOGGER.error(exception.getMessage(), exception);
-		} 
-		
-	    return CONSULTA_PUBLICACAO;
-	}
-	
-	public String editar(Producao producao){
-		setFlashObject(FLASH_KEY_PUBLICACAO, producao);
+        } catch (Exception exception) {
+            adicionarMensagemErroByKey("erro.salvar.publicacao", producao.getTitulo());
+            LOGGER.error(exception.getMessage(), exception);
+        }
 
-        return CADASTRO_PUBLICACAO;
-	}
-	
-	public String excluir(Producao producao){
-		publicacaoService.remove(producao);
-		limparDados();
-		return CONSULTA_PUBLICACAO;
-	}
+        return CONSULTA_PRODUCAO;
+    }
 
-	public void changePesquisador() {
-		if(pesquisadorSelecionado != null){
-			pesquisadorSelecionado = pesquisadorService
-					.buscarTodosDados(pesquisadorSelecionado.getIdUsuario());
-			todasCitacoesDoPesquisador = pesquisadorSelecionado
-					.getCitacaoBibliograficas();
-		}else{
-			todasCitacoesDoPesquisador.clear();
-		}
-	}
+    public String editar(Producao producao) {
+        setFlashObject(FLASH_KEY_PRODUCAO, producao);
 
-	@Override
-	protected void limparDados() {
-		todosPesquisadores = new ArrayList<Pesquisador>();
-		todasCitacoesDoPesquisador = new ArrayList<CitacaoBibliografica>();
-		nomeCitacao = new CitacaoBibliografica();
-		publicacao = new OutraProducaoBibliografica();
-		pesquisadorSelecionado = null;
-		tipoPublicacao = "";
-		publicacoes = new ArrayList<Producao>();
-	}
+        return CADASTRO_PRODUCAO;
+    }
 
-	@Override
-	protected void carregarDados() {
-		todosPesquisadores = pesquisadorService.buscarTodos();
-		publicacoes = publicacaoService.buscarTodas();
-		
-		Producao publicacaoEditando = (Producao)getFlashObject(FLASH_KEY_PUBLICACAO);
-		if(publicacaoEditando != null){
-			this.publicacao = publicacaoService.buscarPorId(publicacaoEditando.getIdProducao());
-		}
-	}
-	
-	public CitacaoBibliografica getNomeCitacao() {
-		return nomeCitacao;
-	}
+    public String excluir(Producao producao) {
+        producaoService.remove(producao);
+        limparDados();
+        return CONSULTA_PRODUCAO;
+    }
 
-	public void setNomeCitacao(CitacaoBibliografica nomeCitacao) {
-		this.nomeCitacao = nomeCitacao;
-	}
+    public void changePesquisador() {
+        if (pesquisadorSelecionado != null) {
+            pesquisadorSelecionado = pesquisadorService.buscarTodosDados(pesquisadorSelecionado.getIdUsuario());
+            todasCitacoesDoPesquisador = pesquisadorSelecionado.getCitacaoBibliograficas();
+        } else {
+            todasCitacoesDoPesquisador.clear();
+        }
+    }
 
-	public Producao getPublicacao() {
-		return publicacao;
-	}
+    @Override
+    protected void limparDados() {
+        todosPesquisadores = new ArrayList<Pesquisador>();
+        todasCitacoesDoPesquisador = new ArrayList<CitacaoBibliografica>();
+        nomeCitacao = new CitacaoBibliografica();
+        producao = new OutraProducaoBibliografica();
+        pesquisadorSelecionado = null;
+        tipoProducao = "";
+        producoes = new ArrayList<Producao>();
+    }
 
-	public void setPublicacao(Producao publicacao) {
-		this.publicacao = publicacao;
-	}
-	
-	public List<Pesquisador> getTodosPesquisadores() {
-		return todosPesquisadores;
-	}
+    @Override
+    protected void carregarDados() {
+        todosPesquisadores = pesquisadorService.buscarTodos();
+        producoes = producaoService.buscarTodas();
 
-	public void setTodosPesquisadores(List<Pesquisador> todosPesquisadores) {
-		this.todosPesquisadores = todosPesquisadores;
-	}
+        Producao producaoEditando = (Producao) getFlashObject(FLASH_KEY_PRODUCAO);
+        if (producaoEditando != null) {
+            this.producao = producaoService.buscarPorId(producaoEditando.getIdProducao());
+        }
+    }
 
-	public PesquisadorService getPesquisadorService() {
-		return pesquisadorService;
-	}
+    public CitacaoBibliografica getNomeCitacao() {
+        return nomeCitacao;
+    }
 
-	public void setPesquisadorService(PesquisadorService pesquisadorService) {
-		this.pesquisadorService = pesquisadorService;
-	}
+    public void setNomeCitacao(CitacaoBibliografica nomeCitacao) {
+        this.nomeCitacao = nomeCitacao;
+    }
 
-	public Pesquisador getPesquisadorSelecionado() {
-		return pesquisadorSelecionado;
-	}
+    public Producao getProducao() {
+        return producao;
+    }
 
-	public void setPesquisadorSelecionado(Pesquisador pesquisadorSelecionado) {
-		this.pesquisadorSelecionado = pesquisadorSelecionado;
-	}
+    public void setProducao(Producao producao) {
+        this.producao = producao;
+    }
 
-	public List<CitacaoBibliografica> getTodasCitacoesDoPesquisador() {
-		return todasCitacoesDoPesquisador;
-	}
+    public List<Pesquisador> getTodosPesquisadores() {
+        return todosPesquisadores;
+    }
 
-	public void setTodasCitacoesDoPesquisador(
-			List<CitacaoBibliografica> todasCitacoesDoPesquisador) {
-		this.todasCitacoesDoPesquisador = todasCitacoesDoPesquisador;
-	}
+    public void setTodosPesquisadores(List<Pesquisador> todosPesquisadores) {
+        this.todosPesquisadores = todosPesquisadores;
+    }
 
-	public String getTipoPublicacao() {
-		return tipoPublicacao;
-	}
+    public PesquisadorService getPesquisadorService() {
+        return pesquisadorService;
+    }
 
-	public void setTipoPublicacao(String tipoPublicacao) {
-		this.tipoPublicacao = tipoPublicacao;
-	}
+    public void setPesquisadorService(PesquisadorService pesquisadorService) {
+        this.pesquisadorService = pesquisadorService;
+    }
 
-	public ProducaoService getPublicacaoService() {
-		return publicacaoService;
-	}
+    public Pesquisador getPesquisadorSelecionado() {
+        return pesquisadorSelecionado;
+    }
 
-	public void setPublicacaoService(ProducaoService publicacaoService) {
-		this.publicacaoService = publicacaoService;
-	}
+    public void setPesquisadorSelecionado(Pesquisador pesquisadorSelecionado) {
+        this.pesquisadorSelecionado = pesquisadorSelecionado;
+    }
 
-	public List<Producao> getPublicacoes() {
-		return publicacoes;
-	}
+    public List<CitacaoBibliografica> getTodasCitacoesDoPesquisador() {
+        return todasCitacoesDoPesquisador;
+    }
 
-	public void setPublicacoes(List<Producao> publicacoes) {
-		this.publicacoes = publicacoes;
-	}
+    public void setTodasCitacoesDoPesquisador(List<CitacaoBibliografica> todasCitacoesDoPesquisador) {
+        this.todasCitacoesDoPesquisador = todasCitacoesDoPesquisador;
+    }
+
+    public String getTipoProducao() {
+        return tipoProducao;
+    }
+
+    public void setTipoProducao(String tipoProducao) {
+        this.tipoProducao = tipoProducao;
+    }
+
+    public ProducaoService getProducaoService() {
+        return producaoService;
+    }
+
+    public void setProducaoService(ProducaoService producaoService) {
+        this.producaoService = producaoService;
+    }
+
+    public List<Producao> getProducoes() {
+        return producoes;
+    }
+
+    public void setProducoes(List<Producao> producoes) {
+        this.producoes = producoes;
+    }
 }

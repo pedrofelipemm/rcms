@@ -7,11 +7,18 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import br.ufscar.rcms.comparator.IdiomaComparator;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.exception.IdiomaEmUsoException;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
+import br.ufscar.rcms.view.model.SortableDataModel;
+
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 @ViewScoped
 @ManagedBean(name = "idiomaMB")
@@ -19,10 +26,12 @@ public class IdiomaMB extends AbstractMB {
 
     private static final long serialVersionUID = -7215958678138311243L;
 
-    private transient DataModel<Idioma> idiomas;
+    private static final Logger LOGGER = LoggerFactory.getLogger(IdiomaMB.class);
 
     @ManagedProperty("#{idiomaService}")
     private IdiomaService idiomaService;
+
+    private DataModel<Idioma> idiomas;
 
     private Idioma idioma;
 
@@ -42,18 +51,11 @@ public class IdiomaMB extends AbstractMB {
     protected void carregarDados() {
 
         Idioma idiomaEdicao = (Idioma) getFlashObject(FLASH_KEY_IDIOMA);
-        if (idiomaEdicao != null) {
+        if (!isEmpty(idiomaEdicao)) {
             idioma = idiomaEdicao;
         }
-        idiomas = new ListDataModel<Idioma>(idiomaService.buscarTodos());
-    }
-
-    public DataModel<Idioma> getIdiomas() {
-        return idiomas;
-    }
-
-    public void setIdiomas(DataModel<Idioma> idiomas) {
-        this.idiomas = idiomas;
+        idiomas = new SortableDataModel<Idioma>(new ListDataModel<Idioma>(idiomaService.buscarTodos()));
+        ((SortableDataModel<Idioma>) idiomas).sortBy(new IdiomaComparator());
     }
 
     public String salvar() {
@@ -66,12 +68,13 @@ public class IdiomaMB extends AbstractMB {
             keepMessagesOnRedirect();
             return CONSULTA_IDIOMAS;
         } catch (RCMSException e) {
+            LOGGER.error("Erro ao salvar idioma", e);
             adicionarMensagemErro(e.getMessage());
-            return PERMANECER_PAGINA;
+            return PAGINA_ATUAL;
         }
     }
 
-    public String excluirIdioma(Idioma idioma) {
+    public String excluirIdioma(final Idioma idioma) {
 
         try {
             idiomaService.remover(idioma);
@@ -86,11 +89,11 @@ public class IdiomaMB extends AbstractMB {
             } else if (exception instanceof IdiomaEmUsoException) {
                 adicionarMensagemErro(exception.getMessage());
             }
-            return PERMANECER_PAGINA;
+            return PAGINA_ATUAL;
         }
     }
 
-    public String editarIdioma(Idioma idioma) {
+    public String editarIdioma(final Idioma idioma) {
 
         setFlashObject(FLASH_KEY_IDIOMA, idioma);
 
@@ -101,7 +104,7 @@ public class IdiomaMB extends AbstractMB {
         return idiomaService;
     }
 
-    public void setIdiomaService(IdiomaService idiomaService) {
+    public void setIdiomaService(final IdiomaService idiomaService) {
         this.idiomaService = idiomaService;
     }
 
@@ -109,7 +112,15 @@ public class IdiomaMB extends AbstractMB {
         return idioma;
     }
 
-    public void setIdioma(Idioma idioma) {
+    public void setIdioma(final Idioma idioma) {
         this.idioma = idioma;
+    }
+
+    public DataModel<Idioma> getIdiomas() {
+        return idiomas;
+    }
+
+    public void setIdiomas(final DataModel<Idioma> idiomas) {
+        this.idiomas = idiomas;
     }
 }

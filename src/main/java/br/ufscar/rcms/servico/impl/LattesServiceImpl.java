@@ -24,7 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
-import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
@@ -120,9 +119,11 @@ public class LattesServiceImpl implements LattesService {
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
 
+        Pesquisador pesquisadorSalvo = pesquisadorService.salvarOuAtualizar(novoPesquisador);
+
         salvarProducoes(pesquisadorLattes);
 
-        return pesquisadorService.salvarOuAtualizar(novoPesquisador);
+        return pesquisadorSalvo;
     }
 
     @Override
@@ -292,59 +293,68 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void salvarProducoes(PesquisadorLattes pesquisadorLattes) {
+    private void salvarProducoes(final PesquisadorLattes pesquisadorLattes) {
 
-        addArtigoEmPeriodico(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
-        // addApresentacaoTrabalho(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
-        addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
+        // Artigos em Periódicos
+        if (pesquisadorLattes.getArtigosPeriodicos() != null)
+            addArtigoEmPeriodico(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
+
+        // Apresentação de Trabalhos
+        if (pesquisadorLattes.getApresentacaoTrabalho() != null)
+            addApresentacaoTrabalho(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
+
+        // Capítulos de Livros
+        if (pesquisadorLattes.getCapitulosLivros() != null)
+            addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
     }
 
-    public void addArtigoEmPeriodico(List<ArtigoLattes> artigosPeriodicosLattes) {
+    public void addArtigoEmPeriodico(final List<ArtigoLattes> artigosPeriodicosLattes) {
 
         for (ArtigoLattes producao : artigosPeriodicosLattes) {
             ArtigoEmPeriodico artigo = new ArtigoEmPeriodico(producao.getTitulo(),
-                    this.getListaCitacoesBibliografica(producao
+                    getListaCitacoesBibliografica(producao
                     .getAutores()), producao.getAno(), producao.getVolume(), producao.getPaginas(), producao.getDoi(),
                     producao.getRevista(), producao.getNumero());
             producaoService.saveOrUpdate(artigo);
         }
     }
 
-    public void addApresentacaoTrabalho(List<TrabalhoApresentadoLattes> apresentacaoTrabalhoLattes) {
+    public void addApresentacaoTrabalho(final List<TrabalhoApresentadoLattes> apresentacaoTrabalhoLattes) {
 
-        for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
-            ApresentacaoTrabalho artigo = new ApresentacaoTrabalho(producao.getTitulo(),
-                    this.getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
-                    producao.getNatureza());
-            producaoService.saveOrUpdate(artigo);
-        }
+        // for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
+        // ApresentacaoTrabalho artigo = new ApresentacaoTrabalho(producao.getTitulo(),
+        // getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
+        // producao.getNatureza());
+        // producaoService.saveOrUpdate(artigo);
+        // }
     }
 
-    public void addCapituloLivro(List<CapituloLattes> capitulosLivrosLattes) {
+    public void addCapituloLivro(final List<CapituloLattes> capitulosLivrosLattes) {
 
         for (CapituloLattes producao : capitulosLivrosLattes) {
-            CapituloLivro artigo = new CapituloLivro(producao.getTitulo(), this.getListaCitacoesBibliografica(producao
+            CapituloLivro artigo = new CapituloLivro(producao.getTitulo(), getListaCitacoesBibliografica(producao
                     .getAutores()), producao.getAno(), producao.getLivro(), producao.getEdicao(), producao.getEditora());
             producaoService.saveOrUpdate(artigo);
         }
     }
 
-    public List<CitacaoBibliografica> getListaCitacoesBibliografica(String autores) {
+    public List<CitacaoBibliografica> getListaCitacoesBibliografica(final String autores) {
 
         List<CitacaoBibliografica> listaCitacoes = new ArrayList<CitacaoBibliografica>();
 
         String[] citacoes = autores.split(";");
         for (String nomeCitacao : citacoes) {
-            CitacaoBibliografica citacaoExistente = citacaoBibliograficaService.buscarPorNomeCitacao(nomeCitacao);
+            CitacaoBibliografica citacaoExistente = citacaoBibliograficaService
+                    .buscarPorNomeCitacao(nomeCitacao.trim());
             if (citacaoExistente != null) {
                 listaCitacoes.add(citacaoExistente);
             } else {
-                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao);
+                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao.trim());
                 citacaoBibliograficaService.salvar(novaCitacao);
                 listaCitacoes.add(novaCitacao);
             }
         }
-        
+
         return listaCitacoes;
     }
 

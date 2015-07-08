@@ -21,30 +21,30 @@ public class PesquisadorDAOTest extends AbstractDAOTestBase {
     public void init() {
 
         Idioma idioma = new Idioma("Ingles");
-        idioma = (Idioma) salvar(idioma);
+        idioma = (Idioma) merge(idioma);
 
         //TODO PEDRO MOVE TO PESQUISADOR BUILDER
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional("Teste");
         Pesquisador pesquisador = new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", true, "resumoProfissional").
                 endereco(endereco).build();
-        pesquisador = (Pesquisador) salvar(pesquisador);
+        pesquisador = (Pesquisador) merge(pesquisador);
 
         CompreensaoIdioma compreensaoIdioma = CompreensaoIdiomaFactory.createCompreensaoIdioma(idioma, "bla",
                 pesquisador);
         pesquisador.addCompreensaoIdiomas(compreensaoIdioma);
-        salvar(pesquisador);
+        merge(pesquisador);
 
         Endereco endereco2 = new Endereco();
         endereco2.setEnderecoProfissional("Teste2");
         Pesquisador pesquisador2 = new PesquisadorBuilder("login2", "nome2", "senha2", "codigoLattes2", "email2", true, "resumoProfissional2").
                 endereco(endereco2).build();
-        pesquisador2 = (Pesquisador) salvar(pesquisador2);
+        pesquisador2 = (Pesquisador) merge(pesquisador2);
 
         CompreensaoIdioma compreensaoIdioma2 = CompreensaoIdiomaFactory.createCompreensaoIdioma(idioma, "bla",
                 pesquisador2);
         pesquisador2.addCompreensaoIdiomas(compreensaoIdioma2);
-        salvar(pesquisador2);
+        merge(pesquisador2);
 
     }
 

@@ -20,7 +20,7 @@
 				<div class="col-md-2" style="padding-top: 25px;">
 					<div class="form-group pull-right">
 						<h:commandButton pt:name="#{mensagens['salvar']}" value="#{mensagens['salvar']}"
-							action="#{publicacaoMB.salvar}" styleClass="btn btn-success" title="#{mensagens['salvar']}">
+							action="#{producaoMB.salvar}" styleClass="btn btn-success" title="#{mensagens['salvar']}">
 							<f:ajax render="@form" execute="@form" />
 						</h:commandButton>
 					</div>
@@ -37,37 +37,7 @@
 				            			<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
-													<h:outputLabel for="inputTextTitulo" value="#{mensagens['label.titulo']} " />
-													<h:inputText id="inputTextTitulo" pt:name="inputTextTitulo" 
-														value="#{publicacaoMB.publicacao.titulo}" required="true"
-														requiredMessage="#{mensagens['publicacao.titulo.nao.preenchido']}" styleClass="form-control" />
-												</div>
-												<div class="form-group">
-													<h:outputLabel for="inputTextAno" value="#{mensagens['label.ano']} " />
-													<h:inputText id="inputTextAno" pt:name="inputTextAno" 
-														value="#{publicacaoMB.publicacao.ano}" required="true"
-														requiredMessage="#{mensagens['publicacao.ano.nao.preenchido']}" styleClass="form-control" />
-												</div>
-												<div class="form-group">
-													<h:outputLabel for="inputTextVolume" value="#{mensagens['label.volume']} " />
-													<h:inputText id="inputTextVolume" pt:name="inputTextVolume" 
-														value="#{publicacaoMB.publicacao.volume}" required="true"
-														requiredMessage="#{mensagens['publicacao.volume.nao.preenchido']}" styleClass="form-control" />
-												</div>
-												<div class="form-group">
-													<h:outputLabel for="inputTextPaginas" value="#{mensagens['label.paginas']} " />
-													<h:inputText id="inputTextPaginas" pt:name="inputTextPaginas" 
-														value="#{publicacaoMB.publicacao.paginas}" required="true"
-														requiredMessage="#{mensagens['publicacao.paginas.nao.preenchido']}" styleClass="form-control" />
-												</div>
-												<div class="form-group">
-													<h:outputLabel for="inputTextLink" value="#{mensagens['label.link']} " />
-													<h:inputText id="inputTextLink" pt:name="inputTextLink" 
-														value="#{publicacaoMB.publicacao.link}" required="true"
-														requiredMessage="#{mensagens['publicacao.link.nao.preenchido']}" styleClass="form-control" />
-												</div>
-												<div class="form-group">
-													<h:selectOneMenu id="selectTipoPublicacao" value="#{publicacaoMB.tipoPublicacao}" rendered="#{publicacaoMB.publicacao.idProducao == null}">
+													<h:selectOneMenu id="selectTipoPublicacao" value="#{producaoMB.tipoProducao}" rendered="#{producaoMB.producao.idProducao == null}" styleClass="form-control">
 														<f:selectItem itemLabel="#{mensagens['apresentacao.de.trabalho']}" itemValue="apresentacaoTrabalho" />
 														<f:selectItem itemLabel="#{mensagens['artigo.aceito.publicacao']}" itemValue="artigoAceitoPublicacao" />
 														<f:selectItem itemLabel="#{mensagens['artigo.em.periodico']}" itemValue="artigoEmPeriodico" />
@@ -84,6 +54,24 @@
 														<f:selectItem itemLabel="#{mensagens['texto.em.jornal']}" itemValue="textoJornal" />
 														<f:ajax/>
 													</h:selectOneMenu>
+												</div>
+												<div class="form-group">
+													<h:outputLabel for="inputTextTitulo" value="#{mensagens['label.titulo']} " />
+													<h:inputText id="inputTextTitulo" pt:name="inputTextTitulo" 
+														value="#{producaoMB.producao.titulo}" required="true"
+														requiredMessage="#{mensagens['publicacao.titulo.nao.preenchido']}" styleClass="form-control" />
+												</div>
+												<div class="form-group">
+													<h:outputLabel for="inputTextAno" value="#{mensagens['label.ano']} " />
+													<h:inputText id="inputTextAno" pt:name="inputTextAno" 
+														value="#{producaoMB.producao.ano}" required="true"
+														requiredMessage="#{mensagens['publicacao.ano.nao.preenchido']}" styleClass="form-control" />
+												</div>
+												<div class="form-group">
+													<h:outputLabel for="inputTextLink" value="#{mensagens['label.link']} " />
+													<h:inputText id="inputTextLink" pt:name="inputTextLink" 
+														value="#{producaoMB.producao.link}" required="true"
+														requiredMessage="#{mensagens['publicacao.link.nao.preenchido']}" styleClass="form-control" />
 												</div>
 											</div>
 										</div>

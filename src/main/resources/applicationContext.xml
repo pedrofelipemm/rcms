@@ -12,7 +12,7 @@
 						   http://www.springframework.org/schema/tx   
         				   http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         				   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
-        				   http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+        				   http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
         				   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
 	<context:component-scan base-package="br.ufscar.rcms" />

@@ -130,7 +130,7 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>cadastroPublicacao</from-outcome>
+			<from-outcome>cadastroProducao</from-outcome>
 			<to-view-id>/paginas/admin/cadastro/publicacao/publicacao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
@@ -195,7 +195,7 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>consultaPublicacao</from-outcome>
+			<from-outcome>consultaProducao</from-outcome>
 			<to-view-id>/paginas/admin/consulta/publicacao/publicacao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
@@ -235,6 +235,15 @@
 		<navigation-case>
 			<from-outcome>listagemProjetos</from-outcome>
 			<to-view-id>/paginas/portal/consulta/projeto/projetos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>projetoPesquisa</from-outcome>
+			<to-view-id>/paginas/portal/consulta/projeto/projeto.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

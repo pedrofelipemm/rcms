@@ -24,16 +24,16 @@
 								<h:outputLabel for="nome" value="#{mensagens['label.nome']}" />
 							</div>
 							<div class="col-md-10">
-								<h:selectOneMenu id="selectPesquisador" styleClass="form-control" value="#{publicacaoMB.pesquisadorSelecionado}" converter="entityConverter">
+								<h:selectOneMenu id="selectPesquisador" styleClass="form-control" value="#{producaoMB.pesquisadorSelecionado}" converter="entityConverter">
 									<f:selectItem itemLabel="#{mensagens['label.pesquisador.placeholder']}" itemValue="#{null}"/>
-									<f:selectItems value="#{publicacaoMB.todosPesquisadores}" var="pesquisador" itemLabel="#{pesquisador.nome}"
+									<f:selectItems value="#{producaoMB.todosPesquisadores}" var="pesquisador" itemLabel="#{pesquisador.nome}"
 										itemValue="#{pesquisador}" />
-									<p:ajax listener="#{publicacaoMB.changePesquisador}" update="selectPesquisador selectCitacao"  />
+									<p:ajax listener="#{producaoMB.changePesquisador}" update="selectPesquisador selectCitacao"  />
 								</h:selectOneMenu>
 							</div>
 							<div class="col-md-10">
-								<h:selectOneMenu id="selectCitacao" styleClass="form-control" value="#{publicacaoMB.nomeCitacao}" converter="entityConverter">
-									<f:selectItems value="#{publicacaoMB.todasCitacoesDoPesquisador}" var="citacao" itemLabel="#{citacao.nomeCitacao}"
+								<h:selectOneMenu id="selectCitacao" styleClass="form-control" value="#{producaoMB.nomeCitacao}" converter="entityConverter">
+									<f:selectItems value="#{producaoMB.todasCitacoesDoPesquisador}" var="citacao" itemLabel="#{citacao.nomeCitacao}"
 										itemValue="#{citacao}" />
 									<f:ajax />
 								</h:selectOneMenu>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
-					<h:commandButton action="#{publicacaoMB.adicionarNomeCitacao}" styleClass="btn btn-primary"
+					<h:commandButton action="#{producaoMB.adicionarNomeCitacao}" styleClass="btn btn-primary"
 						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalNomesCitacao">
 						<f:ajax execute="painelCitacaoBibliografica" render="painelCitacaoBibliografica" />
 					</h:commandButton>

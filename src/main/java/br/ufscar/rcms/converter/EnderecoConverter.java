@@ -4,9 +4,9 @@ import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.webservice.modelo.EnderecoResponse;
 
-public class EnderecoConverter {
+public abstract class EnderecoConverter {
 
-    public static EnderecoResponse convert(Endereco endereco) {
+    public static EnderecoResponse convert(final Endereco endereco) {
 
         EnderecoResponse response = new EnderecoResponse();
         response.setEnderecoProfissional(endereco.getEnderecoProfissional());
@@ -17,7 +17,7 @@ public class EnderecoConverter {
         return response;
     }
 
-    public static Endereco convert(EnderecoResponse enderecoResponse, Pesquisador pesquisador) {
+    public static Endereco convert(final EnderecoResponse enderecoResponse, final Pesquisador pesquisador) {
 
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional(enderecoResponse.getEnderecoProfissional());

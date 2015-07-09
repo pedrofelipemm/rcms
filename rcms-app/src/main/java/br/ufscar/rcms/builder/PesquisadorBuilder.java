@@ -202,7 +202,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         if (formacoes != null) {
             for (FormacaoLattes formacaoLattes : formacoes.getFormacoes()) {
                 FormacaoAcademica formacao = null;
-                if ((formacao = cachedPesquisador.containsFormacaoAcademica(formacaoLattes.getDescricao())) != null) {
+                if ((formacao = cachedPesquisador.containsFormacaoAcademica(formacaoLattes)) != null) {
                     pesquisador.getFormacoes().add(
                             FormacaoAcademicaFactory.createFormacaoAcademica(formacao.getIdFormacaoAcademica(),
                                     formacaoLattes.getAnoConclusao(), formacaoLattes.getAnoInicio(),

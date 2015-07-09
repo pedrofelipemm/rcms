@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/samples")
 public class SampleController {
 
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Sample> getSamples() {
+        return Arrays.asList(new Sample(1, "XPTO"), new Sample(2, "ABC"));
+    }
+
     @RequestMapping(value = "/1", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Sample> getSample() {
         return Arrays.asList(new Sample(1, "XPTO"), new Sample(2, "ABC"));

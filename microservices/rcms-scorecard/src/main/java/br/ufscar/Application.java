@@ -16,7 +16,7 @@ import org.springframework.web.servlet.DispatcherServlet;
         org.springframework.boot.actuate.autoconfigure.ManagementSecurityAutoConfiguration.class })
 public class Application {
 
-    private static final String URL_MAPPING = "/RCMS/microservice/*";
+    private static final String URL_MAPPING = "/rcms-scorecard/api/*";
 
     public static void main(final String... args) throws Exception {
         SpringApplication.run(Application.class, args);

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/admin/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+	<ui:define name="conteudo">
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['subarea.de.atuacao']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formAreaDeAtuacao">
+			
+			<h:dataTable value="#{subAreaAtuacaoMB.todasAsSubAreas}" var="espec" styleClass="table table-hover"
+				headerClass="col-width-50" rowClasses="col-width-50" 
+				rendered="#{not empty subAreaAtuacaoMB.todasAsSubAreas}" >
+ 
+ 				<h:column>
+ 					<f:facet name="header">
+ 						<h:outputLabel value="#"/>
+ 					</f:facet>
+ 					<h:outputLabel value="#{subAreaAtuacaoMB.todasAsSubAreas.rowIndex + 1}"/>
+ 				</h:column>
+ 				
+    			<h:column headerClass="col-xs-10">
+    				<f:facet name="header">
+    					<h:outputLabel value="#{mensagens['descricao']}"/>
+    				</f:facet>
+    				<h:outputLabel value="#{espec.descricao}" />
+    			</h:column>
+    			
+    			<h:column headerClass="text-center">
+					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
+						action="#{subAreaAtuacaoMB.editar(espec)}" /> 
+					<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />
+    			</h:column>
+			
+			</h:dataTable>
+        </h:form>
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<p:panel id="painelOrganizacaoEventos" header="#{mensagens['organizacao.de.eventos']}">
+					<h:dataTable id="tableOrganizacaoEventos" value="#{pesquisadorMB.pesquisador.organizacaoEventos}"
+						var="organizacaoEvento" styleClass="table table-hover" headerClass="col-width-50" rowClasses="col-width-50">
+						<h:column headerClass="col-xs-4">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['evento.titulo']}" />
+							</f:facet>
+							<h:outputText value="#{organizacaoEvento.titulo}"/>
+						</h:column>
+						<h:column headerClass="col-xs-4">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['organizacao.de.eventos.natureza']}" />
+							</f:facet>
+							<h:outputText value="#{organizacaoEvento.natureza}"/>
+						</h:column>
+						<h:column headerClass="col-xs-1">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['evento.ano']}" />
+							</f:facet>
+							<h:outputText value="#{organizacaoEvento.ano}"/>
+						</h:column>
+						<h:column headerClass="col-xs-2 text-center">
+							<f:facet name="header">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalOrganizacaoEventos">#{mensagens['adicionar']}</button>
+							</f:facet>
+							<div class="text-center">
+								<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary">
+									<f:ajax render=":formPesquisador:painelOrganizacaoEventos" />
+								</h:commandButton>
+								<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
+									pt:title="#{mensagens['spacer.titutlo']}"/>
+								<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
+									action="#{pesquisadorMB.removerOrganizacaoEvento(organizacaoEvento)}">
+									<f:ajax render=":formPesquisador:painelOrganizacaoEventos" />
+								</h:commandButton>
+							</div>
+						</h:column>
+					</h:dataTable>
+					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-organizacao-evento.xhtml" />
+				</p:panel>
+			</div>
+		</div>
+	</div>
+</ui:composition>

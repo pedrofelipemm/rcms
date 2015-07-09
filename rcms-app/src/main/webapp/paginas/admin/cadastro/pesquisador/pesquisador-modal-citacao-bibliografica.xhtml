@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="modal fade" id="modalCitacaoBibliografica" tabindex="-1" role="dialog" aria-labelledby="modalCitacaoBibliograficaLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&#10006;</span>
+					</button>
+					<h4 id="modalCitacaoBibliograficaLabel" class="modal-title">#{mensagens['citacao.bibliografica.adicionar']}</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<h:outputLabel for="nomeCitacao" value="#{mensagens['citacao.bibliografica.nome.em.citacao']}" />
+									<p:inputText id="nomeCitacao" value="#{pesquisadorMB.citacaoBibliografica.nomeCitacao}"
+										styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
+					<h:commandButton action="#{pesquisadorMB.adicionarCitacaoBibliografica}" styleClass="btn btn-primary"
+						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalCitacaoBibliografica">
+						<f:ajax execute="painelCitacaoBibliografica" render="painelCitacaoBibliografica" />
+					</h:commandButton>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:composition>

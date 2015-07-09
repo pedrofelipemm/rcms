@@ -159,6 +159,20 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+      		<plugins>
+        		<plugin>
+          			<groupId>org.codehaus.mojo</groupId>
+          			<artifactId>findbugs-maven-plugin</artifactId>
+          			<version>3.0.1</version>
+        		</plugin>
+        		<plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+        			<artifactId>maven-pmd-plugin</artifactId>
+        			<version>3.5</version>
+        		</plugin>
+            </plugins>
+    	</pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -173,16 +187,17 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.0</version>
 				<configuration>
 					<effort>Max</effort>
-					<threshold>Default</threshold>
+					<failOnError>false</failOnError>
+					<threshold>low</threshold>
 					<xmlOutput>true</xmlOutput>
 					<findbugsXmlOutputDirectory>/findbugs</findbugsXmlOutputDirectory>
 				</configuration>
 				<executions>
 					<execution>
 						<id>analyze-compile</id>
+						<phase>compile</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
@@ -192,7 +207,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.0.1</version>
 				<configuration>
 					<linkXref>true</linkXref>
 					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
@@ -215,8 +229,8 @@
 				<executions>
 					<execution>
 						<goals>
+							<goal>cpd</goal>
 							<goal>check</goal>
-							<goal>cpd-check</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -259,7 +273,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.0.1</version>
 				<configuration>
 					<effort>Max</effort>
 					<threshold>Low</threshold>

@@ -18,7 +18,7 @@ public class Application {
 
     private static final String URL_MAPPING = "/RCMS/microservice/*";
 
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String... args) throws Exception {
         SpringApplication.run(Application.class, args);
         // http://localhost:8080/RCMS/microservice/health
     }

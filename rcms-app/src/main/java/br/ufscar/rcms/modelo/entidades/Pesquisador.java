@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.ForeignKey;
 
+import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
+
 @Entity
 @Table(name = "\"PESQUISADOR\"")
 @ForeignKey(name = "fk_pesquisador_usuario")
@@ -149,14 +151,26 @@ public class Pesquisador extends Usuario {
         return null;
     }
 
-    public FormacaoAcademica containsFormacaoAcademica(final String descricao) {
-        for (FormacaoAcademica formacaoAcademica : formacoes) {
-            if (formacaoAcademica != null && formacaoAcademica.getDescricao().equals(descricao)) {
-                return formacaoAcademica;
-            }
-        }
-        return null;
-    }
+    public FormacaoAcademica containsFormacaoAcademica(
+			final FormacaoLattes formacaoLattes) {
+		for (FormacaoAcademica formacaoAcademica : formacoes) {
+			if (formacaoAcademica != null) {
+				if (formacaoAcademica.getDescricao().equals(
+						formacaoLattes.getDescricao())
+						&& formacaoAcademica.getAnoInicio().equals(
+								formacaoLattes.getAnoInicio())
+						&& formacaoAcademica.getAnoConclusao().equals(
+								formacaoLattes.getAnoConclusao())
+						&& formacaoAcademica.getNomeInstituicao().equals(
+								formacaoLattes.getNomeInstituicao())
+						&& formacaoAcademica.getTipo().equals(
+								formacaoLattes.getTipo())) {
+						return formacaoAcademica;
+				}
+			}
+		}
+		return null;
+	}
 
     public void setFormacoes(final List<FormacaoAcademica> formacoes) {
         this.formacoes = formacoes;

@@ -7,7 +7,7 @@ import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 
 public interface CitacaoBibliograficaService extends Serializable {
 
-    CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao);
+	List<CitacaoBibliografica> buscarPorNomeCitacao(String nomeCitacao);
 
     void salvar(CitacaoBibliografica citacaoBibliografica);
 

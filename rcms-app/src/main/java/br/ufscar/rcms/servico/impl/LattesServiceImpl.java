@@ -344,10 +344,10 @@ public class LattesServiceImpl implements LattesService {
 
         String[] citacoes = autores.split(";");
         for (String nomeCitacao : citacoes) {
-            CitacaoBibliografica citacaoExistente = citacaoBibliograficaService
+        	List<CitacaoBibliografica> citacoesExistentes = citacaoBibliograficaService
                     .buscarPorNomeCitacao(nomeCitacao.trim());
-            if (citacaoExistente != null) {
-                listaCitacoes.add(citacaoExistente);
+            if (citacoesExistentes != null) {
+                listaCitacoes.addAll(citacoesExistentes);
             } else {
                 CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao.trim());
                 citacaoBibliograficaService.salvar(novaCitacao);

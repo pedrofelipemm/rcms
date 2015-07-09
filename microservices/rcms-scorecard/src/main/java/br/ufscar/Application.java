@@ -1,14 +1,11 @@
 package br.ufscar;
 
-import javax.sql.DataSource;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
@@ -37,16 +34,16 @@ public class Application {
         return registration;
     }
 
-    @Bean
-    public DataSource dataSource() {
-
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        // TODO PEDRO EXTRACT TO FILE
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcmsTest");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("root");
-
-        return dataSource;
-    }
+    // @Bean
+    // public DataSource dataSource() {
+    //
+    // final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    // // TODO PEDRO EXTRACT TO FILE
+    // dataSource.setDriverClassName("org.postgresql.Driver");
+    // dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcmsTest");
+    // dataSource.setUsername("postgres");
+    // dataSource.setPassword("root");
+    //
+    // return dataSource;
+    // }
 }

@@ -22,7 +22,6 @@
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
 		<org.apache.logging.log4j.version>2.3</org.apache.logging.log4j.version>
-		<org.hibernate.version>4.3.10.Final</org.hibernate.version>
 		<org.springframework.version>4.0.7.RELEASE</org.springframework.version>
 		<spring.security.version>4.0.1.RELEASE</spring.security.version>
 		<postgresql.version>9.1-901-1.jdbc4</postgresql.version>
@@ -90,16 +89,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${org.hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${org.hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>slf4j-api</artifactId>

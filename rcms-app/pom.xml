@@ -22,6 +22,7 @@
 		<jersey.version>2.13</jersey.version>
 		<javax.xml.rpc.version>1.1.1</javax.xml.rpc.version>
 		<org.apache.axis.version>1.4</org.apache.axis.version>
+		<org.hibernate.version>4.3.10.Final</org.hibernate.version>
 		<org.omnifaces.version>1.10</org.omnifaces.version>
 		<org.primefaces.version>5.2</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
@@ -57,6 +58,16 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${javax.servlet.jstl.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${org.hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${org.hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces</groupId>

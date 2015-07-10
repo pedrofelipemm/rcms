@@ -15,9 +15,8 @@ public class Application {
 
     private static final String URL_MAPPING = "/rcms-scorecard/api/*";
 
-    public static void main(final String... args) throws Exception {
+    public static void main(final String... args) {
         SpringApplication.run(Application.class, args);
-        // http://localhost:8080/RCMS/microservice/health
     }
 
     @Bean

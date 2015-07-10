@@ -1,4 +1,4 @@
 $(document).ready(function() {
-	rcms.applyNiceScroll([ $('html'), $('#admin-menu-left') ]);
+	rcms.applyNiceScroll([ $('html'), $('.nav-side-menu') ]);
 	rcms.setFocusFirstElement();
 });

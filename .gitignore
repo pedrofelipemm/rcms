@@ -89,3 +89,5 @@ trace.txt
 .springBeans
 
 /target//target
+*.pmd
+*.ruleset

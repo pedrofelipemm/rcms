@@ -23,30 +23,22 @@
 				<p>Seu browser não suporta javascript</p>
 			</noscript>
 	
-			<h:panelGroup id="page" layout="block">
-	 
-				<div id="cabecalho" >
-	  				<ui:include src="/paginas/admin/template/cabecalho.xhtml" />
-				</div>
-	 			
-	 			<div id="admin-menu-left">
-			  		<ui:include src="/paginas/admin/template/menu-esquerdo.xhtml" />
-			    </div>
-	
-				<div id="admin-fluid-content">
-					<div id="admin-inner-content">
-						<div class="container-fluid">
-							<ui:insert name="conteudo"></ui:insert>
-						</div>
+			<ui:include src="/paginas/admin/template/cabecalho.xhtml" />
+ 			
+	  		<ui:include src="/paginas/admin/template/menu-esquerdo.xhtml" />
+
+			<div id="admin-fluid-content">
+				<div id="admin-inner-content">
+					<div class="container-fluid">
+						<ui:insert name="conteudo"></ui:insert>
 					</div>
 				</div>
+			</div>
+
+<!-- 			<div id="admin-rodape"> -->
+<!-- 				<ui:include src="/paginas/admin/template/rodape.xhtml" /> -->
+<!-- 			</div> -->
 	
-	<!-- 			<div id="admin-rodape"> -->
-	<!-- 				<ui:include src="/paginas/admin/template/rodape.xhtml" /> -->
-	<!-- 			</div> -->
-	
-			</h:panelGroup>
-			
 			<p:growl severity="info"  id="growl-info" autoUpdate="true" life="5000"/>
 			<p:growl severity="warn"  id="growl-warn" autoUpdate="true" life="5000"/>
 			<p:growl severity="error" id="growl-error" autoUpdate="true" life="5000"/>

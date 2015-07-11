@@ -10,36 +10,45 @@
 	
 	<ui:define name="conteudo">
 		
-		<div class="row">
-        	<div class="col-md-12">
-        		<h1>#{mensagens['linhas.de.pesquisa']}</h1>
-        	</div>
-        </div>
-		
-		<h:form id="formLinhaDePesquisa">
+		<h:form id="formLinhaDePesquisa" role="form" prependId="false">
+
+			<div class="row">
+		       	<div class="col-sm-12">
+		       		<h1>#{mensagens['linhas.de.pesquisa']}</h1>
+		       	</div>
+	       	</div>
 			
 			<div class="row">
-		        <div class="col-md-12">
+		        <div class="col-sm-12">
             		<div class="form-group">
-            			<h:outputLabel for="descricao" value="#{mensagens['label.descricao']} " />
-						<h:inputText id="descricao" value="#{linhaDePesquisaMB.linhaDePesquisa.descricao}"
-							required="true" requiredMessage="#{mensagens['descricao.vazia']}"
-							styleClass="form-control" />
+            			<p:panel id="painelLinhaDePesquisa" header="#{mensagens['linha.de.pesquisa']}">
+							<div class="row">
+				          		<div class="col-sm-6">
+			            			<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="descricao" value="#{mensagens['label.descricao']} " />
+											<h:inputText id="descricao" pt:name="descricao"
+												pt:placeholder="#{mensagens['informe.descricao.linhas.de.pesquisa']}"
+												value="#{linhaDePesquisaMB.linhaDePesquisa.descricao}" required="true"
+												requiredMessage="#{mensagens['descricao.vazia']}" styleClass="form-control" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</p:panel>
             		</div>
             	</div>
         	</div>
+        	
         	<div class="row">
-          		<div class="col-md-12">
-            		<div class="form-group">
-              			<h:commandButton value="#{mensagens['salvar']}" action="#{linhaDePesquisaMB.salvar}"
-							styleClass="btn btn-success">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
-            		</div>
-          		</div>
-        	</div>
+          		<div class="col-sm-12">
+           			<h:commandButton pt:name="#{mensagens['salvar']}" title="#{mensagens['salvar']}"
+           				value="#{mensagens['salvar']}" action="#{linhaDePesquisaMB.salvar}" styleClass="btn btn-success">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+           		</div>
+       		</div>
+       		
         </h:form>
-
-		
 	</ui:define>
 </ui:composition>

@@ -48,17 +48,21 @@
 							</div>
 							<div class="rcms-table-td">
 								<span>
-									<h:outputText id="outputTextDescricao" value="#{idioma.descricao}" />
+									<h:outputText id="outputTextDescricao" value="#{idioma.descricao}"/>
 								</span>
 							</div>
 							<div class="rcms-table-td">
-								<div class="text-center" >
-									<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
-										action="#{idiomaMB.editarIdioma(idioma)}" pt:title="#{mensagens['editar']}"/>
-									<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
-										pt:title="#{mensagens['spacer.titutlo']}" />
-									<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-										action="#{idiomaMB.excluirIdioma(idioma)}" pt:title="#{mensagens['excluir']}" />
+								<div class="row text-center">
+									<div class="col-sm-12 text-center">
+										<span>
+											<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2"
+												action="#{idiomaMB.editarIdioma(idioma)}" pt:title="#{mensagens['editar']}"/>
+										</span>
+										<span>
+											<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger bottom-buffer-2 top-buffer-2"
+												action="#{idiomaMB.excluirIdioma(idioma)}" pt:title="#{mensagens['excluir']}" />
+										</span>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -143,14 +143,6 @@ ol.listas-numeradas > li:before {
 	width: 50px;
 }
 
-.top-buffer-10 {
-	margin-top: 10px;
-}
-
-.top-buffer-20 {
-	margin-top: 20px;
-}
-
 .input-5 {
 	width: 500px;
 }

@@ -12,6 +12,22 @@
 	background-image: -o-linear-gradient(left, #ccc, #ccc, #ccc);
 }
 
+.top-buffer-2 {
+	margin-top: 2px;	
+}
+
+.top-buffer-10 {
+	margin-top: 10px;
+}
+
+.top-buffer-20 {
+	margin-top: 20px;
+}
+
+.bottom-buffer-2 {
+	margin-bottom: 2px
+}
+
 .nav-side-menu {
 	overflow: hidden;
 	font-size: 14px;

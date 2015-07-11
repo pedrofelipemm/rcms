@@ -10,15 +10,14 @@
 	
 	<ui:define name="conteudo">
 		<div class="row">
-        	<div class="col-md-12">
+        	<div class="col-sm-12">
         		<h1>#{mensagens['pesquisadores']}</h1>
         	</div>
         </div>
 		
-		<h:form id="formPesquisador" prependId="false">
+		<h:form id="formPesquisador" prependId="false"  role="form">
 			
-			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
-				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
+			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador"
 				rendered="#{not empty pesquisadorMB.pesquisadores}" paginator="true" rows="10">
  
  				<p:column styleClass="col-sm-1 col-md-1 text-center">
@@ -41,9 +40,11 @@
 					</f:facet>
 					<div class="row text-center">
 						<div class="col-sm-12 text-center">
-							<h:commandButton id="salvar" value="#{mensagens['importar']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info bottom-buffer-2 top-buffer-2">
-								<f:ajax render="@form" execute="@form" />
-							</h:commandButton>
+							<span>
+								<h:commandButton id="salvar" value="#{mensagens['importar']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info bottom-buffer-2 top-buffer-2">
+									<f:ajax render="@form" execute="@form" />
+								</h:commandButton>
+							</span>
 							<span>
 								<h:commandButton id="editar" value="#{mensagens['editar']}" action="#{pesquisadorMB.editar(pesquisador)}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2"/>
 							</span>

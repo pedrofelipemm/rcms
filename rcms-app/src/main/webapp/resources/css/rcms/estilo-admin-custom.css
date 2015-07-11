@@ -1,23 +1,8 @@
-@CHARSET "UTF-8";#00FF03
+@CHARSET "UTF-8";
 
 #cabecalho {
-	color: #fff;
-	background-color: #00FF03;
-	padding-top: 10px;
-	border-bottom: 1px solid #fff;
-	width: 100%;
-}
-
-#cabecalho a {
-	color: #fff;
-}
-
-.menu-admin a {
-	color: #ddd;
-}
-
-.menu-admin a:hover {
-	color: #00FF03;
+	background-color: #23282E;
+	height: 50px;
 }
 
 #admin-fluid-content h1, h2, h3 {
@@ -26,25 +11,7 @@
 
 .admin-bg {
 	background-color: #eee;
-}
-
-#admin-menu-top p {
-	padding-right: 25px;
-}
-
-#admin-container {
-	width: 100%;
 	height: 100%;
-}
-
-#admin-menu-left {
-	/* Temporário */
-	min-width: 197px; 
-	top: 53px;
-	position: fixed;
-	height: 100%;
-	background-color: #00FF03;
-	padding: 15px;
 }
 
 #admin-menu-left a {
@@ -52,22 +19,33 @@
 }
 
 #admin-menu-left a:hover {
-	color: #00FF03;
+	color: #2F4050;
 }
 
 #admin-fluid-content {
 	height: 100%;
 	margin-left: 200px;
-	padding: 10px;
-	margin-top: 40px
+	margin-top: 50px
 }
 
 .top-buffer-10 {
 	margin-top: 10px;
 }
 
+.navbar {
+    min-height: 0px;
+}
+
 .navbar-inverse {
-	background-color: #00FF03;
+	background-color: #2F4050;
+}
+
+.navbar-nav>li>a, .navbar-nav>li>a:hover {
+	color: #FFF !important;
+}
+
+.navbar-collapse>p {
+	color: #FFF !important;
 }
 
 .modal-header {
@@ -115,4 +93,14 @@ a:hover.back-to-top{
 
 .container > p {
     margin: 20px 0px;
+}
+
+@media ( max-width : 768px) {
+	#cabecalho {
+		display: none;
+	}
+}
+
+@media ( min-width : 768px) {
+	
 }

@@ -14,11 +14,6 @@
 	height: 100%;
 }
 
-#admin-container {
-	width: 100%;
-	height: 100%;
-}
-
 #admin-menu-left a {
 	color: #ddd;
 }
@@ -29,9 +24,6 @@
 
 #admin-fluid-content {
 	height: 100%;
-	margin-left: 200px;
-	padding: 10px;
-	margin-top: 40px
 }
 
 .top-buffer-10 {
@@ -101,12 +93,53 @@ a:hover.back-to-top{
     margin: 20px 0px;
 }
 
-@media ( max-width : 768px) {
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	#admin-fluid-content {
+		margin-left: 180px;
+		margin-top: 50px
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+}
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
 	#cabecalho {
 		display: none;
 	}
 }
 
-@media ( min-width : 768px) {
-	
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
 }

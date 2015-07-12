@@ -28,13 +28,17 @@
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-organizacao-evento.xhtml"/>
 
 			<div class="row">
-				<div class="col-sm-10"></div>
-				<div class="col-sm-2 top-buffer-20">
-					<div class="form-group pull-right">
-						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}" styleClass="btn btn-success">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
-						<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top"></a>
+				<div class="col-sm-12">
+					<div class="form-group">
+						<span>
+							<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}"
+								styleClass="btn btn-success  bottom-buffer-2 top-buffer-2">
+								<f:ajax render="@form" execute="@form" />
+							</h:commandButton>
+						</span>
+						<span>
+							<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top bottom-buffer-2 top-buffer-2"></a>
+						</span>
 					</div>
 				</div>
 			</div>

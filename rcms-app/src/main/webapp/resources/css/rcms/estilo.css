@@ -24,6 +24,10 @@
 	margin-top: 20px;
 }
 
+.top-buffer-50 {
+	margin-top: 50px;
+}
+
 .bottom-buffer-2 {
 	margin-bottom: 2px
 }
@@ -152,6 +156,9 @@
 @media only screen and (min-width : 768px) {
 	.nav-side-menu .menu-list .menu-content {
 		display: block;
+	}
+	.top-buffer-md-50 {
+		margin-top: 50px;
 	}
 }
 

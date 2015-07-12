@@ -132,6 +132,12 @@
 	transition: all 1s ease;
 }
 
+.ellipse {
+ 	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */

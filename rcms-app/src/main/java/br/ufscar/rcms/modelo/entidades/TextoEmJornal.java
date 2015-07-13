@@ -1,6 +1,10 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +25,35 @@ public class TextoEmJornal extends ProducaoBibliografica {
     @Column(name = "data_publicacao")
     private Date dataPublicacao;
 
+    @Column(name = "volume")
+    private Integer volume;
+
+    @Column(name = "paginas")
+    private String paginas;
+
+    public TextoEmJornal() {
+    }
+
+    public TextoEmJornal(String titulo, List<CitacaoBibliografica> autores, Integer ano, String nomeJornal,
+            String dataPublicacao, Integer volume, String paginas) {
+
+        super.setTitulo(titulo);
+        super.setCitacaoBibliograficas(autores);
+        super.setAno(ano);
+        this.nomeJornal = nomeJornal;
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.dataPublicacao = (java.util.Date) formatter.parse(dataPublicacao);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        this.volume = volume;
+        this.paginas = paginas;
+    }
+
     public String getNomeJornal() {
         return nomeJornal;
     }
@@ -35,5 +68,21 @@ public class TextoEmJornal extends ProducaoBibliografica {
 
     public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = new Date(dataPublicacao.getTime());
+    }
+
+    public Integer getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Integer volume) {
+        this.volume = volume;
+    }
+
+    public String getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(String paginas) {
+        this.paginas = paginas;
     }
 }

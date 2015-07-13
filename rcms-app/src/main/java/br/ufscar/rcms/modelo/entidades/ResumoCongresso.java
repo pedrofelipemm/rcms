@@ -1,5 +1,7 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,8 +21,30 @@ public class ResumoCongresso extends ProducaoBibliografica {
     @Column(name = "nome_evento")
     private String nomeEvento;
 
+    @Column(name = "volume")
+    private Integer volume;
+
+    @Column(name = "paginas")
+    private String paginas;
+
     @Column(name = "numero")
     private Integer numero;
+
+    public ResumoCongresso() {
+    }
+
+    public ResumoCongresso(String titulo, List<CitacaoBibliografica> autores, Integer ano, String doi,
+            String nomeEvento, Integer volume, String paginas, Integer numero) {
+
+        super.setTitulo(titulo);
+        super.setCitacaoBibliograficas(autores);
+        super.setAno(ano);
+        this.doi = doi;
+        this.nomeEvento = nomeEvento;
+        this.volume = volume;
+        this.paginas = paginas;
+        this.numero = numero;
+    }
 
     public String getDoi() {
         return doi;
@@ -36,6 +60,22 @@ public class ResumoCongresso extends ProducaoBibliografica {
 
     public void setNomeEvento(String nomeEvento) {
         this.nomeEvento = nomeEvento;
+    }
+
+    public Integer getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Integer volume) {
+        this.volume = volume;
+    }
+
+    public String getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(String paginas) {
+        this.paginas = paginas;
     }
 
     public Integer getNumero() {

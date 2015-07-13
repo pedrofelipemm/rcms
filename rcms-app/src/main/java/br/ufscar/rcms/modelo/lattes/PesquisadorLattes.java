@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "pesquisador")
-public class PesquisadorLattes extends BaseLattes {
+public class PesquisadorLattes extends CurriculoLattes {
 
     private static final long serialVersionUID = 7991964474837211965L;
 
@@ -64,7 +64,7 @@ public class PesquisadorLattes extends BaseLattes {
     private TrabalhosTecnicoLattes trabalhosTecnico;
 
     @XmlElement(name = "producao_tecnica")
-    private ProducaoBibliograficaLattes producoesTecnica;
+    private OutrasProducoesTecnicaLattes producoesTecnica;
 
     @XmlElement(name = "orientacao_doutorado_em_andamento")
     private OrientacaoDoutoradoLattes orientacaoDoutoradoAndamento = new OrientacaoDoutoradoLattes();
@@ -165,7 +165,7 @@ public class PesquisadorLattes extends BaseLattes {
         return trabalhosTecnico;
     }
 
-    public ProducaoBibliograficaLattes getProducoesTecnica() {
+    public OutrasProducoesTecnicaLattes getProducoesTecnica() {
         return producoesTecnica;
     }
 

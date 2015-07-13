@@ -4,12 +4,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="capitulo")
-public class CapituloLattes extends ProducaoLattes {
+public class CapituloLattes extends BaseLattes {
 
     private static final long serialVersionUID = -8435622607913227170L;
 
     @XmlElement
     private String livro;
+
+    @XmlElement
+    private String titulo;
+
+    @XmlElement
+    private String autores;
 
     @XmlElement
     private String edicao;
@@ -23,8 +29,19 @@ public class CapituloLattes extends ProducaoLattes {
     @XmlElement
     private String paginas;
 
+    @XmlElement
+    private Integer ano;
+
     public String getLivro() {
         return livro;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutores() {
+        return autores;
     }
 
     public String getEdicao() {
@@ -41,5 +58,9 @@ public class CapituloLattes extends ProducaoLattes {
 
     public String getPaginas() {
         return paginas;
+    }
+
+    public Integer getAno() {
+        return ano;
     }
 }

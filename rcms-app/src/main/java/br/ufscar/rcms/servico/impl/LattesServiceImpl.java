@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
+import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
@@ -31,13 +32,27 @@ import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
+import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
+import br.ufscar.rcms.modelo.entidades.OutraProducaoTecnica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.ResumoCongresso;
+import br.ufscar.rcms.modelo.entidades.ResumoExpandidoCongresso;
+import br.ufscar.rcms.modelo.entidades.TextoEmJornal;
+import br.ufscar.rcms.modelo.entidades.TrabalhoCompletoCongresso;
+import br.ufscar.rcms.modelo.entidades.TrabalhoTecnico;
 import br.ufscar.rcms.modelo.entidades.pk.CompreensaoIdiomaPK;
 import br.ufscar.rcms.modelo.lattes.ArtigoLattes;
 import br.ufscar.rcms.modelo.lattes.CapituloLattes;
 import br.ufscar.rcms.modelo.lattes.CurriculoLattes;
+import br.ufscar.rcms.modelo.lattes.OutraProducaoLattes;
+import br.ufscar.rcms.modelo.lattes.OutraProducaoTecnicaLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
+import br.ufscar.rcms.modelo.lattes.ResumoExpandidoLattes;
+import br.ufscar.rcms.modelo.lattes.ResumoLattes;
+import br.ufscar.rcms.modelo.lattes.TextoLattes;
 import br.ufscar.rcms.modelo.lattes.TrabalhoApresentadoLattes;
+import br.ufscar.rcms.modelo.lattes.TrabalhoCompletoLattes;
+import br.ufscar.rcms.modelo.lattes.TrabalhoLattes;
 import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
@@ -299,13 +314,45 @@ public class LattesServiceImpl implements LattesService {
         if (pesquisadorLattes.getArtigosPeriodicos() != null)
             addArtigoEmPeriodico(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
 
+        // Capítulos de Livros
+        if (pesquisadorLattes.getCapitulosLivros() != null)
+            addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
+
+        // Texto em jornal
+        if (pesquisadorLattes.getTextoJornal() != null)
+            addTextoJornal(pesquisadorLattes.getTextoJornal().getTextos());
+
+        // Trabalho completo em congresso
+        if (pesquisadorLattes.getTrabalhoCompleto() != null)
+            addTrabalhoCompleto(pesquisadorLattes.getTrabalhoCompleto().getTrabalhosCompleto());
+
+        // Resumo expandido em congresso
+        if (pesquisadorLattes.getResumoExpandido() != null)
+            addResumoExpandido(pesquisadorLattes.getResumoExpandido().getResumos());
+
+        // Resumo em congresso
+        if (pesquisadorLattes.getResumoCongresso() != null)
+            addResumoCongresso(pesquisadorLattes.getResumoCongresso().getResumos());
+
+        // Resumo em congresso
+        if (pesquisadorLattes.getResumoCongresso() != null)
+            addResumoCongresso(pesquisadorLattes.getResumoCongresso().getResumos());
+
         // Apresentação de Trabalhos
         if (pesquisadorLattes.getApresentacaoTrabalho() != null)
             addApresentacaoTrabalho(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
 
-        // Capítulos de Livros
-        if (pesquisadorLattes.getCapitulosLivros() != null)
-            addCapituloLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
+        // Outra Produção
+        if (pesquisadorLattes.getProducaoBibliografica() != null)
+            addProducaoBibliografica(pesquisadorLattes.getProducaoBibliografica().getProducoes());
+
+        // Trabalhos técnicos
+        if (pesquisadorLattes.getTrabalhosTecnico() != null)
+            addTrabalhosTecnico(pesquisadorLattes.getTrabalhosTecnico().getTrabalhos());
+
+        // Produções Técnicas
+        if (pesquisadorLattes.getProducoesTecnica() != null)
+            addOutrasProducoesTecnica(pesquisadorLattes.getProducoesTecnica().getProducoes());
     }
 
     public void addArtigoEmPeriodico(final List<ArtigoLattes> artigosPeriodicosLattes) {
@@ -319,22 +366,89 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    public void addApresentacaoTrabalho(final List<TrabalhoApresentadoLattes> apresentacaoTrabalhoLattes) {
-
-        // for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
-        // ApresentacaoTrabalho artigo = new ApresentacaoTrabalho(producao.getTitulo(),
-        // getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
-        // producao.getNatureza());
-        // producaoService.saveOrUpdate(artigo);
-        // }
-    }
-
     public void addCapituloLivro(final List<CapituloLattes> capitulosLivrosLattes) {
 
         for (CapituloLattes producao : capitulosLivrosLattes) {
-            CapituloLivro artigo = new CapituloLivro(producao.getTitulo(), getListaCitacoesBibliografica(producao
-                    .getAutores()), producao.getAno(), producao.getLivro(), producao.getEdicao(), producao.getEditora());
+            CapituloLivro artigo = new CapituloLivro(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getLivro(),
+                    producao.getEdicao(), producao.getEditora());
             producaoService.saveOrUpdate(artigo);
+        }
+    }
+
+    private void addTextoJornal(List<TextoLattes> textos) {
+
+        for (TextoLattes producao : textos) {
+            TextoEmJornal texto = new TextoEmJornal(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNomeJornal(),
+                    producao.getData(), producao.getVolume(), producao.getPaginas());
+            producaoService.saveOrUpdate(texto);
+        }
+    }
+
+    private void addTrabalhoCompleto(List<TrabalhoCompletoLattes> trabalhosCompleto) {
+
+        for (TrabalhoCompletoLattes producao : trabalhosCompleto) {
+            TrabalhoCompletoCongresso trabalho = new TrabalhoCompletoCongresso(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getDoi(),
+                    producao.getNomeEvento(), producao.getVolume(), producao.getPaginas());
+            producaoService.saveOrUpdate(trabalho);
+        }
+    }
+
+    private void addResumoExpandido(List<ResumoExpandidoLattes> resumos) {
+
+        for (ResumoExpandidoLattes producao : resumos) {
+            ResumoExpandidoCongresso resumo = new ResumoExpandidoCongresso(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getDoi(),
+                    producao.getNomeEvento(), producao.getVolume(), producao.getPaginas());
+            producaoService.saveOrUpdate(resumo);
+        }
+    }
+
+    private void addResumoCongresso(List<ResumoLattes> resumos) {
+
+        for (ResumoLattes producao : resumos) {
+            ResumoCongresso resumo = new ResumoCongresso(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getDoi(),
+                    producao.getNomeEvento(), producao.getVolume(), producao.getPaginas(), producao.getNumero());
+            producaoService.saveOrUpdate(resumo);
+        }
+    }
+
+    public void addApresentacaoTrabalho(final List<TrabalhoApresentadoLattes> apresentacaoTrabalhoLattes) {
+
+        for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
+            ApresentacaoTrabalho trabalho = new ApresentacaoTrabalho(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+            producaoService.saveOrUpdate(trabalho);
+        }
+    }
+
+    private void addProducaoBibliografica(List<OutraProducaoLattes> producoes) {
+
+        for (OutraProducaoLattes producao : producoes) {
+            OutraProducaoBibliografica producaoBibliografica = new OutraProducaoBibliografica(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+            producaoService.saveOrUpdate(producaoBibliografica);
+        }
+    }
+
+    private void addTrabalhosTecnico(List<TrabalhoLattes> trabalhos) {
+
+        for (TrabalhoLattes producao : trabalhos) {
+            TrabalhoTecnico trabalho = new TrabalhoTecnico(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno());
+            producaoService.saveOrUpdate(trabalho);
+        }
+    }
+
+    private void addOutrasProducoesTecnica(List<OutraProducaoTecnicaLattes> producoes) {
+
+        for (OutraProducaoTecnicaLattes producao : producoes) {
+            OutraProducaoTecnica producaoTecnica = new OutraProducaoTecnica(producao.getTitulo(),
+                    getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+            producaoService.saveOrUpdate(producaoTecnica);
         }
     }
 

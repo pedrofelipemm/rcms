@@ -41,7 +41,7 @@ public class TextoLattes  extends BaseLattes{
         return titulo;
     }
 
-    public String getNome_jornal() {
+    public String getNomeJornal() {
         return nome_jornal;
     }
 

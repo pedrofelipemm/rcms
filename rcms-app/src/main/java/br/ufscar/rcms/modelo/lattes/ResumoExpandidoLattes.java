@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="resumo_expandido")
-public class ResumoExpandidoLattes extends BaseLattes{
+public class ResumoExpandidoLattes extends BaseLattes {
 
     private static final long serialVersionUID = -189421446697148158L;
 
@@ -41,7 +41,7 @@ public class ResumoExpandidoLattes extends BaseLattes{
         return titulo;
     }
 
-    public String getNome_evento() {
+    public String getNomeEvento() {
         return nome_evento;
     }
 

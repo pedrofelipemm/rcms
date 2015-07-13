@@ -38,7 +38,7 @@ import br.ufscar.rcms.modelo.lattes.OrientacaoTCCLattes;
 import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.ProducaoBibliograficaLattes;
-import br.ufscar.rcms.modelo.lattes.ProducaoLattes;
+import br.ufscar.rcms.modelo.lattes.OutraProducaoLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoCongressoLattes;
@@ -261,7 +261,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertProducaoTecnica(producoesTecnica.getProducoes().get(0));
     }
 
-    private void assertProducaoTecnica(ProducaoLattes producaoLattes) {
+    private void assertProducaoTecnica(OutraProducaoLattes producaoLattes) {
 
         assertEquals(Integer.valueOf(2009), producaoLattes.getAno());
         assertEquals("PRADO, A. F. ; ALMEIDA, R. A. P.", producaoLattes.getAutores());
@@ -303,7 +303,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertProducao(producaoBibliografica.getProducoes().get(0));
     }
 
-    private void assertProducao(ProducaoLattes producaoLattes) {
+    private void assertProducao(OutraProducaoLattes producaoLattes) {
 
         assertEquals(Integer.valueOf(2000), producaoLattes.getAno());
         assertEquals("PRADO, A. F.", producaoLattes.getAutores());

@@ -1,0 +1,141 @@
+@CHARSET "UTF-8";
+
+#cabecalho {
+	background-color: #23282E;
+	height: 50px;
+}
+
+#admin-fluid-content h1, h2, h3 {
+	color: #428bca;
+}
+
+.admin-bg {
+	background-color: #eee;
+	height: 100%;
+}
+
+#admin-menu-left a {
+	color: #ddd;
+}
+
+#admin-menu-left a:hover {
+	color: #2F4050;
+}
+
+#admin-fluid-content {
+	height: 100%;
+}
+
+.navbar {
+    min-height: 0px;
+}
+
+.navbar-inverse {
+	background-color: #2F4050;
+}
+
+.navbar-nav>li>a, .navbar-nav>li>a:hover {
+	color: #FFF !important;
+}
+
+.navbar-collapse>p {
+	color: #FFF !important;
+}
+
+.modal-header {
+	background-color: #428bca;
+}
+
+.modal-title {
+	color: #FFF;
+}
+
+.foto-pesquisador, .foto-pesquisador > img {
+	height: 200px;
+	width: 185px;
+	margin: auto;
+}
+
+#statusDialog {
+	height: 50px !important;
+	z-index: 10000 !important;
+}
+
+#statusDialog .ui-dialog-titlebar {
+	display: none
+}
+
+.btn.back-to-top {
+    font-size: 21px;
+}
+
+a.back-to-top{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover.back-to-top{
+    text-decoration: none;
+}
+
+.footer {
+    bottom: 0px;
+    width: 100%;
+    height: 60px;
+	text-align: center;
+}
+
+.container > p {
+    margin: 20px 0px;
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	#admin-fluid-content {
+		margin-left: 180px;
+		margin-top: 50px
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+}
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	#cabecalho {
+		display: none;
+	}
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+}

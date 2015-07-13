@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+#cabecalho {
+	background-color: #23282E;
+	height: 50px;
+}
+
+#admin-fluid-content h1, h2, h3 {
+	color: #428bca;
+}
+
+.admin-bg {
+	background-color: #eee;
+	height: 100%;
+}
+
+#admin-menu-left a {
+	color: #ddd;
+}
+
+#admin-menu-left a:hover {
+	color: #2F4050;
+}
+
+#admin-fluid-content {
+	height: 100%;
+	margin-left: 200px;
+	margin-top: 50px
+}
+
+.navbar {
+    min-height: 0px;
+}
+
+.navbar-inverse {
+	background-color: #2F4050;
+}
+
+.navbar-nav>li>a, .navbar-nav>li>a:hover {
+	color: #FFF !important;
+}
+
+.navbar-collapse>p {
+	color: #FFF !important;
+}
+
+.modal-header {
+	background-color: #428bca;
+}
+
+.modal-title {
+	color: #FFF;
+}
+
+.foto-pesquisador, .foto-pesquisador > img {
+	height: 200px;
+	width: 185px;
+	margin: auto;
+}
+
+#statusDialog {
+	height: 50px !important;
+	z-index: 10000 !important;
+}
+
+#statusDialog .ui-dialog-titlebar {
+	display: none
+}
+
+.btn.back-to-top {
+    font-size: 21px;
+}
+
+a.back-to-top{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover.back-to-top{
+    text-decoration: none;
+}
+
+.footer {
+    bottom: 0px;
+    width: 100%;
+    height: 60px;
+	text-align: center;
+}
+
+.container > p {
+    margin: 20px 0px;
+}
+
+@media ( max-width : 768px) {
+	#cabecalho {
+		display: none;
+	}
+}
+
+@media ( min-width : 768px) {
+	
+}

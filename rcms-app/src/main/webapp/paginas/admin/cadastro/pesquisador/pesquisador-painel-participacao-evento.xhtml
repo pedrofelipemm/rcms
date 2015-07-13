@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<p:panel id="painelParticipacaoEventos" header="#{mensagens['participacao.eventos']}">
+					<h:dataTable id="tableParticipacaoEventos" value="#{pesquisadorMB.pesquisador.participacaoEventos}" var="participacaoEvento"
+						styleClass="table table-hover">
+						<h:column headerClass="col-sm-8">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['evento.titulo']}" />
+							</f:facet>
+							<h:outputText value="#{participacaoEvento.titulo}"/>
+						</h:column>
+						<h:column headerClass="col-sm-1">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['evento.ano']}" />
+							</f:facet>
+							<h:outputText value="#{participacaoEvento.ano}"/>
+						</h:column>
+						<h:column headerClass="col-sm-3 text-center">
+							<f:facet name="header">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalParticipacaoEventos">#{mensagens['adicionar']}</button>
+							</f:facet>
+							<div class="row">
+								<div class="col-sm-12 text-center">
+									<span>
+										<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2">
+											<f:ajax render=":formPesquisador:painelParticipacaoEventos" />
+										</h:commandButton>
+									</span>
+									<span>
+										<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger bottom-buffer-2 top-buffer-2"
+											action="#{pesquisadorMB.removerParticipacaoEvento(participacaoEvento)}">
+											<f:ajax render=":formPesquisador:painelParticipacaoEventos" />
+										</h:commandButton>
+									</span>
+								</div>
+							</div>
+						</h:column>
+					</h:dataTable>
+					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-participacao-evento.xhtml" />
+				</p:panel>
+			</div>
+		</div>
+	</div>
+</ui:composition>

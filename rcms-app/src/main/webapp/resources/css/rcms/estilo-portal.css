@@ -1,0 +1,177 @@
+@CHARSET "UTF-8";
+
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #B20000;
+}
+
+table {
+	width: 100%;
+}
+
+#cabecalho {
+    line-height: 30px;
+    color: #fff;
+    background-color: #B20000;
+    padding-top: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+#cabecalho a {
+    color: #fff;
+}
+
+.bs-login-modal-sm {
+    color: #000;
+}
+
+.nav {
+    padding-right: 15px;
+}
+
+#carrousel {
+    height: 502px;
+    margin-bottom: 20px;
+}
+
+.box-projetos {
+    padding: 0 15px 15px 15px;
+    color: #000;
+}
+
+.box-publicacoes {
+    padding: 15px;
+    color: #000;
+}
+
+#row-logotipos {
+	margin-top: 20px;
+    border-top: 1px solid #B20000;
+}
+
+.logo-cell {
+	text-align: center;
+	line-height: 180px;
+}
+
+#rodape {
+    color: #fff;
+    background-color: #B20000;
+    padding-bottom: 20px;
+}
+
+#rodape h3 {
+    color: #fff;
+}
+
+#rodape a {
+    color: #fff;
+}
+
+#rodape a:hover {
+    text-decoration: underline;
+}
+
+#rodape ul {
+    padding-left: 20px;
+}
+
+.btn-saibamais {
+    background-image: url('../imagens/saiba-mais-icon.png');
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    color: #B20000;
+}
+
+.box-hover {-webkit-transition: all .5s ease;transition: all .5s ease;}
+.box-hover * {-webkit-transition: all .5s ease;transition: all .5s ease; text-decoration: none !important;}
+.box-hover:hover { background-color: #ddd;}
+.box-hover:hover p{color: #000;}
+
+.display-block {
+    display: block;
+}
+
+.breadcrumb a {
+    color: #B20000;
+}
+
+ul.listas {
+	padding-left: 20px;
+	list-style: none;
+}
+
+.listas li {
+	padding: 5px 0 5px 30px;
+	background: url('../resources/images/saiba-mais-icon.png') no-repeat left center;
+}
+
+.lnk-lattes {
+	background: url('../resources/images/lattes-icon.png') no-repeat left center;
+	line-height: 50px;
+	margin-right: 10px;
+	padding: 10px 30px;
+}
+
+ol.listas-numeradas {
+  margin: 0 0 1.5em;
+  padding: 0;
+  counter-reset: item;
+}
+
+ol.listas-numeradas > li {
+  margin: 0 0 1em;
+  padding: 0 0 0 2em;
+  text-indent: -1em;
+  list-style-type: none;
+  counter-increment: item;
+}
+
+ol.listas-numeradas > li:before {
+  display: inline-block;
+  width: 1em;
+  padding-right: 0.5em;
+  font-weight: bold;
+  text-align: right;
+  content: counter(item) ".";
+}
+
+.col-width-50 {
+	width: 50px;
+}
+
+.input-5 {
+	width: 500px;
+}
+
+.message-box-validation {
+	color: red;
+}
+
+.preformatted {
+    white-space: pre-wrap;
+}
+
+.form-signin{
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .form-signin-heading{
+  margin-bottom: 10px;
+}
+
+.login-bx{
+	margin-top: 20px;
+	margin-bottom: 100px;
+}
+
+.foto-pesquisador, .foto-pesquisador > img {
+	height: 200px;
+	width: 185px;
+	margin: auto;
+}

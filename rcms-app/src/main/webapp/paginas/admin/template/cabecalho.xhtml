@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="#{configMB.idioma}" xml:lang="#{configMB.idioma}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+
+	<ui:composition>
+<!-- 	<h:form id="form-cabecalho" prependId="false"> -->
+		<div id="cabecalho" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<div class="collapse navbar-collapse">
+						<p class="navbar-text navbar-right pull-left">#{mensagens['rcms']}</p>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="box-hover"><a href="#{request.contextPath}/paginas/index.xhtml">#{mensagens['ir.para.site']}</a></li>
+							<li class="box-hover"><a href="#">#{mensagens['sair']}</a></li>
+						</ul>
+						<p class="navbar-text navbar-right">#{mensagens['bem.vindo.administrador']}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 	</h:form> -->
+	</ui:composition>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/admin/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+	
+	<ui:define name="conteudo">
+	
+		<h:form id="formIdioma" role="form" prependId="false">
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<h1>#{mensagens['cadastro.idiomas']}</h1>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<p:panel id="painelIdioma" header="#{mensagens['idioma']}">
+							<div class="row">
+				          		<div class="col-sm-6">
+			            			<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="inputTextIdioma" value="#{mensagens['label.idioma']} " />
+											<h:inputText id="inputTextIdioma" pt:name="inputTextIdioma" 
+												pt:placeholder="#{mensagens['informe.descricao.idioma']}"
+												value="#{idiomaMB.idioma.descricao}" required="true"
+												requiredMessage="#{mensagens['idioma.nao.preenchido']}" styleClass="form-control" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</p:panel>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<h:commandButton pt:name="#{mensagens['salvar']}" title="#{mensagens['salvar']}"
+						value="#{mensagens['salvar']}" action="#{idiomaMB.salvar}" styleClass="btn btn-success">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</div>
+			</div>
+						
+		</h:form>
+	</ui:define>
+</ui:composition>

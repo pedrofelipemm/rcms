@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "\"IDIOMA\"")
 public class Idioma extends Entidade {
-
+a
     private static final long serialVersionUID = 3667531830943589983L;
 
     @Id

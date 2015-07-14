@@ -24,11 +24,11 @@
  	<http pattern="/javax.faces.resource/**" security="none"></http>
  	<http pattern="/file/**" security="none"></http>
  
-	<http auto-config="true">
-		<csrf disabled="true"/>
-		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_USER')"/>
-		<form-login login-page="/paginas/portal/login/login.xhtml"  />
-	</http>	
+<!-- 	<http auto-config="true"> -->
+<!-- 		<csrf disabled="true"/> -->
+<!-- 		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_USER')"/> -->
+<!-- 		<form-login login-page="/paginas/portal/login/login.xhtml"  /> -->
+<!-- 	</http>	 -->
 	
 	<authentication-manager>
 		<authentication-provider>

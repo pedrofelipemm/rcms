@@ -49,7 +49,7 @@ public class PesquisadorDAOTest extends AbstractDAOTestBase {
     }
 
     @Test
-    public void buscarPesquisadoresComIdiomaTest() {
+    public void testBuscarPesquisadoresComIdioma() {
 
         Assert.assertEquals(2, pesquisadorDAO.buscarTodosComIdioma(1L).size());
         Assert.assertEquals(0, pesquisadorDAO.buscarTodosComIdioma(2L).size());

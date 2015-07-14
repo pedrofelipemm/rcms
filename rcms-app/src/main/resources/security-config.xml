@@ -24,19 +24,35 @@
  	<http pattern="/javax.faces.resource/**" security="none"></http>
  	<http pattern="/file/**" security="none"></http>
  
-<!-- 	<http auto-config="true"> -->
-<!-- 		<csrf disabled="true"/> -->
-<!-- 		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_USER')"/> -->
-<!-- 		<form-login login-page="/paginas/portal/login/login.xhtml"  /> -->
-<!-- 	</http>	 -->
+	<http auto-config="true">
+		<csrf disabled="true"/>
+		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<form-login login-page="/paginas/portal/login/login.xhtml"  />
+	</http>	
 	
-	<authentication-manager>
+	<!-- <authentication-manager>
 		<authentication-provider>
 			<user-service>
 				<user name="admin" password="admin" authorities="ROLE_USER"/>
 			</user-service>
 		</authentication-provider>
-	</authentication-manager>
+	</authentication-manager> -->
+	
+	<authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource" 
+               users-by-username-query="SELECT nome, senha, enabled FROM &quot;USUARIO&quot; WHERE nome=?"
+               authorities-by-username-query="select nome, nomeautorizacao from &quot;USUARIO&quot; c, &quot;AUTORIZACAO&quot; a where c.nome=?"
+            />
+        </authentication-provider>
+    </authentication-manager> 
+ 
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <beans:property name="url" value="jdbc:postgresql://127.0.0.1:5432/rcms" />
+        <beans:property name="driverClassName" value="org.postgresql.Driver" />
+        <beans:property name="username" value="postgres" />
+        <beans:property name="password" value="postgres" />
+    </beans:bean>
 	
 	 		
 </beans:beans>

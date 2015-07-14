@@ -9,6 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import br.ufscar.rcms.modelo.entidades.Usuario;
+
 @RequestScoped
 @ManagedBean(name = "loginMB")
 public class LoginMB extends AbstractMB{
@@ -21,16 +23,10 @@ public class LoginMB extends AbstractMB{
 
 
 	private String userName;
-     
-  
     private String password;
- 
-    @ManagedProperty(value="#{authenticationManager}")
-    private AuthenticationManager authenticationManager;
-   
-   
-    public String login() {
-    	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(this.getUserName(), this.getPassword());
+    
+     public String login() {
+	    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(this.getUserName(), this.getPassword());
         SecurityContextHolder.createEmptyContext();
         SecurityContextHolder.getContext().setAuthentication(token);
         return "consultaPesquisadores";
@@ -52,10 +48,6 @@ public class LoginMB extends AbstractMB{
 		// TODO Auto-generated method stub
 		
 	}
- 
-    public AuthenticationManager getAuthenticationManager() { return authenticationManager; }
- 
-    public void setAuthenticationManager(AuthenticationManager authenticationManager) { this.authenticationManager = authenticationManager;}
  
     public String getUserName() { return userName; }
  

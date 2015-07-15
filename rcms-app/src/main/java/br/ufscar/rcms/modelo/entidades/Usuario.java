@@ -39,7 +39,7 @@ public class Usuario extends Entidade {
     @Column(name = "email", nullable = false)
     private String email;
     
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean enabled;
     
     @OneToMany

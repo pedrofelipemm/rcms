@@ -11,7 +11,8 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-
+	<context:property-placeholder location="file:${user.home}/RCMS/config/application.properties" />
+	
 	<beans:bean class="org.springframework.security.web.FilterChainProxy" id="springSecurityFilterChain">
 		<filter-chain-map request-matcher="ant">
 			<filter-chain filters="securityContextPersistenceFilter" pattern="/*"></filter-chain>
@@ -41,17 +42,17 @@
 	<authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource" 
-               users-by-username-query="SELECT nome, senha, enabled FROM &quot;USUARIO&quot; WHERE nome=?"
-               authorities-by-username-query="select nome, nomeautorizacao from &quot;USUARIO&quot; c, &quot;AUTORIZACAO&quot; a where c.nome=?"
+               users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?"
+               authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?"
             />
         </authentication-provider>
     </authentication-manager> 
  
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <beans:property name="url" value="jdbc:postgresql://127.0.0.1:5432/rcms" />
-        <beans:property name="driverClassName" value="org.postgresql.Driver" />
-        <beans:property name="username" value="t6web2014" />
-        <beans:property name="password" value="eXiaf9ae" />
+        <beans:property name="url" value="${database.url}" />
+        <beans:property name="driverClassName" value="${database.driver.class.name}" />
+        <beans:property name="username" value="${database.username}" />
+        <beans:property name="password" value="${database.password}" />
     </beans:bean>
 	
 	 		

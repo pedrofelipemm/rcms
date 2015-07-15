@@ -45,7 +45,7 @@
 	<rule ref="rulesets/java/design.xml/ReturnEmptyArrayRatherThanNull" />
 	<rule ref="rulesets/java/design.xml/LogicInversion" />
 	<rule ref="rulesets/java/design.xml/UseVarargs" />
-	<rule ref="rulesets/java/design.xml/FieldDeclarationsShouldBeAtStartOfClass" />
+	<!-- <rule ref="rulesets/java/design.xml/FieldDeclarationsShouldBeAtStartOfClass" /> -->
 	<!-- <rule ref="rulesets/java/design.xml/GodClass"/> -->
 
 </ruleset>

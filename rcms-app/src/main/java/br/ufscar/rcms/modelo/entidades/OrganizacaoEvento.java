@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"ORGANIZACAO_EVENTO\"")
+@Table(name = "organizacao_evento")
 public class OrganizacaoEvento extends Entidade {
 
     private static final long serialVersionUID = -4704509426426228127L;
@@ -37,7 +37,7 @@ public class OrganizacaoEvento extends Entidade {
     public OrganizacaoEvento() {
     }
 
-    public OrganizacaoEvento(Pesquisador pesquisador, String titulo, String natureza, Integer ano) {
+    public OrganizacaoEvento(final Pesquisador pesquisador, final String titulo, final String natureza, final Integer ano) {
         this.pesquisador = pesquisador;
         this.titulo = titulo;
         this.natureza = natureza;
@@ -48,7 +48,7 @@ public class OrganizacaoEvento extends Entidade {
         return idOrganizacaoEvento;
     }
 
-    public void setIdOrganizacaoEvento(Integer idOrganizacaoEvento) {
+    public void setIdOrganizacaoEvento(final Integer idOrganizacaoEvento) {
         this.idOrganizacaoEvento = idOrganizacaoEvento;
     }
 
@@ -56,7 +56,7 @@ public class OrganizacaoEvento extends Entidade {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -64,7 +64,7 @@ public class OrganizacaoEvento extends Entidade {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
+    public void setTitulo(final String titulo) {
         this.titulo = titulo;
     }
 
@@ -72,7 +72,7 @@ public class OrganizacaoEvento extends Entidade {
         return natureza;
     }
 
-    public void setNatureza(String natureza) {
+    public void setNatureza(final String natureza) {
         this.natureza = natureza;
     }
 
@@ -80,7 +80,7 @@ public class OrganizacaoEvento extends Entidade {
         return ano;
     }
 
-    public void setAno(Integer ano) {
+    public void setAno(final Integer ano) {
         this.ano = ano;
     }
 
@@ -93,7 +93,7 @@ public class OrganizacaoEvento extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

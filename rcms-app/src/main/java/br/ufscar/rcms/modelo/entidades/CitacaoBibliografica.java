@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"CITACAO_BIBLIOGRAFICA\"")
+@Table(name = "citacao_bibliografica")
 public class CitacaoBibliografica extends Entidade {
 
     private static final long serialVersionUID = 1883662481651131111L;
@@ -31,7 +31,7 @@ public class CitacaoBibliografica extends Entidade {
     public CitacaoBibliografica() {
     }
 
-    public CitacaoBibliografica(Pesquisador pesquisador, String nomeCitacao) {
+    public CitacaoBibliografica(final Pesquisador pesquisador, final String nomeCitacao) {
         this.pesquisador = pesquisador;
         this.nomeCitacao = nomeCitacao;
     }
@@ -40,7 +40,7 @@ public class CitacaoBibliografica extends Entidade {
         return idCitacaoBibliografica;
     }
 
-    public void setIdCitacaoBibliografica(Integer idCitacaoBibliografica) {
+    public void setIdCitacaoBibliografica(final Integer idCitacaoBibliografica) {
         this.idCitacaoBibliografica = idCitacaoBibliografica;
     }
 
@@ -48,7 +48,7 @@ public class CitacaoBibliografica extends Entidade {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -56,7 +56,7 @@ public class CitacaoBibliografica extends Entidade {
         return nomeCitacao;
     }
 
-    public void setNomeCitacao(String nomeCitacao) {
+    public void setNomeCitacao(final String nomeCitacao) {
         this.nomeCitacao = nomeCitacao;
     }
 
@@ -69,7 +69,7 @@ public class CitacaoBibliografica extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

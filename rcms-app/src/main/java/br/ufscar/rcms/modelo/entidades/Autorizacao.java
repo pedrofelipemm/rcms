@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"AUTORIZACAO\"")
+@Table(name = "autorizacao")
 public class Autorizacao extends Entidade{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class Autorizacao extends Entidade{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_autorizacao")
 	private long idAutorizacao;
-	
+
 	private String nomeAutorizacao;
 
 	public Autorizacao() {}
@@ -29,10 +29,10 @@ public class Autorizacao extends Entidade{
 		return nomeAutorizacao;
 	}
 
-	public void setNomeAutorizacao(String nomeAutorizacao) {
+	public void setNomeAutorizacao(final String nomeAutorizacao) {
 		this.nomeAutorizacao = nomeAutorizacao;
 	}
-	
+
 
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"LINHA_PESQUISA\"")
+@Table(name = "linha_pesquisa")
 public class LinhaDePesquisa extends Entidade {
 
     private static final long serialVersionUID = 5307316270928132625L;
@@ -25,7 +25,7 @@ public class LinhaDePesquisa extends Entidade {
         return idLinhaDePesquisa;
     }
 
-    public void setIdLinhaDePesquisa(Long idLinhaDePesquisa) {
+    public void setIdLinhaDePesquisa(final Long idLinhaDePesquisa) {
         this.idLinhaDePesquisa = idLinhaDePesquisa;
     }
 
@@ -33,7 +33,7 @@ public class LinhaDePesquisa extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -46,7 +46,7 @@ public class LinhaDePesquisa extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

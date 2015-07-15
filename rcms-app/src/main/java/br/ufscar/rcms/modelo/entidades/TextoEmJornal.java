@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"TEXTO_EM_JORNAL\"")
+@Table(name = "texto_em_jornal")
 @ForeignKey(name = "fk_texto_em_jornal_producao_bibliografica")
 public class TextoEmJornal extends ProducaoBibliografica {
 
@@ -34,8 +34,8 @@ public class TextoEmJornal extends ProducaoBibliografica {
     public TextoEmJornal() {
     }
 
-    public TextoEmJornal(String titulo, List<CitacaoBibliografica> autores, Integer ano, String nomeJornal,
-            String dataPublicacao, Integer volume, String paginas) {
+    public TextoEmJornal(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String nomeJornal,
+            final String dataPublicacao, final Integer volume, final String paginas) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -44,7 +44,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            this.dataPublicacao = (java.util.Date) formatter.parse(dataPublicacao);
+            this.dataPublicacao = formatter.parse(dataPublicacao);
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
         return nomeJornal;
     }
 
-    public void setNomeJornal(String nomeJornal) {
+    public void setNomeJornal(final String nomeJornal) {
         this.nomeJornal = nomeJornal;
     }
 
@@ -66,7 +66,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
         return new Date(dataPublicacao.getTime());
     }
 
-    public void setDataPublicacao(Date dataPublicacao) {
+    public void setDataPublicacao(final Date dataPublicacao) {
         this.dataPublicacao = new Date(dataPublicacao.getTime());
     }
 
@@ -74,7 +74,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
         return volume;
     }
 
-    public void setVolume(Integer volume) {
+    public void setVolume(final Integer volume) {
         this.volume = volume;
     }
 
@@ -82,7 +82,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
         return paginas;
     }
 
-    public void setPaginas(String paginas) {
+    public void setPaginas(final String paginas) {
         this.paginas = paginas;
     }
 }

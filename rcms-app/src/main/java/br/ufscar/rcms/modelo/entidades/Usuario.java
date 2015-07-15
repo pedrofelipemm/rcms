@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"USUARIO\"")
+@Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends Entidade {
 
@@ -38,10 +38,10 @@ public class Usuario extends Entidade {
 
     @Column(name = "email", nullable = false)
     private String email;
-    
+
     @Column(columnDefinition = "boolean default true")
     private boolean enabled;
-    
+
     @OneToMany
     private List<Autorizacao> autorizacoes;
 
@@ -49,7 +49,7 @@ public class Usuario extends Entidade {
 		return autorizacoes;
 	}
 
-	public void setAutorizacoes(List<Autorizacao> autorizacoes) {
+	public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
 		this.autorizacoes = autorizacoes;
 	}
 

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"PARTICIPACAO_EVENTO\"")
+@Table(name = "participacao_evento")
 public class ParticipacaoEvento extends Entidade {
 
     private static final long serialVersionUID = -1118426502727782681L;
@@ -34,7 +34,7 @@ public class ParticipacaoEvento extends Entidade {
     public ParticipacaoEvento() {
     }
 
-    public ParticipacaoEvento(Pesquisador pesquisador, String titulo, Integer ano) {
+    public ParticipacaoEvento(final Pesquisador pesquisador, final String titulo, final Integer ano) {
         this.pesquisador = pesquisador;
         this.titulo = titulo;
         this.ano = ano;
@@ -44,7 +44,7 @@ public class ParticipacaoEvento extends Entidade {
         return idParticipacaoEvento;
     }
 
-    public void setIdParticipacaoEvento(Integer idParticipacaoEvento) {
+    public void setIdParticipacaoEvento(final Integer idParticipacaoEvento) {
         this.idParticipacaoEvento = idParticipacaoEvento;
     }
 
@@ -52,7 +52,7 @@ public class ParticipacaoEvento extends Entidade {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -60,7 +60,7 @@ public class ParticipacaoEvento extends Entidade {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
+    public void setTitulo(final String titulo) {
         this.titulo = titulo;
     }
 
@@ -68,7 +68,7 @@ public class ParticipacaoEvento extends Entidade {
         return ano;
     }
 
-    public void setAno(Integer ano) {
+    public void setAno(final Integer ano) {
         this.ano = ano;
     }
 
@@ -81,7 +81,7 @@ public class ParticipacaoEvento extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

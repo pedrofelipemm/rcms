@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"ORIENTACAO_OUTRO_TIPO\"")
+@Table(name = "orientacao_outro_tipo")
 @ForeignKey(name = "fk_orientacao_outro_tipo_orientacao")
 public class OrientacaoOutroTipo extends Orientacao {
 

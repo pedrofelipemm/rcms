@@ -10,48 +10,48 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "\"ATUACAO\"")
+@Table(name = "atuacao")
 public class AtuacaoPesquisador extends Entidade{
 
     private static final long serialVersionUID = -6748580184423008322L;
-	
+
     public AtuacaoPesquisador() {
     }
-	
+
     private int index;
-	
-    public AtuacaoPesquisador(EspecializacaoAreaAtuacao especializacao, Pesquisador pesquisador) {
+
+    public AtuacaoPesquisador(final EspecializacaoAreaAtuacao especializacao, final Pesquisador pesquisador) {
 
         this.especializacao = especializacao;
         this.pesquisador = pesquisador;
     }
-	
+
 /*	public AtuacaoPesquisador(GrandeAreaAtuacao grandeArea, AreaAtuacao area,
 			SubAreaAtuacao subArea, EspecializacaoAreaAtuacao especializacao){
 		descricao = "";
-		
+
 		if (grandeArea != null){
 			descricao += "Grande área: " +  grandeArea.getDescricao() + " /";
 		}
-		
+
 		if (area != null){
 			descricao += " Área: " + area.getDescricao() + " /";
 		}
-		
+
 		if (subArea != null){
 			descricao += " Subárea: " + subArea.getDescricao() + " /";
 		}
-		
+
 		if (especializacao != null){
 			descricao += " Especialidade: " + especializacao.getDescricao();
 		}
-		
+
 		if (descricao.endsWith("/")){
 			descricao = String.copyValueOf(descricao.toCharArray(), 0, descricao.length() - 1);
 		}
-		
+
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -60,35 +60,35 @@ public class AtuacaoPesquisador extends Entidade{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int IdAtuacao;
 
-	
+
 	@Column
 	private String descricao;
 	*/
-	
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_atuacao")
     private int IdAtuacao;
-	
+
     @ManyToOne(optional = false)
     private Pesquisador pesquisador;
-	
+
     @ManyToOne(optional = false)
     private EspecializacaoAreaAtuacao especializacao;
-	
+
     public EspecializacaoAreaAtuacao getEspecializacao() {
         return especializacao;
     }
-	
-    public void setEspecializacao(EspecializacaoAreaAtuacao especializacao) {
+
+    public void setEspecializacao(final EspecializacaoAreaAtuacao especializacao) {
         this.especializacao = especializacao;
     }
-	
+
     public Pesquisador getPesquisador() {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -96,7 +96,7 @@ public class AtuacaoPesquisador extends Entidade{
         return IdAtuacao;
     }
 
-    public void setIdAtuacao(int idAtuacao) {
+    public void setIdAtuacao(final int idAtuacao) {
         IdAtuacao = idAtuacao;
     }
 
@@ -104,7 +104,7 @@ public class AtuacaoPesquisador extends Entidade{
         return index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(final int index) {
         this.index = index;
     }
 

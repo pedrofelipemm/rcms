@@ -24,19 +24,19 @@
  	<http pattern="/javax.faces.resource/**" security="none"></http>
  	<http pattern="/file/**" security="none"></http>
  
-	<http auto-config="true">
-		<csrf disabled="true"/>
-		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<form-login login-page="/paginas/portal/login/login.xhtml"  />
-	</http>	
+<!-- 	<http auto-config="true" > -->
+<!-- 		<csrf disabled="true"/> -->
+<!-- 		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
+<!-- 		<form-login login-page="/paginas/portal/login/login.xhtml"  /> -->
+<!-- 	</http>	 -->
 	
-	<!-- <authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER"/>
-			</user-service>
-		</authentication-provider>
-	</authentication-manager> -->
+<!-- 	<authentication-manager> -->
+<!-- 		<authentication-provider> -->
+<!-- 			<user-service> -->
+<!-- 				<user name="admin" password="admin" authorities="ROLE_USER"/> -->
+<!-- 			</user-service> -->
+<!-- 		</authentication-provider> -->
+<!-- 	</authentication-manager> -->
 	
 	<authentication-manager>
         <authentication-provider>
@@ -51,7 +51,7 @@
         <beans:property name="url" value="jdbc:postgresql://127.0.0.1:5432/rcms" />
         <beans:property name="driverClassName" value="org.postgresql.Driver" />
         <beans:property name="username" value="postgres" />
-        <beans:property name="password" value="postgres" />
+        <beans:property name="password" value="root" />
     </beans:bean>
 	
 	 		

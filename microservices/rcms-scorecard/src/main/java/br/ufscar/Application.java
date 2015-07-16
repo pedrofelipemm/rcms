@@ -15,9 +15,8 @@ public class Application {
 
     private static final String URL_MAPPING = "/rcms-scorecard/api/*";
 
-    public static void main(final String... args) throws Exception {
+    public static void main(final String... args) {
         SpringApplication.run(Application.class, args);
-        // http://localhost:8080/RCMS/microservice/health
     }
 
     @Bean
@@ -33,17 +32,4 @@ public class Application {
 
         return registration;
     }
-
-    // @Bean
-    // public DataSource dataSource() {
-    //
-    // final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    // // TODO PEDRO EXTRACT TO FILE
-    // dataSource.setDriverClassName("org.postgresql.Driver");
-    // dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcmsTest");
-    // dataSource.setUsername("postgres");
-    // dataSource.setPassword("root");
-    //
-    // return dataSource;
-    // }
 }

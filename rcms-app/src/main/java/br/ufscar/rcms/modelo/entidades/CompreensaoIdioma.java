@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import br.ufscar.rcms.modelo.entidades.pk.CompreensaoIdiomaPK;
 
 @Entity
-@Table(name = "\"COMPREENSAO_IDIOMA\"")
+@Table(name = "compreensao_idioma")
 public class CompreensaoIdioma extends Entidade{
 
     private static final long serialVersionUID = 2333166344065581455L;
@@ -23,7 +23,7 @@ public class CompreensaoIdioma extends Entidade{
         return compreensaoIdiomaPK;
     }
 
-    public void setCompreensaoIdiomaPK(CompreensaoIdiomaPK compreensaoIdiomaPK) {
+    public void setCompreensaoIdiomaPK(final CompreensaoIdiomaPK compreensaoIdiomaPK) {
         this.compreensaoIdiomaPK = compreensaoIdiomaPK;
     }
 
@@ -31,7 +31,7 @@ public class CompreensaoIdioma extends Entidade{
         return proficiencia;
     }
 
-    public void setProficiencia(String proficiencia) {
+    public void setProficiencia(final String proficiencia) {
         this.proficiencia = proficiencia;
     }
 
@@ -44,7 +44,7 @@ public class CompreensaoIdioma extends Entidade{
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

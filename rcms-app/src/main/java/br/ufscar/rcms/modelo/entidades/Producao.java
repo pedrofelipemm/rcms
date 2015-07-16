@@ -18,7 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"PRODUCAO\"")
+@Table(name = "producao")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Producao extends Entidade {
 

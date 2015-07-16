@@ -35,10 +35,12 @@ import br.ufscar.rcms.modelo.lattes.OrientacaoMestradoLattes;
 import br.ufscar.rcms.modelo.lattes.OrientacaoOutraLattes;
 import br.ufscar.rcms.modelo.lattes.OrientacaoOutrosTiposConcluidoLattes;
 import br.ufscar.rcms.modelo.lattes.OrientacaoTCCLattes;
+import br.ufscar.rcms.modelo.lattes.OutraProducaoLattes;
+import br.ufscar.rcms.modelo.lattes.OutraProducaoTecnicaLattes;
+import br.ufscar.rcms.modelo.lattes.OutrasProducoesTecnicaLattes;
 import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.ProducaoBibliograficaLattes;
-import br.ufscar.rcms.modelo.lattes.ProducaoLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoCongressoLattes;
@@ -81,7 +83,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
     // assertPesquisador(pesquisadores.get(0));
     // }
 
-    private void assertPesquisador(PesquisadorLattes pesquisador) {
+    private void assertPesquisador(final PesquisadorLattes pesquisador) {
 
         assertEquals("2668568143800755", pesquisador.getCodigoLattes());
         assertIdentificacao(pesquisador.getIdentificacao());
@@ -112,13 +114,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertOrganizacaoEvento(pesquisador.getOrganizacaoEvento());
     }
 
-    private void assertOrganizacaoEvento(OrganizacaoEventoLattes organizacaoEvento) {
+    private void assertOrganizacaoEvento(final OrganizacaoEventoLattes organizacaoEvento) {
 
         assertEquals(2, organizacaoEvento.getEventos().size());
         assertEventoOrg(organizacaoEvento.getEventos().get(0));
     }
 
-    private void assertEventoOrg(EventoLatttes eventoLatttes) {
+    private void assertEventoOrg(final EventoLatttes eventoLatttes) {
 
         assertEquals(Integer.valueOf(2007), eventoLatttes.getAno());
         assertEquals("Congresso", eventoLatttes.getNatureza());
@@ -126,25 +128,25 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 eventoLatttes.getTitulo());
     }
 
-    private void assertParticipacaoEvento(ParticipacaoEventoLattes participacaoEvento) {
+    private void assertParticipacaoEvento(final ParticipacaoEventoLattes participacaoEvento) {
 
         assertEquals(29, participacaoEvento.getEventos().size());
         assertEvento(participacaoEvento.getEventos().get(0));
     }
 
-    private void assertEvento(EventoLatttes eventoLatttes) {
+    private void assertEvento(final EventoLatttes eventoLatttes) {
 
         assertEquals(Integer.valueOf(2013), eventoLatttes.getAno());
         assertEquals("XXVII Congresso Brasileiro de Software: Teoria e Prática. 2013. (Congresso).", eventoLatttes.getTitulo());
     }
 
-    private void assertOrientacaoOutrosTipoConcluido(OrientacaoOutrosTiposConcluidoLattes orientacaoOutrosTipoConcluido) {
+    private void assertOrientacaoOutrosTipoConcluido(final OrientacaoOutrosTiposConcluidoLattes orientacaoOutrosTipoConcluido) {
 
         assertEquals(46, orientacaoOutrosTipoConcluido.getOrientacaoOutra().size());
         assertOrientacaoOutroTipo(orientacaoOutrosTipoConcluido.getOrientacaoOutra().get(0));
     }
 
-    private void assertOrientacaoOutroTipo(OrientacaoOutraLattes orientacaoOutraLattes) {
+    private void assertOrientacaoOutroTipo(final OrientacaoOutraLattes orientacaoOutraLattes) {
 
         assertEquals(Integer.valueOf(2008), orientacaoOutraLattes.getAno());
         assertEquals("", orientacaoOutraLattes.getAgenciaFomento());
@@ -154,13 +156,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Framework da BMF", orientacaoOutraLattes.getTituloTrabalho());
     }
 
-    private void assertOrientacaoIniciacaoCientifica( OrientacaoIniciacaoCientificaLattes orientacaoIniciacaoCientificaConcluido) {
+    private void assertOrientacaoIniciacaoCientifica( final OrientacaoIniciacaoCientificaLattes orientacaoIniciacaoCientificaConcluido) {
 
         assertEquals(11, orientacaoIniciacaoCientificaConcluido.getIniciacaoCientifica().size());
         assertOrientacaoCientifica(orientacaoIniciacaoCientificaConcluido.getIniciacaoCientifica().get(0));
     }
 
-    private void assertOrientacaoCientifica(IniciacaoCientificaLattes iniciacaoCientificaLattes) {
+    private void assertOrientacaoCientifica(final IniciacaoCientificaLattes iniciacaoCientificaLattes) {
 
         assertEquals(Integer.valueOf(2010), iniciacaoCientificaLattes.getAno());
         assertEquals("Conselho Nacional de Desenvolvimento Científico e Tecnológico", iniciacaoCientificaLattes.getAgenciaFomento());
@@ -171,13 +173,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 iniciacaoCientificaLattes.getTituloTrabalho());
     }
 
-    private void assertOrientacaoTCCConcluido(OrientacaoTCCLattes orientacaoTCCConcluido) {
+    private void assertOrientacaoTCCConcluido(final OrientacaoTCCLattes orientacaoTCCConcluido) {
 
         assertEquals(3, orientacaoTCCConcluido.getTccs().size());
         assertTCCConcluido(orientacaoTCCConcluido.getTccs().get(0));
     }
 
-    private void assertTCCConcluido(TCCLattes tccLattes) {
+    private void assertTCCConcluido(final TCCLattes tccLattes) {
 
         assertEquals(Integer.valueOf(2004), tccLattes.getAno());
         assertEquals("", tccLattes.getAgenciaFomento());
@@ -187,13 +189,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Desenvolvimento de um componente para domínio de formulários Web, usando PHP", tccLattes.getTituloTrabalho());
     }
 
-    private void assertOrientacaoMestradoConcluido(OrientacaoMestradoLattes orientacaoMestrado) {
+    private void assertOrientacaoMestradoConcluido(final OrientacaoMestradoLattes orientacaoMestrado) {
 
         assertEquals(34, orientacaoMestrado.getDissertacoes().size());
         assertDissertacaoConcluido(orientacaoMestrado.getDissertacoes().get(0));
     }
 
-    private void assertDissertacaoConcluido(DissertacaoLattes dissertacaoLattes) {
+    private void assertDissertacaoConcluido(final DissertacaoLattes dissertacaoLattes) {
 
         assertEquals(Integer.valueOf(2013), dissertacaoLattes.getAno());
         assertEquals("Coordenação de Aperfeiçoamento de Pessoal de Nível Superior", dissertacaoLattes.getAgenciaFomento());
@@ -205,13 +207,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 dissertacaoLattes.getTituloTrabalho());
     }
 
-    private void assertOrientacaoMestradoAndamento(OrientacaoMestradoLattes orientacaoMestrado) {
+    private void assertOrientacaoMestradoAndamento(final OrientacaoMestradoLattes orientacaoMestrado) {
 
         assertEquals(2, orientacaoMestrado.getDissertacoes().size());
         assertDissertacao(orientacaoMestrado.getDissertacoes().get(0));
     }
 
-    private void assertDissertacao(DissertacaoLattes dissertacaoLattes) {
+    private void assertDissertacao(final DissertacaoLattes dissertacaoLattes) {
 
         assertEquals(Integer.valueOf(2013), dissertacaoLattes.getAno());
         assertEquals("Coordenação de Aperfeiçoamento de Pessoal de Nível Superior", dissertacaoLattes.getAgenciaFomento());
@@ -222,13 +224,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Em definição", dissertacaoLattes.getTituloTrabalho());
     }
 
-    private void assertOrientacaoDoutoradoConcluido(OrientacaoDoutoradoLattes orientacaoDoutorado) {
+    private void assertOrientacaoDoutoradoConcluido(final OrientacaoDoutoradoLattes orientacaoDoutorado) {
 
         assertEquals(2, orientacaoDoutorado.getTeses().size());
         assertTeseConcluido(orientacaoDoutorado.getTeses().get(0));
     }
 
-    private void assertTeseConcluido(TeseLattes teseLattes) {
+    private void assertTeseConcluido(final TeseLattes teseLattes) {
 
         assertEquals(Integer.valueOf(2012), teseLattes.getAno());
         assertEquals("", teseLattes.getAgenciaFomento());
@@ -238,13 +240,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Uma Arquitetura de Fornecimento de Serviços para a Computação Móvel", teseLattes.getTituloTrabalho());
     }
 
-    private void assertOrientacaoDoutoradoAndamento(OrientacaoDoutoradoLattes orientacaoDoutorado) {
+    private void assertOrientacaoDoutoradoAndamento(final OrientacaoDoutoradoLattes orientacaoDoutorado) {
 
         assertEquals(2, orientacaoDoutorado.getTeses().size());
         assertTese(orientacaoDoutorado.getTeses().get(0));
     }
 
-    private void assertTese(TeseLattes teseLattes) {
+    private void assertTese(final TeseLattes teseLattes) {
 
         assertEquals(Integer.valueOf(2011), teseLattes.getAno());
         assertEquals("Coordenação de Aperfeiçoamento de Pessoal de Nível Superior", teseLattes.getAgenciaFomento());
@@ -255,13 +257,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Adaptação Dinâmica de Serviços Sensível ao Contexto", teseLattes.getTituloTrabalho());
     }
 
-    private void assertProducoesTecnica(ProducaoBibliograficaLattes producoesTecnica) {
+    private void assertProducoesTecnica(final OutrasProducoesTecnicaLattes producoesTecnica) {
 
         assertEquals(8, producoesTecnica.getProducoes().size());
         assertProducaoTecnica(producoesTecnica.getProducoes().get(0));
     }
 
-    private void assertProducaoTecnica(ProducaoLattes producaoLattes) {
+    private void assertProducaoTecnica(final OutraProducaoTecnicaLattes producaoLattes) {
 
         assertEquals(Integer.valueOf(2009), producaoLattes.getAno());
         assertEquals("PRADO, A. F. ; ALMEIDA, R. A. P.", producaoLattes.getAutores());
@@ -269,13 +271,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Paradigmas de Programação", producaoLattes.getTitulo());
     }
 
-    private void assertApresentacaoTrabalho(ApresentacaoTrabalhoLattes apresentacaoTrabalho) {
+    private void assertApresentacaoTrabalho(final ApresentacaoTrabalhoLattes apresentacaoTrabalho) {
 
         assertEquals(6, apresentacaoTrabalho.getTrabalhos().size());
         assertTrabalhoApresentado(apresentacaoTrabalho.getTrabalhos().get(0));
     }
 
-    private void assertTrabalhoApresentado(TrabalhoApresentadoLattes trabalhoApresentadoLattes) {
+    private void assertTrabalhoApresentado(final TrabalhoApresentadoLattes trabalhoApresentadoLattes) {
 
         assertEquals(Integer.valueOf(2010), trabalhoApresentadoLattes.getAno());
         assertEquals("CIRILO, C. E. ; BELLINI, A. ; PRADO, A. F. ; ZAINA, L. A. M.", trabalhoApresentadoLattes.getAutores());
@@ -283,13 +285,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Desenvolvimento de Sistemas Sensíveis ao Contexto usando Web Services", trabalhoApresentadoLattes.getTitulo());
     }
 
-    private void assertTrabalhoTecnico(TrabalhosTecnicoLattes trabalhosTecnico) {
+    private void assertTrabalhoTecnico(final TrabalhosTecnicoLattes trabalhosTecnico) {
 
         assertEquals(12, trabalhosTecnico.getTrabalhos().size());
         assertTrabalho(trabalhosTecnico.getTrabalhos().get(0));
     }
 
-    private void assertTrabalho(TrabalhoLattes trabalhoLattes) {
+    private void assertTrabalho(final TrabalhoLattes trabalhoLattes) {
 
         assertEquals(Integer.valueOf(2011), trabalhoLattes.getAno());
         assertEquals("PRADO, A. F.", trabalhoLattes.getAutores());
@@ -297,13 +299,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 trabalhoLattes.getTitulo());
     }
 
-    private void assertProducaoBibliografica(ProducaoBibliograficaLattes producaoBibliografica) {
+    private void assertProducaoBibliografica(final ProducaoBibliograficaLattes producaoBibliografica) {
 
         assertEquals(1, producaoBibliografica.getProducoes().size());
         assertProducao(producaoBibliografica.getProducoes().get(0));
     }
 
-    private void assertProducao(ProducaoLattes producaoLattes) {
+    private void assertProducao(final OutraProducaoLattes producaoLattes) {
 
         assertEquals(Integer.valueOf(2000), producaoLattes.getAno());
         assertEquals("PRADO, A. F.", producaoLattes.getAutores());
@@ -311,83 +313,84 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Unified Modeling Language. São Carlos: Universidade Federal de São Carlos - Departamento de Computação", producaoLattes.getTitulo());
     }
 
-    private void assertResumoCongresso(ResumoCongressoLattes resumoCongresso) {
+    private void assertResumoCongresso(final ResumoCongressoLattes resumoCongresso) {
 
         assertEquals(15, resumoCongresso.getResumos().size());
         assertResumo(resumoCongresso.getResumos().get(0));
     }
 
-    private void assertResumo(ResumoLattes resumoLattes) {
+    private void assertResumo(final ResumoLattes resumoLattes) {
 
         assertEquals(Integer.valueOf(2012), resumoLattes.getAno());
         assertEquals("CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; ZAINA, L. A. M.", resumoLattes.getAutores());
         assertEquals("", resumoLattes.getDoi());
         assertEquals("XV Congresso Ibero-Americano em Engenharia de Software (CIbSE), 2012, Buenos Aires, Argentina. Anais do XV Congresso Ibero-Americano em Engenharia de Software",
-                resumoLattes.getNome_evento());
+                resumoLattes.getNomeEvento());
         assertEquals("264-269", resumoLattes.getPaginas());
         assertEquals("Estudo Experimental do Processo Model Driven RichUbi: Análise Qualitativa", resumoLattes.getTitulo());
         assertEquals(Integer.valueOf(0), resumoLattes.getVolume());
     }
 
-    private void assertResumoExpandido(ResumoExpandidoCongressoLattes resumoExpandido) {
+    private void assertResumoExpandido(final ResumoExpandidoCongressoLattes resumoExpandido) {
 
         assertEquals(5, resumoExpandido.getResumos().size());
         assertResumo(resumoExpandido.getResumos().get(0));
     }
 
-    private void assertResumo(ResumoExpandidoLattes resumoExpandidoLattes) {
+    private void assertResumo(final ResumoExpandidoLattes resumoExpandidoLattes) {
 
         assertEquals(Integer.valueOf(2009), resumoExpandidoLattes.getAno());
         assertEquals("SANTANA, E. F. Z. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de", resumoExpandidoLattes.getAutores());
         assertEquals("", resumoExpandidoLattes.getDoi());
         assertEquals("Simpósio Brasileiro de Sistemas Multimídia e Web (WEBMEDIA), 2009, Fortaleza. Anais do Simpósio Brasileiro de Sistemas Multimídia e Web",
-                resumoExpandidoLattes.getNome_evento());
+                resumoExpandidoLattes.getNomeEvento());
         assertEquals("39-42", resumoExpandidoLattes.getPaginas());
         assertEquals("P2PMobileLearning: Uma aplicação P2P com adaptação de conteúdo em dispositivos móveis", resumoExpandidoLattes.getTitulo());
         assertEquals(Integer.valueOf(2), resumoExpandidoLattes.getVolume());
     }
 
-    private void assertTrabalhoCompleto(TrabalhoCompletoCongressoLattes trabalhoCompleto) {
+    private void assertTrabalhoCompleto(final TrabalhoCompletoCongressoLattes trabalhoCompleto) {
 
         assertEquals(147, trabalhoCompleto.getTrabalhosCompleto().size());
         assertTrabalho(trabalhoCompleto.getTrabalhosCompleto().get(0));
     }
 
-    private void assertTrabalho(TrabalhoCompletoLattes trabalhoCompletoLattes) {
+    private void assertTrabalho(final TrabalhoCompletoLattes trabalhoCompletoLattes) {
 
         assertEquals(Integer.valueOf(2013), trabalhoCompletoLattes.getAno());
         assertEquals("da Silva, V. G. ; CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; PEREIRA, V.", trabalhoCompletoLattes.getAutores());
         assertEquals("", trabalhoCompletoLattes.getDoi());
-        assertEquals("ICIW 2013 : The Eighth International Conference on Internet and Web Applications and Services", trabalhoCompletoLattes.getNome_evento());
+        assertEquals("ICIW 2013 : The Eighth International Conference on Internet and Web Applications and Services",
+                trabalhoCompletoLattes.getNomeEvento());
         assertEquals("83-89", trabalhoCompletoLattes.getPaginas());
         assertEquals("An Approach to Dynamic Discovery of Context-Sensitive Web Services", trabalhoCompletoLattes.getTitulo());
         assertEquals(Integer.valueOf(0), trabalhoCompletoLattes.getVolume());
     }
 
-    private void assertTextoJornal(TextoJornalLattes textoJornal) {
+    private void assertTextoJornal(final TextoJornalLattes textoJornal) {
 
         assertEquals(2, textoJornal.getTextos().size());
         assertTexto(textoJornal.getTextos().get(0));
     }
 
-    private void assertTexto(TextoLattes textoLattes) {
+    private void assertTexto(final TextoLattes textoLattes) {
 
         assertEquals(Integer.valueOf(2004), textoLattes.getAno());
         assertEquals("CUNHA, João Ronaldo Del Ducca ; PRADO, A. F. ; SANTOS, Antonio Carlos Do", textoLattes.getAutores());
         assertEquals("12 nov. 2004", textoLattes.getData());
-        assertEquals("Revista Eletrônica de Sistemas de Informação (RESI), digital, ", textoLattes.getNome_jornal());
+        assertEquals("Revista Eletrônica de Sistemas de Informação (RESI), digital, ", textoLattes.getNomeJornal());
         assertEquals("1-10", textoLattes.getPaginas());
         assertEquals("Uma Abordagem para o Processo de Gerenciamento de Configuração de Software", textoLattes.getTitulo());
         assertEquals(Integer.valueOf(1), textoLattes.getVolume());
     }
 
-    private void assertCapitulosLivros(CapitulosLivrosLattes capitulosLivros) {
+    private void assertCapitulosLivros(final CapitulosLivrosLattes capitulosLivros) {
 
         assertEquals(5, capitulosLivros.getCapitulos().size());
         assertCapitulo(capitulosLivros.getCapitulos().get(0));
     }
 
-    private void assertCapitulo(CapituloLattes capituloLattes) {
+    private void assertCapitulo(final CapituloLattes capituloLattes) {
 
         assertEquals(Integer.valueOf(2012), capituloLattes.getAno());
         assertEquals("CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; ZAINA, L. A. M.",
@@ -401,13 +404,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("", capituloLattes.getVolume());
     }
 
-    private void assertArtigosPeriodicos(ArtigosPeriodicosLattes artigosPeriodicos) {
+    private void assertArtigosPeriodicos(final ArtigosPeriodicosLattes artigosPeriodicos) {
 
         assertEquals(9, artigosPeriodicos.getArtigos().size());
         assertArtigoPeriodico(artigosPeriodicos.getArtigos().get(1));
     }
 
-    private void assertArtigoPeriodico(ArtigoLattes artigoLattes) {
+    private void assertArtigoPeriodico(final ArtigoLattes artigoLattes) {
 
         assertEquals(Integer.valueOf(2013), artigoLattes.getAno());
         assertEquals("VIANA, MATHEUS C. ; PENTEADO, ROSÂNGELA A.D. ; DO PRADO, ANTÔNIO F.", artigoLattes.getAutores());
@@ -419,7 +422,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("The Journal of Systems and Software", artigoLattes.getVolume());
     }
 
-    private void assertColaboradores(ColaboradoresLattes colaboradores) {
+    private void assertColaboradores(final ColaboradoresLattes colaboradores) {
 
         List<String> idsColaboradores = colaboradores.getIdColaborador();
         List<String> idsColaboradoresTest = loadIdsColaboradoresTest();
@@ -430,7 +433,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         }
     }
 
-    private void assertAreaAtuacao(AreaAtuacaoLattes areaAtuacao) {
+    private void assertAreaAtuacao(final AreaAtuacaoLattes areaAtuacao) {
 
         List<String> descricoes = areaAtuacao.getDescricao();
         List<String> descricoesTest = loaddDescricoesTest();
@@ -441,13 +444,13 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         }
     }
 
-    private void assertProjetosPesquisa(ProjetetosPesquisaLattes projetosPesquisa) {
+    private void assertProjetosPesquisa(final ProjetetosPesquisaLattes projetosPesquisa) {
 
         assertEquals(7, projetosPesquisa.getProjetos().size());
         assertProjeto(projetosPesquisa.getProjetos().get(0));
     }
 
-    private void assertProjeto(ProjetoLattes projetoLattes) {
+    private void assertProjeto(final ProjetoLattes projetoLattes) {
 
         assertEquals(Integer.valueOf(2012), projetoLattes.getAnoConclusao());
         assertEquals(Integer.valueOf(2011), projetoLattes.getAnoInicio());
@@ -459,7 +462,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 projetoLattes.getNome());
     }
 
-    private void assertIdentificacao(IdentificacaoLattes identificacao) {
+    private void assertIdentificacao(final IdentificacaoLattes identificacao) {
 
         assertEquals("", identificacao.getIdentificador());
         assertEquals(
@@ -470,7 +473,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Masculino", identificacao.getSexo());
     }
 
-    private void assertEndereco(EnderecoLattes endereco) {
+    private void assertEndereco(final EnderecoLattes endereco) {
 
         assertEquals(
                 "Universidade Federal de São Carlos, Centro de Ciências Exatas e de Tecnologia, Departamento de Computação. Rodovia Washington Luiz, Km 235 - Jardim Guanabara - Prédio DC1 - Sala 13 Jardim Guanabara 13565905 - Sao Carlos, SP - Brasil - Caixa-postal: 676 Telefone: (16) 33518598 Fax: (16) 33518233 URL da Homepage: http://www.dc.ufscar.br/~prado",
@@ -479,25 +482,25 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals(Double.valueOf(-47.8809028), endereco.getEnderecoProfissionalLongitude());
     }
 
-    private void assertIdiomas(IdiomasLattes idiomas) {
+    private void assertIdiomas(final IdiomasLattes idiomas) {
 
         assertEquals(2, idiomas.getIdiomas().size());
         assertIdioma(idiomas.getIdiomas().get(0));
     }
 
-    private void assertIdioma(IdiomaLattes idioma) {
+    private void assertIdioma(final IdiomaLattes idioma) {
 
         assertEquals("Inglês", idioma.getNome());
         assertEquals("Compreende Bem, Fala Razoavelmente, Lê Bem, Escreve Razoavelmente.", idioma.getProficiencia());
     }
 
-    private void assertFormacoes(FormacoesAcademicaLattes formacoes) {
+    private void assertFormacoes(final FormacoesAcademicaLattes formacoes) {
 
         assertEquals(8, formacoes.getFormacoes().size());
         assertFormacao(formacoes.getFormacoes().get(0));
     }
 
-    private void assertFormacao(FormacaoLattes formacao) {
+    private void assertFormacao(final FormacaoLattes formacao) {
 
         assertEquals(Integer.valueOf(1992), formacao.getAnoConclusao());
         assertEquals(Integer.valueOf(1990), formacao.getAnoInicio());

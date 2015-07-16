@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "endereco")
-public class EnderecoLattes extends BaseLattes {
+public class EnderecoLattes extends PesquisadorLattes {
 
     private static final long serialVersionUID = -5485632191566255912L;
 

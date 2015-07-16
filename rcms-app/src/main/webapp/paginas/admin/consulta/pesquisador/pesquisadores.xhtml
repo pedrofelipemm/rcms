@@ -10,50 +10,48 @@
 	
 	<ui:define name="conteudo">
 		<div class="row">
-        	<div class="col-md-12">
+        	<div class="col-sm-12">
         		<h1>#{mensagens['pesquisadores']}</h1>
         	</div>
         </div>
 		
-		<h:form id="formPesquisador" prependId="false">
+		<h:form id="formPesquisador" prependId="false"  role="form">
 			
-			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador" styleClass="table table-hover"
-				headerClass="col-width-50" rowClasses="col-width-50"
-				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
+			<p:dataTable id="tabelaPesquisadores" value="#{pesquisadorMB.pesquisadores}" var="pesquisador"
 				rendered="#{not empty pesquisadorMB.pesquisadores}" paginator="true" rows="10">
  
- 				<p:column width="60">
+ 				<p:column styleClass="col-sm-1 col-md-1 text-center">
  					<f:facet name="header">
  						<h:outputLabel value="#"/>
  					</f:facet>
  					<h:outputLabel value="#{pesquisadorMB.pesquisadores.rowIndex + 1}"/>
  				</p:column>
  				
-    			<p:column headerClass="col-xs-10">
+    			<p:column styleClass="col-sm-6 cold-md-8">
     				<f:facet name="header">
     					<h:outputLabel value="#{mensagens['nome']}"/>
     				</f:facet>
     				<h:outputLabel value="#{pesquisador.nome}" />
     			</p:column>
 
-				<p:column headerClass="text-center">
+				<p:column styleClass="col-sm-5 col-md-3">
 					<f:facet name="header">
-						<a href="${request.contextPath}/paginas/admin/cadastro/pesquisador/pesquisador.xhtml" style="color: white;" class="btn btn-primary"> #{mensagens['adicionar.pesquisador']} </a>
+						<a href="${request.contextPath}/paginas/admin/cadastro/pesquisador/pesquisador.xhtml" style="color: white;" class="btn btn-primary"> #{mensagens['adicionar']} </a>
 					</f:facet>
-
-					
-					<div class="text-center">
-					<h:commandButton id="salvar" value="#{mensagens['importar.dados.lattes']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info">
-						<f:ajax render="@form" execute="@form" />
-					</h:commandButton>
-					<p:spacer id="spacer1" width="20" pt:alt="#{mensagens['spacer.mensagem']}"
-							pt:title="#{mensagens['spacer.titutlo']}"/>
-					<h:commandButton id="editar" value="#{mensagens['editar']}" styleClass="btn btn-primary" 
-						action="#{pesquisadorMB.editar(pesquisador)}" />
-					<p:spacer id="spacer2" width="20" pt:alt="#{mensagens['spacer.mensagem']}"
-								pt:title="#{mensagens['spacer.titutlo']}"/>
-					<h:commandButton id="excluir" value="#{mensagens['excluir']}" styleClass="btn btn-danger" 
-						action="#{pesquisadorMB.excluir(pesquisador)}" /> 
+					<div class="row text-center">
+						<div class="col-sm-12 text-center">
+							<span>
+								<h:commandButton id="salvar" value="#{mensagens['importar']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info bottom-buffer-2 top-buffer-2">
+									<f:ajax render="@form" execute="@form" />
+								</h:commandButton>
+							</span>
+							<span>
+								<h:commandButton id="editar" value="#{mensagens['editar']}" action="#{pesquisadorMB.editar(pesquisador)}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2"/>
+							</span>
+							<span>
+								<h:commandButton id="excluir" value="#{mensagens['excluir']}" action="#{pesquisadorMB.excluir(pesquisador)}" styleClass="btn btn-danger bottom-buffer-2 top-buffer-2"/> 
+							</span>
+						</div>
 					</div>
 				</p:column>
 			</p:dataTable>

@@ -10,33 +10,27 @@
 	
 	<ui:define name="conteudo">
 	
-		<h:form id="formIdioma" prependId="false">
+		<h:form id="formIdioma" role="form" prependId="false">
 			
 			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<h1>#{mensagens['cadastro.idiomas']}</h1>
-					</div>
+				<div class="col-sm-12">
+					<h1>#{mensagens['cadastro.idiomas']}</h1>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="form-group">
-						<p:panel id="painelPesquisador" header="#{mensagens['idioma']}">
+						<p:panel id="painelIdioma" header="#{mensagens['idioma']}">
 							<div class="row">
-				          		<div class="col-md-4">
-				            		<div class="form-group">
-				            			<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<h:outputLabel for="inputTextIdioma" value="#{mensagens['label.idioma']} " />
-													<h:inputText id="inputTextIdioma" pt:name="inputTextIdioma" 
-														pt:placeholder="#{mensagens['informe.descricao.idioma']}"
-														value="#{idiomaMB.idioma.descricao}" required="true"
-														requiredMessage="#{mensagens['idioma.nao.preenchido']}" styleClass="form-control" />
-												</div>
-											</div>
+				          		<div class="col-sm-6">
+			            			<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="inputTextIdioma" value="#{mensagens['label.idioma']} " />
+											<h:inputText id="inputTextIdioma" pt:name="inputTextIdioma" 
+												pt:placeholder="#{mensagens['informe.descricao.idioma']}"
+												value="#{idiomaMB.idioma.descricao}" required="true"
+												requiredMessage="#{mensagens['idioma.nao.preenchido']}" styleClass="form-control" />
 										</div>
 									</div>
 								</div>
@@ -47,13 +41,11 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<h:commandButton pt:name="#{mensagens['salvar']}" value="#{mensagens['salvar']}"
-							action="#{idiomaMB.salvar}" styleClass="btn btn-success" title="#{mensagens['salvar']}">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
-					</div>
+				<div class="col-sm-12">
+					<h:commandButton pt:name="#{mensagens['salvar']}" title="#{mensagens['salvar']}"
+						value="#{mensagens['salvar']}" action="#{idiomaMB.salvar}" styleClass="btn btn-success">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
 				</div>
 			</div>
 						

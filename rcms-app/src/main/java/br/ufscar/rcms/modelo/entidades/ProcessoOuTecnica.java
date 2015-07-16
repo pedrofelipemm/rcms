@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"PROCESSO_OU_TECNICA\"")
+@Table(name = "processo_ou_tecnica")
 @ForeignKey(name = "fk_processo_ou_tecnica_producao_tecnica")
 public class ProcessoOuTecnica extends ProducaoTecnica {
 

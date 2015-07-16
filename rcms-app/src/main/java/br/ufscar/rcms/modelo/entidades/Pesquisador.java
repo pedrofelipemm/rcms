@@ -21,7 +21,7 @@ import org.hibernate.annotations.ForeignKey;
 import br.ufscar.rcms.modelo.lattes.FormacaoLattes;
 
 @Entity
-@Table(name = "\"PESQUISADOR\"")
+@Table(name = "pesquisador")
 @ForeignKey(name = "fk_pesquisador_usuario")
 public class Pesquisador extends Usuario {
 

@@ -11,54 +11,50 @@
 	<ui:define name="conteudo">
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-sm-12">
 				<h1>#{mensagens['idiomas']}</h1>
 			</div>
 		</div>
 
-		<h:form id="formIdioma" prependId="false">
+		<h:form id="form-idioma" role="form" prependId="false">
 
 			<div class="rcms-table rcms-table-hover">
 				<div class="rcms-table-thead">
 			  		<div class="rcms-table-tr">
-						<div class="rcms-table-th col-" >
+						<div class="rcms-table-th col-sm-1" >
 							<h:outputText value="#" />
 						</div>
-						<div class="rcms-table-th col-xs-10" >
-							<span>
-								<h:outputText value="#{mensagens['descricao']}" />
-							</span>
+						<div class="rcms-table-th col-sm-7" >
+							<h:outputText value="#{mensagens['descricao']}" />
 						</div>
-						<div class="rcms-table-th col-xs-2 text-center" >
-							<span>
-								<a rel="next" title="#{mensagens['adicionar.idioma']}" href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-primary">
-									#{mensagens['adicionar.idioma']}
-								</a>			
-							</span>
+						<div class="rcms-table-th col-sm-4 text-center" >
+							<a rel="next" title="#{mensagens['adicionar.idioma']}" href="${request.contextPath}/paginas/admin/cadastro/idioma/idioma.xhtml" class="btn btn-primary">
+								#{mensagens['adicionar.idioma']}
+							</a>			
 				  		</div>
 					</div>
 				</div>
 				<div class="rcms-table-tbody">
-					<ui:repeat id="gridIdiomas" pt:name="gridIdiomas" varStatus="status" var="idioma" value="#{idiomaMB.idiomas}" >
-						<div class="rcms-table-tr col-">
+					<ui:repeat id="grid-idiomas" pt:name="grid-idiomas" varStatus="status" var="idioma" value="#{idiomaMB.idiomas}" >
+						<div class="rcms-table-tr">
 							<div class="rcms-table-td">
-								<span>
-									<h:outputText id="outputTextRowIndex" value="#{status.index+1}" />
-								</span>
+								<h:outputText id="output-text-row-index" value="#{status.index+1}" />
 							</div>
 							<div class="rcms-table-td">
-								<span>
-									<h:outputText id="outputTextDescricao" value="#{idioma.descricao}" />
-								</span>
+								<h:outputText id="output-text-descricao" value="#{idioma.descricao}"/>
 							</div>
 							<div class="rcms-table-td">
-								<div class="text-center" >
-									<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
-										action="#{idiomaMB.editarIdioma(idioma)}" pt:title="#{mensagens['editar']}"/>
-									<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
-										pt:title="#{mensagens['spacer.titutlo']}" />
-									<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger"
-										action="#{idiomaMB.excluirIdioma(idioma)}" pt:title="#{mensagens['excluir']}" />
+								<div class="row text-center">
+									<div class="col-sm-12 text-center">
+										<span>
+											<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2"
+												action="#{idiomaMB.editarIdioma(idioma)}" pt:title="#{mensagens['editar']}"/>
+										</span>
+										<span>
+											<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger bottom-buffer-2 top-buffer-2"
+												action="#{idiomaMB.excluirIdioma(idioma)}" pt:title="#{mensagens['excluir']}" />
+										</span>
+									</div>
 								</div>
 							</div>
 						</div>

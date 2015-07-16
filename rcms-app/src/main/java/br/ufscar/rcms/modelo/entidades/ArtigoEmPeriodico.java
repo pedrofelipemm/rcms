@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"ARTIGO_EM_PERIODICO\"")
+@Table(name = "artigo_em_periodico")
 @ForeignKey(name = "fk_artigo_em_periodico_producao_bibliografica")
 public class ArtigoEmPeriodico extends ProducaoBibliografica {
 
@@ -33,9 +33,9 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
     public ArtigoEmPeriodico() {
     }
 
-    public ArtigoEmPeriodico(String titulo, List<CitacaoBibliografica> autores, Integer ano, String volume,
-            String paginas, String doi, String revista, Integer numero) {
-        
+    public ArtigoEmPeriodico(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String volume,
+            final String paginas, final String doi, final String revista, final Integer numero) {
+
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
         super.setAno(ano);
@@ -50,7 +50,7 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
         return volume;
     }
 
-    public void setVolume(String volume) {
+    public void setVolume(final String volume) {
         this.volume = volume;
     }
 
@@ -58,7 +58,7 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
         return paginas;
     }
 
-    public void setPaginas(String paginas) {
+    public void setPaginas(final String paginas) {
         this.paginas = paginas;
     }
 
@@ -66,7 +66,7 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
         return doi;
     }
 
-    public void setDoi(String doi) {
+    public void setDoi(final String doi) {
         this.doi = doi;
     }
 
@@ -74,7 +74,7 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
         return revista;
     }
 
-    public void setRevista(String revista) {
+    public void setRevista(final String revista) {
         this.revista = revista;
     }
 
@@ -82,7 +82,7 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(final Integer numero) {
         this.numero = numero;
     }
 }

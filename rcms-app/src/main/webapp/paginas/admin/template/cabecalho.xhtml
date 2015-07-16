@@ -9,13 +9,12 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
 
 	<ui:composition>
-		<h:form>
-			<nav id="admin-menu-top" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!-- 	<h:form id="form-cabecalho" prependId="false"> -->
+		<div id="cabecalho" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="navbar-inner">
 				<div class="container-fluid">
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">#{mensagens['rcms']}</a>
-					</div>
 					<div class="collapse navbar-collapse">
+						<p class="navbar-text navbar-right pull-left">#{mensagens['rcms']}</p>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="box-hover"><a href="#{request.contextPath}/paginas/index.xhtml">#{mensagens['ir.para.site']}</a></li>
 							<li class="box-hover"><a href="#">#{mensagens['sair']}</a></li>
@@ -23,7 +22,8 @@
 						<p class="navbar-text navbar-right">#{mensagens['bem.vindo.administrador']}</p>
 					</div>
 				</div>
-			</nav>
-		</h:form>
+			</div>
+		</div>
+<!-- 	</h:form> -->
 	</ui:composition>
 </html>

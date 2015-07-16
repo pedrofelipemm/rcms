@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "identificacao")
-public class IdentificacaoLattes extends BaseLattes {
+public class IdentificacaoLattes extends PesquisadorLattes {
 
     private static final long serialVersionUID = -7677027746469870708L;
 

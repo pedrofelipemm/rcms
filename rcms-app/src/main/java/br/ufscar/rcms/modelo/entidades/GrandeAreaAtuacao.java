@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"GRANDE_AREA_ATUACAO\"")
+@Table(name = "grande_area_atuacao")
 public class GrandeAreaAtuacao extends Entidade {
 
     private static final long serialVersionUID = -3303227387678912075L;
@@ -34,7 +34,7 @@ public class GrandeAreaAtuacao extends Entidade {
         return idGrandeAreaAtuacao;
     }
 
-    public void setIdGrandeAreaAtuacao(Integer idGrandeAreaAtuacao) {
+    public void setIdGrandeAreaAtuacao(final Integer idGrandeAreaAtuacao) {
         this.idGrandeAreaAtuacao = idGrandeAreaAtuacao;
     }
 
@@ -42,7 +42,7 @@ public class GrandeAreaAtuacao extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -50,7 +50,7 @@ public class GrandeAreaAtuacao extends Entidade {
         return areasDeAtuacao;
     }
 
-    public void setAreasDeAtuacao(List<AreaAtuacao> areasDeAtuacao) {
+    public void setAreasDeAtuacao(final List<AreaAtuacao> areasDeAtuacao) {
         this.areasDeAtuacao = areasDeAtuacao;
     }
 
@@ -63,7 +63,7 @@ public class GrandeAreaAtuacao extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -84,7 +84,7 @@ public class GrandeAreaAtuacao extends Entidade {
         return true;
     }
 
-    public void addAreaAtuacao(AreaAtuacao areaAtuacao) {
+    public void addAreaAtuacao(final AreaAtuacao areaAtuacao) {
         areasDeAtuacao.add(areaAtuacao);
     }
 }

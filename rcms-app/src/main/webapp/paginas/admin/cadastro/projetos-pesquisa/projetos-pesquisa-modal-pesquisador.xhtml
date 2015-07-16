@@ -7,7 +7,7 @@
 	xmlns:o="http://omnifaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-	<div class="modal fade" id="modalProjetoPesquisador" tabindex="-1" role="dialog" aria-labelledby="modalProjetoPesquisadorLabel" aria-hidden="true">
+	<div class="modal fade" id="modalProjetoPesquisador" tabindex="-1" role="dialog" aria-labelledby="modalProjetoPesquisador" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -63,7 +63,7 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
 					<h:commandButton action="#{projetoPesquisaMB.adicionarPequisador}" styleClass="btn btn-primary"
 						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalProjetoPesquisador">
-						<f:ajax execute="painelProjetoPesquisa" render="painelProjetoPesquisa" />
+						<f:ajax execute="form-projeto-pesquisa" render="form-projeto-pesquisa" />
 					</h:commandButton>
 				</div>
 			</div>

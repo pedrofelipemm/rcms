@@ -1,5 +1,7 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"TRABALHO_COMPLETO_CONGRESSO\"")
+@Table(name = "trabalho_completo_congresso")
 @ForeignKey(name = "fk_trabalho_completo_congresso_producao_bibliografica")
 public class TrabalhoCompletoCongresso extends ProducaoBibliografica {
 
@@ -19,11 +21,32 @@ public class TrabalhoCompletoCongresso extends ProducaoBibliografica {
     @Column(name = "nome_evento")
     private String nomeEvento;
 
+    @Column(name = "volume")
+    private Integer volume;
+
+    @Column(name = "paginas")
+    private String paginas;
+
+    public TrabalhoCompletoCongresso() {
+    }
+
+    public TrabalhoCompletoCongresso(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String doi,
+            final String nomeEvento, final Integer volume, final String paginas) {
+
+        super.setTitulo(titulo);
+        super.setCitacaoBibliograficas(autores);
+        super.setAno(ano);
+        this.doi = doi;
+        this.nomeEvento = nomeEvento;
+        this.volume = volume;
+        this.paginas = paginas;
+    }
+
     public String getDoi() {
         return doi;
     }
 
-    public void setDoi(String doi) {
+    public void setDoi(final String doi) {
         this.doi = doi;
     }
 
@@ -31,7 +54,23 @@ public class TrabalhoCompletoCongresso extends ProducaoBibliografica {
         return nomeEvento;
     }
 
-    public void setNomeEvento(String nomeEvento) {
+    public void setNomeEvento(final String nomeEvento) {
         this.nomeEvento = nomeEvento;
+    }
+
+    public Integer getVolume() {
+        return volume;
+    }
+
+    public void setVolume(final Integer volume) {
+        this.volume = volume;
+    }
+
+    public String getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(final String paginas) {
+        this.paginas = paginas;
     }
 }

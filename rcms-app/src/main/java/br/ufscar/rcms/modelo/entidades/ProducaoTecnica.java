@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"PRODUCAO_TECNICA\"")
+@Table(name = "producao_tecnica")
 @ForeignKey(name = "fk_producao_tecnica_producao")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ProducaoTecnica extends Producao {

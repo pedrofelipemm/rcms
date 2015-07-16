@@ -11,9 +11,9 @@ public class ProducaoBibliograficaLattes extends BaseLattes{
     private static final long serialVersionUID = -8246733210837106085L;
 
     @XmlElement(name = "producao")
-    private List<ProducaoLattes> producoes;
+    private List<OutraProducaoLattes> producoes;
 
-    public List<ProducaoLattes> getProducoes() {
+    public List<OutraProducaoLattes> getProducoes() {
         return producoes;
     }
 }

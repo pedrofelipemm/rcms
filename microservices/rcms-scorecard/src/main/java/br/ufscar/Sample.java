@@ -1,6 +1,10 @@
 package br.ufscar;
 
-public class Sample {
+import java.io.Serializable;
+
+public class Sample implements Serializable{
+
+    private static final long serialVersionUID = -2522173199005092944L;
 
     private int id;
     private String description;
@@ -19,5 +23,4 @@ public class Sample {
     public String getDescription() {
         return description;
     }
-    
 }

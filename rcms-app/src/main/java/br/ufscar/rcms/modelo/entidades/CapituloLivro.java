@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"CAPITULO_LIVRO\"")
+@Table(name = "capitulo_livro")
 @ForeignKey(name = "fk_capitulo_livro_producao_bibliografica")
 public class CapituloLivro extends ProducaoBibliografica {
 
@@ -27,8 +27,8 @@ public class CapituloLivro extends ProducaoBibliografica {
     public CapituloLivro() {
     }
 
-    public CapituloLivro(String titulo, List<CitacaoBibliografica> autores, Integer ano, String livro, String edicao,
-            String editora) {
+    public CapituloLivro(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String livro, final String edicao,
+            final String editora) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -42,7 +42,7 @@ public class CapituloLivro extends ProducaoBibliografica {
         return livro;
     }
 
-    public void setLivro(String livro) {
+    public void setLivro(final String livro) {
         this.livro = livro;
     }
 
@@ -50,7 +50,7 @@ public class CapituloLivro extends ProducaoBibliografica {
         return edicao;
     }
 
-    public void setEdicao(String edicao) {
+    public void setEdicao(final String edicao) {
         this.edicao = edicao;
     }
 
@@ -58,7 +58,7 @@ public class CapituloLivro extends ProducaoBibliografica {
         return editora;
     }
 
-    public void setEditora(String editora) {
+    public void setEditora(final String editora) {
         this.editora = editora;
     }
 }

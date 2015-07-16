@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"LIVRO_PUBLICADO\"")
+@Table(name = "livro_publicado")
 @ForeignKey(name = "fk_livro_publicado_producao_bibliografica")
 public class LivroPublicado extends ProducaoBibliografica {
 
@@ -20,7 +20,7 @@ public class LivroPublicado extends ProducaoBibliografica {
         return edicao;
     }
 
-    public void setEdicao(String edicao) {
+    public void setEdicao(final String edicao) {
         this.edicao = edicao;
     }
 }

@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="resumo")
-public class ResumoLattes extends BaseLattes{
+public class ResumoLattes extends BaseLattes {
 
     private static final long serialVersionUID = 7561464996320402258L;
 
@@ -29,6 +29,9 @@ public class ResumoLattes extends BaseLattes{
     @XmlElement
     private String paginas;
 
+    @XmlElement
+    private Integer numero;
+
     public String getDoi() {
         return doi;
     }
@@ -41,7 +44,7 @@ public class ResumoLattes extends BaseLattes{
         return titulo;
     }
 
-    public String getNome_evento() {
+    public String getNomeEvento() {
         return nome_evento;
     }
 
@@ -55,5 +58,9 @@ public class ResumoLattes extends BaseLattes{
 
     public String getPaginas() {
         return paginas;
+    }
+
+    public Integer getNumero() {
+        return numero;
     }
 }

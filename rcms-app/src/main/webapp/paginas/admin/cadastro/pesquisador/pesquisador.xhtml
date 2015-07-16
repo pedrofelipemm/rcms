@@ -9,10 +9,10 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
 	<ui:define name="conteudo">
-		<h:form id="formPesquisador" prependId="false">
+		<h:form id="formPesquisador" role="form" prependId="false">
 
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="form-group">
 						<h1>#{mensagens['pesquisadores']}</h1>
 					</div>
@@ -28,17 +28,17 @@
 			<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-painel-organizacao-evento.xhtml"/>
 
 			<div class="row">
-				<div class="col-md-10">
+				<div class="col-sm-12">
 					<div class="form-group">
-					</div>
-				</div>
-				<div class="col-md-2" style="padding-top: 25px;">
-					<div class="form-group pull-right">
-						<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}"
-							styleClass="btn btn-success">
-							<f:ajax render="@form" execute="@form" />
-						</h:commandButton>
-						<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top"></a>
+						<span>
+							<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{pesquisadorMB.salvar}"
+								styleClass="btn btn-success  bottom-buffer-2 top-buffer-2">
+								<f:ajax render="@form" execute="@form" />
+							</h:commandButton>
+						</span>
+						<span>
+							<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top bottom-buffer-2 top-buffer-2"></a>
+						</span>
 					</div>
 				</div>
 			</div>

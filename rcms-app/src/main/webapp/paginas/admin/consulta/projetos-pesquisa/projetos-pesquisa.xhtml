@@ -11,87 +11,71 @@
 	<ui:define name="conteudo">
 		
 		<div class="row">
-        	<div class="col-md-12">
+        	<div class="col-sm-12">
         		<h1>#{mensagens['projetos.de.pesquisa']}</h1>
         	</div>
         </div>
 		
-		<h:form id="formPesquisador" prependId="false">
+		<h:form id="form-projetos-pesquisa" prependId="false" role="form">
 
 			<div class="rcms-table rcms-table-hover">
 				<div class="rcms-table-thead">
 					<div class="rcms-table-tr">
-						<div class="rcms-table-th col-">
-							<h:outputText value="ID" />
+						<div class="rcms-table-th col-sm-1">
+							<h:outputText value="#"/>
 						</div>
-						<div class="rcms-table-th col-xs-4">
-							<span> <h:outputText value="#{mensagens['nome']}" />
-							</span>
+						<div class="rcms-table-th col-sm-3">
+							<h:outputText value="#{mensagens['nome']}" />
 						</div>
-						<div class="rcms-table-th col-xs-4">
-							<span> <h:outputText value="#{mensagens['descricao']}" />
-							</span>
+						<div class="rcms-table-th col-sm-4">
+							<h:outputText value="#{mensagens['descricao']}" />
 						</div>
-						<div class="rcms-table-th col-xs-1">
-							<span> <h:outputText value="#{mensagens['label.ano.inicio']}" />
-							</span>
+						<div class="rcms-table-th col-sm-1">
+							<h:outputText value="#{mensagens['label.ano.inicio']}" />
 						</div>
-						<div class="rcms-table-th col-xs-1">
-							<span> <h:outputText value="#{mensagens['label.ano.conclusao']}" />
-							</span>
+						<div class="rcms-table-th col-sm-1">
+							<h:outputText value="#{mensagens['label.ano.conclusao']}" />
 						</div>
-						
-						<div class="rcms-table-th col-xs-2 text-center">
-							<span> <a rel="next"
-								title="#{mensagens['adicionar.projeto.pesquisa']}"
+						<div class="rcms-table-th col-sm-2 text-center">
+							<a rel="next" title="#{mensagens['adicionar.projeto.pesquisa']}"
 								href="${request.contextPath}/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa.xhtml"
 								class="btn btn-primary"> #{mensagens['adicionar.projeto.pesquisa']} </a>
-							</span>
 						</div>
 					</div>
 				</div>
 				<div class="rcms-table-tbody">
-					<ui:repeat id="gridIdiomas" pt:name="gridIdiomas"
+					<ui:repeat id="grid-projetos-pesquisa" pt:name="grid-projetos-pesquisa"
 						varStatus="status" var="projeto" value="#{projetoPesquisaMB.projetosPesquisa}">
-						<div class="rcms-table-tr col-">
+						<div class="rcms-table-tr">
 							<div class="rcms-table-td">
-								<span> <h:outputText id="outputTextId"
-										value="#{projeto.idProjetoPesquisa}" />
-								</span>
+								<h:outputText id="output-text-row-index" value="#{status.index+1}" />
 							</div>
 							<div class="rcms-table-td">
-								<span> <h:outputText id="outputTextNome"
-										value="#{projeto.nome}" />
-								</span>
+								<h:outputText id="output-text-nome" value="#{projeto.nome}" />
 							</div>
 							<div class="rcms-table-td">
-								<span> <h:outputText id="outputTextDescricao"
-										value="#{projeto.descricao}" />
-								</span>
+								<div class=""><!-- TODO: PEDRO ellipse, dynamic width -->
+									<h:outputText id="output-text-descricao" value="#{projeto.descricao}" />
+								</div>
 							</div>
 							<div class="rcms-table-td">
-								<span> <h:outputText id="outputTextAnoInicio"
-										value="#{projeto.anoInicio}" />
-								</span>
+								<h:outputText id="output-text-ano-inicio" value="#{projeto.anoInicio}" />
 							</div>
 							<div class="rcms-table-td">
-								<span> <h:outputText id="outputTextAnoConclusao"
-										value="#{projeto.anoConclusao}" />
-								</span>
+								<h:outputText id="output-text-ano-conclusao" value="#{projeto.anoConclusao}" />
 							</div>
 							<div class="rcms-table-td">
-								<div class="text-center">
-									<h:commandButton value="#{mensagens['editar']}"
-										styleClass="btn btn-primary"
-										action="#{projetoPesquisaMB.editar(projeto)}"
-										pt:title="#{mensagens['editar']}" />
-									<p:spacer id="spacer" width="20"
-										pt:alt="#{mensagens['spacer.mensagem']}"
-										pt:title="#{mensagens['spacer.titutlo']}" />
-									<h:commandButton value="#{mensagens['excluir']}"
-										styleClass="btn btn-danger"
-										action="#{projetoPesquisaMB.excluir(projeto)}"
-										pt:title="#{mensagens['excluir']}" />
+								<div class="row text-center">
+									<div class="col-sm-12 text-center">
+										<span>
+											<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2"
+												action="#{projetoPesquisaMB.editar(projeto)}" pt:title="#{mensagens['editar']}" />
+										</span>
+										<span>
+											<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger bottom-buffer-2 top-buffer-2"
+												action="#{projetoPesquisaMB.excluir(projeto)}" pt:title="#{mensagens['excluir']}" />
+										</span>
+									</div>
 								</div>
 							</div>
 						</div>

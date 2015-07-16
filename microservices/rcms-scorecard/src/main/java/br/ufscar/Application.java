@@ -32,17 +32,4 @@ public class Application {
 
         return registration;
     }
-
-    // @Bean
-    // public DataSource dataSource() {
-    //
-    // final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    // // TODO PEDRO EXTRACT TO FILE
-    // dataSource.setDriverClassName("org.postgresql.Driver");
-    // dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/rcmsTest");
-    // dataSource.setUsername("postgres");
-    // dataSource.setPassword("root");
-    //
-    // return dataSource;
-    // }
 }

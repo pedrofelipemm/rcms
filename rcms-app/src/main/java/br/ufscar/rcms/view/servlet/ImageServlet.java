@@ -1,4 +1,4 @@
-fqfqpackage br.ufscar.rcms.view.servlet;
+package br.ufscar.rcms.view.servlet;
 
 import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 

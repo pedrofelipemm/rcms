@@ -18,7 +18,7 @@ public class Application {
     public static void main(final String... args) {
         SpringApplication.run(Application.class, args);
     }
-
+a
     @Bean
     public DispatcherServlet dispatcherServlet() {
         return new DispatcherServlet();

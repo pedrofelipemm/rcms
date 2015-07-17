@@ -229,6 +229,12 @@ public class Pesquisador extends Usuario {
             this.compreensaoIdiomas.addAll(Arrays.asList(compreensaoIdiomas));
         }
     }
+    
+    public void addAutorizacao(final Autorizacao... autorizacoes){
+    	if(autorizacoes != null){
+    		this.getAutorizacoes().addAll(Arrays.asList(autorizacoes));
+    	}
+    }
 
     public void removeCompreensaoIdiomas(final CompreensaoIdioma... compreensaoIdiomas) {
         if (compreensaoIdiomas != null) {

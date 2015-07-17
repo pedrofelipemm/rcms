@@ -88,13 +88,6 @@ public abstract class AbstractMB implements Serializable {
     public static final String CADASTRO_PRODUCAO = "cadastroProducao";
     public static final String FLASH_KEY_PRODUCAO = "producao";
 
-    public Map<String, Boolean> getTiposUsuario() {
-        Map<String, Boolean> map = new HashMap<String, Boolean>();
-        map.put(getMessage("pesquisador"), false);
-        map.put(getMessage("administrador"), true);
-        return map;
-    }
-
     // TODO PEDRO
     // @PostConstruct
     // public void inicializar() {

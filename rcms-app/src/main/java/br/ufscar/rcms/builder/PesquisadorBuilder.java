@@ -55,11 +55,11 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     public PesquisadorBuilder(final String login, final String nome, final String senha, final String codigoLattes, final String email,
             final boolean flagAdministrador, final String resumoProfissional) {
-        this(null, login, nome, senha, codigoLattes, email, flagAdministrador, resumoProfissional);
+        this(null, login, nome, senha, codigoLattes, email, resumoProfissional);
     }
 
     public PesquisadorBuilder(final Long idUsuario, final String login, final String nome, final String senha, final String codigoLattes,
-            final String email, final boolean flagAdministrador, final String resumoProfissional) {
+            final String email, final String resumoProfissional) {
 
         pesquisador = new Pesquisador();
         pesquisador.setIdUsuario(idUsuario);
@@ -68,7 +68,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         pesquisador.setSenha(senha);
         pesquisador.setCodigoLattes(codigoLattes);
         pesquisador.setEmail(email);
-        pesquisador.setFlagAdministrador(flagAdministrador);
         pesquisador.setResumoProfissional(resumoProfissional);
 
         validatePesquisador(pesquisador);
@@ -77,7 +76,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
-                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), pesquisador.getFlagAdministrador(),
+                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), 
                 pesquisador.getResumoProfissional());
 
         this.pesquisador.setSexo(pesquisadorLattes.getIdentificacao().getSexo());
@@ -231,7 +230,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         Validate.notBlank(pesquisador.getCodigoLattes());
         Validate.notBlank(pesquisador.getEmail());
         Validate.notBlank(pesquisador.getResumoProfissional());
-        Validate.notNull(pesquisador.getFlagAdministrador());
     }
 
     private void validatePesquisador(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {

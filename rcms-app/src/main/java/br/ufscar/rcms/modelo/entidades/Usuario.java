@@ -1,5 +1,6 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,9 +28,6 @@ public class Usuario extends Entidade {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "flag_administrador", nullable = false)
-    private Boolean flagAdministrador;
-
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
@@ -39,11 +37,11 @@ public class Usuario extends Entidade {
     @Column(name = "email", nullable = false)
     private String email;
     
-    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private boolean enabled;
+    @Column(name = "enabled")
+    private Boolean enabled = false;
     
     @OneToMany
-    private List<Autorizacao> autorizacoes;
+    private List<Autorizacao> autorizacoes = new ArrayList<Autorizacao>();
 
     public List<Autorizacao> getAutorizacoes() {
 		return autorizacoes;
@@ -67,14 +65,6 @@ public class Usuario extends Entidade {
 
     public void setNome(final String nome) {
         this.nome = nome;
-    }
-
-    public Boolean getFlagAdministrador() {
-        return flagAdministrador;
-    }
-
-    public void setFlagAdministrador(final Boolean flagAdministrador) {
-        this.flagAdministrador = flagAdministrador;
     }
 
     public String getLogin() {

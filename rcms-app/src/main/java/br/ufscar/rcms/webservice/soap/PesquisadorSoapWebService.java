@@ -43,17 +43,6 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
         return response;
 	}
 	
-	@WebMethod
-	public Boolean isUsuarioAdministrador(Long pesquisadorId) {
-		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
-		
-		if (pesquisador == null){
-			return false;
-		}
-		
-        return pesquisador.getFlagAdministrador() ? true : false;
-	}
-	
     @WebMethod
     public PesquisadorSoapResponseWrapper getPesquisadores() {
 

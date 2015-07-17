@@ -30,13 +30,13 @@
 		<form-login login-page="/paginas/portal/login/login.xhtml"  />
 	</http>	
 	
-	<!-- <authentication-manager>
+	 <!-- <authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER"/>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
 			</user-service>
 		</authentication-provider>
-	</authentication-manager> -->
+	</authentication-manager>  -->
 	
 	<authentication-manager>
         <authentication-provider>
@@ -45,7 +45,7 @@
                authorities-by-username-query="select nome, nomeautorizacao from &quot;USUARIO&quot; c, &quot;AUTORIZACAO&quot; a where c.nome=?"
             />
         </authentication-provider>
-    </authentication-manager> 
+    </authentication-manager>  
  
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <beans:property name="url" value="jdbc:postgresql://127.0.0.1:5432/rcms" />

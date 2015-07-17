@@ -25,6 +25,7 @@ import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.Autorizacao;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
@@ -37,6 +38,7 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
+import br.ufscar.rcms.servico.AutorizacaoService;
 import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.IdiomaService;
@@ -88,6 +90,9 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{producaoService}")
     private ProducaoService producaoService;
+    
+    @ManagedProperty("#{autorizacaoService}")
+    private AutorizacaoService autorizacaoService;
 
     private Pesquisador pesquisador;
     private DataModel<Pesquisador> pesquisadores;
@@ -98,6 +103,9 @@ public class PesquisadorMB extends AbstractMB {
 
     private Idioma idioma;
     private transient List<Idioma> idiomas;
+    
+    private Autorizacao autorizacao;
+    private transient List<Autorizacao> autorizacoes;
 
     private GrandeAreaAtuacao grandeAreaSelecionada;
     private DataModel<GrandeAreaAtuacao> todasAsGrandeAreas;
@@ -140,6 +148,7 @@ public class PesquisadorMB extends AbstractMB {
         pesquisadores = new SortableDataModel<Pesquisador>(new ListDataModel<Pesquisador>(pesquisadorService.buscarTodos()));
         ((SortableDataModel<Pesquisador>) pesquisadores).sortBy(new PesquisadorComparator());
         idiomas = new ArrayList<Idioma>(idiomaService.buscarTodos());
+        autorizacoes = new ArrayList<Autorizacao>(autorizacaoService.buscarTodos());
         todasAsGrandeAreas = new ListDataModel<GrandeAreaAtuacao>(grandeAreaService.buscarTodas());
         linhasDePesquisa = new ArrayList<LinhaDePesquisa>(linhaDePesquisaService.buscarTodas());
 
@@ -314,8 +323,16 @@ public class PesquisadorMB extends AbstractMB {
     public void setIdiomas(final List<Idioma> idiomas) {
         this.idiomas = idiomas;
     }
+    
+    public List<Autorizacao> getAutorizacoes() {
+		return autorizacoes;
+	}
 
-    public CompreensaoIdioma getCompreensaoIdioma() {
+	public void setAutorizacoes(List<Autorizacao> autorizacoes) {
+		this.autorizacoes = autorizacoes;
+	}
+
+	public CompreensaoIdioma getCompreensaoIdioma() {
         return compreensaoIdioma;
     }
 
@@ -336,7 +353,10 @@ public class PesquisadorMB extends AbstractMB {
                 compreensaoIdioma.getProficiencia(), pesquisador));
         compreensaoIdioma = new CompreensaoIdioma();
     }
-
+    
+    public void adicionarAutorizacao(){
+    	pesquisador.addAutorizacao(autorizacao);
+    }
     public void removerCompreensaoIdioma(final CompreensaoIdioma compreensaoIdioma) {
         pesquisador.removeCompreensaoIdiomas(compreensaoIdioma);
     }
@@ -356,8 +376,16 @@ public class PesquisadorMB extends AbstractMB {
     public void setIdioma(final Idioma idioma) {
         this.idioma = idioma;
     }
+    
+    public Autorizacao getAutorizacao() {
+		return autorizacao;
+	}
 
-    // Área de Atuação
+	public void setAutorizacao(Autorizacao autorizacao) {
+		this.autorizacao = autorizacao;
+	}
+
+	// Área de Atuação
     public void changeGrandeAreaSelecionada(){
     	areasAtuacaoParaSelecionar = null;
 		subAreasParaSelecionar = null;
@@ -659,4 +687,14 @@ public class PesquisadorMB extends AbstractMB {
 
         return producaoService.buscarPorId(producao.getIdProducao()).getCitacaoBibliograficas();
     }
+
+	public AutorizacaoService getAutorizacaoService() {
+		return autorizacaoService;
+	}
+
+	public void setAutorizacaoService(AutorizacaoService autorizacaoService) {
+		this.autorizacaoService = autorizacaoService;
+	}
+    
+    
 }

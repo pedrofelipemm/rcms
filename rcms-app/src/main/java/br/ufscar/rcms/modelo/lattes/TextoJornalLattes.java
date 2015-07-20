@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="texto_em_jornal")
-public class TextoJornalLattes extends BaseLattes{
+public class TextoJornalLattes {
 
     private static final long serialVersionUID = -4206499889847615840L;
 

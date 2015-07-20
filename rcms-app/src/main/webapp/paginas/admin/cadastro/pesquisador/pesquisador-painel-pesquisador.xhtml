@@ -27,7 +27,7 @@
 		            		</div>
 							<div class="form-group">
 				            	<p:outputLabel styleClass="control-label" id="senhaLabel" value="#{mensagens['label.senha']}" />
-				            	<p:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}"
+				            	<p:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}" 
 									required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
 									pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
 				            </div>
@@ -82,7 +82,7 @@
 		            		<div class="form-group">
 		              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLabel" value="#{mensagens['label.endereco.profissional']}"/>
 		              			<p:inputTextarea id="enderecoProfissional" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissional}"
-		              				required="true" requiredMessage="#{mensagens['endereco.latitude.nao.preenchido']}"
+		              				requiredMessage="#{mensagens['endereco.latitude.nao.preenchido']}"
 		              				pt:placeholder="#{mensagens['informe.endereco.latitude']}" styleClass="form-control" rows="3"/>
 		            		</div>
 		          		</div>
@@ -92,7 +92,7 @@
 		            		<div class="form-group">
 		              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLatitudeLabel" value="#{mensagens['label.endereco.latitude']}"/>
 		              			<p:inputText id="enderecoProfissionalLatitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLatitude}"
-		              				required="true" requiredMessage="#{mensagens['endereco.longitude.nao.preenchido']}"
+		              				requiredMessage="#{mensagens['endereco.longitude.nao.preenchido']}"
 		              				pt:placeholder="#{mensagens['informe.endereco.longitude']}" styleClass="form-control" />
 		            		</div>
 		          		</div>
@@ -100,7 +100,7 @@
 		            		<div class="form-group">
 		              			<p:outputLabel styleClass="control-label" id="enderecoProfissionalLongitudeLabel" value="#{mensagens['label.endereco.longitude']}"/>
 		              			<p:inputText id="enderecoProfissionalLongitude" value="#{pesquisadorMB.pesquisador.endereco.enderecoProfissionalLongitude}"
-		              				required="true" requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
+		              				requiredMessage="#{mensagens['endereco.profissional.nao.preenchido']}"
 		              				pt:placeholder="#{mensagens['informe.endereco.profissional.pesquisador']}" styleClass="form-control" />
 		            		</div>
 		          		</div>
@@ -110,7 +110,7 @@
 		            		<div class="form-group">
 		              			<p:outputLabel styleClass="control-label" id="resumoProfissionalLabel" value="#{mensagens['label.resumo.profissional']}"/>
 		              			<p:inputTextarea id="resumoProfissional" value="#{pesquisadorMB.pesquisador.resumoProfissional}"
-		              				required="true" requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
+		              				requiredMessage="#{mensagens['resumo.profissional.nao.preenchido']}"
 		              				pt:placeholder="#{mensagens['informe.resumo.profissional.pesquisador']}" styleClass="form-control" rows="5"/>
 		            		</div>
 		          		</div>

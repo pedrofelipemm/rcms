@@ -3,8 +3,8 @@ package br.ufscar.rcms.modelo.lattes;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="producao")
-public class OutraProducaoLattes {
+@XmlRootElement(name="produto")
+public class ProdutoProcessoTecnicaLattes {
 
     @XmlElement
     private String titulo;

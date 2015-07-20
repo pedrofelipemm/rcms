@@ -5,9 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "pesquisador")
-public class PesquisadorLattes extends CurriculoLattes {
-
-    private static final long serialVersionUID = 7991964474837211965L;
+public class PesquisadorLattes {
 
     @XmlAttribute(name = "id")
     private String codigoLattes;
@@ -39,6 +37,9 @@ public class PesquisadorLattes extends CurriculoLattes {
     @XmlElement(name = "artigos_em_periodicos")
     private ArtigosPeriodicosLattes artigosPeriodicos;
 
+    @XmlElement(name = "livros_publicados")
+    private LivrosPublicadosLattes livrosPublicados;
+
     @XmlElement(name = "capitulos_livros")
     private CapitulosLivrosLattes capitulosLivros;
 
@@ -60,11 +61,17 @@ public class PesquisadorLattes extends CurriculoLattes {
     @XmlElement(name = "producao_bibliografica")
     private ProducaoBibliograficaLattes producaoBibliografica;
 
+    @XmlElement(name = "produtos_tecnologicos")
+    private ProdutoTecnologicoLattes produtosTecnologicos;
+
     @XmlElement(name = "trabalhos_tecnicos")
     private TrabalhosTecnicoLattes trabalhosTecnico;
 
     @XmlElement(name = "producao_tecnica")
     private OutrasProducoesTecnicaLattes producoesTecnica;
+
+    @XmlElement(name = "processo_tecnica")
+    private ProcessoTecnicaLattes processosOuTecnicas;
 
     @XmlElement(name = "orientacao_doutorado_em_andamento")
     private OrientacaoDoutoradoLattes orientacaoDoutoradoAndamento = new OrientacaoDoutoradoLattes();
@@ -133,6 +140,10 @@ public class PesquisadorLattes extends CurriculoLattes {
         return artigosPeriodicos;
     }
 
+    public LivrosPublicadosLattes getLivrosPublicados() {
+        return livrosPublicados;
+    }
+
     public CapitulosLivrosLattes getCapitulosLivros() {
         return capitulosLivros;
     }
@@ -161,12 +172,20 @@ public class PesquisadorLattes extends CurriculoLattes {
         return producaoBibliografica;
     }
 
+    public ProdutoTecnologicoLattes getProdutosTecnologicos() {
+        return produtosTecnologicos;
+    }
+
     public TrabalhosTecnicoLattes getTrabalhosTecnico() {
         return trabalhosTecnico;
     }
 
     public OutrasProducoesTecnicaLattes getProducoesTecnica() {
         return producoesTecnica;
+    }
+
+    public ProcessoTecnicaLattes getProcessosOuTecnicas() {
+        return processosOuTecnicas;
     }
 
     public OrientacaoDoutoradoLattes getOrientacaoDoutoradoAndamento() {

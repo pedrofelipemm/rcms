@@ -6,9 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "orientacao_iniciacao_cientifica_concluido")
-public class OrientacaoIniciacaoCientificaLattes extends BaseLattes {
-
-    private static final long serialVersionUID = -3946750591777006579L;
+public class OrientacaoIniciacaoCientificaLattes {
 
     @XmlElement(name = "iniciacao_cientifica")
     private List<IniciacaoCientificaLattes> iniciacaoCientifica;

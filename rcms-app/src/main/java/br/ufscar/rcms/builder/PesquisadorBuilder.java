@@ -138,7 +138,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     public PesquisadorBuilder premios(final PremiosLattes premios) {
         if (premios != null) {
-            for (PremioLattes premioLattes : premios.getPremio()) {
+            for (PremioLattes premioLattes : premios.getPremiosTitulos()) {
                 pesquisador.addPremios(new PremioTitulo(cachedPesquisador, premioLattes.getAno(), premioLattes.getDescricao()));
             }
         }
@@ -230,7 +230,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         Validate.notBlank(pesquisador.getSenha());
         Validate.notBlank(pesquisador.getCodigoLattes());
         Validate.notBlank(pesquisador.getEmail());
-        Validate.notBlank(pesquisador.getResumoProfissional());
+        // Validate.notBlank(pesquisador.getResumoProfissional());
         Validate.notNull(pesquisador.getFlagAdministrador());
     }
 

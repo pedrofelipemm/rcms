@@ -4,9 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "premio_titulo")
-public class PremioLattes extends BaseLattes{
-
-    private static final long serialVersionUID = -1512752247538018997L;
+public class PremioLattes {
 
     @XmlElement
     private Integer ano;

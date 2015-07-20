@@ -6,19 +6,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "premios_titulos")
-public class PremiosLattes extends BaseLattes {
-
-    private static final long serialVersionUID = 3333389981085695399L;
+public class PremiosLattes {
 
     @XmlElement(name = "premio_titulo")
-    private List<PremioLattes> premio;
+    private List<PremioLattes> premiosTitulos;
 
-    public List<PremioLattes> getPremio() {
-        return premio;
+    public List<PremioLattes> getPremiosTitulos() {
+        return premiosTitulos;
     }
-
-    public void setPremio(List<PremioLattes> premio) {
-        this.premio = premio;
-    }
-
 }

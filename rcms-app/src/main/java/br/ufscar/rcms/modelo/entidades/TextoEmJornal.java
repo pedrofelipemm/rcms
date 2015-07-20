@@ -26,7 +26,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
     private Date dataPublicacao;
 
     @Column(name = "volume")
-    private Integer volume;
+    private String volume;
 
     @Column(name = "paginas")
     private String paginas;
@@ -35,7 +35,7 @@ public class TextoEmJornal extends ProducaoBibliografica {
     }
 
     public TextoEmJornal(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String nomeJornal,
-            final String dataPublicacao, final Integer volume, final String paginas) {
+ final String dataPublicacao, final String volume, final String paginas) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -70,11 +70,11 @@ public class TextoEmJornal extends ProducaoBibliografica {
         this.dataPublicacao = new Date(dataPublicacao.getTime());
     }
 
-    public Integer getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(final Integer volume) {
+    public void setVolume(final String volume) {
         this.volume = volume;
     }
 

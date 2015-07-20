@@ -6,9 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="resumo_congresso")
-public class ResumoCongressoLattes extends BaseLattes{
-
-    private static final long serialVersionUID = 4105330188969567612L;
+public class ResumoCongressoLattes {
 
     @XmlElement(name = "resumo")
     private List<ResumoLattes> resumos;

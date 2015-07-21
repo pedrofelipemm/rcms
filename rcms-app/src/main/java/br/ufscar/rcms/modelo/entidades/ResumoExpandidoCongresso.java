@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"RESUMO_EXPANDIDO_CONGRESSO\"")
+@Table(name = "resumo_expandido_congresso")
 @ForeignKey(name = "fk_resumo_expandido_congresso_producao_bibliografica")
 public class ResumoExpandidoCongresso extends ProducaoBibliografica {
 
@@ -18,11 +18,11 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
     @Column(name = "doi")
     private String doi;
 
-    @Column(name = "nome_evento")
+    @Column(name = "nome_evento", length = COLUMN_DEFAULT_LENGTH)
     private String nomeEvento;
 
     @Column(name = "volume")
-    private Integer volume;
+    private String volume;
 
     @Column(name = "paginas")
     private String paginas;
@@ -30,8 +30,8 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
     public ResumoExpandidoCongresso() {
     }
 
-    public ResumoExpandidoCongresso(String titulo, List<CitacaoBibliografica> autores, Integer ano, String doi,
-            String nomeEvento, Integer volume, String paginas) {
+    public ResumoExpandidoCongresso(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String doi,
+ final String nomeEvento, final String volume, final String paginas) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -46,7 +46,7 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
         return doi;
     }
 
-    public void setDoi(String doi) {
+    public void setDoi(final String doi) {
         this.doi = doi;
     }
 
@@ -54,15 +54,15 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
         return nomeEvento;
     }
 
-    public void setNomeEvento(String nomeEvento) {
+    public void setNomeEvento(final String nomeEvento) {
         this.nomeEvento = nomeEvento;
     }
 
-    public Integer getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(Integer volume) {
+    public void setVolume(final String volume) {
         this.volume = volume;
     }
 
@@ -70,7 +70,7 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
         return paginas;
     }
 
-    public void setPaginas(String paginas) {
+    public void setPaginas(final String paginas) {
         this.paginas = paginas;
     }
 }

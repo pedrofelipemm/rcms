@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"PROJETO_PESQUISA\"")
+@Table(name = "projeto_pesquisa")
 public class ProjetoPesquisa extends Entidade {
 
     private static final long serialVersionUID = -9149061665883584009L;
@@ -49,7 +49,7 @@ public class ProjetoPesquisa extends Entidade {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
     private List<Midia> midia = new ArrayList<Midia>();
-    
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(joinColumns = { @JoinColumn(name = "id_projeto_de_pesquisa") }, inverseJoinColumns = { @JoinColumn(name = "id_usuario") })
     @org.hibernate.annotations.ForeignKey(name = "fk_projeto_pesquisa_pesquisador_projeto_pesquisa", inverseName = "fk_projeto_pesquisa_pesquisador_pesquisador")
@@ -58,16 +58,16 @@ public class ProjetoPesquisa extends Entidade {
     public ProjetoPesquisa() {
     }
 
-    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao) {
+    public ProjetoPesquisa(final String nome, final String descricao, final Integer anoInicio, final Integer anoConclusao) {
         this(nome, descricao, anoInicio, anoConclusao, null);
     }
 
-    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao, String agenciaDeFomento) {
+    public ProjetoPesquisa(final String nome, final String descricao, final Integer anoInicio, final Integer anoConclusao, final String agenciaDeFomento) {
         this(nome, descricao, anoInicio, anoConclusao, agenciaDeFomento, new ArrayList<Producao>(), new ArrayList<Midia>(), new ArrayList<Pesquisador>());
     }
 
-    public ProjetoPesquisa(String nome, String descricao, Integer anoInicio, Integer anoConclusao,
-            String agenciaDeFomento, List<Producao> producoes, List<Midia> midia, List<Pesquisador> pesquisadores) {
+    public ProjetoPesquisa(final String nome, final String descricao, final Integer anoInicio, final Integer anoConclusao,
+            final String agenciaDeFomento, final List<Producao> producoes, final List<Midia> midia, final List<Pesquisador> pesquisadores) {
         this.nome = nome;
         this.descricao = descricao;
         this.anoInicio = anoInicio;
@@ -77,14 +77,14 @@ public class ProjetoPesquisa extends Entidade {
         this.midia = midia;
         this.pesquisadores = pesquisadores;
     }
-    
-    public void adicionarPesquisador(Pesquisador pesquisador){
+
+    public void adicionarPesquisador(final Pesquisador pesquisador){
     	if(!this.getPesquisadores().contains(pesquisador)){
     		this.pesquisadores.add(pesquisador);
     	}
     }
-    
-    public void removerPesquisador(Pesquisador pesquisador){
+
+    public void removerPesquisador(final Pesquisador pesquisador){
     	if(this.getPesquisadores().contains(pesquisador)){
     		this.pesquisadores.remove(pesquisador);
     	}
@@ -94,7 +94,7 @@ public class ProjetoPesquisa extends Entidade {
         return producoes;
     }
 
-    public void setProducoes(List<Producao> producoes) {
+    public void setProducoes(final List<Producao> producoes) {
         this.producoes = producoes;
     }
 
@@ -102,7 +102,7 @@ public class ProjetoPesquisa extends Entidade {
         return midia;
     }
 
-    public void setMidia(List<Midia> midia) {
+    public void setMidia(final List<Midia> midia) {
         this.midia = midia;
     }
 
@@ -110,7 +110,7 @@ public class ProjetoPesquisa extends Entidade {
         return idProjetoPesquisa;
     }
 
-    public void setIdProjetoPesquisa(Long idProjetoPesquisa) {
+    public void setIdProjetoPesquisa(final Long idProjetoPesquisa) {
         this.idProjetoPesquisa = idProjetoPesquisa;
     }
 
@@ -118,7 +118,7 @@ public class ProjetoPesquisa extends Entidade {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(final String nome) {
         this.nome = nome;
     }
 
@@ -126,7 +126,7 @@ public class ProjetoPesquisa extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -134,7 +134,7 @@ public class ProjetoPesquisa extends Entidade {
         return anoInicio;
     }
 
-    public void setAnoInicio(Integer anoInicio) {
+    public void setAnoInicio(final Integer anoInicio) {
         this.anoInicio = anoInicio;
     }
 
@@ -142,7 +142,7 @@ public class ProjetoPesquisa extends Entidade {
         return anoConclusao;
     }
 
-    public void setAnoConclusao(Integer anoConclusao) {
+    public void setAnoConclusao(final Integer anoConclusao) {
         this.anoConclusao = anoConclusao;
     }
 
@@ -150,15 +150,15 @@ public class ProjetoPesquisa extends Entidade {
         return agenciaDeFomento;
     }
 
-    public void setAgenciaDeFomento(String agenciaDeFomento) {
+    public void setAgenciaDeFomento(final String agenciaDeFomento) {
         this.agenciaDeFomento = agenciaDeFomento;
     }
-    
+
     public List<Pesquisador> getPesquisadores() {
 		return pesquisadores;
 	}
 
-	public void setPesquisadores(List<Pesquisador> pesquisadores) {
+	public void setPesquisadores(final List<Pesquisador> pesquisadores) {
 		this.pesquisadores = pesquisadores;
 	}
 
@@ -171,7 +171,7 @@ public class ProjetoPesquisa extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

@@ -6,9 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="area_atuacao")
-public class AreaAtuacaoLattes extends BaseLattes{
-
-    private static final long serialVersionUID = -4806236255878565582L;
+public class AreaAtuacaoLattes {
 
     @XmlElement
     private List<String> descricao;

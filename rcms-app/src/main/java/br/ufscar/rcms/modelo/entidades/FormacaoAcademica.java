@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"FORMACAO_ACADEMICA\"")
+@Table(name = "formacao_academica")
 public class FormacaoAcademica extends Entidade {
 
     private static final long serialVersionUID = -1883554721627714716L;
@@ -44,7 +44,7 @@ public class FormacaoAcademica extends Entidade {
         return idFormacaoAcademica;
     }
 
-    public void setIdFormacaoAcademica(Long idFormacaoAcademica) {
+    public void setIdFormacaoAcademica(final Long idFormacaoAcademica) {
         this.idFormacaoAcademica = idFormacaoAcademica;
     }
 
@@ -52,7 +52,7 @@ public class FormacaoAcademica extends Entidade {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -60,7 +60,7 @@ public class FormacaoAcademica extends Entidade {
         return anoInicio;
     }
 
-    public void setAnoInicio(Integer anoInicio) {
+    public void setAnoInicio(final Integer anoInicio) {
         this.anoInicio = anoInicio;
     }
 
@@ -68,7 +68,7 @@ public class FormacaoAcademica extends Entidade {
         return anoConclusao;
     }
 
-    public void setAnoConclusao(Integer anoConclusao) {
+    public void setAnoConclusao(final Integer anoConclusao) {
         this.anoConclusao = anoConclusao;
     }
 
@@ -76,7 +76,7 @@ public class FormacaoAcademica extends Entidade {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(final String tipo) {
         this.tipo = tipo;
     }
 
@@ -84,7 +84,7 @@ public class FormacaoAcademica extends Entidade {
         return nomeInstituicao;
     }
 
-    public void setNomeInstituicao(String nomeInstituicao) {
+    public void setNomeInstituicao(final String nomeInstituicao) {
         this.nomeInstituicao = nomeInstituicao;
     }
 
@@ -92,7 +92,7 @@ public class FormacaoAcademica extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -105,7 +105,7 @@ public class FormacaoAcademica extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

@@ -76,7 +76,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
-                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), 
+                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(),
                 pesquisador.getResumoProfissional());
 
         this.pesquisador.setSexo(pesquisadorLattes.getIdentificacao().getSexo());

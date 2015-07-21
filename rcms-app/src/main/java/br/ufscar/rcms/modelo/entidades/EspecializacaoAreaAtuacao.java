@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"ESPECIALIZACAO_AREA_ATUACAO\"")
+@Table(name = "especializacao_area_atuacao")
 public class EspecializacaoAreaAtuacao extends Entidade {
 
     private static final long serialVersionUID = 5149973934587512084L;

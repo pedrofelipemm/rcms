@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"SOBRE_O_GRUPO\"")
+@Table(name = "sobre_o_grupo")
 public class SobreOGrupo extends Entidade {
 
     private static final long serialVersionUID = -4195521719596138259L;
@@ -22,7 +22,7 @@ public class SobreOGrupo extends Entidade {
         return idioma;
     }
 
-    public void setIdioma(String idioma) {
+    public void setIdioma(final String idioma) {
         this.idioma = idioma;
     }
 
@@ -30,11 +30,11 @@ public class SobreOGrupo extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
-    public String getDescricaoDoIdioma(String idioma) {
+    public String getDescricaoDoIdioma(final String idioma) {
 
         String descricaoDoIdioma;
 
@@ -59,7 +59,7 @@ public class SobreOGrupo extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

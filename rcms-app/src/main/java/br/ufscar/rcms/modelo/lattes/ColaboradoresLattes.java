@@ -6,9 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "colaboradores")
-public class ColaboradoresLattes extends BaseLattes {
-
-    private static final long serialVersionUID = -6693977138385784210L;
+public class ColaboradoresLattes {
 
     @XmlElement(name = "id_lattes_colaborador")
     private List<String> idColaborador;

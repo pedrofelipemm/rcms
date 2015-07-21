@@ -18,7 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"PRODUCAO\"")
+@Table(name = "producao")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Producao extends Entidade {
 
@@ -29,7 +29,7 @@ public abstract class Producao extends Entidade {
     @Column(name = "id_producao")
     private Long idProducao;
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "titulo", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String titulo;
 
     @Column(name = "ano")

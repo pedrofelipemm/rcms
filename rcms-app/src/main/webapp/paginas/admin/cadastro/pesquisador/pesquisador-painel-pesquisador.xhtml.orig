@@ -27,7 +27,11 @@
 		            		</div>
 							<div class="form-group">
 				            	<p:outputLabel styleClass="control-label" id="senhaLabel" value="#{mensagens['label.senha']}" />
+<<<<<<< HEAD
 				            	<p:password id="senha" value="#{pesquisadorMB.pesquisador.senha}"
+=======
+				            	<p:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}" 
+>>>>>>> 4b0af523706193e09b31a3bb2654dfbf44a4bb9b
 									required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
 									pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
 				            </div>

@@ -78,6 +78,7 @@ local.properties
 .buildpath
 
 # Custom files
+test/
 *.cmd
 *.sh
 *.classpath
@@ -87,7 +88,5 @@ local.properties
 *.iml
 trace.txt
 .springBeans
-
-/target//target
 *.pmd
 *.ruleset

@@ -1,7 +1,6 @@
 package br.ufscar.rcms.factory;
 
 import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
-import br.ufscar.rcms.modelo.entidades.ArtigoAceitoParaPublicacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.LivroPublicado;
@@ -23,8 +22,6 @@ public abstract class ProducaoFactory {
 		case "artigoEmPeriodico":
             return producaoBase.CloneTo(new ArtigoEmPeriodico());
 		case "artigoAceitoPublicacao":
-            return producaoBase.CloneTo(new ArtigoAceitoParaPublicacao());
-		case "livroPublicado":
             return producaoBase.CloneTo(new LivroPublicado());
 		case "apresentacaoTrabalho":
             return producaoBase.CloneTo(new ApresentacaoTrabalho());

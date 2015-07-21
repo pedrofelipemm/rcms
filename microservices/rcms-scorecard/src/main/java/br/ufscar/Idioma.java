@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"IDIOMA\"")
+@Table(name = "idioma")
 public class Idioma extends br.ufscar.Entity {
 
     private static final long serialVersionUID = 3667531830943589983L;

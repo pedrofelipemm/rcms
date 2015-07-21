@@ -4,9 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "producao")
-public class OutraProducaoTecnicaLattes extends BaseLattes {
-
-    private static final long serialVersionUID = 1468614522799557358L;
+public class OutraProducaoTecnicaLattes {
 
     @XmlElement
     private String titulo;

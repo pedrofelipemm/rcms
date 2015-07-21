@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "\"OUTRA_PRODUCAO_TECNICA\"")
+@Table(name = "outra_producao_tecnica")
 @ForeignKey(name = "fk_outra_producao_tecnica_producao_tecnica")
 public class OutraProducaoTecnica extends ProducaoTecnica {
 
@@ -21,7 +21,7 @@ public class OutraProducaoTecnica extends ProducaoTecnica {
     public OutraProducaoTecnica() {
     }
 
-    public OutraProducaoTecnica(String titulo, List<CitacaoBibliografica> autores, Integer ano, String natureza) {
+    public OutraProducaoTecnica(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String natureza) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -33,7 +33,7 @@ public class OutraProducaoTecnica extends ProducaoTecnica {
         return natureza;
     }
 
-    public void setNatureza(String natureza) {
+    public void setNatureza(final String natureza) {
         this.natureza = natureza;
     }
 }

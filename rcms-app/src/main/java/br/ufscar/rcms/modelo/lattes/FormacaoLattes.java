@@ -4,9 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "formacao")
-public class FormacaoLattes extends BaseLattes {
-
-    private static final long serialVersionUID = -7809195471510168530L;
+public class FormacaoLattes {
 
     @XmlElement(name = "ano_inicio")
     private Integer anoInicio;

@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"SUB_AREA_ATUACAO\"")
+@Table(name = "sub_area_atuacao")
 public class SubAreaAtuacao extends Entidade {
     private static final long serialVersionUID = -1968382113523281553L;
 
@@ -39,7 +39,7 @@ public class SubAreaAtuacao extends Entidade {
         return idSubAreaAtuacao;
     }
 
-    public void setIdSubAreaAtuacao(Integer idSubAreaAtuacao) {
+    public void setIdSubAreaAtuacao(final Integer idSubAreaAtuacao) {
         this.idSubAreaAtuacao = idSubAreaAtuacao;
     }
 
@@ -47,7 +47,7 @@ public class SubAreaAtuacao extends Entidade {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(final String descricao) {
         this.descricao = descricao;
     }
 
@@ -55,7 +55,7 @@ public class SubAreaAtuacao extends Entidade {
         return especializacoes;
     }
 
-    public void setEspecializacoes(List<EspecializacaoAreaAtuacao> especializacoes) {
+    public void setEspecializacoes(final List<EspecializacaoAreaAtuacao> especializacoes) {
         this.especializacoes = especializacoes;
     }
 
@@ -63,7 +63,7 @@ public class SubAreaAtuacao extends Entidade {
         return areaAtuacao;
     }
 
-    public void setAreaAtuacao(AreaAtuacao areaAtuacao) {
+    public void setAreaAtuacao(final AreaAtuacao areaAtuacao) {
         this.areaAtuacao = areaAtuacao;
     }
 
@@ -76,7 +76,7 @@ public class SubAreaAtuacao extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -97,7 +97,7 @@ public class SubAreaAtuacao extends Entidade {
         return true;
     }
 
-    public void addEspecializacao(EspecializacaoAreaAtuacao especializacao) {
+    public void addEspecializacao(final EspecializacaoAreaAtuacao especializacao) {
         especializacoes.add(especializacao);
     }
 

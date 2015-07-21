@@ -251,6 +251,15 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
+			<from-outcome>listagemPublicacoes</from-outcome>
+			<to-view-id>/paginas/portal/consulta/publicacao/publicacoes.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
 			<from-outcome>sobreOGrupo</from-outcome>
 			<to-view-id>/paginas/portal/consulta/sobre-o-grupo/sobre-o-grupo.xhtml</to-view-id>
 			<redirect />

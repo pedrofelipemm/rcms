@@ -4,9 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "idioma")
-public class IdiomaLattes extends BaseLattes {
-
-    private static final long serialVersionUID = 7468793645838085364L;
+public class IdiomaLattes {
 
     @XmlElement
     private String nome;

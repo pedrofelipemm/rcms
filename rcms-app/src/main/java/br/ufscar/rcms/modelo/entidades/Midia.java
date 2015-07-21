@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"MIDIA\"")
+@Table(name = "midia")
 public class Midia extends Entidade {
 
     private static final long serialVersionUID = 3759933099478534637L;
@@ -32,7 +32,7 @@ public class Midia extends Entidade {
         return idMidia;
     }
 
-    public void setIdMidia(Integer idMidia) {
+    public void setIdMidia(final Integer idMidia) {
         this.idMidia = idMidia;
     }
 
@@ -40,7 +40,7 @@ public class Midia extends Entidade {
         return projetoPesquisa;
     }
 
-    public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+    public void setProjetoPesquisa(final ProjetoPesquisa projetoPesquisa) {
         this.projetoPesquisa = projetoPesquisa;
     }
 
@@ -56,7 +56,7 @@ public class Midia extends Entidade {
         return copyOfMidia;
     }
 
-    public void setMidia(byte[] midia) {
+    public void setMidia(final byte[] midia) {
 
         if (midia == null) {
             return;
@@ -77,7 +77,7 @@ public class Midia extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

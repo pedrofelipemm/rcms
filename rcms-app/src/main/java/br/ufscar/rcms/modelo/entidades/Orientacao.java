@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"ORIENTACAO\"")
+@Table(name = "orientacao")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Orientacao extends Entidade {
 
@@ -50,7 +50,7 @@ public abstract class Orientacao extends Entidade {
         return tituloTrabalho;
     }
 
-    public void setTituloTrabalho(String tituloTrabalho) {
+    public void setTituloTrabalho(final String tituloTrabalho) {
         this.tituloTrabalho = tituloTrabalho;
     }
 
@@ -58,7 +58,7 @@ public abstract class Orientacao extends Entidade {
         return idOrientacao;
     }
 
-    public void setIdOrientacao(Long idOrientacao) {
+    public void setIdOrientacao(final Long idOrientacao) {
         this.idOrientacao = idOrientacao;
     }
 
@@ -66,7 +66,7 @@ public abstract class Orientacao extends Entidade {
         return pesquisador;
     }
 
-    public void setPesquisador(Pesquisador pesquisador) {
+    public void setPesquisador(final Pesquisador pesquisador) {
         this.pesquisador = pesquisador;
     }
 
@@ -74,7 +74,7 @@ public abstract class Orientacao extends Entidade {
         return nomeDoAluno;
     }
 
-    public void setNomeDoAluno(String nomeDoAluno) {
+    public void setNomeDoAluno(final String nomeDoAluno) {
         this.nomeDoAluno = nomeDoAluno;
     }
 
@@ -82,7 +82,7 @@ public abstract class Orientacao extends Entidade {
         return instituicao;
     }
 
-    public void setInstituicao(String instituicao) {
+    public void setInstituicao(final String instituicao) {
         this.instituicao = instituicao;
     }
 
@@ -90,7 +90,7 @@ public abstract class Orientacao extends Entidade {
         return agenciaDeFomento;
     }
 
-    public void setAgenciaDeFomento(String agenciaDeFomento) {
+    public void setAgenciaDeFomento(final String agenciaDeFomento) {
         this.agenciaDeFomento = agenciaDeFomento;
     }
 
@@ -98,7 +98,7 @@ public abstract class Orientacao extends Entidade {
         return tipoDeOrientacao;
     }
 
-    public void setTipoDeOrientacao(String tipoDeOrientacao) {
+    public void setTipoDeOrientacao(final String tipoDeOrientacao) {
         this.tipoDeOrientacao = tipoDeOrientacao;
     }
 
@@ -106,7 +106,7 @@ public abstract class Orientacao extends Entidade {
         return situacao;
     }
 
-    public void setSituacao(String situacao) {
+    public void setSituacao(final String situacao) {
         this.situacao = situacao;
     }
 
@@ -119,7 +119,7 @@ public abstract class Orientacao extends Entidade {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

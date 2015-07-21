@@ -10,12 +10,12 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="form-group">
-				<p:panel id="painelAutorizacao" header="#{mensagens['idiomas']}">
+				<p:panel id="painelAutorizacao" header="#{mensagens['cadastro.autorizacao']}">
 					<h:dataTable id="tableAutorizacoes" value="#{pesquisadorMB.pesquisador.autorizacoes}" var="autorizacoes"
 						styleClass="table table-hover" >
 						<h:column headerClass="col-sm-9">
 							<f:facet name="header">
-								<h:outputLabel value="#{mensagens['idioma']}" />
+								<h:outputLabel value="#{mensagens['label.autorizacao']}" />
 							</f:facet>
 							<h:outputText value="#{autorizacoes.nomeAutorizacao}"/>
 						</h:column>

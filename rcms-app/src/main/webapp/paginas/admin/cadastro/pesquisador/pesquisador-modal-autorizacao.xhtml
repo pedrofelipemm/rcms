@@ -26,7 +26,7 @@
 							<div class="col-md-6">
 								<h:selectOneMenu id="selectAutorizacoes" styleClass="form-control" value="#{pesquisadorMB.autorizacao}"
 									converter="entityConverter">
-									<f:selectItems value="#{pesquisadorMB.autorizacoes}" var="autorizacao" itemLabel="#{autorizacao.nomeAutorizacao}"
+									<f:selectItems value="#{pesquisadorMB.autorizacoes}" var="autorizacao" itemLabel="#{autorizacao.descricao}"
 										itemValue="#{autorizacao}" />
 									<f:ajax />
 								</h:selectOneMenu>

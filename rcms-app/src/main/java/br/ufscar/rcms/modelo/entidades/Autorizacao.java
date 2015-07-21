@@ -22,6 +22,8 @@ public class Autorizacao extends Entidade{
 	private long idAutorizacao;
 
 	private String nomeAutorizacao;
+	
+	private String descricao;
 
 	public Autorizacao() {}
 
@@ -31,6 +33,14 @@ public class Autorizacao extends Entidade{
 
 	public void setNomeAutorizacao(final String nomeAutorizacao) {
 		this.nomeAutorizacao = nomeAutorizacao;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 

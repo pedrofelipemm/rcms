@@ -30,22 +30,22 @@
 		<form-login login-page="/paginas/portal/login/login.xhtml"  />
 	</http>	
 	
-	 <!-- <authentication-manager>
+	 <!--  <authentication-manager>
 		<authentication-provider>
 			<user-service>
 				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
 			</user-service>
 		</authentication-provider>
-	</authentication-manager>  -->
+	</authentication-manager> -->
 	
 	<authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource" 
-               users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?"
-               authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?"
+               users-by-username-query="SELECT login, senha, enabled FROM usuario WHERE login=?"
+               authorities-by-username-query="select login, nomeautorizacao from usuario c, autorizacao a where c.login=?"
             />
         </authentication-provider>
-    </authentication-manager>  
+    </authentication-manager>
  
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <beans:property name="url" value="${database.url}" />

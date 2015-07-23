@@ -8,5 +8,7 @@ import br.ufscar.rcms.modelo.entidades.Autorizacao;
 public interface AutorizacaoService extends Serializable {
 	
 	List<Autorizacao> buscarTodos();
+	
+	Autorizacao salvar(Autorizacao autorizacao);
 
 }

@@ -27,5 +27,11 @@ public class AutorizacaoServiceImpl implements AutorizacaoService {
 		return autorizacaoDAO.buscarTodos();
 	}
 
+
+	@Override
+	public Autorizacao salvar(Autorizacao autorizacao) {
+		return autorizacaoDAO.salvarOuAtualizar(autorizacao);
+	}
+
    
 }

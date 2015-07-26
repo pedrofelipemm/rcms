@@ -1,4 +1,4 @@
-package br.ufscar;
+package br.ufscar.rcms.scorecard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -6,11 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
 @EnableJpaRepositories
+@PropertySource("file:${user.home}/RCMS/config/application.properties")
 @EnableAutoConfiguration(exclude = { org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
         org.springframework.boot.actuate.autoconfigure.ManagementSecurityAutoConfiguration.class })
 public class Application {
@@ -33,7 +35,6 @@ public class Application {
 
         ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet(), URL_MAPPING);
         registration.setName(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME);
-
         return registration;
     }
 }

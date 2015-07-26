@@ -1,8 +1,8 @@
-package br.ufscar;
+package br.ufscar.rcms.scorecard;
 
 import java.io.Serializable;
 
-public class Sample implements Serializable{
+public class Sample implements Serializable {
 
     private static final long serialVersionUID = -2522173199005092944L;
 

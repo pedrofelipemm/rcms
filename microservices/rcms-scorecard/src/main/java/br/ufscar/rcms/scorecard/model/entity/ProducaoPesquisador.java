@@ -1,4 +1,4 @@
-package br.ufscar;
+package br.ufscar.rcms.scorecard.model.entity;
 
 import java.util.List;
 
@@ -6,8 +6,10 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import br.ufscar.rcms.scorecard.util.JsonUtil;
+
 @Entity
-public class ProducaoPesquisador extends br.ufscar.Entity {
+public class ProducaoPesquisador extends br.ufscar.rcms.scorecard.model.entity.Entity {
 
     private static final long serialVersionUID = -7510333707661579584L;
     // TODO: PEDRO TEST COLUMN ANNOTATION
@@ -19,6 +21,15 @@ public class ProducaoPesquisador extends br.ufscar.Entity {
 
     @ElementCollection
     private List<String> autores;
+
+    public ProducaoPesquisador() {/* Serialization */}
+
+    public ProducaoPesquisador(final String titulo, final Integer ano, final String link, final List<String> autores) {
+        this.titulo = titulo;
+        this.ano = ano;
+        this.link = link;
+        this.autores = autores;
+    }
 
     @Override
     public Long getId() {
@@ -50,19 +61,24 @@ public class ProducaoPesquisador extends br.ufscar.Entity {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         ProducaoPesquisador other = (ProducaoPesquisador) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        } else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         return true;
     }
 

@@ -225,13 +225,13 @@
             	<div class="col-md-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Produções</h3>
+                        <h3 class="panel-title">#{mensagens['producoes']}</h3>
                       </div>
                       <div class="panel-body">
                         <div class="container-fluid">
                         	<div class="row">
                             	<div class="col-md-2 text-right">
-                                	<strong>Nome em citações bibliográficas</strong>
+                                	<strong>#{mensagens['exibir.pesquisador.nome.citacoes.bibliograficas']}</strong>
                                 </div>
                                 <div class="col-md-10">
 		                        	<ui:repeat var="citacaoBibliografica" value="#{pesquisadorMB.pesquisador.citacaoBibliograficas}">
@@ -239,50 +239,214 @@
         	                        </ui:repeat>
                                 </div>
                             </div>
-                            <div class="row">
+                            <br/>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaArtigosEmPeriodicos}">
 	                            <div class="col-md-12">
-                                	<h4>Artigos completos publicados em periódicos</h4>
+                                	<h4>#{mensagens['exibir.pesquisador.artigos.completos.publicados.em.periodicos']}</h4>
                                     <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaArtigoEmPeriodico}">
-	        	                            <li><ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat> . #{producao.titulo}. #{producao.revista}, p. #{producao.paginas}, #{producao.ano}.</li>
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaArtigosEmPeriodicos}">
+	        	                            <li>
+		        	                            <ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+		        	                            <strong>#{producao.titulo}</strong>. #{producao.revista}, 
+		        	                            <!-- v. #{producao.volume}, -->
+		        	                            <h:outputText value="n. #{producao.numero}" rendered="#{producao.numero > 0}" />, 
+		        	                            p. #{producao.paginas}, 
+		        	                            #{producao.ano}.
+		        	                        </li>
 	        	                        </ui:repeat>
                                     </ol>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaLivrosPublicados}">
 	                            <div class="col-md-12">
-                                	<h4>Capítulos de livros publicados</h4>
+                                	<h4>#{mensagens['exibir.pesquisador.livros.publicados.organizados.ou.edicoes']}</h4>
                                     <ol class="listas-numeradas">
-                                    	<li>CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; ZAINA, L. A. M. . Building Adaptive Rich Interfaces for Interactive Ubiquitous Applications. In: Ioannis Deliyannis. (Org.). Interactive Multimedia. Rijeka: InTech - Open Access Publisher, 2012, v. , p. 191-218.</li>
-                                    	<li>BRAGA, R. M. M. ; CAVALINI, L. T. ; CIRILO, C. E. ; COOK, T. W. ; CORREA, B. S. P. M. ; FREIRE, S. M. ; GOMES, A. T. A. ; MACEDO, V. M. ; MENEZES, A. L. ; MORAES, João Luis Cardoso de ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; TEIXEIRA, I. M. ; ZIVIANI, A. . Model-driven development of healthcare applications. In: Raúl A. Feijóo; Artur Ziviani; Pablo J. Blanco.. (Org.). Scientific Computing Applied to Medicine and Healthcare: Current State and Future Trends at the INCT-MACC. 1ed.Petrópolis, Brasil: INCT-MACC/LNCC, 2012, v. 1, p. 315-354.</li>
-                                    	<li>SOUZA, Wanderley Lopes de ; PRADO, A. F. ; FORTE, Marcos ; CIRILO, C. E. . Content Adaptation in Ubiquitous Computing. In: Eduard Babkin. (Org.). Ubiquitous Computing. 1ed.Rijeka: InTech, 2011, v. 1, p. 67-94.</li>
-                                    	<li>GASPAR, T. C. ; YAGUINUMA, Cristiane A ; PRADO, A. F. . Desenvolvimento de Aplicações Colaborativas Síncronas na Web 2.0. In: Mário Meireles Teixeira; César Augusto Camillo Teixeira; Fernando Antônio Mota Trinta; Pedro Porfírio Muniz Farias. (Org.). Anais Webmedia: XV Simpósio Brasileiro de Sistemas Multimídia e Web. Fortaleza, CE: Sociedade Brasileira de Computação - SBC, 2009, v. 3, p. 168-207.</li>
-                                    	<li>PRADO, A. F. . Reengenharia de Software Baseada em Componentes. In: Itana Maria de Souza Gimenes; Elisa Hatsue Moriya Huzita. (Org.). Desenvolvimento Baseado em Componentes: Conceitos e Técnicas. Rio de Janeiro: Ciência Moderna Ltda, 2005, v. 1, p. 105-166.</li>
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaLivrosPublicados}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.edicao}, 
+	        	                            	#{producao.ano}. v. 
+	        	                            	#{producao.volume}. 
+	        	                            	#{producao.paginas}p.</li>
+	        	                        </ui:repeat>
                                     </ol>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaCapitulosDeLivros}">
 	                            <div class="col-md-12">
-                                	<h4>Textos em jornais de notícias/revistas</h4>
+                                	<h4>#{mensagens['exibir.pesquisador.capitulos.de.livros.publicados']}</h4>
                                     <ol class="listas-numeradas">
-                                    	<li>CUNHA, João Ronaldo Del Ducca ; PRADO, A. F. ; SANTOS, Antonio Carlos Do . Uma Abordagem para o Processo de Gerenciamento de Configuração de Software. Revista Eletrônica de Sistemas de Informação (RESI), digital, , v. 1, p. 1 - 10, 12 nov. 2004.</li>
-                                    	<li>CATARINO, Iolanda Cláudia Sanches ; PRADO, A. F. ; SOUZA NETO, Raphael Marcílio de . Framework para ensino a distância baseado em componentes de Software. UNOPAR Científica. Ciências Exatas e Tecnológicas, UNOPAR Editora, , v. 1, p. 17 - 24, 01 nov. 2002.</li>
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaCapitulosDeLivros}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	Em: #{producao.livro}: 
+	        	                            	<!-- #{producao.edicao}, --> 
+	        	                            	#{producao.editora}, 
+	        	                            	#{producao.ano}, 
+	        	                            	v. #{producao.volume}, 
+	        	                            	p. #{producao.paginas}.
+	        	                        	</li>
+	        	                        </ui:repeat>
                                     </ol>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaTextosEmJornais}">
 	                            <div class="col-md-12">
-                                	<h4>Trabalhos completos publicados em anais de congressos</h4>
+                                	<h4>#{mensagens['exibir.pesquisador.textos.em.jornais.de.noticias.revistas']}</h4>
                                     <ol class="listas-numeradas">
-                                    	<li>da Silva, V. G. ; CIRILO, C. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; PEREIRA, V. . An Approach to Dynamic Discovery of Context-Sensitive Web Services. In: ICIW 2013 : The Eighth International Conference on Internet and Web Applications and Services, 2013, Roma, Italia. Iaria, 2013. p. 83-89.</li>
-                                    	<li>RODRIGUES, JOSE F. ; CIRILO, CARLOS E. ; PRADO, ANTONIO F. ; ZAINA, LUCIANA A. M. . Hierarchical visual filtering, pragmatic and epistemic actions for database visualization. In: the 28th Annual ACM Symposium, 2013, Coimbra. Proceedings of the 28th Annual ACM Symposium on Applied Computing - SAC '13. New York: ACM Press, 2013. p. 946-952.</li>
-                                    	<li>DE MORAES, JOAO LUIS CARDOSO ; DE SOUZA, WANDERLEY LOPES ; PIRES, LUIS FERREIRA ; CAVALINI, LUCIANA TRICAI ; FRANCISCO DO PRADO, ANTONIO . A novel architecture for message exchange in Pervasive Healthcare based on the use of Intelligent Agents. In: 2013 ACS International Conference on Computer Systems and Applications (AICCSA), 2013, Ifrane. 2013 ACS International Conference on Computer Systems and Applications (AICCSA). v. 1. p. 1-8.</li>
-                                    	<li>PAPOTTI, P. E. ; PRADO, A. F. ; SOUZA, Wanderley Lopes de ; CIRILO, C. E. ; PIRES, L. F. . A Quantitative Analysis of Model-Driven Code Generation through Software Experimentation. In: 25th International Conference on Advanced Information Systems Engineering, 2013, Valencia. Lecture Notes in Computer Science (LNCS): Advanced Information Systems Engineering CAISE 2013. Berlin: Springer-Verlag, 2013. v. 7908. p. 321-337.</li>
-                                    	<li>MORAES, João Luis Cardoso de ; SOUZA, Wanderley Lopes de ; PIRES, L. F. ; PRADO, A. F. . A Novel Approach to Developing Applications in the Pervasive Healthcare Environment through the Use of Archetypes. In: The 13th International Conference on Computational Science and Its Applications (ICCSA 2013), 2013, Ho Chi Minh City. Computational Science and Its Applications ICCSA 2013. Berlin: Springer Berlin Heidelberg, 2013. v. 7975. p. 475-490.</li>
-                                    	<li>MORAES, João Luis Cardoso de ; SOUZA, Wanderley Lopes de ; PIRES, L. F. ; PRADO, A. F. . Towards a Reusable Architecture for Message Exchange in Pervasive Healthcare. In: 15th International Conference on Enterprise Information Systems (ICEIS 2013), 2013, Angers. Proceedings of the 15th International Conference on Enterprise Information Systems (ICEIS 2013). Lisboa: Science and Technology Publications, 2013. v. 2. p. 393-402.</li>
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTextosEmJornais}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.nomeJornal}, 
+	        	                            	<!-- v. #{producao.volume}, -->
+	        	                            	p. #{producao.paginas}, 
+		        	                            <h:outputText value="#{producao.dataPublicacao}" >
+													<f:convertDateTime pattern="dd MMM. yyyy" />
+												</h:outputText>.
+											</li>
+	        	                        </ui:repeat>
                                     </ol>
                                 </div>
-                            </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaTrabalhosCompletosCongressos}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.trabalhos.completos.publicados.em.anais.de.congressos']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTrabalhosCompletosCongressos}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	Em: #{producao.nomeEvento}, 
+	        	                            	v. #{producao.volume}, 
+	        	                            	p. #{producao.paginas}, 
+	        	                            	#{producao.ano}.
+        	                            	</li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaResumosExpandidosCongressos}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.resumos.expandidos.publicados.em.anais.de.congressos']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaResumosExpandidosCongressos}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	Em: #{producao.nomeEvento}, 
+	        	                            	v. #{producao.volume}, 
+	        	                            	p. #{producao.paginas}, 
+	        	                            	#{producao.ano}.
+	        	                            </li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaResumosCongressos}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.resumos.publicados.em.anais.de.congressos']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaResumosCongressos}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	Em: #{producao.nomeEvento}, 
+	        	                            	v. #{producao.volume}, 
+	        	                            	p. #{producao.paginas}, 
+	        	                            	#{producao.ano}.
+	        	                            </li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaApresentacoesTrabalhos}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.apresentacoes.de.trabalho']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaApresentacoesTrabalhos}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.ano}. 
+	        	                            	(#{producao.natureza}).
+	        	                            </li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaOutrasProducoesBibligraficas}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.outras.producoes.bibliograficas']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaOutrasProducoesBibligraficas}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.ano}. 
+	        	                            	(#{producao.natureza}).
+	        	                            </li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaProdutosTecnologicos}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.produtos.tecnologicos']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaProdutosTecnologicos}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.ano}.
+	        	                            </li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaProcessosOuTecnicas}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.processos.ou.tecnicas']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaProcessosOuTecnicas}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.ano}.
+	        	                            </li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaTrabalhosTecnicos}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.trabalhos.tecnicos']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTrabalhosTecnicos}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.ano}.</li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaOutrasProducoesTecnicas}">
+	                            <div class="col-md-12">
+                                	<h4>#{mensagens['exibir.pesquisador.demais.tipos.de.producao.tecnica']}</h4>
+                                    <ol class="listas-numeradas">
+			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaOutrasProducoesTecnicas}">
+	        	                            <li>
+	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<strong>#{producao.titulo}</strong>. 
+	        	                            	#{producao.ano}. 
+	        	                            	(#{producao.natureza}).</li>
+	        	                        </ui:repeat>
+                                    </ol>
+                                </div>
+                            </h:panelGroup>
                         </div>
                       </div>
                     </div>

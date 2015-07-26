@@ -7,7 +7,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.ProducaoDAO;
-import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.Producao;
 
 @Repository
@@ -19,14 +18,26 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
         setClazz(Producao.class);
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
+    public Boolean exists(String titulo, Integer ano) {
 
         StringBuilder jpql = new StringBuilder();
-        jpql.append(" SELECT DISTINCT AP FROM ArtigoEmPeriodico AP ");
-        jpql.append(" JOIN FETCH AP.citacaoBibliograficas CB ");
+        jpql.append("SELECT p FROM " + Producao.class.getName() + " p ");
+        jpql.append("WHERE p.titulo = :titulo AND p.ano = :ano ");
+
+        Query query = createQuery(jpql.toString());
+        query.setParameter("titulo", titulo);
+        query.setParameter("ano", ano);
+
+        return query.getResultList().size() > 0;
+    }
+
+    public <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario) {
+
+        StringBuilder jpql = new StringBuilder();
+        jpql.append(" SELECT DISTINCT P FROM " + clazz.getName() + " P ");
+        jpql.append(" JOIN FETCH P.citacaoBibliograficas CB ");
         jpql.append(" WHERE CB.idCitacaoBibliografica IN (SELECT CBA FROM CitacaoBibliografica CBA WHERE CBA.pesquisador.idUsuario = :idUsuario) ");
+        jpql.append(" ORDER BY P.ano DESC ");
 
         Query query = createQuery(jpql.toString());
 

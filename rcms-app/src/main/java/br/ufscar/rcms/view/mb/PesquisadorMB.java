@@ -22,20 +22,32 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 import br.ufscar.rcms.comparator.PesquisadorComparator;
 import br.ufscar.rcms.factory.CompreensaoIdiomaFactory;
+import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.Idioma;
 import br.ufscar.rcms.modelo.entidades.LinhaDePesquisa;
+import br.ufscar.rcms.modelo.entidades.LivroPublicado;
 import br.ufscar.rcms.modelo.entidades.OrganizacaoEvento;
+import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
+import br.ufscar.rcms.modelo.entidades.OutraProducaoTecnica;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.ProcessoOuTecnica;
 import br.ufscar.rcms.modelo.entidades.Producao;
+import br.ufscar.rcms.modelo.entidades.ProdutoTecnologico;
+import br.ufscar.rcms.modelo.entidades.ResumoCongresso;
+import br.ufscar.rcms.modelo.entidades.ResumoExpandidoCongresso;
 import br.ufscar.rcms.modelo.entidades.SubAreaAtuacao;
+import br.ufscar.rcms.modelo.entidades.TextoEmJornal;
+import br.ufscar.rcms.modelo.entidades.TrabalhoCompletoCongresso;
+import br.ufscar.rcms.modelo.entidades.TrabalhoTecnico;
 import br.ufscar.rcms.servico.AreaAtuacaoService;
 import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
@@ -125,9 +137,21 @@ public class PesquisadorMB extends AbstractMB {
     private OrganizacaoEvento organizacaoEvento;
     private transient List<OrganizacaoEvento> organizacaoEventos;
 
-    private transient List<ArtigoEmPeriodico> listaArtigoEmPeriodico;
-
     private transient List<Producao> listaProducoes;
+
+    private transient List<ArtigoEmPeriodico> listaArtigosEmPeriodicos;
+    private transient List<LivroPublicado> listaLivrosPublicados;
+    private transient List<CapituloLivro> listaCapitulosDeLivros;
+    private transient List<TextoEmJornal> listaTextosEmJornais;
+    private transient List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos;
+    private transient List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos;
+    private transient List<ResumoCongresso> listaResumosCongressos;
+    private transient List<ApresentacaoTrabalho> listaApresentacoesTrabalhos;
+    private transient List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas;
+    private transient List<ProdutoTecnologico> listaProdutosTecnologicos;
+    private transient List<ProcessoOuTecnica> listaProcessosOuTecnicas;
+    private transient List<TrabalhoTecnico> listaTrabalhosTecnicos;
+    private transient List<OutraProducaoTecnica> listaOutrasProducoesTecnicas;
 
     @PostConstruct
     public void inicializar() {
@@ -148,7 +172,32 @@ public class PesquisadorMB extends AbstractMB {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
             removeNullValues(pesquisador.getCompreensaoIdiomas(), pesquisador.getParticipacaoEventos());
 
-            this.setListaArtigoEmPeriodico(this.producaoService.buscarArtigosEmPeriodicos(pesquisador.getIdUsuario()));
+            this.setListaArtigosEmPeriodicos(this.producaoService.buscarProducoes(ArtigoEmPeriodico.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaLivrosPublicados(this.producaoService.buscarProducoes(LivroPublicado.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaCapitulosDeLivros(this.producaoService.buscarProducoes(CapituloLivro.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaTextosEmJornais(this.producaoService.buscarProducoes(TextoEmJornal.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaTrabalhosCompletosCongressos(this.producaoService.buscarProducoes(
+                    TrabalhoCompletoCongresso.class, pesquisador.getIdUsuario()));
+            this.setListaResumosExpandidosCongressos(this.producaoService.buscarProducoes(
+                    ResumoExpandidoCongresso.class, pesquisador.getIdUsuario()));
+            this.setListaResumosCongressos(this.producaoService.buscarProducoes(ResumoCongresso.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaApresentacoesTrabalhos(this.producaoService.buscarProducoes(ApresentacaoTrabalho.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaOutrasProducoesBibliograficas(this.producaoService.buscarProducoes(
+                    OutraProducaoBibliografica.class, pesquisador.getIdUsuario()));
+            this.setListaProdutosTecnologicos(this.producaoService.buscarProducoes(ProdutoTecnologico.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaProcessosOuTecnicas(this.producaoService.buscarProducoes(ProcessoOuTecnica.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaTrabalhosTecnicos(this.producaoService.buscarProducoes(TrabalhoTecnico.class,
+                    pesquisador.getIdUsuario()));
+            this.setListaOutrasProducoesTecnicas(this.producaoService.buscarProducoes(OutraProducaoTecnica.class,
+                    pesquisador.getIdUsuario()));
         }
     }
 
@@ -639,14 +688,6 @@ public class PesquisadorMB extends AbstractMB {
         this.producaoService = producaoService;
     }
 
-    public List<ArtigoEmPeriodico> getListaArtigoEmPeriodico() {
-        return listaArtigoEmPeriodico;
-    }
-
-    public void setListaArtigoEmPeriodico(List<ArtigoEmPeriodico> listaArtigoEmPeriodico) {
-        this.listaArtigoEmPeriodico = listaArtigoEmPeriodico;
-    }
-
     public List<Producao> getListaProducoes() {
         return listaProducoes;
     }
@@ -658,5 +699,109 @@ public class PesquisadorMB extends AbstractMB {
     public List<CitacaoBibliografica> listarCitacoes(Producao producao) {
 
         return producaoService.buscarPorId(producao.getIdProducao()).getCitacaoBibliograficas();
+    }
+
+    public List<ArtigoEmPeriodico> getListaArtigosEmPeriodicos() {
+        return listaArtigosEmPeriodicos;
+    }
+
+    public void setListaArtigosEmPeriodicos(List<ArtigoEmPeriodico> listaArtigosEmPeriodicos) {
+        this.listaArtigosEmPeriodicos = listaArtigosEmPeriodicos;
+    }
+
+    public List<LivroPublicado> getListaLivrosPublicados() {
+        return listaLivrosPublicados;
+    }
+
+    public void setListaLivrosPublicados(List<LivroPublicado> listaLivrosPublicados) {
+        this.listaLivrosPublicados = listaLivrosPublicados;
+    }
+
+    public List<CapituloLivro> getListaCapitulosDeLivros() {
+        return listaCapitulosDeLivros;
+    }
+
+    public void setListaCapitulosDeLivros(List<CapituloLivro> listaCapitulosDeLivros) {
+        this.listaCapitulosDeLivros = listaCapitulosDeLivros;
+    }
+
+    public List<TextoEmJornal> getListaTextosEmJornais() {
+        return listaTextosEmJornais;
+    }
+
+    public void setListaTextosEmJornais(List<TextoEmJornal> listaTextosEmJornais) {
+        this.listaTextosEmJornais = listaTextosEmJornais;
+    }
+
+    public List<TrabalhoCompletoCongresso> getListaTrabalhosCompletosCongressos() {
+        return listaTrabalhosCompletosCongressos;
+    }
+
+    public void setListaTrabalhosCompletosCongressos(List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos) {
+        this.listaTrabalhosCompletosCongressos = listaTrabalhosCompletosCongressos;
+    }
+
+    public List<ResumoExpandidoCongresso> getListaResumosExpandidosCongressos() {
+        return listaResumosExpandidosCongressos;
+    }
+
+    public void setListaResumosExpandidosCongressos(List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos) {
+        this.listaResumosExpandidosCongressos = listaResumosExpandidosCongressos;
+    }
+
+    public List<ResumoCongresso> getListaResumosCongressos() {
+        return listaResumosCongressos;
+    }
+
+    public void setListaResumosCongressos(List<ResumoCongresso> listaResumosCongressos) {
+        this.listaResumosCongressos = listaResumosCongressos;
+    }
+
+    public List<ApresentacaoTrabalho> getListaApresentacoesTrabalhos() {
+        return listaApresentacoesTrabalhos;
+    }
+
+    public void setListaApresentacoesTrabalhos(List<ApresentacaoTrabalho> listaApresentacoesTrabalhos) {
+        this.listaApresentacoesTrabalhos = listaApresentacoesTrabalhos;
+    }
+
+    public List<OutraProducaoBibliografica> getListaOutrasProducoesBibligraficas() {
+        return listaOutrasProducoesBibligraficas;
+    }
+
+    public void setListaOutrasProducoesBibliograficas(List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas) {
+        this.listaOutrasProducoesBibligraficas = listaOutrasProducoesBibligraficas;
+    }
+
+    public List<ProdutoTecnologico> getListaProdutosTecnologicos() {
+        return listaProdutosTecnologicos;
+    }
+
+    public void setListaProdutosTecnologicos(List<ProdutoTecnologico> listaProdutosTecnologicos) {
+        this.listaProdutosTecnologicos = listaProdutosTecnologicos;
+    }
+
+    public List<ProcessoOuTecnica> getListaProcessosOuTecnicas() {
+        return listaProcessosOuTecnicas;
+    }
+
+    public void setListaProcessosOuTecnicas(List<ProcessoOuTecnica> listaProcessosOuTecnicas) {
+        this.listaProcessosOuTecnicas = listaProcessosOuTecnicas;
+    }
+
+    public List<TrabalhoTecnico> getListaTrabalhosTecnicos() {
+        return listaTrabalhosTecnicos;
+    }
+
+    public void setListaTrabalhosTecnicos(List<TrabalhoTecnico> listaTrabalhosTecnicos) {
+        this.listaTrabalhosTecnicos = listaTrabalhosTecnicos;
+    }
+
+    public List<OutraProducaoTecnica> getListaOutrasProducoesTecnicas() {
+        return listaOutrasProducoesTecnicas;
+    }
+
+    public void setListaOutrasProducoesTecnicas(List<OutraProducaoTecnica> listaOutrasProducoesTecnicas) {
+        this.listaOutrasProducoesTecnicas = listaOutrasProducoesTecnicas;
     }
 }

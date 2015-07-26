@@ -6,7 +6,9 @@ import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 
 public interface CitacaoBibliograficaDAO extends BaseDAO<CitacaoBibliografica, Long> {
 
-    public List<CitacaoBibliografica> buscarPorNomeCitacao(String nomeCitacao);
+    Boolean exists(String nomeCitacao);
+
+    public CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao);
 
     public void remover(List<CitacaoBibliografica> citacoesBibliograficas);
 

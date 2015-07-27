@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="form-group">
-				<p:panel id="painelCitacaoBibliografica" header="#{mensagens['publicacao.participantes']}">
+				<p:panel id="painelCitacaoBibliografica" header="#{mensagens['producao.participantes']}">
 					<div class="rcms-table rcms-table-hover">
 						<div class="rcms-table-thead">
 							<div class="rcms-table-tr">
@@ -34,7 +34,7 @@
 							</div>
 						</div>
 						<div class="rcms-table-tbody">
-							<ui:repeat id="gridPublicacaoNomeCitacao" pt:name="gridPublicacaoNomeCitacao"
+							<ui:repeat id="gridProducaoNomeCitacao" pt:name="gridProducaoNomeCitacao"
 								varStatus="status" var="nomeCitacao" value="#{producaoMB.producao.citacaoBibliograficas}">
 								<div class="rcms-table-tr col-">
 									<div class="rcms-table-td">
@@ -67,7 +67,7 @@
 						</div>
 					</div>
 				</p:panel>
-				<ui:include src="/paginas/admin/cadastro/publicacao/publicacao-modal-nomes-bibliograficos.xhtml" />
+				<ui:include src="/paginas/admin/cadastro/producao/producao-modal-nomes-bibliograficos.xhtml" />
 			</div>
 		</div>
 	</div>

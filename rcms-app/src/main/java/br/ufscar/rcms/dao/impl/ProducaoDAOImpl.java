@@ -31,6 +31,19 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
         return query.getResultList().size() > 0;
     }
 
+    @Override
+    public <T> List<T> buscarProducoes(Class<T> clazz) {
+
+        StringBuilder jpql = new StringBuilder();
+        jpql.append(" SELECT DISTINCT P FROM " + clazz.getName() + " P ");
+        jpql.append(" JOIN FETCH P.citacaoBibliograficas CB ");
+        jpql.append(" ORDER BY P.ano DESC ");
+
+        Query query = createQuery(jpql.toString());
+
+        return query.getResultList();
+    }
+
     public <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario) {
 
         StringBuilder jpql = new StringBuilder();

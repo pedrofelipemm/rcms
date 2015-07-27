@@ -16,5 +16,7 @@ public interface ProducaoService extends Serializable {
 
     Boolean exists(String titulo, Integer ano);
 
+    <T> List<T> buscarProducoes(Class<T> clazz);
+
     <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario);
 }

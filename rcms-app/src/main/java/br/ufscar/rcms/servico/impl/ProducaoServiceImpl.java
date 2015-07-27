@@ -50,6 +50,11 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
     @Override
+    public <T> List<T> buscarProducoes(Class<T> clazz) {
+        return producaoDAO.buscarProducoes(clazz);
+    }
+
+    @Override
     public <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario) {
         return producaoDAO.buscarProducoes(clazz, idUsuario);
     }

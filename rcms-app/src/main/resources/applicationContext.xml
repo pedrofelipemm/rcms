@@ -17,5 +17,5 @@
 
 	<context:component-scan base-package="br.ufscar.rcms" />
 	
-	<bean id="eventListenerBean" class="br.ufscar.rcms.config.RcmsServletContextListener" />
+	
 </beans>

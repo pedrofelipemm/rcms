@@ -3,8 +3,10 @@ package br.ufscar.rcms.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,9 +40,9 @@ public class Usuario extends Entidade {
     private String email;
     
     @Column(name = "enabled")
-    private Boolean enabled = false;
+    private Boolean enabled = true;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Autorizacao> autorizacoes = new ArrayList<Autorizacao>();
 
     public List<Autorizacao> getAutorizacoes() {

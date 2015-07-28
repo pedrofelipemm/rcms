@@ -3,13 +3,8 @@ package br.ufscar.rcms.modelo.lattes;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="trabalho_completo")
-public class TrabalhoCompletoLattes {
-
-    private static final long serialVersionUID = 3104340761284938487L;
-
-    @XmlElement
-    private String doi;
+@XmlRootElement(name="livro")
+public class LivroLattes {
 
     @XmlElement
     private String autores;
@@ -18,10 +13,7 @@ public class TrabalhoCompletoLattes {
     private String titulo;
 
     @XmlElement
-    private String nome_evento;
-
-    @XmlElement
-    private Integer ano;
+    private String edicao;
 
     @XmlElement
     private String volume;
@@ -29,9 +21,8 @@ public class TrabalhoCompletoLattes {
     @XmlElement
     private String paginas;
 
-    public String getDoi() {
-        return doi;
-    }
+    @XmlElement
+    private Integer ano;
 
     public String getAutores() {
         return autores;
@@ -41,12 +32,8 @@ public class TrabalhoCompletoLattes {
         return titulo;
     }
 
-    public String getNomeEvento() {
-        return nome_evento;
-    }
-
-    public Integer getAno() {
-        return ano;
+    public String getEdicao() {
+        return edicao;
     }
 
     public String getVolume() {
@@ -55,5 +42,9 @@ public class TrabalhoCompletoLattes {
 
     public String getPaginas() {
         return paginas;
+    }
+
+    public Integer getAno() {
+        return ano;
     }
 }

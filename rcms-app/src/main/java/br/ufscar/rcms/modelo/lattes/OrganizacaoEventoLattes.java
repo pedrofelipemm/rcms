@@ -6,9 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="organizacao_evento")
-public class OrganizacaoEventoLattes extends BaseLattes{
-
-    private static final long serialVersionUID = 2150902492114436303L;
+public class OrganizacaoEventoLattes {
 
     @XmlElement(name = "evento")
     private List<EventoLatttes> eventos;

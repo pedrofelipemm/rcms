@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="trabalhos_tecnicos")
-public class TrabalhosTecnicoLattes extends BaseLattes{
+public class TrabalhosTecnicoLattes {
 
     private static final long serialVersionUID = -646682544138678510L;
 

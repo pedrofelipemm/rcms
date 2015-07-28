@@ -24,11 +24,17 @@ public class CapituloLivro extends ProducaoBibliografica {
     @Column(name = "editora")
     private String editora;
 
+    @Column(name = "volume")
+    private String volume;
+
+    @Column(name = "paginas")
+    private String paginas;
+
     public CapituloLivro() {
     }
 
     public CapituloLivro(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String livro, final String edicao,
-            final String editora) {
+ final String editora, final String volume, final String paginas) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -36,6 +42,8 @@ public class CapituloLivro extends ProducaoBibliografica {
         this.livro = livro;
         this.edicao = edicao;
         this.editora = editora;
+        this.volume = volume;
+        this.paginas = paginas;
     }
 
     public String getLivro() {
@@ -60,5 +68,21 @@ public class CapituloLivro extends ProducaoBibliografica {
 
     public void setEditora(final String editora) {
         this.editora = editora;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(final String volume) {
+        this.volume = volume;
+    }
+
+    public String getPaginas() {
+        return paginas;
+    }
+
+    public void setPaginas(final String paginas) {
+        this.paginas = paginas;
     }
 }

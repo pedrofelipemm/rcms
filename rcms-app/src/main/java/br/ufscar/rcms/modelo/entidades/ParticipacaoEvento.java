@@ -25,7 +25,7 @@ public class ParticipacaoEvento extends Entidade {
     @JoinColumn(name = "id_pesquisador", foreignKey = @ForeignKey(name = "fk_participacao_evento_pesquisador"))
     private Pesquisador pesquisador;
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "titulo", nullable = false, length = COLUMN_DEFAULT_LENGTH)
     private String titulo;
 
     @Column(name = "ano", nullable = false)

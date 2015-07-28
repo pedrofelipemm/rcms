@@ -4,9 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="capitulo")
-public class CapituloLattes extends BaseLattes {
-
-    private static final long serialVersionUID = -8435622607913227170L;
+public class CapituloLattes {
 
     @XmlElement
     private String livro;

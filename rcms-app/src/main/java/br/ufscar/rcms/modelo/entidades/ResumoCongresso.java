@@ -18,11 +18,11 @@ public class ResumoCongresso extends ProducaoBibliografica {
     @Column(name = "doi")
     private String doi;
 
-    @Column(name = "nome_evento")
+    @Column(name = "nome_evento", length = COLUMN_DEFAULT_LENGTH)
     private String nomeEvento;
 
     @Column(name = "volume")
-    private Integer volume;
+    private String volume;
 
     @Column(name = "paginas")
     private String paginas;
@@ -34,7 +34,7 @@ public class ResumoCongresso extends ProducaoBibliografica {
     }
 
     public ResumoCongresso(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String doi,
-            final String nomeEvento, final Integer volume, final String paginas, final Integer numero) {
+ final String nomeEvento, final String volume, final String paginas, final Integer numero) {
 
         super.setTitulo(titulo);
         super.setCitacaoBibliograficas(autores);
@@ -62,11 +62,11 @@ public class ResumoCongresso extends ProducaoBibliografica {
         this.nomeEvento = nomeEvento;
     }
 
-    public Integer getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(final Integer volume) {
+    public void setVolume(final String volume) {
         this.volume = volume;
     }
 

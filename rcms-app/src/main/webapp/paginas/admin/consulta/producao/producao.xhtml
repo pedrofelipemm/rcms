@@ -12,11 +12,11 @@
 		
 		<div class="row">
         	<div class="col-sm-12">
-        		<h1>#{mensagens['publicacao']}</h1>
+        		<h1>#{mensagens['producao']}</h1>
         	</div>
         </div>
 		
-		<h:form id="formPublicacao" prependId="false"  role="form">
+		<h:form id="formProducao" prependId="false"  role="form">
 
 			<div class="rcms-table rcms-table-hover">
 				<div class="rcms-table-thead">
@@ -35,15 +35,15 @@
 						
 						<div class="rcms-table-th col-sm-3 text-center">
 							<span> <a rel="next"
-								title="#{mensagens['adicionar.publicacao']}"
-								href="${request.contextPath}/paginas/admin/cadastro/publicacao/publicacao.xhtml"
-								class="btn btn-primary"> #{mensagens['adicionar.publicacao']} </a>
+								title="#{mensagens['adicionar.producao']}"
+								href="${request.contextPath}/paginas/admin/cadastro/producao/producao.xhtml"
+								class="btn btn-primary"> #{mensagens['adicionar.producao']} </a>
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="rcms-table-tbody">
-					<ui:repeat id="gridPublicacao" pt:name="gridPublicacao"
+					<ui:repeat id="gridProducao" pt:name="gridProducao"
 						varStatus="status" var="producao" value="#{producaoMB.producoes}">
 						<div class="rcms-table-tr col-">
 							<div class="rcms-table-td">

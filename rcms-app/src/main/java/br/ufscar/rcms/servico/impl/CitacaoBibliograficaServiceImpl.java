@@ -19,6 +19,15 @@ public class CitacaoBibliograficaServiceImpl implements CitacaoBibliograficaServ
     @Autowired
     private CitacaoBibliograficaDAO citacaoBibliograficaDAO;
 
+    public CitacaoBibliografica buscarPorNomeCitacao(String nomeCitacao) {
+        return citacaoBibliograficaDAO.buscarPorNomeCitacao(nomeCitacao);
+    }
+
+    @Override
+    public Boolean exists(String nomeCitacao) {
+        return citacaoBibliograficaDAO.exists(nomeCitacao);
+    }
+
     @Override
     public void salvar(CitacaoBibliografica citacaoBibliografica) {
         citacaoBibliograficaDAO.salvar(citacaoBibliografica);
@@ -37,9 +46,4 @@ public class CitacaoBibliograficaServiceImpl implements CitacaoBibliograficaServ
     public List<CitacaoBibliografica> buscarTodas(){
         return citacaoBibliograficaDAO.buscarTodos();
     }
-
-    public List<CitacaoBibliografica> buscarPorNomeCitacao(String nomeCitacao) {
-        return citacaoBibliograficaDAO.buscarPorNomeCitacao(nomeCitacao);
-    }
-
 }

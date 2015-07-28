@@ -17,8 +17,6 @@ import org.springframework.web.servlet.DispatcherServlet;
         org.springframework.boot.actuate.autoconfigure.ManagementSecurityAutoConfiguration.class })
 public class Application {
 
-    // TODO: PEDRO AJUSTAR PACOTES
-
     private static final String URL_MAPPING = "/rcms-scorecard/api/*";
 
     public static void main(final String... args) {

@@ -2,10 +2,10 @@ package br.ufscar.rcms.scorecard.service;
 
 import java.util.List;
 
-import br.ufscar.rcms.scorecard.model.entity.Producao;
+import br.ufscar.rcms.scorecard.rest.dto.AmountProducaoByYearDTO;
 
 public interface ProducaoService {
 
-    List<Producao> findAll();
+    List<AmountProducaoByYearDTO> findAll();
 
 }

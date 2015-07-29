@@ -12,7 +12,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
 @EnableJpaRepositories
-@PropertySource("file:${user.home}/RCMS/config/application.properties")
+@PropertySource("file:${user.home}/RCMS/config/application.properties") // TODO REMOVE DEPENDENCY
 @EnableAutoConfiguration(exclude = { org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
         org.springframework.boot.actuate.autoconfigure.ManagementSecurityAutoConfiguration.class })
 public class Application {

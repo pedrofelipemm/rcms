@@ -9,6 +9,9 @@ public final class JsonUtil {
 
     private JsonUtil() {}
 
+    /**
+     * Referência circular poderá lançar {@linkplain StackOverflowError}
+     */
     public static String toJson(final Object object) {
         return GSON.toJson(object);
     }

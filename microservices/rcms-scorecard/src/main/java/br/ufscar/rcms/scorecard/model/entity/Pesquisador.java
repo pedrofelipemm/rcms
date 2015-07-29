@@ -1,6 +1,7 @@
 package br.ufscar.rcms.scorecard.model.entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.ForeignKey;
 
 import br.ufscar.rcms.scorecard.util.JsonUtil;
@@ -229,12 +231,12 @@ public class Pesquisador extends Usuario {
 //        }
 //    }
 
-//    public void addCitacaoBibliografica(final CitacaoBibliografica... citacaoBibliografica) {
-//        if (citacaoBibliografica != null) {
-//            citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliografica));
-//        }
-//    }
-//
+    public void addCitacaoBibliografica(final CitacaoBibliografica... citacaoBibliografica) {
+        if (citacaoBibliografica != null) {
+            citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliografica));
+        }
+    }
+
 //    public void removeCitacaoBibliografica(final CitacaoBibliografica... citacaoBibliografica) {
 //        if (citacaoBibliografica != null) {
 //            citacaoBibliograficas.removeAll(Arrays.asList(citacaoBibliografica));

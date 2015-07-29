@@ -27,19 +27,14 @@ public class ProducaoServiceImpl implements ProducaoService {
     @Autowired
     private ProducaoRepository producaoRepository;
 
-//    Function<Entry<Integer, Long>, AmountProducaoByYearDTO> toAmountProducaoByYearDTO = new Function<Entry<Integer, Long>, AmountProducaoByYearDTO>() {
-//        @Override
-//        public AmountProducaoByYearDTO apply(final Entry<Integer, Long> entry) {
-//            return new AmountProducaoByYearDTO(entry.getKey(), entry.getValue().intValue());
-//        }
-//    };
-
     @Override
     public List<AmountProducaoByYearDTO> findAmountProducaoByYear() {
 
         List<Producao> producoes = producaoRepository.findAll();
-        Map<Integer, Long> collect = producoes.stream().collect(Collectors.groupingBy(p -> p.getAno(), Collectors.counting()));
-        return collect.entrySet().stream().map(e -> new AmountProducaoByYearDTO(e.getValue().intValue(), e.getKey())).collect(Collectors.toList());
+
+        return producoes.stream().collect(Collectors.groupingBy(p -> p.getAno(), Collectors.counting()))
+                .entrySet().stream().map(e -> new AmountProducaoByYearDTO(e.getValue().intValue(), e.getKey()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -47,7 +42,6 @@ public class ProducaoServiceImpl implements ProducaoService {
 
         List<Producao> producoes = producaoRepository.findAll();
 
-        // TODO PEDRO TRY TO USE LAMBDA
         List<AmountProducaoByResearcherDTO> result = new ArrayList<AmountProducaoByResearcherDTO>();
         Map<String, Integer> map = new HashMap<String, Integer>();
         for (Producao producao : producoes) {
@@ -67,8 +61,7 @@ public class ProducaoServiceImpl implements ProducaoService {
         for (Entry<String, Integer> entry : map.entrySet()) {
             result.add(new AmountProducaoByResearcherDTO(entry.getValue(), entry.getKey()));
         }
-        // TODO PEDRO TRY TO USE LAMBDA
+
         return result;
     }
-
 }

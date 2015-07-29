@@ -78,7 +78,6 @@ local.properties
 .buildpath
 
 # Custom files
-test/
 *.cmd
 *.sh
 *.classpath

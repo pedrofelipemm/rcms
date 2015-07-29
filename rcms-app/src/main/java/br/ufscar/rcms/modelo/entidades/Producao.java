@@ -42,7 +42,7 @@ public abstract class Producao extends Entidade {
     private byte[] pdf;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-    @JoinTable(joinColumns = { @JoinColumn(name = "id_producao") }, inverseJoinColumns = { @JoinColumn(name = "id_citacao_bibliografica") })
+    @JoinTable( name="producao_citacao_bibliografica", joinColumns = { @JoinColumn(name = "id_producao") }, inverseJoinColumns = { @JoinColumn(name = "id_citacao_bibliografica") })
     @org.hibernate.annotations.ForeignKey(name = "fk_producao_citacao_bibliografica_producao", inverseName = "fk_producao_citacao_bibliografica_citacao_bibliografica")
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
 

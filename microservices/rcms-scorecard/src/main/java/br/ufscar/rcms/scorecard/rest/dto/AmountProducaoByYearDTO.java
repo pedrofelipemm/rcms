@@ -4,14 +4,14 @@ public class AmountProducaoByYearDTO extends AmountProducaoDTO {
 
     private static final long serialVersionUID = -5970482782225021574L;
 
-    private final int year;
+    private final Integer year;
 
-    public AmountProducaoByYearDTO(final int amount, final int year) {
+    public AmountProducaoByYearDTO(final Integer amount, final Integer year) {
         super(amount);
         this.year = year;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 }

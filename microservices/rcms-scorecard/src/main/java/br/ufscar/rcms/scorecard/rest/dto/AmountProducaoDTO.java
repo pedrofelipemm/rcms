@@ -5,13 +5,13 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public abstract class AmountProducaoDTO implements Serializable {
 
-    private final int amount;
+    private final Integer amount;
 
-    public AmountProducaoDTO(final int amount) {
+    public AmountProducaoDTO(final Integer amount) {
         this.amount = amount;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 }

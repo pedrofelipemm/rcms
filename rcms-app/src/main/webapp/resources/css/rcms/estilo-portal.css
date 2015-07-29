@@ -29,7 +29,7 @@ table {
 }
 
 .nav {
-    padding-right: 15px;
+    padding-right: 10px;
 }
 
 #carrousel {
@@ -48,7 +48,7 @@ table {
 }
 
 #row-logotipos {
-	margin-top: 20px;
+	margin: 20px 15px 0 15px;
     border-top: 1px solid #B20000;
 }
 
@@ -80,7 +80,8 @@ table {
 }
 
 .btn-saibamais {
-    background-image: url('../imagens/saiba-mais-icon.png');
+	
+    background-image: url('../../resources/images/saiba-mais-icon.png');
     background-repeat: no-repeat;
     padding-left: 20px;
     color: #B20000;
@@ -106,11 +107,11 @@ ul.listas {
 
 .listas li {
 	padding: 5px 0 5px 30px;
-	background: url('../resources/images/saiba-mais-icon.png') no-repeat left center;
+	background: url('../../resources/images/saiba-mais-icon.png') no-repeat left center;
 }
 
 .lnk-lattes {
-	background: url('../resources/images/lattes-icon.png') no-repeat left center;
+	background: url('../../resources/images/lattes-icon.png') no-repeat left center;
 	line-height: 50px;
 	margin-right: 10px;
 	padding: 10px 30px;

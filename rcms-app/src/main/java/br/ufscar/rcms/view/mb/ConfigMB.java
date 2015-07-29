@@ -9,28 +9,32 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.PartialViewContext;
 
-@ManagedBean(name = "configMB", eager = true)
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @SessionScoped
+@ManagedBean(name = "configMB")
 public class ConfigMB extends AbstractMB{
 
     private static final long serialVersionUID = -8168079468992950249L;
 
-    private static final String ESTILO_RCMS = "RCMS";
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigMB.class);
+
+    private static final String ESTILO_ADMIN_RCMS = "RCMS";
 
     private String idioma;
     private Map<String, String> idiomas;
 
-    private String tema;
-    private Map<String, String> temas;
+    private String estiloAdmin;
+    private Map<String, String> estilosAdmin;
 
-    private String estilo;
-    private Map<String, String> estilos;
+    private String temaPortal;
+    private Map<String, String> temasPortal;
 
     @PostConstruct
     public void inicializar() {
         limparDados();
         carregarDados();
-
     }
 
     @Override
@@ -39,8 +43,8 @@ public class ConfigMB extends AbstractMB{
     @Override
     protected void carregarDados() {
         carregarIdiomas();
-        carregarTemas();
-        carregarEstilos();
+        carregarEstilosAdmin();
+        carregarTemasPortal();
         // TODO PEDRO CARREGAR CONFIG DO BANCO
     }
 
@@ -50,9 +54,11 @@ public class ConfigMB extends AbstractMB{
         getViewRoot().setLocale(new Locale(idioma));
     }
 
-    public void alterarTema() {}
-
     public void alterarEstilo() {
+        noCacheRefresh();
+    }
+
+    public void alterarTemaPortal() {
         noCacheRefresh();
     }
 
@@ -67,7 +73,7 @@ public class ConfigMB extends AbstractMB{
     }
 
     public boolean loadCustomScript() {
-        return estilo != null && !estilo.equals(ESTILO_RCMS);
+        return estiloAdmin != null && !estiloAdmin.equals(ESTILO_ADMIN_RCMS);
     }
 
     private void carregarIdiomas() {
@@ -78,19 +84,21 @@ public class ConfigMB extends AbstractMB{
         idiomas.put(getMessage("portugues"), "pt_BR");
     }
 
-    private void carregarTemas() {
-        tema = "bootstrap";
-        temas = new HashMap<String, String>();
-        temas.put(getMessage("primefaces"), "none");
-        temas.put(getMessage("rcms"), "bootstreap");
-        temas.put("aristo", "aristo");
+    private void carregarEstilosAdmin() {
+        estilosAdmin = new HashMap<String, String>();
+        estilosAdmin.put(ESTILO_ADMIN_RCMS, ESTILO_ADMIN_RCMS);
+
+        /* TESTS */estilosAdmin.put("(TEST) Green Style", "estilo-admin-custom");
     }
 
-    private void carregarEstilos() {
-        estilos = new HashMap<String, String>();
-        estilos.put(ESTILO_RCMS, ESTILO_RCMS);
-
-        /* TESTS */estilos.put("(TEST) Green Style", "estilo-admin-custom");
+    private void carregarTemasPortal() {
+        temaPortal = "portal";
+        temasPortal = new HashMap<String, String>();
+        temasPortal.put(getMessage("temas.portal.padrao"), "portal");
+        temasPortal.put(getMessage("temas.portal.alegria"), "alegria");
+        temasPortal.put(getMessage("temas.portal.confianca"), "confianca");
+        temasPortal.put(getMessage("temas.portal.surpresa"), "surpresa");
+        temasPortal.put(getMessage("temas.portal.raiva"), "raiva");
     }
 
     public String getIdioma() {
@@ -109,35 +117,36 @@ public class ConfigMB extends AbstractMB{
         this.idiomas = idiomas;
     }
 
-    public String getTema() {
-        return tema;
+    public String getEstiloAdmin() {
+        return estiloAdmin;
     }
 
-    public void setTema(final String tema) {
-        this.tema = tema;
+    public void setEstiloAdmin(final String estiloAdmin) {
+        this.estiloAdmin = estiloAdmin;
     }
 
-    public Map<String, String> getTemas() {
-        return temas;
+    public Map<String, String> getEstilosAdmin() {
+        return estilosAdmin;
     }
 
-    public void setTemas(final Map<String, String> temas) {
-        this.temas = temas;
+    public void setEstilosAdmin(final Map<String, String> estilosAdmin) {
+        this.estilosAdmin = estilosAdmin;
     }
 
-    public String getEstilo() {
-        return estilo;
+    public String getTemaPortal() {
+        return temaPortal;
     }
 
-    public void setEstilo(final String estilo) {
-        this.estilo = estilo;
+    public void setTemaPortal(String temaPortal) {
+        this.temaPortal = temaPortal;
     }
 
-    public Map<String, String> getEstilos() {
-        return estilos;
+
+    public Map<String, String> getTemasPortal() {
+        return temasPortal;
     }
 
-    public void setEstilos(final Map<String, String> estilos) {
-        this.estilos = estilos;
+    public void setTemasPortal(Map<String, String> temasPortal) {
+        this.temasPortal = temasPortal;
     }
 }

@@ -32,7 +32,7 @@ public class ProducaoServiceImpl implements ProducaoService {
 
         List<Producao> producoes = producaoRepository.findAll();
         Map<Integer, Long> collect = producoes.stream().collect(Collectors.groupingBy(p -> p.getAno(), Collectors.counting()));
-        return collect.entrySet().stream().map(e -> new AmountProducaoByYearDTO(e.getKey(), e.getValue().intValue())).collect(Collectors.toList());
+        return collect.entrySet().stream().map(e -> new AmountProducaoByYearDTO(e.getValue().intValue(), e.getKey())).collect(Collectors.toList());
     }
 
     // @Override

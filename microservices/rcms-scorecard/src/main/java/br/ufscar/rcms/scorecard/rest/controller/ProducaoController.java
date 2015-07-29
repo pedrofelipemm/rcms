@@ -22,7 +22,9 @@ public class ProducaoController {
     public Wrapper<AmountProducaoByYearDTO> getProducoesByYeay() {
 
         List<AmountProducaoByYearDTO> producoes = producaoService.findAll();
-        return new Wrapper<AmountProducaoByYearDTO>(producoes.size(), producoes);
+        Integer size = producoes.stream().map(producao -> producao.getAmount()).reduce((sum, amount) -> sum + amount).get();
+
+        return new Wrapper<AmountProducaoByYearDTO>(producoes.size(), size, producoes);
     }
 
 //    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)

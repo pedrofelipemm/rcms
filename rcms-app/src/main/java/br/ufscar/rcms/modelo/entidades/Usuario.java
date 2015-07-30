@@ -1,6 +1,8 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,6 +46,17 @@ public class Usuario extends Entidade {
 
     @OneToMany
     private List<Autorizacao> autorizacoes;
+
+    @OneToMany
+    private Set<Configuracao> configuracoes = new HashSet<Configuracao>();
+
+    public void addConfiguracao(final Configuracao configuracao) {
+        configuracoes.add(configuracao);
+    }
+
+    public void removeConfiguracao(final Configuracao configuracao) {
+        configuracoes.remove(configuracao);
+    }
 
     public List<Autorizacao> getAutorizacoes() {
 		return autorizacoes;

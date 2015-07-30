@@ -1,7 +1,10 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,11 @@ import javax.servlet.http.Part;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import br.ufscar.rcms.modelo.entidades.Entidade;
 
@@ -87,6 +95,8 @@ public abstract class AbstractMB implements Serializable {
     public static final String CONSULTA_PRODUCAO = "consultaProducao";
     public static final String CADASTRO_PRODUCAO = "cadastroProducao";
     public static final String FLASH_KEY_PRODUCAO = "producao";
+
+    private static final User DEFAULT_USER = new User("DEFAULT-USER", "123456", new ArrayList<GrantedAuthority>());
 
     public Map<String, Boolean> getTiposUsuario() {
         Map<String, Boolean> map = new HashMap<String, Boolean>();
@@ -279,6 +289,19 @@ public abstract class AbstractMB implements Serializable {
             }
         }
         return null;
+    }
+
+    protected SecurityContext getSecurityContext() {
+        return SecurityContextHolder.getContext();
+    }
+
+    protected Authentication getAuthentication() {
+        return getSecurityContext().getAuthentication();
+    }
+
+    protected User getPrincipal() {
+        final Authentication authentication = getAuthentication();
+        return isEmpty(authentication) ? DEFAULT_USER : (User) authentication.getPrincipal();
     }
 
     private void adicionarMensagem(final String texto, final Severity severity) {

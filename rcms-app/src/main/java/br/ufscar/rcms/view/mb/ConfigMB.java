@@ -6,11 +6,14 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.PartialViewContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import br.ufscar.rcms.servico.PesquisadorService;
 
 @SessionScoped
 @ManagedBean(name = "configMB")
@@ -21,6 +24,9 @@ public class ConfigMB extends AbstractMB{
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigMB.class);
 
     private static final String ESTILO_ADMIN_RCMS = "RCMS";
+
+    @ManagedProperty("#{pesquisadorService}")
+    private PesquisadorService pesquisadorService;
 
     private String idioma;
     private Map<String, String> idiomas;
@@ -65,6 +71,9 @@ public class ConfigMB extends AbstractMB{
     public String salvar() {
 
         // TODO PEDRO - SAVE CONFIG TABLE - AGUARDANDO IMPLEMENTAÇÃO DE SPRING SECURITY
+
+        getPrincipal().getUsername();
+
 
         limparDados();
         adicionarMensagemInfoByKey("configuracoes.salva.sucesso");
@@ -137,7 +146,7 @@ public class ConfigMB extends AbstractMB{
         return temaPortal;
     }
 
-    public void setTemaPortal(String temaPortal) {
+    public void setTemaPortal(final String temaPortal) {
         this.temaPortal = temaPortal;
     }
 
@@ -146,7 +155,15 @@ public class ConfigMB extends AbstractMB{
         return temasPortal;
     }
 
-    public void setTemasPortal(Map<String, String> temasPortal) {
+    public void setTemasPortal(final Map<String, String> temasPortal) {
         this.temasPortal = temasPortal;
+    }
+
+    public PesquisadorService getPesquisadorService() {
+        return pesquisadorService;
+    }
+
+    public void setPesquisadorService(final PesquisadorService pesquisadorService) {
+        this.pesquisadorService = pesquisadorService;
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Pesquisador;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
-import br.ufscar.rcms.scorecard.repository.ProducaoRepository;
+import br.ufscar.rcms.scorecard.util.Fixture;
 
 public class ProducaoRepositoryTest extends AbstractRepositoryTest {
 
@@ -22,28 +22,13 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
     @Before
     public void setUp() {
 
-        Pesquisador pesquisador = new Pesquisador();
-        pesquisador.setCodigoLattes("codigo-lattes-default");
-        pesquisador.setEmail("email-default@email.com");
-        pesquisador.setFlagAdministrador(true);
-        pesquisador.setLogin("login-default");
-        pesquisador.setNome("nome-default");
-        pesquisador.setResumoProfissional("resumo-profissional-default");
-        pesquisador.setSenha("senha-default");
-        pesquisador.setSexo("sexo-default");
-
-        CitacaoBibliografica citacao = new CitacaoBibliografica();
-        citacao.setNomeCitacao("Citação Default");
+        Pesquisador pesquisador = Fixture.newPesquisador();
+        CitacaoBibliografica citacao = Fixture.newCitacao();
+        Producao producao = Fixture.newProducao();
 
         citacao.setPesquisador(pesquisador);
         pesquisador.addCitacaoBibliografica(citacao);
-
-        Producao producao = new Producao();
-        producao.setAno(2000);
         producao.setCitacaoBibliograficas(Arrays.asList(citacao));
-        producao.setLink("www.link-default.com.br");
-        producao.setPdf(new byte[2]);
-        producao.setTitulo("Producao Default");
 
         save(pesquisador, producao);
     }
@@ -54,7 +39,7 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
         producoes.forEach(this::assertProducoes);
     }
 
-    private void assertProducoes(Producao producao) {
+    private void assertProducoes(final Producao producao) {
         assertNotNull(producao.getAno());
         assertNotNull(producao.getId());
         assertNotNull(producao.getIdProducao());
@@ -66,7 +51,7 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
         citacoes.forEach(this::assertCitacoes);
     }
 
-    private void assertCitacoes(CitacaoBibliografica citacao) {
+    private void assertCitacoes(final CitacaoBibliografica citacao) {
         assertNotNull(citacao.getId());
         assertNotNull(citacao.getIdCitacaoBibliografica());
         assertNotNull(citacao.getNomeCitacao());
@@ -75,7 +60,7 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
         assertPesquisador(pesquisador);
     }
 
-    private void assertPesquisador(Pesquisador pesquisador) {
+    private void assertPesquisador(final Pesquisador pesquisador) {
         assertNotNull(pesquisador.getCodigoLattes());
         assertNotNull(pesquisador.getEmail());
         assertNotNull(pesquisador.getFlagAdministrador());

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
+import br.ufscar.rcms.commons.util.XMLUtils;
 import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
@@ -68,7 +69,6 @@ import br.ufscar.rcms.servico.ProducaoService;
 import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
-import br.ufscar.rcms.util.XMLUtils;
 
 
 @Service("lattesService")
@@ -317,56 +317,69 @@ public class LattesServiceImpl implements LattesService {
     private void salvarProducoes(final PesquisadorLattes pesquisadorLattes) {
 
         // Artigos em Periódicos
-        if (pesquisadorLattes.getArtigosPeriodicos() != null)
+        if (pesquisadorLattes.getArtigosPeriodicos() != null) {
             addArtigosEmPeriodicos(pesquisadorLattes.getArtigosPeriodicos().getArtigos());
+        }
 
         // Livros publicados
-        if (pesquisadorLattes.getLivrosPublicados() != null)
+        if (pesquisadorLattes.getLivrosPublicados() != null) {
             addLivrosPublicado(pesquisadorLattes.getLivrosPublicados().getLivros());
+        }
 
         // Capítulos de Livros
-        if (pesquisadorLattes.getCapitulosLivros() != null)
+        if (pesquisadorLattes.getCapitulosLivros() != null) {
             addCapitulosDeLivro(pesquisadorLattes.getCapitulosLivros().getCapitulos());
+        }
 
         // Texto em jornal
-        if (pesquisadorLattes.getTextoJornal() != null)
+        if (pesquisadorLattes.getTextoJornal() != null) {
             addTextosEmJornais(pesquisadorLattes.getTextoJornal().getTextos());
+        }
 
         // Trabalho completo em congresso
-        if (pesquisadorLattes.getTrabalhoCompleto() != null)
+        if (pesquisadorLattes.getTrabalhoCompleto() != null) {
             addTrabalhosCompleto(pesquisadorLattes.getTrabalhoCompleto().getTrabalhosCompleto());
+        }
 
         // Resumo expandido em congresso
-        if (pesquisadorLattes.getResumoExpandido() != null)
+        if (pesquisadorLattes.getResumoExpandido() != null) {
             addResumosExpandido(pesquisadorLattes.getResumoExpandido().getResumos());
+        }
 
         // Resumo em congresso
-        if (pesquisadorLattes.getResumoCongresso() != null)
+        if (pesquisadorLattes.getResumoCongresso() != null) {
             addResumosEmCongressos(pesquisadorLattes.getResumoCongresso().getResumos());
+        }
 
         // Apresentação de Trabalhos
-        if (pesquisadorLattes.getApresentacaoTrabalho() != null)
+        if (pesquisadorLattes.getApresentacaoTrabalho() != null) {
             addApresentacoesDeTrabalhos(pesquisadorLattes.getApresentacaoTrabalho().getTrabalhos());
+        }
 
         // Outra Produção
-        if (pesquisadorLattes.getProducaoBibliografica() != null)
+        if (pesquisadorLattes.getProducaoBibliografica() != null) {
             addProducoesBibliograficas(pesquisadorLattes.getProducaoBibliografica().getProducoes());
+        }
 
         // Produtos Tecnológicos
-        if (pesquisadorLattes.getProdutosTecnologicos() != null)
+        if (pesquisadorLattes.getProdutosTecnologicos() != null) {
             addProdutosTecnologicos(pesquisadorLattes.getProdutosTecnologicos().getProdutos());
+        }
 
         // Processos ou técnicas
-        if (pesquisadorLattes.getProcessosOuTecnicas() != null)
+        if (pesquisadorLattes.getProcessosOuTecnicas() != null) {
             addProcessosTecnicas(pesquisadorLattes.getProcessosOuTecnicas().getProdutos());
+        }
 
         // Trabalhos técnicos
-        if (pesquisadorLattes.getTrabalhosTecnico() != null)
+        if (pesquisadorLattes.getTrabalhosTecnico() != null) {
             addTrabalhosTecnico(pesquisadorLattes.getTrabalhosTecnico().getTrabalhos());
+        }
 
         // Produções Técnicas
-        if (pesquisadorLattes.getProducoesTecnica() != null)
+        if (pesquisadorLattes.getProducoesTecnica() != null) {
             addOutrasProducoesTecnica(pesquisadorLattes.getProducoesTecnica().getProducoes());
+        }
     }
 
     public void addArtigosEmPeriodicos(final List<ArtigoLattes> artigosPeriodicosLattes) {

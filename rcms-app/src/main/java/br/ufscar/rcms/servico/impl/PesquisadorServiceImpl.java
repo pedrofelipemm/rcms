@@ -1,7 +1,6 @@
 package br.ufscar.rcms.servico.impl;
-
+import static br.ufscar.rcms.commons.util.FileUtils.generateReasearcherPhotoName;
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
-import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.rcms.dao.EnderecoDAO;
+import br.ufscar.rcms.commons.util.ExceptionUtils;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
@@ -28,7 +27,6 @@ import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
-import br.ufscar.rcms.util.ExceptionUtils;
 import br.ufscar.rcms.util.SupportedImageTypes;
 
 @Service("pesquisadorService")
@@ -43,9 +41,6 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
     @Autowired
     private IdiomaDAO idiomaDAO;
-
-    @Autowired
-    private EnderecoDAO enderecoDAO;
 
     @Value("${pasta.script.foto.pesquisador}")
     private String pastaFotosPesquisadores;

@@ -1,4 +1,4 @@
-package br.ufscar.rcms.util;
+package br.ufscar.rcms.commons.util;
 
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 

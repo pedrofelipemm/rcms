@@ -1,6 +1,6 @@
 package br.ufscar.rcms.view.servlet;
 
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -62,7 +62,7 @@ public class ImageServlet extends HttpServlet {
     }
 
     private byte[] loadImage(final TransientFile file) {
-        return isEmpty(file) ? getDefaultImage() : file.getFile();
+        return TransientFile.isEmpty(file) ? getDefaultImage() : file.getFile();
     }
 
     private byte[] getDefaultImage() {

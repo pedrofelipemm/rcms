@@ -249,10 +249,10 @@ public class Pesquisador extends Usuario {
     }
 
     public void removeOrganizacaoEventos(final OrganizacaoEvento... organizacaoEventos) {
-		if(organizacaoEventos != null){
-			this.organizacaoEventos.removeAll(Arrays.asList(organizacaoEventos));
-		}
-	}
+        if (organizacaoEventos != null) {
+            this.organizacaoEventos.removeAll(Arrays.asList(organizacaoEventos));
+        }
+    }
 
     public void addParticipacaoEventos(final ParticipacaoEvento... participacaoEventos) {
         if (participacaoEventos != null) {
@@ -263,12 +263,6 @@ public class Pesquisador extends Usuario {
     public void removeParticipacaoEventos(final ParticipacaoEvento... participacaoEventos) {
         if (participacaoEventos != null) {
             this.participacaoEventos.removeAll(Arrays.asList(participacaoEventos));
-        }
-    }
-
-    public void addCitacaoBibliograficas(final CitacaoBibliografica... citacaoBibliograficas) {
-        if (citacaoBibliograficas != null) {
-            this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
         }
     }
 

@@ -1,6 +1,6 @@
 package br.ufscar.rcms.scorecard.service.impl;
 
-import static br.ufscar.rcms.scorecard.util.MiscellanyUtil.isEmpty;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
 import br.ufscar.rcms.scorecard.repository.ProducaoRepository;
-import br.ufscar.rcms.scorecard.rest.dto.AmountProducaoByResearcherDTO;
-import br.ufscar.rcms.scorecard.rest.dto.AmountProducaoByYearDTO;
+import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByResearcherDTO;
+import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByYearDTO;
 import br.ufscar.rcms.scorecard.service.ProducaoService;
 
 @Service

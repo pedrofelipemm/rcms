@@ -17,7 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import br.ufscar.rcms.scorecard.util.JsonUtil;
+import br.ufscar.rcms.commons.util.JsonUtil;
 
 @Entity
 @Table(name = "producao")
@@ -47,7 +47,7 @@ public class Producao extends br.ufscar.rcms.scorecard.model.entity.Entity {
     @JoinTable( name="producao_citacao_bibliografica", joinColumns = { @JoinColumn(name = "id_producao") }, inverseJoinColumns = { @JoinColumn(name = "id_citacao_bibliografica") })
     @org.hibernate.annotations.ForeignKey(name = "fk_producao_citacao_bibliografica_producao", inverseName = "fk_producao_citacao_bibliografica_citacao_bibliografica")
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
-    
+
     @Override
     public Long getId() {
         return getIdProducao();

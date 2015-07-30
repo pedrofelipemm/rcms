@@ -1,7 +1,7 @@
 package br.ufscar.rcms.servico.impl;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 import static br.ufscar.rcms.util.FileUtils.generateReasearcherPhotoName;
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 import java.io.File;
 import java.io.IOException;

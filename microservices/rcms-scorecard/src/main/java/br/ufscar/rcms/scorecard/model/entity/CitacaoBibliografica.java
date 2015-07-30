@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.ufscar.rcms.scorecard.util.JsonUtil;
+import br.ufscar.rcms.commons.util.JsonUtil;
 
 @Entity
 @Table(name = "citacao_bibliografica")

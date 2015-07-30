@@ -1,5 +1,7 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -17,8 +19,6 @@ import br.ufscar.rcms.servico.exception.IdiomaEmUsoException;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.view.model.SortableDataModel;
-
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 @ViewScoped
 @ManagedBean(name = "idiomaMB")

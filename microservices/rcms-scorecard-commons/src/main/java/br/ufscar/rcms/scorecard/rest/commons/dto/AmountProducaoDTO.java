@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard.rest.dto;
+package br.ufscar.rcms.scorecard.rest.commons.dto;
 
 import java.io.Serializable;
 

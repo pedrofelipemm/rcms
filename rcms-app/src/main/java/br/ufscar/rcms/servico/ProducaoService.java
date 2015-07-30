@@ -6,6 +6,7 @@ import java.util.List;
 import br.ufscar.rcms.modelo.entidades.Producao;
 
 public interface ProducaoService extends Serializable {
+
     void saveOrUpdate(Producao producao);
 
     void remove(Producao producao);

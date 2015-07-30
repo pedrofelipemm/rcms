@@ -9,7 +9,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import br.ufscar.rcms.scorecard.util.JsonUtil;
+import br.ufscar.rcms.commons.util.JsonUtil;
 
 @Entity
 @Table(name = "usuario")
@@ -38,25 +38,11 @@ public class Usuario extends br.ufscar.rcms.scorecard.model.entity.Entity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean enabled;
-
-//    @OneToMany
-//    private List<Autorizacao> autorizacoes;
-//
-//    public List<Autorizacao> getAutorizacoes() {
-//		return autorizacoes;
-//	}
-//
-//	public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
-//		this.autorizacoes = autorizacoes;
-//	}
-
     @Override
     public Long getId(){
         return getIdUsuario();
     }
-    
+
 	public Long getIdUsuario() {
         return idUsuario;
     }

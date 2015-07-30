@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>rcms-scorecard-commons</artifactId>
+	<packaging>jar</packaging>
+
+	<name>rcms-scorecard-commons</name>
+
+	<parent>
+		<groupId>br.ufscar</groupId>
+		<artifactId>rcms</artifactId>
+		<version>1.0</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<configuration>
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+					<xmlOutput>true</xmlOutput>
+					<findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>analyze-compile</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<linkXref>true</linkXref>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+					<rulesets>
+						<ruleset>../../etc/pmd/basic.xml</ruleset>
+						<ruleset>../../etc/pmd/imports.xml</ruleset>
+						<ruleset>../../etc/pmd/strings.xml</ruleset>
+						<ruleset>../../etc/pmd/design.xml</ruleset>
+						<ruleset>../../etc/pmd/braces.xml</ruleset>
+						<ruleset>../../etc/pmd/j2ee.xml</ruleset>
+						<ruleset>../../etc/pmd/controversial.xml</ruleset>
+						<ruleset>../../etc/pmd/clone.xml</ruleset>
+						<ruleset>../../etc/pmd/logging-java.xml</ruleset>
+						<ruleset>../../etc/pmd/optimizations.xml</ruleset>
+					</rulesets>
+					<excludes>
+						<exclude>**/test/*.java</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>cpd</goal>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
+</project>

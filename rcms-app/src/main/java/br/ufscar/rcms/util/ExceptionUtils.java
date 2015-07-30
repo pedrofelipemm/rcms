@@ -1,6 +1,6 @@
 package br.ufscar.rcms.util;
 
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 public abstract class ExceptionUtils {
 

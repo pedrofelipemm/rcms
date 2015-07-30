@@ -1,16 +1,15 @@
-package br.ufscar.rcms.util;
+package br.ufscar.rcms.commons.util;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
-import br.ufscar.rcms.modelo.entidades.TransientFile;
+public final class MiscellanyUtil {
 
-public abstract class MiscellanyUtil {
+    private MiscellanyUtil() {}
 
     public static boolean isEmpty(final Object param) {
-
         if (param == null) {
             return true;
         } else if (param instanceof String) {
@@ -29,8 +28,6 @@ public abstract class MiscellanyUtil {
             return ((Collection<?>) param).isEmpty();
         } else if (param instanceof Map<?, ?>) {
             return ((Map<?, ?>) param).isEmpty();
-        } else if (param instanceof TransientFile) {
-            return ((TransientFile) param).getFile().length == 0;
         } else if (param instanceof byte[]) {
             return ((byte[]) param).length == 0;
         }

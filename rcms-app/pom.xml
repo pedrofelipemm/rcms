@@ -2,10 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>br.ufscar</groupId>
 	<artifactId>rcms-app</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
 
 	<parent>
 		<groupId>br.ufscar</groupId>
@@ -26,6 +24,7 @@
 		<org.omnifaces.version>1.10</org.omnifaces.version>
 		<org.primefaces.version>5.2</org.primefaces.version>
 		<org.primefaces.themes.version>1.0.10</org.primefaces.themes.version>
+		<rcms.version>1.0</rcms.version>
 	</properties>
 
 	<repositories>
@@ -37,6 +36,16 @@
 	</repositories>
 
 	<dependencies>
+	   <dependency>
+            <groupId>br.ufscar</groupId>
+            <artifactId>rcms-commons</artifactId>
+            <version>${rcms.version}</version>
+        </dependency>
+	   <dependency>
+            <groupId>br.ufscar</groupId>
+            <artifactId>rcms-scorecard-commons</artifactId>
+            <version>${rcms.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>

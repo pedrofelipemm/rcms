@@ -41,6 +41,7 @@ public class ProducaoServiceImpl implements ProducaoService {
         return p;
     }
 
+    @Override
     public Boolean exists(String titulo, Integer ano) {
         return producaoDAO.exists(titulo, ano);
     }

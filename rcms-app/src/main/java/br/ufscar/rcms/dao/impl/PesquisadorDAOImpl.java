@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.util.MiscellanyUtil;
 
 @Repository
 public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implements PesquisadorDAO {
@@ -43,5 +44,19 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
         }
 
         return query.getResultList();
+    }
+
+    @Override
+    public Pesquisador buscarPorLogin(final String login) {
+
+        if (MiscellanyUtil.isEmpty(login)) {
+            throw new IllegalArgumentException("Login cannot be null!");
+        }
+
+        String jpql = "select p from " + getClass().getName() + " p where p.login = :login ";
+        Query query = createQuery(jpql);
+        query.setParameter("login", login);
+
+        return (Pesquisador) query.getSingleResult();
     }
 }

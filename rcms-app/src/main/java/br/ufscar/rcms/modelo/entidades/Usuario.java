@@ -50,8 +50,12 @@ public class Usuario extends Entidade {
     @OneToMany
     private Set<Configuracao> configuracoes = new HashSet<Configuracao>();
 
+    public Configuracao getConfiguracao(final Configuracao.Tipos tipo) {
+        return configuracoes.stream().filter(c -> c.getKey().equals(tipo)).findFirst().get();
+    }
+
     public void addConfiguracao(final Configuracao configuracao) {
-        configuracoes.add(configuracao);
+        this.configuracoes.add(configuracao);
     }
 
     public void removeConfiguracao(final Configuracao configuracao) {
@@ -59,14 +63,14 @@ public class Usuario extends Entidade {
     }
 
     public List<Autorizacao> getAutorizacoes() {
-		return autorizacoes;
-	}
+        return autorizacoes;
+    }
 
-	public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
-		this.autorizacoes = autorizacoes;
-	}
+    public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
+    }
 
-	public Long getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 

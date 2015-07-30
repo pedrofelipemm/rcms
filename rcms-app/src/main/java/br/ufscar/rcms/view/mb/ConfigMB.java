@@ -1,6 +1,8 @@
 package br.ufscar.rcms.view.mb;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -13,7 +15,10 @@ import javax.faces.context.PartialViewContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.ufscar.rcms.modelo.entidades.Configuracao;
+import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.util.MiscellanyUtil;
 
 @SessionScoped
 @ManagedBean(name = "configMB")
@@ -37,6 +42,9 @@ public class ConfigMB extends AbstractMB{
     private String temaPortal;
     private Map<String, String> temasPortal;
 
+    private String usuario;
+    private Pesquisador pesquisador;
+
     @PostConstruct
     public void inicializar() {
         limparDados();
@@ -48,10 +56,23 @@ public class ConfigMB extends AbstractMB{
 
     @Override
     protected void carregarDados() {
+        usuario = getPrincipal().getUsername();
+        pesquisador = pesquisadorService.buscarPorLogin(usuario);
+
+        carregarCombos();
+        carregarConfiguracoes();
+    }
+
+    private void carregarCombos() {
         carregarIdiomas();
         carregarEstilosAdmin();
         carregarTemasPortal();
-        // TODO PEDRO CARREGAR CONFIG DO BANCO
+    }
+
+    private void carregarConfiguracoes() {
+        idioma = pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA).getValue();
+        estiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN).getValue();
+        temaPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL).getValue();
     }
 
     public void alterarIdioma() {
@@ -70,15 +91,28 @@ public class ConfigMB extends AbstractMB{
 
     public String salvar() {
 
-        // TODO PEDRO - SAVE CONFIG TABLE - AGUARDANDO IMPLEMENTAÇÃO DE SPRING SECURITY
+        if (MiscellanyUtil.isEmpty(pesquisador)) {
+            adicionarMensagemAlertaByKey("usuario.nao.cadastrado", usuario);
+        } else {
+            salvarConfiguracoes(pesquisador);
+        }
 
-        getPrincipal().getUsername();
-
-
-        limparDados();
-        adicionarMensagemInfoByKey("configuracoes.salva.sucesso");
         keepMessagesOnRedirect();
         return PAINEL_CONTROLE;
+    }
+
+    private void salvarConfiguracoes(Pesquisador pesquisador) {
+
+        getConfiguracoes().forEach(pesquisador::addConfiguracao);
+        try {
+            pesquisadorService.salvarOuAtualizar(pesquisador);
+
+            limparDados();
+            adicionarMensagemInfoByKey("configuracoes.salva.sucesso");
+        } catch (final Exception exception) {
+            adicionarMensagemErroByKey("erro.salvar.configuracoes");
+            LOGGER.error(exception.getMessage(), exception);
+        }
     }
 
     public boolean loadCustomScript() {
@@ -86,7 +120,6 @@ public class ConfigMB extends AbstractMB{
     }
 
     private void carregarIdiomas() {
-        // TODO PEDRO LANGUANGUES PROPS
         idioma = getViewRoot().getLocale().toString();
         idiomas = new HashMap<String, String>();
         idiomas.put(getMessage("ingles"), "en");
@@ -97,7 +130,7 @@ public class ConfigMB extends AbstractMB{
         estilosAdmin = new HashMap<String, String>();
         estilosAdmin.put(ESTILO_ADMIN_RCMS, ESTILO_ADMIN_RCMS);
 
-        /* TESTS */estilosAdmin.put("(TEST) Green Style", "estilo-admin-custom");
+        /* TESTS */estilosAdmin.put("(TEST)", "estilo-admin-custom");
     }
 
     private void carregarTemasPortal() {
@@ -108,6 +141,15 @@ public class ConfigMB extends AbstractMB{
         temasPortal.put(getMessage("temas.portal.confianca"), "confianca");
         temasPortal.put(getMessage("temas.portal.surpresa"), "surpresa");
         temasPortal.put(getMessage("temas.portal.raiva"), "raiva");
+    }
+
+    private List<Configuracao> getConfiguracoes() {
+        List<Configuracao> configuracoes = new ArrayList<Configuracao>();
+        configuracoes.add(new Configuracao(Configuracao.Tipos.IDIOMA, idioma));
+        configuracoes.add(new Configuracao(Configuracao.Tipos.ESTILO_ADMIN, estiloAdmin));
+        configuracoes.add(new Configuracao(Configuracao.Tipos.ESTILO_PORTAL, temaPortal));
+
+        return configuracoes;
     }
 
     public String getIdioma() {

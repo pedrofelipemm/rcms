@@ -7,12 +7,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.commons.util.ExceptionUtils;
 import br.ufscar.rcms.dao.GrandeAreaAtuacaoDAO;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.GrandeAreaAtuacao;
 import br.ufscar.rcms.servico.GrandeAreaAtuacaoService;
 import br.ufscar.rcms.servico.exception.RCMSException;
-import br.ufscar.rcms.util.ExceptionUtils;
 
 @Service("grandeAreaAtuacaoService")
 @Transactional

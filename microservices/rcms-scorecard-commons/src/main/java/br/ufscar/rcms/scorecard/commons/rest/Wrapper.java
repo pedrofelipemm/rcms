@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard.rest;
+package br.ufscar.rcms.scorecard.commons.rest;
 
 import java.util.List;
 

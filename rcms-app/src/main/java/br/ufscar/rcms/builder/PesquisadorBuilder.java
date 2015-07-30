@@ -160,7 +160,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         if (identificacao != null) {
             String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
             for (String citacao : citacoes) {
-                pesquisador.addCitacaoBibliograficas(new CitacaoBibliografica(cachedPesquisador, citacao.trim()));
+                pesquisador.addCitacaoBibliografica(new CitacaoBibliografica(cachedPesquisador, citacao.trim()));
             }
         }
         return this;

@@ -37,6 +37,10 @@ public class TransientFile implements Serializable{
         this.file = copyOfFile;
     }
 
+    public static boolean isEmpty(final TransientFile file) {
+        return file == null || file.getFile().length == 0;
+    }
+
     public String getFileName() {
         return fileName;
     }

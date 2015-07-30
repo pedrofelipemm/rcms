@@ -1,5 +1,7 @@
 package br.ufscar.rcms.servico.impl;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,6 @@ import br.ufscar.rcms.servico.exception.IdiomaEmUsoException;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
 import br.ufscar.rcms.util.ExceptionUtils;
-
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 @Service("idiomaService")
 @Transactional(rollbackFor = RCMSException.class)

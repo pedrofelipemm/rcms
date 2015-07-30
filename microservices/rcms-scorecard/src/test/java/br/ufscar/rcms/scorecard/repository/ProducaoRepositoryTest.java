@@ -70,6 +70,5 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
         assertNotNull(pesquisador.getNome());
         assertNotNull(pesquisador.getResumoProfissional());
         assertNotNull(pesquisador.getSenha());
-        assertNotNull(pesquisador.getSexo());
     }
 }

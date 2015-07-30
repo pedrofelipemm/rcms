@@ -15,7 +15,6 @@ public class Fixture {
         pesquisador.setNome("nome-default");
         pesquisador.setResumoProfissional("resumo-profissional-default");
         pesquisador.setSenha("senha-default");
-        pesquisador.setSexo("sexo-default");
         return pesquisador;
     }
 

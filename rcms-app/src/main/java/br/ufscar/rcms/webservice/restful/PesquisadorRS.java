@@ -1,6 +1,6 @@
 package br.ufscar.rcms.webservice.restful;
 
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.text.MessageFormat;
 import java.util.Arrays;

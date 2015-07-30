@@ -34,19 +34,19 @@
 <!-- 	<authentication-manager> -->
 <!-- 		<authentication-provider> -->
 <!-- 			<user-service> -->
-<!-- 				<user name="admin" password="admin" authorities="ROLE_USER"/> -->
+<!-- 				<user name="admin" password="admin" authorities="ROLE_ADMIN"/> -->
 <!-- 			</user-service> -->
 <!-- 		</authentication-provider> -->
 <!-- 	</authentication-manager> -->
 	
-	<authentication-manager>
-        <authentication-provider>
-            <jdbc-user-service data-source-ref="dataSource" 
-               users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?"
-               authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?"
-            />
-        </authentication-provider>
-    </authentication-manager> 
+<!-- 	<authentication-manager> -->
+<!--         <authentication-provider> -->
+<!--             <jdbc-user-service data-source-ref="dataSource"  -->
+<!--                users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?" -->
+<!--                authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?" -->
+<!--             /> -->
+<!--         </authentication-provider> -->
+<!--     </authentication-manager>  -->
  
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <beans:property name="url" value="${database.url}" />

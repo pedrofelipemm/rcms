@@ -60,7 +60,7 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
             Pesquisador savedPesquisador = pesquisadorDAO.salvarOuAtualizar(pesquisador);
 
-            if (!isEmpty(pesquisador.getFoto())) {
+            if (!TransientFile.isEmpty(pesquisador.getFoto())) {
                 salvarFotoPesquisador(pesquisador);
             }
             return savedPesquisador;

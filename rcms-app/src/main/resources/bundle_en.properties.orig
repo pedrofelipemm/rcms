@@ -324,8 +324,11 @@ temas.portal.alegria=
 temas.portal.confianca=
 temas.portal.surpresa=
 temas.portal.raiva=
+<<<<<<< HEAD
 
 ### Indicador ###
 falha.servico=Fail in attemp to call service: {0}
+=======
 erro.salvar.configuracoes=Error in attemp to save configurations!
 usuario.nao.cadastrado=User: {0} not registered!
+>>>>>>> feature/salvar-config

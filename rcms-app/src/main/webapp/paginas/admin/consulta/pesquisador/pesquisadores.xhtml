@@ -9,6 +9,11 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
 	<ui:define name="conteudo">
+		
+		<f:metadata>
+        	<f:event type="preRenderView" listener="#{configMB.loadUser}"/>
+    	</f:metadata>
+	
 		<div class="row">
         	<div class="col-sm-12">
         		<h1>#{mensagens['pesquisadores']}</h1>

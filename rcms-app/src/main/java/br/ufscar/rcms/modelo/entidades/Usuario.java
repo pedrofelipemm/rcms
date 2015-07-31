@@ -1,9 +1,13 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,38 +26,57 @@ public class Usuario extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    protected Long idUsuario;
 
     @Column(name = "nome", nullable = false)
-    private String nome;
+    protected String nome;
 
     @Column(name = "flag_administrador", nullable = false)
-    private Boolean flagAdministrador;
+    protected Boolean flagAdministrador;
 
     @Column(name = "login", nullable = false, unique = true)
-    private String login;
+    protected String login;
 
     @Column(name = "senha", nullable = false)
-    private String senha;
+    protected String senha;
 
     @Column(name = "email", nullable = false)
     private String email;
 
     @Column(columnDefinition = "boolean default true")
-    private boolean enabled;
+    protected boolean enabled;
 
     @OneToMany
-    private List<Autorizacao> autorizacoes;
+    protected List<Autorizacao> autorizacoes;
+
+    // TODO PEDRO
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    protected Set<Configuracao> configuracoes = new HashSet<Configuracao>();
+
+    public Configuracao getConfiguracao(final Configuracao.Tipos tipo) {
+        return configuracoes.stream().filter(c -> c.getKey().equals(tipo)).findFirst().orElse(null);
+    }
+
+    public void addConfiguracao(final Configuracao configuracao) {
+        if (configuracoes.contains(configuracao)) {
+            configuracoes.remove(configuracao);
+        }
+        this.configuracoes.add(configuracao);
+    }
+
+    public void removeConfiguracao(final Configuracao configuracao) {
+        configuracoes.remove(configuracao);
+    }
 
     public List<Autorizacao> getAutorizacoes() {
-		return autorizacoes;
-	}
+        return autorizacoes;
+    }
 
-	public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
-		this.autorizacoes = autorizacoes;
-	}
+    public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
+    }
 
-	public Long getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 

@@ -324,8 +324,11 @@ temas.portal.alegria=Alegria
 temas.portal.confianca=Confiança
 temas.portal.surpresa=Surpresa
 temas.portal.raiva=Raiva
+<<<<<<< HEAD
 
 ### Indicador ###
 falha.servico=Falha ao chamar serviço: {0}
+=======
 erro.salvar.configuracoes=Erro ao salvar configuracoes!
 usuario.nao.cadastrado=Usuário: {0} não cadastrado!
+>>>>>>> feature/salvar-config

@@ -8,13 +8,11 @@ import javax.servlet.annotation.WebListener;
 public class CustomContextListener implements ServletContextListener {
 
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
+    public void contextInitialized(final ServletContextEvent servletContextEvent) {
         servletContextEvent.getServletContext().setInitParameter("primefaces.THEME", "bootstrap");
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
-    }
+    public void contextDestroyed(final ServletContextEvent servletContextEvent) {}
 
 }

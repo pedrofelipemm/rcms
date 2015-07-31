@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +50,7 @@ public class Usuario extends Entidade {
     protected List<Autorizacao> autorizacoes;
 
     // TODO PEDRO
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     protected Set<Configuracao> configuracoes = new HashSet<Configuracao>();
 
     public Configuracao getConfiguracao(final Configuracao.Tipos tipo) {
@@ -57,6 +58,9 @@ public class Usuario extends Entidade {
     }
 
     public void addConfiguracao(final Configuracao configuracao) {
+        if (configuracoes.contains(configuracao)) {
+            configuracoes.remove(configuracao);
+        }
         this.configuracoes.add(configuracao);
     }
 

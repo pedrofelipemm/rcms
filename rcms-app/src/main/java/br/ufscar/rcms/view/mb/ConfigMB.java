@@ -81,6 +81,8 @@ public class ConfigMB extends AbstractMB {
 
             Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL);
             temaPortal = isEmpty(configEstiloPortal) ? temaPortal : configEstiloPortal.getValue();
+
+            alterarIdioma();
         }
     }
 
@@ -113,8 +115,11 @@ public class ConfigMB extends AbstractMB {
     private void salvarConfiguracoes(final Pesquisador pesquisador) {
 
         getConfiguracoes().forEach(pesquisador::addConfiguracao);
+
+        getConfiguracoes().forEach(System.out::println);
+
         try {
-            pesquisadorService.salvarOuAtualizar(pesquisador);
+            pesquisadorService.saveOrUpdate(pesquisador);
 
             limparDados();
             adicionarMensagemInfoByKey("configuracoes.salva.sucesso");
@@ -152,6 +157,7 @@ public class ConfigMB extends AbstractMB {
         temasPortal.put(getMessage("temas.portal.raiva"), "raiva");
     }
 
+    // TODO PEDRO HANDLE DUPLICATES - INIT COLLECTION
     private List<Configuracao> getConfiguracoes() {
         List<Configuracao> configuracoes = new ArrayList<Configuracao>();
         configuracoes.add(new Configuracao(Configuracao.Tipos.IDIOMA, idioma));

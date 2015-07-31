@@ -1,5 +1,7 @@
 package br.ufscar.rcms.dao.impl;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
-import br.ufscar.rcms.util.MiscellanyUtil;
 
 @Repository
 public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implements PesquisadorDAO {
@@ -50,7 +51,7 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
     @Override
     public Pesquisador buscarPorLogin(final String login) {
 
-        if (MiscellanyUtil.isEmpty(login)) {
+        if (isEmpty(login)) {
             throw new IllegalArgumentException("Login cannot be null!");
         }
 

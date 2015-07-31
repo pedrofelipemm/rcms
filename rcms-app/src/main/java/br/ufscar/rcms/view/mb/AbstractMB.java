@@ -35,6 +35,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.ufscar.rcms.modelo.entidades.Entidade;
 
@@ -299,9 +300,10 @@ public abstract class AbstractMB implements Serializable {
         return getSecurityContext().getAuthentication();
     }
 
-    protected User getPrincipal() {
+    protected UserDetails getPrincipal() {
         final Authentication authentication = getAuthentication();
-        return isEmpty(authentication) ? DEFAULT_USER : (User) authentication.getPrincipal();
+        return isEmpty(authentication) || authentication.getPrincipal() instanceof String ? DEFAULT_USER
+                : (UserDetails) authentication.getPrincipal();
     }
 
     private void adicionarMensagem(final String texto, final Severity severity) {

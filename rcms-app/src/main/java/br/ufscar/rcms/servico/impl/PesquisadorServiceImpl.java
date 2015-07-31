@@ -164,6 +164,12 @@ public class PesquisadorServiceImpl implements PesquisadorService {
     public Pesquisador buscarPorLogin(final String login) {
         return pesquisadorDAO.buscarPorLogin(login);
     }
+
+    @Override
+    public void saveOrUpdate(final Pesquisador pesquisador) {
+        pesquisadorDAO.saveOrUpdate(pesquisador);
+    }
+
     private void loadPhoto(final Pesquisador pesquisador) {
         try {
             String fileExtension = getFileExtension(pesquisador);

@@ -33,4 +33,6 @@ public interface PesquisadorService extends Serializable {
     void salvarFotoPesquisador(Pesquisador pesquisador) throws RCMSException;
 
     Pesquisador buscarPorLogin(String login);
+
+    void saveOrUpdate(Pesquisador pesquisador);
 }

@@ -34,7 +34,7 @@ public class Configuracao extends Entidade {
         return idConfiguracao;
     }
 
-    public void setIdConfiguracao(Long idConfiguracao) {
+    public void setIdConfiguracao(final Long idConfiguracao) {
         this.idConfiguracao = idConfiguracao;
     }
 
@@ -42,7 +42,7 @@ public class Configuracao extends Entidade {
         return key;
     }
 
-    public void setKey(Tipos key) {
+    public void setKey(final Tipos key) {
         this.key = key;
     }
 
@@ -58,12 +58,12 @@ public class Configuracao extends Entidade {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((idConfiguracao == null) ? 0 : idConfiguracao.hashCode());
+        result = prime * result + ((key == null) ? 0 : key.hashCode());
         return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -74,11 +74,7 @@ public class Configuracao extends Entidade {
             return false;
         }
         Configuracao other = (Configuracao) obj;
-        if (idConfiguracao == null) {
-            if (other.idConfiguracao != null) {
-                return false;
-            }
-        } else if (!idConfiguracao.equals(other.idConfiguracao)) {
+        if (key != other.key) {
             return false;
         }
         return true;

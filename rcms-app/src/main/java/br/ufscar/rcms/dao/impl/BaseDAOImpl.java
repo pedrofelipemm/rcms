@@ -67,7 +67,6 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
         return entidade;
     }
 
-    // TODO PEDRO
     @Deprecated
     @Override
     public T salvarOuAtualizar(T entidade) {

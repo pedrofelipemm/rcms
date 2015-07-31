@@ -2,12 +2,14 @@ package br.ufscar.rcms.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.util.MiscellanyUtil;
 
 @Repository
 public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implements PesquisadorDAO {
@@ -43,5 +45,23 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
         }
 
         return query.getResultList();
+    }
+
+    @Override
+    public Pesquisador buscarPorLogin(final String login) {
+
+        if (MiscellanyUtil.isEmpty(login)) {
+            throw new IllegalArgumentException("Login cannot be null!");
+        }
+
+        String jpql = "select p from " + getClazz().getName() + " p where p.login = :login";
+        Query query = createQuery(jpql);
+        query.setParameter("login", login);
+
+        try {
+            return (Pesquisador) query.getSingleResult();
+        } catch (NoResultException exception) {
+            return null;
+        }
     }
 }

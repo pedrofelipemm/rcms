@@ -1,6 +1,6 @@
 package br.ufscar.rcms.view.mb;
 
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.io.Serializable;
 import java.text.MessageFormat;

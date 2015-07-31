@@ -1,6 +1,6 @@
 package br.ufscar.rcms.view.mb;
 
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
-import br.ufscar.rcms.util.MiscellanyUtil;
 
 @SessionScoped
 @ManagedBean(name = "configMB")
@@ -72,7 +71,7 @@ public class ConfigMB extends AbstractMB {
     }
 
     private void carregarConfiguracoes() {
-        if (!MiscellanyUtil.isEmpty(pesquisador)) {
+        if (!isEmpty(pesquisador)) {
             Configuracao configIdioma = pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA);
             idioma = isEmpty(configIdioma) ? idioma : configIdioma.getValue();
 
@@ -102,7 +101,7 @@ public class ConfigMB extends AbstractMB {
 
     public String salvar() {
 
-        if (MiscellanyUtil.isEmpty(pesquisador)) {
+        if (isEmpty(pesquisador)) {
             adicionarMensagemAlertaByKey("usuario.nao.cadastrado", usuario);
         } else {
             salvarConfiguracoes(pesquisador);
@@ -168,7 +167,7 @@ public class ConfigMB extends AbstractMB {
     }
 
     public void loadUser() {
-        if (MiscellanyUtil.isEmpty(pesquisador)) {
+        if (isEmpty(pesquisador)) {
             inicializar();
         }
     }

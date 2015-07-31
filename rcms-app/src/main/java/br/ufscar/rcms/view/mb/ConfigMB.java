@@ -1,5 +1,7 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +24,7 @@ import br.ufscar.rcms.util.MiscellanyUtil;
 
 @SessionScoped
 @ManagedBean(name = "configMB")
-public class ConfigMB extends AbstractMB{
+public class ConfigMB extends AbstractMB {
 
     private static final long serialVersionUID = -8168079468992950249L;
 
@@ -70,9 +72,16 @@ public class ConfigMB extends AbstractMB{
     }
 
     private void carregarConfiguracoes() {
-        idioma = pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA).getValue();
-        estiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN).getValue();
-        temaPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL).getValue();
+        if (!MiscellanyUtil.isEmpty(pesquisador)) {
+            Configuracao configIdioma = pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA);
+            idioma = isEmpty(configIdioma) ? idioma : configIdioma.getValue();
+
+            Configuracao configEstiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN);
+            estiloAdmin = isEmpty(configEstiloAdmin) ? estiloAdmin : configEstiloAdmin.getValue();
+
+            Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL);
+            temaPortal = isEmpty(configEstiloPortal) ? temaPortal : configEstiloPortal.getValue();
+        }
     }
 
     public void alterarIdioma() {
@@ -101,7 +110,7 @@ public class ConfigMB extends AbstractMB{
         return PAINEL_CONTROLE;
     }
 
-    private void salvarConfiguracoes(Pesquisador pesquisador) {
+    private void salvarConfiguracoes(final Pesquisador pesquisador) {
 
         getConfiguracoes().forEach(pesquisador::addConfiguracao);
         try {
@@ -150,6 +159,12 @@ public class ConfigMB extends AbstractMB{
         configuracoes.add(new Configuracao(Configuracao.Tipos.ESTILO_PORTAL, temaPortal));
 
         return configuracoes;
+    }
+
+    public void loadUser() {
+        if (MiscellanyUtil.isEmpty(pesquisador)) {
+            inicializar();
+        }
     }
 
     public String getIdioma() {

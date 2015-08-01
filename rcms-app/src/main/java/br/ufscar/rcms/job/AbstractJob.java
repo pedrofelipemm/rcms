@@ -24,8 +24,7 @@ public abstract class AbstractJob {
         validateState();
     }
 
-    // TODO PEDRO PROPERTIES
-    @Scheduled(fixedDelay = 3600000)
+    @Scheduled(fixedDelayString = "${job.lattes.importer.delay}")
     private void run() {
         beforeProcess();
         process();

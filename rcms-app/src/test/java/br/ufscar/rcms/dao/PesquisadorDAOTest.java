@@ -26,7 +26,7 @@ public class PesquisadorDAOTest extends AbstractDAOTestBase {
         //TODO PEDRO MOVE TO PESQUISADOR BUILDER
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional("Teste");
-        Pesquisador pesquisador = new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", true, "resumoProfissional").
+        Pesquisador pesquisador = new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", "resumoProfissional").
                 endereco(endereco).build();
         pesquisador = (Pesquisador) merge(pesquisador);
 
@@ -37,7 +37,7 @@ public class PesquisadorDAOTest extends AbstractDAOTestBase {
 
         Endereco endereco2 = new Endereco();
         endereco2.setEnderecoProfissional("Teste2");
-        Pesquisador pesquisador2 = new PesquisadorBuilder("login2", "nome2", "senha2", "codigoLattes2", "email2", true, "resumoProfissional2").
+        Pesquisador pesquisador2 = new PesquisadorBuilder("login2", "nome2", "senha2", "codigoLattes2", "email2", "resumoProfissional2").
                 endereco(endereco2).build();
         pesquisador2 = (Pesquisador) merge(pesquisador2);
 

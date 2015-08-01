@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.PartialViewContext;
 
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.PesquisadorService;
 
-@SessionScoped
+@ViewScoped
 @ManagedBean(name = "configMB")
 public class ConfigMB extends AbstractMB {
 
@@ -32,7 +32,7 @@ public class ConfigMB extends AbstractMB {
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
 
-    private String idioma = getExternalContext().getRequestLocale().toString();
+    private String idioma;
     private Map<String, String> idiomas;
 
     private String estiloAdmin;
@@ -40,6 +40,8 @@ public class ConfigMB extends AbstractMB {
 
     private String temaPortal;
     private Map<String, String> temasPortal;
+
+    private Boolean importacaoLattesAutomcatica = false;
 
     private String usuario;
     private Pesquisador pesquisador;
@@ -79,6 +81,10 @@ public class ConfigMB extends AbstractMB {
             Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL);
             temaPortal = isEmpty(configEstiloPortal.getValue()) ? temaPortal : configEstiloPortal.getValue();
 
+            Configuracao configAutoImport = pesquisador.getConfiguracao(Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA);
+            importacaoLattesAutomcatica = isEmpty(configAutoImport.getValue()) ? importacaoLattesAutomcatica
+                    : Boolean.valueOf(configAutoImport.getValue());
+
             alterarIdioma();
         }
     }
@@ -87,14 +93,6 @@ public class ConfigMB extends AbstractMB {
         final PartialViewContext partialViewContext = getPartialViewContext();
         partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         getViewRoot().setLocale(new Locale(idioma));
-    }
-
-    public void alterarEstilo() {
-        noCacheRefresh();
-    }
-
-    public void alterarTemaPortal() {
-        noCacheRefresh();
     }
 
     public String salvar() {
@@ -113,11 +111,10 @@ public class ConfigMB extends AbstractMB {
 
         try {
 
+            pesquisador.getConfiguracao(Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA).setValue(importacaoLattesAutomcatica.toString());
             pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN).setValue(estiloAdmin);
             pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL).setValue(temaPortal);
             pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA).setValue(idioma);
-
-            // pesquisador.getConfiguracao(Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA).setValue(estiloAdmin);
 
             pesquisadorService.saveOrUpdate(pesquisador);
 
@@ -143,8 +140,6 @@ public class ConfigMB extends AbstractMB {
     private void carregarEstilosAdmin() {
         estilosAdmin = new HashMap<String, String>();
         estilosAdmin.put(ESTILO_ADMIN_RCMS, ESTILO_ADMIN_RCMS);
-
-        /* TESTS */estilosAdmin.put("(TEST)", "estilo-admin-custom");
     }
 
     private void carregarTemasPortal() {
@@ -217,5 +212,21 @@ public class ConfigMB extends AbstractMB {
 
     public void setPesquisadorService(final PesquisadorService pesquisadorService) {
         this.pesquisadorService = pesquisadorService;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(final String usuario) {
+        this.usuario = usuario;
+    }
+
+    public Boolean getImportacaoLattesAutomcatica() {
+        return importacaoLattesAutomcatica;
+    }
+
+    public void setImportacaoLattesAutomcatica(final Boolean importacaoLattesAutomcatica) {
+        this.importacaoLattesAutomcatica = importacaoLattesAutomcatica;
     }
 }

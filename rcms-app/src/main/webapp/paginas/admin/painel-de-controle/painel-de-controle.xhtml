@@ -9,87 +9,73 @@
 
 	<ui:define name="conteudo">
 
-		<h:form id="formPainelControle" prependId="false">
-			
+		<h:form id="formPainelControle" role="form" prependId="false">
+
 			<div class="row">
-				<div class="col-md-10">
-					<div class="form-group">
-						<h1>#{mensagens['painel.de.controle']}</h1>
-					</div>
-				</div>
-				<div class="col-md-2" style="padding-top: 25px;">
-					<div class="form-group pull-right">
-						<h:commandButton value="#{mensagens['salvar']}"
-							pt:name="buttonSalvar" action="#{configMB.salvar}"
-							styleClass="btn btn-success">
-							<f:ajax render="@all" />
-						</h:commandButton>
-					</div>
+				<div class="col-sm-12">
+					<h1>#{mensagens['painel.de.controle']}</h1>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="form-group">
-						<p:panel id="painelPesquisador"
-							header="#{mensagens['configuracoes']}">
+						<p:panel id="painelPesquisador" header="#{mensagens['configuracoes']}">
 							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<h:outputLabel for="selectOneMenuIdioma"
-														pt:name="selectOneMenuIdiomaLabel"
-														value="#{mensagens['idiomas']}" />
-													<h:selectOneMenu id="selectOneMenuIdioma"
-														pt:name="selectOneMenuIdioma" value="#{configMB.idioma}"
-														styleClass="form-control">
-														<f:selectItems value="#{configMB.idiomas.entrySet()}"
-															var="entry" itemValue="#{entry.value}"
-															itemLabel="#{entry.key}" />
-														<f:ajax listener="#{configMB.alterarIdioma}" />
-													</h:selectOneMenu>
-												</div>
-											</div>
+				          		<div class="col-sm-6">
+			            			<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="selectOneMenuIdioma" pt:name="selectOneMenuIdiomaLabel" 
+												value="#{mensagens['idiomas']}" />
+											<h:selectOneMenu id="selectOneMenuIdioma" pt:name="selectOneMenuIdioma"
+												value="#{configMB.idioma}" styleClass="form-control">
+												<f:selectItems value="#{configMB.idiomas.entrySet()}" var="entry"
+													itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+											</h:selectOneMenu>
 										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<h:outputLabel for="selectOneMenuEstilo"
-														pt:name="selectOneMenuEstiloLabel"
-														value="#{mensagens['estilos']}" />
-													<h:selectOneMenu id="selectOneMenuEstilo"
-														pt:name="selectOneMenuEstilo"
-														value="#{configMB.estiloAdmin}" styleClass="form-control">
-														<f:selectItems value="#{configMB.estilosAdmin.entrySet()}"
-															var="entry" itemValue="#{entry.value}"
-															itemLabel="#{entry.key}" />
-														<f:ajax listener="#{configMB.alterarEstiloAdmin}" />
-													</h:selectOneMenu>
-												</div>
-											</div>
+										<div class="col-sm-12">
+											<h:outputLabel for="selectOneMenuEstilo" pt:name="selectOneMenuEstiloLabel"
+												value="#{mensagens['estilos']}" />
+											<h:selectOneMenu id="selectOneMenuEstilo" pt:name="selectOneMenuEstilo"
+												value="#{configMB.estiloAdmin}" styleClass="form-control">
+												<f:selectItems value="#{configMB.estilosAdmin.entrySet()}" var="entry"
+													itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+											</h:selectOneMenu>
 										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="form-group">
-													<h:outputLabel for="temaPortal" id="temaPortalLabel"
-														value="#{mensagens['temas.para.portal']}" />
-													<h:selectOneMenu id="temaPortal"
-														value="#{configMB.temaPortal}" styleClass="form-control">
-														<f:selectItems value="#{configMB.temasPortal.entrySet()}"
-															var="entry" itemValue="#{entry.value}"
-															itemLabel="#{entry.key}" />
-														<f:ajax listener="#{configMB.alterarTemaPortal}" />
-													</h:selectOneMenu>
-												</div>
-											</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+			            			<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="temaPortal" id="temaPortalLabel" value="#{mensagens['temas.para.portal']}" />
+											<h:selectOneMenu id="temaPortal" value="#{configMB.temaPortal}" styleClass="form-control">
+												<f:selectItems value="#{configMB.temasPortal.entrySet()}" var="entry"
+													itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+											</h:selectOneMenu>
+										</div>
+										<div class="col-sm-12">
+											<h:outputLabel for="importacaoLattesAutomcatica" id="importacaoLattesAutomcaticaLabel"
+												value="#{mensagens['importacao.automatica']}" />
+											<h:selectOneMenu id="importacaoLattesAutomcatica" styleClass="form-control"
+												value="#{configMB.importacaoLattesAutomcatica}">
+												<f:selectItem itemValue="#{true}" itemLabel="#{mensagens['sim']}" />
+												<f:selectItem itemValue="#{false}" itemLabel="#{mensagens['nao']}" />
+									        </h:selectOneMenu>
 										</div>
 									</div>
 								</div>
 							</div>
 						</p:panel>
 					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar"
+						action="#{configMB.salvar}" styleClass="btn btn-success">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
 				</div>
 			</div>
 

@@ -29,7 +29,7 @@ public class ProducaoDAOTest extends AbstractDAOTestBase {
     public void init() {
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional("Teste");
-        merge(new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", true, "resumoProfissional").endereco(endereco).build());
+        merge(new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", "resumoProfissional").endereco(endereco).build());
     }
 
     @Test

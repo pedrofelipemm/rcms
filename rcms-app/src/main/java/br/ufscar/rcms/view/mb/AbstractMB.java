@@ -5,9 +5,7 @@ import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.faces.application.Application;
@@ -98,13 +96,6 @@ public abstract class AbstractMB implements Serializable {
     public static final String FLASH_KEY_PRODUCAO = "producao";
 
     private static final User DEFAULT_USER = new User("DEFAULT-USER", "123456", new ArrayList<GrantedAuthority>());
-
-    public Map<String, Boolean> getTiposUsuario() {
-        Map<String, Boolean> map = new HashMap<String, Boolean>();
-        map.put(getMessage("pesquisador"), false);
-        map.put(getMessage("administrador"), true);
-        return map;
-    }
 
     // TODO PEDRO
     // @PostConstruct

@@ -1,9 +1,5 @@
 package br.ufscar.rcms.job;
 
-import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
-
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +25,12 @@ public class JobLattesImporter extends AbstractJob {
     public void process() {
 
         // TODO PEDRO TEST
-        // safeProcess(null);
+        safeProcess(null);
 
-        List<Pesquisador> pesquisadores = pesquisadorService.findToAutoImport();
-        if (!isEmpty(pesquisadores)) {
-            pesquisadores.forEach(this::safeProcess);
-        }
+        // List<Pesquisador> pesquisadores = pesquisadorService.findToAutoImport();
+        // if (!isEmpty(pesquisadores)) {
+        // pesquisadores.forEach(this::safeProcess);
+        // }
     }
 
     private void safeProcess(final Pesquisador pesquisador) {

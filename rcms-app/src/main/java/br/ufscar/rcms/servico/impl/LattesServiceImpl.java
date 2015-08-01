@@ -135,7 +135,7 @@ public class LattesServiceImpl implements LattesService {
                 .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento())
                 .projetosPesquisa(pesquisadorLattes.getProjetosPesquisa()).orientacoes(pesquisadorLattes)
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
-                .build();
+                .configuracao(pesquisador.getConfiguracoes()).build();
 
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
@@ -147,8 +147,7 @@ public class LattesServiceImpl implements LattesService {
         return pesquisadorSalvo;
     }
 
-    @Override
-    public void executarComandoLattes(final Pesquisador pesquisador) {
+    private void executarComandoLattes(final Pesquisador pesquisador) {
 
         final String hash = pesquisador.getCodigoLattes();
         final String nome = pesquisador.getNome();
@@ -418,7 +417,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addTextosEmJornais(List<TextoLattes> textos) {
+    private void addTextosEmJornais(final List<TextoLattes> textos) {
 
         for (TextoLattes producao : textos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -430,7 +429,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addTrabalhosCompleto(List<TrabalhoCompletoLattes> trabalhosCompleto) {
+    private void addTrabalhosCompleto(final List<TrabalhoCompletoLattes> trabalhosCompleto) {
 
         for (TrabalhoCompletoLattes producao : trabalhosCompleto) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -442,7 +441,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addResumosExpandido(List<ResumoExpandidoLattes> resumos) {
+    private void addResumosExpandido(final List<ResumoExpandidoLattes> resumos) {
 
         for (ResumoExpandidoLattes producao : resumos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -454,7 +453,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addResumosEmCongressos(List<ResumoLattes> resumos) {
+    private void addResumosEmCongressos(final List<ResumoLattes> resumos) {
 
         for (ResumoLattes producao : resumos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -477,7 +476,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addProducoesBibliograficas(List<OutraProducaoLattes> producoes) {
+    private void addProducoesBibliograficas(final List<OutraProducaoLattes> producoes) {
 
         for (OutraProducaoLattes producao : producoes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -488,7 +487,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addProdutosTecnologicos(List<ProdutoLattes> trabalhos) {
+    private void addProdutosTecnologicos(final List<ProdutoLattes> trabalhos) {
 
         for (ProdutoLattes producao : trabalhos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -499,7 +498,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addTrabalhosTecnico(List<TrabalhoLattes> trabalhos) {
+    private void addTrabalhosTecnico(final List<TrabalhoLattes> trabalhos) {
 
         for (TrabalhoLattes producao : trabalhos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -510,7 +509,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addOutrasProducoesTecnica(List<OutraProducaoTecnicaLattes> producoes) {
+    private void addOutrasProducoesTecnica(final List<OutraProducaoTecnicaLattes> producoes) {
 
         for (OutraProducaoTecnicaLattes producao : producoes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -521,7 +520,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private void addProcessosTecnicas(List<ProdutoProcessoTecnicaLattes> producoes) {
+    private void addProcessosTecnicas(final List<ProdutoProcessoTecnicaLattes> producoes) {
 
         for (ProdutoProcessoTecnicaLattes producao : producoes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
@@ -532,7 +531,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    public Boolean isProducao(String titulo, Integer ano) {
+    public Boolean isProducao(final String titulo, final Integer ano) {
 
         return producaoService.exists(titulo, ano);
     }

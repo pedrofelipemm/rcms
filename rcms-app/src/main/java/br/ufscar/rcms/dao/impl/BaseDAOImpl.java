@@ -103,6 +103,10 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
         return entityManager.createQuery(query);
     }
 
+    public Query createNativeQuery(final String query) {
+        return entityManager.createNativeQuery(query);
+    }
+
     public EntityManager getEntityManager() {
         return entityManager;
     }

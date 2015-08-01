@@ -3,6 +3,7 @@ package br.ufscar.rcms.builder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.factory.OrientacaoFactory;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
+import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Doutorado;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
@@ -216,6 +218,11 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
                 }
             }
         }
+        return this;
+    }
+
+    public PesquisadorBuilder configuracao(final Set<Configuracao> configuracoes) {
+        configuracoes.forEach(pesquisador::addConfiguracao);
         return this;
     }
 

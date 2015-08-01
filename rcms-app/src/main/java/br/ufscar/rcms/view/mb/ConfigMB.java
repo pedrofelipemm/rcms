@@ -2,9 +2,7 @@ package br.ufscar.rcms.view.mb;
 
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -34,7 +32,7 @@ public class ConfigMB extends AbstractMB {
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
 
-    private String idioma;
+    private String idioma = getExternalContext().getRequestLocale().toString();
     private Map<String, String> idiomas;
 
     private String estiloAdmin;
@@ -73,13 +71,13 @@ public class ConfigMB extends AbstractMB {
     private void carregarConfiguracoes() {
         if (!isEmpty(pesquisador)) {
             Configuracao configIdioma = pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA);
-            idioma = isEmpty(configIdioma) ? idioma : configIdioma.getValue();
+            idioma = isEmpty(configIdioma.getValue()) ? idioma : configIdioma.getValue();
 
             Configuracao configEstiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN);
-            estiloAdmin = isEmpty(configEstiloAdmin) ? estiloAdmin : configEstiloAdmin.getValue();
+            estiloAdmin = isEmpty(configEstiloAdmin.getValue()) ? estiloAdmin : configEstiloAdmin.getValue();
 
             Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL);
-            temaPortal = isEmpty(configEstiloPortal) ? temaPortal : configEstiloPortal.getValue();
+            temaPortal = isEmpty(configEstiloPortal.getValue()) ? temaPortal : configEstiloPortal.getValue();
 
             alterarIdioma();
         }
@@ -113,11 +111,14 @@ public class ConfigMB extends AbstractMB {
 
     private void salvarConfiguracoes(final Pesquisador pesquisador) {
 
-        getConfiguracoes().forEach(pesquisador::addConfiguracao);
-
-        getConfiguracoes().forEach(System.out::println);
-
         try {
+
+            pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN).setValue(estiloAdmin);
+            pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL).setValue(temaPortal);
+            pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA).setValue(idioma);
+
+            // pesquisador.getConfiguracao(Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA).setValue(estiloAdmin);
+
             pesquisadorService.saveOrUpdate(pesquisador);
 
             limparDados();
@@ -154,16 +155,6 @@ public class ConfigMB extends AbstractMB {
         temasPortal.put(getMessage("temas.portal.confianca"), "confianca");
         temasPortal.put(getMessage("temas.portal.surpresa"), "surpresa");
         temasPortal.put(getMessage("temas.portal.raiva"), "raiva");
-    }
-
-    // TODO PEDRO HANDLE DUPLICATES - INIT COLLECTION
-    private List<Configuracao> getConfiguracoes() {
-        List<Configuracao> configuracoes = new ArrayList<Configuracao>();
-        configuracoes.add(new Configuracao(Configuracao.Tipos.IDIOMA, idioma));
-        configuracoes.add(new Configuracao(Configuracao.Tipos.ESTILO_ADMIN, estiloAdmin));
-        configuracoes.add(new Configuracao(Configuracao.Tipos.ESTILO_PORTAL, temaPortal));
-
-        return configuracoes;
     }
 
     public void loadUser() {
@@ -211,7 +202,6 @@ public class ConfigMB extends AbstractMB {
     public void setTemaPortal(final String temaPortal) {
         this.temaPortal = temaPortal;
     }
-
 
     public Map<String, String> getTemasPortal() {
         return temasPortal;

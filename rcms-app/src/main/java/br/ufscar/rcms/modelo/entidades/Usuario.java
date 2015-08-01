@@ -16,6 +16,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.ufscar.rcms.modelo.entidades.Configuracao.Tipos;
+
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -49,19 +51,32 @@ public class Usuario extends Entidade {
     @OneToMany
     protected List<Autorizacao> autorizacoes;
 
-    // TODO PEDRO
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     protected Set<Configuracao> configuracoes = new HashSet<Configuracao>();
+
+    public Usuario() {
+        configuracoes = initConfiguracoes();
+    }
+
+    private Set<Configuracao> initConfiguracoes() {
+        final Set<Configuracao> result = new HashSet<Configuracao>();
+        for (Tipos tipo : Configuracao.Tipos.values()) {
+            result.add(new Configuracao(tipo));
+        }
+        return result;
+    }
+
+    public Set<Configuracao> getConfiguracoes() {
+        return configuracoes;
+    }
 
     public Configuracao getConfiguracao(final Configuracao.Tipos tipo) {
         return configuracoes.stream().filter(c -> c.getKey().equals(tipo)).findFirst().orElse(null);
     }
 
     public void addConfiguracao(final Configuracao configuracao) {
-        if (configuracoes.contains(configuracao)) {
-            configuracoes.remove(configuracao);
-        }
-        this.configuracoes.add(configuracao);
+        configuracoes.remove(configuracao);
+        configuracoes.add(configuracao);
     }
 
     public void removeConfiguracao(final Configuracao configuracao) {

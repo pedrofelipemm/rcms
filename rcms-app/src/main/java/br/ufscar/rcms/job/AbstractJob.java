@@ -25,7 +25,7 @@ public abstract class AbstractJob {
     }
 
     // TODO PEDRO PROPERTIES
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedDelay = 3600000)
     private void run() {
         beforeProcess();
         process();

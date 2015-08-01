@@ -2,6 +2,8 @@ package br.ufscar.rcms.modelo.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +22,16 @@ public class Configuracao extends Entidade {
     @Column(name = "id_configuracao")
     private Long idConfiguracao;
 
+    @Enumerated(EnumType.STRING)
     private Tipos key;
+
     private String value;
 
     public Configuracao() {/* Serialization */}
+
+    public Configuracao(final Tipos key) {
+        this(key, null);
+    }
 
     public Configuracao(final Tipos key, final String value) {
         this.key = key;
@@ -86,9 +94,10 @@ public class Configuracao extends Entidade {
     }
 
     public enum Tipos {
-        ESTILO_ADMIN("estilo admin"),
-        ESTILO_PORTAL("estilo portal"),
-        IDIOMA("idioma");
+        ESTILO_ADMIN("Estilo admin"),
+        ESTILO_PORTAL("Estilo portal"),
+        IDIOMA("Idioma"),
+        IMPORTACAO_LATTES_AUTOMATICA("Importação lattes automática");
 
         private final String descricao;
 

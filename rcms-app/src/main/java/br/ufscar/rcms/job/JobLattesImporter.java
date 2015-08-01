@@ -37,7 +37,7 @@ public class JobLattesImporter extends AbstractJob {
         try {
             lattesService.salvarDadosLattes(pesquisador);
         } catch (final RCMSException exception) {
-            LOGGER.error(String.format("Erro ao importar dados do pesquisador: ", pesquisador.getNome()), exception);
+            LOGGER.error(String.format("Erro ao importar dados do pesquisador: %s", pesquisador.getNome()), exception);
         }
     }
 

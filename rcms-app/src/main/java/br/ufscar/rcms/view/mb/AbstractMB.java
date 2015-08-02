@@ -90,6 +90,8 @@ public abstract class AbstractMB implements Serializable {
     // Painel de Controle
     public static final String PAINEL_CONTROLE = "painelControle";
 
+    public static final String INDICADOR = "indicadores";
+
     // Produções
     public static final String CONSULTA_PRODUCAO = "consultaProducao";
     public static final String CADASTRO_PRODUCAO = "cadastroProducao";
@@ -276,8 +278,7 @@ public abstract class AbstractMB implements Serializable {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : partHeader.split(";")) {
             if (content.trim().startsWith("filename")) {
-                String fileName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-                return fileName;
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
             }
         }
         return null;

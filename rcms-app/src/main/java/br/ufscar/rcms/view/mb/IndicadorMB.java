@@ -1,25 +1,26 @@
 package br.ufscar.rcms.view.mb;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestOperations;
 
 import com.google.gson.reflect.TypeToken;
 
-import br.ufscar.rcms.commons.util.JsonUtil;
 import br.ufscar.rcms.scorecard.commons.rest.Wrapper;
 import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByResearcherDTO;
 import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByYearDTO;
+import br.ufscar.rcms.view.util.RestClient;
 
 @ViewScoped
 @ManagedBean(name = "indicadorMB")
@@ -29,16 +30,19 @@ public class IndicadorMB extends AbstractMB {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IndicadorMB.class);
 
-    @Autowired
-    private RestOperations client;
+    @ManagedProperty("#{restClient}")
+    private RestClient restClient;
 
     private List<AmountProducaoByResearcherDTO> producoesByResearcher;
     private List<AmountProducaoByYearDTO> producoesByYear;
+
+    private LineChartModel lineChartByYear;
 
     @PostConstruct
     public void inicializar() {
         limparDados();
         carregarDados();
+        lineChartByYear = createLineChartByYearl();
     }
 
     @Override
@@ -54,54 +58,63 @@ public class IndicadorMB extends AbstractMB {
 
     public List<AmountProducaoByYearDTO> findAmountProducoesByYear() {
 
-        List<AmountProducaoByYearDTO> result = null;
-
         // TODO PEDRO EXTRACT URL
         String url = "http://localhost:23081/rcms-scorecard/api/producoes/amount/year";
+        List<AmountProducaoByYearDTO> entity = null;
+
         try {
-            ResponseEntity<String> response = client.getForEntity(url, String.class);
-
-            if (response.getStatusCode().equals(HttpStatus.OK)) {
-                Type type = new TypeToken<Wrapper<AmountProducaoByYearDTO>>() {
-                }.getType();
-                Wrapper<AmountProducaoByYearDTO> wrapper = JsonUtil.getInstance().fromJson(response.getBody(), type);
-
-                result = wrapper.getData();
-            }
-
+            entity = restClient.getForEntity(url, new TypeToken<Wrapper<AmountProducaoByYearDTO>>() {}.getType());
         } catch (final Exception exception) {
             String mensagem = getMessage("falha.servico", url);
-            adicionarMensagemErroByKey(mensagem);
+            adicionarMensagemErro(mensagem);
             LOGGER.error(mensagem, exception);
         }
 
-        return result;
+        return entity;
     }
 
     public List<AmountProducaoByResearcherDTO> findAmountProducoesByResearcher() {
 
-        List<AmountProducaoByResearcherDTO> result = null;
-
         // TODO PEDRO EXTRACT URL
         String url = "http://localhost:23081/rcms-scorecard/api/producoes/amount/researcher";
+        List<AmountProducaoByResearcherDTO> entity = null;
+
         try {
-            ResponseEntity<String> response = client.getForEntity(url, String.class);
-
-            if (response.getStatusCode().equals(HttpStatus.OK)) {
-                Type type = new TypeToken<Wrapper<AmountProducaoByResearcherDTO>>() {}.getType();
-                Wrapper<AmountProducaoByResearcherDTO> wrapper = JsonUtil.getInstance().fromJson(response.getBody(), type);
-
-                result = wrapper.getData();
-            }
-
-            throw new RuntimeException();
+            entity = restClient.getForEntity(url, new TypeToken<Wrapper<AmountProducaoByResearcherDTO>>() {}.getType());
         } catch (final Exception exception) {
             String mensagem = getMessage("falha.servico", url);
-            adicionarMensagemErroByKey(mensagem);
+            adicionarMensagemErro(mensagem);
             LOGGER.error(mensagem, exception);
         }
 
-        return result;
+        return entity;
+    }
+
+    private LineChartModel createLineChartByYearl() {
+
+        LineChartSeries year = new LineChartSeries();
+        year.setFill(true);
+        year.setLabel(getMessage("producoes"));
+
+        LineChartModel chart = new LineChartModel();
+        chart.addSeries(year);
+        chart.setTitle("Test");// TODO PEDRO
+        chart.setLegendPosition("ne");
+        chart.setStacked(true);
+        chart.setShowPointLabels(true);
+
+        producoesByYear.forEach(t -> year.set(t.getYear(), t.getAmount()));
+
+        Axis xAxis = new CategoryAxis("Test2");// TODO PEDRO
+        chart.getAxes().put(AxisType.X, xAxis);
+
+        Axis yAxis = chart.getAxis(AxisType.Y);
+        yAxis.setLabel("Test3");// TODO PEDRO
+
+        yAxis.setMin(0);
+        yAxis.setMax(producoesByYear.stream().max((t1, t2) -> t1.getAmount().compareTo(t2.getAmount())).get().getAmount() + 1);
+
+        return chart;
     }
 
     public List<AmountProducaoByResearcherDTO> getProducoesByResearcher() {
@@ -112,11 +125,27 @@ public class IndicadorMB extends AbstractMB {
         return producoesByYear;
     }
 
-    public RestOperations getClient() {
-        return client;
+    public RestClient getRestClient() {
+        return restClient;
     }
 
-    public void setClient(RestOperations client) {
-        this.client = client;
+    public void setRestClient(final RestClient restClient) {
+        this.restClient = restClient;
+    }
+
+    public void setProducoesByResearcher(final List<AmountProducaoByResearcherDTO> producoesByResearcher) {
+        this.producoesByResearcher = producoesByResearcher;
+    }
+
+    public void setProducoesByYear(final List<AmountProducaoByYearDTO> producoesByYear) {
+        this.producoesByYear = producoesByYear;
+    }
+
+    public LineChartModel getLineChartByYear() {
+        return lineChartByYear;
+    }
+
+    public void setLineChartByYear(final LineChartModel lineChartByYear) {
+        this.lineChartByYear = lineChartByYear;
     }
 }

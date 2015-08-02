@@ -26,9 +26,6 @@ public class Usuario extends br.ufscar.rcms.scorecard.model.entity.Entity {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "flag_administrador", nullable = false)
-    private Boolean flagAdministrador;
-
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
@@ -57,14 +54,6 @@ public class Usuario extends br.ufscar.rcms.scorecard.model.entity.Entity {
 
     public void setNome(final String nome) {
         this.nome = nome;
-    }
-
-    public Boolean getFlagAdministrador() {
-        return flagAdministrador;
-    }
-
-    public void setFlagAdministrador(final Boolean flagAdministrador) {
-        this.flagAdministrador = flagAdministrador;
     }
 
     public String getLogin() {

@@ -10,7 +10,6 @@ public class Fixture {
         final Pesquisador pesquisador = new Pesquisador();
         pesquisador.setCodigoLattes("codigo-lattes-default");
         pesquisador.setEmail("email-default@email.com");
-        pesquisador.setFlagAdministrador(true);
         pesquisador.setLogin("login-default");
         pesquisador.setNome("nome-default");
         pesquisador.setResumoProfissional("resumo-profissional-default");

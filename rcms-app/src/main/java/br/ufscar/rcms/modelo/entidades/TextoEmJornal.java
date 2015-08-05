@@ -3,7 +3,6 @@ package br.ufscar.rcms.modelo.entidades;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,11 +32,11 @@ public class TextoEmJornal extends ProducaoBibliografica {
     public TextoEmJornal() {
     }
 
-    public TextoEmJornal(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String nomeJornal,
+    public TextoEmJornal(final String titulo, final Integer ano,
+            final String nomeJornal,
  final String dataPublicacao, final String volume, final String paginas) {
 
         super.setTitulo(titulo);
-        super.setCitacaoBibliograficas(autores);
         super.setAno(ano);
         this.nomeJornal = nomeJornal;
 

@@ -47,7 +47,7 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
     private void loadLazyDependencies(Producao p) {
-        p.getCitacaoBibliograficas().size();
+        p.getAutores().size();
     }
 
     @Override

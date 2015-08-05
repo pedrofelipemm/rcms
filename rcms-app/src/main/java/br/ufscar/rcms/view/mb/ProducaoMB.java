@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import br.ufscar.rcms.factory.ProducaoFactory;
 import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
+import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.LivroPublicado;
@@ -45,7 +46,7 @@ public class ProducaoMB extends AbstractMB {
     private static final long serialVersionUID = -3678684230889264324L;
     private List<Pesquisador> todosPesquisadores;
     private List<CitacaoBibliografica> todasCitacoesDoPesquisador;
-    private CitacaoBibliografica nomeCitacao;
+    private AutorProducao autor;
     private Producao producao;
     private Pesquisador pesquisadorSelecionado;
     private String tipoProducao;
@@ -72,13 +73,13 @@ public class ProducaoMB extends AbstractMB {
     }
 
     public void adicionarNomeCitacao() {
-        if (nomeCitacao != null) {
-            producao.getCitacaoBibliograficas().add(nomeCitacao);
+        if (autor != null) {
+            producao.getAutores().add(autor);
         }
     }
 
     public void excluirNomeCitacao(CitacaoBibliografica citacao) {
-        producao.getCitacaoBibliograficas().remove(citacao);
+        producao.getAutores().remove(citacao);
     }
 
     public String salvar() {
@@ -129,7 +130,7 @@ public class ProducaoMB extends AbstractMB {
     protected void limparDados() {
         todosPesquisadores = new ArrayList<Pesquisador>();
         todasCitacoesDoPesquisador = new ArrayList<CitacaoBibliografica>();
-        nomeCitacao = new CitacaoBibliografica();
+        autor = new AutorProducao();
         producao = new OutraProducaoBibliografica();
         pesquisadorSelecionado = null;
         tipoProducao = "";
@@ -162,12 +163,12 @@ public class ProducaoMB extends AbstractMB {
         this.setListaOutrasProducoesTecnicas(this.producaoService.buscarProducoes(OutraProducaoTecnica.class));
     }
 
-    public CitacaoBibliografica getNomeCitacao() {
-        return nomeCitacao;
+    public AutorProducao getAutor() {
+        return autor;
     }
 
-    public void setNomeCitacao(CitacaoBibliografica nomeCitacao) {
-        this.nomeCitacao = nomeCitacao;
+    public void setAutor(AutorProducao autor) {
+        this.autor = autor;
     }
 
     public Producao getProducao() {
@@ -234,9 +235,9 @@ public class ProducaoMB extends AbstractMB {
         this.producoes = producoes;
     }
 
-    public List<CitacaoBibliografica> listarCitacoes(Producao producao) {
+    public List<AutorProducao> listarAutores(Producao producao) {
 
-        return producaoService.buscarPorId(producao.getIdProducao()).getCitacaoBibliograficas();
+        return producaoService.buscarPorId(producao.getIdProducao()).getAutores();
     }
 
     public List<ArtigoEmPeriodico> getListaArtigosEmPeriodicos() {

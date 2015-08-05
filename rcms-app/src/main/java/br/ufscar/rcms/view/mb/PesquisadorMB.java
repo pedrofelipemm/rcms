@@ -26,6 +26,7 @@ import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
@@ -685,9 +686,9 @@ public class PesquisadorMB extends AbstractMB {
         this.listaProducoes = listaProducoes;
     }
 
-    public List<CitacaoBibliografica> listarCitacoes(Producao producao) {
+    public List<AutorProducao> listarAutores(Producao producao) {
 
-        return producaoService.buscarPorId(producao.getIdProducao()).getCitacaoBibliograficas();
+        return producaoService.buscarPorId(producao.getIdProducao()).getAutores();
     }
 
     public List<ArtigoEmPeriodico> getListaArtigosEmPeriodicos() {

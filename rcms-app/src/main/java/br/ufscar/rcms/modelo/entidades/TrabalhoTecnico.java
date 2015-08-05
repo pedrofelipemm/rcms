@@ -1,7 +1,5 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,10 +15,9 @@ public class TrabalhoTecnico extends ProducaoTecnica {
     public TrabalhoTecnico() {
     }
 
-    public TrabalhoTecnico(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano) {
+    public TrabalhoTecnico(final String titulo, final Integer ano) {
 
         super.setTitulo(titulo);
-        super.setCitacaoBibliograficas(autores);
         super.setAno(ano);
     }
 }

@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.ufscar.rcms.builder.PesquisadorBuilder;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
-import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
+import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.servico.CitacaoBibliograficaService;
 
 public class ProducaoDAOTest extends AbstractDAOTestBase {
 
@@ -24,6 +25,9 @@ public class ProducaoDAOTest extends AbstractDAOTestBase {
 
     @Autowired
     private ProducaoDAO producaoDAO;
+
+    @Autowired
+    private CitacaoBibliograficaService citacaoBibliograficaService;
 
     @Before
     public void init() {
@@ -36,8 +40,9 @@ public class ProducaoDAOTest extends AbstractDAOTestBase {
     public void buscarProducoesTest() {
 
         Pesquisador pesquisador = pesquisadorDAO.buscarTodos().get(0);
-        List<CitacaoBibliografica> autores = Arrays.asList(new CitacaoBibliografica(pesquisador, pesquisador.getNome() + " citacação"));
-        ArtigoEmPeriodico artigoEmPeriodico = new ArtigoEmPeriodico("titulo", autores, 2000, "vol.1", "200", "doi", "revista", 1);
+        ArtigoEmPeriodico artigoEmPeriodico = new ArtigoEmPeriodico("titulo", 2000, "vol.1", "200", "doi", "revista", 1);
+        List<AutorProducao> autores = Arrays.asList(new AutorProducao(artigoEmPeriodico, citacaoBibliograficaService
+                .buscarPorNomeCitacao("nome"), 1));
 
         merge(artigoEmPeriodico);
 

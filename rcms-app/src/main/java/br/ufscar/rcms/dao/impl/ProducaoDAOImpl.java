@@ -36,7 +36,8 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
 
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT DISTINCT P FROM " + clazz.getName() + " P ");
-        jpql.append(" JOIN FETCH P.citacaoBibliograficas CB ");
+        jpql.append(" JOIN FETCH P.autores A ");
+        jpql.append(" JOIN FETCH A.citacaoBibliografica CB ");
         jpql.append(" ORDER BY P.ano DESC ");
 
         Query query = createQuery(jpql.toString());
@@ -48,7 +49,8 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
 
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT DISTINCT P FROM " + clazz.getName() + " P ");
-        jpql.append(" JOIN FETCH P.citacaoBibliograficas CB ");
+        jpql.append(" JOIN FETCH P.autores A ");
+        jpql.append(" JOIN FETCH A.citacaoBibliografica CB ");
         jpql.append(" WHERE CB.idCitacaoBibliografica IN (SELECT CBA FROM CitacaoBibliografica CBA WHERE CBA.pesquisador.idUsuario = :idUsuario) ");
         jpql.append(" ORDER BY P.ano DESC ");
 

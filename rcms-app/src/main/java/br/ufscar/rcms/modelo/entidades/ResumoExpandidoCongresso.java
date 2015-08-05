@@ -1,7 +1,5 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -30,11 +28,10 @@ public class ResumoExpandidoCongresso extends ProducaoBibliografica {
     public ResumoExpandidoCongresso() {
     }
 
-    public ResumoExpandidoCongresso(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String doi,
- final String nomeEvento, final String volume, final String paginas) {
+    public ResumoExpandidoCongresso(final String titulo, final Integer ano, final String doi, final String nomeEvento,
+            final String volume, final String paginas) {
 
         super.setTitulo(titulo);
-        super.setCitacaoBibliograficas(autores);
         super.setAno(ano);
         this.doi = doi;
         this.nomeEvento = nomeEvento;

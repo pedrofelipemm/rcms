@@ -28,6 +28,7 @@ import br.ufscar.rcms.commons.util.XMLUtils;
 import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
@@ -38,6 +39,7 @@ import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.OutraProducaoTecnica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.ProcessoOuTecnica;
+import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.ProdutoTecnologico;
 import br.ufscar.rcms.modelo.entidades.ResumoCongresso;
 import br.ufscar.rcms.modelo.entidades.ResumoExpandidoCongresso;
@@ -383,9 +385,10 @@ public class LattesServiceImpl implements LattesService {
 
         for (ArtigoLattes producao : artigosPeriodicosLattes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                ArtigoEmPeriodico artigo = new ArtigoEmPeriodico(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getVolume(),
+                ArtigoEmPeriodico artigo = new ArtigoEmPeriodico(producao.getTitulo(), producao.getAno(),
+                        producao.getVolume(),
                         producao.getPaginas(), producao.getDoi(), producao.getRevista(), producao.getNumero());
+                artigo.setAutores(getListaAutores(artigo, producao.getAutores()));
                 producaoService.saveOrUpdate(artigo);
             }
         }
@@ -395,9 +398,10 @@ public class LattesServiceImpl implements LattesService {
 
         for (LivroLattes producao : livrosPublicadosLattes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                LivroPublicado livro = new LivroPublicado(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getEdicao(),
+                LivroPublicado livro = new LivroPublicado(producao.getTitulo(), producao.getAno(),
+                        producao.getEdicao(),
                         producao.getVolume(), producao.getPaginas());
+                livro.setAutores(getListaAutores(livro, producao.getAutores()));
                 producaoService.saveOrUpdate(livro);
             }
         }
@@ -407,10 +411,11 @@ public class LattesServiceImpl implements LattesService {
 
         for (CapituloLattes producao : capitulosLivrosLattes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                CapituloLivro artigo = new CapituloLivro(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getLivro(),
+                CapituloLivro capitulo = new CapituloLivro(producao.getTitulo(), producao.getAno(),
+                        producao.getLivro(),
                         producao.getEdicao(), producao.getEditora(), producao.getVolume(), producao.getPaginas());
-                producaoService.saveOrUpdate(artigo);
+                capitulo.setAutores(getListaAutores(capitulo, producao.getAutores()));
+                producaoService.saveOrUpdate(capitulo);
             }
         }
     }
@@ -419,9 +424,9 @@ public class LattesServiceImpl implements LattesService {
 
         for (TextoLattes producao : textos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                TextoEmJornal texto = new TextoEmJornal(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(),
+                TextoEmJornal texto = new TextoEmJornal(producao.getTitulo(), producao.getAno(),
                         producao.getNomeJornal(), producao.getData(), producao.getVolume(), producao.getPaginas());
+                texto.setAutores(getListaAutores(texto, producao.getAutores()));
                 producaoService.saveOrUpdate(texto);
             }
         }
@@ -432,8 +437,9 @@ public class LattesServiceImpl implements LattesService {
         for (TrabalhoCompletoLattes producao : trabalhosCompleto) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
                 TrabalhoCompletoCongresso trabalho = new TrabalhoCompletoCongresso(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getDoi(),
+                        producao.getAno(), producao.getDoi(),
                         producao.getNomeEvento(), producao.getVolume(), producao.getPaginas());
+                trabalho.setAutores(getListaAutores(trabalho, producao.getAutores()));
                 producaoService.saveOrUpdate(trabalho);
             }
         }
@@ -443,9 +449,10 @@ public class LattesServiceImpl implements LattesService {
 
         for (ResumoExpandidoLattes producao : resumos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                ResumoExpandidoCongresso resumo = new ResumoExpandidoCongresso(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getDoi(),
+                ResumoExpandidoCongresso resumo = new ResumoExpandidoCongresso(producao.getTitulo(), producao.getAno(),
+                        producao.getDoi(),
                         producao.getNomeEvento(), producao.getVolume(), producao.getPaginas());
+                resumo.setAutores(getListaAutores(resumo, producao.getAutores()));
                 producaoService.saveOrUpdate(resumo);
             }
         }
@@ -455,9 +462,10 @@ public class LattesServiceImpl implements LattesService {
 
         for (ResumoLattes producao : resumos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                ResumoCongresso resumo = new ResumoCongresso(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getDoi(),
+                ResumoCongresso resumo = new ResumoCongresso(producao.getTitulo(), producao.getAno(),
+                        producao.getDoi(),
                         producao.getNomeEvento(), producao.getVolume(), producao.getPaginas(), producao.getNumero());
+                resumo.setAutores(getListaAutores(resumo, producao.getAutores()));
                 producaoService.saveOrUpdate(resumo);
             }
         }
@@ -467,8 +475,9 @@ public class LattesServiceImpl implements LattesService {
 
         for (TrabalhoApresentadoLattes producao : apresentacaoTrabalhoLattes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                ApresentacaoTrabalho trabalho = new ApresentacaoTrabalho(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+                ApresentacaoTrabalho trabalho = new ApresentacaoTrabalho(producao.getTitulo(), producao.getAno(),
+                        producao.getNatureza());
+                trabalho.setAutores(getListaAutores(trabalho, producao.getAutores()));
                 producaoService.saveOrUpdate(trabalho);
             }
         }
@@ -479,7 +488,8 @@ public class LattesServiceImpl implements LattesService {
         for (OutraProducaoLattes producao : producoes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
                 OutraProducaoBibliografica producaoBibliografica = new OutraProducaoBibliografica(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+                        producao.getAno(), producao.getNatureza());
+                producaoBibliografica.setAutores(getListaAutores(producaoBibliografica, producao.getAutores()));
                 producaoService.saveOrUpdate(producaoBibliografica);
             }
         }
@@ -489,9 +499,9 @@ public class LattesServiceImpl implements LattesService {
 
         for (ProdutoLattes producao : trabalhos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                ProdutoTecnologico trabalho = new ProdutoTecnologico(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno());
-                producaoService.saveOrUpdate(trabalho);
+                ProdutoTecnologico produto = new ProdutoTecnologico(producao.getTitulo(), producao.getAno());
+                produto.setAutores(getListaAutores(produto, producao.getAutores()));
+                producaoService.saveOrUpdate(produto);
             }
         }
     }
@@ -500,8 +510,8 @@ public class LattesServiceImpl implements LattesService {
 
         for (TrabalhoLattes producao : trabalhos) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                TrabalhoTecnico trabalho = new TrabalhoTecnico(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno());
+                TrabalhoTecnico trabalho = new TrabalhoTecnico(producao.getTitulo(), producao.getAno());
+                trabalho.setAutores(getListaAutores(trabalho, producao.getAutores()));
                 producaoService.saveOrUpdate(trabalho);
             }
         }
@@ -512,7 +522,8 @@ public class LattesServiceImpl implements LattesService {
         for (OutraProducaoTecnicaLattes producao : producoes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
                 OutraProducaoTecnica producaoTecnica = new OutraProducaoTecnica(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+                        producao.getAno(), producao.getNatureza());
+                producaoTecnica.setAutores(getListaAutores(producaoTecnica, producao.getAutores()));
             producaoService.saveOrUpdate(producaoTecnica);
             }
         }
@@ -522,8 +533,9 @@ public class LattesServiceImpl implements LattesService {
 
         for (ProdutoProcessoTecnicaLattes producao : producoes) {
             if (!isProducao(producao.getTitulo(), producao.getAno())) {
-                ProcessoOuTecnica processoTecnica = new ProcessoOuTecnica(producao.getTitulo(),
-                        getListaCitacoesBibliografica(producao.getAutores()), producao.getAno(), producao.getNatureza());
+                ProcessoOuTecnica processoTecnica = new ProcessoOuTecnica(producao.getTitulo(), producao.getAno(),
+                        producao.getNatureza());
+                processoTecnica.setAutores(getListaAutores(processoTecnica, producao.getAutores()));
                 producaoService.saveOrUpdate(processoTecnica);
             }
         }
@@ -534,18 +546,19 @@ public class LattesServiceImpl implements LattesService {
         return producaoService.exists(titulo, ano);
     }
 
-    public List<CitacaoBibliografica> getListaCitacoesBibliografica(final String autores) {
+    public List<AutorProducao> getListaAutores(Producao producao, String autores) {
 
-        List<CitacaoBibliografica> listaCitacoes = new ArrayList<CitacaoBibliografica>();
+        List<AutorProducao> listaCitacoes = new ArrayList<AutorProducao>();
 
         String[] citacoes = autores.split(";");
-        for (String nomeCitacao : citacoes) {
-            if (!citacaoBibliograficaService.exists(nomeCitacao.trim())) {
-                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, nomeCitacao.trim());
+        for (int i=0; i<citacoes.length; i++) {
+            if (!citacaoBibliograficaService.exists(citacoes[i].trim())) {
+                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(null, citacoes[i].trim());
                 citacaoBibliograficaService.salvar(novaCitacao);
             }
 
-            listaCitacoes.add(citacaoBibliograficaService.buscarPorNomeCitacao(nomeCitacao.trim()));
+            listaCitacoes.add(new AutorProducao(producao, citacaoBibliograficaService.buscarPorNomeCitacao(citacoes[i]
+                    .trim()), i + 1));
         }
 
         return listaCitacoes;

@@ -246,7 +246,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaArtigosEmPeriodicos}">
 	        	                            <li>
-		        	                            <ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+		        	                            <ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 		        	                            <strong>#{producao.titulo}</strong>. #{producao.revista}, 
 		        	                            <!-- v. #{producao.volume}, -->
 		        	                            <h:outputText value="n. #{producao.numero}" rendered="#{producao.numero > 0}" />, 
@@ -263,7 +263,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaLivrosPublicados}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.edicao}, 
 	        	                            	#{producao.ano}. v. 
@@ -279,7 +279,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaCapitulosDeLivros}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	Em: #{producao.livro}: 
 	        	                            	<!-- #{producao.edicao}, --> 
@@ -298,7 +298,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTextosEmJornais}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.nomeJornal}, 
 	        	                            	<!-- v. #{producao.volume}, -->
@@ -317,7 +317,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTrabalhosCompletosCongressos}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	Em: #{producao.nomeEvento}, 
 	        	                            	v. #{producao.volume}, 
@@ -334,7 +334,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaResumosExpandidosCongressos}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	Em: #{producao.nomeEvento}, 
 	        	                            	v. #{producao.volume}, 
@@ -351,7 +351,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaResumosCongressos}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	Em: #{producao.nomeEvento}, 
 	        	                            	v. #{producao.volume}, 
@@ -368,7 +368,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaApresentacoesTrabalhos}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.ano}. 
 	        	                            	(#{producao.natureza}).
@@ -383,7 +383,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaOutrasProducoesBibligraficas}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.ano}. 
 	        	                            	(#{producao.natureza}).
@@ -398,7 +398,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaProdutosTecnologicos}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.ano}.
 	        	                            </li>
@@ -412,7 +412,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaProcessosOuTecnicas}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.ano}.
 	        	                            </li>
@@ -426,7 +426,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTrabalhosTecnicos}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.ano}.</li>
 	        	                        </ui:repeat>
@@ -439,7 +439,7 @@
                                     <ol class="listas-numeradas">
 			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaOutrasProducoesTecnicas}">
 	        	                            <li>
-	        	                            	<ui:repeat var="citacao" value="#{pesquisadorMB.listarCitacoes(producao)}">#{citacao.nomeCitacao}; </ui:repeat>. 
+	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
 	        	                            	<strong>#{producao.titulo}</strong>. 
 	        	                            	#{producao.ano}. 
 	        	                            	(#{producao.natureza}).</li>

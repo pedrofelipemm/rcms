@@ -1,6 +1,7 @@
 package br.ufscar.rcms.modelo.entidades;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,9 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -41,11 +40,8 @@ public abstract class Producao extends Entidade {
     @Column(name = "pdf")
     private byte[] pdf;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-    @JoinTable( name="producao_citacao_bibliografica", joinColumns = { @JoinColumn(name = "id_producao") }, inverseJoinColumns = { @JoinColumn(name = "id_citacao_bibliografica") })
-    @org.hibernate.annotations.ForeignKey(name = "fk_producao_citacao_bibliografica_producao", inverseName = "fk_producao_citacao_bibliografica_citacao_bibliografica")
-    private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producao")
+    private List<AutorProducao> autores = new ArrayList<AutorProducao>();
 
     public Long getIdProducao() {
         return idProducao;
@@ -135,7 +131,7 @@ public abstract class Producao extends Entidade {
 
     public Producao CloneTo(final Producao producaoDestino) {
         producaoDestino.setAno(ano);
-        producaoDestino.setCitacaoBibliograficas(citacaoBibliograficas);
+        producaoDestino.setAutores(autores);
         producaoDestino.setIdProducao(idProducao);
         producaoDestino.setLink(link);
         producaoDestino.setPdf(pdf);
@@ -143,11 +139,12 @@ public abstract class Producao extends Entidade {
         return producaoDestino;
     }
 
-	public List<CitacaoBibliografica> getCitacaoBibliograficas() {
-		return citacaoBibliograficas;
-	}
+    public List<AutorProducao> getAutores() {
+        Collections.sort(autores);
+        return autores;
+    }
 
-	public void setCitacaoBibliograficas(final List<CitacaoBibliografica> citacaoBibliograficas) {
-		this.citacaoBibliograficas = citacaoBibliograficas;
-	}
+    public void setAutores(final List<AutorProducao> autores) {
+        this.autores = autores;
+    }
 }

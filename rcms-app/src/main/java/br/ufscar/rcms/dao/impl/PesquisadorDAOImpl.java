@@ -73,7 +73,7 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
 
         String jpql = "select p from " + getClazz().getName() + " p "
                 + "inner join p.configuracoes c "
-                + "where c.key = '" + Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA + "' "
+                + "where c.key = '" + Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA + "' "
                 + "and c.value = 'true' ";
 
         Query query = createQuery(jpql);

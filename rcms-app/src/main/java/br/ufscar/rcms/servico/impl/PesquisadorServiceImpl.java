@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.commons.util.ExceptionUtils;
-import br.ufscar.rcms.dao.ConfiguracaoDAO;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
@@ -42,9 +41,6 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
     @Autowired
     private IdiomaDAO idiomaDAO;
-
-    @Autowired
-    private ConfiguracaoDAO configuracaoDAO;
 
     @Value("${pasta.script.foto.pesquisador}")
     private String pastaFotosPesquisadores;

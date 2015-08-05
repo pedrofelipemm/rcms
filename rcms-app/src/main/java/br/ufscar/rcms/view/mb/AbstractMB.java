@@ -101,7 +101,7 @@ public abstract class AbstractMB implements Serializable {
 
     // TODO PEDRO
     // @PostConstruct
-    // public void inicializar() {
+    // protected void inicializar() {
     // limparDados();
     // carregarDados();
     // };

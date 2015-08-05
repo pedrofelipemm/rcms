@@ -18,7 +18,6 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 
 public class ProducaoDAOTest extends AbstractDAOTestBase {
 
-    // TODO REMOVE
     @Autowired
     private PesquisadorDAO pesquisadorDAO;
 

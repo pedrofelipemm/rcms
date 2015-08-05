@@ -324,17 +324,17 @@ public class PesquisadorMB extends AbstractMB {
             limparDados();
 
         } catch (final InvalidDataAccessApiUsageException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);
+            LOGGER.error("Erro ao salvar dados do lattes", e);// TODO PEDRO
             adicionarMensagemAlerta(String.format("Erro ao salvar dados importados do Lattes, pesquisador: %s ", pesquisador.getNome()));
         } catch (final CurriculoLattesNaoEncontradoException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);
+            LOGGER.error("Erro ao salvar dados do lattes", e);// TODO PEDRO
             adicionarMensagemErro(e.getMessage());
         } catch (final ArquivoNaoEncontradoException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);
+            LOGGER.error("Erro ao salvar dados do lattes", e);// TODO PEDRO
             adicionarMensagemErro(e.getMessage());
         } catch (final Exception exception) {
-            adicionarMensagemErroByKey("erro.salvar.pesquisador", pesquisador.getNome());
             LOGGER.error(exception.getMessage(), exception);
+            adicionarMensagemErroByKey("erro.importar.dados.lattes", pesquisador.getNome());
         }
 
         keepMessagesOnRedirect();

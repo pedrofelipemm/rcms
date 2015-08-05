@@ -72,16 +72,16 @@ public class ConfigMB extends AbstractMB {
 
     private void carregarConfiguracoes() {
         if (!isEmpty(pesquisador)) {
-            Configuracao configIdioma = pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA);
+            Configuracao configIdioma = pesquisador.getConfiguracao(Configuracao.Tipo.IDIOMA);
             idioma = isEmpty(configIdioma.getValue()) ? idioma : configIdioma.getValue();
 
-            Configuracao configEstiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN);
+            Configuracao configEstiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_ADMIN);
             estiloAdmin = isEmpty(configEstiloAdmin.getValue()) ? estiloAdmin : configEstiloAdmin.getValue();
 
-            Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL);
+            Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_PORTAL);
             temaPortal = isEmpty(configEstiloPortal.getValue()) ? temaPortal : configEstiloPortal.getValue();
 
-            Configuracao configAutoImport = pesquisador.getConfiguracao(Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA);
+            Configuracao configAutoImport = pesquisador.getConfiguracao(Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA);
             importacaoLattesAutomcatica = isEmpty(configAutoImport.getValue()) ? importacaoLattesAutomcatica
                     : Boolean.valueOf(configAutoImport.getValue());
 
@@ -111,10 +111,10 @@ public class ConfigMB extends AbstractMB {
 
         try {
 
-            pesquisador.getConfiguracao(Configuracao.Tipos.IMPORTACAO_LATTES_AUTOMATICA).setValue(importacaoLattesAutomcatica.toString());
-            pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_ADMIN).setValue(estiloAdmin);
-            pesquisador.getConfiguracao(Configuracao.Tipos.ESTILO_PORTAL).setValue(temaPortal);
-            pesquisador.getConfiguracao(Configuracao.Tipos.IDIOMA).setValue(idioma);
+            pesquisador.getConfiguracao(Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA).setValue(importacaoLattesAutomcatica.toString());
+            pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_ADMIN).setValue(estiloAdmin);
+            pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_PORTAL).setValue(temaPortal);
+            pesquisador.getConfiguracao(Configuracao.Tipo.IDIOMA).setValue(idioma);
 
             pesquisadorService.saveOrUpdate(pesquisador);
 

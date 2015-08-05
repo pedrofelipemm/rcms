@@ -7,13 +7,16 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "configuracao")
-public class Configuracao extends Entidade {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Configuracao extends Entidade {
 
     private static final long serialVersionUID = -3474384694113846818L;
 
@@ -23,17 +26,13 @@ public class Configuracao extends Entidade {
     private Long idConfiguracao;
 
     @Enumerated(EnumType.STRING)
-    private Tipos key;
+    private Tipo key;
 
     private String value;
 
     public Configuracao() {/* Serialization */}
 
-    public Configuracao(final Tipos key) {
-        this(key, null);
-    }
-
-    public Configuracao(final Tipos key, final String value) {
+    public Configuracao(final Tipo key, final String value) {
         this.key = key;
         this.value = value;
     }
@@ -46,11 +45,11 @@ public class Configuracao extends Entidade {
         this.idConfiguracao = idConfiguracao;
     }
 
-    public Tipos getKey() {
+    public Tipo getKey() {
         return key;
     }
 
-    public void setKey(final Tipos key) {
+    public void setKey(final Tipo key) {
         this.key = key;
     }
 
@@ -71,7 +70,7 @@ public class Configuracao extends Entidade {
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -93,20 +92,13 @@ public class Configuracao extends Entidade {
         return ToStringBuilder.reflectionToString(this);
     }
 
-    public enum Tipos {
-        ESTILO_ADMIN("Estilo admin"),
-        ESTILO_PORTAL("Estilo portal"),
-        IDIOMA("Idioma"),
-        IMPORTACAO_LATTES_AUTOMATICA("Importação lattes automática");
+    public enum Tipo {
+        ESTILO_ADMIN,
+        ESTILO_PORTAL,
+        IDIOMA,
+        IMPORTACAO_LATTES_AUTOMATICA,
+        MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER,
+        MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR;
 
-        private final String descricao;
-
-        private Tipos(final String descricao) {
-            this.descricao = descricao;
-        }
-
-        public String getDescricao() {
-            return descricao;
-        }
     }
 }

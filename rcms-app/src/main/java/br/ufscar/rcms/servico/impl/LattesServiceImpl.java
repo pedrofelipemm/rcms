@@ -104,8 +104,7 @@ public class LattesServiceImpl implements LattesService {
     private String arquivoCurriculoLattes;
 
     @Override
-    public PesquisadorLattes carregarCurriculoLattes(final String codigoLattes) throws CurriculoLattesNaoEncontradoException,
-            ArquivoNaoEncontradoException {
+    public PesquisadorLattes carregarCurriculoLattes(final String codigoLattes) throws RCMSException {
 
         final CurriculoLattes curriculos = carregarCurriculosLattes(codigoLattes);
         for (final PesquisadorLattes pesquisador : curriculos.getPesquisadores()) {
@@ -147,7 +146,7 @@ public class LattesServiceImpl implements LattesService {
         return pesquisadorSalvo;
     }
 
-    private void executarComandoLattes(final Pesquisador pesquisador) {
+    private void executarComandoLattes(final Pesquisador pesquisador) throws RCMSException {
 
         final String hash = pesquisador.getCodigoLattes();
         final String nome = pesquisador.getNome();
@@ -217,7 +216,7 @@ public class LattesServiceImpl implements LattesService {
         LOGGER.info("END runScript()");
     }
 
-    private CurriculoLattes carregarCurriculosLattes(final String codigoLattes) throws ArquivoNaoEncontradoException {
+    private CurriculoLattes carregarCurriculosLattes(final String codigoLattes) throws RCMSException {
         CurriculoLattes curriculoLattes = new CurriculoLattes();
         try {
             final String fileName = pastaScriptLates + File.separator + codigoLattes + File.separator + codigoLattes + SUFFIX_XML;
@@ -227,9 +226,9 @@ public class LattesServiceImpl implements LattesService {
             try {
                 curriculoLattes = XMLUtils.xmlToObject(CurriculoLattes.class, XMLUtils.stripSpecialChars(CurriculoAsString));
             } catch (final JAXBException e) {
-                LOGGER.error("Erro ao converter XML, código lattes: %s", codigoLattes, e);
-                // TODO PEDRO
-                throw new RuntimeException(e);
+                String msg = String.format("Erro ao converter XML, código lattes: %s", codigoLattes);
+                LOGGER.error(msg, e);
+                throw new RCMSException(msg, e);
             }
         } catch (final IOException e) {
             LOGGER.error(e.getMessage(), e);
@@ -238,12 +237,11 @@ public class LattesServiceImpl implements LattesService {
         return curriculoLattes;
     }
 
-    private void criarArquivo(final String nome, final String path, final String conteudo) {
+    private void criarArquivo(final String nome, final String path, final String conteudo) throws RCMSException {
 
         try {
             final File list = new File(pastaScriptLates + path + ".list");
 
-            // if file doesnt exists, then create it
             if (!list.exists()) {
                 list.createNewFile();
             }
@@ -256,7 +254,6 @@ public class LattesServiceImpl implements LattesService {
 
             final File file = new File(pastaScriptLates + path + ".config");
 
-            // if file doesnt exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -268,8 +265,9 @@ public class LattesServiceImpl implements LattesService {
             bw.flush();
             bw.close();
         } catch (final IOException exception) {
-            LOGGER.error(String.format("Erro ao criar arquivo lattes, nome: %s path: %s ", nome, path), exception);
-            throw new RuntimeException(exception);
+            String msg = String.format("Erro ao criar arquivo lattes, nome: %s path: %s ", nome, path);
+            LOGGER.error(msg, exception);
+            throw new RCMSException(msg, exception);
         }
     }
 

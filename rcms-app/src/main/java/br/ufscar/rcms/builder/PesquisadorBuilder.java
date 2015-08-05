@@ -16,7 +16,7 @@ import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.factory.OrientacaoFactory;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
-import br.ufscar.rcms.modelo.entidades.Configuracao;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoUsuario;
 import br.ufscar.rcms.modelo.entidades.Doutorado;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
@@ -219,7 +219,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
-    public PesquisadorBuilder configuracao(final Set<Configuracao> configuracoes) {
+    public PesquisadorBuilder configuracao(final Set<ConfiguracaoUsuario> configuracoes) {
         configuracoes.forEach(pesquisador::addConfiguracao);
         return this;
     }

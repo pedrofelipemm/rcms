@@ -1,6 +1,13 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -9,7 +16,10 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.CategoryAxis;
+import org.primefaces.model.chart.ChartModel;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.slf4j.Logger;
@@ -17,9 +27,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.reflect.TypeToken;
 
+import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.scorecard.commons.rest.Wrapper;
 import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByResearcherDTO;
 import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByYearDTO;
+import br.ufscar.rcms.servico.ConfiguracaoService;
 import br.ufscar.rcms.view.util.RestClient;
 
 @ViewScoped
@@ -33,16 +45,20 @@ public class IndicadorMB extends AbstractMB {
     @ManagedProperty("#{restClient}")
     private RestClient restClient;
 
+    @ManagedProperty("#{configuracaoService}")
+    private ConfiguracaoService configuracaoService;
+
     private List<AmountProducaoByResearcherDTO> producoesByResearcher;
     private List<AmountProducaoByYearDTO> producoesByYear;
+    private Set<String> servicosIndisponiveis = new HashSet<String>();
 
-    private LineChartModel lineChartByYear;
+    private Map<String, ChartModel> charts = new HashMap<String, ChartModel>();
 
     @PostConstruct
     public void inicializar() {
         limparDados();
         carregarDados();
-        lineChartByYear = createLineChartByYearl();
+        carregarGraficos();
     }
 
     @Override
@@ -50,24 +66,31 @@ public class IndicadorMB extends AbstractMB {
 
         producoesByResearcher = findAmountProducoesByResearcher();
         producoesByYear = findAmountProducoesByYear();
-
     }
 
     @Override
     protected void limparDados() {}
 
+    private void carregarGraficos() {
+        if (!isEmpty(producoesByYear)) {
+            charts.put("lineChartByYear", createLineChartByYearl(producoesByYear));
+        }
+
+        if (!isEmpty(producoesByResearcher)) {
+            charts.put("barChartByResearcher", createBarChartByResearcher(producoesByResearcher));
+        }
+    }
+
     public List<AmountProducaoByYearDTO> findAmountProducoesByYear() {
 
-        // TODO PEDRO EXTRACT URL
-        String url = "http://localhost:23081/rcms-scorecard/api/producoes/amount/year";
+        String url = configuracaoService.buscarPorTipo(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR).get(0).getValue();
         List<AmountProducaoByYearDTO> entity = null;
 
         try {
             entity = restClient.getForEntity(url, new TypeToken<Wrapper<AmountProducaoByYearDTO>>() {}.getType());
+            servicosIndisponiveis.remove(url);
         } catch (final Exception exception) {
-            String mensagem = getMessage("falha.servico", url);
-            adicionarMensagemErro(mensagem);
-            LOGGER.error(mensagem, exception);
+            handleFault(url, exception);
         }
 
         return entity;
@@ -75,46 +98,71 @@ public class IndicadorMB extends AbstractMB {
 
     public List<AmountProducaoByResearcherDTO> findAmountProducoesByResearcher() {
 
-        // TODO PEDRO EXTRACT URL
-        String url = "http://localhost:23081/rcms-scorecard/api/producoes/amount/researcher";
+        String url = configuracaoService.buscarPorTipo(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER).get(0).getValue();
         List<AmountProducaoByResearcherDTO> entity = null;
 
         try {
             entity = restClient.getForEntity(url, new TypeToken<Wrapper<AmountProducaoByResearcherDTO>>() {}.getType());
+            servicosIndisponiveis.remove(url);
         } catch (final Exception exception) {
-            String mensagem = getMessage("falha.servico", url);
-            adicionarMensagemErro(mensagem);
-            LOGGER.error(mensagem, exception);
+            handleFault(url, exception);
         }
 
         return entity;
     }
 
-    private LineChartModel createLineChartByYearl() {
+    private LineChartModel createLineChartByYearl(final List<AmountProducaoByYearDTO> producoesByYear) {
 
-        LineChartSeries year = new LineChartSeries();
-        year.setFill(true);
-        year.setLabel(getMessage("producoes"));
+        LineChartSeries series = new LineChartSeries();
+        series.setFill(true);
 
         LineChartModel chart = new LineChartModel();
-        chart.addSeries(year);
-        chart.setTitle("Test");// TODO PEDRO
-        chart.setLegendPosition("ne");
+        chart.addSeries(series);
         chart.setStacked(true);
         chart.setShowPointLabels(true);
 
-        producoesByYear.forEach(t -> year.set(t.getYear(), t.getAmount()));
+        producoesByYear.forEach(t -> series.set(t.getYear(), t.getAmount()));
 
-        Axis xAxis = new CategoryAxis("Test2");// TODO PEDRO
+        Axis xAxis = new CategoryAxis(getMessage("ano"));
         chart.getAxes().put(AxisType.X, xAxis);
+        xAxis.setTickAngle(-50);
 
         Axis yAxis = chart.getAxis(AxisType.Y);
-        yAxis.setLabel("Test3");// TODO PEDRO
+        yAxis.setLabel(getMessage("quantidade"));
+        yAxis.setTickFormat("%d");
 
         yAxis.setMin(0);
         yAxis.setMax(producoesByYear.stream().max((t1, t2) -> t1.getAmount().compareTo(t2.getAmount())).get().getAmount() + 1);
 
         return chart;
+    }
+
+    private BarChartModel createBarChartByResearcher(final List<AmountProducaoByResearcherDTO> producoesByResearcher) {
+
+        BarChartSeries series = new BarChartSeries();
+        BarChartModel chart = new BarChartModel();
+
+        producoesByResearcher.sort((t1, t2) -> t1.getName().compareTo(t2.getName()));
+        producoesByResearcher.forEach(t -> series.set(t.getName(), t.getAmount()));
+
+        chart.addSeries(series);
+
+        Axis xAxis = new CategoryAxis(getMessage("pesquisadores"));
+        chart.getAxes().put(AxisType.X, xAxis);
+        xAxis.setTickAngle(-25);
+
+        Axis yAxis = chart.getAxis(AxisType.Y);
+        yAxis.setLabel(getMessage("quantidade"));
+        yAxis.setTickFormat("%d");
+
+        return chart;
+    }
+
+    private void handleFault(final String url, final Exception exception) {
+        String mensagem = getMessage("falha.servico", url);
+        servicosIndisponiveis.add(url);
+        adicionarMensagemErro(mensagem);
+        LOGGER.error(mensagem, exception);
     }
 
     public List<AmountProducaoByResearcherDTO> getProducoesByResearcher() {
@@ -141,11 +189,23 @@ public class IndicadorMB extends AbstractMB {
         this.producoesByYear = producoesByYear;
     }
 
-    public LineChartModel getLineChartByYear() {
-        return lineChartByYear;
+    public Map<String, ChartModel> getCharts() {
+        return charts;
     }
 
-    public void setLineChartByYear(final LineChartModel lineChartByYear) {
-        this.lineChartByYear = lineChartByYear;
+    public void setCharts(final Map<String, ChartModel> charts) {
+        this.charts = charts;
+    }
+
+    public List<String> getListaServicosIndisponiveis() {
+        return new ArrayList<String>(servicosIndisponiveis);
+    }
+
+    public ConfiguracaoService getConfiguracaoService() {
+        return configuracaoService;
+    }
+
+    public void setConfiguracaoService(final ConfiguracaoService configuracaoService) {
+        this.configuracaoService = configuracaoService;
     }
 }

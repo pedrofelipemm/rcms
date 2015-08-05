@@ -23,7 +23,6 @@ public class PesquisadorDAOTest extends AbstractDAOTestBase {
         Idioma idioma = new Idioma("Ingles");
         idioma = (Idioma) merge(idioma);
 
-        //TODO PEDRO MOVE TO PESQUISADOR BUILDER
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional("Teste");
         Pesquisador pesquisador = new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", "resumoProfissional").

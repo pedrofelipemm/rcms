@@ -31,9 +31,14 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         try {
             return projetoPesquisaDAO.salvarOuAtualizar(projetoPesquisa);
-        } catch (Exception e) {
+        } catch (Exception exception) {
+
             // TODO PEDRO
-            throw new RuntimeException(ExceptionUtils.getInnerCause(e));
+            // Throwable throwable = ExceptionUtils.getInnerCause(exception);
+            // throw new RCMSException(throwable.getMessage(), throwable);
+
+            Throwable throwable = ExceptionUtils.getInnerCause(exception);
+            throw new RuntimeException(throwable.getMessage(), throwable);
         }
     }
 

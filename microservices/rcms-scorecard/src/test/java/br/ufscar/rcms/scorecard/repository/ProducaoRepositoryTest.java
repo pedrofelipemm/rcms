@@ -9,10 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.ufscar.rcms.commons.util.Fixture;
 import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Pesquisador;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
-import br.ufscar.rcms.scorecard.util.Fixture;
 
 public class ProducaoRepositoryTest extends AbstractRepositoryTest {
 

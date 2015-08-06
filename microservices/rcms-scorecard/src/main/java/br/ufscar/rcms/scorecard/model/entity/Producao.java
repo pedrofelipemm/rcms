@@ -12,9 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.ufscar.rcms.commons.util.JsonUtil;
@@ -43,10 +41,8 @@ public class Producao extends br.ufscar.rcms.scorecard.model.entity.Entity {
     @Column(name = "pdf")
     private byte[] pdf;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-    @JoinTable( name="producao_citacao_bibliografica", joinColumns = { @JoinColumn(name = "id_producao") }, inverseJoinColumns = { @JoinColumn(name = "id_citacao_bibliografica") })
-    @org.hibernate.annotations.ForeignKey(name = "fk_producao_citacao_bibliografica_producao", inverseName = "fk_producao_citacao_bibliografica_citacao_bibliografica")
-    private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producao")
+    private List<AutorProducao> autores = new ArrayList<AutorProducao>();
 
     @Override
     public Long getId() {
@@ -109,6 +105,14 @@ public class Producao extends br.ufscar.rcms.scorecard.model.entity.Entity {
         this.pdf = copyOfPdf;
     }
 
+    public void setAutores(final List<AutorProducao> autores) {
+        this.autores = autores;
+    }
+
+    public List<AutorProducao> getAutores() {
+        return autores;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -137,24 +141,6 @@ public class Producao extends br.ufscar.rcms.scorecard.model.entity.Entity {
             return false;
         }
         return true;
-    }
-
-    public Producao cloneTo(final Producao producaoDestino) {
-        producaoDestino.setAno(ano);
-        producaoDestino.setCitacaoBibliograficas(citacaoBibliograficas);
-        producaoDestino.setIdProducao(idProducao);
-        producaoDestino.setLink(link);
-        producaoDestino.setPdf(pdf);
-        producaoDestino.setTitulo(titulo);
-        return producaoDestino;
-    }
-
-    public List<CitacaoBibliografica> getCitacaoBibliograficas() {
-        return citacaoBibliograficas;
-    }
-
-    public void setCitacaoBibliograficas(final List<CitacaoBibliografica> citacaoBibliograficas) {
-        this.citacaoBibliograficas = citacaoBibliograficas;
     }
 
     @Override

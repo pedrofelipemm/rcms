@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.scorecard.model.entity.AutorProducao;
 import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
 import br.ufscar.rcms.scorecard.repository.ProducaoRepository;
@@ -45,9 +46,10 @@ public class ProducaoServiceImpl implements ProducaoService {
         List<AmountProducaoByResearcherDTO> result = new ArrayList<AmountProducaoByResearcherDTO>();
         Map<String, Integer> map = new HashMap<String, Integer>();
         for (Producao producao : producoes) {
-            List<CitacaoBibliografica> citacoes = producao.getCitacaoBibliograficas();
-            for (CitacaoBibliografica citacao : citacoes) {
-                if (!isEmpty(citacao.getPesquisador())) {
+            List<AutorProducao> autores = producao.getAutores();
+            for (AutorProducao autor : autores) {
+                CitacaoBibliografica citacao = autor.getCitacaoBibliografica();
+                if (!isEmpty(citacao) && !isEmpty(citacao.getPesquisador())) {
                     String nomeCitacao = citacao.getPesquisador().getNome();
                     Integer amount = map.get(nomeCitacao);
                     if (isEmpty(amount)) {

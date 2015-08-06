@@ -244,10 +244,6 @@ public class LattesServiceImpl implements LattesService {
         try {
             final File list = new File(pastaScriptLates + path + ".list");
 
-            if (!list.exists()) {
-                list.createNewFile();
-            }
-
             FileWriter fw = new FileWriter(list.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(path + ", " + nome);
@@ -255,10 +251,6 @@ public class LattesServiceImpl implements LattesService {
             bw.close();
 
             final File file = new File(pastaScriptLates + path + ".config");
-
-            if (!file.exists()) {
-                file.createNewFile();
-            }
 
             fw = new FileWriter(file.getAbsoluteFile());
             bw = new BufferedWriter(fw);
@@ -273,7 +265,7 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    private String getConteudo(final String hash) {
+    private String getConteudo(final String hash) throws ArquivoNaoEncontradoException {
 
         final ClassLoader classLoader = getClass().getClassLoader();
         File file;
@@ -285,8 +277,7 @@ public class LattesServiceImpl implements LattesService {
         } catch (final IOException ioException) {
             LOGGER.error(ioException.getMessage(), ioException);
         }
-        // TODO PEDRO
-        return null;
+        throw new ArquivoNaoEncontradoException(arquivoConfig);
     }
 
     // TODO PEDRO - DUPLICANDO ITENS
@@ -546,7 +537,7 @@ public class LattesServiceImpl implements LattesService {
         return producaoService.exists(titulo, ano);
     }
 
-    public List<AutorProducao> getListaAutores(Producao producao, String autores) {
+    public List<AutorProducao> getListaAutores(final Producao producao, final String autores) {
 
         List<AutorProducao> listaCitacoes = new ArrayList<AutorProducao>();
 

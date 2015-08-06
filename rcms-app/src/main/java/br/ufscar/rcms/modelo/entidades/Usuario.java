@@ -75,6 +75,7 @@ public class Usuario extends Entidade {
 
     public void addConfiguracao(final ConfiguracaoUsuario configuracao) {
         configuracoes.remove(configuracao);
+        System.out.println(configuracoes.size());
         configuracoes.add(configuracao);
     }
 

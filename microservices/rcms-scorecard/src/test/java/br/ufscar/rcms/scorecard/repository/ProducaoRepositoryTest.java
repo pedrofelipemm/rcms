@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.ufscar.rcms.commons.util.Fixture;
+import br.ufscar.rcms.scorecard.model.entity.AutorProducao;
 import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Pesquisador;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
@@ -25,10 +26,12 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
         Pesquisador pesquisador = Fixture.newPesquisador();
         CitacaoBibliografica citacao = Fixture.newCitacao();
         Producao producao = Fixture.newProducao();
+        AutorProducao autorProducao = new AutorProducao(producao, citacao, 1);
 
         citacao.setPesquisador(pesquisador);
         pesquisador.addCitacaoBibliografica(citacao);
-        producao.setCitacaoBibliograficas(Arrays.asList(citacao));
+
+        producao.setAutores(Arrays.asList(autorProducao));
 
         save(pesquisador, producao);
     }
@@ -47,8 +50,18 @@ public class ProducaoRepositoryTest extends AbstractRepositoryTest {
         assertNotNull(producao.getPdf());
         assertNotNull(producao.getTitulo());
 
-        List<CitacaoBibliografica> citacoes = producao.getCitacaoBibliograficas();
-        citacoes.forEach(this::assertCitacoes);
+        List<AutorProducao> autores = producao.getAutores();
+        autores.forEach(this::assertAutores);
+    }
+
+    private void assertAutores(final AutorProducao autor) {
+        assertNotNull(autor.getId());
+        assertNotNull(autor.getIdAutor());
+        assertNotNull(autor.getOrdemAutoria());
+        assertNotNull(autor.getProducao());
+
+        CitacaoBibliografica citacao = autor.getCitacaoBibliografica();
+        assertCitacoes(citacao);
     }
 
     private void assertCitacoes(final CitacaoBibliografica citacao) {

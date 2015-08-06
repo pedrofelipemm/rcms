@@ -682,11 +682,11 @@ public class PesquisadorMB extends AbstractMB {
         return listaProducoes;
     }
 
-    public void setListaProducoes(List<Producao> listaProducoes) {
+    public void setListaProducoes(final List<Producao> listaProducoes) {
         this.listaProducoes = listaProducoes;
     }
 
-    public List<AutorProducao> listarAutores(Producao producao) {
+    public List<AutorProducao> listarAutores(final Producao producao) {
 
         return producaoService.buscarPorId(producao.getIdProducao()).getAutores();
     }
@@ -695,7 +695,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaArtigosEmPeriodicos;
     }
 
-    public void setListaArtigosEmPeriodicos(List<ArtigoEmPeriodico> listaArtigosEmPeriodicos) {
+    public void setListaArtigosEmPeriodicos(final List<ArtigoEmPeriodico> listaArtigosEmPeriodicos) {
         this.listaArtigosEmPeriodicos = listaArtigosEmPeriodicos;
     }
 
@@ -703,7 +703,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaLivrosPublicados;
     }
 
-    public void setListaLivrosPublicados(List<LivroPublicado> listaLivrosPublicados) {
+    public void setListaLivrosPublicados(final List<LivroPublicado> listaLivrosPublicados) {
         this.listaLivrosPublicados = listaLivrosPublicados;
     }
 
@@ -711,7 +711,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaCapitulosDeLivros;
     }
 
-    public void setListaCapitulosDeLivros(List<CapituloLivro> listaCapitulosDeLivros) {
+    public void setListaCapitulosDeLivros(final List<CapituloLivro> listaCapitulosDeLivros) {
         this.listaCapitulosDeLivros = listaCapitulosDeLivros;
     }
 
@@ -719,7 +719,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaTextosEmJornais;
     }
 
-    public void setListaTextosEmJornais(List<TextoEmJornal> listaTextosEmJornais) {
+    public void setListaTextosEmJornais(final List<TextoEmJornal> listaTextosEmJornais) {
         this.listaTextosEmJornais = listaTextosEmJornais;
     }
 
@@ -727,7 +727,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaTrabalhosCompletosCongressos;
     }
 
-    public void setListaTrabalhosCompletosCongressos(List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos) {
+    public void setListaTrabalhosCompletosCongressos(final List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos) {
         this.listaTrabalhosCompletosCongressos = listaTrabalhosCompletosCongressos;
     }
 
@@ -735,7 +735,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaResumosExpandidosCongressos;
     }
 
-    public void setListaResumosExpandidosCongressos(List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos) {
+    public void setListaResumosExpandidosCongressos(final List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos) {
         this.listaResumosExpandidosCongressos = listaResumosExpandidosCongressos;
     }
 
@@ -743,7 +743,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaResumosCongressos;
     }
 
-    public void setListaResumosCongressos(List<ResumoCongresso> listaResumosCongressos) {
+    public void setListaResumosCongressos(final List<ResumoCongresso> listaResumosCongressos) {
         this.listaResumosCongressos = listaResumosCongressos;
     }
 
@@ -751,7 +751,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaApresentacoesTrabalhos;
     }
 
-    public void setListaApresentacoesTrabalhos(List<ApresentacaoTrabalho> listaApresentacoesTrabalhos) {
+    public void setListaApresentacoesTrabalhos(final List<ApresentacaoTrabalho> listaApresentacoesTrabalhos) {
         this.listaApresentacoesTrabalhos = listaApresentacoesTrabalhos;
     }
 
@@ -759,7 +759,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaOutrasProducoesBibligraficas;
     }
 
-    public void setListaOutrasProducoesBibliograficas(List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas) {
+    public void setListaOutrasProducoesBibliograficas(final List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas) {
         this.listaOutrasProducoesBibligraficas = listaOutrasProducoesBibligraficas;
     }
 
@@ -767,7 +767,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaProdutosTecnologicos;
     }
 
-    public void setListaProdutosTecnologicos(List<ProdutoTecnologico> listaProdutosTecnologicos) {
+    public void setListaProdutosTecnologicos(final List<ProdutoTecnologico> listaProdutosTecnologicos) {
         this.listaProdutosTecnologicos = listaProdutosTecnologicos;
     }
 
@@ -775,7 +775,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaProcessosOuTecnicas;
     }
 
-    public void setListaProcessosOuTecnicas(List<ProcessoOuTecnica> listaProcessosOuTecnicas) {
+    public void setListaProcessosOuTecnicas(final List<ProcessoOuTecnica> listaProcessosOuTecnicas) {
         this.listaProcessosOuTecnicas = listaProcessosOuTecnicas;
     }
 
@@ -783,7 +783,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaTrabalhosTecnicos;
     }
 
-    public void setListaTrabalhosTecnicos(List<TrabalhoTecnico> listaTrabalhosTecnicos) {
+    public void setListaTrabalhosTecnicos(final List<TrabalhoTecnico> listaTrabalhosTecnicos) {
         this.listaTrabalhosTecnicos = listaTrabalhosTecnicos;
     }
 
@@ -791,7 +791,7 @@ public class PesquisadorMB extends AbstractMB {
         return listaOutrasProducoesTecnicas;
     }
 
-    public void setListaOutrasProducoesTecnicas(List<OutraProducaoTecnica> listaOutrasProducoesTecnicas) {
+    public void setListaOutrasProducoesTecnicas(final List<OutraProducaoTecnica> listaOutrasProducoesTecnicas) {
         this.listaOutrasProducoesTecnicas = listaOutrasProducoesTecnicas;
     }
 }

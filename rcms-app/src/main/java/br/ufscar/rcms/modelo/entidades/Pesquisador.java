@@ -151,26 +151,18 @@ public class Pesquisador extends Usuario {
         return null;
     }
 
-    public FormacaoAcademica containsFormacaoAcademica(
-			final FormacaoLattes formacaoLattes) {
-		for (FormacaoAcademica formacaoAcademica : formacoes) {
-			if (formacaoAcademica != null) {
-				if (formacaoAcademica.getDescricao().equals(
-						formacaoLattes.getDescricao())
-						&& formacaoAcademica.getAnoInicio().equals(
-								formacaoLattes.getAnoInicio())
-						&& formacaoAcademica.getAnoConclusao().equals(
-								formacaoLattes.getAnoConclusao())
-						&& formacaoAcademica.getNomeInstituicao().equals(
-								formacaoLattes.getNomeInstituicao())
-						&& formacaoAcademica.getTipo().equals(
-								formacaoLattes.getTipo())) {
-						return formacaoAcademica;
-				}
-			}
-		}
-		return null;
-	}
+    public FormacaoAcademica containsFormacaoAcademica(final FormacaoLattes formacaoLattes) {
+        for (FormacaoAcademica formacaoAcademica : formacoes) {
+            if (formacaoAcademica != null && formacaoAcademica.getDescricao().equals(formacaoLattes.getDescricao())
+                    && formacaoAcademica.getAnoInicio().equals(formacaoLattes.getAnoInicio())
+                    && formacaoAcademica.getAnoConclusao().equals(formacaoLattes.getAnoConclusao())
+                    && formacaoAcademica.getNomeInstituicao().equals(formacaoLattes.getNomeInstituicao())
+                    && formacaoAcademica.getTipo().equals(formacaoLattes.getTipo())) {
+                return formacaoAcademica;
+            }
+        }
+        return null;
+    }
 
     public void setFormacoes(final List<FormacaoAcademica> formacoes) {
         this.formacoes = formacoes;

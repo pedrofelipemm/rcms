@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class ProducaoServiceImpl implements ProducaoService {
 
         return producoes.stream().collect(Collectors.groupingBy(p -> p.getAno(), Collectors.counting()))
                 .entrySet().stream().map(e -> new AmountProducaoByYearDTO(e.getValue().intValue(), e.getKey()))
-                .collect(Collectors.toList());
+                .filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override

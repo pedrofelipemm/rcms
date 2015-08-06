@@ -28,7 +28,7 @@ public class JobLattesImporter extends AbstractJob {
     @Override
     public void process() {
 
-        List<Pesquisador> pesquisadores = pesquisadorService.findToAutoImport();
+        List<Pesquisador> pesquisadores = pesquisadorService.buscarTodos();
         if (!isEmpty(pesquisadores)) {
             pesquisadores.forEach(this::safeProcess);
         }

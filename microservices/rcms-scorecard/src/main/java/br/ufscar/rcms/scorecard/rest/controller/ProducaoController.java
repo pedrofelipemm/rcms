@@ -25,7 +25,7 @@ public class ProducaoController {
     public ResponseEntity<Wrapper<AmountProducaoByYearDTO>> findProducoesByYear() {
 
         List<AmountProducaoByYearDTO> producoes = producaoService.findAmountProducaoByYear();
-        Integer size = producoes.stream().map(AmountProducaoByYearDTO::getAmount).reduce((sum, amount) -> sum + amount).get();
+        Integer size = producoes.stream().map(AmountProducaoByYearDTO::getAmount).reduce((sum, amount) -> sum + amount).orElse(0);
 
         Wrapper<AmountProducaoByYearDTO> wrapper = new Wrapper<AmountProducaoByYearDTO>(producoes.size(), size, producoes);
 
@@ -36,7 +36,7 @@ public class ProducaoController {
     public ResponseEntity<Wrapper<AmountProducaoByResearcherDTO>> findAmountProducaoByResearcher() {
 
         List<AmountProducaoByResearcherDTO> producoes = producaoService.findAmountProducaoByResearcher();
-        Integer size = producoes.stream().map(AmountProducaoByResearcherDTO::getAmount).reduce((sum, amount) -> sum + amount).get();
+        Integer size = producoes.stream().map(AmountProducaoByResearcherDTO::getAmount).reduce((sum, amount) -> sum + amount).orElse(0);
 
         Wrapper<AmountProducaoByResearcherDTO> wrapper = new Wrapper<AmountProducaoByResearcherDTO>(producoes.size(), size, producoes);
 

@@ -34,6 +34,13 @@
 			<name>Prime Repo</name>
 			<url>http://repository.primefaces.org</url>
 		</repository>
+		<repository>
+		    <id>com.springsource.repository.maven.snapshot</id>
+		    <url>http://maven.springframework.org/snapshot/</url>
+		    <snapshots>
+		       <enabled>true</enabled>
+		    </snapshots>
+		</repository>
 	</repositories>
 
 	<dependencies>

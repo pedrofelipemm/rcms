@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "projeto_pesquisa")
@@ -41,6 +42,9 @@ public class ProjetoPesquisa extends Entidade {
 
     @Column(name = "agencia_de_fomento", length = COLUMN_DEFAULT_LENGTH)
     private String agenciaDeFomento;
+
+    @Transient
+    private List<TransientFile> galeria = new ArrayList<TransientFile>();
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinTable(joinColumns = { @JoinColumn(name = "id_projeto_de_pesquisa") }, inverseJoinColumns = { @JoinColumn(name = "id_producao") })
@@ -155,12 +159,20 @@ public class ProjetoPesquisa extends Entidade {
     }
 
     public List<Pesquisador> getPesquisadores() {
-		return pesquisadores;
-	}
+        return pesquisadores;
+    }
 
-	public void setPesquisadores(final List<Pesquisador> pesquisadores) {
-		this.pesquisadores = pesquisadores;
-	}
+    public void setPesquisadores(final List<Pesquisador> pesquisadores) {
+        this.pesquisadores = pesquisadores;
+    }
+
+    public List<TransientFile> getGaleria() {
+        return galeria;
+    }
+
+    public void setGaleria(List<TransientFile> galeria) {
+        this.galeria = galeria;
+    }
 
     @Override
     public int hashCode() {

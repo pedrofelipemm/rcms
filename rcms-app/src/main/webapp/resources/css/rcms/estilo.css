@@ -215,3 +215,16 @@
 /* Custom, iPhone Retina */
 @media only screen and (max-width : 320px) {
 }
+
+
+.tituloProducao {
+	font-weight: bold;
+}
+
+.tituloProducao::before { 
+    content: "\2014";
+}
+
+.tituloProducao::after { 
+    content: "\2014";
+}

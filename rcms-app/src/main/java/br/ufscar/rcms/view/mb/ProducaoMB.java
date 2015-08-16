@@ -46,6 +46,8 @@ public class ProducaoMB extends AbstractMB {
     private static final long serialVersionUID = -3678684230889264324L;
     private List<Pesquisador> todosPesquisadores;
     private List<CitacaoBibliografica> todasCitacoesDoPesquisador;
+    private CitacaoBibliografica citacaoBibliografica;
+
     private AutorProducao autor;
     private Producao producao;
     private Pesquisador pesquisadorSelecionado;
@@ -72,14 +74,18 @@ public class ProducaoMB extends AbstractMB {
         carregarDados();
     }
 
-    public void adicionarNomeCitacao() {
+    public void adicionarAutor() {
+        autor = new AutorProducao();
+        autor.setProducao(producao);
+        autor.setCitacaoBibliografica(citacaoBibliografica);
+        autor.setOrdemAutoria(producao.getAutores().size() + 1);
         if (autor != null) {
             producao.getAutores().add(autor);
         }
     }
 
-    public void excluirNomeCitacao(CitacaoBibliografica citacao) {
-        producao.getAutores().remove(citacao);
+    public void excluirAutor(AutorProducao autor) {
+        producao.getAutores().remove(autor);
     }
 
     public String salvar() {
@@ -103,6 +109,15 @@ public class ProducaoMB extends AbstractMB {
         }
 
         return CONSULTA_PRODUCAO;
+    }
+
+    public String exibir(Producao producao) {
+
+        producao = producaoService.buscarPorId(producao.getIdProducao());
+
+        setFlashObject(FLASH_KEY_PRODUCAO, producao);
+
+        return EXIBE_PRODUCAO;
     }
 
     public String editar(Producao producao) {
@@ -342,5 +357,13 @@ public class ProducaoMB extends AbstractMB {
 
     public void setListaOutrasProducoesTecnicas(List<OutraProducaoTecnica> listaOutrasProducoesTecnicas) {
         this.listaOutrasProducoesTecnicas = listaOutrasProducoesTecnicas;
+    }
+
+    public CitacaoBibliografica getCitacaoBibliografica() {
+        return citacaoBibliografica;
+    }
+
+    public void setCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
+        this.citacaoBibliografica = citacaoBibliografica;
     }
 }

@@ -93,8 +93,9 @@ public abstract class AbstractMB implements Serializable {
     public static final String INDICADOR = "indicadores";
 
     // Produções
-    public static final String CONSULTA_PRODUCAO = "consultaProducao";
     public static final String CADASTRO_PRODUCAO = "cadastroProducao";
+    public static final String CONSULTA_PRODUCAO = "consultaProducao";
+    public static final String EXIBE_PRODUCAO = "producao";
     public static final String FLASH_KEY_PRODUCAO = "producao";
 
     private static final User DEFAULT_USER = new User("DEFAULT-USER", "123456", new ArrayList<GrantedAuthority>());

@@ -8,7 +8,6 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="conteudo">
-
 		<h:form id="formPainelControle" role="form" prependId="false">
 
 			<div class="row">
@@ -20,47 +19,61 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
-						<p:panel id="painelPesquisador" header="#{mensagens['configuracoes']}">
+						<p:panel id="painelConfiguracoes"
+							header="#{mensagens['configuracoes']}">
 							<div class="row">
-				          		<div class="col-sm-6">
-			            			<div class="row">
+								<div class="col-sm-6">
+									<div class="row">
 										<div class="col-sm-12">
-											<h:outputLabel for="selectOneMenuIdioma" pt:name="selectOneMenuIdiomaLabel" 
+											<h:outputLabel for="selectOneMenuIdioma"
+												pt:name="selectOneMenuIdiomaLabel"
 												value="#{mensagens['idiomas']}" />
-											<h:selectOneMenu id="selectOneMenuIdioma" pt:name="selectOneMenuIdioma"
-												value="#{configMB.idioma}" styleClass="form-control">
-												<f:selectItems value="#{configMB.idiomas.entrySet()}" var="entry"
-													itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+											<h:selectOneMenu id="selectOneMenuIdioma"
+												pt:name="selectOneMenuIdioma" value="#{configMB.idioma}"
+												styleClass="form-control">
+												<f:selectItems value="#{configMB.idiomas.entrySet()}"
+													var="entry" itemValue="#{entry.value}"
+													itemLabel="#{entry.key}" />
 											</h:selectOneMenu>
 										</div>
 										<div class="col-sm-12">
-											<h:outputLabel for="selectOneMenuEstilo" pt:name="selectOneMenuEstiloLabel"
+											<h:outputLabel for="selectOneMenuEstilo"
+												pt:name="selectOneMenuEstiloLabel"
 												value="#{mensagens['estilos']}" />
-											<h:selectOneMenu id="selectOneMenuEstilo" pt:name="selectOneMenuEstilo"
+											<h:selectOneMenu id="selectOneMenuEstilo"
+												pt:name="selectOneMenuEstilo"
 												value="#{configMB.estiloAdmin}" styleClass="form-control">
-												<f:selectItems value="#{configMB.estilosAdmin.entrySet()}" var="entry"
-													itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+												<f:selectItems value="#{configMB.estilosAdmin.entrySet()}"
+													var="entry" itemValue="#{entry.value}"
+													itemLabel="#{entry.key}" />
 											</h:selectOneMenu>
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-6">
-			            			<div class="row">
+									<div class="row">
 										<div class="col-sm-12">
-											<h:outputLabel for="temaPortal" id="temaPortalLabel" value="#{mensagens['temas.para.portal']}" />
-											<h:selectOneMenu id="temaPortal" value="#{configMB.temaPortal}" styleClass="form-control">
-												<f:selectItems value="#{configMB.temasPortal.entrySet()}" var="entry"
-													itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+											<h:outputLabel for="temaPortal" id="temaPortalLabel"
+												value="#{mensagens['temas.para.portal']}" />
+											<h:selectOneMenu id="temaPortal"
+												value="#{configMB.temaPortal}" styleClass="form-control">
+												<f:selectItems value="#{configMB.temasPortal.entrySet()}"
+													var="entry" itemValue="#{entry.value}"
+													itemLabel="#{entry.key}" />
 											</h:selectOneMenu>
 										</div>
 										<div class="col-sm-12">
-											<h:outputLabel for="importacaoLattesAutomcatica" id="importacaoLattesAutomcaticaLabel"
+											<h:outputLabel for="importacaoLattesAutomcatica"
+												id="importacaoLattesAutomcaticaLabel"
 												value="#{mensagens['importacao.automatica']}" />
-											<h:selectOneMenu id="importacaoLattesAutomcatica" styleClass="form-control"
+											<h:selectOneMenu id="importacaoLattesAutomcatica"
+												styleClass="form-control"
 												value="#{configMB.importacaoLattesAutomcatica}">
-												<f:selectItem itemValue="#{true}" itemLabel="#{mensagens['sim']}" />
-												<f:selectItem itemValue="#{false}" itemLabel="#{mensagens['nao']}" />
-									        </h:selectOneMenu>
+												<f:selectItem itemValue="#{true}"
+													itemLabel="#{mensagens['sim']}" />
+												<f:selectItem itemValue="#{false}"
+													itemLabel="#{mensagens['nao']}" />
+											</h:selectOneMenu>
 										</div>
 									</div>
 								</div>
@@ -72,13 +85,105 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar"
-						action="#{configMB.salvar}" styleClass="btn btn-success">
+					<div class="form-group">
+						<p:panel id="painelPaginaInicial" header="#{mensagens['indice']}">
+
+							<div class="row">
+								<div class="col-sm-12">
+									<h:dataTable id="tableProjetos"
+										value="#{configMB.projetosSelecionados}"
+										var="projetoDePesquisa" styleClass="table table-hover">
+										<h:column headerClass="col-sm-9">
+											<f:facet name="header">
+												<h:outputLabel value="#{mensagens['projeto.pesquisa']}" />
+											</f:facet>
+											<h:outputText value="#{projetoDePesquisa.nome}" />
+										</h:column>
+										<h:column headerClass="col-sm-3 text-right">
+											<f:facet name="header">
+												<button type="button" class="btn btn-primary"
+													data-toggle="modal" data-target="#modalProjetoDePesquisa">#{mensagens['adicionar']}</button>
+											</f:facet>
+											<div class="row">
+												<div class="col-sm-12 text-right">
+													<span> <h:commandButton
+															value="#{mensagens['remover']}"
+															styleClass="btn btn-danger  bottom-buffer-2 top-buffer-2"
+															action="#{configMB.removerProjetoDePesquisa(projetoDePesquisa)}">
+															<f:ajax render=":formPainelControle:painelPaginaInicial" />
+														</h:commandButton>
+													</span>
+												</div>
+											</div>
+										</h:column>
+									</h:dataTable>
+									<ui:include
+										src="/paginas/admin/painel-de-controle/modal-projeto-pesquisa.xhtml" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<h:outputLabel value="#{mensagens['producoes']}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<p:autoComplete id="tituloProducao"
+										value="#{configMB.producaoSelecionada}"
+										completeMethod="#{configMB.completeProducao}" var="producao"
+										itemLabel="#{producao.titulo}" itemValue="#{producao}"
+										converter="#{producaoConverter}" forceSelection="true"
+										size="80" />
+									<h:commandButton value="#{mensagens['adicionar']}"
+										styleClass="btn btn-primary"
+										action="#{configMB.adicionarProducao()}"
+										style="margin: 0 0 4px 10px; padding-top: 0; padding-bottom: 0; height: 31px;">
+										<f:ajax render="@form" execute="@form" />
+									</h:commandButton>
+								</div>
+							</div>
+							<br />
+							<br />
+							<div class="row">
+								<div class="col-sm-12">
+									<h:dataTable id="tableProducoes"
+										value="#{configMB.producoesSelecionadas}" var="producao"
+										styleClass="table table-hover">
+										<h:column headerClass="col-sm-9">
+											<h:outputText value="#{producao.titulo}" />
+										</h:column>
+										<h:column headerClass="col-sm-3 text-right">
+											<div class="row">
+												<div class="col-sm-12 text-right">
+													<span> <h:commandButton
+															value="#{mensagens['remover']}"
+															styleClass="btn btn-danger  bottom-buffer-2 top-buffer-2"
+															action="#{configMB.removerProducao(producao)}">
+															<f:ajax render=":formPainelControle:painelPaginaInicial" />
+														</h:commandButton>
+													</span>
+												</div>
+											</div>
+										</h:column>
+									</h:dataTable>
+								</div>
+							</div>
+
+						</p:panel>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h:commandButton value="#{mensagens['salvar']}"
+						pt:name="buttonSalvar" action="#{configMB.salvar}"
+						styleClass="btn btn-success">
 						<f:ajax render="@form" execute="@form" />
 					</h:commandButton>
 				</div>
 			</div>
-
 		</h:form>
+		
 	</ui:define>
 </ui:composition>

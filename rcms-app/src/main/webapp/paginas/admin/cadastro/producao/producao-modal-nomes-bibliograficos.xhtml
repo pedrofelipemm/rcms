@@ -39,7 +39,7 @@
 										<h:outputLabel for="nome" value="#{mensagens['label.citacao']}" />
 									</div>
 									<div class="col-sm-10">
-										<h:selectOneMenu id="selectCitacao" styleClass="form-control" value="#{producaoMB.nomeCitacao}" converter="entityConverter">
+										<h:selectOneMenu id="selectCitacao" styleClass="form-control" value="#{producaoMB.citacaoBibliografica}" converter="entityConverter">
 											<f:selectItems value="#{producaoMB.todasCitacoesDoPesquisador}" var="citacao" itemLabel="#{citacao.nomeCitacao}"
 												itemValue="#{citacao}" />
 											<f:ajax />
@@ -52,7 +52,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
-					<h:commandButton action="#{producaoMB.adicionarNomeCitacao}" styleClass="btn btn-primary"
+					<h:commandButton action="#{producaoMB.adicionarAutor}" styleClass="btn btn-primary"
 						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalNomesCitacao">
 						<f:ajax execute="painelCitacaoBibliografica" render="painelCitacaoBibliografica" />
 					</h:commandButton>

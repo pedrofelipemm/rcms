@@ -1,5 +1,9 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +15,17 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 
 @ViewScoped
 @ManagedBean(name = "projetoPesquisaMB")
@@ -41,7 +48,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
     private ProjetoPesquisa projetoPesquisa;
     private transient DataModel<ProjetoPesquisa> projetosPesquisa;
 
-    private transient Part fotoProjetoPesquisa;
+    private transient Part imagem;
 
     @PostConstruct
     public void inicializar() {
@@ -84,7 +91,26 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return CONSULTA_PROJETO_PESQUISA;
     }
 
-    public void uploadFile() {}
+    public void uploadFile() {
+        if (!isEmpty(imagem)) {
+            try {
+                TransientFile file = new TransientFile();
+                file.setFile(IOUtils.toByteArray(imagem.getInputStream()));
+                file.setFileName(imagem.getSubmittedFileName());
+                file.setFileExtension(extractFileExtension(imagem.getSubmittedFileName()));
+
+                projetoPesquisaService.salvarImagem(projetoPesquisa, file);
+
+                projetoPesquisa.getGaleria().add(file);
+            } catch (final IOException ioException) {
+                LOGGER.error("Erro ao realizar upload de imagem", ioException);
+                adicionarMensagemErroByKey("erro.enviar.imagem");
+            } catch (RCMSException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
 
     public String exibir(ProjetoPesquisa projetoPesquisa) {
 
@@ -128,60 +154,59 @@ public class ProjetoPesquisaMB extends AbstractMB {
     public void pesquisar() {
     }
 
-	public ProjetoPesquisaService getProjetoPesquisaService() {
-		return projetoPesquisaService;
-	}
+    public ProjetoPesquisaService getProjetoPesquisaService() {
+        return projetoPesquisaService;
+    }
 
-	public void setProjetoPesquisaService(
-			final ProjetoPesquisaService projetoPesquisaService) {
-		this.projetoPesquisaService = projetoPesquisaService;
-	}
+    public void setProjetoPesquisaService(final ProjetoPesquisaService projetoPesquisaService) {
+        this.projetoPesquisaService = projetoPesquisaService;
+    }
 
-	public ProjetoPesquisa getProjetoPesquisa() {
-		return projetoPesquisa;
-	}
+    public ProjetoPesquisa getProjetoPesquisa() {
+        return projetoPesquisa;
+    }
 
-	public void setProjetoPesquisa(final ProjetoPesquisa projetoPesquisa) {
-		this.projetoPesquisa = projetoPesquisa;
-	}
+    public void setProjetoPesquisa(final ProjetoPesquisa projetoPesquisa) {
+        this.projetoPesquisa = projetoPesquisa;
+    }
 
-	public DataModel<ProjetoPesquisa> getProjetosPesquisa() {
-		return projetosPesquisa;
-	}
+    public DataModel<ProjetoPesquisa> getProjetosPesquisa() {
+        return projetosPesquisa;
+    }
 
-	public void setProjetosPesquisa(final DataModel<ProjetoPesquisa> projetosPesquisa) {
-		this.projetosPesquisa = projetosPesquisa;
-	}
+    public void setProjetosPesquisa(final DataModel<ProjetoPesquisa> projetosPesquisa) {
+        this.projetosPesquisa = projetosPesquisa;
+    }
 
-	public Part getFotoProjetoPesquisa() {
-		return fotoProjetoPesquisa;
-	}
+    public Part getImagem() {
+        return imagem;
+    }
 
-	public void setFotoProjetoPesquisa(final Part fotoProjetoPesquisa) {
-		this.fotoProjetoPesquisa = fotoProjetoPesquisa;
-	}
+    public void setImagem(final Part imagem) {
+        this.imagem = imagem;
+    }
 
-	public Pesquisador getPesquisador() {
-		return pesquisador;
-	}
+    public Pesquisador getPesquisador() {
+        return pesquisador;
+    }
 
-	public void setPesquisador(final Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
+    public void setPesquisador(final Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
+    }
 
-	public PesquisadorService getPesquisadorService() {
-		return pesquisadorService;
-	}
+    public PesquisadorService getPesquisadorService() {
+        return pesquisadorService;
+    }
 
-	public void setPesquisadorService(final PesquisadorService pesquisadorService) {
-		this.pesquisadorService = pesquisadorService;
-	}
+    public void setPesquisadorService(final PesquisadorService pesquisadorService) {
+        this.pesquisadorService = pesquisadorService;
+    }
 
-	public List<Pesquisador> getPesquisadores() {
-		return pesquisadores;
-	}
+    public List<Pesquisador> getPesquisadores() {
+        return pesquisadores;
+    }
 
-	public void setPesquisadores(final List<Pesquisador> pesquisadores) {
-		this.pesquisadores = pesquisadores;
-	}
+    public void setPesquisadores(final List<Pesquisador> pesquisadores) {
+        this.pesquisadores = pesquisadores;
+    }
 }

@@ -35,13 +35,13 @@
 						</div>
 						<div class="rcms-table-tbody">
 							<ui:repeat id="gridProducaoNomeCitacao" pt:name="gridProducaoNomeCitacao"
-								varStatus="status" var="nomeCitacao" value="#{producaoMB.producao.citacaoBibliograficas}">
+								varStatus="status" var="autor" value="#{producaoMB.producao.autores}">
 								<div class="rcms-table-tr col-">
 									<div class="rcms-table-td">
-										<h:outputText id="outputTextNome" value="#{nomeCitacao.pesquisador.nome}" />
+										<h:outputText id="outputTextNome" value="#{autor.citacaoBibliografica.pesquisador.nome}" />
 									</div>
 									<div class="rcms-table-td">
-										<h:outputText id="outputTextDescricao" value="#{nomeCitacao.nomeCitacao}" />
+										<h:outputText id="outputTextDescricao" value="#{autor.citacaoBibliografica.nomeCitacao}" />
 									</div>
 									<!-- <div class="rcms-table-td">
 										<h:outputText id="outputTextAnoInicio" value="#{pesquisador.codigoLattes}" />
@@ -55,7 +55,7 @@
 												</h:commandButton>
 											</span>
 											<span>
-												<h:commandButton value="#{mensagens['excluir']}" action="#{producaoMB.excluirNomeCitacao(nomeCitacao)}"
+												<h:commandButton value="#{mensagens['excluir']}" action="#{producaoMB.excluirAutor(autor)}"
 													styleClass="btn btn-danger bottom-buffer-2 top-buffer-2">
 													<f:ajax render="painelCitacaoBibliografica" />
 												</h:commandButton>

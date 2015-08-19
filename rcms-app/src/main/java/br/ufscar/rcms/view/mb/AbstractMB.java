@@ -1,10 +1,11 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.faces.application.Application;
@@ -27,6 +28,12 @@ import javax.servlet.http.Part;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.ufscar.rcms.modelo.entidades.Entidade;
 
@@ -83,14 +90,18 @@ public abstract class AbstractMB implements Serializable {
     // Painel de Controle
     public static final String PAINEL_CONTROLE = "painelControle";
 
+    public static final String INDICADOR = "indicadores";
+
     // Produções
     public static final String CONSULTA_PRODUCAO = "consultaProducao";
     public static final String CADASTRO_PRODUCAO = "cadastroProducao";
     public static final String FLASH_KEY_PRODUCAO = "producao";
 
+    private static final User DEFAULT_USER = new User("DEFAULT-USER", "123456", new ArrayList<GrantedAuthority>());
+
     // TODO PEDRO
     // @PostConstruct
-    // public void inicializar() {
+    // protected void inicializar() {
     // limparDados();
     // carregarDados();
     // };
@@ -267,11 +278,24 @@ public abstract class AbstractMB implements Serializable {
         final String partHeader = part.getHeader("content-disposition");
         for (String content : partHeader.split(";")) {
             if (content.trim().startsWith("filename")) {
-                String fileName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-                return fileName;
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
             }
         }
         return null;
+    }
+
+    protected SecurityContext getSecurityContext() {
+        return SecurityContextHolder.getContext();
+    }
+
+    protected Authentication getAuthentication() {
+        return getSecurityContext().getAuthentication();
+    }
+
+    protected UserDetails getPrincipal() {
+        final Authentication authentication = getAuthentication();
+        return isEmpty(authentication) || authentication.getPrincipal() instanceof String ? DEFAULT_USER
+                : (UserDetails) authentication.getPrincipal();
     }
 
     private void adicionarMensagem(final String texto, final Severity severity) {

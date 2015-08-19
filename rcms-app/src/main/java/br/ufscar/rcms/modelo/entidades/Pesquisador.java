@@ -151,26 +151,18 @@ public class Pesquisador extends Usuario {
         return null;
     }
 
-    public FormacaoAcademica containsFormacaoAcademica(
-			final FormacaoLattes formacaoLattes) {
-		for (FormacaoAcademica formacaoAcademica : formacoes) {
-			if (formacaoAcademica != null) {
-				if (formacaoAcademica.getDescricao().equals(
-						formacaoLattes.getDescricao())
-						&& formacaoAcademica.getAnoInicio().equals(
-								formacaoLattes.getAnoInicio())
-						&& formacaoAcademica.getAnoConclusao().equals(
-								formacaoLattes.getAnoConclusao())
-						&& formacaoAcademica.getNomeInstituicao().equals(
-								formacaoLattes.getNomeInstituicao())
-						&& formacaoAcademica.getTipo().equals(
-								formacaoLattes.getTipo())) {
-						return formacaoAcademica;
-				}
-			}
-		}
-		return null;
-	}
+    public FormacaoAcademica containsFormacaoAcademica(final FormacaoLattes formacaoLattes) {
+        for (FormacaoAcademica formacaoAcademica : formacoes) {
+            if (formacaoAcademica != null && formacaoAcademica.getDescricao().equals(formacaoLattes.getDescricao())
+                    && formacaoAcademica.getAnoInicio().equals(formacaoLattes.getAnoInicio())
+                    && formacaoAcademica.getAnoConclusao().equals(formacaoLattes.getAnoConclusao())
+                    && formacaoAcademica.getNomeInstituicao().equals(formacaoLattes.getNomeInstituicao())
+                    && formacaoAcademica.getTipo().equals(formacaoLattes.getTipo())) {
+                return formacaoAcademica;
+            }
+        }
+        return null;
+    }
 
     public void setFormacoes(final List<FormacaoAcademica> formacoes) {
         this.formacoes = formacoes;
@@ -255,10 +247,10 @@ public class Pesquisador extends Usuario {
     }
 
     public void removeOrganizacaoEventos(final OrganizacaoEvento... organizacaoEventos) {
-		if(organizacaoEventos != null){
-			this.organizacaoEventos.removeAll(Arrays.asList(organizacaoEventos));
-		}
-	}
+        if (organizacaoEventos != null) {
+            this.organizacaoEventos.removeAll(Arrays.asList(organizacaoEventos));
+        }
+    }
 
     public void addParticipacaoEventos(final ParticipacaoEvento... participacaoEventos) {
         if (participacaoEventos != null) {
@@ -269,12 +261,6 @@ public class Pesquisador extends Usuario {
     public void removeParticipacaoEventos(final ParticipacaoEvento... participacaoEventos) {
         if (participacaoEventos != null) {
             this.participacaoEventos.removeAll(Arrays.asList(participacaoEventos));
-        }
-    }
-
-    public void addCitacaoBibliograficas(final CitacaoBibliografica... citacaoBibliograficas) {
-        if (citacaoBibliograficas != null) {
-            this.citacaoBibliograficas.addAll(Arrays.asList(citacaoBibliograficas));
         }
     }
 

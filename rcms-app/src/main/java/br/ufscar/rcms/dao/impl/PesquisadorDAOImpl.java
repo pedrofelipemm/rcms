@@ -1,12 +1,16 @@
 package br.ufscar.rcms.dao.impl;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
+import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 
 @Repository
@@ -42,6 +46,37 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
             query.setParameter("idIdioma", idIdioma);
         }
 
+        return query.getResultList();
+    }
+
+    @Override
+    public Pesquisador buscarPorLogin(final String login) {
+
+        if (isEmpty(login)) {
+            throw new IllegalArgumentException("Login cannot be null!");
+        }
+
+        String jpql = "select p from " + getClazz().getName() + " p where p.login = :login";
+        Query query = createQuery(jpql);
+        query.setParameter("login", login);
+
+        try {
+            return (Pesquisador) query.getSingleResult();
+        } catch (final NoResultException exception) {
+            return null;
+        }
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Pesquisador> findToAutoImport() {
+
+        String jpql = "select p from " + getClazz().getName() + " p "
+                + "inner join p.configuracoes c "
+                + "where c.key = '" + Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA + "' "
+                + "and c.value = 'true' ";
+
+        Query query = createQuery(jpql);
         return query.getResultList();
     }
 }

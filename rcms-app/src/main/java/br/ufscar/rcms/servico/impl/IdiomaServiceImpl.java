@@ -1,5 +1,7 @@
 package br.ufscar.rcms.servico.impl;
 
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.commons.util.ExceptionUtils;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
 import br.ufscar.rcms.modelo.entidades.Idioma;
@@ -15,9 +18,6 @@ import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.exception.IdiomaEmUsoException;
 import br.ufscar.rcms.servico.exception.IdiomaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
-import br.ufscar.rcms.util.ExceptionUtils;
-
-import static br.ufscar.rcms.util.MiscellanyUtil.isEmpty;
 
 @Service("idiomaService")
 @Transactional(rollbackFor = RCMSException.class)

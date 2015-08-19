@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "processo_tecnica")
+@XmlRootElement(name = "produto_tecnologico")
 public class ProdutoTecnologicoLattes {
 
     @XmlElement(name = "produto")

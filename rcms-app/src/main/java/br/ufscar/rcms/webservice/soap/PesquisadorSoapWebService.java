@@ -23,17 +23,17 @@ import br.ufscar.rcms.webservice.modelo.PesquisadorSoapResponseWrapper;
 @Component
 @WebService
 public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
-	
+
 	public PesquisadorSoapWebService() {
 	}
-	
+
 	@Autowired(required = true)
 	private PesquisadorService pesquisadorService;
-	
+
 	@WebMethod
-	public PesquisadorSoapResponseWrapper getPesquisadorPorId(Long pesquisadorId){
+	public PesquisadorSoapResponseWrapper getPesquisadorPorId(final Long pesquisadorId){
 		Pesquisador pesquisador = getPesquisadorService().buscar(pesquisadorId);
-		
+
 		if (pesquisador == null){
 			return new PesquisadorSoapResponseWrapper();
 		}
@@ -42,7 +42,13 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 
         return response;
 	}
-	
+
+    @WebMethod
+    public Boolean isUsuarioAdministrador(final Long pesquisadorId) {
+        // TODO
+        return true;
+    }
+
     @WebMethod
     public PesquisadorSoapResponseWrapper getPesquisadores() {
 
@@ -58,9 +64,9 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
         return response;
     }
 
-	
+
 	@WebMethod
-	public String deletePorId(Long pesquisadorId){
+	public String deletePorId(final Long pesquisadorId){
 		try {
 			getPesquisadorService().remover(pesquisadorId);
 
@@ -69,8 +75,8 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 			 throw new ResourceNotFoundException(message);
 		}
 		return "Sucesso";
-		
-        
+
+
 	}
 
 	@WebMethod(exclude=true)
@@ -79,9 +85,9 @@ public class PesquisadorSoapWebService extends SpringBeanAutowiringSupport {
 	}
 
 	@WebMethod(exclude=true)
-	public void setPesquisadorService(PesquisadorService pesquisadorService) {
+	public void setPesquisadorService(final PesquisadorService pesquisadorService) {
 		this.pesquisadorService = pesquisadorService;
 	}
 
-	
+
 }

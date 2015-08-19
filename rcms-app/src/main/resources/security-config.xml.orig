@@ -11,8 +11,7 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<context:property-placeholder location="file:${user.home}/RCMS/config/application.properties" />
-	
+
 	<beans:bean class="org.springframework.security.web.FilterChainProxy" id="springSecurityFilterChain">
 		<filter-chain-map request-matcher="ant">
 			<filter-chain filters="securityContextPersistenceFilter" pattern="/*"></filter-chain>
@@ -25,38 +24,52 @@
  	<http pattern="/javax.faces.resource/**" security="none"></http>
  	<http pattern="/file/**" security="none"></http>
  
-<!-- 	<http auto-config="true" > -->
-<!-- 		<csrf disabled="true"/> -->
-<!-- 		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
-<!-- 		<form-login login-page="/paginas/portal/login/login.xhtml"  /> -->
-<!-- 	</http>	 -->
-	
 <<<<<<< HEAD
-	 <!-- <authentication-manager>
+	<http auto-config="true">
+=======
+	<http auto-config="true" >
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
+		<csrf disabled="true"/>
+		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<form-login login-page="/paginas/portal/login/login.xhtml"  />
+	</http>	
+<<<<<<< HEAD
+	
+	 <!--  <authentication-manager>
 		<authentication-provider>
 			<user-service>
 				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
 			</user-service>
 		</authentication-provider>
-	</authentication-manager>  -->
-=======
-<!-- 	<authentication-manager> -->
-<!-- 		<authentication-provider> -->
-<!-- 			<user-service> -->
-<!-- 				<user name="admin" password="admin" authorities="ROLE_USER"/> -->
-<!-- 			</user-service> -->
-<!-- 		</authentication-provider> -->
-<!-- 	</authentication-manager> -->
->>>>>>> 4b0af523706193e09b31a3bb2654dfbf44a4bb9b
+	</authentication-manager> -->
 	
 	<authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource" 
-               users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?"
-               authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?"
+               users-by-username-query="SELECT login, senha, enabled FROM usuario WHERE login=?"
+               authorities-by-username-query="select login, nomeautorizacao from usuario c, autorizacao a where c.login=?"
             />
         </authentication-provider>
-    </authentication-manager>  
+    </authentication-manager>
+=======
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	
+<!-- 	<authentication-manager> -->
+<!--         <authentication-provider> -->
+<!--             <jdbc-user-service data-source-ref="dataSource"  -->
+<!--                users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?" -->
+<!--                authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?" -->
+<!--             /> -->
+<!--         </authentication-provider> -->
+<!--     </authentication-manager>  -->
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
  
     <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <beans:property name="url" value="${database.url}" />

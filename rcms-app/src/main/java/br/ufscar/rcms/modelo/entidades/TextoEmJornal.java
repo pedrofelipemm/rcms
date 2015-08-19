@@ -1,10 +1,8 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,24 +32,63 @@ public class TextoEmJornal extends ProducaoBibliografica {
     public TextoEmJornal() {
     }
 
-    public TextoEmJornal(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String nomeJornal,
+    public TextoEmJornal(final String titulo, final Integer ano,
+            final String nomeJornal,
  final String dataPublicacao, final String volume, final String paginas) {
 
         super.setTitulo(titulo);
-        super.setCitacaoBibliograficas(autores);
         super.setAno(ano);
         this.nomeJornal = nomeJornal;
 
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            this.dataPublicacao = formatter.parse(dataPublicacao);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        Date date = null;
+        if (dataPublicacao.length() > 0) {
+            String[] data = dataPublicacao.split(" ");
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+            String dateInString = data[0] + "-" + this.getMes(data[1].replace(".", "")) + "-" + data[2];
+            try {
+                date = sdf.parse(dateInString);
+            } catch (ParseException e) {
+                date = null;
+            }
         }
+
+        this.dataPublicacao = date;
 
         this.volume = volume;
         this.paginas = paginas;
+    }
+
+    private int getMes(String mes) {
+
+        switch (mes) {
+        case "jan":
+            return 1;
+        case "fev":
+            return 2;
+        case "mar":
+            return 3;
+        case "abr":
+            return 4;
+        case "mai":
+            return 5;
+        case "jun":
+            return 6;
+        case "jul":
+            return 7;
+        case "ago":
+            return 8;
+        case "set":
+            return 9;
+        case "out":
+            return 10;
+        case "nov":
+            return 11;
+        case "dez":
+            return 12;
+        default:
+            return 0;
+        }
     }
 
     public String getNomeJornal() {
@@ -63,11 +100,11 @@ public class TextoEmJornal extends ProducaoBibliografica {
     }
 
     public Date getDataPublicacao() {
-        return new Date(dataPublicacao.getTime());
+        return this.dataPublicacao;
     }
 
     public void setDataPublicacao(final Date dataPublicacao) {
-        this.dataPublicacao = new Date(dataPublicacao.getTime());
+        this.dataPublicacao = dataPublicacao;
     }
 
     public String getVolume() {

@@ -9,4 +9,8 @@ public interface PesquisadorDAO extends BaseDAO<Pesquisador, Long> {
     List<Pesquisador> buscarTodosOrderByNome();
 
     List<Pesquisador> buscarTodosComIdioma(Long idIdioma);
+
+    Pesquisador buscarPorLogin(String login);
+
+    List<Pesquisador> findToAutoImport();
 }

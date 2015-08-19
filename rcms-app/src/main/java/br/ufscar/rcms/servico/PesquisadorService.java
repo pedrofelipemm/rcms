@@ -31,4 +31,10 @@ public interface PesquisadorService extends Serializable {
     TransientFile buscarFoto(Long idUsuario);
 
     void salvarFotoPesquisador(Pesquisador pesquisador) throws RCMSException;
+
+    Pesquisador buscarPorLogin(String login);
+
+    void saveOrUpdate(Pesquisador pesquisador);
+
+    List<Pesquisador> findToAutoImport();
 }

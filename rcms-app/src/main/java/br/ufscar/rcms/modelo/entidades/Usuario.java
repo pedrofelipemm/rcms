@@ -1,7 +1,11 @@
 package br.ufscar.rcms.modelo.entidades;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +19,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
+
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -25,35 +31,68 @@ public class Usuario extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    protected Long idUsuario;
 
     @Column(name = "nome", nullable = false)
-    private String nome;
+    protected String nome;
 
     @Column(name = "login", nullable = false, unique = true)
-    private String login;
+    protected String login;
 
     @Column(name = "senha", nullable = false)
-    private String senha;
+    protected String senha;
 
     @Column(name = "email", nullable = false)
     private String email;
-    
+
     @Column(name = "enabled")
     private Boolean enabled = true;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Autorizacao> autorizacoes = new ArrayList<Autorizacao>();
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
+    protected Set<ConfiguracaoUsuario> configuracoes = new HashSet<ConfiguracaoUsuario>();
+
+    public Usuario() {
+        configuracoes = initConfiguracoes();
+    }
+
+    private Set<ConfiguracaoUsuario> initConfiguracoes() {
+        return Arrays.asList(Tipo.values()).stream()
+                .filter(t -> t.equals(Tipo.ESTILO_ADMIN) || t.equals(Tipo.ESTILO_PORTAL) ||
+                        t.equals(Tipo.IDIOMA) || t.equals(Tipo.IMPORTACAO_LATTES_AUTOMATICA))
+                .map(t -> new ConfiguracaoUsuario(t, this))
+                .collect(Collectors.toSet());
+    }
+
+    public Set<ConfiguracaoUsuario> getConfiguracoes() {
+        return configuracoes;
+    }
+
+    public Configuracao getConfiguracao(final Configuracao.Tipo tipo) {
+        return configuracoes.stream().filter(c -> c.getKey().equals(tipo)).findFirst().orElse(null);
+    }
+
+    public void addConfiguracao(final ConfiguracaoUsuario configuracao) {
+        configuracoes.remove(configuracao);
+        System.out.println(configuracoes.size());
+        configuracoes.add(configuracao);
+    }
+
+    public void removeConfiguracao(final Configuracao configuracao) {
+        configuracoes.remove(configuracao);
+    }
+
     public List<Autorizacao> getAutorizacoes() {
-		return autorizacoes;
-	}
+        return autorizacoes;
+    }
 
-	public void setAutorizacoes(List<Autorizacao> autorizacoes) {
-		this.autorizacoes = autorizacoes;
-	}
+    public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
+    }
 
-	public Long getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }
 

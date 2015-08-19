@@ -1,7 +1,5 @@
 package br.ufscar.rcms.modelo.entidades;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -33,11 +31,11 @@ public class ArtigoEmPeriodico extends ProducaoBibliografica {
     public ArtigoEmPeriodico() {
     }
 
-    public ArtigoEmPeriodico(final String titulo, final List<CitacaoBibliografica> autores, final Integer ano, final String volume,
+    public ArtigoEmPeriodico(final String titulo, final Integer ano,
+            final String volume,
             final String paginas, final String doi, final String revista, final Integer numero) {
 
         super.setTitulo(titulo);
-        super.setCitacaoBibliograficas(autores);
         super.setAno(ano);
         this.volume = volume;
         this.paginas = paginas;

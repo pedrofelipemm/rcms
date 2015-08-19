@@ -3,6 +3,7 @@ package br.ufscar.rcms.builder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import br.ufscar.rcms.factory.EnderecoFactory;
 import br.ufscar.rcms.factory.FormacaoAcademicaFactory;
 import br.ufscar.rcms.factory.OrientacaoFactory;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoUsuario;
 import br.ufscar.rcms.modelo.entidades.Doutorado;
 import br.ufscar.rcms.modelo.entidades.Endereco;
 import br.ufscar.rcms.modelo.entidades.FormacaoAcademica;
@@ -54,7 +56,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     private Pesquisador cachedPesquisador;
 
     public PesquisadorBuilder(final String login, final String nome, final String senha, final String codigoLattes, final String email,
-            final boolean flagAdministrador, final String resumoProfissional) {
+            final String resumoProfissional) {
         this(null, login, nome, senha, codigoLattes, email, resumoProfissional);
     }
 
@@ -76,8 +78,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
-                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(),
-                pesquisador.getResumoProfissional());
+                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), pesquisador.getResumoProfissional());
 
         this.pesquisador.setSexo(pesquisadorLattes.getIdentificacao().getSexo());
         validatePesquisador(pesquisadorLattes, pesquisador);
@@ -159,7 +160,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         if (identificacao != null) {
             String[] citacoes = identificacao.getNomeCitacaoBibliografica().split(";");
             for (String citacao : citacoes) {
-                pesquisador.addCitacaoBibliograficas(new CitacaoBibliografica(cachedPesquisador, citacao.trim()));
+                pesquisador.addCitacaoBibliografica(new CitacaoBibliografica(cachedPesquisador, citacao.trim()));
             }
         }
         return this;
@@ -218,6 +219,11 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         return this;
     }
 
+    public PesquisadorBuilder configuracao(final Set<ConfiguracaoUsuario> configuracoes) {
+        configuracoes.forEach(pesquisador::addConfiguracao);
+        return this;
+    }
+
     @Override
     public Pesquisador build() {
         return pesquisador;
@@ -229,7 +235,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         Validate.notBlank(pesquisador.getSenha());
         Validate.notBlank(pesquisador.getCodigoLattes());
         Validate.notBlank(pesquisador.getEmail());
-        Validate.notBlank(pesquisador.getResumoProfissional());
+        // Validate.notBlank(pesquisador.getResumoProfissional());
     }
 
     private void validatePesquisador(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.dao.ProducaoDAO;
-import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.servico.ProducaoService;
 
@@ -43,12 +42,21 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
     @Override
-    public List<ArtigoEmPeriodico> buscarArtigosEmPeriodicos(final Long idUsuario) {
-        return producaoDAO.buscarArtigosEmPeriodicos(idUsuario);
+    public Boolean exists(String titulo, Integer ano) {
+        return producaoDAO.exists(titulo, ano);
     }
 
     private void loadLazyDependencies(Producao p) {
-        p.getCitacaoBibliograficas().size();
+        p.getAutores().size();
     }
 
+    @Override
+    public <T> List<T> buscarProducoes(Class<T> clazz) {
+        return producaoDAO.buscarProducoes(clazz);
+    }
+
+    @Override
+    public <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario) {
+        return producaoDAO.buscarProducoes(clazz, idUsuario);
+    }
 }

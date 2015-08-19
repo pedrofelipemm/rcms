@@ -7,14 +7,14 @@
 	<packaging>pom</packaging>
 	<version>1.0</version>
 
-	<modules>
-		<module>rcms-app</module>
-		<!--
-		<module>microservices/rcms-lattes-scheduler</module>
-		-->
-		<module>microservices/rcms-scorecard</module>
-	</modules>
-
+    <modules>
+        <module>rcms-commons</module>       
+        <module>rcms-app</module>
+        <module>microservices/rcms-scorecard-commons</module>
+        <module>microservices/rcms-scorecard</module>
+        <!-- <module>microservices/rcms-lattes-scheduler</module> -->
+    </modules>
+    
 	<properties>
 		<apache.commons.lang3.version>3.3.2</apache.commons.lang3.version>
 		<com.lmax.version>3.3.2</com.lmax.version>
@@ -22,13 +22,14 @@
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
 		<org.apache.logging.log4j.version>2.3</org.apache.logging.log4j.version>
-		<org.springframework.version>4.1.7.RELEASE</org.springframework.version>
-		<spring.security.version>4.0.1.RELEASE</spring.security.version>
-		<postgresql.version>9.1-901-1.jdbc4</postgresql.version>
+		<org.springframework.version>4.1.7.RELEASE</org.springframework.version> <!-- NARROW DEPENDENCY -->
+		<spring.security.version>4.0.1.RELEASE</spring.security.version> <!-- NARROW DEPENDENCY -->
+		<postgresql.version>9.1-901-1.jdbc4</postgresql.version> <!-- NARROW DEPENDENCY -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<slf4j.version>1.7.12</slf4j.version>
+		<rcms.version>1.0</rcms.version>
 	</properties>
-
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

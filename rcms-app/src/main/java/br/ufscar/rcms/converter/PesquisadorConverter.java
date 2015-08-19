@@ -9,7 +9,7 @@ import br.ufscar.rcms.webservice.modelo.PesquisadorResponse;
 
 public abstract class PesquisadorConverter {
 
-    public static List<PesquisadorResponse> convert(Collection<Pesquisador> pesquisadores) {
+    public static List<PesquisadorResponse> convert(final Collection<Pesquisador> pesquisadores) {
 
         List<PesquisadorResponse> response = new ArrayList<PesquisadorResponse>();
         for (Pesquisador pesquisador : pesquisadores) {
@@ -18,7 +18,7 @@ public abstract class PesquisadorConverter {
         return response;
     }
 
-    public static PesquisadorResponse convert(Pesquisador pesquisador) {
+    public static PesquisadorResponse convert(final Pesquisador pesquisador) {
 
         PesquisadorResponse response = new PesquisadorResponse();
         response.setCodigoLattes(pesquisador.getCodigoLattes());
@@ -33,7 +33,7 @@ public abstract class PesquisadorConverter {
         return response;
     }
 
-    public static Pesquisador convert(PesquisadorResponse pesquisadorResponse) {
+    public static Pesquisador convert(final PesquisadorResponse pesquisadorResponse) {
 
         Pesquisador pesquisador = new Pesquisador();
         pesquisador.setCodigoLattes(pesquisadorResponse.getCodigoLattes());

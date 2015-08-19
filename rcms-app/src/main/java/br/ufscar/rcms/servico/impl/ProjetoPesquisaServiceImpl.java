@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.commons.util.ExceptionUtils;
 import br.ufscar.rcms.dao.ProjetoPesquisaDAO;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
-import br.ufscar.rcms.util.ExceptionUtils;
 
 @Service("projetoPesquisaService")
 @Transactional(readOnly = false)
@@ -31,9 +31,14 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         try {
             return projetoPesquisaDAO.salvarOuAtualizar(projetoPesquisa);
-        } catch (Exception e) {
+        } catch (Exception exception) {
+
             // TODO PEDRO
-            throw new RuntimeException(ExceptionUtils.getInnerCause(e));
+            // Throwable throwable = ExceptionUtils.getInnerCause(exception);
+            // throw new RCMSException(throwable.getMessage(), throwable);
+
+            Throwable throwable = ExceptionUtils.getInnerCause(exception);
+            throw new RuntimeException(throwable.getMessage(), throwable);
         }
     }
 
@@ -82,9 +87,9 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         return projetoPesquisa;
     }
-    
+
     private void lazyLoadCollections(ProjetoPesquisa projetoPesquisa) {
-    	projetoPesquisa.getPesquisadores().size();	
+    	projetoPesquisa.getPesquisadores().size();
     }
 
 	public ProjetoPesquisaDAO getProjetoPesquisaDAO() {

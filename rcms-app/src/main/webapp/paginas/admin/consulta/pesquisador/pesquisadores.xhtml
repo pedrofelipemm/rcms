@@ -9,6 +9,11 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
 	<ui:define name="conteudo">
+		
+		<f:metadata>
+        	<f:event type="preRenderView" listener="#{configMB.loadUser}"/>
+    	</f:metadata>
+	
 		<div class="row">
         	<div class="col-sm-12">
         		<h1>#{mensagens['pesquisadores']}</h1>
@@ -22,9 +27,9 @@
  
  				<p:column styleClass="col-sm-1 col-md-1 text-center">
  					<f:facet name="header">
- 						<h:outputLabel value="#"/>
+ 						<h:outputLabel value="#{mensagens['id']}"/>
  					</f:facet>
- 					<h:outputLabel value="#{pesquisadorMB.pesquisadores.rowIndex + 1}"/>
+ 					<h:outputLabel value="#{pesquisador.idUsuario}"/>
  				</p:column>
  				
     			<p:column styleClass="col-sm-6 cold-md-8">
@@ -41,7 +46,7 @@
 					<div class="row text-center">
 						<div class="col-sm-12 text-center">
 							<span>
-								<h:commandButton id="salvar" value="#{mensagens['importar']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info bottom-buffer-2 top-buffer-2">
+								<h:commandButton id="importar" value="#{mensagens['importar']}" action="#{pesquisadorMB.salvarDadosLattes(pesquisador)}" styleClass="btn btn-info bottom-buffer-2 top-buffer-2">
 									<f:ajax render="@form" execute="@form" />
 								</h:commandButton>
 							</span>

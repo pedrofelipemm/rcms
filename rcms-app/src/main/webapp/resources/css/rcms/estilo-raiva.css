@@ -1,0 +1,205 @@
+/* CSS Document */
+
+@font-face {
+    font-family: Prototype;
+    src: url('../../resources/fonts/Prototype.ttf');
+}
+
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Prototype;
+    color: #C40040;
+}
+
+table {
+	width: 100%;
+}
+
+#cabecalho {
+    line-height: 30px;
+    color: #fff;
+    background-color: #C40040;
+    padding-top: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+#cabecalho a {
+    color: #fff;
+}
+
+.bs-login-modal-sm {
+    color: #000;
+}
+
+.nav {
+    padding-right: 10px;
+}
+
+.navbar-default .navbar-nav {
+	font-family: Prototype; 
+	font-size: 20px;
+}
+
+#carrousel {
+    height: 502px;
+    margin-bottom: 20px;
+}
+
+.box-projetos {
+    padding: 0 15px 15px 15px;
+    color: #000;
+}
+
+.box-producoes {
+    padding: 15px;
+    color: #000;
+}
+
+#row-logotipos {
+	margin: 20px 15px 0 15px;
+    border-top: 1px solid #C40040;
+}
+
+.logo-cell {
+	text-align: center;
+	line-height: 180px;
+}
+
+#rodape {
+    color: #fff;
+    background-color: #C40040;
+    padding-bottom: 20px;
+}
+
+#rodape h3 {
+    color: #fff;
+}
+
+#rodape a {
+    color: #fff;
+}
+
+#rodape a:hover {
+    text-decoration: underline;
+}
+
+#rodape ul {
+    padding-left: 20px;
+}
+
+.btn-saibamais {
+    background-image: url('../../resources/images/saiba-mais-icon-raiva.png');
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    color: #C40040;
+}
+
+.box-hover {-webkit-transition: all .5s ease;transition: all .5s ease;}
+.box-hover * {-webkit-transition: all .5s ease;transition: all .5s ease; text-decoration: none !important;}
+.box-hover:hover { background-color: #ddd;}
+.box-hover:hover p{color: #000;}
+
+.display-block {
+    display: block;
+}
+
+.breadcrumb a {
+    color: #C40040;
+}
+
+ul.listas {
+	padding-left: 20px;
+	list-style: none;
+}
+
+.listas li {
+	padding: 5px 0 5px 30px;
+	background: url('../../resources/images/saiba-mais-icon-raiva.png') no-repeat left center;
+}
+
+.lnk-lattes {
+	background: url('../../resources/images/lattes-icon.png') no-repeat right;
+	line-height: 50px;
+	margin-right: 10px;
+	padding: 10px 30px;
+}
+
+ol.listas-numeradas {
+  margin: 0 0 1.5em;
+  padding: 0;
+  counter-reset: item;
+}
+
+ol.listas-numeradas > li {
+  margin: 0;
+  padding: 0 0 0 2em;
+  text-indent: -1em;
+  list-style-type: none;
+  counter-increment: item;
+}
+
+ol.listas-numeradas > li:before {
+  display: inline-block;
+  width: 1em;
+  padding-right: 0.5em;
+  font-weight: bold;
+  text-align: right;
+  content: counter(item) ".";
+}
+
+.admin-bg {
+  background-color: #eee;
+}
+
+#admin-menu-top p {
+  padding-right: 25px;
+}
+
+#admin-container {
+	width: 100%; 
+	height: 100%; 
+}
+
+#admin-menu-left {
+	float: left;
+	top: 72px; 
+	position: fixed;
+	width: 200px; 
+	height: 100%; 
+	background-color: #222; 
+	padding: 15px;
+}
+
+#admin-menu-left a {
+	color: #ddd;
+}
+
+#admin-menu-left a:hover {
+	color: #222;
+}
+
+#admin-fluid-content {
+	float:left;
+	width: 100%;
+	height: 100%;
+	margin-left: 200px;
+	padding: 86px 215px 15px 15px;
+}
+
+#admin-fluid-content h1 {
+	color: #428bca;
+}
+
+#admin-rodape {
+	position: absolute; 
+	border-bottom: 0;
+	font-style: italic;
+	padding: 30px 215px 15px 15px;
+}
+
+.col-width-50 {
+	width: 50px;
+}

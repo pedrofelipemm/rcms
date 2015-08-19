@@ -131,7 +131,7 @@
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>cadastroProducao</from-outcome>
-			<to-view-id>/paginas/admin/cadastro/publicacao/publicacao.xhtml</to-view-id>
+			<to-view-id>/paginas/admin/cadastro/producao/producao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -152,6 +152,15 @@
 		<navigation-case>
 			<from-outcome>consultaIdiomas</from-outcome>
 			<to-view-id>/paginas/admin/consulta/idioma/idiomas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id></from-view-id>
+		<navigation-case>
+			<from-outcome>indicadores</from-outcome>
+			<to-view-id>/paginas/admin/consulta/indicador/indicadores.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -196,7 +205,7 @@
 		<from-view-id></from-view-id>
 		<navigation-case>
 			<from-outcome>consultaProducao</from-outcome>
-			<to-view-id>/paginas/admin/consulta/publicacao/publicacao.xhtml</to-view-id>
+			<to-view-id>/paginas/admin/consulta/producao/producoes.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -251,8 +260,8 @@
 	<navigation-rule>
 		<from-view-id></from-view-id>
 		<navigation-case>
-			<from-outcome>listagemPublicacoes</from-outcome>
-			<to-view-id>/paginas/portal/consulta/publicacao/publicacoes.xhtml</to-view-id>
+			<from-outcome>listagemProducoes</from-outcome>
+			<to-view-id>/paginas/portal/consulta/producao/producoes.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<p:panel id="painelProducao" header="#{mensagens['producao']}">
+					<div class="row">
+		          		<div class="col-sm-6 col-md-4">
+		            		<div class="form-group">
+								<div class="form-group">
+									<h:selectOneMenu id="selectTipoProducao" value="#{producaoMB.tipoProducao}" rendered="#{producaoMB.producao.idProducao == null}" styleClass="form-control">
+										<f:selectItem itemLabel="#{mensagens['apresentacao.de.trabalho']}" itemValue="apresentacaoTrabalho" />
+										<f:selectItem itemLabel="#{mensagens['artigo.aceito.publicacao']}" itemValue="artigoAceitoPublicacao" />
+										<f:selectItem itemLabel="#{mensagens['artigo.em.periodico']}" itemValue="artigoEmPeriodico" />
+										<f:selectItem itemLabel="#{mensagens['capitulo.de.livro']}" itemValue="capituloLivro" />
+										<f:selectItem itemLabel="#{mensagens['livro.publicado']}" itemValue="livroPublicado" />
+										<f:selectItem itemLabel="#{mensagens['outra.producao.bibliografica']}" itemValue="outraProducaoBibliografica" />
+										<f:selectItem itemLabel="#{mensagens['outra.producao.tecnica']}" itemValue="outraProducaoTecnica" />
+										<f:selectItem itemLabel="#{mensagens['produto.tecnologico']}" itemValue="produtoTecnologico" />
+										<f:selectItem itemLabel="#{mensagens['processo.ou.tecnica']}" itemValue="processoOuTecnica" />
+										<f:selectItem itemLabel="#{mensagens['resumo.em.congresso']}" itemValue="resumoCongresso" />
+										<f:selectItem itemLabel="#{mensagens['resumo.exp.em.congresso']}" itemValue="resumoExpandidoCongresso" />
+										<f:selectItem itemLabel="#{mensagens['trabalho.compl.congresso']}" itemValue="trabalhoCompletoCongresso" />
+										<f:selectItem itemLabel="#{mensagens['trabalho.tecnico']}" itemValue="trabalhoTecnico" />
+										<f:selectItem itemLabel="#{mensagens['texto.em.jornal']}" itemValue="textoJornal" />
+										<f:ajax/>
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="inputTextTitulo" value="#{mensagens['label.titulo']} " />
+									<h:inputText id="inputTextTitulo" pt:name="inputTextTitulo" 
+										value="#{producaoMB.producao.titulo}" required="true"
+										requiredMessage="#{mensagens['producao.titulo.nao.preenchido']}" styleClass="form-control" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="inputTextAno" value="#{mensagens['label.ano']} " />
+									<h:inputText id="inputTextAno" pt:name="inputTextAno" 
+										value="#{producaoMB.producao.ano}" required="true"
+										requiredMessage="#{mensagens['producao.ano.nao.preenchido']}" styleClass="form-control" />
+								</div>
+								<div class="form-group">
+									<h:outputLabel for="inputTextLink" value="#{mensagens['label.link']} " />
+									<h:inputText id="inputTextLink" pt:name="inputTextLink" 
+										value="#{producaoMB.producao.link}" required="true"
+										requiredMessage="#{mensagens['producao.link.nao.preenchido']}" styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</div>
+		</div>
+	</div>
+				
+</ui:composition>

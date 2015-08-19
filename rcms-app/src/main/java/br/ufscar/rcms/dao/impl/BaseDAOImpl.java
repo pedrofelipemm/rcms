@@ -67,7 +67,6 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
         return entidade;
     }
 
-    // TODO PEDRO
     @Deprecated
     @Override
     public T salvarOuAtualizar(T entidade) {
@@ -102,6 +101,10 @@ public abstract class BaseDAOImpl<T, K extends Serializable> implements BaseDAO<
 
     public Query createQuery(final String query) {
         return entityManager.createQuery(query);
+    }
+
+    public Query createNativeQuery(final String query) {
+        return entityManager.createNativeQuery(query);
     }
 
     public EntityManager getEntityManager() {

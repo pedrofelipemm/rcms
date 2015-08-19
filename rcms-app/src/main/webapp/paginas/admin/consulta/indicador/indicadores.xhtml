@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/admin/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+
+	<ui:define name="conteudo">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<h1>#{mensagens['indicadores']}</h1>
+			</div>
+		</div>
+
+		<h:form id="form-indicador" role="form" prependId="false">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<p:panel id="painel-producao-por-ano" header="#{mensagens['quantidade.producoes.por.ano']}"
+						  rendered="#{not empty indicadorMB.charts['lineChartByYear']}">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<p:chart type="line" model="#{indicadorMB.charts.lineChartByYear}"
+										  style="height:300px" responsive="true"/>
+									</div>
+								</div>
+							</div>
+						</p:panel>
+					</div>
+					<div class="form-group">
+                        <p:panel id="painel-producao-por-pesquisador" header="#{mensagens['quantidade.producoes.por.pesquisador']}"
+                            rendered="#{not empty indicadorMB.charts['barChartByResearcher']}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <p:chart type="bar" model="#{indicadorMB.charts.barChartByResearcher}"
+                                          style="height:300px" responsive="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </div>
+                    <div class="form-group">
+                        <p:panel id="painel-erro" header="#{mensagens['servicos.indisponiveis']}"
+                            rendered="#{not empty indicadorMB.listaServicosIndisponiveis}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <ui:repeat var="url" value="#{indicadorMB.listaServicosIndisponiveis}">
+	                                        <h4><a rel="next" href="#{url}" target="_blank">#{url}</a></h4>
+                                        </ui:repeat>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </div>
+				</div>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -4,60 +4,84 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
-	
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
 	<ui:define name="conteudo">
 
 		<div id="carrousel" class="container-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="carousel-example-generic" class="carousel slide"
+							data-ride="carousel">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<li data-target="#carousel-example-generic" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+							</ol>
 
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <a href="#"><img src="#{request.contextPath}/resources/images/carrousel-foto1.jpg" alt="Google Glass" /></a>
-                                    <div class="carousel-caption">
-                                        O Google Glass
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <a href="#"><img src="#{request.contextPath}/resources/images/carrousel-foto2.jpg" alt="Desenvolvimento para aplicativos móveis" /></a>
-                                    <div class="carousel-caption">
-                                        Desenvolvimento para aplicativos móveis
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <a href="#"><img src="#{request.contextPath}/resources/images/carrousel-foto3.jpg" alt="Lorem Ipsum" /></a>
-                                    <div class="carousel-caption">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    </div>
-                                </div>
-                            </div>
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner">
+								<div class="item active">
+									<a href="#"><img
+										src="#{request.contextPath}/resources/images/carrousel-foto1.jpg"
+										alt="Google Glass" /></a>
+									<div class="carousel-caption">O Google Glass</div>
+								</div>
+								<div class="item">
+									<a href="#"><img
+										src="#{request.contextPath}/resources/images/carrousel-foto2.jpg"
+										alt="Desenvolvimento para aplicativos móveis" /></a>
+									<div class="carousel-caption">Desenvolvimento para
+										aplicativos móveis</div>
+								</div>
+								<div class="item">
+									<a href="#"><img
+										src="#{request.contextPath}/resources/images/carrousel-foto3.jpg"
+										alt="Lorem Ipsum" /></a>
+									<div class="carousel-caption">Lorem ipsum dolor sit amet,
+										consectetur adipiscing elit.</div>
+								</div>
+							</div>
 
-                            <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>                
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
+							<!-- Controls -->
+							<a class="left carousel-control" href="#carousel-example-generic"
+								role="button" data-slide="prev"> <span
+								class="glyphicon glyphicon-chevron-left"></span>
+							</a> <a class="right carousel-control"
+								href="#carousel-example-generic" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<h:form id="formProjetosPesquisa">
+					<ui:repeat var="projeto" value="#{indiceMB.projetos}">
+						<div class="col-md-#{indiceMB.getColunasParaProjetos()}">
+							<div class="box-hover">
+								<h:commandLink class="display-block"
+									action="#{projetoPesquisaMB.exibir(projeto)}">
+									<img
+										src="#{request.contextPath}/resources/images/projeto-android.jpg"
+										alt="Projeto Android" />
+									<div class="box-projetos">
+										<h3>#{projeto.nome}</h3>
+										<p>#{projeto.descricao}</p>
+										<span class="btn-saibamais">#{mensagens['saiba.mais']}</span>
+									</div>
+								</h:commandLink>
+							</div>
+						</div>
+					</ui:repeat>
+				</h:form>
+				<!-- 
                 <div class="col-md-4">
                     <div class="box-hover">
                         <a href="#" class="display-block">
@@ -93,59 +117,88 @@
                             </div>
                         </a>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Últimas produções</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="box-hover">
-                        <a href="#" class="display-block">
-                        <div class="box-producoes">
-                            <p><strong><!-- &HorizontalLone; --> 10/07/2014 <!-- &HorizontalLone; --></strong></p>
-                            <p>In lorem turpis, pretium vel lacus vel, vulputate bibendum mauris. Cras dignissim tristique arcu nec cursus.</p>
-                            <span class="btn-saibamais">Saiba mais</span>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="box-hover">
-                        <a href="#" class="display-block">
-                        <div class="box-producoes">
-                            <p><strong><!-- &HorizontalLone; --> 01/02/2014 <!-- &HorizontalLone; --></strong></p>
-                            <p>Proin eu tellus commodo, gravida erat et, euismod dolor. Morbi convallis nisl convallis dui placerat.</p>	
-                            <span class="btn-saibamais">Saiba mais</span>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="box-hover">
-                        <a href="#" class="display-block">
-                        <div class="box-producoes">
-                            <p><strong><!-- &HorizontalLone; --> 05/12/2013 <!-- &HorizontalLone; --></strong></p>
-                            <p>Nulla libero turpis, adipiscing vitae condimentum sit amet, posuere quis lectus.</p>
-                            <span class="btn-saibamais">Saiba mais</span>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="box-hover">
-                        <a href="#" class="display-block">
-                        <div class="box-producoes">
-                            <p><strong><!-- &HorizontalLone; --> 22/09/2013 <!-- &HorizontalLone; --></strong></p>
-                            <p>Integer gravida nec erat ultricies porta. Mauris mollis ante nec tortor mattis eleifend.</p>
-                            <span class="btn-saibamais">Saiba mais</span>
-                        </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-   	</ui:define>
+                </div> -->
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>#{mensagens['producoes']}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<h:form id="formProducoes">
+					<ui:repeat var="producao" value="#{indiceMB.producoes}">
+						<div class="col-md-#{indiceMB.getColunasParaProducoes()}">
+							<div class="box-hover">
+								<h:commandLink class="display-block"
+									action="#{producaoMB.exibir(producao)}">
+									<div class="box-producoes">
+										<p class="tituloProducao">#{producao.ano}</p>
+										<p>#{producao.titulo}</p>
+										<span class="btn-saibamais">#{mensagens['saiba.mais']}</span>
+									</div>
+								</h:commandLink>
+							</div>
+						</div>
+					</ui:repeat>
+				</h:form>
+				<!-- 
+				<div class="col-md-3">
+					<div class="box-hover">
+						<a href="#" class="display-block">
+							<div class="box-producoes">
+								<p>
+									<strong>10/07/2014</strong>
+								</p>
+								<p>In lorem turpis, pretium vel lacus vel, vulputate
+									bibendum mauris. Cras dignissim tristique arcu nec cursus.</p>
+								<span class="btn-saibamais">Saiba mais</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="box-hover">
+						<a href="#" class="display-block">
+							<div class="box-producoes">
+								<p>
+									<strong>01/02/2014</strong>
+								</p>
+								<p>Proin eu tellus commodo, gravida erat et, euismod dolor.
+									Morbi convallis nisl convallis dui placerat.</p>
+								<span class="btn-saibamais">Saiba mais</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="box-hover">
+						<a href="#" class="display-block">
+							<div class="box-producoes">
+								<p>
+									<strong>05/12/2013</strong>
+								</p>
+								<p>Nulla libero turpis, adipiscing vitae condimentum sit
+									amet, posuere quis lectus.</p>
+								<span class="btn-saibamais">Saiba mais</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="box-hover">
+						<a href="#" class="display-block">
+							<div class="box-producoes">
+								<p class="tituloProducao">
+									<strong>22/09/2013</strong>
+								</p>
+								<p>Integer gravida nec erat ultricies porta. Mauris mollis
+									ante nec tortor mattis eleifend.</p>
+								<span class="btn-saibamais">Saiba mais</span>
+							</div>
+						</a>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</ui:define>
 </ui:composition>

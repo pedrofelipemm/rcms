@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.ufscar.rcms.dao.ConfiguracaoDAO;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoIndice;
 import br.ufscar.rcms.servico.ConfiguracaoService;
 
 @Service("configuracaoService")
@@ -27,5 +28,15 @@ public class ConfiguracaoServiceImpl implements ConfiguracaoService {
     @Override
     public List<Configuracao> buscarPorTipo(final Tipo... tipos) {
         return configuracaoDAO.buscarPorTipo(tipos);
+    }
+
+    @Override
+    public ConfiguracaoIndice buscarPorIdETipo(Long id, Tipo tipo) {
+        return configuracaoDAO.buscarPorIdETipo(id, tipo);
+    }
+
+    @Override
+    public void remover(Configuracao configuracao) {
+        configuracaoDAO.remover(configuracao);
     }
 }

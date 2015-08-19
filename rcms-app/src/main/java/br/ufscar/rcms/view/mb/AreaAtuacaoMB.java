@@ -236,12 +236,12 @@ public class AreaAtuacaoMB extends AbstractMB {
 	}
 	
 	public void excluirEspec(EspecializacaoAreaAtuacao especializacao) {
-		SubAreaAtuacao subArea = especializacao.getSubAreaAtuacao();
-		subArea.getEspecializacoes().remove(especializacao);
-		especializacao.setSubAreaAtuacao(null);
-		subAreaAtuacaoService.alterar(subArea);
-		especializacaoService.remover(especializacao);		
-		todasAsEspecializacoes = especializacaoService.buscarTodas();
+		try{
+			especializacaoService.remover(especializacao);		
+			todasAsEspecializacoes = especializacaoService.buscarTodas();
+		}catch(Exception ex){
+			adicionarMensagemErroByKey("nao.foi.possivel.excluir", especializacao.getDescricao());
+		}
 	}
 	
 	public void inserirEspec() {

@@ -19,81 +19,96 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-9">
+				<div class="col-md-12">
 					<h1>
 						#{projetoPesquisaMB.projetoPesquisa.nome}<br />
 					</h1>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">#{mensagens['exibir.projeto.descricao']}</h3>
-								</div>
-								<div class="panel-body">
-									<div class="col-md-10">
-										#{projetoPesquisaMB.projetoPesquisa.descricao}</div>
-								</div>
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">#{mensagens['exibir.projeto.descricao']}</h3>
+						</div>
+						<div class="panel-body">
+							<div class="col-md-12">
+								#{projetoPesquisaMB.projetoPesquisa.descricao}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h:panelGroup
+				rendered="#{not empty projetoPesquisaMB.projetoPesquisa.agenciaDeFomento}">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">#{mensagens['exibir.projeto.agencia.fomento']}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="col-md-12">
+									#{projetoPesquisaMB.projetoPesquisa.agenciaDeFomento}</div>
 							</div>
 						</div>
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">#{mensagens['exibir.projeto.agencia.fomento']}</h3>
-								</div>
-								<div class="panel-body">
-									<div class="col-md-10">
-										#{projetoPesquisaMB.projetoPesquisa.agenciaDeFomento}</div>
-								</div>
+					</div>
+				</div>
+			</h:panelGroup>
+			<div class="row">
+				<h:panelGroup
+					rendered="#{not empty projetoPesquisaMB.projetoPesquisa.anoInicio}">
+					<div class="col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">#{mensagens['exibir.projeto.ano.inicio']}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="col-md-12">
+									#{projetoPesquisaMB.projetoPesquisa.anoInicio}</div>
 							</div>
 						</div>
-
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">#{mensagens['exibir.projeto.ano.inicio']}</h3>
-								</div>
-								<div class="panel-body">
-									<div class="col-md-10">
-										#{projetoPesquisaMB.projetoPesquisa.anoInicio}</div>
-								</div>
+					</div>
+				</h:panelGroup>
+				<h:panelGroup
+					rendered="#{not empty projetoPesquisaMB.projetoPesquisa.anoConclusao}">
+					<div class="col-md-3">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">#{mensagens['exibir.projeto.ano.conclusao']}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="col-md-12">
+									#{projetoPesquisaMB.projetoPesquisa.anoConclusao}</div>
 							</div>
 						</div>
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h3 class="panel-title">#{mensagens['exibir.projeto.ano.conclusao']}</h3>
-								</div>
-								<div class="panel-body">
-									<div class="col-md-10">
-										#{projetoPesquisaMB.projetoPesquisa.anoConclusao}</div>
-								</div>
+					</div>
+				</h:panelGroup>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">#{mensagens['exibir.projeto.pesquisadores']}</h3>
+						</div>
+						<div class="panel-body">
+							<div class="container-fluid">
+								<ui:repeat var="pesquisador"
+									value="#{projetoPesquisaMB.projetoPesquisa.pesquisadores}"
+									varStatus="linha">
+									<div class="row">
+										<div class="col-md-2 text-right">
+											<strong>#{linha.index + 1}.</strong>
+										</div>
+										<div class="col-md-10">#{pesquisador.nome}</div>
+									</div>
+								</ui:repeat>
 							</div>
 						</div>
-						<div class="col-md-12">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">#{mensagens['exibir.projeto.pesquisadores']}</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="container-fluid">
-                        	<ui:repeat var="pesquisador" value="#{projetoPesquisaMB.projetoPesquisa.pesquisadores}" varStatus="linha">
-	                        	<div class="row">
-	                            	<div class="col-md-2 text-right">
-	                                	<strong>#{linha.index + 1}.</strong>
-	                                </div>
-	                                <div class="col-md-10">
-	                                    #{pesquisador.nome}
-	                                </div>
-	                            </div>
-                            </ui:repeat>
-                        </div>
-                      </div>
-                      
-                    </div>
-                </div>
 
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</ui:define>

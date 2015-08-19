@@ -1,7 +1,17 @@
 package br.ufscar.rcms.servico.impl;
 
+import static br.ufscar.rcms.commons.util.FileUtils.generateReasearcherPhotoName;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,17 +19,23 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.commons.util.ExceptionUtils;
 import br.ufscar.rcms.dao.ProjetoPesquisaDAO;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
+import br.ufscar.rcms.servico.exception.RCMSException;
 
 @Service("projetoPesquisaService")
 @Transactional(readOnly = false)
 public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
     private static final long serialVersionUID = 4593268685421323315L;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProjetoPesquisaServiceImpl.class);
 
     @Autowired
     private ProjetoPesquisaDAO projetoPesquisaDAO;
+
+    // @Value("${pasta.galeria.projeto}")
+    // private String pastaGaleriaProjetos;
 
     @Override
     public void salvar(ProjetoPesquisa projetoPesquisa) {
@@ -30,7 +46,9 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
     public ProjetoPesquisa salvarOuAtualizar(ProjetoPesquisa projetoPesquisa) {
 
         try {
-            return projetoPesquisaDAO.salvarOuAtualizar(projetoPesquisa);
+            ProjetoPesquisa savedProjetoPesquisa = projetoPesquisaDAO.salvarOuAtualizar(projetoPesquisa);
+
+            return savedProjetoPesquisa;
         } catch (Exception exception) {
 
             // TODO PEDRO
@@ -43,6 +61,25 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
     }
 
     @Override
+    public void salvarImagem(final ProjetoPesquisa projetoPesquisa, TransientFile imagem) throws RCMSException {
+        // LOGGER.debug("BEGIN - salvarImagem() - {0}", projeto);
+        try {
+            String fileName = generateReasearcherPhotoName(
+                    "/home/andre/RCMS/galeria-projetos/" + projetoPesquisa.getIdProjetoPesquisa() + "/",
+                    imagem.getFileName(), imagem.getFileExtension());
+            File file = new File(fileName);
+
+            FileUtils.writeByteArrayToFile(file, imagem.getFile());
+
+        } catch (IOException e) {
+            String message = "Erro ao salvar imagem";
+            // LOGGER.error(message, e);
+            throw new RCMSException(message, e);
+        }
+        // LOGGER.debug("END - salvarImagem() - {0}", projeto);
+    }
+
+    @Override
     public List<ProjetoPesquisa> buscarTodos() {
         return projetoPesquisaDAO.buscarTodos();
     }
@@ -50,6 +87,39 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
     @Override
     public List<ProjetoPesquisa> buscarTodosOrderByNome() {
         return projetoPesquisaDAO.buscarTodosOrderByNome();
+    }
+
+    private void carregarGaleria(final ProjetoPesquisa projetoPesquisa) {
+        try {
+
+            final File folder = new File("/home/andre/RCMS/galeria-projetos/" + projetoPesquisa.getIdProjetoPesquisa());
+            for (final File fileEntry : folder.listFiles()) {
+                
+                byte[] imagem = Files.readAllBytes(Paths.get("/home/andre/RCMS/galeria-projetos/"
+                        + projetoPesquisa.getIdProjetoPesquisa() + "/" + fileEntry.getName()));
+                String ext = FilenameUtils.getExtension("/home/andre/RCMS/galeria-projetos/"
+                        + projetoPesquisa.getIdProjetoPesquisa() + "/" + fileEntry.getName());
+                String fileName = FilenameUtils.getName("/home/andre/RCMS/galeria-projetos/"
+                        + projetoPesquisa.getIdProjetoPesquisa() + "/" + fileEntry.getName());
+                
+                TransientFile tf = new TransientFile();
+                tf.setFile(imagem);
+                tf.setFileExtension(ext);
+                tf.setFileLocation("/home/andre/RCMS/galeria-projetos/" + projetoPesquisa.getIdProjetoPesquisa()
+                        + "/");
+                tf.setFileName(fileName);
+
+                projetoPesquisa.getGaleria().add(tf);
+            }
+
+        } catch (IOException exception) {
+            LOGGER.error("Erro ao carregar ao carregar galeria", exception);
+        }
+    }
+
+    @Override
+    public List<TransientFile> buscarGaleria(final Long idProjetoPesquisa) {
+        return buscar(idProjetoPesquisa).getGaleria();
     }
 
     @Override
@@ -84,6 +154,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         ProjetoPesquisa projetoPesquisa = projetoPesquisaDAO.buscar(idUsuario);
         lazyLoadCollections(projetoPesquisa);
+        carregarGaleria(projetoPesquisa);
 
         return projetoPesquisa;
     }

@@ -18,8 +18,8 @@
 			      
 			      <div class="modal-body" >
 			        <div class="panel-body">
-	    				<div class="row">
-			          		<div class="col-md-6">
+	    				<!-- <div class="row">
+			          		 <div class="col-md-6">
 			            		<div class="form-group">
 			            		    <h:outputLabel for="selectGrandeAreaAtuacao" value="#{mensagens['grande.area.de.atuacao']}" />
 			            			<h:selectOneMenu id="selectGrandeAreaAtuacao" styleClass="form-control" 
@@ -46,10 +46,10 @@
 			            			</h:selectOneMenu>            			
 			              		</div>
 			          		</div>
-			        	</div>
+			        	</div> -->
 			        	
 			        	<div class= "row">
-			        		<div class="col-md-6">
+			        		<!-- <div class="col-md-6">
 			            		<div class="form-group">
 			            		    <h:outputLabel for="selectSubArea" value="#{mensagens['subarea.de.atuacao']}" />
 			            			<h:selectOneMenu id="selectSubArea" styleClass="form-control" 
@@ -61,18 +61,18 @@
 			            				               var="subArea" itemLabel="#{subArea.descricao}" itemValue="#{subArea}" />
 			            			</h:selectOneMenu>            			
 			              		</div>
-			          		</div>
+			          		</div> -->
 			          		
-			          		<div class="col-md-6">
+			          		<div class="col-md-12">
 			            		<div class="form-group">
-			            		    <h:outputLabel for="selectEspec" value="#{mensagens['especializacao.descricao']}" />
+			            		    <h:outputLabel for="selectEspec" value="#{mensagens['area.de.atuacao']}" />
 			            			<h:selectOneMenu id="selectEspec" styleClass="form-control" 
 			            			                 value="#{pesquisadorMB.especializacaoSelecionada}"
 			            			                 converter="entityConverter">
-			            			    <p:ajax  update="selectGrandeAreaAtuacao selectAreaAtuacao selectSubArea selectEspec" />
-			            				<f:selectItem itemLabel="#{mensagens['label.especializacao.placeholder']}" itemValue="#{null}"/>
-			            				<f:selectItems value="#{pesquisadorMB.especializacoesParaSelecionar}"
-			            				               var="espec" itemLabel="#{espec.descricao}" itemValue="#{espec}" />
+			            			    <p:ajax  update="selectEspec" />
+			            				<f:selectItem itemLabel="#{mensagens['label.area.placeholder']}" itemValue="#{null}"/>
+			            				<f:selectItems value="#{areaAtuacaoMB.todasAsEspecializacoes}"
+			            				               var="espec" itemLabel="#{espec}" itemValue="#{espec}" />
 			            			</h:selectOneMenu>            			
 			              		</div>
 			          		</div>

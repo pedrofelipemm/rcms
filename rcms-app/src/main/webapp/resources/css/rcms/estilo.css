@@ -142,6 +142,15 @@
     text-overflow: ellipsis;
 }
 
+.btnManterAtuacao{
+	margin-left: 10px;
+}
+
+.inputModalAreaAtuacao{
+	width: 50%;
+}
+
+
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */

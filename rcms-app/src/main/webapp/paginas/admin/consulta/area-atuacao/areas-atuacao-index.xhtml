@@ -9,22 +9,59 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
 	<ui:define name="conteudo">
-		<div class="panel panel-default">
-  			<div class="panel-body">
-  				<li><a href="${request.contextPath}/paginas/admin/consulta/area-atuacao/grandes-area-atuacao.xhtml">#{mensagens['grande.area.de.atuacao']}</a></li>
-  			</div>
+	
+		<div class="row">
+			<div class="col-sm-12">
+				<h1>#{mensagens['areas.de.atuacao']}</h1>
+			</div>
 		</div>
-		
-		<div class="panel panel-default">
-  			<div class="panel-body">
-  			<li><a href="${request.contextPath}/paginas/admin/consulta/area-atuacao/areas-atuacao.xhtml">#{mensagens['area.de.atuacao']}</a></li>
-  			</div>
-		</div>
-		
-		<div class="panel panel-default">
-  			<div class="panel-body">
-  			<li><a href="${request.contextPath}/paginas/admin/consulta/area-atuacao/sub-areas-atuacao.xhtml">#{mensagens['subarea.de.atuacao']}</a></li>
-  			</div>
-		</div>
+
+		<h:form id="form-idioma" role="form" prependId="false">
+
+			<div class="rcms-table rcms-table-hover">
+				<div class="rcms-table-thead">
+			  		<div class="rcms-table-tr">
+						<div class="rcms-table-th col-sm-1" >
+							<h:outputText value="#" />
+						</div>
+						<div class="rcms-table-th col-sm-7" >
+							<h:outputText value="#{mensagens['descricao']}" />
+						</div>
+						<div class="rcms-table-th col-sm-4 text-center" >
+							<a rel="next" title="#{mensagens['adicionar']}" href="${request.contextPath}/paginas/admin/cadastro/area-atuacao/area-atuacao.xhtml" class="btn btn-primary">
+								#{mensagens['adicionar']}
+							</a>			
+				  		</div>
+					</div>
+				</div>
+				<div class="rcms-table-tbody">
+					<ui:repeat id="grid-idiomas" pt:name="grid-area" varStatus="status" var="area" value="#{areaAtuacaoMB.todasAsEspecializacoes}" >
+						<div class="rcms-table-tr">
+							<div class="rcms-table-td">
+								<h:outputText id="output-text-row-index" value="#{status.index+1}" />
+							</div>
+							<div class="rcms-table-td">
+								<h:outputText id="output-text-descricao" value="#{area}"/>
+							</div>
+							<div class="rcms-table-td">
+								<div class="row text-center">
+									<div class="col-sm-12 text-center">
+										<!-- <span>
+											<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2"
+												action="#{areaAtuacaoMB.editar(area)}" pt:title="#{mensagens['editar']}"/>
+										</span>  -->
+										<span>
+											<h:commandButton value="#{mensagens['excluir']}" styleClass="btn btn-danger bottom-buffer-2 top-buffer-2"
+												action="#{areaAtuacaoMB.excluirEspec(area)}" pt:title="#{mensagens['excluir']}" />
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
+			</div>
+			
+		</h:form>
 	</ui:define>
 </ui:composition>

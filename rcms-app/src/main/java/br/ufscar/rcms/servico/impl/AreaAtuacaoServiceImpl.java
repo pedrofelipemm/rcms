@@ -44,7 +44,7 @@ public class AreaAtuacaoServiceImpl implements AreaAtuacaoService {
 
     @Override
     public void remover(AreaAtuacao area) {
-        areaDAO.remover(area);
+        areaDAO.remover(area.getIdAreaAtuacao());
     }
 
     private void setAreaAtuacao(AreaAtuacao areaAtuacao) {
@@ -52,4 +52,9 @@ public class AreaAtuacaoServiceImpl implements AreaAtuacaoService {
             subAreaAtuacao.setAreaAtuacao(areaAtuacao);
         }
     }
+
+	@Override
+	public AreaAtuacao buscar(long id) {
+		return areaDAO.buscar(id);
+	}
 }

@@ -19,7 +19,7 @@ public class EspecializacaoAreaAtuacao extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_especializacao")
-    private int idEspecializacao;
+    private long idEspecializacao;
 
     @Column(name = "descricao")
     private String descricao;
@@ -28,11 +28,11 @@ public class EspecializacaoAreaAtuacao extends Entidade {
     @JoinColumn(name = "id_sub_area_atuacao", foreignKey = @ForeignKey(name = "fk_especializacao_area_atuacao_sub_area_atuacao"))
     private SubAreaAtuacao subAreaAtuacao;
 
-    public int getIdEspecializacao() {
+    public long getIdEspecializacao() {
         return idEspecializacao;
     }
 
-    public void setIdEspecializacao(final int idEspecializacao) {
+    public void setIdEspecializacao(final long idEspecializacao) {
         this.idEspecializacao = idEspecializacao;
     }
 

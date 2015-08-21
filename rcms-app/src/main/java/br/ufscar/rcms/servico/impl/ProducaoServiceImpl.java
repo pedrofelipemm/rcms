@@ -1,6 +1,7 @@
 package br.ufscar.rcms.servico.impl;
 
 import static br.ufscar.rcms.commons.util.FileUtils.generateFileName;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,37 +29,37 @@ public class ProducaoServiceImpl implements ProducaoService {
 
     @Autowired
     private ProducaoDAO producaoDAO;
-    
+
     @Value("${pasta.arquivos.pdf.producao}")
     private String pastaArquivos;
 
     @Override
     public void saveOrUpdate(Producao producao) {
-    	
+
         salvarArquivo(producao);
-       
+
         producaoDAO.saveOrUpdate(producao);
     }
 
-    private void salvarArquivo(Producao producao) {
-    	try {
-    		
-            TransientFile arquivo = producao.getArquivoPdf();
-            
-            if(arquivo == null)
-            	return;
-            
-            String fileName = generateFileName(pastaArquivos, producao.getIdProducao().toString(), arquivo.getFileExtension());
-            File file = new File(fileName);
-            producao.setNomePdf(producao.getIdProducao().toString() + arquivo.getFileExtension());
-            
+    private void salvarArquivo(final Producao producao) {
+        try {
 
-            FileUtils.writeByteArrayToFile(file, arquivo.getFile());
+            TransientFile arquivo = producao.getArquivoPdf();
+
+            if (!isEmpty(producao.getIdProducao()) && !TransientFile.isEmpty(arquivo)) {
+
+                String fileName = generateFileName(pastaArquivos, producao.getIdProducao().toString(),
+                        arquivo.getFileExtension());
+                File file = new File(fileName);
+                producao.setNomePdf(producao.getIdProducao().toString() + arquivo.getFileExtension());
+
+                FileUtils.writeByteArrayToFile(file, arquivo.getFile());
+            }
         } catch (IOException e) {
             String message = String.format("Erro ao salvar arquivo da produção: %s", producao.getTitulo());
             LOGGER.error(message, e);
         }
-	}
+    }
 
 	@Override
     public void remove(Producao producao) {

@@ -150,6 +150,13 @@
 	width: 50%;
 }
 
+.salvarPdfPesquisador{
+	padding-top: 10px;
+}
+
+.primefacesFileUpload > div.ui-fileupload-content.ui-widget-content.ui-corner-bottom > div{
+	display:none;
+}
 
 /*==========  Mobile First Method  ==========*/
 

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.integration.repository.ProducaoIntegrationRepository;
 import br.ufscar.rcms.scorecard.model.entity.AutorProducao;
 import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
@@ -29,6 +30,9 @@ public class ProducaoServiceImpl implements ProducaoService {
     @Autowired
     private ProducaoRepository producaoRepository;
 
+    @Autowired
+    private ProducaoIntegrationRepository producaoIntegrationRepository;
+
     @Override
     public List<AmountProducaoByYearDTO> findAmountProducaoByYear() {
 
@@ -42,6 +46,7 @@ public class ProducaoServiceImpl implements ProducaoService {
     @Override
     public List<AmountProducaoByResearcherDTO> findAmountProducaoByResearcher() {
 
+        List<Producao> lama = producaoIntegrationRepository.findAll();
         List<Producao> producoes = producaoRepository.findAll();
 
         List<AmountProducaoByResearcherDTO> result = new ArrayList<AmountProducaoByResearcherDTO>();

@@ -34,9 +34,7 @@ public class ScorecardConfig {
     @Autowired
     private JpaVendorAdapter jpaVendorAdapter;
 
-
     @Bean(name = "scorecardEntityManagerFactory")
-    // @Qualifier(value = "scorecardEntityManagerFactory")
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
@@ -48,13 +46,12 @@ public class ScorecardConfig {
         return em.getObject();
     }
 
-
     @Bean(name = "scorecardEntityManager")
     public EntityManager entityManager() {
         return entityManagerFactory().createEntityManager();
     }
 
-
+    @Primary
     @Bean(name = "scorecardDataSource")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

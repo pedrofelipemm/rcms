@@ -154,7 +154,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         ProjetoPesquisa projetoPesquisa = projetoPesquisaDAO.buscar(idUsuario);
         lazyLoadCollections(projetoPesquisa);
-        carregarGaleria(projetoPesquisa);
+        // carregarGaleria(projetoPesquisa);
 
         return projetoPesquisa;
     }

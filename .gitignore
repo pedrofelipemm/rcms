@@ -89,3 +89,4 @@ trace.txt
 .springBeans
 *.pmd
 *.ruleset
+/bin/

@@ -9,80 +9,34 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
 	<ui:define name="conteudo">
-		<div class="row">
-			<div class="col-md-12">
-				<h1>#{mensagens['area.de.atuacao']}</h1>
-			</div>
-		</div>
-		<h:form id="formCadAreaAtuacao">
-
+		<h:form id="formPesquisador" role="form" prependId="false">
+			
+			 
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-sm-12">
 					<div class="form-group">
-						<h2>#{areaAtuacaoMB.area.descricao}</h2>
+						<!--<h1>#{mensagens['area.de.atuacao']}</h1> -->
 					</div>
-
-
-					<h:panelGroup>
-
-						<h:column headerClass="text-center">
-							<h:outputLabel for="descricaoSubArea"
-								value="#{mensagens['label.subarea.descricao']} " />
-							<div class="input-group">
-								<h:inputText id="descricaoSubArea"
-									value="#{areaAtuacaoMB.subAreaSelecionada.descricao}"
-									pt:placeHolder="#{mensagens['label.subarea.placeholder']}"
-									styleClass="form-control" />
-								<span class="input-group-btn"> <h:commandButton
-										value="#{mensagens['adicionar']}" styleClass="btn btn-primary"
-										action="#{areaAtuacaoMB.adicionarSubAreaAtuacao}" >
-										<f:ajax render="@form" execute="@form" />
-										</h:commandButton>
-										<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />
-								</span>
-							</div>
-						</h:column>
-						<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />	
-					</h:panelGroup>
-
-					<h:dataTable value="#{areaAtuacaoMB.subAreas}" var="area"
-						styleClass="table table-hover" headerClass="col-width-50"
-						rowClasses="col-width-50"
-						rendered="#{not empty areaAtuacaoMB.subAreas}">
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputLabel value="#" />
-							</f:facet>
-							<h:outputLabel value="#{areaAtuacaoMB.subAreas.rowIndex + 1}" />
-						</h:column>
-
-						<h:column headerClass="col-xs-10">
-							<f:facet name="header">
-								<h:outputLabel value="#{mensagens['descricao']}" />
-							</f:facet>
-							<h:outputLabel value="#{area.descricao}" />
-						</h:column>
-
-						<h:column headerClass="text-center">
-							<h:commandButton value="#{mensagens['excluir']}"
-								styleClass="btn btn-danger"
-								action="#{areaAtuacaoMB.removerSubAreaAtuacao(area)}" >
-							<f:ajax render="@form" execute="@form" />
+				</div>
+			</div>
+			
+			<ui:include src="/paginas/admin/cadastro/area-atuacao/area-atuacao-painel.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/area-atuacao/area-atuacao-modal-grande-area.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/area-atuacao/area-atuacao-modal-area.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/area-atuacao/area-atuacao-modal-sub-area.xhtml" />
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<span>
+							<h:commandButton value="#{mensagens['salvar']}" pt:name="buttonSalvar" action="#{areaAtuacaoMB.salvar}"
+								styleClass="btn btn-success  bottom-buffer-2 top-buffer-2">
+								<f:ajax render="@form" execute="@form" />
 							</h:commandButton>
-						</h:column>
-
-					</h:dataTable>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<h:commandButton value="#{mensagens['salvar']}"
-									action="#{areaAtuacaoMB.salvar}" styleClass="btn btn-success">
-									<f:ajax render="@form" execute="@form" />
-								</h:commandButton>
-							</div>
-						</div>
+						</span>
+						<span>
+							<a href="#" class="btn btn-success fa fa-arrow-circle-o-up fa-3x back-to-top bottom-buffer-2 top-buffer-2"></a>
+						</span>
 					</div>
 				</div>
 			</div>

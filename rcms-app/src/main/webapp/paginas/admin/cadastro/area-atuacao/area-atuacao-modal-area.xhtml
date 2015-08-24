@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+			<!-- Modal -->
+			<div class="modal fade" id="modalArea" tabindex="-1" role="dialog" aria-labelledby="modalArea" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#10006;</span></button>
+			        <h4 class="modal-title" id="myModalAreaLabel">#{mensagens['cadastro.area.atuacao']}</h4>
+			      </div>
+			      
+			      <div class="modal-body" >
+			        <div class="panel-body">
+	    				<div class="row">
+			          		<div class="col-md-12">
+			            		<div class="form-group">
+				            		 <p:outputLabel styleClass="control-label" id="modalAreaLabel" value="#{mensagens['descricao']}"/>
+				            		 <div>
+				            		 	<h:inputText id="inputModalArea" styleClass="inputModalAreaAtuacao" value="#{areaAtuacaoMB.areaInserindoOuEditando}"></h:inputText>
+				            		 </div>      			
+			              		</div>
+			          		</div>
+			        	</div>
+  					 </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
+
+			        <h:commandButton value="#{mensagens['adicionar']}" styleClass="btn btn-primary btnManterAtuacao"
+												action="#{areaAtuacaoMB.inserirArea}">
+						<f:ajax execute="inputModalArea" render="painelArea" />
+						<f:passThroughAttribute name="data-toggle" value="modal" />
+					    <f:passThroughAttribute name="data-target" value="#modalArea" />
+					</h:commandButton>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+	</ui:composition>

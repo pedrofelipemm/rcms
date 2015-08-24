@@ -63,7 +63,7 @@ public class Pesquisador extends Usuario {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<AtuacaoPesquisador> areaAtuacoes = new ArrayList<AtuacaoPesquisador>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="pesquisadores")

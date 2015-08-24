@@ -34,7 +34,7 @@ public class SubAreaAtuacaoServiceImpl implements SubAreaAtuacaoService {
 
     @Override
     public void remover(SubAreaAtuacao subArea) {
-        subAreaDAO.remover(subArea);
+        subAreaDAO.remover(subArea.getIdSubAreaAtuacao());
     }
 
     @Override

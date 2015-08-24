@@ -52,7 +52,7 @@ public class SubAreaAtuacaoMB extends AbstractMB {
 
     public void salvar() {
 
-        if (getSubArea().getIdSubAreaAtuacao() != null) {
+        if (getSubArea().getIdSubAreaAtuacao() > 0) {
             getSubAreaAtuacaoService().alterar(getSubArea());
             adicionarMensagemInfoByKey("area.atuacao.alterada.sucesso", getSubArea().getDescricao());
         } else {

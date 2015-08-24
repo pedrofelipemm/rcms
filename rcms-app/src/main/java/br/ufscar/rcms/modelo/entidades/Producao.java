@@ -15,6 +15,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "producao")
@@ -38,10 +39,13 @@ public abstract class Producao extends Entidade {
     private String link;
 
     @Column(name = "pdf")
-    private byte[] pdf;
+    private String nomePdf;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producao")
     private List<AutorProducao> autores = new ArrayList<AutorProducao>();
+    
+    @Transient
+    private TransientFile arquivoPdf = new TransientFile();
 
     public Long getIdProducao() {
         return idProducao;
@@ -75,28 +79,30 @@ public abstract class Producao extends Entidade {
         this.link = link;
     }
 
-    public byte[] getPdf() {
+    public String getNomePdf() {
 
-        if (pdf == null) {
+        /*if (pdf == null) {
             return new byte[0];
         }
 
         byte[] copyOfPdf = new byte[pdf.length];
         System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
 
-        return copyOfPdf;
+        return copyOfPdf;*/
+    	return this.nomePdf;
     }
 
-    public void setPdf(final byte[] pdf) {
-
-        if (pdf == null) {
+    public void setNomePdf(String pdf) {
+    	this.nomePdf = pdf;
+    	
+        /*if (pdf == null) {
             return;
         }
 
         byte[] copyOfPdf = new byte[pdf.length];
         System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
 
-        this.pdf = copyOfPdf;
+        this.pdf = copyOfPdf;*/
     }
 
     @Override
@@ -134,7 +140,7 @@ public abstract class Producao extends Entidade {
         producaoDestino.setAutores(autores);
         producaoDestino.setIdProducao(idProducao);
         producaoDestino.setLink(link);
-        producaoDestino.setPdf(pdf);
+        producaoDestino.setNomePdf(nomePdf);
         producaoDestino.setTitulo(titulo);
         return producaoDestino;
     }
@@ -147,4 +153,12 @@ public abstract class Producao extends Entidade {
     public void setAutores(final List<AutorProducao> autores) {
         this.autores = autores;
     }
+
+	public TransientFile getArquivoPdf() {
+		return arquivoPdf;
+	}
+
+	public void setArquivoPdf(TransientFile arquivoPdf) {
+		this.arquivoPdf = arquivoPdf;
+	}
 }

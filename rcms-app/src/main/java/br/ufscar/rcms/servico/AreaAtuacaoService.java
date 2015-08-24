@@ -16,4 +16,6 @@ public interface AreaAtuacaoService extends Serializable {
     List<AreaAtuacao> buscarTodas();
 
     List<AreaAtuacao> buscarPorDescricao(String Descricao);
+    
+    AreaAtuacao buscar(long id);
 }

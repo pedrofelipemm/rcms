@@ -14,6 +14,17 @@
 	<welcome-file-list>
 		<welcome-file>paginas/index.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<filter>
+		<filter-name>primeUploadFilter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>primeUploadFilter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -86,6 +97,10 @@
 	<mime-mapping>
 		<extension>ico</extension>
 		<mime-type>image/x-icon</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>pdf</extension>
+		<mime-type>application/pdf</mime-type>
 	</mime-mapping>
 
 	<servlet>

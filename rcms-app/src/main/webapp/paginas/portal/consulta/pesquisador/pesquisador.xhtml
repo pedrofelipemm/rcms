@@ -83,6 +83,7 @@
                     </div>
                 </div>
             </div>
+            <h:panelGroup rendered="#{not empty pesquisadorMB.pesquisador.linhasDePesquisa}">
             <div class="row">
             	<div class="col-md-12">
                     <div class="panel panel-default">
@@ -106,6 +107,7 @@
                     </div>
                 </div>
             </div>
+            </h:panelGroup>
             <div class="row">
             	<div class="col-md-12">
                     <div class="panel panel-default">
@@ -113,41 +115,19 @@
                         <h3 class="panel-title">#{mensagens['projetos.de.pesquisa']}</h3>
                       </div>
                       <div class="panel-body">
-                      <em>* Pendente</em>
-                      <!-- 
                         <div class="container-fluid">
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>2011 - 2012</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Elaboração de Material Didático Interdisciplinar de Apoio ao Processo de Desenvolvimento de Software nas Etapas de Modelagem e Implementação<br/>
-                                    <br/>
-                                    Descrição: A presente proposta tem como objetivo a elaboração de material didático interdisciplinar que atenda às etapas de modelagem e implementação de sistemas de software. Pretende-se elaborar material didático que envolva a integração de disciplinas de programação, desenvolvimento de Software e Banco de Dados ministradas nos módulos do curso Sistemas de Informação. Essas disciplinas nortearão o desenvolvimento de um material didático que apoiará os professores e alunos ao longo do curso.<br/>
-                                    Situação: Em andamento; Natureza: Pesquisa. <br/>
-                                    Alunos envolvidos: Graduação: (4) / Mestrado acadêmico: (2) / Doutorado: (1) . <br/>
-                                    <br/>
-                                    Integrantes: Antonio Francisco do Prado - Coordenador / Marilde T P Santos - Integrante / Carlos Eduardo Cirilo - Integrante / Carlos Roberto Silveira Júnior - Integrante / Bruno Luigi Borgo - Integrante / Graziele Aparecida de Lima Rocco - Integrante / Paulo Eduardo Papotti - Integrante / Eurico Rogério Corte - Integrante.<br/><br/>
-                                </div>
-                            </div>
-                        	<div class="row">
-                            	<div class="col-md-2 text-right">
-                                	<strong>2009 - 2012</strong>
-                                </div>
-                                <div class="col-md-10">
-                                    Software Reuse<br/>
-                                    <br/>
-                                    Descrição: Motivados pela importância da Tecnologia da Informação, visando contribuir para o avanço do conhecimento e da tecnologia no desenvolvimento de aplicações na WEB 2.0, em Engenharia de Software, e com foco nas idéias sobre a Reutilização de Software, este projeto visa pesquisar e explorar conceitos, técnicas, métodos e ferramentas para tornar o Reuso de Software uma prática intra e inter comunidades. Com foco na reutilização, investiga-se uma Estratégia para o Desenvolvimento de Software, que visa o compartilhamento de recursos e a cooperação na web, apoiando e melhorando a Internet como plataforma de trabalho. O principal objetivo deste projeto é elaborar uma Estratégia para o Desenvolvimento de Software, orientada para Reuso, combinando idéias, disciplinas, tecnologias, e ferramentas, conforme o paradigma emergente da WEB2.0. Outros objetivos são: Definir um conjunto de recursos computacionais, incluindo ontologias, serviços, componentes, padrões, frameworks, sistemas multi-agentes, e ferramentas, para apoiar a Estratégia Orientada para o Reuso; Desenvolver uma Linha de Produtos de Software em domínios de aplicações na WEB 2.0. Essas linha de produtos servirá como estudo de caso para propor, testar, e refinar a Estratégia de Reuso proposta; Elaborar documentações e tutoriais que instruem sobre o PDS orientado para o Reuso; e Elaborar publicações que divulgam os resultados alcançados. A Estratégia servirá para orientar o desenvolvimento orientado para o reuso de software de aplicações na web. O apoio computacional produzido com o projeto pode ser utilizado para facilitar a prática da estratégia nas empresas. Por fim, a documentação do projeto, tutoriais e publicações servirão para divulgar e estimular o uso da estratégia pelas diferentes comunidades que desenvolvem software.. <br/>
-                                    Situação: Em andamento; Natureza: Pesquisa. <br/>
-                                    Alunos envolvidos: Doutorado: (2) . <br/>
-                                    <br/>
-                                    Integrantes: Antonio Francisco do Prado - Coordenador.<br/>
-                                    Financiador(es): Ci&amp;T - Cooperação / Digital Assets - Cooperação / Fundação de Amparo à Pesquisa do Estado de São Paulo - Cooperação.<br/>
-                                    Número de produções C, T &amp; A: 2 / Número de orientações: 1
-                                </div>
-                            </div>
+                        	<ui:repeat var="projetoPesquisa" value="#{pesquisadorMB.pesquisador.projetosPesquisa}">
+	                        	<div class="row">
+	                            	<div class="col-md-2 text-right">
+	                                	<strong>#{projetoPesquisa.anoInicio} - #{(not empty projetoPesquisa.anoConclusao) ? projetoPesquisa.anoConclusao : mensagens['atual']}</strong>
+	                                </div>
+	                                <div class="col-md-10">
+	                                    #{projetoPesquisa.nome}<br/><br/>
+	                                    #{projetoPesquisa.descricao}<br/><br/>
+	                                </div>
+	                            </div>
+                            </ui:repeat>
                         </div>
-                        -->
                       </div>
                     </div>
                 </div>

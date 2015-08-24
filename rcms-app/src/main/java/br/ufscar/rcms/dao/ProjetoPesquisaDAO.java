@@ -8,4 +8,5 @@ public interface ProjetoPesquisaDAO extends BaseDAO<ProjetoPesquisa, Long> {
 
     List<ProjetoPesquisa> buscarTodosOrderByNome();
 
+    Boolean exists(String nome);
 }

@@ -23,7 +23,7 @@ public class PesquisadorLattes {
     private FormacoesAcademicaLattes formacoes;
 
     @XmlElement(name = "projetos_pesquisa")
-    private ProjetetosPesquisaLattes projetosPesquisa;
+    private ProjetosPesquisaLattes projetosPesquisa;
 
     @XmlElement(name = "area_atuacao")
     private AreaAtuacaoLattes areaAtuacao;
@@ -120,7 +120,7 @@ public class PesquisadorLattes {
         return formacoes;
     }
 
-    public ProjetetosPesquisaLattes getProjetosPesquisa() {
+    public ProjetosPesquisaLattes getProjetosPesquisa() {
         return projetosPesquisa;
     }
 

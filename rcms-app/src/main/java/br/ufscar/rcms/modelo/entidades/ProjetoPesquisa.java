@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "projeto_pesquisa")
-public class ProjetoPesquisa extends Entidade {
+public class ProjetoPesquisa extends Entidade implements Comparable {
 
     private static final long serialVersionUID = -9149061665883584009L;
 
@@ -202,5 +202,14 @@ public class ProjetoPesquisa extends Entidade {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        ProjetoPesquisa pp = (ProjetoPesquisa) o;
+        Integer ppAnoConclusao = (pp.anoConclusao != null) ? pp.anoConclusao : 10000;
+        Integer thisAnoConclusao = (this.anoConclusao != null) ? this.anoConclusao : 10000;
+
+        return thisAnoConclusao.compareTo(ppAnoConclusao);
     }
 }

@@ -244,3 +244,11 @@
 .tituloProducao::after { 
     content: "\2014";
 }
+
+.download {
+	background-image: url("../../resources/images/pdf_document.png");
+	background-repeat: no-repeat;
+	margin-left: 8px;
+	padding-left: 22px;
+	font-style: italic;
+}

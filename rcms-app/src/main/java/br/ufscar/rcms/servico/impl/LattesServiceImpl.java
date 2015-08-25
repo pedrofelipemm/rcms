@@ -563,7 +563,7 @@ public class LattesServiceImpl implements LattesService {
 
     public void addProjetosPesquisa(final List<ProjetoLattes> projetosPesquisa, Pesquisador pesquisador) {
         
-        if (projetosPesquisa != null) {
+        if (projetosPesquisa.size() > 0) {
             for (ProjetoLattes projetoLattes : projetosPesquisa) {
                 if (!isProjetoPesquisa(projetoLattes.getNome())) {
                     ProjetoPesquisa projetoPesquisa = new ProjetoPesquisa(projetoLattes.getNome(),

@@ -25,7 +25,7 @@ public class SubAreaAtuacao extends Entidade {
     @Column(name = "id_sub_area_atuacao")
     private long idSubAreaAtuacao;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @OneToMany(cascade = { javax.persistence.CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "subAreaAtuacao")

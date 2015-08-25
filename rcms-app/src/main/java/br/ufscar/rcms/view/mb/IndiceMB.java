@@ -35,6 +35,8 @@ public class IndiceMB extends AbstractMB {
 
     private List<Producao> producoes;
 
+    private ProjetoPesquisa projetoPesquisa;
+
     @PostConstruct
     public void inicializar() {
         limparDados();
@@ -104,5 +106,18 @@ public class IndiceMB extends AbstractMB {
 
     public Integer getColunasParaProducoes() {
         return 12 / this.producoes.size();
+    }
+
+    public ProjetoPesquisa exibirProjeto(Long id) {
+        return projetoPesquisaService.buscar(id);
+    }
+
+    public ProjetoPesquisa getProjetoPesquisa() {
+
+        return projetoPesquisaService.buscar(1L);
+    }
+
+    public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+        this.projetoPesquisa = projetoPesquisa;
     }
 }

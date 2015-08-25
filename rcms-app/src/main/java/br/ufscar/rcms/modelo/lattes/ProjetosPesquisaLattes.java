@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "projetos_pesquisa")
-public class ProjetetosPesquisaLattes {
+public class ProjetosPesquisaLattes {
 
     @XmlElement(name = "projeto")
     private List<ProjetoLattes> projetos;

@@ -13,49 +13,131 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<div id="carousel-example-generic" class="carousel slide"
-							data-ride="carousel">
-							<!-- Indicators -->
-							<ol class="carousel-indicators">
-								<li data-target="#carousel-example-generic" data-slide-to="0"
-									class="active"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-							</ol>
+						<h:panelGroup rendered="#{configMB.temaPortal eq 'portal'}">
+							<div id="carousel-example-generic" class="carousel slide"
+								data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-generic" data-slide-to="0"
+										class="active"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+								</ol>
 
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner">
-								<div class="item active">
-									<a href="#"><img
-										src="#{request.contextPath}/resources/images/carrousel-foto1.jpg"
-										alt="Google Glass" /></a>
-									<div class="carousel-caption">O Google Glass</div>
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<div class="item active">
+										<a href="#"><img
+											src="#{request.contextPath}/resources/images/carrousel-foto1.jpg"
+											alt="Google Glass" /></a>
+										<div class="carousel-caption">O Google Glass</div>
+									</div>
+									<div class="item">
+										<a href="#"><img
+											src="#{request.contextPath}/resources/images/carrousel-foto2.jpg"
+											alt="Desenvolvimento para aplicativos móveis" /></a>
+										<div class="carousel-caption">Desenvolvimento para
+											aplicativos móveis</div>
+									</div>
+									<div class="item">
+										<a href="#"><img
+											src="#{request.contextPath}/resources/images/carrousel-foto3.jpg"
+											alt="Lorem Ipsum" /></a>
+										<div class="carousel-caption">Lorem ipsum dolor sit
+											amet, consectetur adipiscing elit.</div>
+									</div>
 								</div>
-								<div class="item">
-									<a href="#"><img
-										src="#{request.contextPath}/resources/images/carrousel-foto2.jpg"
-										alt="Desenvolvimento para aplicativos móveis" /></a>
-									<div class="carousel-caption">Desenvolvimento para
-										aplicativos móveis</div>
-								</div>
-								<div class="item">
-									<a href="#"><img
-										src="#{request.contextPath}/resources/images/carrousel-foto3.jpg"
-										alt="Lorem Ipsum" /></a>
-									<div class="carousel-caption">Lorem ipsum dolor sit amet,
-										consectetur adipiscing elit.</div>
+
+								<!-- Controls -->
+								<a class="left carousel-control"
+									href="#carousel-example-generic" role="button"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left"></span>
+								</a> <a class="right carousel-control"
+									href="#carousel-example-generic" role="button"
+									data-slide="next"> <span
+									class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{configMB.temaPortal eq 'alegria'}">
+							<div id="carousel-example-generic" class="carousel slide"
+								data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-generic" data-slide-to="0"
+										class="active"></li>
+								</ol>
+
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<div class="item active">
+										<h:form>
+											<h:commandLink
+												action="#{projetoPesquisaMB.exibir(indiceMB.exibirProjeto(1))}">
+												<img
+													src="#{request.contextPath}/resources/images/carrousel-foto4.jpg"
+													alt="Google Glass" />
+											</h:commandLink>
+											<div class="carousel-caption">XO for All and Green:
+												Desiging Flexible and Sustainable XO applications</div>
+										</h:form>
+									</div>
 								</div>
 							</div>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{configMB.temaPortal eq 'surpresa'}">
+							<div id="carousel-example-generic" class="carousel slide"
+								data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-generic" data-slide-to="0"
+										class="active"></li>
+								</ol>
 
-							<!-- Controls -->
-							<a class="left carousel-control" href="#carousel-example-generic"
-								role="button" data-slide="prev"> <span
-								class="glyphicon glyphicon-chevron-left"></span>
-							</a> <a class="right carousel-control"
-								href="#carousel-example-generic" role="button" data-slide="next">
-								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>
-						</div>
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<div class="item active">
+										<h:form>
+											<h:commandLink
+												action="#{projetoPesquisaMB.exibir(indiceMB.exibirProjeto(1))}">
+												<img
+													src="#{request.contextPath}/resources/images/carrousel-foto5.jpg"
+													alt="Google Glass" />
+											</h:commandLink>
+											<div class="carousel-caption">XO for All and Green:
+												Desiging Flexible and Sustainable XO applications</div>
+										</h:form>
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{configMB.temaPortal eq 'raiva'}">
+							<div id="carousel-example-generic" class="carousel slide"
+								data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-example-generic" data-slide-to="0"
+										class="active"></li>
+								</ol>
+
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<div class="item active">
+										<h:form>
+											<h:commandLink
+												action="#{projetoPesquisaMB.exibir(indiceMB.exibirProjeto(1))}">
+												<img
+													src="#{request.contextPath}/resources/images/carrousel-foto7.jpg"
+													alt="Google Glass" />
+											</h:commandLink>
+											<div class="carousel-caption">XO for All and Green:
+												Desiging Flexible and Sustainable XO applications</div>
+										</h:form>
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
 					</div>
 				</div>
 			</div>
@@ -68,12 +150,24 @@
 							<div class="box-hover">
 								<h:commandLink class="display-block"
 									action="#{projetoPesquisaMB.exibir(projeto)}">
-									<img
-										src="#{request.contextPath}/resources/images/projeto-android.jpg"
-										alt="Projeto Android" />
+									<h:panelGroup
+										rendered="#{configMB.temaPortal eq 'alegria' and projeto.idProjetoPesquisa eq 15}">
+										<img
+											src="#{request.contextPath}/resources/images/projeto2.jpg"
+											alt="Projeto" />
+									</h:panelGroup>
+									<h:panelGroup
+										rendered="#{configMB.temaPortal eq 'alegria' and projeto.idProjetoPesquisa eq 14}">
+										<img
+											src="#{request.contextPath}/resources/images/projeto1.jpg"
+											alt="Projeto" />
+									</h:panelGroup>
 									<div class="box-projetos">
 										<h3>#{projeto.nome}</h3>
-										<p>#{projeto.descricao}</p>
+										<p>
+											<h:outputText
+												value="#{projeto.descricao.length() gt 700 ? projeto.descricao.substring(0,697).concat('...') : projeto.descricao}" />
+										</p>
 										<span class="btn-saibamais">#{mensagens['saiba.mais']}</span>
 									</div>
 								</h:commandLink>
@@ -121,7 +215,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<h3>#{mensagens['producoes']}</h3>
+					<h3>#{mensagens['producoes.recentes']}</h3>
 				</div>
 			</div>
 			<div class="row">

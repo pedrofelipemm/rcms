@@ -50,7 +50,6 @@ public class RcmsServletContextListener implements ApplicationListener<ContextRe
 				enderecoAdmin.setEnderecoProfissional("CPD");
 				administrador.setEndereco(enderecoAdmin);
 				List<Autorizacao> adminAutorizacoes = autorizacaoService.buscarTodos();
-				adminAutorizacoes.add(admin);
 				administrador.setAutorizacoes(adminAutorizacoes);
 				try {
 					pesquisadorService.salvarOuAtualizar(administrador);

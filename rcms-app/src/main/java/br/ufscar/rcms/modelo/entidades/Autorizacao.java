@@ -43,6 +43,14 @@ public class Autorizacao extends Entidade{
 		this.descricao = descricao;
 	}
 
+	public long getIdAutorizacao() {
+		return idAutorizacao;
+	}
+
+	public void setIdAutorizacao(long idAutorizacao) {
+		this.idAutorizacao = idAutorizacao;
+	}
+
 
 
 }

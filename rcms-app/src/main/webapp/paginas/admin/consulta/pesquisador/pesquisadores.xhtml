@@ -6,7 +6,8 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:o="http://omnifaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:sec="http://www.springframework.org/security/tags">
 	
 	<ui:define name="conteudo">
 		
@@ -41,7 +42,9 @@
 
 				<p:column styleClass="col-sm-5 col-md-3">
 					<f:facet name="header">
-						<a href="${request.contextPath}/paginas/admin/cadastro/pesquisador/pesquisador.xhtml" style="color: white;" class="btn btn-primary"> #{mensagens['adicionar']} </a>
+						<sec:authorize ifAnyGranted="ROLE_ADMIN">
+							<a href="${request.contextPath}/paginas/admin/cadastro/pesquisador/pesquisador.xhtml" style="color: white;" class="btn btn-primary"> #{mensagens['adicionar']} </a>
+						</sec:authorize>
 					</f:facet>
 					<div class="row text-center">
 						<div class="col-sm-12 text-center">

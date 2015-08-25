@@ -21,9 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.rcms.commons.util.ExceptionUtils;
 import br.ufscar.rcms.dao.IdiomaDAO;
 import br.ufscar.rcms.dao.PesquisadorDAO;
+import br.ufscar.rcms.modelo.entidades.Autorizacao;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
+import br.ufscar.rcms.servico.AutorizacaoService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.PesquisadorNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
@@ -38,6 +40,9 @@ public class PesquisadorServiceImpl implements PesquisadorService {
 
     @Autowired
     private PesquisadorDAO pesquisadorDAO;
+    
+    @Autowired
+    private AutorizacaoService autorizacaoService;
 
     @Autowired
     private IdiomaDAO idiomaDAO;
@@ -57,8 +62,8 @@ public class PesquisadorServiceImpl implements PesquisadorService {
                     idiomaDAO.saveOrUpdate(compreensaoIdioma.getCompreensaoIdiomaPK().getIdioma());
                 }
             }
-
             Pesquisador savedPesquisador = pesquisadorDAO.salvarOuAtualizar(pesquisador);
+            
 
             if (!TransientFile.isEmpty(pesquisador.getFoto())) {
                 salvarFotoPesquisador(pesquisador);

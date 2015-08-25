@@ -33,5 +33,11 @@ public class AutorizacaoServiceImpl implements AutorizacaoService {
 		return autorizacaoDAO.salvarOuAtualizar(autorizacao);
 	}
 
+
+	@Override
+	public Autorizacao buscarAutorizacao(Long id) {
+		return autorizacaoDAO.buscar(id);
+	}
+
    
 }

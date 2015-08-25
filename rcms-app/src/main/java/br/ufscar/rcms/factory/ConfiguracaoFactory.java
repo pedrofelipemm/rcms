@@ -14,7 +14,6 @@ public class ConfiguracaoFactory {
 
     public static Configuracao createConfiguracao(final Tipo tipo, final Usuario usuario) {
         switch (tipo) {
-
         case ESTILO_ADMIN:
         case ESTILO_PORTAL:
         case IDIOMA:
@@ -23,11 +22,11 @@ public class ConfiguracaoFactory {
 
         case MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER:
             return new ConfiguracaoSistema(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER,
-                    "http://localhost:23081/rcms-scorecard/api/producoes/amount/researcher");
+                    "http://localhost:23081/api.rcms/producoes/amount/researcher");
 
         case MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR:
             return new ConfiguracaoSistema(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR,
-                    "http://localhost:23081/rcms-scorecard/api/producoes/amount/year");
+                    "http://localhost:23081/api.rcms/producoes/amount/year");
 
         default:
             throw new IllegalArgumentException("Invalid argument: " + tipo);

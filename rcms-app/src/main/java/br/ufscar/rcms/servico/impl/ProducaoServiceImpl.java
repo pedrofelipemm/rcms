@@ -5,6 +5,8 @@ import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -34,7 +36,7 @@ public class ProducaoServiceImpl implements ProducaoService {
     private String pastaArquivos;
 
     @Override
-    public void saveOrUpdate(Producao producao) {
+    public void saveOrUpdate(final Producao producao) {
 
         salvarArquivo(producao);
 
@@ -62,7 +64,7 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
 	@Override
-    public void remove(Producao producao) {
+    public void remove(final Producao producao) {
         producaoDAO.remover(producao);
     }
 
@@ -72,28 +74,62 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
     @Override
-    public Producao buscarPorId(Long id) {
+    public Producao buscarPorId(final Long id) {
         Producao p = producaoDAO.buscar(id);
         loadLazyDependencies(p);
         return p;
     }
 
     @Override
-    public Boolean exists(String titulo, Integer ano) {
+    public Boolean exists(final String titulo, final Integer ano) {
         return producaoDAO.exists(titulo, ano);
     }
 
-    private void loadLazyDependencies(Producao p) {
+    private void loadLazyDependencies(final Producao p) {
         p.getAutores().size();
     }
 
     @Override
-    public <T> List<T> buscarProducoes(Class<T> clazz) {
+    public <T> List<T> buscarProducoes(final Class<T> clazz) {
         return producaoDAO.buscarProducoes(clazz);
     }
 
     @Override
-    public <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario) {
+    public <T> List<T> buscarProducoes(final Class<T> clazz, final Long idUsuario) {
         return producaoDAO.buscarProducoes(clazz, idUsuario);
+    }
+
+    @Override
+    public TransientFile buscarPdf(final Long producaoId) {
+        return buscarPdf(buscarPorId(producaoId));
+    }
+
+    @Override
+    public TransientFile buscarPdf(final Producao producao) {
+        if (!isEmpty(producao)) {
+            loadPdf(producao);
+        }
+        return producao.getArquivoPdf();
+    }
+
+    private void loadPdf(final Producao producao) {
+        try {
+            String fileExtension = "pdf";
+            if (!isEmpty(fileExtension)) {
+                String fileName = producao.getIdProducao() + "." + fileExtension;
+                byte[] pdf = Files.readAllBytes(Paths.get(pastaArquivos + fileName));
+
+                TransientFile file = new TransientFile();
+                file.setFile(pdf);
+                file.setFileExtension("pdf");
+                file.setFileLocation(pastaArquivos);
+                file.setFileName(fileName);
+
+                producao.setArquivoPdf(file);
+            }
+        } catch (IOException exception) {
+            LOGGER.error(String.format("Erro ao carregar ao carregar o pdf da produção: %s", producao.getTitulo()),
+                    exception);
+        }
     }
 }

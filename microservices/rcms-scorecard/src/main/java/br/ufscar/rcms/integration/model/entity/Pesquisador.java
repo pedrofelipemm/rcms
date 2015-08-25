@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard.model.entity;
+package br.ufscar.rcms.integration.model.entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;

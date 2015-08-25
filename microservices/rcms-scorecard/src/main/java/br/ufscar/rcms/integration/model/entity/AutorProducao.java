@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard.model.entity;
+package br.ufscar.rcms.integration.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "autor_producao")
-public class AutorProducao extends br.ufscar.rcms.scorecard.model.entity.Entity {
+public class AutorProducao extends br.ufscar.rcms.model.entity.Entity {
 
     private static final long serialVersionUID = -7028167574212537609L;
 

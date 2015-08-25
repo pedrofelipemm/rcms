@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.integration.model.entity.AutorProducao;
+import br.ufscar.rcms.integration.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.integration.repository.ProducaoIntegrationRepository;
-import br.ufscar.rcms.scorecard.model.entity.AutorProducao;
-import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
 import br.ufscar.rcms.scorecard.repository.ProducaoRepository;
 import br.ufscar.rcms.scorecard.rest.commons.dto.AmountProducaoByResearcherDTO;
@@ -36,7 +36,9 @@ public class ProducaoServiceImpl implements ProducaoService {
     @Override
     public List<AmountProducaoByYearDTO> findAmountProducaoByYear() {
 
-        List<Producao> producoes = producaoRepository.findAll();
+        syncronizeData();
+
+        List<br.ufscar.rcms.integration.model.entity.Producao> producoes = producaoIntegrationRepository.findAll();
 
         return producoes.stream().collect(Collectors.groupingBy(p -> p.getAno(), Collectors.counting()))
                 .entrySet().stream().map(e -> new AmountProducaoByYearDTO(e.getValue().intValue(), e.getKey()))
@@ -46,12 +48,13 @@ public class ProducaoServiceImpl implements ProducaoService {
     @Override
     public List<AmountProducaoByResearcherDTO> findAmountProducaoByResearcher() {
 
-        List<Producao> lama = producaoIntegrationRepository.findAll();
-        List<Producao> producoes = producaoRepository.findAll();
+        syncronizeData();
+
+        List<br.ufscar.rcms.integration.model.entity.Producao> producoes = producaoIntegrationRepository.findAll();
 
         List<AmountProducaoByResearcherDTO> result = new ArrayList<AmountProducaoByResearcherDTO>();
         Map<String, Integer> map = new HashMap<String, Integer>();
-        for (Producao producao : producoes) {
+        for (br.ufscar.rcms.integration.model.entity.Producao producao : producoes) {
             List<AutorProducao> autores = producao.getAutores();
             for (AutorProducao autor : autores) {
                 CitacaoBibliografica citacao = autor.getCitacaoBibliografica();
@@ -71,5 +74,17 @@ public class ProducaoServiceImpl implements ProducaoService {
         }
 
         return result;
+    }
+
+    @Override
+    public void syncronizeData() {
+
+        List<Producao> producoes = producaoRepository.findAll();
+        List<br.ufscar.rcms.integration.model.entity.Producao> producoesFromIntegration = producaoIntegrationRepository
+                .findAll();
+
+        List<Producao> lama = producoesFromIntegration.stream().map(p -> new Producao(p)).collect(Collectors.toList());
+
+
     }
 }

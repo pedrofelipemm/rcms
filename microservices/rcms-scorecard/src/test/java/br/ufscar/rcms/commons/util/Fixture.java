@@ -1,7 +1,7 @@
 package br.ufscar.rcms.commons.util;
 
-import br.ufscar.rcms.scorecard.model.entity.CitacaoBibliografica;
-import br.ufscar.rcms.scorecard.model.entity.Pesquisador;
+import br.ufscar.rcms.integration.model.entity.CitacaoBibliografica;
+import br.ufscar.rcms.integration.model.entity.Pesquisador;
 import br.ufscar.rcms.scorecard.model.entity.Producao;
 
 public abstract class Fixture {

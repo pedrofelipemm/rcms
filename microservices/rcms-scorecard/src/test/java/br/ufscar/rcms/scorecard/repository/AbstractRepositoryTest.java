@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.rcms.model.entity.Entity;
 import br.ufscar.rcms.scorecard.UnitTestConfig;
-import br.ufscar.rcms.scorecard.model.entity.Entity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

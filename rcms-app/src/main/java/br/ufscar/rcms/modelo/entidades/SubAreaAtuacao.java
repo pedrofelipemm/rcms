@@ -23,9 +23,9 @@ public class SubAreaAtuacao extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_sub_area_atuacao")
-    private Integer idSubAreaAtuacao;
+    private long idSubAreaAtuacao;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @OneToMany(cascade = { javax.persistence.CascadeType.ALL }, fetch = FetchType.EAGER, mappedBy = "subAreaAtuacao")
@@ -35,7 +35,7 @@ public class SubAreaAtuacao extends Entidade {
     @JoinColumn(name = "id_area_atuacao", foreignKey = @ForeignKey(name = "fk_sub_area_atuacao_area_atuacao"))
     private AreaAtuacao areaAtuacao;
 
-    public Integer getIdSubAreaAtuacao() {
+    public long getIdSubAreaAtuacao() {
         return idSubAreaAtuacao;
     }
 

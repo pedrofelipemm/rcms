@@ -41,8 +41,8 @@ import br.ufscar.rcms.modelo.lattes.OutrasProducoesTecnicaLattes;
 import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.ProducaoBibliograficaLattes;
-import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
 import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
+import br.ufscar.rcms.modelo.lattes.ProjetosPesquisaLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoCongressoLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoExpandidoCongressoLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoExpandidoLattes;
@@ -444,7 +444,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         }
     }
 
-    private void assertProjetosPesquisa(final ProjetetosPesquisaLattes projetosPesquisa) {
+    private void assertProjetosPesquisa(final ProjetosPesquisaLattes projetosPesquisa) {
 
         assertEquals(7, projetosPesquisa.getProjetos().size());
         assertProjeto(projetosPesquisa.getProjetos().get(0));

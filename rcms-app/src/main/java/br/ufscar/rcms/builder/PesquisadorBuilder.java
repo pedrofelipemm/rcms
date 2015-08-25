@@ -29,7 +29,6 @@ import br.ufscar.rcms.modelo.entidades.OrientacaoOutroTipo;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.PremioTitulo;
-import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.modelo.entidades.TCC;
 import br.ufscar.rcms.modelo.lattes.AreaAtuacaoLattes;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
@@ -45,8 +44,6 @@ import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.PremioLattes;
 import br.ufscar.rcms.modelo.lattes.PremiosLattes;
-import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
-import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
 
@@ -85,16 +82,12 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         cachedPesquisador = pesquisador;
     }
 
-    public PesquisadorBuilder projetosPesquisa(final ProjetetosPesquisaLattes projetosPesquisa) {
-        if (projetosPesquisa!=null) {
-            for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
-                pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes.getDescricao(),
-                        projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao()));
-            }
-        }
-        return this;
-    }
-
+    /*
+     * public PesquisadorBuilder projetosPesquisa(final ProjetosPesquisaLattes projetosPesquisa) { if
+     * (projetosPesquisa!=null) { for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
+     * pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes .getDescricao(),
+     * projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao())); } } return this; }
+     */
     public PesquisadorBuilder areaAtuacoes(final AreaAtuacaoLattes areaAtuacao) {
         if (areaAtuacao != null) {
             for (String descricao : areaAtuacao.getDescricao()) {

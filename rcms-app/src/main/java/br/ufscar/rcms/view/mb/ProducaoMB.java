@@ -1,13 +1,24 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +64,7 @@ public class ProducaoMB extends AbstractMB {
     private Pesquisador pesquisadorSelecionado;
     private String tipoProducao;
     private List<Producao> producoes;
+    private UploadedFile pdf;
 
     private transient List<ArtigoEmPeriodico> listaArtigosEmPeriodicos;
     private transient List<LivroPublicado> listaLivrosPublicados;
@@ -176,6 +188,34 @@ public class ProducaoMB extends AbstractMB {
         this.setListaProcessosOuTecnicas(this.producaoService.buscarProducoes(ProcessoOuTecnica.class));
         this.setListaTrabalhosTecnicos(this.producaoService.buscarProducoes(TrabalhoTecnico.class));
         this.setListaOutrasProducoesTecnicas(this.producaoService.buscarProducoes(OutraProducaoTecnica.class));
+    }
+
+    public void doUpload(FileUploadEvent fileUploadEvent) {
+
+        pdf = fileUploadEvent.getFile();
+
+        try {
+            producao.getArquivoPdf().setFile(IOUtils.toByteArray(pdf.getInputstream()));
+            producao.getArquivoPdf().setFileExtension(extractFileExtension(pdf.getFileName()));
+            producao.setNomePdf(pdf.getFileName());
+        } catch (final IOException ioException) {
+            LOGGER.error(String.format("Erro ao realizar upload do pdf para produção: %s", producao.getTitulo()),
+                    ioException);
+            adicionarMensagemErroByKey("falha.enviar.arquivo");
+        }
+    }
+
+    public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
+        List<FacesMessage> msgs = new ArrayList<FacesMessage>();
+        Part file = (Part) value;
+
+        if (!"application/pdf".equals(file.getContentType())) {
+            adicionarMensagemErroByKey("arquivo.invalido.pdf");
+        }
+
+        if (!msgs.isEmpty()) {
+            throw new ValidatorException(msgs);
+        }
     }
 
     public AutorProducao getAutor() {
@@ -365,5 +405,13 @@ public class ProducaoMB extends AbstractMB {
 
     public void setCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
         this.citacaoBibliografica = citacaoBibliografica;
+    }
+
+    public UploadedFile getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(UploadedFile pdf) {
+        this.pdf = pdf;
     }
 }

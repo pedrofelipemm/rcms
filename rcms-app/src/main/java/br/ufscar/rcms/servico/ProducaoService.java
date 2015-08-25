@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.ufscar.rcms.modelo.entidades.Producao;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 
 public interface ProducaoService extends Serializable {
 
@@ -20,4 +21,8 @@ public interface ProducaoService extends Serializable {
     <T> List<T> buscarProducoes(Class<T> clazz);
 
     <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario);
+
+    TransientFile buscarPdf(Producao producao);
+
+    TransientFile buscarPdf(Long producaoId);
 }

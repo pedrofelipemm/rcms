@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/admin/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+	<ui:define name="conteudo">
+		
+		<div class="row">
+        	<div class="col-md-12">
+        		<h1>#{mensagens['area.de.atuacao']}</h1>
+        	</div>
+        </div>
+		
+		<h:form id="formAreaDeAtuacao" role="form">
+			
+			<h:dataTable id="tabelaAreaAtuacao" value="#{areaAtuacaoMB.todasAsAreas}" var="area" styleClass="table table-hover"
+				headerClass="col-width-50" rowClasses="col-width-50"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}" 
+				rendered="#{not empty areaAtuacaoMB.todasAsAreas}" paginator="true" rows="10">
+ 
+ 				<h:column>
+ 					<f:facet name="header">
+ 						<h:outputLabel value="#"/>
+ 					</f:facet>
+ 					<h:outputLabel value="#{areaAtuacaoMB.todasAsAreas.rowIndex + 1}"/>
+ 				</h:column>
+ 				
+    			<h:column headerClass="col-xs-10">
+    				<f:facet name="header">
+    					<h:outputLabel value="#{mensagens['descricao']}"/>
+    				</f:facet>
+    				<h:outputLabel value="#{area.descricao}" />
+    			</h:column>
+    			
+    			<h:column headerClass="text-center">
+					<h:commandButton value="#{mensagens['editar']}" styleClass="btn btn-primary"
+						action="#{areaAtuacaoMB.editar(area)}" />
+					<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}" pt:title="#{mensagens['spacer.titutlo']}" />
+    			</h:column>
+			
+			</h:dataTable>
+        </h:form>
+		
+	</ui:define>
+</ui:composition>

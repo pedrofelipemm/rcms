@@ -460,10 +460,10 @@ public class PesquisadorMB extends AbstractMB {
 
     public void adicionarAtuacao(){
 
-    	if (grandeAreaSelecionada != null){
-    		areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
-    		subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
-    		especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
+    	if (especializacaoSelecionada != null){
+    		//areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
+    		//subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
+    		//especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
 
             final AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
 

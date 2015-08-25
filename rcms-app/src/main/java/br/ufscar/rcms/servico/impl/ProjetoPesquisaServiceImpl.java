@@ -154,7 +154,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         ProjetoPesquisa projetoPesquisa = projetoPesquisaDAO.buscar(idUsuario);
         lazyLoadCollections(projetoPesquisa);
-        carregarGaleria(projetoPesquisa);
+        // carregarGaleria(projetoPesquisa);
 
         return projetoPesquisa;
     }
@@ -163,11 +163,16 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
     	projetoPesquisa.getPesquisadores().size();
     }
 
-	public ProjetoPesquisaDAO getProjetoPesquisaDAO() {
-		return projetoPesquisaDAO;
-	}
+    public ProjetoPesquisaDAO getProjetoPesquisaDAO() {
+        return projetoPesquisaDAO;
+    }
 
-	public void setProjetoPesquisaDAO(ProjetoPesquisaDAO projetoPesquisaDAO) {
-		this.projetoPesquisaDAO = projetoPesquisaDAO;
-	}
+    public void setProjetoPesquisaDAO(ProjetoPesquisaDAO projetoPesquisaDAO) {
+        this.projetoPesquisaDAO = projetoPesquisaDAO;
+    }
+
+    @Override
+    public Boolean exists(String nome) {
+        return projetoPesquisaDAO.exists(nome);
+    }
 }

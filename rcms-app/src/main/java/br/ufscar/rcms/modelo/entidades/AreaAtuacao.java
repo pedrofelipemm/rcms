@@ -25,7 +25,7 @@ public class AreaAtuacao extends Entidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_area_atuacao")
-    private Integer idAreaAtuacao;
+    private long idAreaAtuacao;
 
     @Column(name = "descricao", nullable = false)
     private String descricao;
@@ -37,11 +37,11 @@ public class AreaAtuacao extends Entidade {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy ="areaAtuacao")
     private List<SubAreaAtuacao> subAreasAtuacao = new ArrayList<SubAreaAtuacao>();
 
-    public Integer getIdAreaAtuacao() {
+    public long getIdAreaAtuacao() {
         return idAreaAtuacao;
     }
 
-    public void setIdAreaAtuacao(final Integer idAreaAtuacao) {
+    public void setIdAreaAtuacao(final long idAreaAtuacao) {
         this.idAreaAtuacao = idAreaAtuacao;
     }
 

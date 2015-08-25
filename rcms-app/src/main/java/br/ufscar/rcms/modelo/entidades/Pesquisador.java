@@ -2,6 +2,7 @@ package br.ufscar.rcms.modelo.entidades;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -63,7 +64,7 @@ public class Pesquisador extends Usuario {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<Orientacao> orientacoes = new ArrayList<Orientacao>();
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<AtuacaoPesquisador> areaAtuacoes = new ArrayList<AtuacaoPesquisador>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="pesquisadores")
@@ -193,6 +194,7 @@ public class Pesquisador extends Usuario {
     }
 
     public List<ProjetoPesquisa> getProjetosPesquisa() {
+        Collections.reverse(projetosPesquisa);
         return projetosPesquisa;
     }
 

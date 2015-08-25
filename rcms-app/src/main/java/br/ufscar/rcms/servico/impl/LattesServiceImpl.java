@@ -41,6 +41,7 @@ import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.ProcessoOuTecnica;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.ProdutoTecnologico;
+import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.modelo.entidades.ResumoCongresso;
 import br.ufscar.rcms.modelo.entidades.ResumoExpandidoCongresso;
 import br.ufscar.rcms.modelo.entidades.TextoEmJornal;
@@ -56,6 +57,7 @@ import br.ufscar.rcms.modelo.lattes.OutraProducaoTecnicaLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.ProdutoLattes;
 import br.ufscar.rcms.modelo.lattes.ProdutoProcessoTecnicaLattes;
+import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoExpandidoLattes;
 import br.ufscar.rcms.modelo.lattes.ResumoLattes;
 import br.ufscar.rcms.modelo.lattes.TextoLattes;
@@ -68,6 +70,7 @@ import br.ufscar.rcms.servico.IdiomaService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.ProducaoService;
+import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ArquivoNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.CurriculoLattesNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
@@ -83,6 +86,9 @@ public class LattesServiceImpl implements LattesService {
 
     @Autowired
     private PesquisadorService pesquisadorService;
+
+    @Autowired
+    private ProjetoPesquisaService projetoPesquisaService;
 
     @Autowired
     private IdiomaService idiomaService;
@@ -133,8 +139,7 @@ public class LattesServiceImpl implements LattesService {
                 .endereco(pesquisadorLattes.getEndereco()).formacaoAcademica(pesquisadorLattes.getFormacoes())
                 .citacaoBibliografica(pesquisadorLattes.getIdentificacao()).premios(pesquisadorLattes.getPremios())
                 .participacaoEventos(pesquisadorLattes.getParticipacaoEvento())
-                .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento())
-                .projetosPesquisa(pesquisadorLattes.getProjetosPesquisa()).orientacoes(pesquisadorLattes)
+                .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento()).orientacoes(pesquisadorLattes)
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
                 .configuracao(pesquisador.getConfiguracoes()).build();
 
@@ -143,6 +148,7 @@ public class LattesServiceImpl implements LattesService {
 
         Pesquisador pesquisadorSalvo = pesquisadorService.salvarOuAtualizar(novoPesquisador);
 
+        addProjetosPesquisa(pesquisadorLattes.getProjetosPesquisa().getProjetos(), pesquisadorSalvo);
         salvarProducoes(pesquisadorLattes);
 
         return pesquisadorSalvo;
@@ -555,4 +561,22 @@ public class LattesServiceImpl implements LattesService {
         return listaCitacoes;
     }
 
+    public void addProjetosPesquisa(final List<ProjetoLattes> projetosPesquisa, Pesquisador pesquisador) {
+        
+        if (projetosPesquisa.size() > 0) {
+            for (ProjetoLattes projetoLattes : projetosPesquisa) {
+                if (!isProjetoPesquisa(projetoLattes.getNome())) {
+                    ProjetoPesquisa projetoPesquisa = new ProjetoPesquisa(projetoLattes.getNome(),
+                            projetoLattes.getDescricao(), projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao());
+                    projetoPesquisa.adicionarPesquisador(pesquisador);
+                    projetoPesquisaService.salvarOuAtualizar(projetoPesquisa);
+                }
+            }
+        }
+    }
+
+    public Boolean isProjetoPesquisa(final String nome) {
+
+        return projetoPesquisaService.exists(nome);
+    }
 }

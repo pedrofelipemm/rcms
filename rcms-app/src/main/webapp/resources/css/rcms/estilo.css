@@ -142,6 +142,22 @@
     text-overflow: ellipsis;
 }
 
+.btnManterAtuacao{
+	margin-left: 10px;
+}
+
+.inputModalAreaAtuacao{
+	width: 50%;
+}
+
+.salvarPdfPesquisador{
+	padding-top: 10px;
+}
+
+.primefacesFileUpload > div.ui-fileupload-content.ui-widget-content.ui-corner-bottom > div{
+	display:none;
+}
+
 /*==========  Mobile First Method  ==========*/
 
 /* Custom, iPhone Retina */
@@ -227,4 +243,12 @@
 
 .tituloProducao::after { 
     content: "\2014";
+}
+
+.download {
+	background-image: url("../../resources/images/pdf_document.png");
+	background-repeat: no-repeat;
+	margin-left: 8px;
+	padding-left: 22px;
+	font-style: italic;
 }

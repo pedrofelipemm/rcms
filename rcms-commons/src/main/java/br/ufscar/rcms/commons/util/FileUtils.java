@@ -9,4 +9,8 @@ public abstract class FileUtils {
     public static String generateReasearcherPhotoName(final String fileLocation, final String lattesCode, final String fileExtension) {
         return fileLocation + lattesCode + (fileExtension.charAt(0) == '.' ? fileExtension : '.' + fileExtension);
     }
+    
+    public static String generateFileName(final String fileLocation, final String id, final String fileExtension) {
+        return fileLocation + id + (fileExtension.charAt(0) == '.' ? fileExtension : '.' + fileExtension);
+    }
 }

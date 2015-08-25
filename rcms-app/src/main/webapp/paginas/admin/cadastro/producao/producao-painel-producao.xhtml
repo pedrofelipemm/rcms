@@ -12,7 +12,7 @@
 			<div class="form-group">
 				<p:panel id="painelProducao" header="#{mensagens['producao']}">
 					<div class="row">
-		          		<div class="col-sm-6 col-md-4">
+		          		<div class="col-sm-9 col-md-9">
 		            		<div class="form-group">
 								<div class="form-group">
 									<h:selectOneMenu id="selectTipoProducao" value="#{producaoMB.tipoProducao}" rendered="#{producaoMB.producao.idProducao == null}" styleClass="form-control">
@@ -51,6 +51,25 @@
 										value="#{producaoMB.producao.link}" required="false"
 										requiredMessage="#{mensagens['producao.link.nao.preenchido']}" styleClass="form-control" />
 								</div>
+								
+								<p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+        <p:fileDownload value="#{fileDownloadView.file}" />
+    </p:commandButton>
+    
+								<div >
+									<h:outputLabel value="#{mensagens['pdf.producao']}" />
+							
+										<h:form id="fileUpload" prependId="false" enctype="multipart/form-data">
+											<h:outputLabel value="#{producaoMB.producao.nomePdf}"/>
+										   	<p:fileUpload mode="advanced" dragDropSupport="false" 
+										   				 fileUploadListener="#{producaoMB.doUpload}" 
+										   				 showButtons="false" label="#{mensagens['upload']}"
+										   				 allowTypes="/(\.|\/)(pdf)$/" auto="true"
+										   				 update=":formProducao"
+										   				 styleClass="primefacesFileUpload"/>
+											</h:form>
+								</div>
+						
 							</div>
 						</div>
 					</div>

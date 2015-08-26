@@ -32,6 +32,10 @@ public abstract class Configuracao extends Entidade {
 
     public Configuracao() {/* Serialization */}
 
+    public Configuracao(final Tipo key) {
+        this.key = key;
+    }
+
     public Configuracao(final Tipo key, final String value) {
         this.key = key;
         this.value = value;

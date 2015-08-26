@@ -11,6 +11,10 @@ public class ConfiguracaoSistema extends Configuracao {
 
     public ConfiguracaoSistema() {/* Serialization */}
 
+    public ConfiguracaoSistema(final Tipo key) {
+        super(key);
+    }
+
     public ConfiguracaoSistema(final Tipo key, final String value) {
         super(key, value);
     }

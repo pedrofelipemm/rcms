@@ -18,14 +18,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(
         basePackages = "br.ufscar.rcms.scorecard",
         entityManagerFactoryRef = "scorecardEntityManagerFactory",
         transactionManagerRef = "scorecardTransactionManager")
-@EnableTransactionManagement
 public class ScorecardConfig {
 
     @Autowired

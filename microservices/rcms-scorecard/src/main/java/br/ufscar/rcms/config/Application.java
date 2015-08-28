@@ -11,17 +11,18 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "br.ufscar.rcms.scorecard", "br.ufscar.rcms.integration", "br.ufscar.rcms.config" })
 @PropertySource("file:${user.home}/RCMS/config/application.properties") // TODO REMOVE DEPENDENCY
+@EnableTransactionManagement(proxyTargetClass = true)
 @EnableAutoConfiguration(exclude = { org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
         org.springframework.boot.actuate.autoconfigure.ManagementSecurityAutoConfiguration.class })
 public class Application {
 
-    // TODO private static final String URL_MAPPING = "/api.rcms/scorecard/*";
-    private static final String URL_MAPPING = "/api.rcms/*";
+    private static final String URL_MAPPING = "/api.rcms/scorecard/*";
 
     public static void main(final String... args) {
         SpringApplication.run(Application.class, args);

@@ -26,7 +26,7 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalJUnit4
         System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
     }
 
-    @PersistenceContext
+    @PersistenceContext(name = "scorecardPersistenceUnit")
     private EntityManager entityManager;
 
     @Test

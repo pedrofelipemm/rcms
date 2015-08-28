@@ -189,34 +189,33 @@ public class ProducaoMB extends AbstractMB {
         this.setListaTrabalhosTecnicos(this.producaoService.buscarProducoes(TrabalhoTecnico.class));
         this.setListaOutrasProducoesTecnicas(this.producaoService.buscarProducoes(OutraProducaoTecnica.class));
     }
-    
-	public void doUpload(FileUploadEvent fileUploadEvent) { 
-		
-		pdf = fileUploadEvent.getFile();
+
+    public void doUpload(FileUploadEvent fileUploadEvent) {
+
+        pdf = fileUploadEvent.getFile();
 
         try {
-        	producao.getArquivoPdf().setFile(IOUtils.toByteArray(pdf.getInputstream()));
+            producao.getArquivoPdf().setFile(IOUtils.toByteArray(pdf.getInputstream()));
             producao.getArquivoPdf().setFileExtension(extractFileExtension(pdf.getFileName()));
             producao.setNomePdf(pdf.getFileName());
         } catch (final IOException ioException) {
-            LOGGER.error(String.format("Erro ao realizar upload do pdf para produção: %s", producao.getTitulo()), ioException);
+            LOGGER.error(String.format("Erro ao realizar upload do pdf para produção: %s", producao.getTitulo()),
+                    ioException);
             adicionarMensagemErroByKey("falha.enviar.arquivo");
         }
-	}
+    }
 
-   
-    
     public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
-		List<FacesMessage> msgs = new ArrayList<FacesMessage>();
-		Part file = (Part)value;
-		
-		if (!"application/pdf".equals(file.getContentType())) {
-			adicionarMensagemErroByKey("arquivo.invalido.pdf");
-		}
-		
-		if (!msgs.isEmpty()) {
-			throw new ValidatorException(msgs);
-		}
+        List<FacesMessage> msgs = new ArrayList<FacesMessage>();
+        Part file = (Part) value;
+
+        if (!"application/pdf".equals(file.getContentType())) {
+            adicionarMensagemErroByKey("arquivo.invalido.pdf");
+        }
+
+        if (!msgs.isEmpty()) {
+            throw new ValidatorException(msgs);
+        }
     }
 
     public AutorProducao getAutor() {
@@ -408,11 +407,11 @@ public class ProducaoMB extends AbstractMB {
         this.citacaoBibliografica = citacaoBibliografica;
     }
 
-	public UploadedFile getPdf() {
-		return pdf;
-	}
+    public UploadedFile getPdf() {
+        return pdf;
+    }
 
-	public void setPdf(UploadedFile pdf) {
-		this.pdf = pdf;
-	}
+    public void setPdf(UploadedFile pdf) {
+        this.pdf = pdf;
+    }
 }

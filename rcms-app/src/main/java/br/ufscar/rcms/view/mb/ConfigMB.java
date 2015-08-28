@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoIndice;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
@@ -104,27 +105,25 @@ public class ConfigMB extends AbstractMB {
             Configuracao configEstiloAdmin = pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_ADMIN);
             estiloAdmin = isEmpty(configEstiloAdmin.getValue()) ? estiloAdmin : configEstiloAdmin.getValue();
 
-            Configuracao configEstiloPortal = pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_PORTAL);
-            temaPortal = isEmpty(configEstiloPortal.getValue()) ? temaPortal : configEstiloPortal.getValue();
-
             Configuracao configAutoImport = pesquisador.getConfiguracao(Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA);
-            importacaoLattesAutomcatica = isEmpty(configAutoImport.getValue()) ? importacaoLattesAutomcatica
-                    : Boolean.valueOf(configAutoImport.getValue());
-
-            this.projetosSelecionados = new ArrayList<ProjetoPesquisa>();
-            for (Configuracao configuracao : configuracaoService
-                    .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA)) {
-                this.projetosSelecionados
-                        .add(projetoPesquisaService.buscar(((ConfiguracaoIndice) configuracao).getId()));
-            }
-
-            this.producoesSelecionadas = new ArrayList<Producao>();
-            for (Configuracao configuracao : configuracaoService.buscarPorTipo(Configuracao.Tipo.INDICE_PRODUCAO)) {
-                this.producoesSelecionadas
-                        .add(producaoService.buscarPorId(((ConfiguracaoIndice) configuracao).getId()));
-            }
+            importacaoLattesAutomcatica = isEmpty(configAutoImport.getValue()) ? importacaoLattesAutomcatica : Boolean
+                    .valueOf(configAutoImport.getValue());
 
             alterarIdioma();
+        }
+
+        ConfiguracaoSistema configEstiloPortal = configuracaoService.buscarPorKey(Configuracao.Tipo.ESTILO_PORTAL);
+        temaPortal = (configEstiloPortal == null || isEmpty(configEstiloPortal.getValue())) ? temaPortal
+                : configEstiloPortal.getValue();
+
+        this.projetosSelecionados = new ArrayList<ProjetoPesquisa>();
+        for (Configuracao configuracao : configuracaoService.buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA)) {
+            this.projetosSelecionados.add(projetoPesquisaService.buscar(((ConfiguracaoIndice) configuracao).getId()));
+        }
+
+        this.producoesSelecionadas = new ArrayList<Producao>();
+        for (Configuracao configuracao : configuracaoService.buscarPorTipo(Configuracao.Tipo.INDICE_PRODUCAO)) {
+            this.producoesSelecionadas.add(producaoService.buscarPorId(((ConfiguracaoIndice) configuracao).getId()));
         }
     }
 
@@ -160,10 +159,14 @@ public class ConfigMB extends AbstractMB {
 
             pesquisador.getConfiguracao(Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA).setValue(importacaoLattesAutomcatica.toString());
             pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_ADMIN).setValue(estiloAdmin);
-            pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_PORTAL).setValue(temaPortal);
+            // pesquisador.getConfiguracao(Configuracao.Tipo.ESTILO_PORTAL).setValue(temaPortal);
             pesquisador.getConfiguracao(Configuracao.Tipo.IDIOMA).setValue(idioma);
 
             pesquisadorService.saveOrUpdate(pesquisador);
+
+            ConfiguracaoSistema configuracaoTema = configuracaoService.buscarPorKey(Configuracao.Tipo.ESTILO_PORTAL);
+            configuracaoTema.setValue(temaPortal);
+            this.configuracaoService.saveOrUpdate(configuracaoTema);
 
             for (Configuracao configuracao : configuracaoService
                     .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA)) {

@@ -52,6 +52,10 @@
 										requiredMessage="#{mensagens['producao.link.nao.preenchido']}" styleClass="form-control" />
 								</div>
 								
+								<p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+        <p:fileDownload value="#{fileDownloadView.file}" />
+    </p:commandButton>
+    
 								<div >
 									<h:outputLabel value="#{mensagens['pdf.producao']}" />
 							

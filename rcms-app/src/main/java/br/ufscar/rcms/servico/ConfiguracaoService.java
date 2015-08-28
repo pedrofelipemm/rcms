@@ -5,6 +5,7 @@ import java.util.List;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoIndice;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 
 public interface ConfiguracaoService {
 
@@ -15,4 +16,6 @@ public interface ConfiguracaoService {
     ConfiguracaoIndice buscarPorIdETipo(Long id, Tipo tipo);
 
     void remover(Configuracao configuracao);
+
+    ConfiguracaoSistema buscarPorKey(Tipo tipo);
 }

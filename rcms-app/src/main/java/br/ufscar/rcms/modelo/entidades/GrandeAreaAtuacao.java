@@ -24,7 +24,7 @@ public class GrandeAreaAtuacao extends Entidade {
     @Column(name = "id_grande_area_atuacao")
     private long idGrandeAreaAtuacao;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "grandeAreaAtuacao")

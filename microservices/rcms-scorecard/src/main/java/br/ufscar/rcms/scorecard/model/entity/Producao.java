@@ -39,7 +39,7 @@ public class Producao extends br.ufscar.rcms.model.entity.Entity {
         this.title = title;
         this.authors = authors;
         this.year = year;
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = new Date(lastUpdate.getTime());
     }
 
     public Producao(final br.ufscar.rcms.integration.model.entity.Producao producaoIntegration) {
@@ -67,7 +67,7 @@ public class Producao extends br.ufscar.rcms.model.entity.Entity {
     }
 
     public Date getLastUpdate() {
-        return lastUpdate;
+        return new Date(lastUpdate.getTime());
     }
 
     @Override

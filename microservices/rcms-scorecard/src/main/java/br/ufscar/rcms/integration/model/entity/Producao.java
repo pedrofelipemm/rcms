@@ -39,7 +39,7 @@ public class Producao extends br.ufscar.rcms.model.entity.Entity {
     private String link;
 
     @Column(name = "pdf")
-    private byte[] pdf;
+    private String nomePdf;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "producao")
     private List<AutorProducao> autores = new ArrayList<AutorProducao>();
@@ -81,28 +81,12 @@ public class Producao extends br.ufscar.rcms.model.entity.Entity {
         this.link = link;
     }
 
-    public byte[] getPdf() {
-
-        if (pdf == null) {
-            return new byte[0];
-        }
-
-        byte[] copyOfPdf = new byte[pdf.length];
-        System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
-
-        return copyOfPdf;
+    public String getNomePdf() {
+        return nomePdf;
     }
 
-    public void setPdf(final byte[] pdf) {
-
-        if (pdf == null) {
-            return;
-        }
-
-        byte[] copyOfPdf = new byte[pdf.length];
-        System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
-
-        this.pdf = copyOfPdf;
+    public void setNomePdf(final String nomePdf) {
+        this.nomePdf = nomePdf;
     }
 
     public void setAutores(final List<AutorProducao> autores) {

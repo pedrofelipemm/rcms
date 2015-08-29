@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard;
+package br.ufscar.rcms.scorecard.config;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -35,7 +35,7 @@ public class IntegrationConfig {
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "br.ufscar.rcms.integration.model.entity", "br.ufscar.rcms.scorecard.model.entity" });
+        em.setPackagesToScan(new String[] { "br.ufscar.rcms.integration.model.entity" });
         em.setJpaVendorAdapter(jpaVendorAdapter);
         em.setJpaPropertyMap(additionalProperties());
         em.setPersistenceUnitName("integrationPersistenceUnit");

@@ -79,6 +79,7 @@ local.properties
 
 # Custom files
 *.cmd
+*.bat
 *.sh
 *.classpath
 .classpath

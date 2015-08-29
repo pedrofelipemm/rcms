@@ -17,6 +17,7 @@ import br.ufscar.rcms.commons.util.JsonUtil;
 
 @Entity
 @Table(name = "pesquisador")
+@SuppressWarnings("deprecation")
 @ForeignKey(name = "fk_pesquisador_usuario")
 public class Pesquisador extends Usuario {
 
@@ -30,12 +31,6 @@ public class Pesquisador extends Usuario {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
     private List<CitacaoBibliografica> citacaoBibliograficas = new ArrayList<CitacaoBibliografica>();
-
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pesquisador")
-//    private List<FormacaoAcademica> formacoes = new ArrayList<FormacaoAcademica>();
-
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "compreensaoIdiomaPK.pesquisador")
-//    private List<CompreensaoIdioma> compreensaoIdiomas = new ArrayList<CompreensaoIdioma>();
 
     public String getCodigoLattes() {
         return codigoLattes;
@@ -53,14 +48,6 @@ public class Pesquisador extends Usuario {
         this.resumoProfissional = resumoProfissional;
     }
 
-//    public List<CompreensaoIdioma> getCompreensaoIdiomas() {
-//        return compreensaoIdiomas;
-//    }
-//
-//    public void setCompreensaoIdiomas(final List<CompreensaoIdioma> compreensaoIdiomas) {
-//        this.compreensaoIdiomas = compreensaoIdiomas;
-//    }
-
     public List<CitacaoBibliografica> getCitacaoBibliograficas() {
         return citacaoBibliograficas;
     }
@@ -68,27 +55,6 @@ public class Pesquisador extends Usuario {
     public void setCitacaoBibliograficas(final List<CitacaoBibliografica> citacaoBibliograficas) {
         this.citacaoBibliograficas = citacaoBibliograficas;
     }
-
-//    public List<FormacaoAcademica> getFormacoes() {
-//        return formacoes;
-//    }
-//
-
-//    public void setFormacoes(final List<FormacaoAcademica> formacoes) {
-//        this.formacoes = formacoes;
-//    }
-
-//    public void addCompreensaoIdiomas(final CompreensaoIdioma... compreensaoIdiomas) {
-//        if (compreensaoIdiomas != null) {
-//            this.compreensaoIdiomas.addAll(Arrays.asList(compreensaoIdiomas));
-//        }
-//    }
-//
-//    public void removeCompreensaoIdiomas(final CompreensaoIdioma... compreensaoIdiomas) {
-//        if (compreensaoIdiomas != null) {
-//            this.compreensaoIdiomas.removeAll(Arrays.asList(compreensaoIdiomas));
-//        }
-//    }
 
     public void addCitacaoBibliografica(final CitacaoBibliografica... citacaoBibliografica) {
         if (citacaoBibliografica != null) {

@@ -6,9 +6,11 @@ import java.util.List;
 import br.ufscar.rcms.modelo.entidades.Autorizacao;
 
 public interface AutorizacaoService extends Serializable {
-	
-	List<Autorizacao> buscarTodos();
-	
-	Autorizacao salvar(Autorizacao autorizacao);
+
+    List<Autorizacao> buscarTodos();
+
+    Autorizacao salvar(Autorizacao autorizacao);
+
+    Autorizacao findByRole(String role);
 
 }

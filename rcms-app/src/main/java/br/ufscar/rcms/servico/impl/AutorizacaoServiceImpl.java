@@ -15,23 +15,23 @@ import br.ufscar.rcms.servico.exception.RCMSException;
 @Transactional(rollbackFor = RCMSException.class)
 public class AutorizacaoServiceImpl implements AutorizacaoService {
 
-    
-	private static final long serialVersionUID = -3782026195564982152L;
+    private static final long serialVersionUID = -3782026195564982152L;
 
-	@Autowired
+    @Autowired
     private AutorizacaoDAO autorizacaoDAO;
 
-    
-	@Override
-	public List<Autorizacao> buscarTodos() {
-		return autorizacaoDAO.buscarTodos();
-	}
+    @Override
+    public List<Autorizacao> buscarTodos() {
+        return autorizacaoDAO.buscarTodos();
+    }
 
+    @Override
+    public Autorizacao salvar(final Autorizacao autorizacao) {
+        return autorizacaoDAO.saveOrUpdate(autorizacao);
+    }
 
-	@Override
-	public Autorizacao salvar(Autorizacao autorizacao) {
-		return autorizacaoDAO.salvarOuAtualizar(autorizacao);
-	}
-
-   
+    @Override
+    public Autorizacao findByRole(final String role) {
+        return autorizacaoDAO.findByRole(role);
+    }
 }

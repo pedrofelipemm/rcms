@@ -9,40 +9,39 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "autorizacao")
-public class Autorizacao extends Entidade{
+public class Autorizacao extends Entidade {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_autorizacao")
-	private long idAutorizacao;
+    private Long idAutorizacao;
 
-	private String nomeAutorizacao;
-	
-	private String descricao;
+    private String nomeAutorizacao;
 
-	public Autorizacao() {}
+    private String descricao;
 
-	public String getNomeAutorizacao() {
-		return nomeAutorizacao;
-	}
+    public Autorizacao() {/* Serialization */}
 
-	public void setNomeAutorizacao(final String nomeAutorizacao) {
-		this.nomeAutorizacao = nomeAutorizacao;
-	}
+    public Autorizacao(final String nomeAutorizacao, final String descricao) {
+        this.nomeAutorizacao = nomeAutorizacao;
+        this.descricao = descricao;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getNomeAutorizacao() {
+        return nomeAutorizacao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setNomeAutorizacao(final String nomeAutorizacao) {
+        this.nomeAutorizacao = nomeAutorizacao;
+    }
 
+    public String getDescricao() {
+        return descricao;
+    }
 
-
+    public void setDescricao(final String descricao) {
+        this.descricao = descricao;
+    }
 }

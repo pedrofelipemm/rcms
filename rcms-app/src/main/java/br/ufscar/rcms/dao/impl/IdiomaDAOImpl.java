@@ -28,7 +28,7 @@ public class IdiomaDAOImpl extends BaseDAOImpl<Idioma, Long> implements IdiomaDA
         try {
             return (Idioma) q.getSingleResult();
         } catch (NoResultException noResultException) {
-            LOGGER.debug("Nenhum idioma encontrado, descrição: %s", descricao, noResultException);
+            LOGGER.debug("Nenhum idioma encontrado, descrição: {0}", descricao, noResultException);
             return null;
         }
     }

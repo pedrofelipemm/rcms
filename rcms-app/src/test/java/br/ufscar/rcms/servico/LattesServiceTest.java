@@ -328,7 +328,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 resumoLattes.getNomeEvento());
         assertEquals("264-269", resumoLattes.getPaginas());
         assertEquals("Estudo Experimental do Processo Model Driven RichUbi: Análise Qualitativa", resumoLattes.getTitulo());
-        assertEquals(Integer.valueOf(0), resumoLattes.getVolume());
+        assertEquals("0", resumoLattes.getVolume());
     }
 
     private void assertResumoExpandido(final ResumoExpandidoCongressoLattes resumoExpandido) {
@@ -346,7 +346,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 resumoExpandidoLattes.getNomeEvento());
         assertEquals("39-42", resumoExpandidoLattes.getPaginas());
         assertEquals("P2PMobileLearning: Uma aplicação P2P com adaptação de conteúdo em dispositivos móveis", resumoExpandidoLattes.getTitulo());
-        assertEquals(Integer.valueOf(2), resumoExpandidoLattes.getVolume());
+        assertEquals("2", resumoExpandidoLattes.getVolume());
     }
 
     private void assertTrabalhoCompleto(final TrabalhoCompletoCongressoLattes trabalhoCompleto) {
@@ -364,7 +364,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
                 trabalhoCompletoLattes.getNomeEvento());
         assertEquals("83-89", trabalhoCompletoLattes.getPaginas());
         assertEquals("An Approach to Dynamic Discovery of Context-Sensitive Web Services", trabalhoCompletoLattes.getTitulo());
-        assertEquals(Integer.valueOf(0), trabalhoCompletoLattes.getVolume());
+        assertEquals("0", trabalhoCompletoLattes.getVolume());
     }
 
     private void assertTextoJornal(final TextoJornalLattes textoJornal) {
@@ -381,7 +381,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         assertEquals("Revista Eletrônica de Sistemas de Informação (RESI), digital, ", textoLattes.getNomeJornal());
         assertEquals("1-10", textoLattes.getPaginas());
         assertEquals("Uma Abordagem para o Processo de Gerenciamento de Configuração de Software", textoLattes.getTitulo());
-        assertEquals(Integer.valueOf(1), textoLattes.getVolume());
+        assertEquals("1", textoLattes.getVolume());
     }
 
     private void assertCapitulosLivros(final CapitulosLivrosLattes capitulosLivros) {

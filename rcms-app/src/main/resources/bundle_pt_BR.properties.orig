@@ -12,12 +12,10 @@ indice=Índice
 areas.de.atuacao=Áreas de Atuação
 premios.e.titulos=Prêmios e Títulos 
 producoes=Produções
-producoes.recentes=Produções Recentes
 editar=Editar
 importar=Importar
 importar.dados.lattes=Importar dados do Lattes
 excluir=Excluir
-remover=Remover
 descricao=Descrição
 adicionar=Adicionar
 inicio=Início
@@ -31,10 +29,6 @@ falha.enviar.arquivo=Falha ao enviar arquivo.
 sim=Sim
 nao=Não
 id=ID
-saiba.mais=Saiba mais
-nao.foi.possivel.excluir=Não foi possível excluir
-arquivo.invalido.pdf=O arquivo deve ser do tipo PDF.
-atual=Atual
 
 ### Cabecalho ###
 ir.para.site=Ir para o site
@@ -189,7 +183,6 @@ label.especializacao.placeholder=Informe a especialização
 label.adicionar.area.atuacao=Adicionar área de atuação
 nenhuma.area.adicionada=Nenhuma área adicionada
 especializacao.descricao=Especialização
-cadastro.subarea.atuacao=Cadastro de Subárea de Atuação
 
 ### Exibição Projeto ###
 exibir.projeto.descricao=Descrição
@@ -238,11 +231,6 @@ adicionar.producao=Adicionar produção
 titulo=Título
 volume=Volume
 ano=Ano
-pdf.producao=Arquivo PDF:
-
-### Exibição Produção ###
-exibir.producao.autores=Autores
-exibir.producao.ano.publicacao=Ano de Publicação
 
 ### Exibição Projeto ###
 exibir.producao.producoes=Produções
@@ -335,18 +323,19 @@ configuracoes=Configurações
 configuracoes.salva.sucesso=Configurações salvas com sucesso!
 importacao.automatica=Importação automática
 estilos=Estilos
+<<<<<<< HEAD
+
+## Cadastro Autorizacao ##
+cadastro.autorizacao=Papéis
+label.autorizacao=Papel
+adicionar.autorizacoes=Adicionar Papéis
+=======
 temas.para.portal=Temas para o portal
 temas.portal.padrao=Padrão
 temas.portal.alegria=Alegria
 temas.portal.confianca=Confiança
 temas.portal.surpresa=Surpresa
 temas.portal.raiva=Raiva
-config.projeto.pesquisa=Projeto de Pesquisa
-config.producoes.disponiveis=Produções Disponíveis
-config.producoes.selecionadas=Produções Selecionadas
-config.selecione.projeto.pesquisa=Selecione um Projeto de Pesquisa
-config.enviar.imagem=Enviar imagem
-config.adicionar.projeto.pesquisa=Adicionar Projeto de Pesquisa
 
 ### Indicador ###
 falha.servico=Falha ao chamar serviço: {0}
@@ -356,8 +345,4 @@ quantidade.producoes.por.ano=Quantidade de produções por ano
 quantidade.producoes.por.pesquisador=Quantidade de produções por pesquisador
 quantidade=Quantidade
 servicos.indisponiveis=Serviços Indisponíveis
-
-## Cadastro Autorizacao ##
-cadastro.autorizacao=Papéis
-label.autorizacao=Papel
-adicionar.autorizacoes=Adicionar Papéis
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd

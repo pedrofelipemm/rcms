@@ -29,6 +29,7 @@ import br.ufscar.rcms.modelo.entidades.OrientacaoOutroTipo;
 import br.ufscar.rcms.modelo.entidades.ParticipacaoEvento;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.PremioTitulo;
+import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.modelo.entidades.TCC;
 import br.ufscar.rcms.modelo.lattes.AreaAtuacaoLattes;
 import br.ufscar.rcms.modelo.lattes.EnderecoLattes;
@@ -44,6 +45,8 @@ import br.ufscar.rcms.modelo.lattes.ParticipacaoEventoLattes;
 import br.ufscar.rcms.modelo.lattes.PesquisadorLattes;
 import br.ufscar.rcms.modelo.lattes.PremioLattes;
 import br.ufscar.rcms.modelo.lattes.PremiosLattes;
+import br.ufscar.rcms.modelo.lattes.ProjetetosPesquisaLattes;
+import br.ufscar.rcms.modelo.lattes.ProjetoLattes;
 
 public class PesquisadorBuilder implements Builder<Pesquisador> {
 
@@ -53,7 +56,11 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     private Pesquisador cachedPesquisador;
 
     public PesquisadorBuilder(final String login, final String nome, final String senha, final String codigoLattes, final String email,
+<<<<<<< HEAD
+            final boolean flagAdministrador, final String resumoProfissional) {
+=======
             final String resumoProfissional) {
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
         this(null, login, nome, senha, codigoLattes, email, resumoProfissional);
     }
 
@@ -75,19 +82,28 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
     public PesquisadorBuilder(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         this(pesquisador.getIdUsuario(), pesquisador.getLogin(), pesquisadorLattes.getIdentificacao().getNomeCompleto(),
+<<<<<<< HEAD
+                pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(),
+                pesquisador.getResumoProfissional());
+=======
                 pesquisador.getSenha(), pesquisador.getCodigoLattes(), pesquisador.getEmail(), pesquisador.getResumoProfissional());
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
 
         this.pesquisador.setSexo(pesquisadorLattes.getIdentificacao().getSexo());
         validatePesquisador(pesquisadorLattes, pesquisador);
         cachedPesquisador = pesquisador;
     }
 
-    /*
-     * public PesquisadorBuilder projetosPesquisa(final ProjetosPesquisaLattes projetosPesquisa) { if
-     * (projetosPesquisa!=null) { for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
-     * pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes .getDescricao(),
-     * projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao())); } } return this; }
-     */
+    public PesquisadorBuilder projetosPesquisa(final ProjetetosPesquisaLattes projetosPesquisa) {
+        if (projetosPesquisa!=null) {
+            for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
+                pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes.getDescricao(),
+                        projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao()));
+            }
+        }
+        return this;
+    }
+
     public PesquisadorBuilder areaAtuacoes(final AreaAtuacaoLattes areaAtuacao) {
         if (areaAtuacao != null) {
             for (String descricao : areaAtuacao.getDescricao()) {
@@ -228,7 +244,11 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         Validate.notBlank(pesquisador.getSenha());
         Validate.notBlank(pesquisador.getCodigoLattes());
         Validate.notBlank(pesquisador.getEmail());
+<<<<<<< HEAD
+        Validate.notBlank(pesquisador.getResumoProfissional());
+=======
         // Validate.notBlank(pesquisador.getResumoProfissional());
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
     }
 
     private void validatePesquisador(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {

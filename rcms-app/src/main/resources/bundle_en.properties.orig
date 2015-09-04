@@ -12,12 +12,10 @@ indice=index
 areas.de.atuacao=
 premios.e.titulos=
 producoes=
-producoes.recentes=
 editar=Edit
 importar=Import
 importar.dados.lattes=Import data form Lattes
 excluir=Delete
-remover=Remove
 descricao=Description
 adicionar=
 inicio=Home
@@ -31,10 +29,6 @@ falha.enviar.arquivo=Fail to upload file
 sim=Yes
 nao=No
 id=ID
-saiba.mais=Read more
-nao.foi.possivel.excluir=It was not possible to exclude
-arquivo.invalido.pdf=Must be the file type PDF
-atual=
 
 ### Header ###
 ir.para.site=Go to the site
@@ -189,7 +183,6 @@ label.especializacao.placeholder=
 label.adicionar.area.atuacao=Add Field
 nenhuma.area.adicionada=
 especializacao.descricao=
-cadastro.subarea.atuacao=
 
 ### Display Project ###
 exibir.projeto.descricao=Description
@@ -205,7 +198,7 @@ sobre.o.grupo.ingles=
 sobre.o.grupo.salvo.sucesso=
 
 ###  ###
-cadastro.producao=
+cadastro.publicacao=
 publicacao=
 apresentacao.de.trabalho=
 artigo.aceito.publicacao=
@@ -238,11 +231,6 @@ adicionar.publicacao=
 titulo=
 volume=
 ano=
-pdf.producao=
-
-### Displaay Production ###
-exibir.producao.autores=
-exibir.producao.ano.publicacao=
 
 ### Project Display ###
 exibir.producao.producoes=
@@ -335,18 +323,19 @@ configuracoes=Configurations
 configuracoes.salva.sucesso=Configurations succesfully saved!
 importacao.automatica=Auto Import
 estilos=Styles
+<<<<<<< HEAD
+
+## Cadastro Autorizacao ##
+cadastro.autorizacao=Roles
+label.autorizacao=Role
+adicionar.autorizacoes=Add Role
+=======
 temas.para.portal=Portal Themes
 temas.portal.padrao=Default
 temas.portal.alegria=Joy
 temas.portal.confianca=Trust
 temas.portal.surpresa=Surprise
 temas.portal.raiva=Anger
-config.projeto.pesquisa=Research Project
-config.producoes.disponiveis=Available Productions
-config.producoes.selecionadas=Selected Productions
-config.selecione.projeto.pesquisa=
-config.enviar.imagem=Enviar imagem
-config.adicionar.projeto.pesquisa=Adicionar Projeto de Pesquisa
 
 ### Indicador ###
 falha.servico=Fail in attemp to call service: {0}
@@ -356,8 +345,4 @@ quantidade.producoes.por.ano=Amount production by year
 quantidade.producoes.por.pesquisador=Amount production by researcher
 quantidade=Amount
 servicos.indisponiveis=Services Unavailable
-
-## Cadastro Autorizacao ##
-cadastro.autorizacao=Roles
-label.autorizacao=Role
-adicionar.autorizacoes=Add Role
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd

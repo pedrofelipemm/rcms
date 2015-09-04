@@ -26,9 +26,12 @@ import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
+<<<<<<< HEAD
 import br.ufscar.rcms.modelo.entidades.Autorizacao;
+=======
 import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
 import br.ufscar.rcms.modelo.entidades.EspecializacaoAreaAtuacao;
@@ -460,10 +463,10 @@ public class PesquisadorMB extends AbstractMB {
 
     public void adicionarAtuacao(){
 
-    	if (especializacaoSelecionada != null){
-    		//areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
-    		//subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
-    		//especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
+    	if (grandeAreaSelecionada != null){
+    		areaAtuacaoSelecionada.setGrandeAreaAtuacao(grandeAreaSelecionada);
+    		subAreaAtuacaoSelecionada.setAreaAtuacao(areaAtuacaoSelecionada);
+    		especializacaoSelecionada.setSubAreaAtuacao(subAreaAtuacaoSelecionada);
 
             final AtuacaoPesquisador a = new AtuacaoPesquisador(especializacaoSelecionada, pesquisador);
 

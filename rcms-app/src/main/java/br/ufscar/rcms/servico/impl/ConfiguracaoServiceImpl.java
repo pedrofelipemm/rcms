@@ -11,6 +11,7 @@ import br.ufscar.rcms.dao.ConfiguracaoDAO;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoIndice;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 import br.ufscar.rcms.servico.ConfiguracaoService;
 
 @Service("configuracaoService")
@@ -28,6 +29,11 @@ public class ConfiguracaoServiceImpl implements ConfiguracaoService {
     @Override
     public List<Configuracao> buscarPorTipo(final Tipo... tipos) {
         return configuracaoDAO.buscarPorTipo(tipos);
+    }
+
+    @Override
+    public ConfiguracaoSistema buscarPorKey(Tipo tipo) {
+        return configuracaoDAO.buscarPorKey(tipo);
     }
 
     @Override

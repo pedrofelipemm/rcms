@@ -137,7 +137,7 @@ public class LattesServiceImpl implements LattesService {
 
         novoPesquisador = new PesquisadorBuilder(pesquisadorLattes, novoPesquisador)
                 .endereco(pesquisadorLattes.getEndereco()).formacaoAcademica(pesquisadorLattes.getFormacoes())
-                .citacaoBibliografica(pesquisadorLattes.getIdentificacao()).premios(pesquisadorLattes.getPremios())
+                .premios(pesquisadorLattes.getPremios())
                 .participacaoEventos(pesquisadorLattes.getParticipacaoEvento())
                 .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento()).orientacoes(pesquisadorLattes)
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
@@ -148,7 +148,8 @@ public class LattesServiceImpl implements LattesService {
 
         Pesquisador pesquisadorSalvo = pesquisadorService.salvarOuAtualizar(novoPesquisador);
 
-        addProjetosPesquisa(pesquisadorLattes.getProjetosPesquisa().getProjetos(), pesquisadorSalvo);
+        salvarProjetosPesquisa(pesquisadorLattes, novoPesquisador);
+        salvarCitacaoBibliografica(pesquisadorLattes, novoPesquisador);
         salvarProducoes(pesquisadorLattes);
 
         return pesquisadorSalvo;
@@ -561,15 +562,27 @@ public class LattesServiceImpl implements LattesService {
         return listaCitacoes;
     }
 
-    public void addProjetosPesquisa(final List<ProjetoLattes> projetosPesquisa, Pesquisador pesquisador) {
+    public void salvarCitacaoBibliografica(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
+
+        String[] citacoes = pesquisadorLattes.getIdentificacao().getNomeCitacaoBibliografica().split(";");
+        for (int i = 0; i < citacoes.length; i++) {
+            if (!citacaoBibliograficaService.exists(citacoes[i].trim())) {
+                CitacaoBibliografica novaCitacao = new CitacaoBibliografica(pesquisador, citacoes[i].trim());
+                citacaoBibliograficaService.salvar(novaCitacao);
+            }
+        }
+    }
+
+    public void salvarProjetosPesquisa(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
         
-        if (projetosPesquisa.size() > 0) {
-            for (ProjetoLattes projetoLattes : projetosPesquisa) {
+        if (pesquisadorLattes.getProjetosPesquisa() != null) {
+            for (ProjetoLattes projetoLattes : pesquisadorLattes.getProjetosPesquisa().getProjetos()) {
                 if (!isProjetoPesquisa(projetoLattes.getNome())) {
                     ProjetoPesquisa projetoPesquisa = new ProjetoPesquisa(projetoLattes.getNome(),
                             projetoLattes.getDescricao(), projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao());
                     projetoPesquisa.adicionarPesquisador(pesquisador);
                     projetoPesquisaService.salvarOuAtualizar(projetoPesquisa);
+                    System.out.println("gravou");
                 }
             }
         }

@@ -5,6 +5,7 @@ import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import br.ufscar.rcms.dao.ConfiguracaoDAO;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoIndice;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 
 @Repository
 public class ConfiguracaoDAOImpl extends BaseDAOImpl<Configuracao, Long>implements ConfiguracaoDAO {
@@ -46,5 +48,22 @@ public class ConfiguracaoDAOImpl extends BaseDAOImpl<Configuracao, Long>implemen
         query.setParameter("id", id);
 
         return (ConfiguracaoIndice) query.getSingleResult();
+    }
+
+    @Override
+    public ConfiguracaoSistema buscarPorKey(Tipo tipo) {
+
+        StringBuilder jpql = new StringBuilder();
+        jpql.append("SELECT c FROM ConfiguracaoSistema c ");
+        jpql.append("WHERE c.key = :tipo");
+
+        Query query = createQuery(jpql.toString());
+        query.setParameter("tipo", tipo);
+
+        try {
+            return (ConfiguracaoSistema) query.getSingleResult();
+        } catch (NoResultException noResultException) {
+            return null;
+        }
     }
 }

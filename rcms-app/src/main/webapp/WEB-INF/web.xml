@@ -24,7 +24,16 @@
 		<filter-name>primeUploadFilter</filter-name>
 		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping>
-
+	
+	<filter>
+		<filter-name>configurationFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>configurationFilter</filter-name>
+		<url-pattern>/paginas/*</url-pattern>
+	</filter-mapping>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

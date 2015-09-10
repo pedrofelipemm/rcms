@@ -12,6 +12,8 @@ public interface ConfiguracaoService {
     Configuracao saveOrUpdate(Configuracao configuracao);
 
     List<Configuracao> buscarPorTipo(Tipo... tipos);
+    
+    boolean verificaConfiguracao(final Tipo... tipos);
 
     ConfiguracaoIndice buscarPorIdETipo(Long id, Tipo tipo);
 

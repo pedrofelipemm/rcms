@@ -30,6 +30,15 @@ public class ConfiguracaoServiceImpl implements ConfiguracaoService {
     public List<Configuracao> buscarPorTipo(final Tipo... tipos) {
         return configuracaoDAO.buscarPorTipo(tipos);
     }
+    
+    @Override
+    public boolean verificaConfiguracao(final Tipo... tipos) {
+        List<Configuracao> listaConfigs = configuracaoDAO.buscarPorTipo(tipos);
+        if(listaConfigs == null || listaConfigs.size() != tipos.length){
+        	return false;
+        }
+        return true;
+    }
 
     @Override
     public ConfiguracaoSistema buscarPorKey(Tipo tipo) {

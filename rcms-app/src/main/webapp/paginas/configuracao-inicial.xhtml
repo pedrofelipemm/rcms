@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ui:composition template="/paginas/admin/template/template.xhtml"
+<ui:composition template="/paginas/admin/template/templateSemMenu.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -78,6 +78,7 @@
 									</div>
 								</div>
 							</div>
+							
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="row">
@@ -106,97 +107,6 @@
 									</div>
 								</div>
 							</div>
-						</p:panel>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="form-group">
-						<p:panel id="painelPaginaInicial" header="#{mensagens['indice']}">
-
-							<div class="row">
-								<div class="col-sm-12">
-									<h:dataTable id="tableProjetos"
-										value="#{configSistemaMB.projetosSelecionados}"
-										var="projetoDePesquisa" styleClass="table table-hover">
-										<h:column headerClass="col-sm-9">
-											<f:facet name="header">
-												<h:outputLabel value="#{mensagens['projeto.pesquisa']}" />
-											</f:facet>
-											<h:outputText value="#{projetoDePesquisa.nome}" />
-										</h:column>
-										<h:column headerClass="col-sm-3 text-right">
-											<f:facet name="header">
-												<button type="button" class="btn btn-primary"
-													data-toggle="modal" data-target="#modalProjetoDePesquisa">#{mensagens['adicionar']}</button>
-											</f:facet>
-											<div class="row">
-												<div class="col-sm-12 text-right">
-													<span> <h:commandButton
-															value="#{mensagens['remover']}"
-															styleClass="btn btn-danger  bottom-buffer-2 top-buffer-2"
-															action="#{configSistemaMB.removerProjetoDePesquisa(projetoDePesquisa)}">
-															<f:ajax render=":formPainelControle:painelPaginaInicial" />
-														</h:commandButton>
-													</span>
-												</div>
-											</div>
-										</h:column>
-									</h:dataTable>
-									<ui:include
-										src="/paginas/admin/painel-de-controle/modal-projeto-pesquisa.xhtml" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<h:outputLabel value="#{mensagens['producoes']}" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<p:autoComplete id="tituloProducao"
-										value="#{configSistemaMB.producaoSelecionada}"
-										completeMethod="#{configSistemaMB.completeProducao}" var="producao"
-										itemLabel="#{producao.titulo}" itemValue="#{producao}"
-										converter="#{producaoConverter}" forceSelection="true"
-										size="80" />
-									<h:commandButton value="#{mensagens['adicionar']}"
-										styleClass="btn btn-primary"
-										action="#{configSistemaMB.adicionarProducao()}"
-										style="margin: 0 0 4px 10px; padding-top: 0; padding-bottom: 0; height: 31px;">
-										<f:ajax render="@form" execute="@form" />
-									</h:commandButton>
-								</div>
-							</div>
-							<br />
-							<br />
-							<div class="row">
-								<div class="col-sm-12">
-									<h:dataTable id="tableProducoes"
-										value="#{configSistemaMB.producoesSelecionadas}" var="producao"
-										styleClass="table table-hover">
-										<h:column headerClass="col-sm-9">
-											<h:outputText value="#{producao.titulo}" />
-										</h:column>
-										<h:column headerClass="col-sm-3 text-right">
-											<div class="row">
-												<div class="col-sm-12 text-right">
-													<span> <h:commandButton
-															value="#{mensagens['remover']}"
-															styleClass="btn btn-danger  bottom-buffer-2 top-buffer-2"
-															action="#{configSistemaMB.removerProducao(producao)}">
-															<f:ajax render=":formPainelControle:painelPaginaInicial" />
-														</h:commandButton>
-													</span>
-												</div>
-											</div>
-										</h:column>
-									</h:dataTable>
-								</div>
-							</div>
-
 						</p:panel>
 					</div>
 				</div>

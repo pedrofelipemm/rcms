@@ -57,7 +57,11 @@ public class ConfigurationFilter implements Filter {
 				chain.doFilter(req, res);
 			}
 		} else{
-			responseHttp.sendRedirect(requestHttp.getContextPath() + URL_CONFIG_INICIAL);
+			if ((requestHttp.getContextPath() + URL_CONFIG_INICIAL).equals(requestHttp.getRequestURI())) {
+				chain.doFilter(req, res);
+			} else{
+				responseHttp.sendRedirect(requestHttp.getContextPath() + URL_CONFIG_INICIAL);
+			}
 		}
 	}
 

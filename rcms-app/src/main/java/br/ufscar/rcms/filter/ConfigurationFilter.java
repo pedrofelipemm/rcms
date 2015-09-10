@@ -37,15 +37,18 @@ public class ConfigurationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest requestHttp = ((HttpServletRequest) req);
+		chain.doFilter(req, res);
+		/*HttpServletRequest requestHttp = ((HttpServletRequest) req);
 		HttpServletResponse responseHttp = ((HttpServletResponse) res);
 		Long attrConfig = (Long) req.getServletContext().getAttribute("attrConfig");
 		boolean configurado = true;
 		if (attrConfig == null) {
+			configurado = false;
 			if ((requestHttp.getContextPath() + URL_CONFIG_INICIAL).equals(requestHttp.getRequestURI())) {
 				chain.doFilter(req, res);
+			} else {
+				configurado = verificaConfiguracao();
 			}
-			configurado = verificaConfiguracao();
 		} else {
 			Long diferenca = System.currentTimeMillis() - attrConfig;
 			if ((diferenca / 3600000) > 1) {
@@ -65,7 +68,7 @@ public class ConfigurationFilter implements Filter {
 			} else{
 				responseHttp.sendRedirect(requestHttp.getContextPath() + URL_CONFIG_INICIAL);
 			}
-		}
+		}*/
 	}
 
 	private boolean verificaConfiguracao() {

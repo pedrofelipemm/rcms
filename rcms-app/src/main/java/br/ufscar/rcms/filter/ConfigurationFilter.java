@@ -25,71 +25,44 @@ public class ConfigurationFilter implements Filter {
 	@Autowired(required = true)
 	private ConfiguracaoService configuracaoService;
 
-	private final String URL_CONFIG_INICIAL = "/paginas/configuracao-inicial.xhtml";
-	private final String URL_HOME = "/paginas/index.xhtml";
+	private final String URL_CONFIG_INICIAL = "/configuracao-inicial.xhtml";
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-
-	}
+	public void destroy() {}
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		chain.doFilter(req, res);
-		/*HttpServletRequest requestHttp = ((HttpServletRequest) req);
+		HttpServletRequest requestHttp = ((HttpServletRequest) req);
 		HttpServletResponse responseHttp = ((HttpServletResponse) res);
 		Long attrConfig = (Long) req.getServletContext().getAttribute("attrConfig");
 		boolean configurado = true;
 		if (attrConfig == null) {
-			configurado = false;
-			if ((requestHttp.getContextPath() + URL_CONFIG_INICIAL).equals(requestHttp.getRequestURI())) {
-				chain.doFilter(req, res);
-			} else {
-				configurado = verificaConfiguracao();
-			}
+				configurado = verificaConfiguracao(req);
 		} else {
 			Long diferenca = System.currentTimeMillis() - attrConfig;
 			if ((diferenca / 3600000) > 1) {
-				configurado = verificaConfiguracao();
+				configurado = verificaConfiguracao(req);
 			}
 		}
 		if(configurado){
-			req.getServletContext().setAttribute("attrConfig", System.currentTimeMillis());
-			if ((requestHttp.getContextPath() + URL_CONFIG_INICIAL).equals(requestHttp.getRequestURI())) {
-				responseHttp.sendRedirect(requestHttp.getContextPath() + URL_HOME);
-			} else {
-				chain.doFilter(req, res);
-			}
+			chain.doFilter(req, res);
 		} else{
-			if ((requestHttp.getContextPath() + URL_CONFIG_INICIAL).equals(requestHttp.getRequestURI())) {
-				chain.doFilter(req, res);
-			} else{
-				responseHttp.sendRedirect(requestHttp.getContextPath() + URL_CONFIG_INICIAL);
-			}
-		}*/
+			responseHttp.sendRedirect(requestHttp.getContextPath() + URL_CONFIG_INICIAL);
+		}
 	}
 
-	private boolean verificaConfiguracao() {
-		return getConfiguracaoService().verificaConfiguracao(Configuracao.Tipo.getTiposConfigSistema());
+	private boolean verificaConfiguracao(ServletRequest req) {
+		boolean configurado = getConfiguracaoService().verificaConfiguracao(Configuracao.Tipo.getTiposConfigSistema());
+		if(configurado){
+			req.getServletContext().setAttribute("attrConfig", System.currentTimeMillis());
+		}
+		return configurado;
+		
 	}
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		/*
-		 * ServletContext servletContext = filterConfig.getServletContext();
-		 * WebApplicationContext webApplicationContext =
-		 * WebApplicationContextUtils .getWebApplicationContext(servletContext);
-		 * 
-		 * AutowireCapableBeanFactory autowireCapableBeanFactory =
-		 * webApplicationContext.getAutowireCapableBeanFactory();
-		 * 
-		 * autowireCapableBeanFactory.configureBean(this,
-		 * "configurationFilter");
-		 */
-
-	}
+	public void init(FilterConfig filterConfig) throws ServletException {}
 
 	public ConfiguracaoService getConfiguracaoService() {
 		return configuracaoService;

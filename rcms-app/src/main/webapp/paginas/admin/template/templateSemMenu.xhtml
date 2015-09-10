@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="#{configMB.idioma}" xml:lang="#{configMB.idioma}"
+<html lang="#{configSistemaMB.idioma}" xml:lang="#{configSistemaMB.idioma}"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -18,7 +18,7 @@
 	</h:head >
 	
 	<h:body styleClass="admin-bg">
-		<f:view locale="#{configMB.idioma}"> 
+		<f:view locale="#{configSistemaMB.idioma}"> 
 			<noscript>
 				<p>Seu browser não suporta javascript</p>
 			</noscript>
@@ -51,7 +51,7 @@
 	        <h:outputStylesheet name="rcms/estilo-admin.css" library="css"/>
 	        <h:outputStylesheet name="rcms/rcms-table.css" library="css" />
 	        <h:outputStylesheet name="rcms/animation.css" library="css"/>
-	        <h:outputStylesheet name="rcms/#{configMB.estiloAdmin}.css" library="css" rendered="#{configMB.loadCustomScript()}"/>
+	        <h:outputStylesheet name="rcms/#{configSistemaMB.estiloAdmin}.css" library="css" rendered="#{configSistemaMB.loadCustomScript()}"/>
 	        
 			<h:outputScript name="jquery/jquery-migrate-1.0.0.js" library="js"/>
 			<h:outputScript name="jquery/jquery.nicescroll.min.js" library="js"/>

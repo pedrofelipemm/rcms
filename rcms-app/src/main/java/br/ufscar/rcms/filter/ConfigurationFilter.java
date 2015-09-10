@@ -42,6 +42,9 @@ public class ConfigurationFilter implements Filter {
 		Long attrConfig = (Long) req.getServletContext().getAttribute("attrConfig");
 		boolean configurado = true;
 		if (attrConfig == null) {
+			if ((requestHttp.getContextPath() + URL_CONFIG_INICIAL).equals(requestHttp.getRequestURI())) {
+				chain.doFilter(req, res);
+			}
 			configurado = verificaConfiguracao();
 		} else {
 			Long diferenca = System.currentTimeMillis() - attrConfig;

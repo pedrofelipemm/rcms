@@ -17,6 +17,7 @@ import br.ufscar.rcms.factory.PesquisadorFactory;
 import br.ufscar.rcms.modelo.entidades.Autorizacao;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.servico.AutorizacaoService;
 import br.ufscar.rcms.servico.ConfiguracaoService;
@@ -61,9 +62,9 @@ public class ApplicationRefreshEventListener implements ApplicationListener<Cont
     }
 
     private void insertMicroservicesUrls() {
-        Configuracao service1 = ConfiguracaoFactory.createConfiguracao(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR);
-        Configuracao service2 = ConfiguracaoFactory.createConfiguracao(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER);
-        List<Configuracao> services = Arrays.asList(service1, service2);
+        ConfiguracaoSistema service1 = (ConfiguracaoSistema) ConfiguracaoFactory.createConfiguracao(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR);
+        ConfiguracaoSistema service2 = (ConfiguracaoSistema) ConfiguracaoFactory.createConfiguracao(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER);
+        List<ConfiguracaoSistema> services = Arrays.asList(service1, service2);
 
         List<Configuracao> servicesFromDB = configuracaoService.buscarPorTipo(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR,
                 Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER);

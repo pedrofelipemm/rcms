@@ -3,7 +3,6 @@ package br.ufscar.rcms.factory;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
-import br.ufscar.rcms.modelo.entidades.ConfiguracaoUsuario;
 import br.ufscar.rcms.modelo.entidades.Usuario;
 
 public class ConfiguracaoFactory {
@@ -17,8 +16,11 @@ public class ConfiguracaoFactory {
         case ESTILO_ADMIN:
         case ESTILO_PORTAL:
         case IDIOMA:
+        case NOME_GRUPO:
+        case DESCRICAO_GRUPO:
+        case LOGOTIPO:
         case IMPORTACAO_LATTES_AUTOMATICA:
-            return new ConfiguracaoUsuario(tipo, usuario);
+            return new ConfiguracaoSistema(tipo);
 
         case MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER:
             return new ConfiguracaoSistema(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER,

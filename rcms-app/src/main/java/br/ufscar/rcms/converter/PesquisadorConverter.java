@@ -38,7 +38,7 @@ public abstract class PesquisadorConverter {
         Pesquisador pesquisador = new Pesquisador();
         pesquisador.setCodigoLattes(pesquisadorResponse.getCodigoLattes());
         pesquisador.setEmail(pesquisadorResponse.getEmail());
-        pesquisador.setEndereco(EnderecoConverter.convert(pesquisadorResponse.getEndereco(), pesquisador));
+        pesquisador.setEndereco(EnderecoConverter.convert(pesquisadorResponse.getEndereco()));
         pesquisador.setIdUsuario(pesquisadorResponse.getIdUsuario());
         pesquisador.setLogin(pesquisadorResponse.getLogin());
         pesquisador.setNome(pesquisadorResponse.getNome());

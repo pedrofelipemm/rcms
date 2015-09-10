@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<p:panel id="painelAutorizacao" header="#{mensagens['cadastro.autorizacao']}">
+					<h:dataTable id="tableAutorizacoes" value="#{pesquisadorMB.pesquisador.autorizacoes}" var="autorizacoes"
+						styleClass="table table-hover" >
+						<h:column headerClass="col-sm-9">
+							<f:facet name="header">
+								<h:outputLabel value="#{mensagens['label.autorizacao']}" />
+							</f:facet>
+							<h:outputText value="#{autorizacoes.descricao}"/>
+						</h:column>
+						<h:column headerClass="col-sm-3 text-center">
+							<f:facet name="header">
+								<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalAutorizacao">#{mensagens['adicionar']}</button>
+							</f:facet>
+							<div class="row">
+								<div class="col-sm-12 text-center">
+									<span>
+										<h:commandButton disabled="true" value="#{mensagens['editar']}" styleClass="btn btn-primary bottom-buffer-2 top-buffer-2">
+											<f:ajax render="painelAutorizacao" />
+										</h:commandButton>
+									</span>
+								</div>
+							</div>
+						</h:column>
+					</h:dataTable>
+					<ui:include src="/paginas/admin/cadastro/pesquisador/pesquisador-modal-autorizacao.xhtml" />
+				</p:panel>
+			</div>
+		</div>
+	</div>
+</ui:composition>

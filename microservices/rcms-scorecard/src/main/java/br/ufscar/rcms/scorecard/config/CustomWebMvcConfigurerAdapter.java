@@ -1,7 +1,8 @@
-package br.ufscar.rcms.scorecard;
+package br.ufscar.rcms.scorecard.config;
 
 import java.util.List;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @Component
-// @ComponentScan(basePackages = "br.ufscar.rcms.scorecard")
+@ComponentScan(basePackages = "br.ufscar.rcms.scorecard")
 @EnableWebMvc
 public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 

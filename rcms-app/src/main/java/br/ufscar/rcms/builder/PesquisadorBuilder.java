@@ -131,7 +131,7 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
 
     public PesquisadorBuilder premios(final PremiosLattes premios) {
         if (premios != null) {
-            for (PremioLattes premioLattes : premios.getPremiosTitulos()) {
+            for (PremioLattes premioLattes : premios.getPremio()) {
                 pesquisador.addPremios(new PremioTitulo(cachedPesquisador, premioLattes.getAno(), premioLattes.getDescricao()));
             }
         }

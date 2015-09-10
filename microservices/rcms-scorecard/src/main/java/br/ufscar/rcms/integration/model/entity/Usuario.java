@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard.model.entity;
+package br.ufscar.rcms.integration.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import br.ufscar.rcms.commons.util.JsonUtil;
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario extends br.ufscar.rcms.scorecard.model.entity.Entity {
+public class Usuario extends br.ufscar.rcms.model.entity.Entity {
 
     private static final long serialVersionUID = 5066890213009565801L;
 

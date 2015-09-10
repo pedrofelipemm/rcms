@@ -1,5 +1,6 @@
 package br.ufscar.rcms.modelo.entidades;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -44,11 +45,11 @@ public class Usuario extends Entidade {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(columnDefinition = "boolean default true")
-    protected boolean enabled;
-
-    @OneToMany
-    protected List<Autorizacao> autorizacoes;
+    @Column(name = "enabled")
+    private Boolean enabled = true;
+    
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Autorizacao> autorizacoes = new ArrayList<Autorizacao>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
     protected Set<ConfiguracaoUsuario> configuracoes = new HashSet<ConfiguracaoUsuario>();

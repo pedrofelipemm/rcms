@@ -27,13 +27,13 @@
 		            		</div>
 							<div class="form-group">
 				            	<p:outputLabel styleClass="control-label" id="senhaLabel" value="#{mensagens['label.senha']}" />
-				            	<p:inputText id="senha" value="#{pesquisadorMB.pesquisador.senha}" 
+				            	<p:password id="senha" value="#{pesquisadorMB.pesquisador.senha}"
 									required="true" requiredMessage="#{mensagens['senha.nao.preenchido']}"
 									pt:placeholder="#{mensagens['informe.senha.pesquisador']}" styleClass="form-control"/>
 				            </div>
 		            		<div class="form-group">
 				              	<p:outputLabel styleClass="control-label" id="confirmarSenhaLabel" value="#{mensagens['label.confirmacao.senha']}"/>
-				              	<p:inputText id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
+				              	<p:password id="confirmar-senha" value="#{pesquisadorMB.pesquisador.senha}"
 									required="true" requiredMessage="#{mensagens['confirmacao.senha.nao.preenchido']}"
 									pt:placeholder="#{mensagens['informe.confirmar.senha.pesquisador']}" styleClass="form-control"/>
 				            </div>

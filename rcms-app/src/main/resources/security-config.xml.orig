@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+	<beans:bean class="org.springframework.security.web.FilterChainProxy" id="springSecurityFilterChain">
+		<filter-chain-map request-matcher="ant">
+			<filter-chain filters="securityContextPersistenceFilter" pattern="/*"></filter-chain>
+		</filter-chain-map>
+	</beans:bean>
+	<beans:bean class="org.springframework.security.web.context.SecurityContextPersistenceFilter" id="securityContextPersistenceFilter">
+		<beans:property name="forceEagerSessionCreation" value="true"></beans:property>
+	</beans:bean>
+  	
+ 	<http pattern="/javax.faces.resource/**" security="none"></http>
+ 	<http pattern="/file/**" security="none"></http>
+ 
+<<<<<<< HEAD
+	<http auto-config="true">
+=======
+	<http auto-config="true" >
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
+		<csrf disabled="true"/>
+		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<form-login login-page="/paginas/portal/login/login.xhtml"  />
+	</http>	
+<<<<<<< HEAD
+	
+	 <!--  <authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager> -->
+	
+	<authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource" 
+               users-by-username-query="SELECT login, senha, enabled FROM usuario WHERE login=?"
+               authorities-by-username-query="select login, nomeautorizacao from usuario c, autorizacao a where c.login=?"
+            />
+        </authentication-provider>
+    </authentication-manager>
+=======
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	
+<!-- 	<authentication-manager> -->
+<!--         <authentication-provider> -->
+<!--             <jdbc-user-service data-source-ref="dataSource"  -->
+<!--                users-by-username-query="SELECT nome, senha, enabled FROM usuario WHERE nome=?" -->
+<!--                authorities-by-username-query="select nome, nomeautorizacao from usuario c, autorizacao a where c.nome=?" -->
+<!--             /> -->
+<!--         </authentication-provider> -->
+<!--     </authentication-manager>  -->
+>>>>>>> 0375cc35c2051dfa8359d4cc168c52336e8dd4dd
+ 
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <beans:property name="url" value="${database.url}" />
+        <beans:property name="driverClassName" value="${database.driver.class.name}" />
+        <beans:property name="username" value="${database.username}" />
+        <beans:property name="password" value="${database.password}" />
+    </beans:bean>
+	
+	 		
+</beans:beans>
+

@@ -52,7 +52,6 @@ public abstract class XMLUtils {
     }
 
     public static String stripSpecialChars(final String curriculoAsString) {
-        // TODO PEDRO
         return curriculoAsString.replaceAll("&", "&amp;");
     }
 }

@@ -10,4 +10,6 @@ public interface ProducaoService {
     List<AmountProducaoByYearDTO> findAmountProducaoByYear();
 
     List<AmountProducaoByResearcherDTO> findAmountProducaoByResearcher();
+
+    void syncronizeData();
 }

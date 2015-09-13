@@ -13,7 +13,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h:panelGroup rendered="#{configMB.temaPortal eq 'portal'}">
+						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'portal'}">
 							<div id="carousel-example-generic" class="carousel slide"
 								data-ride="carousel">
 								<!-- Indicators -->
@@ -60,7 +60,7 @@
 								</a>
 							</div>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{configMB.temaPortal eq 'alegria'}">
+						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'alegria'}">
 							<div id="carousel-example-generic" class="carousel slide"
 								data-ride="carousel">
 								<!-- Indicators -->
@@ -86,7 +86,7 @@
 								</div>
 							</div>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{configMB.temaPortal eq 'surpresa'}">
+						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'surpresa'}">
 							<div id="carousel-example-generic" class="carousel slide"
 								data-ride="carousel">
 								<!-- Indicators -->
@@ -112,7 +112,7 @@
 								</div>
 							</div>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{configMB.temaPortal eq 'raiva'}">
+						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'raiva'}">
 							<div id="carousel-example-generic" class="carousel slide"
 								data-ride="carousel">
 								<!-- Indicators -->
@@ -151,13 +151,13 @@
 								<h:commandLink class="display-block"
 									action="#{projetoPesquisaMB.exibir(projeto)}">
 									<h:panelGroup
-										rendered="#{configMB.temaPortal eq 'alegria' and projeto.idProjetoPesquisa eq 15}">
+										rendered="#{configSistemaMB.temaPortal eq 'alegria' and projeto.idProjetoPesquisa eq 15}">
 										<img
 											src="#{request.contextPath}/resources/images/projeto2.jpg"
 											alt="Projeto" />
 									</h:panelGroup>
 									<h:panelGroup
-										rendered="#{configMB.temaPortal eq 'alegria' and projeto.idProjetoPesquisa eq 14}">
+										rendered="#{configSistemaMB.temaPortal eq 'alegria' and projeto.idProjetoPesquisa eq 14}">
 										<img
 											src="#{request.contextPath}/resources/images/projeto1.jpg"
 											alt="Projeto" />

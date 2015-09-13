@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<ui:composition template="/paginas/admin/template/templateSemMenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="conteudo">
+		<h:form id="formPainelControle" role="form" prependId="false">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h1>#{mensagens['painel.de.controle']}</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<p:panel id="painelConfiguracoes"
+							header="#{mensagens['configuracoes']}">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="selectOneMenuIdioma"
+												pt:name="selectOneMenuIdiomaLabel"
+												value="#{mensagens['idiomas']}" />
+											<h:selectOneMenu id="selectOneMenuIdioma"
+												pt:name="selectOneMenuIdioma" value="#{configSistemaMB.idioma}"
+												styleClass="form-control">
+												<f:selectItems value="#{configSistemaMB.idiomas.entrySet()}"
+													var="entry" itemValue="#{entry.value}"
+													itemLabel="#{entry.key}" />
+											</h:selectOneMenu>
+										</div>
+										<div class="col-sm-12">
+											<h:outputLabel for="selectOneMenuEstilo"
+												pt:name="selectOneMenuEstiloLabel"
+												value="#{mensagens['estilos']}" />
+											<h:selectOneMenu id="selectOneMenuEstilo"
+												pt:name="selectOneMenuEstilo"
+												value="#{configSistemaMB.estiloAdmin}" styleClass="form-control">
+												<f:selectItems value="#{configSistemaMB.estilosAdmin.entrySet()}"
+													var="entry" itemValue="#{entry.value}"
+													itemLabel="#{entry.key}" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-12">
+											<h:outputLabel for="temaPortal" id="temaPortalLabel"
+												value="#{mensagens['temas.para.portal']}" />
+											<h:selectOneMenu id="temaPortal"
+												value="#{configSistemaMB.temaPortal}" styleClass="form-control">
+												<f:selectItems value="#{configSistemaMB.temasPortal.entrySet()}"
+													var="entry" itemValue="#{entry.value}"
+													itemLabel="#{entry.key}" />
+											</h:selectOneMenu>
+										</div>
+										<div class="col-sm-12">
+											<h:outputLabel for="importacaoLattesAutomcatica"
+												id="importacaoLattesAutomcaticaLabel"
+												value="#{mensagens['importacao.automatica']}" />
+											<h:selectOneMenu id="importacaoLattesAutomcatica"
+												styleClass="form-control"
+												value="#{configSistemaMB.importacaoLattesAutomcatica}">
+												<f:selectItem itemValue="#{true}"
+													itemLabel="#{mensagens['sim']}" />
+												<f:selectItem itemValue="#{false}"
+													itemLabel="#{mensagens['nao']}" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-12">
+											<p:outputLabel styleClass="control-label" id="nomeLabel" value="#{mensagens['label.nome']}"/>
+											<p:inputText id="nome" value="#{configSistemaMB.nomeGrupo}" 
+												required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
+												pt:placeholder="#{mensagens['informe.nome.grupo']}" styleClass="form-control"/>
+										</div>
+										<div class="col-sm-12">
+											<p:outputLabel styleClass="control-label" id="descLabel" value="#{mensagens['label.descricao']}"/>
+											<p:inputText id="descGrupo" value="#{configSistemaMB.descGrupo}" 
+												required="true" requiredMessage="#{mensagens['descricao.vazia']}"
+												pt:placeholder="#{mensagens['informe.descricao.grupo']}" styleClass="form-control"/>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="row">
+										<div class="col-sm-12">
+											<p:outputLabel styleClass="control-label" id="logotipoLabel" value="#{mensagens['label.logotipo']}"/>
+											<p:inputText id="logotipo" value="#{configSistemaMB.logotipo}" 
+												required="true" requiredMessage="#{mensagens['logotipo.nao.preenchido']}"
+												pt:placeholder="#{mensagens['informe.logotipo']}" styleClass="form-control"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</p:panel>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h:commandButton value="#{mensagens['salvar']}"
+						pt:name="buttonSalvar" action="#{configSistemaMB.salvar}"
+						styleClass="btn btn-success">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</div>
+			</div>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

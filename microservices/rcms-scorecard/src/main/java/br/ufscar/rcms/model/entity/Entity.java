@@ -1,4 +1,4 @@
-package br.ufscar.rcms.scorecard.model.entity;
+package br.ufscar.rcms.model.entity;
 
 import java.io.Serializable;
 

@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.rcms.scorecard.UnitTestConfig;
-import br.ufscar.rcms.scorecard.model.entity.Entity;
+import br.ufscar.rcms.model.entity.Entity;
+import br.ufscar.rcms.scorecard.config.UnitTestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -26,7 +26,7 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalJUnit4
         System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
     }
 
-    @PersistenceContext
+    @PersistenceContext(name = "scorecardPersistenceUnit")
     private EntityManager entityManager;
 
     @Test

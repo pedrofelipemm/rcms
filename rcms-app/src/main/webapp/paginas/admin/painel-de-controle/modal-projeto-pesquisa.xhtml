@@ -28,9 +28,9 @@
 										value="#{mensagens['titulo']}" />
 									<h:selectOneMenu id="selectProjetoDePesquisa"
 										styleClass="form-control"
-										value="#{configMB.projetoDePesquisaSelecionado}"
+										value="#{configSistemaMB.projetoDePesquisaSelecionado}"
 										converter="entityConverter">
-										<f:selectItems value="#{configMB.projetosDePesquisa}"
+										<f:selectItems value="#{configSistemaMB.projetosDePesquisa}"
 											var="projetoDePesquisa" itemLabel="#{projetoDePesquisa.nome}"
 											itemValue="#{projetoDePesquisa}" />
 										<f:ajax />
@@ -42,7 +42,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
-					<h:commandButton action="#{configMB.adicionarProjetoDePesquisa}"
+					<h:commandButton action="#{configSistemaMB.adicionarProjetoDePesquisa}"
 						styleClass="btn btn-primary" value="#{mensagens['adicionar']}"
 						pt:data-toggle="modal" pt:data-target="#modalProjetoDePesquisa">
 						<f:ajax execute="painelPaginaInicial"

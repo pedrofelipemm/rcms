@@ -40,7 +40,7 @@ public abstract class Configuracao extends Entidade {
         this.key = key;
         this.value = value;
     }
-
+    
     public Long getIdConfiguracao() {
         return idConfiguracao;
     }
@@ -104,6 +104,20 @@ public abstract class Configuracao extends Entidade {
         MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER,
         MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR, INDICE_CAROUSEL,
         INDICE_PROJETO_PESQUISA,
-        INDICE_PRODUCAO;
+        INDICE_PRODUCAO,
+        NOME_GRUPO,
+    	DESCRICAO_GRUPO,
+    	LOGOTIPO;
+    	
+    	public static Tipo[] getTiposConfigSistema(){
+        	return new Tipo[]{ 
+        			ESTILO_ADMIN,
+        	        ESTILO_PORTAL,
+        	        IDIOMA,
+        	        IMPORTACAO_LATTES_AUTOMATICA,
+        	        NOME_GRUPO,
+        	    	DESCRICAO_GRUPO,
+        	    	LOGOTIPO};
+        }
     }
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="#{configSistemaMB.idioma}" xml:lang="#{configSistemaMB.idioma}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+
+	<h:head>
+		<f:facet name="first">
+	       	<meta charset="utf-8" />
+	        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	        <title>#{mensagens['titulo.sistema']}</title>
+	    </f:facet>
+	</h:head >
+	
+	<h:body styleClass="admin-bg">
+		<f:view locale="#{configSistemaMB.idioma}"> 
+			<noscript>
+				<p>Seu browser não suporta javascript</p>
+			</noscript>
+	
+			<ui:include src="/paginas/admin/template/cabecalho.xhtml" />
+ 			
+			<div id="admin-fluid-content">
+				<div class="container-fluid">
+					<ui:insert name="conteudo"></ui:insert>
+				</div>
+			</div>
+
+<!-- 			<div id="admin-rodape"> -->
+<!-- 				<ui:include src="/paginas/admin/template/rodape.xhtml" /> -->
+<!-- 			</div> -->
+	
+			<p:growl severity="info"  id="growl-info" autoUpdate="true" life="5000"/>
+			<p:growl severity="warn"  id="growl-warn" autoUpdate="true" life="5000"/>
+			<p:growl severity="error" id="growl-error" autoUpdate="true" life="5000"/>
+			<p:growl severity="fatal" id="growl-fatal" autoUpdate="true" life="5000"/>
+				
+			<ui:include src="/paginas/admin/template/ajax-status.xhtml" />
+					
+			<h:outputStylesheet name="bootstrap/bootstrap.min.css" library="css"/>
+			<h:outputStylesheet name="dropzone/basic.min.css" library="css"/>
+			<h:outputStylesheet name="dropzone/dropzone.min.css" library="css"/>
+	        <h:outputStylesheet name="primefaces/custom-primefaces.css" library="css"/>
+	        <h:outputStylesheet name="font-awesome/font-awesome.min.css" library="css"/>
+			<h:outputStylesheet name="rcms/estilo.css" library="css"/>        
+	        <h:outputStylesheet name="rcms/estilo-admin.css" library="css"/>
+	        <h:outputStylesheet name="rcms/rcms-table.css" library="css" />
+	        <h:outputStylesheet name="rcms/animation.css" library="css"/>
+	        <h:outputStylesheet name="rcms/#{configSistemaMB.estiloAdmin}.css" library="css" rendered="#{configSistemaMB.loadCustomScript()}"/>
+	        
+			<h:outputScript name="jquery/jquery-migrate-1.0.0.js" library="js"/>
+			<h:outputScript name="jquery/jquery.nicescroll.min.js" library="js"/>
+			<h:outputScript name="bootstrap/bootstrap.min.js" library="js"/>
+			<h:outputScript name="dropzone/dropzone.min.js" library="js"/>
+			<h:outputScript name="dropzone/dropzone-config.min.js" library="js"/>
+			<h:outputScript name="rcms/rcms.js" library="js"/>
+			<h:outputScript name="rcms/rcms-admin.js" library="js"/>
+		</f:view>
+	</h:body>
+</html>

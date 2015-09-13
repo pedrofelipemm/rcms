@@ -97,6 +97,7 @@ public class Pesquisador extends Usuario {
 
     public void setEndereco(final Endereco endereco) {
         this.endereco = endereco;
+        this.endereco.setPesquisador(this);
     }
 
     public TransientFile getFoto() {
@@ -222,6 +223,12 @@ public class Pesquisador extends Usuario {
         if (compreensaoIdiomas != null) {
             this.compreensaoIdiomas.addAll(Arrays.asList(compreensaoIdiomas));
         }
+    }
+
+    public void addAutorizacao(final Autorizacao... autorizacoes){
+    	if(autorizacoes != null){
+    		this.getAutorizacoes().addAll(Arrays.asList(autorizacoes));
+    	}
     }
 
     public void removeCompreensaoIdiomas(final CompreensaoIdioma... compreensaoIdiomas) {

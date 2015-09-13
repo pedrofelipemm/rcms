@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.ufscar.rcms.factory.ConfiguracaoFactory;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
+import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoUsuario;
 import br.ufscar.rcms.modelo.entidades.Usuario;
 import br.ufscar.rcms.util.Fixture;
@@ -27,13 +28,10 @@ public class ConfiguracaoDAOTest extends AbstractDAOTestBase {
 
         Configuracao config1 = ConfiguracaoFactory.createConfiguracao(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR);
         Configuracao config2 = ConfiguracaoFactory.createConfiguracao(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_RESEARCHER);
-        ConfiguracaoUsuario config3 = (ConfiguracaoUsuario) ConfiguracaoFactory.createConfiguracao(Tipo.ESTILO_PORTAL, usuario);
-        ConfiguracaoUsuario config4 = (ConfiguracaoUsuario) ConfiguracaoFactory.createConfiguracao(Tipo.IDIOMA, usuario);
+        ConfiguracaoSistema config3 = (ConfiguracaoSistema) ConfiguracaoFactory.createConfiguracao(Tipo.ESTILO_PORTAL);
+        ConfiguracaoSistema config4 = (ConfiguracaoSistema) ConfiguracaoFactory.createConfiguracao(Tipo.IDIOMA, usuario);
 
-        usuario.addConfiguracao(config3);
-        usuario.addConfiguracao(config4);
-
-        salvar(config1, config2, usuario);
+        salvar(config1, config2, config3, config4);
     }
 
     @Test
@@ -51,6 +49,6 @@ public class ConfiguracaoDAOTest extends AbstractDAOTestBase {
         List<Configuracao> configs = configuracaoDAO.buscarPorTipo(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR,
                 Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR, Tipo.IDIOMA);
 
-        assertEquals(3, configs.size());
+        assertEquals(4, configs.size());
     }
 }

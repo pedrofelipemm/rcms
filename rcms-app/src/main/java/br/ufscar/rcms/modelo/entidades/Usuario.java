@@ -59,7 +59,7 @@ public class Usuario extends Entidade {
 
     private Set<ConfiguracaoUsuario> initConfiguracoes() {
         return Arrays.asList(Tipo.values()).stream()
-                .filter(t -> t.equals(Tipo.ESTILO_ADMIN) || t.equals(Tipo.ESTILO_PORTAL) ||
+                .filter(t -> t.equals(Tipo.ESTILO_ADMIN) ||
                         t.equals(Tipo.IDIOMA) || t.equals(Tipo.IMPORTACAO_LATTES_AUTOMATICA))
                 .map(t -> new ConfiguracaoUsuario(t, this))
                 .collect(Collectors.toSet());

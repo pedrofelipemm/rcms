@@ -235,470 +235,207 @@
 								<br />
 
 								<h:panelGroup layout="block" styleClass="row"
-									rendered="#{pesquisadorMB.pesquisador.codigoLattes eq '0268728255033469'}">
+									rendered="#{not empty pesquisadorMB.listaArtigosEmPeriodicos}">
 									<div class="col-md-12">
 										<h4>#{mensagens['exibir.pesquisador.artigos.completos.publicados.em.periodicos']}</h4>
 										<ol class="listas-numeradas">
-											<li>Alencar, T. S. ; MACHADO, L. ; Neris, L. O. ; Neris,
-												Vânia Paula de Almeida . Addressing the Users Diversity in
-												Ubiquitous Environments through a Low Cost Architecture. In:
-												<em>16th International Conference on Human-Computer
-													Interaction (HCII 2014)</em>, 2014, Creta. Human-Computer
-												Interaction. Applications and Services. Lecture Notes in
-												Computer Science, 2014. p. 441-452.
-											</li>
-											<li>Rodrigues, K. H. ; Teixeira, C. ; Neris, Vânia Paula
-												de Almeida . Assessing the elderly s emotional responses
-												while interact with movies enriched with additional
-												multimedia content. In: <em>16th International
-													Conference on Human-Computer Interaction (HCII 2014)</em>, 2014,
-												Creta. Stephanidis, C., Antona, M. (eds.) UAHCI/HCII 2014,
-												Part III. LNCS, vol. 8515, 2014. p. 158-169.
-											</li>
-											<li>BERNICHE, E. ; Neris, Vânia Paula de Almeida .
-												Análise Comparativa entre Bibliotecas Javascript para o
-												Desenvolvimento de Interfaces Web Ricas. <em>T.I.S.
-													Tecnologias Infraestrutura e Software</em>, v. 2, p. 18-25,
-												2013.
-											</li>
-											<li>Neris, Vânia Paula de Almeida ; Baranauskas, M.
-												Cecília C. . Designing tailorable software systems with the
-												users participation. <em>Journal of the Brazilian
-													Computer Society (Impresso)</em>, 2012. <a
-												href="#{request.contextPath}/resources/artigos/Vania/Designing-tailorable-software-systems-with-the-users-participation.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>NERIS, Vânia Paula de Almeida; BARANAUSKAS, M.
-												Cecília C. Making interactive systems more flexible: an
-												approach based on users' participation and norms. In: <em>Proceedings
-													of the IX Symposium on Human Factors in Computing Systems</em>.
-												Brazilian Computer Society, 2010. p. 101-110. <a
-												href="#{request.contextPath}/resources/artigos/Vania/Making-interactive-systems-more-flexible-an-approach-based-on users-participation-and-norms-2010.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>Rodrigues, K. H. ; Teixeira, C. ; Neris, Vânia Paula
-												de Almeida . Heuristics for assessing emotional response of
-												viewers during the interaction with TV programs. In: <em>16th
-													International Conference on Human-Computer Interaction
-													(HCII 2010)</em>, 2010, Creta. M. Kurosu (Ed.): Human-Computer
-												Interaction, Part I, HCII 2012, LNCS 8510, 2014. p. 577-588.
-											</li>
-											<li>Neris, Vânia Paula de Almeida ; Rodrigues, K. H. ;
-												LIMA, R. F. . A Systematic Review about Sustainability and
-												Aspects of Human-Computer Interaction. In: <em>16th
-													International Conference on Human-Computer Interaction
-													(HCII 2010)</em>, 2010, Creta. Human-Computer Interaction.
-												Lecture Notes in Computer Science, 2010.
-											</li>
-											<li>BOTEGA, L. ; BERTI, C. ; Araujo, R. B. ; Neris,
-												Vânia Paula de Almeida . A Model to Promote Interaction
-												Between Humans and Data Fusion Intelligence to Enhance
-												Situational Awareness. In: <em>Workshop on Human
-													Factors in Assistive Technologies</em>, 2010, Creta. Proceedings
-												of the 16th Human-Computer Interaction Internacional, 2010.
-											</li>
-											<li>NERIS, Vania Paula de Almeida ; SILVA, Junia
-												Coutinho Anacleto ; TALARICO NETO, Americo ; MASCARENHAS,
-												Silvia Helena Zem . Estratégias Cognitivas como Soluções de
-												Sucesso no Projeto do Material Instrucional para EAD. <em>Revista
-													Brasileira de Informática na Educação</em>, Rio de Janeiro, v.
-												13, n.3, p. 9-18, 2005.<a
-												href="#{request.contextPath}/resources/artigos/Vania/Estrategias-Cognitivas-como-Solucoes-de-Sucesso-no-Projeto-do-Material-Instrucional-para-EAD-2005.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>Rodrigues, K. H. ; NERIS, Vania Paula de Almeida ;
-												Teixeira, C. . Interaction of the elderly viewer with
-												additional multimedia content to support the appreciation of
-												television programs. In: <em>15th International
-													Conference on Human-Computer Interaction (HCII)</em>, 2004, Las
-												Vegas. HCII 2004 - 15th International Conference on
-												Human-Computer Interaction, 2004. p. 227-236.
-											</li>
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaArtigosEmPeriodicos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.revista}, <h:outputText
+														value="n. #{producao.numero}"
+														rendered="#{producao.numero > 0}" />, p.
+													#{producao.paginas}, #{producao.ano}.</li>
+											</ui:repeat>
 										</ol>
 									</div>
 								</h:panelGroup>
-
 								<h:panelGroup layout="block" styleClass="row"
-									rendered="#{pesquisadorMB.pesquisador.codigoLattes eq '9035684997439778'}">
+									rendered="#{not empty pesquisadorMB.listaLivrosPublicados}">
 									<div class="col-md-12">
-										<h4>#{mensagens['exibir.pesquisador.artigos.completos.publicados.em.periodicos']}</h4>
+										<h4>#{mensagens['exibir.pesquisador.livros.publicados.organizados.ou.edicoes']}</h4>
 										<ol class="listas-numeradas">
-											<li>VIEL, C. C. ; RODRIGUES, K. R. H. ; TEIXEIRA, C. A.
-												C ; PIMENTEL, M. G. . Design Solutions for Interactive
-												Multi-video Multimedia Learning Objects, no Prelo. In:
-												http://2015.hci.international, 2015, Los Angeles, CA, USA.
-												17th International Conference on Human-Computer Interaction,
-												2015. v. 0. p. 0-0.2.</li>
-											<li>RODRIGUES, K. R. H. ; TEIXEIRA, C. A. C ; NERIS, V.
-												P. A. . Heuristics for Assessing Emotional Response of
-												Viewers during the Interaction with TV Programs. In: <em>16th
-													International Conference on Human-Computer Interaction</em>,
-												2014, Crete. 16th International Conference on Human-Computer
-												Interaction. Switzerland: Springer International Publishing,
-												2014. p. 577-588.
-											</li>
-											<li>NERIS, V. P. A. ; RODRIGUES, K. R. H. ; LIMA, R. F.
-												. A Systematic Review of Sustainability and Aspects of
-												Human-Computer Interaction. In: <em>16th International
-													Conference on Human-Computer Interaction</em>, 2014, Crete. 16th
-												International Conference on Human-Computer Interaction.
-												Switzerland: Springer International Publishing, 2014.
-											</li>
-											<li>RODRIGUES, K. R. H. ; VIEL, C. C.; MELO, E. L. ;
-												BUENO, R. ; PIMENTEL, M. G. ; TEIXEIRA, C. A. C .
-												Interaction with a Problem Solving Multi-video Lecture:
-												Observing Students from Distance and Traditional Learning
-												Courses. <em>International Journal</em>: Emerging
-												Technologies in Learning, v. 9, p. 39-46, 2014. <a
-												href="#{request.contextPath}/resources/artigos/Kamila/Interaction-with-a-Problem-Solving-Multi-video-Lecture-Observing-Students-from-Distance-and-Traditional-Learning-Courses-2014.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>RODRIGUES, K. R. H. ; NAKAGAWA, P. I. ; MELO, E. L.
-												; TEIXEIRA, C. A. C . Interação com conteúdo complementar
-												para apoio ao entendimento de programas televisivos. In: <em>IX
-													Simpósio de Fatores Humanos em Sistemas Computacionais (IHC
-													2010)</em>, 2010, Belo Horizonte. Proceedings of the IX
-												Symposium on Human Factors in Computing Systems. Porto
-												Alegre: Brazilian Computer Society, 2010. v. 1. p. 91-100. <a
-												href="#{request.contextPath}/resources/artigos/Kamila/Interacao-com-conteudo-complementar-para-apoio-ao-entendimento-de-programas-televisivos-2010.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>RODRIGUES, K. R. H. ; BOCANEGRA, L. F. ; GONCALVES,
-												V. P. ; CARVALHO, V. G. ; NERIS, V. P. A. . Enriquecimento
-												de Personas para Apoio ao Design de Aplicações Terapêuticas
-												para a Saúde Mental. In: <em>Simpósio Brasileiro sobre
-													Fatores Humanos em Sistemas Computacionais (IHC)</em>, 2010, Foz
-												do Iguaçu-PR. Anais do Simpósio Brasileiro sobre Fatores
-												Humanos em Sistemas Computacionais, 2010.
-											</li>
-											<li>RODRIGUES, K. R. H. ; NERIS, V. P. A. ; TEIXEIRA, C.
-												A. C . Interaction of the elderly viewer with additional
-												multimedia content to support the appreciation of television
-												programs.. In: <em>HCII 2010 - 15th International
-													Conference on Human-Computer Interaction.</em>, 2010, Las Vegas,
-												Nevada, USA. 15th International Conference on Human-Computer
-												Interaction, 2010. v. 8006. p. 227-236.
-											</li>
-											<li>RODRIGUES, K. R. H. ; PEREIRA, S. S. ; QUINELATO,
-												L.G.G. ; MELO, E. L. ; NERIS, V. P. A. ; TEIXEIRA, C. A. C .
-												Interação com conteúdo complementar por meio de múltiplos
-												dispositivos para apoio à apreciação de programas
-												televisivos. In: <em>WEBMEDIA 2009 Simpósio Brasileiro
-													de Sistemas Multimídia e Web</em>, 2009, Florianópolis - SC.
-												Simpósio Brasileiro de Sistemas Multimídia e Web (WEBMEDIA
-												2009). Porto Alegre: Sociedade Brasileira de Computação,
-												2009.
-											</li>
-											<li>RODRIGUES, K. R. H. ; CANAL, M. C. ; XAVIER, R. C. ;
-												ALENCAR, T. S. ; NERIS, V. P. A. Avaliando aspectos de
-												privacidade no Facebook pelas lentes de usabilidade,
-												acessibilidade e fatores emocionais. In: <em>11th
-													Brazilian Symposium on Human Factors in Computer Systems</em>,
-												2008, Cuiabá. Companion Proceedings of the 11th Brazilian
-												Symposium on Human Factors in Computing Systems, 2008. p.
-												75-76. <a
-												href="#{request.contextPath}/resources/artigos/Kamila/Avaliando-aspectos-de-privacidade-no-Facebook-pelas-lentes-de-usabilidade-acessibilidade-e-fatores-emocionais-2012.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>RODRIGUES, K. R. H. ; NERIS, V. P. A. ; TEIXEIRA, C.
-												A. C . Interaction of the elderly viewer with additional
-												multimedia content to support the appreciation of television
-												programs. In: <em>WEBMEDIA 2011 Simpósio Brasileiro de
-													Sistemas Multimídia e Web</em>, 2008, Florianópolis - SC.
-												Simpósio Brasileiro de Sistemas Multimídia e Web (WEBMEDIA
-												2008). Porto Alegre: Sociedade Brasileira de Computação,
-												2008.
-											</li>
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaLivrosPublicados}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.edicao},
+													#{producao.ano}. v. #{producao.volume}.
+													#{producao.paginas}p.</li>
+											</ui:repeat>
 										</ol>
 									</div>
 								</h:panelGroup>
-
 								<h:panelGroup layout="block" styleClass="row"
-									rendered="#{pesquisadorMB.pesquisador.codigoLattes eq '0149606919335608'}">
+									rendered="#{not empty pesquisadorMB.listaCapitulosDeLivros}">
 									<div class="col-md-12">
-										<h4>#{mensagens['exibir.pesquisador.artigos.completos.publicados.em.periodicos']}</h4>
+										<h4>#{mensagens['exibir.pesquisador.capitulos.de.livros.publicados']}</h4>
 										<ol class="listas-numeradas">
-											<li>de Alencar, T. S. ; MACHADO, L. R. ; NERIS, L. O. ;
-												Neris, V. P. A. . Addressing the Users Diversity in
-												Ubiquitous Environments through a Low Cost Architecture. In:
-												<em>HCI International</em>, 2014, Grécia. Proceedings of the
-												16th International Conference on Human-Computer Interaction,
-												Lecture Notes in Computer Science. Switzerland: Springer
-												International Publishing, 2014. v. 8515. p. 441-452.
-											</li>
-											<li>Alencar, T. S. ; Neris, V. P. A. . Sistemas Ubíquos
-												para Todos: conhecendo e mapeando os diferentes perfis de
-												interação. In: <em>XII Simpósio Brasileiro sobre
-													Fatores Humanos em Sistemas Computacionais (IHC'14)</em>, 2014,
-												Manaus. Anais do XII Simpósio Brasileiro sobre Fatores
-												Humanos em Sistemas Computacionais, 2014.
-											</li>
-											<li>Alencar, T. S. ; GARCIA, A. S. B. ; OLIVEIRA, M. R.
-												; ABIB, S. . Proposta de uma plataforma de software para a
-												melhoria da gestão dos polos de apoio presenciais. In: <em>Simpósio
-													Internacional de Educação a Distância</em>, 2014, São Carlos.
-												Anais do SIED:EnPED, 2014.
-											</li>
-											<li>Alencar, T. S. ; Neris, V. P. A. . Towards Design
-												Guidelines for Software Applications that Collect User Data
-												for Ubicomp. In: <em>XIII Simpósio Brasileiro sobre
-													Fatores Humanos em Sistemas Computacionais (IHC'14)</em>, 2014,
-												Foz do Iguaçu. Anais do XIII Simpósio Brasileiro sobre
-												Fatores Humanos em Sistemas Computacionais, 2014. <a
-												href="#{request.contextPath}/resources/artigos/Tatiana/Towards-Design-Guidelines-for-Software-Applications-that-Collect-User-Data-for-Ubicomp-2014.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>Alencar, T. S. ; Neris, V. P. A. . Ubiquitous
-												Environments and Brazilian Personas: Can our citizens
-												universally access this technology?. In: <em>SEMISH -
-													XXXIX Seminário Integrado de Software e Hardware</em>, 2012,
-												Curitiba. Anais do XXXII Congresso da Sociedade Brasileira
-												de Computação, 2012. <a
-												href="#{request.contextPath}/resources/artigos/Tatiana/Ubiquitous-Environments-and-Brazilian-Personas-Can-our-citizens-universally-access-this-technology-2012.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>Rodrigues, K. R. H. ; Canal, M. C. ; Xavier, R. A.
-												C. ; Alencar, T. S. ; Neris, V. P. A. . Avaliando aspectos
-												de privacidade no Facebook pelas lentes de usabilidade,
-												acessibilidade e fatores emocionais. In: <em>Simpósio
-													Brasileiro sobre Fatores Humanos em Sistemas Computacionais</em>,
-												2012, Cuiabá. Companion Proceedings of the 11th Brazilian
-												Symposium on Human Factors in Computing Systems, 2012. p.
-												75-76.
-											</li>
-											<li>Rodrigues, K. R. H. ; Canal, M. C. ; Xavier, R. A.
-												C. ; Alencar, T. S. ; Neris, V. P. A. . <em>Avaliando
-													aspectos de privacidade no Facebook pelas lentes de
-													usabilidade, acessibilidade e fatores emocionais</em>. Relatório
-												Técnico apresentado no IHC'12. 2012.
-											</li>
-											<li>Alencar, T. S. ; Correia, M. L. ; Nascimento, F. E.
-												; Kitamura, P. V. . <em>Apontamentos sobre a
-													usabilidade do sistema Moodle aplicado ao Ensino a
-													Distância na Universidade Federal de São Carlos</em>. Relatório
-												Técnico apresentado no IHC'11. 2011.
-											</li>
-											<li>ALENCAR, T. S. ; GARCIA, A. S. B. ; OLIVEIRA, M. R.
-												; ABIB, S. . Proposta de uma plataforma de software para a
-												melhoria da gestão dos polos de apoio presenciais. <em>Revista
-													Eletrônica Gestão e Saúde</em>, v. 3, p. 1312-1327, 2011. <a
-												href="#{request.contextPath}/resources/artigos/Tatiana/Proposta-de-uma-plataforma-de-software-para-a-melhoria-da-gestao-dos-polos-de-apoio-presenciais-2011.pdf"
-												class="download" target="_blank">Download</a>
-											</li>
-											<li>ALENCAR, R. A. C. ; PEREIRA, F. D. . SISTEMA DE
-												RASTREAMENTO DE VULNERABILIDADES EM APLICAÇÕES WEB. In: <em>XI
-													Seminário de Iniciação Científica</em>, 2010, Marília. XI
-												Seminário de Iniciação Científica, 2010.
-											</li>
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaCapitulosDeLivros}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. Em: #{producao.livro}:
+													#{producao.editora}, #{producao.ano}, v.
+													#{producao.volume}, p. #{producao.paginas}.</li>
+											</ui:repeat>
 										</ol>
 									</div>
 								</h:panelGroup>
-								<!-- 
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaArtigosEmPeriodicos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.artigos.completos.publicados.em.periodicos']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaArtigosEmPeriodicos}">
-	        	                            <li>
-		        	                            <ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-		        	                            <strong>#{producao.titulo}</strong>. #{producao.revista}, 
-		        	                            <h:outputText value="n. #{producao.numero}" rendered="#{producao.numero > 0}" />, 
-		        	                            p. #{producao.paginas}, 
-		        	                            #{producao.ano}.
-		        	                        </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaLivrosPublicados}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.livros.publicados.organizados.ou.edicoes']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaLivrosPublicados}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.edicao}, 
-	        	                            	#{producao.ano}. v. 
-	        	                            	#{producao.volume}. 
-	        	                            	#{producao.paginas}p.</li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaCapitulosDeLivros}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.capitulos.de.livros.publicados']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaCapitulosDeLivros}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	Em: #{producao.livro}: 
-	        	                            	#{producao.editora}, 
-	        	                            	#{producao.ano}, 
-	        	                            	v. #{producao.volume}, 
-	        	                            	p. #{producao.paginas}.
-	        	                        	</li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaTextosEmJornais}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.textos.em.jornais.de.noticias.revistas']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTextosEmJornais}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.nomeJornal}, 
-	        	                            	p. #{producao.paginas}, 
-		        	                            <h:outputText value="#{producao.dataPublicacao}" >
-													<f:convertDateTime pattern="dd MMM. yyyy" />
-												</h:outputText>.
-											</li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaTrabalhosCompletosCongressos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.trabalhos.completos.publicados.em.anais.de.congressos']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTrabalhosCompletosCongressos}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	Em: #{producao.nomeEvento}, 
-	        	                            	v. #{producao.volume}, 
-	        	                            	p. #{producao.paginas}, 
-	        	                            	#{producao.ano}.
-        	                            	</li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaResumosExpandidosCongressos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.resumos.expandidos.publicados.em.anais.de.congressos']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaResumosExpandidosCongressos}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	Em: #{producao.nomeEvento}, 
-	        	                            	v. #{producao.volume}, 
-	        	                            	p. #{producao.paginas}, 
-	        	                            	#{producao.ano}.
-	        	                            </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaResumosCongressos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.resumos.publicados.em.anais.de.congressos']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaResumosCongressos}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	Em: #{producao.nomeEvento}, 
-	        	                            	v. #{producao.volume}, 
-	        	                            	p. #{producao.paginas}, 
-	        	                            	#{producao.ano}.
-	        	                            </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaApresentacoesTrabalhos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.apresentacoes.de.trabalho']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaApresentacoesTrabalhos}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.ano}. 
-	        	                            	(#{producao.natureza}).
-	        	                            </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaOutrasProducoesBibligraficas}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.outras.producoes.bibliograficas']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaOutrasProducoesBibligraficas}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.ano}. 
-	        	                            	(#{producao.natureza}).
-	        	                            </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaProdutosTecnologicos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.produtos.tecnologicos']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaProdutosTecnologicos}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.ano}.
-	        	                            </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaProcessosOuTecnicas}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.processos.ou.tecnicas']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaProcessosOuTecnicas}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.ano}.
-	        	                            </li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaTrabalhosTecnicos}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.trabalhos.tecnicos']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaTrabalhosTecnicos}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.ano}.</li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="row" rendered="#{not empty pesquisadorMB.listaOutrasProducoesTecnicas}">
-	                            <div class="col-md-12">
-                                	<h4>#{mensagens['exibir.pesquisador.demais.tipos.de.producao.tecnica']}</h4>
-                                    <ol class="listas-numeradas">
-			                        	<ui:repeat var="producao" value="#{pesquisadorMB.listaOutrasProducoesTecnicas}">
-	        	                            <li>
-	        	                            	<ui:repeat var="autor" value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>. 
-	        	                            	<strong>#{producao.titulo}</strong>. 
-	        	                            	#{producao.ano}. 
-	        	                            	(#{producao.natureza}).</li>
-	        	                        </ui:repeat>
-                                    </ol>
-                                </div>
-                            </h:panelGroup>
- -->
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaTextosEmJornais}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.textos.em.jornais.de.noticias.revistas']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaTextosEmJornais}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>.
+													#{producao.nomeJornal}, p. #{producao.paginas}, <h:outputText
+														value="#{producao.dataPublicacao}">
+														<f:convertDateTime pattern="dd MMM. yyyy" />
+													</h:outputText>.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaTrabalhosCompletosCongressos}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.trabalhos.completos.publicados.em.anais.de.congressos']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaTrabalhosCompletosCongressos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. Em:
+													#{producao.nomeEvento}, v. #{producao.volume}, p.
+													#{producao.paginas}, #{producao.ano}.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaResumosExpandidosCongressos}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.resumos.expandidos.publicados.em.anais.de.congressos']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaResumosExpandidosCongressos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. Em:
+													#{producao.nomeEvento}, v. #{producao.volume}, p.
+													#{producao.paginas}, #{producao.ano}.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaResumosCongressos}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.resumos.publicados.em.anais.de.congressos']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaResumosCongressos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. Em:
+													#{producao.nomeEvento}, v. #{producao.volume}, p.
+													#{producao.paginas}, #{producao.ano}.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaApresentacoesTrabalhos}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.apresentacoes.de.trabalho']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaApresentacoesTrabalhos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.ano}.
+													(#{producao.natureza}).</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaOutrasProducoesBibligraficas}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.outras.producoes.bibliograficas']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaOutrasProducoesBibligraficas}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.ano}.
+													(#{producao.natureza}).</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaProdutosTecnologicos}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.produtos.tecnologicos']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaProdutosTecnologicos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.ano}.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaProcessosOuTecnicas}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.processos.ou.tecnicas']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaProcessosOuTecnicas}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.ano}.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaTrabalhosTecnicos}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.trabalhos.tecnicos']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaTrabalhosTecnicos}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.ano}.</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
+								<h:panelGroup layout="block" styleClass="row"
+									rendered="#{not empty pesquisadorMB.listaOutrasProducoesTecnicas}">
+									<div class="col-md-12">
+										<h4>#{mensagens['exibir.pesquisador.demais.tipos.de.producao.tecnica']}</h4>
+										<ol class="listas-numeradas">
+											<ui:repeat var="producao"
+												value="#{pesquisadorMB.listaOutrasProducoesTecnicas}">
+												<li><ui:repeat var="autor"
+														value="#{pesquisadorMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+													<strong>#{producao.titulo}</strong>. #{producao.ano}.
+													(#{producao.natureza}).</li>
+											</ui:repeat>
+										</ol>
+									</div>
+								</h:panelGroup>
 							</div>
 						</div>
 					</div>

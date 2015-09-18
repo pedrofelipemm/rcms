@@ -15,7 +15,6 @@
         				   http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
         				   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
-	<context:component-scan base-package="br.ufscar.rcms" />
-	
-	<bean name="configurationFilter" class="br.ufscar.rcms.filter.ConfigurationFilter"/>
+<context:component-scan base-package="br.ufscar.rcms" />
+
 </beans>

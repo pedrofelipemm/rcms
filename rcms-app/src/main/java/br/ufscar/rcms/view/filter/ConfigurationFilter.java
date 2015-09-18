@@ -1,4 +1,4 @@
-package br.ufscar.rcms.filter;
+package br.ufscar.rcms.view.filter;
 
 import java.io.IOException;
 

@@ -6,7 +6,8 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:o="http://omnifaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" >
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" >
 	
 	<ui:composition>
 		<div id="cabecalho" class="container-fluid">
@@ -40,7 +41,9 @@
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
-                        <a href="#{request.contextPath}/paginas/index.xhtml"><h:graphicImage value="#{configSistemaMB.logotipo}" alt="#{configSistemaMB.nomeGrupo}" /></a>
+                    	<ui:param name="length" value="#{fn:length(configSistemaMB.logotipo)}" />
+                    	<ui:param name="logoUrl" value="#{fn:substring(configSistemaMB.logotipo,length - 4,length)}" />
+                        <a href="#{request.contextPath}/paginas/index.xhtml"><h:graphicImage value="/images/logotipo#{fn:startsWith(logoUrl,'.') ? '' : '.'}#{logoUrl}" alt="#{configSistemaMB.nomeGrupo}" /></a>
                     </div>
                     <h:form id="formMenu">
 	                    <ul class="nav navbar-nav navbar-right">

@@ -8,6 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import br.ufscar.rcms.modelo.entidades.TransientFile;
@@ -33,11 +36,17 @@ public class ImageServlet extends HttpServlet {
 
     protected static final String IMAGES_PATH = "/images/";
     protected static final String DEFAULT_IMAGE = IMAGES_PATH + "person.png";
+    protected static final String DEFAULT_LOGO = IMAGES_PATH + "logo-rcms.jpg";
+    
+    @Value("${pasta.logotipo}")
+    private String pastaLogotipo;
 
     @Autowired
     private PesquisadorService pesquisadorService;
-
+    
     private byte[] defaultImage;
+    
+    private byte[] defaultLogo;
 
     @Override
     public void init(final ServletConfig config) throws ServletException {
@@ -48,27 +57,54 @@ public class ImageServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
 
-        Long userId = extractUserId(request);
-        TransientFile file = pesquisadorService.buscarFoto(userId);
-
-        byte[] image = loadImage(file);
+        String userId = extractUserId(request);
+        
+        TransientFile file = new TransientFile();
+        byte[] image = null;
+        
+        if(userId.toString().startsWith("logotipo")){
+        	image = Files.readAllBytes(Paths.get(pastaLogotipo + userId));
+        	image = loadLogo(image);
+        } else {
+        	file = pesquisadorService.buscarFoto(Long.valueOf(userId));
+        	image = loadImage(file);
+        }
 
         downloadFile(response, image);
     }
 
-    private Long extractUserId(final HttpServletRequest request) {
+    private String extractUserId(final HttpServletRequest request) {
         String id = request.getPathInfo().substring(1);
-        return !isEmpty(id) ? Long.valueOf(id) : Long.valueOf(-1);
+        return !isEmpty(id) ? id : "-1";
     }
 
     private byte[] loadImage(final TransientFile file) {
         return TransientFile.isEmpty(file) ? getDefaultImage() : file.getFile();
     }
+    
+    private byte[] loadLogo(final byte[] image) {
+    	return image == null || image.length == 0 ? getDefaultLogo() : image;
+    }
 
     private byte[] getDefaultImage() {
         return !isEmpty(defaultImage) ? defaultImage : loadDefaultImage();
     }
+    
+    private byte[] getDefaultLogo() {
+        return !isEmpty(defaultLogo) ? defaultLogo : loadDefaultLogo();
+    }
 
+    private byte[] loadDefaultLogo() {
+        try {
+            String imagePath = this.getClass().getResource(DEFAULT_LOGO).getPath();
+            defaultLogo = IOUtils.toByteArray(new FileInputStream(new File(imagePath)));
+            return defaultLogo;
+        } catch (IOException exception) {
+            LOGGER.error(exception.getMessage(), exception);
+            throw new RuntimeException(exception);
+        }
+    }
+    
     private byte[] loadDefaultImage() {
         try {
             String imagePath = this.getClass().getResource(DEFAULT_IMAGE).getPath();

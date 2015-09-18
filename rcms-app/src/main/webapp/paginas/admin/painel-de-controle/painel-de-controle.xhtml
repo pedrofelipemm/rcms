@@ -98,10 +98,26 @@
 								<div class="col-sm-6">
 									<div class="row">
 										<div class="col-sm-12">
-											<p:outputLabel styleClass="control-label" id="logotipoLabel" value="#{mensagens['label.logotipo']}"/>
+											<div class="col-md-3 text-center">
+												<div class="foto-pesquisador">
+													<img title="#{mensagens['logotipo']}"
+														src="#{request.contextPath}/images/logotipo/logotipo.png"></img>
+												</div>
+												<div class="form-group">
+													<button type="button" class="btn btn-primary fa fa-upload"
+														data-toggle="modal" data-target="#modalLogoUpload"
+														style="margin: 10px; font-family: FontAwesome">
+														<p:spacer width="20"
+															pt:alt="#{mensagens['spacer.mensagem']}"
+															pt:title="#{mensagens['spacer.titutlo']}" />
+														#{mensagens['upload']}
+													</button>
+												</div>
+											</div>
+											<!-- <p:outputLabel styleClass="control-label" id="logotipoLabel" value="#{mensagens['label.logotipo']}"/>
 											<p:inputText id="logotipo" value="#{configSistemaMB.logotipo}" 
 												required="true" requiredMessage="#{mensagens['logotipo.nao.preenchido']}"
-												pt:placeholder="#{mensagens['informe.logotipo']}" styleClass="form-control"/>
+												pt:placeholder="#{mensagens['informe.logotipo']}" styleClass="form-control"/> -->
 										</div>
 									</div>
 								</div>
@@ -212,6 +228,6 @@
 				</div>
 			</div>
 		</h:form>
-		
+		<ui:include src="/paginas/admin/painel-de-controle/logotipo-modal-file-upload.xhtml" />
 	</ui:define>
 </ui:composition>

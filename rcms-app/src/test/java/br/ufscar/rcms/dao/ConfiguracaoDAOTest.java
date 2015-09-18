@@ -12,7 +12,6 @@ import br.ufscar.rcms.factory.ConfiguracaoFactory;
 import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
-import br.ufscar.rcms.modelo.entidades.ConfiguracaoUsuario;
 import br.ufscar.rcms.modelo.entidades.Usuario;
 import br.ufscar.rcms.util.Fixture;
 

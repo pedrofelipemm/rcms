@@ -1,7 +1,9 @@
 package br.ufscar.rcms.view.mb;
 
+import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,7 +17,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.PartialViewContext;
+import javax.persistence.Transient;
+import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,6 +29,7 @@ import br.ufscar.rcms.modelo.entidades.ConfiguracaoIndice;
 import br.ufscar.rcms.modelo.entidades.ConfiguracaoSistema;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.ConfiguracaoService;
 import br.ufscar.rcms.servico.ProducaoService;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
@@ -55,6 +61,11 @@ public class ConfigSistemaMB extends AbstractMB {
 
     private String temaPortal;
     private Map<String, String> temasPortal;
+    
+    private Part imagemLogo;
+    
+    @Transient
+    private TransientFile foto = new TransientFile();
     
     private String nomeGrupo;
     
@@ -170,10 +181,15 @@ public class ConfigSistemaMB extends AbstractMB {
         	getConfiguracoes().add(config);
         	config = getConfiguracao(Configuracao.Tipo.DESCRICAO_GRUPO);
         	config.setValue(descGrupo);
-        	getConfiguracoes().add(config);
-        	config = getConfiguracao(Configuracao.Tipo.LOGOTIPO);
-        	config.setValue(logotipo);
-        	getConfiguracoes().add(config);
+        	
+        	if (!isEmpty(getImagemLogo())) {
+	        	uploadFile();
+	        	setLogotipo(getConfiguracaoService().salvarLogotipo(getFoto()));
+	        	getConfiguracoes().add(config);
+	        	config = getConfiguracao(Configuracao.Tipo.LOGOTIPO);
+	        	config.setValue(logotipo);
+	        	getConfiguracoes().add(config);
+        	}
         	
         	for(Configuracao conf : getConfiguracoes()){
         		getConfiguracaoService().saveOrUpdate(conf);
@@ -307,6 +323,16 @@ public class ConfigSistemaMB extends AbstractMB {
         partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         getViewRoot().setLocale(new Locale(idioma));
     }
+    
+	public void uploadFile() {
+		try {
+			getFoto().setFile(IOUtils.toByteArray(imagemLogo.getInputStream()));
+			getFoto().setFileExtension(extractFileExtension(imagemLogo.getSubmittedFileName()));
+		} catch (final IOException ioException) {
+			LOGGER.error(String.format("Erro ao realizar upload do logotipo", ioException));
+			adicionarMensagemErroByKey("erro.enviar.imagem");
+		}
+	}
 
     public String getIdioma() {
         return idioma;
@@ -356,7 +382,23 @@ public class ConfigSistemaMB extends AbstractMB {
         this.temasPortal = temasPortal;
     }
 
-    public Boolean getImportacaoLattesAutomcatica() {
+    public Part getImagemLogo() {
+		return imagemLogo;
+	}
+
+	public void setImagemLogo(Part imagemLogo) {
+		this.imagemLogo = imagemLogo;
+	}
+
+	public TransientFile getFoto() {
+		return foto;
+	}
+
+	public void setFoto(TransientFile foto) {
+		this.foto = foto;
+	}
+
+	public Boolean getImportacaoLattesAutomcatica() {
         return importacaoLattesAutomcatica;
     }
 

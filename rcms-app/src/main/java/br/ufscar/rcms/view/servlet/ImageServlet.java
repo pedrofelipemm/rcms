@@ -63,8 +63,16 @@ public class ImageServlet extends HttpServlet {
         byte[] image = null;
         
         if(userId.toString().startsWith("logotipo")){
-        	image = Files.readAllBytes(Paths.get(pastaLogotipo + userId));
-        	image = loadLogo(image);
+        	if(userId.endsWith("null")){
+        		image = loadDefaultLogo();
+        	} else {
+        		try{
+	        	image = Files.readAllBytes(Paths.get(pastaLogotipo + userId));
+        		}catch(IOException ie){
+        			image = loadDefaultLogo();
+        		}
+	        	image = loadLogo(image);
+        	}
         } else {
         	file = pesquisadorService.buscarFoto(Long.valueOf(userId));
         	image = loadImage(file);

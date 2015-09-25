@@ -16,6 +16,7 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
+import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -26,8 +27,8 @@ import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
-import br.ufscar.rcms.modelo.entidades.Autorizacao;
 import br.ufscar.rcms.modelo.entidades.AutorProducao;
+import br.ufscar.rcms.modelo.entidades.Autorizacao;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.CompreensaoIdioma;
@@ -823,13 +824,16 @@ public class PesquisadorMB extends AbstractMB {
         this.listaOutrasProducoesTecnicas = listaOutrasProducoesTecnicas;
     }
 
-	public AutorizacaoService getAutorizacaoService() {
-		return autorizacaoService;
-	}
+    public AutorizacaoService getAutorizacaoService() {
+        return autorizacaoService;
+    }
 
-	public void setAutorizacaoService(AutorizacaoService autorizacaoService) {
-		this.autorizacaoService = autorizacaoService;
-	}
-    
-    
+    public void setAutorizacaoService(AutorizacaoService autorizacaoService) {
+        this.autorizacaoService = autorizacaoService;
+    }
+
+    public StreamedContent downloadFile(Long idProducao) {
+        Producao producao = producaoService.buscarPorId(idProducao);
+        return producaoService.loadPDF(producao);
+    }
 }

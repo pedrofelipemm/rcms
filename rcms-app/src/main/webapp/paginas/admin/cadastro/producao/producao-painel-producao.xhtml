@@ -3,73 +3,112 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-	
+	<script type="text/javascript">
+		function start() {
+			PF('statusDialog').show();
+		}
+
+		function stop() {
+			PF('statusDialog').hide();
+		}
+	</script>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="form-group">
 				<p:panel id="painelProducao" header="#{mensagens['producao']}">
 					<div class="row">
-		          		<div class="col-sm-9 col-md-9">
-		            		<div class="form-group">
+						<div class="col-sm-9 col-md-9">
+							<div class="form-group">
 								<div class="form-group">
-									<h:selectOneMenu id="selectTipoProducao" value="#{producaoMB.tipoProducao}" rendered="#{producaoMB.producao.idProducao == null}" styleClass="form-control">
-										<f:selectItem itemLabel="#{mensagens['apresentacao.de.trabalho']}" itemValue="apresentacaoTrabalho" />
-										<f:selectItem itemLabel="#{mensagens['artigo.aceito.publicacao']}" itemValue="artigoAceitoPublicacao" />
-										<f:selectItem itemLabel="#{mensagens['artigo.em.periodico']}" itemValue="artigoEmPeriodico" />
-										<f:selectItem itemLabel="#{mensagens['capitulo.de.livro']}" itemValue="capituloLivro" />
-										<f:selectItem itemLabel="#{mensagens['livro.publicado']}" itemValue="livroPublicado" />
-										<f:selectItem itemLabel="#{mensagens['outra.producao.bibliografica']}" itemValue="outraProducaoBibliografica" />
-										<f:selectItem itemLabel="#{mensagens['outra.producao.tecnica']}" itemValue="outraProducaoTecnica" />
-										<f:selectItem itemLabel="#{mensagens['produto.tecnologico']}" itemValue="produtoTecnologico" />
-										<f:selectItem itemLabel="#{mensagens['processo.ou.tecnica']}" itemValue="processoOuTecnica" />
-										<f:selectItem itemLabel="#{mensagens['resumo.em.congresso']}" itemValue="resumoCongresso" />
-										<f:selectItem itemLabel="#{mensagens['resumo.exp.em.congresso']}" itemValue="resumoExpandidoCongresso" />
-										<f:selectItem itemLabel="#{mensagens['trabalho.compl.congresso']}" itemValue="trabalhoCompletoCongresso" />
-										<f:selectItem itemLabel="#{mensagens['trabalho.tecnico']}" itemValue="trabalhoTecnico" />
-										<f:selectItem itemLabel="#{mensagens['texto.em.jornal']}" itemValue="textoJornal" />
-										<f:ajax/>
+									<h:selectOneMenu id="selectTipoProducao"
+										value="#{producaoMB.tipoProducao}"
+										rendered="#{producaoMB.producao.idProducao == null}"
+										styleClass="form-control">
+										<f:selectItem
+											itemLabel="#{mensagens['apresentacao.de.trabalho']}"
+											itemValue="apresentacaoTrabalho" />
+										<f:selectItem
+											itemLabel="#{mensagens['artigo.aceito.publicacao']}"
+											itemValue="artigoAceitoPublicacao" />
+										<f:selectItem itemLabel="#{mensagens['artigo.em.periodico']}"
+											itemValue="artigoEmPeriodico" />
+										<f:selectItem itemLabel="#{mensagens['capitulo.de.livro']}"
+											itemValue="capituloLivro" />
+										<f:selectItem itemLabel="#{mensagens['livro.publicado']}"
+											itemValue="livroPublicado" />
+										<f:selectItem
+											itemLabel="#{mensagens['outra.producao.bibliografica']}"
+											itemValue="outraProducaoBibliografica" />
+										<f:selectItem
+											itemLabel="#{mensagens['outra.producao.tecnica']}"
+											itemValue="outraProducaoTecnica" />
+										<f:selectItem itemLabel="#{mensagens['produto.tecnologico']}"
+											itemValue="produtoTecnologico" />
+										<f:selectItem itemLabel="#{mensagens['processo.ou.tecnica']}"
+											itemValue="processoOuTecnica" />
+										<f:selectItem itemLabel="#{mensagens['resumo.em.congresso']}"
+											itemValue="resumoCongresso" />
+										<f:selectItem
+											itemLabel="#{mensagens['resumo.exp.em.congresso']}"
+											itemValue="resumoExpandidoCongresso" />
+										<f:selectItem
+											itemLabel="#{mensagens['trabalho.compl.congresso']}"
+											itemValue="trabalhoCompletoCongresso" />
+										<f:selectItem itemLabel="#{mensagens['trabalho.tecnico']}"
+											itemValue="trabalhoTecnico" />
+										<f:selectItem itemLabel="#{mensagens['texto.em.jornal']}"
+											itemValue="textoJornal" />
+										<f:ajax />
 									</h:selectOneMenu>
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="inputTextTitulo" value="#{mensagens['label.titulo']} " />
-									<h:inputText id="inputTextTitulo" pt:name="inputTextTitulo" 
+									<h:outputLabel for="inputTextTitulo"
+										value="#{mensagens['label.titulo']} " />
+									<h:inputText id="inputTextTitulo" pt:name="inputTextTitulo"
 										value="#{producaoMB.producao.titulo}" required="true"
-										requiredMessage="#{mensagens['producao.titulo.nao.preenchido']}" styleClass="form-control" />
+										requiredMessage="#{mensagens['producao.titulo.nao.preenchido']}"
+										styleClass="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="inputTextAno" value="#{mensagens['label.ano']} " />
-									<h:inputText id="inputTextAno" pt:name="inputTextAno" 
+									<h:outputLabel for="inputTextAno"
+										value="#{mensagens['label.ano']} " />
+									<h:inputText id="inputTextAno" pt:name="inputTextAno"
 										value="#{producaoMB.producao.ano}" required="true"
-										requiredMessage="#{mensagens['producao.ano.nao.preenchido']}" styleClass="form-control" />
+										requiredMessage="#{mensagens['producao.ano.nao.preenchido']}"
+										styleClass="form-control" />
 								</div>
 								<div class="form-group">
-									<h:outputLabel for="inputTextLink" value="#{mensagens['label.link']} " />
-									<h:inputText id="inputTextLink" pt:name="inputTextLink" 
+									<h:outputLabel for="inputTextLink"
+										value="#{mensagens['label.link']} " />
+									<h:inputText id="inputTextLink" pt:name="inputTextLink"
 										value="#{producaoMB.producao.link}" required="false"
-										requiredMessage="#{mensagens['producao.link.nao.preenchido']}" styleClass="form-control" />
+										requiredMessage="#{mensagens['producao.link.nao.preenchido']}"
+										styleClass="form-control" />
 								</div>
-								
-								<p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-        <p:fileDownload value="#{fileDownloadView.file}" />
-    </p:commandButton>
-    
-								<div >
+								<div>
 									<h:outputLabel value="#{mensagens['pdf.producao']}" />
-							
-										<h:form id="fileUpload" prependId="false" enctype="multipart/form-data">
-											<h:outputLabel value="#{producaoMB.producao.nomePdf}"/>
-										   	<p:fileUpload mode="advanced" dragDropSupport="false" 
-										   				 fileUploadListener="#{producaoMB.doUpload}" 
-										   				 showButtons="false" label="#{mensagens['upload']}"
-										   				 allowTypes="/(\.|\/)(pdf)$/" auto="true"
-										   				 update=":formProducao"
-										   				 styleClass="primefacesFileUpload"/>
-											</h:form>
+									<h:panelGroup rendered="#{producaoMB.file != null}">
+										<h:form>
+											<p:commandButton value="Download" ajax="false"
+												onclick="PrimeFaces.monitorDownload(start, stop);"
+												icon="ui-icon-arrowthick-1-s">
+												<p:fileDownload value="#{producaoMB.file}" />
+											</p:commandButton>
+										</h:form>
+									</h:panelGroup>
+									<h:form id="fileUpload" prependId="false"
+										enctype="multipart/form-data">
+										<h:outputLabel value="#{producaoMB.producao.nomePdf}" />
+										<p:fileUpload mode="advanced" dragDropSupport="false"
+											fileUploadListener="#{producaoMB.doUpload}"
+											showButtons="false" label="#{mensagens['upload']}"
+											allowTypes="/(\.|\/)(pdf)$/" auto="true"
+											update=":formProducao" styleClass="primefacesFileUpload" />
+									</h:form>
 								</div>
-						
+
 							</div>
 						</div>
 					</div>
@@ -77,5 +116,5 @@
 			</div>
 		</div>
 	</div>
-				
+
 </ui:composition>

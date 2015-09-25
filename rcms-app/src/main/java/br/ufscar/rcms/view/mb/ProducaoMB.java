@@ -18,9 +18,11 @@ import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import br.ufscar.rcms.factory.ProducaoFactory;
 import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
@@ -52,6 +54,9 @@ public class ProducaoMB extends AbstractMB {
     @ManagedProperty("#{producaoService}")
     private ProducaoService producaoService;
 
+    @Value("${pasta.arquivos.pdf.producao}")
+    private String pastaArquivos;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ProducaoMB.class);
 
     private static final long serialVersionUID = -3678684230889264324L;
@@ -65,6 +70,7 @@ public class ProducaoMB extends AbstractMB {
     private String tipoProducao;
     private List<Producao> producoes;
     private UploadedFile pdf;
+    private StreamedContent file;
 
     private transient List<ArtigoEmPeriodico> listaArtigosEmPeriodicos;
     private transient List<LivroPublicado> listaLivrosPublicados;
@@ -172,6 +178,19 @@ public class ProducaoMB extends AbstractMB {
         Producao producaoEditando = (Producao) getFlashObject(FLASH_KEY_PRODUCAO);
         if (producaoEditando != null) {
             this.producao = producaoService.buscarPorId(producaoEditando.getIdProducao());
+
+            file = producaoService.loadPDF(producaoEditando);
+            /*
+             * String caminhoWebInf = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/");
+             * InputStream stream; try { stream = new FileInputStream("/home/andre/RCMS/producao/" +
+             * producao.getIdProducao() + ".pdf"); file = new DefaultStreamedContent(stream, "application/pdf",
+             * "producao_" + producao.getIdProducao().toString() + ".pdf"); } catch (FileNotFoundException e) {
+             * System.out.println("erro"); e.printStackTrace(); } /* InputStream stream = ((ServletContext)
+             * FacesContext.getCurrentInstance().getExternalContext().getContext())
+             * .getResourceAsStream("/home/andre/RCMS/producao/" + producao.getIdProducao() + ".pdf"); file = new
+             * DefaultStreamedContent(stream, "application/pdf", "producao_" + producao.getIdProducao().toString() +
+             * ".pdf");
+             */
         }
 
         this.setListaArtigosEmPeriodicos(this.producaoService.buscarProducoes(ArtigoEmPeriodico.class));
@@ -413,5 +432,14 @@ public class ProducaoMB extends AbstractMB {
 
     public void setPdf(UploadedFile pdf) {
         this.pdf = pdf;
+    }
+
+    public StreamedContent getFile() {
+        return file;
+    }
+
+    public StreamedContent downloadFile(Long idProducao) {
+        Producao producao = producaoService.buscarPorId(idProducao);
+        return producaoService.loadPDF(producao);
     }
 }

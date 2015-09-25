@@ -4,12 +4,19 @@ import static br.ufscar.rcms.commons.util.FileUtils.generateFileName;
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+
 import org.apache.commons.io.FileUtils;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,5 +138,19 @@ public class ProducaoServiceImpl implements ProducaoService {
             LOGGER.error(String.format("Erro ao carregar ao carregar o pdf da produção: %s", producao.getTitulo()),
                     exception);
         }
+    }
+
+    public StreamedContent loadPDF(Producao p) {
+        String caminhoWebInf = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/");
+        InputStream stream;
+        try {
+            stream = new FileInputStream(pastaArquivos + p.getIdProducao() + ".pdf");
+            return new DefaultStreamedContent(stream, "application/pdf", "producao_" + p.getIdProducao().toString()
+                    + ".pdf");
+        } catch (FileNotFoundException e) {
+            System.out.println("erro");
+            e.printStackTrace();
+        }
+        return null;
     }
 }

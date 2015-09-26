@@ -53,6 +53,37 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">#{mensagens['exibir.producao.link.download']}</h3>
+						</div>
+						<div class="panel-body">
+							<div class="col-md-12">
+								<h:panelGroup rendered="#{not empty producaoMB.producao.link}">
+									<h:form>
+										<p:commandButton value="#{mensagens['exibir.producao.acesse.producao']}" ajax="false"
+											onclick="window.open('#{producaoMB.producao.link}')"
+											style="float: left; margin-right: 15px;" />
+									</h:form>
+								</h:panelGroup>
+								<h:panelGroup
+									rendered="#{producaoMB.downloadFile(producaoMB.producao.idProducao) != null}">
+									<h:form>
+										<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
+											onclick="PrimeFaces.monitorDownload(start, stop);"
+											icon="ui-icon-arrowthick-1-s" style="float: left;">
+											<p:fileDownload
+												value="#{producaoMB.downloadFile(producaoMB.producao.idProducao)}" />
+										</p:commandButton>
+									</h:form>
+								</h:panelGroup>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>

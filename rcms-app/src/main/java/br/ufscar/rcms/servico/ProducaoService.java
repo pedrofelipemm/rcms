@@ -3,6 +3,8 @@ package br.ufscar.rcms.servico;
 import java.io.Serializable;
 import java.util.List;
 
+import org.primefaces.model.StreamedContent;
+
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
 
@@ -25,4 +27,6 @@ public interface ProducaoService extends Serializable {
     TransientFile buscarPdf(Producao producao);
 
     TransientFile buscarPdf(Long producaoId);
+    
+    StreamedContent loadPDF(Producao p);
 }

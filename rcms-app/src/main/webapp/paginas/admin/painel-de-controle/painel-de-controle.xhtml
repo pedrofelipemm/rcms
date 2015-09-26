@@ -24,104 +24,96 @@
 							header="#{mensagens['configuracoes']}">
 							<div class="row">
 								<div class="col-sm-6">
-									<div class="row">
-										<div class="col-sm-12">
-											<h:outputLabel for="selectOneMenuIdioma"
-												pt:name="selectOneMenuIdiomaLabel"
-												value="#{mensagens['idiomas']}" />
-											<h:selectOneMenu id="selectOneMenuIdioma"
-												pt:name="selectOneMenuIdioma" value="#{configSistemaMB.idioma}"
-												styleClass="form-control">
-												<f:selectItems value="#{configSistemaMB.idiomas.entrySet()}"
-													var="entry" itemValue="#{entry.value}"
-													itemLabel="#{entry.key}" />
-											</h:selectOneMenu>
-										</div>
-										<div class="col-sm-12">
-											<h:outputLabel for="selectOneMenuEstilo"
-												pt:name="selectOneMenuEstiloLabel"
-												value="#{mensagens['estilos']}" />
-											<h:selectOneMenu id="selectOneMenuEstilo"
-												pt:name="selectOneMenuEstilo"
-												value="#{configSistemaMB.estiloAdmin}" styleClass="form-control">
-												<f:selectItems value="#{configSistemaMB.estilosAdmin.entrySet()}"
-													var="entry" itemValue="#{entry.value}"
-													itemLabel="#{entry.key}" />
-											</h:selectOneMenu>
-										</div>
+									<div class="form-group">
+										<h:outputLabel for="selectOneMenuIdioma"
+											pt:name="selectOneMenuIdiomaLabel"
+											value="#{mensagens['idiomas']}" />
+										<h:selectOneMenu id="selectOneMenuIdioma"
+											pt:name="selectOneMenuIdioma"
+											value="#{configSistemaMB.idioma}" styleClass="form-control">
+											<f:selectItems value="#{configSistemaMB.idiomas.entrySet()}"
+												var="entry" itemValue="#{entry.value}"
+												itemLabel="#{entry.key}" />
+										</h:selectOneMenu>
 									</div>
+									<div class="form-group">
+										<h:outputLabel for="selectOneMenuEstilo"
+											pt:name="selectOneMenuEstiloLabel"
+											value="#{mensagens['estilos']}" />
+										<h:selectOneMenu id="selectOneMenuEstilo"
+											pt:name="selectOneMenuEstilo"
+											value="#{configSistemaMB.estiloAdmin}"
+											styleClass="form-control">
+											<f:selectItems
+												value="#{configSistemaMB.estilosAdmin.entrySet()}"
+												var="entry" itemValue="#{entry.value}"
+												itemLabel="#{entry.key}" />
+										</h:selectOneMenu>
+									</div>
+									<div class="form-group">
+										<p:outputLabel styleClass="control-label" id="nomeLabel"
+											value="#{mensagens['label.nome']}" />
+										<p:inputText id="nome" value="#{configSistemaMB.nomeGrupo}"
+											required="true"
+											requiredMessage="#{mensagens['nome.nao.preenchido']}"
+											pt:placeholder="#{mensagens['informe.nome.grupo']}"
+											styleClass="form-control" />
+									</div>
+									<div class="form-group">
+										<p:outputLabel styleClass="control-label" id="descLabel"
+											value="#{mensagens['label.descricao']}" />
+										<p:inputText id="descGrupo"
+											value="#{configSistemaMB.descGrupo}" required="true"
+											requiredMessage="#{mensagens['descricao.vazia']}"
+											pt:placeholder="#{mensagens['informe.descricao.grupo']}"
+											styleClass="form-control" />
+									</div>
+
 								</div>
 								<div class="col-sm-6">
-									<div class="row">
-										<div class="col-sm-12">
-											<h:outputLabel for="temaPortal" id="temaPortalLabel"
-												value="#{mensagens['temas.para.portal']}" />
-											<h:selectOneMenu id="temaPortal"
-												value="#{configSistemaMB.temaPortal}" styleClass="form-control">
-												<f:selectItems value="#{configSistemaMB.temasPortal.entrySet()}"
-													var="entry" itemValue="#{entry.value}"
-													itemLabel="#{entry.key}" />
-											</h:selectOneMenu>
-										</div>
-										<div class="col-sm-12">
-											<h:outputLabel for="importacaoLattesAutomcatica"
-												id="importacaoLattesAutomcaticaLabel"
-												value="#{mensagens['importacao.automatica']}" />
-											<h:selectOneMenu id="importacaoLattesAutomcatica"
-												styleClass="form-control"
-												value="#{configSistemaMB.importacaoLattesAutomcatica}">
-												<f:selectItem itemValue="#{true}"
-													itemLabel="#{mensagens['sim']}" />
-												<f:selectItem itemValue="#{false}"
-													itemLabel="#{mensagens['nao']}" />
-											</h:selectOneMenu>
-										</div>
+									<div class="form-group">
+										<h:outputLabel for="temaPortal" id="temaPortalLabel"
+											value="#{mensagens['temas.para.portal']}" />
+										<h:selectOneMenu id="temaPortal"
+											value="#{configSistemaMB.temaPortal}"
+											styleClass="form-control">
+											<f:selectItems
+												value="#{configSistemaMB.temasPortal.entrySet()}"
+												var="entry" itemValue="#{entry.value}"
+												itemLabel="#{entry.key}" />
+										</h:selectOneMenu>
 									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="row">
-										<div class="col-sm-12">
-											<p:outputLabel styleClass="control-label" id="nomeLabel" value="#{mensagens['label.nome']}"/>
-											<p:inputText id="nome" value="#{configSistemaMB.nomeGrupo}" 
-												required="true" requiredMessage="#{mensagens['nome.nao.preenchido']}"
-												pt:placeholder="#{mensagens['informe.nome.grupo']}" styleClass="form-control"/>
-										</div>
-										<div class="col-sm-12">
-											<p:outputLabel styleClass="control-label" id="descLabel" value="#{mensagens['label.descricao']}"/>
-											<p:inputText id="descGrupo" value="#{configSistemaMB.descGrupo}" 
-												required="true" requiredMessage="#{mensagens['descricao.vazia']}"
-												pt:placeholder="#{mensagens['informe.descricao.grupo']}" styleClass="form-control"/>
-										</div>
+
+									<div class="form-group">
+
+										<h:outputLabel for="importacaoLattesAutomcatica"
+											id="importacaoLattesAutomcaticaLabel"
+											value="#{mensagens['importacao.automatica']}" />
+										<h:selectOneMenu id="importacaoLattesAutomcatica"
+											styleClass="form-control"
+											value="#{configSistemaMB.importacaoLattesAutomcatica}">
+											<f:selectItem itemValue="#{true}"
+												itemLabel="#{mensagens['sim']}" />
+											<f:selectItem itemValue="#{false}"
+												itemLabel="#{mensagens['nao']}" />
+										</h:selectOneMenu>
 									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="col-md-3 text-center">
-												<div class="foto-pesquisador">
-													<ui:param name="length" value="#{fn:length(configSistemaMB.logotipo)}" />
-                    								<ui:param name="logoUrl" value="#{fn:substring(configSistemaMB.logotipo,length - 4,length)}" />
-													<img title="#{mensagens['logotipo']}"
-														src="#{request.contextPath}/images/logotipo#{fn:startsWith(logoUrl,'.') ? '' : '.'}#{logoUrl}"></img>
-												</div>
-												<div class="form-group">
-													<button type="button" class="btn btn-primary fa fa-upload"
-														data-toggle="modal" data-target="#modalLogoUpload"
-														style="margin: 10px; font-family: FontAwesome">
-														<p:spacer width="20"
-															pt:alt="#{mensagens['spacer.mensagem']}"
-															pt:title="#{mensagens['spacer.titutlo']}" />
-														#{mensagens['upload']}
-													</button>
-												</div>
-											</div>
-											<!-- <p:outputLabel styleClass="control-label" id="logotipoLabel" value="#{mensagens['label.logotipo']}"/>
-											<p:inputText id="logotipo" value="#{configSistemaMB.logotipo}" 
-												required="true" requiredMessage="#{mensagens['logotipo.nao.preenchido']}"
-												pt:placeholder="#{mensagens['informe.logotipo']}" styleClass="form-control"/> -->
-										</div>
+									<div>
+										<ui:param name="length"
+											value="#{fn:length(configSistemaMB.logotipo)}" />
+										<ui:param name="logoUrl"
+											value="#{fn:substring(configSistemaMB.logotipo,length - 4,length)}" />
+										<img title="#{mensagens['logotipo']}"
+											src="#{request.contextPath}/images/logotipo#{fn:startsWith(logoUrl,'.') ? '' : '.'}#{logoUrl}"></img>
+									</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-primary fa fa-upload"
+											data-toggle="modal" data-target="#modalLogoUpload"
+											style="margin: 10px; font-family: FontAwesome">
+											<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
+												pt:title="#{mensagens['spacer.titutlo']}" />
+											#{mensagens['upload']}
+										</button>
 									</div>
 								</div>
 							</div>
@@ -177,10 +169,10 @@
 								<div class="col-sm-12">
 									<p:autoComplete id="tituloProducao"
 										value="#{configSistemaMB.producaoSelecionada}"
-										completeMethod="#{configSistemaMB.completeProducao}" var="producao"
-										itemLabel="#{producao.titulo}" itemValue="#{producao}"
-										converter="#{producaoConverter}" forceSelection="true"
-										size="80" />
+										completeMethod="#{configSistemaMB.completeProducao}"
+										var="producao" itemLabel="#{producao.titulo}"
+										itemValue="#{producao}" converter="#{producaoConverter}"
+										forceSelection="true" size="80" />
 									<h:commandButton value="#{mensagens['adicionar']}"
 										styleClass="btn btn-primary"
 										action="#{configSistemaMB.adicionarProducao()}"
@@ -194,8 +186,8 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<h:dataTable id="tableProducoes"
-										value="#{configSistemaMB.producoesSelecionadas}" var="producao"
-										styleClass="table table-hover">
+										value="#{configSistemaMB.producoesSelecionadas}"
+										var="producao" styleClass="table table-hover">
 										<h:column headerClass="col-sm-9">
 											<h:outputText value="#{producao.titulo}" />
 										</h:column>
@@ -231,6 +223,7 @@
 				</div>
 			</div>
 		</h:form>
-		<ui:include src="/paginas/admin/painel-de-controle/logotipo-modal-file-upload.xhtml" />
+		<ui:include
+			src="/paginas/admin/painel-de-controle/logotipo-modal-file-upload.xhtml" />
 	</ui:define>
 </ui:composition>

@@ -198,11 +198,26 @@ public class ConfigSistemaMB extends AbstractMB {
                 getConfiguracaoService().saveOrUpdate(conf);
             }
 
+            // Projetos da página inicial
+
+            // Limpa todos para depois inserir todos novamente para não duplicar
+            for (Configuracao configuracao : configuracaoService
+                    .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA)) {
+                configuracaoService.remover(configuracao);
+            }
+
             for (ProjetoPesquisa projeto : this.projetosSelecionados) {
                 ConfiguracaoIndice configuracao = new ConfiguracaoIndice();
                 configuracao.setId(projeto.getIdProjetoPesquisa());
                 configuracao.setKey(Configuracao.Tipo.INDICE_PROJETO_PESQUISA);
                 this.configuracaoService.saveOrUpdate(configuracao);
+            }
+
+            // Produções da página inicial
+
+            // Limpa todas para depois inserir todas novamente para não duplicar
+            for (Configuracao configuracao : configuracaoService.buscarPorTipo(Configuracao.Tipo.INDICE_PRODUCAO)) {
+                configuracaoService.remover(configuracao);
             }
 
             for (Producao producao : this.producoesSelecionadas) {

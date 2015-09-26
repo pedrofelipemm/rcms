@@ -49,7 +49,7 @@
 					            	<p:autoComplete id="autoSub" value="#{areaAtuacaoMB.subAreaSelecionada}" completeMethod="#{areaAtuacaoMB.completeSub}"
 												required="true" requiredMessage="#{mensagens['label.subarea.placeholder']}"
 		                        				var="sub" itemLabel="#{sub.descricao}" itemValue="#{sub}" converter="entityConverter" forceSelection="true">
-		                        		<p:ajax event="itemSelect" update="painelArea" />
+		                        		<p:ajax event="itemSelect" execute="autoSub" update="formAreaAtuacao" />
 		                        	</p:autoComplete>
 		                        	
 		                        	<button type="button" class="btn btn-primary btnManterAtuacao" data-toggle="modal" data-target="#modalSubArea">#{mensagens['adicionar']}</button>							

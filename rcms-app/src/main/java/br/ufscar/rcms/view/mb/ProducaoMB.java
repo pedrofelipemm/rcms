@@ -154,6 +154,8 @@ public class ProducaoMB extends AbstractMB {
         if (pesquisadorSelecionado != null) {
             pesquisadorSelecionado = pesquisadorService.buscarTodosDados(pesquisadorSelecionado.getIdUsuario());
             todasCitacoesDoPesquisador = pesquisadorSelecionado.getCitacaoBibliograficas();
+            if((todasCitacoesDoPesquisador != null) && (!todasCitacoesDoPesquisador.isEmpty()))
+            	citacaoBibliografica = pesquisadorSelecionado.getCitacaoBibliograficas().get(0);
         } else {
             todasCitacoesDoPesquisador.clear();
         }

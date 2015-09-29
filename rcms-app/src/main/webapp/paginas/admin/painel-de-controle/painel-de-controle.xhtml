@@ -129,12 +129,45 @@
 
 							<div class="row">
 								<div class="col-sm-12">
+									<h:dataTable id="tableProjetosCarousel"
+										value="#{configSistemaMB.projetosDePesquisaCarouselSelecionados}"
+										var="projetoDePesquisaCarousel" styleClass="table table-hover">
+										<h:column headerClass="col-sm-9">
+											<f:facet name="header">
+												<h:outputLabel value="#{mensagens['projetos.pesquisa.carousel']}" />
+											</f:facet>
+											<h:outputText value="#{projetoDePesquisaCarousel.nome}" />
+										</h:column>
+										<h:column headerClass="col-sm-3 text-right">
+											<f:facet name="header">
+												<button type="button" class="btn btn-primary"
+													data-toggle="modal" data-target="#modalProjetoDePesquisaCarousel">#{mensagens['adicionar']}</button>
+											</f:facet>
+											<div class="row">
+												<div class="col-sm-12 text-right">
+													<span> <h:commandButton
+															value="#{mensagens['remover']}"
+															styleClass="btn btn-danger  bottom-buffer-2 top-buffer-2"
+															action="#{configSistemaMB.removerProjetoDePesquisaCarousel(projetoDePesquisaCarousel)}">
+															<f:ajax render=":formPainelControle:painelPaginaInicial" />
+														</h:commandButton>
+													</span>
+												</div>
+											</div>
+										</h:column>
+									</h:dataTable>
+									<ui:include
+										src="/paginas/admin/painel-de-controle/modal-projeto-pesquisa-carousel.xhtml" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
 									<h:dataTable id="tableProjetos"
 										value="#{configSistemaMB.projetosSelecionados}"
 										var="projetoDePesquisa" styleClass="table table-hover">
 										<h:column headerClass="col-sm-9">
 											<f:facet name="header">
-												<h:outputLabel value="#{mensagens['projeto.pesquisa']}" />
+												<h:outputLabel value="#{mensagens['projetos.pesquisa.em.destaque']}" />
 											</f:facet>
 											<h:outputText value="#{projetoDePesquisa.nome}" />
 										</h:column>
@@ -162,7 +195,7 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
-									<h:outputLabel value="#{mensagens['producoes']}" />
+									<h:outputLabel value="#{mensagens['producoes.em.destaque']}" />
 								</div>
 							</div>
 							<div class="row">

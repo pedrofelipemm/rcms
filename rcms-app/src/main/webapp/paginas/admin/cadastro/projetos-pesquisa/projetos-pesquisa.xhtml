@@ -9,7 +9,7 @@
 
 	<ui:define name="conteudo">
 
-		<h:form id="form-projeto-pesquisa" role="form" prependId="false">
+		<h:form id="formProjetoPesquisa" role="form" prependId="false">
 
 			<div class="row">
 				<div class="col-sm-12">
@@ -21,6 +21,8 @@
 				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-projetos-pesquisa.xhtml" />
 			<ui:include
 				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-pesquisador.xhtml" />
+			<ui:include
+				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-carousel.xhtml" />
 				
 				<!-- 
 			<div class="row">
@@ -40,7 +42,7 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<h:commandButton pt:name="#{mensagens['salvar']}"
+					<h:commandButton pt:name="buttonSalvarProjeto" 
 						value="#{mensagens['salvar']}"
 						action="#{projetoPesquisaMB.salvar}" styleClass="btn btn-success"
 						title="#{mensagens['salvar']}">
@@ -51,8 +53,10 @@
 
 		</h:form>
 
+		<!-- <ui:include
+			src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-modal-file-upload.xhtml" />-->
 		<ui:include
-			src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-modal-file-upload.xhtml" />
+			src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-modal-carousel-upload.xhtml" />
 
 	</ui:define>
 </ui:composition>

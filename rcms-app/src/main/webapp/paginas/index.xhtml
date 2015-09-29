@@ -18,34 +18,24 @@
 								data-ride="carousel">
 								<!-- Indicators -->
 								<ol class="carousel-indicators">
-									<li data-target="#carousel-example-generic" data-slide-to="0"
-										class="active"></li>
-									<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+									<ui:repeat var="projetoCarousel1"
+										value="#{indiceMB.projetosDePesquisaCarousel}">
+										<li data-target="#carousel-example-generic" data-slide-to="0"></li>
+									</ui:repeat>
 								</ol>
 
 								<!-- Wrapper for slides -->
 								<div class="carousel-inner">
-									<div class="item active">
-										<a href="#"><img
-											src="#{request.contextPath}/resources/images/carrousel-foto1.jpg"
-											alt="Google Glass" /></a>
-										<div class="carousel-caption">O Google Glass</div>
-									</div>
-									<div class="item">
-										<a href="#"><img
-											src="#{request.contextPath}/resources/images/carrousel-foto2.jpg"
-											alt="Desenvolvimento para aplicativos móveis" /></a>
-										<div class="carousel-caption">Desenvolvimento para
-											aplicativos móveis</div>
-									</div>
-									<div class="item">
-										<a href="#"><img
-											src="#{request.contextPath}/resources/images/carrousel-foto3.jpg"
-											alt="Lorem Ipsum" /></a>
-										<div class="carousel-caption">Lorem ipsum dolor sit
-											amet, consectetur adipiscing elit.</div>
-									</div>
+
+									<ui:repeat var="projetoCarousel2"
+										value="#{indiceMB.projetosDePesquisaCarousel}" varStatus="status">
+										<div class="item #{status.index eq 0 ? 'active' : ''}">
+											<a href="#"><img
+												src="#{request.contextPath}/carousel/#{projetoCarousel2.idProjetoPesquisa}"
+												alt="#{projetoCarousel2.nome}" /></a>
+											<div class="carousel-caption">#{projetoCarousel2.nome}</div>
+										</div>
+									</ui:repeat>
 								</div>
 
 								<!-- Controls -->
@@ -58,84 +48,6 @@
 									data-slide="next"> <span
 									class="glyphicon glyphicon-chevron-right"></span>
 								</a>
-							</div>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'alegria'}">
-							<div id="carousel-example-generic" class="carousel slide"
-								data-ride="carousel">
-								<!-- Indicators -->
-								<ol class="carousel-indicators">
-									<li data-target="#carousel-example-generic" data-slide-to="0"
-										class="active"></li>
-								</ol>
-
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<div class="item active">
-										<h:form>
-											<h:commandLink
-												action="#{projetoPesquisaMB.exibir(indiceMB.exibirProjeto(1))}">
-												<img
-													src="#{request.contextPath}/resources/images/carrousel-foto4.jpg"
-													alt="Google Glass" />
-											</h:commandLink>
-											<div class="carousel-caption">XO for All and Green:
-												Desiging Flexible and Sustainable XO applications</div>
-										</h:form>
-									</div>
-								</div>
-							</div>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'surpresa'}">
-							<div id="carousel-example-generic" class="carousel slide"
-								data-ride="carousel">
-								<!-- Indicators -->
-								<ol class="carousel-indicators">
-									<li data-target="#carousel-example-generic" data-slide-to="0"
-										class="active"></li>
-								</ol>
-
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<div class="item active">
-										<h:form>
-											<h:commandLink
-												action="#{projetoPesquisaMB.exibir(indiceMB.exibirProjeto(1))}">
-												<img
-													src="#{request.contextPath}/resources/images/carrousel-foto5.jpg"
-													alt="Google Glass" />
-											</h:commandLink>
-											<div class="carousel-caption">XO for All and Green:
-												Desiging Flexible and Sustainable XO applications</div>
-										</h:form>
-									</div>
-								</div>
-							</div>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'raiva'}">
-							<div id="carousel-example-generic" class="carousel slide"
-								data-ride="carousel">
-								<!-- Indicators -->
-								<ol class="carousel-indicators">
-									<li data-target="#carousel-example-generic" data-slide-to="0"
-										class="active"></li>
-								</ol>
-
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<div class="item active">
-										<h:form>
-											<h:commandLink
-												action="#{projetoPesquisaMB.exibir(indiceMB.exibirProjeto(1))}">
-												<img
-													src="#{request.contextPath}/resources/images/carrousel-foto7.jpg"
-													alt="Google Glass" />
-											</h:commandLink>
-											<div class="carousel-caption">XO for All and Green:
-												Desiging Flexible and Sustainable XO applications</div>
-										</h:form>
-									</div>
-								</div>
 							</div>
 						</h:panelGroup>
 					</div>

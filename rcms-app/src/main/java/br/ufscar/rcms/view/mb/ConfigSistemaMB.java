@@ -77,9 +77,16 @@ public class ConfigSistemaMB extends AbstractMB {
 
     protected Set<Configuracao> configuracoes;
 
+
     private List<ProjetoPesquisa> projetosDePesquisa;
     private List<ProjetoPesquisa> projetosSelecionados;
     private ProjetoPesquisa projetoDePesquisaSelecionado;
+
+    private List<ProjetoPesquisa> projetosDePesquisaCarousel;
+    private List<ProjetoPesquisa> projetosDePesquisaCarouselSelecionados;
+    private ProjetoPesquisa projetoDePesquisaCarouselSelecionado;
+
+    private String blocoCarouselOuProjetos;
 
     private Producao producaoSelecionada;
     private List<Producao> producoesSelecionadas;
@@ -143,6 +150,13 @@ public class ConfigSistemaMB extends AbstractMB {
         Configuracao configDescGrupo = getConfiguracao(Configuracao.Tipo.DESCRICAO_GRUPO);
         descGrupo = isEmpty(configDescGrupo.getValue()) ? descGrupo : configDescGrupo.getValue();
 
+        this.projetosDePesquisaCarouselSelecionados = new ArrayList<ProjetoPesquisa>();
+        for (Configuracao configuracao : configuracaoService
+                .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA_CAROUSEL)) {
+            this.projetosDePesquisaCarouselSelecionados.add(projetoPesquisaService
+                    .buscar(((ConfiguracaoIndice) configuracao).getId()));
+        }
+
         this.projetosSelecionados = new ArrayList<ProjetoPesquisa>();
         for (Configuracao configuracao : configuracaoService.buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA)) {
             this.projetosSelecionados.add(projetoPesquisaService.buscar(((ConfiguracaoIndice) configuracao).getId()));
@@ -196,6 +210,21 @@ public class ConfigSistemaMB extends AbstractMB {
 
             for (Configuracao conf : getConfiguracoes()) {
                 getConfiguracaoService().saveOrUpdate(conf);
+            }
+
+            // Projetos para o carousel
+
+            // Limpa todos para depois inserir todos novamente para não duplicar
+            for (Configuracao configuracao : configuracaoService
+                    .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA_CAROUSEL)) {
+                configuracaoService.remover(configuracao);
+            }
+
+            for (ProjetoPesquisa projeto : this.projetosDePesquisaCarouselSelecionados) {
+                ConfiguracaoIndice configuracao = new ConfiguracaoIndice();
+                configuracao.setId(projeto.getIdProjetoPesquisa());
+                configuracao.setKey(Configuracao.Tipo.INDICE_PROJETO_PESQUISA_CAROUSEL);
+                this.configuracaoService.saveOrUpdate(configuracao);
             }
 
             // Projetos da página inicial
@@ -275,6 +304,19 @@ public class ConfigSistemaMB extends AbstractMB {
      * setLogotipo(getConfiguracao(Configuracao.Tipo.LOGOTIPO).getValue()); } }
      */
 
+    public void adicionarProjetoDePesquisaCarousel() {
+
+        if (projetoDePesquisaCarouselSelecionado != null) {
+
+            this.projetosDePesquisaCarouselSelecionados.add(projetoDePesquisaCarouselSelecionado);
+        }
+    }
+
+    public void removerProjetoDePesquisaCarousel(final ProjetoPesquisa projetoDePesquisa) {
+
+        this.projetosDePesquisaCarouselSelecionados.remove(projetoDePesquisa);
+    }
+
     public void adicionarProjetoDePesquisa() {
 
         if (projetoDePesquisaSelecionado != null) {
@@ -318,6 +360,7 @@ public class ConfigSistemaMB extends AbstractMB {
     }
 
     private void carregarProjetos() {
+        this.projetosDePesquisaCarousel = projetoPesquisaService.buscarTodos();
         this.projetosDePesquisa = projetoPesquisaService.buscarTodos();
     }
 
@@ -512,5 +555,37 @@ public class ConfigSistemaMB extends AbstractMB {
 
     public void setProducoesSelecionadas(List<Producao> producoesSelecionadas) {
         this.producoesSelecionadas = producoesSelecionadas;
+    }
+
+    public List<ProjetoPesquisa> getProjetosDePesquisaCarouselSelecionados() {
+        return projetosDePesquisaCarouselSelecionados;
+    }
+
+    public void setProjetosDePesquisaCarouselSelecionados(List<ProjetoPesquisa> projetosDePesquisaCarouselSelecionados) {
+        this.projetosDePesquisaCarouselSelecionados = projetosDePesquisaCarouselSelecionados;
+    }
+
+    public String getBlocoCarouselOuProjetos() {
+        return blocoCarouselOuProjetos;
+    }
+
+    public void setBlocoCarouselOuProjetos(String blocoCarouselOuProjetos) {
+        this.blocoCarouselOuProjetos = blocoCarouselOuProjetos;
+    }
+
+    public ProjetoPesquisa getProjetoDePesquisaCarouselSelecionado() {
+        return projetoDePesquisaCarouselSelecionado;
+    }
+
+    public void setProjetoDePesquisaCarouselSelecionado(ProjetoPesquisa projetoDePesquisaCarouselSelecionado) {
+        this.projetoDePesquisaCarouselSelecionado = projetoDePesquisaCarouselSelecionado;
+    }
+
+    public List<ProjetoPesquisa> getProjetosDePesquisaCarousel() {
+        return projetosDePesquisaCarousel;
+    }
+
+    public void setProjetosDePesquisaCarousel(List<ProjetoPesquisa> projetosDePesquisaCarousel) {
+        this.projetosDePesquisaCarousel = projetosDePesquisaCarousel;
     }
 }

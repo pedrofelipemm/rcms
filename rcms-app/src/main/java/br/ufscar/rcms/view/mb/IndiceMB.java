@@ -33,9 +33,9 @@ public class IndiceMB extends AbstractMB {
 
     private List<ProjetoPesquisa> projetos;
 
-    private List<Producao> producoes;
+    private List<ProjetoPesquisa> projetosDePesquisaCarousel;
 
-    private ProjetoPesquisa projetoPesquisa;
+    private List<Producao> producoes;
 
     @PostConstruct
     public void inicializar() {
@@ -49,6 +49,13 @@ public class IndiceMB extends AbstractMB {
 
     @Override
     protected void carregarDados() {
+        this.projetosDePesquisaCarousel = new ArrayList<ProjetoPesquisa>();
+        for (Configuracao configuracao : configuracaoService
+                .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA_CAROUSEL)) {
+            this.projetosDePesquisaCarousel.add(projetoPesquisaService.buscar(((ConfiguracaoIndice) configuracao)
+                    .getId()));
+        }
+
         this.projetos = new ArrayList<ProjetoPesquisa>();
         for (Configuracao configuracao : configuracaoService.buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA)) {
             this.projetos.add(projetoPesquisaService.buscar(((ConfiguracaoIndice) configuracao).getId()));
@@ -112,12 +119,11 @@ public class IndiceMB extends AbstractMB {
         return projetoPesquisaService.buscar(id);
     }
 
-    public ProjetoPesquisa getProjetoPesquisa() {
-
-        return projetoPesquisaService.buscar(1L);
+    public List<ProjetoPesquisa> getProjetosDePesquisaCarousel() {
+        return projetosDePesquisaCarousel;
     }
 
-    public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
-        this.projetoPesquisa = projetoPesquisa;
+    public void setProjetosDePesquisaCarousel(List<ProjetoPesquisa> projetosDePesquisaCarousel) {
+        this.projetosDePesquisaCarousel = projetosDePesquisaCarousel;
     }
 }

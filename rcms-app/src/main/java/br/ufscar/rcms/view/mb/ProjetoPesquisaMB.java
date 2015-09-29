@@ -21,11 +21,9 @@ import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
-import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
-import br.ufscar.rcms.servico.exception.RCMSException;
 
 @ViewScoped
 @ManagedBean(name = "projetoPesquisaMB")
@@ -47,6 +45,8 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
     private ProjetoPesquisa projetoPesquisa;
     private transient DataModel<ProjetoPesquisa> projetosPesquisa;
+
+    private Part imagemCarousel;
 
     private transient Part imagem;
 
@@ -91,27 +91,17 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return CONSULTA_PROJETO_PESQUISA;
     }
 
-    public void uploadFile() {
-        if (!isEmpty(imagem)) {
-            try {
-                TransientFile file = new TransientFile();
-                file.setFile(IOUtils.toByteArray(imagem.getInputStream()));
-                file.setFileName(imagem.getSubmittedFileName());
-                file.setFileExtension(extractFileExtension(imagem.getSubmittedFileName()));
-
-                projetoPesquisaService.salvarImagem(projetoPesquisa, file);
-
-                projetoPesquisa.getGaleria().add(file);
-            } catch (final IOException ioException) {
-                LOGGER.error("Erro ao realizar upload de imagem", ioException);
-                adicionarMensagemErroByKey("erro.enviar.imagem");
-            } catch (RCMSException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
-
+    /*
+     * public void uploadFile() { if (!isEmpty(imagem)) { try { TransientFile file = new TransientFile();
+     * file.setFile(IOUtils.toByteArray(imagem.getInputStream())); file.setFileName(imagem.getSubmittedFileName());
+     * file.setFileExtension(extractFileExtension(imagem.getSubmittedFileName()));
+     * 
+     * projetoPesquisaService.salvarImagem(projetoPesquisa, file);
+     * 
+     * projetoPesquisa.getGaleria().add(file); } catch (final IOException ioException) {
+     * LOGGER.error("Erro ao realizar upload de imagem", ioException); adicionarMensagemErroByKey("erro.enviar.imagem");
+     * } catch (RCMSException e) { // TODO Auto-generated catch block e.printStackTrace(); } } }
+     */
     public String exibir(ProjetoPesquisa projetoPesquisa) {
 
         projetoPesquisa = projetoPesquisaService.buscarTodosDados(projetoPesquisa.getIdProjetoPesquisa());
@@ -208,5 +198,28 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
     public void setPesquisadores(final List<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
+    }
+
+    public Part getImagemCarousel() {
+        return imagemCarousel;
+    }
+
+    public void setImagemCarousel(Part imagemCarousel) {
+        this.imagemCarousel = imagemCarousel;
+    }
+
+    public void uploadFile() {
+        if (!isEmpty(imagemCarousel)) {
+            try {
+                projetoPesquisa.getImagemCarousel().setFile(IOUtils.toByteArray(imagemCarousel.getInputStream()));
+                projetoPesquisa.getImagemCarousel().setFileExtension(
+                        extractFileExtension(imagemCarousel.getSubmittedFileName()));
+            } catch (final IOException ioException) {
+                LOGGER.error(
+                        String.format("Erro ao realizar upload de imagem para o carousel: %s",
+                                projetoPesquisa.getNome()), ioException);
+                adicionarMensagemErroByKey("erro.enviar.imagem");
+            }
+        }
     }
 }

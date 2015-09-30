@@ -31,4 +31,10 @@ public interface ProjetoPesquisaService extends Serializable {
     void salvarImagem(ProjetoPesquisa projetoPesquisa, TransientFile imagem) throws RCMSException;
 
     Boolean exists(String nome);
+
+    void salvarImagemCarousel(ProjetoPesquisa projetoPesquisa) throws RCMSException;
+
+    TransientFile buscarImagemCarousel(ProjetoPesquisa projetoPesquisa);
+
+    TransientFile buscarImagemCarousel(Long idProjetoPesquisa);
 }

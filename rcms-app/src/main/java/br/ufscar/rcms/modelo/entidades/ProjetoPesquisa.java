@@ -44,6 +44,9 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
     private String agenciaDeFomento;
 
     @Transient
+    private TransientFile imagemCarousel = new TransientFile();
+
+    @Transient
     private List<TransientFile> galeria = new ArrayList<TransientFile>();
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
@@ -223,4 +226,11 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
 	public void setLinkMidia(List<LinkMidia> linkMidia) {
 		this.linkMidia = linkMidia;
 	}
+    public TransientFile getImagemCarousel() {
+        return imagemCarousel;
+    }
+
+    public void setImagemCarousel(TransientFile imagemCarousel) {
+        this.imagemCarousel = imagemCarousel;
+    }
 }

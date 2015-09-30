@@ -1,6 +1,7 @@
 package br.ufscar.rcms.servico.impl;
 
 import static br.ufscar.rcms.commons.util.FileUtils.generateReasearcherPhotoName;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +11,11 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,7 @@ import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
 import br.ufscar.rcms.servico.exception.RCMSException;
+import br.ufscar.rcms.util.SupportedImageTypes;
 
 @Service("projetoPesquisaService")
 @Transactional(readOnly = false)
@@ -33,6 +37,9 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
     @Autowired
     private ProjetoPesquisaDAO projetoPesquisaDAO;
+
+    @Value("${pasta.imagens.carousel}")
+    private String pastaImagensCarousel;
 
     // @Value("${pasta.galeria.projeto}")
     // private String pastaGaleriaProjetos;
@@ -47,6 +54,10 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         try {
             ProjetoPesquisa savedProjetoPesquisa = projetoPesquisaDAO.salvarOuAtualizar(projetoPesquisa);
+
+            if (!TransientFile.isEmpty(projetoPesquisa.getImagemCarousel())) {
+                salvarImagemCarousel(projetoPesquisa);
+            }
 
             return savedProjetoPesquisa;
         } catch (Exception exception) {
@@ -154,9 +165,57 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
         ProjetoPesquisa projetoPesquisa = projetoPesquisaDAO.buscar(idUsuario);
         lazyLoadCollections(projetoPesquisa);
+        loadImagemCarousel(projetoPesquisa);
         // carregarGaleria(projetoPesquisa);
 
         return projetoPesquisa;
+    }
+
+    private void loadImagemCarousel(final ProjetoPesquisa projetoPesquisa) {
+        try {
+            String fileExtension = getFileExtension(projetoPesquisa);
+            if (!isEmpty(fileExtension)) {
+                String fileName = projetoPesquisa.getIdProjetoPesquisa() + "." + fileExtension;
+                byte[] foto = Files.readAllBytes(Paths.get(pastaImagensCarousel + fileName));
+
+                TransientFile file = new TransientFile();
+                file.setFile(foto);
+                file.setFileExtension("png");
+                file.setFileLocation(pastaImagensCarousel);
+                file.setFileName(fileName);
+
+                projetoPesquisa.setImagemCarousel(file);
+            }
+        } catch (IOException exception) {
+            LOGGER.error(
+                    String.format("Erro ao carregar ao carregar imagem do carousel: %s", projetoPesquisa.getNome()),
+                    exception);
+        }
+    }
+
+    private String getFileExtension(final ProjetoPesquisa projetoPesquisa) {
+        for (SupportedImageTypes supportedImageTypes : SupportedImageTypes.values()) {
+            if (Files.exists(Paths.get(pastaImagensCarousel + projetoPesquisa.getIdProjetoPesquisa() + "."
+                    + supportedImageTypes.getFileType()))) {
+                return supportedImageTypes.getFileType();
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    @Override
+    public TransientFile buscarImagemCarousel(final ProjetoPesquisa projetoPesquisa) {
+        ProjetoPesquisa projetoPesquisaTemp = new ProjetoPesquisa();
+        if (!isEmpty(projetoPesquisa)) {
+            projetoPesquisaTemp.setIdProjetoPesquisa(projetoPesquisa.getIdProjetoPesquisa());
+            loadImagemCarousel(projetoPesquisaTemp);
+        }
+        return projetoPesquisaTemp.getImagemCarousel();
+    }
+
+    @Override
+    public TransientFile buscarImagemCarousel(final Long idProjetoPesquisa) {
+        return buscarImagemCarousel(buscar(idProjetoPesquisa));
     }
 
     private void lazyLoadCollections(ProjetoPesquisa projetoPesquisa) {
@@ -175,5 +234,29 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
     @Override
     public Boolean exists(String nome) {
         return projetoPesquisaDAO.exists(nome);
+    }
+
+    @Override
+    public void salvarImagemCarousel(final ProjetoPesquisa projetoPesquisa) throws RCMSException {
+        System.out.println("teste1");
+        LOGGER.debug("BEGIN - salvarImagemCarousel() - {0}", projetoPesquisa);
+        try {
+
+            System.out.println("teste2");
+            TransientFile imagem = projetoPesquisa.getImagemCarousel();
+            String fileName = generateReasearcherPhotoName(pastaImagensCarousel,
+ projetoPesquisa.getIdProjetoPesquisa()
+                    .toString(), imagem.getFileExtension());
+            File file = new File(fileName);
+
+            FileUtils.writeByteArrayToFile(file, imagem.getFile());
+            System.out.println("teste3");
+
+        } catch (IOException e) {
+            String message = String.format("Erro ao salvar foto para o carousel: %s", projetoPesquisa.getNome());
+            LOGGER.error(message, e);
+            throw new RCMSException(message, e);
+        }
+        LOGGER.debug("END - salvarImagemCarousel() - {0}", projetoPesquisa);
     }
 }

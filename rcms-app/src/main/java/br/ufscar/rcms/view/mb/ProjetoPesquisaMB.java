@@ -19,6 +19,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.ufscar.rcms.modelo.entidades.LinkMidia;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
@@ -49,6 +50,8 @@ public class ProjetoPesquisaMB extends AbstractMB {
     private transient DataModel<ProjetoPesquisa> projetosPesquisa;
 
     private transient Part imagem;
+    
+    private String link;
 
     @PostConstruct
     public void inicializar() {
@@ -59,6 +62,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
     @Override
     protected void carregarDados() {
+    	link = "http://";
     	projetosPesquisa = new ListDataModel<ProjetoPesquisa>(projetoPesquisaService.buscarTodos());
     	pesquisadores = new ArrayList<Pesquisador>(pesquisadorService.buscarTodos());
 
@@ -150,6 +154,27 @@ public class ProjetoPesquisaMB extends AbstractMB {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
     	projetoPesquisa.removerPesquisador(pesquisador);
     }
+    
+    public void adicionarLink(){
+    	if(!link.equals("http://")){
+    		LinkMidia linkMidia = new LinkMidia();
+    		linkMidia.setUrl(link);
+    		linkMidia.setProjetoPesquisa(projetoPesquisa);
+    		projetoPesquisa.getLinkMidia().add(linkMidia);
+    		link = "http://";
+    	}
+    }
+    
+    public void excluirLink(LinkMidia linkMidia){
+    	if(linkMidia != null){
+    		LinkMidia midia = projetoPesquisa.getLinkMidia().get(projetoPesquisa.getLinkMidia().indexOf(linkMidia));
+    		projetoPesquisa.getLinkMidia().remove(midia);
+
+    		projetoPesquisa.setLinkMidia(projetoPesquisa.getLinkMidia());
+    		
+    		link = "http://";
+    	}
+    }
 
     public void pesquisar() {
     }
@@ -209,4 +234,12 @@ public class ProjetoPesquisaMB extends AbstractMB {
     public void setPesquisadores(final List<Pesquisador> pesquisadores) {
         this.pesquisadores = pesquisadores;
     }
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
 }

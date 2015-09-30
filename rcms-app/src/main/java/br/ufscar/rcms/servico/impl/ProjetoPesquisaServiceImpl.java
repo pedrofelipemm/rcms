@@ -161,6 +161,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
 
     private void lazyLoadCollections(ProjetoPesquisa projetoPesquisa) {
     	projetoPesquisa.getPesquisadores().size();
+    	projetoPesquisa.getLinkMidia().size();
     }
 
     public ProjetoPesquisaDAO getProjetoPesquisaDAO() {

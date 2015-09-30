@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<div class="modal fade" id="modalLinks" tabindex="-1" role="dialog" aria-labelledby="modalLinks" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&#10006;</span>
+					</button>
+					<h4 id="modalLinksLabel" class="modal-title">#{mensagens['adicionar.link']}</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="panel-body">
+						<div class="row">							
+							<div class="col-md-12">
+								<div class="form-group">
+									<p:outputLabel styleClass="control-label" id="modalAreaLabel" value="#{mensagens['link']}"/>
+					            	<div>
+					            		<h:inputText styleClass="form-control col-md-12" id="inputLink" value="#{projetoPesquisaMB.link}"></h:inputText>
+					            	</div>
+				            	</div>  	
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
+					<h:commandButton action="#{projetoPesquisaMB.adicionarLink}" styleClass="btn btn-primary"
+						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalLinks">
+						<f:ajax execute="inputLink" render="painel-links modalLinks" />
+					</h:commandButton>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:composition>

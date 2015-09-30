@@ -110,6 +110,30 @@
 				</div>
 
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">#{mensagens['links']}</h3>
+						</div>
+						<div class="panel-body">
+							<div class="container-fluid">
+								<ui:repeat var="link"
+									value="#{projetoPesquisaMB.projetoPesquisa.linkMidia}"
+									varStatus="linha">
+									<div class="row">
+										<div class="col-md-2 text-right">
+											<strong>#{linha.index + 1}.</strong>
+										</div>
+										<a href="#{link.url}" class="col-md-10">#{link.url}</a>
+									</div>
+								</ui:repeat>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>

@@ -46,16 +46,16 @@
 									</div>
 									<div class="rcms-table-td">
 										<div class="text-center">
-											<span>
+											<!-- <span>
 												<h:commandButton disabled="true" value="#{mensagens['editar']}" pt:title="#{mensagens['editar']}"
 													styleClass="btn btn-primary bottom-buffer-2 top-buffer-2">
 													<f:ajax render="painel-projeto-pesquisa" />
 												</h:commandButton>
-											</span>
+											</span> -->
 											<span>
-												<h:commandButton value="#{mensagens['excluir']}" action="#{projetoPesquisaMB.excluir(projeto)}"
+												<h:commandButton value="#{mensagens['excluir']}" action="#{projetoPesquisaMB.removerPequisador(pesquisador)}"
 													styleClass="btn btn-danger bottom-buffer-2 top-buffer-2">
-													<f:ajax render="painel-projeto-pesquisa" />
+													<f:ajax render="painel-pesquisador" />
 												</h:commandButton>
 											</span>
 										</div>

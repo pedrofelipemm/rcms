@@ -53,6 +53,9 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
     private List<Midia> midia = new ArrayList<Midia>();
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa", orphanRemoval = true)
+    private List<LinkMidia> linkMidia = new ArrayList<LinkMidia>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(joinColumns = { @JoinColumn(name = "id_projeto_de_pesquisa") }, inverseJoinColumns = { @JoinColumn(name = "id_usuario") })
@@ -212,4 +215,12 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
 
         return thisAnoConclusao.compareTo(ppAnoConclusao);
     }
+
+	public List<LinkMidia> getLinkMidia() {
+		return linkMidia;
+	}
+
+	public void setLinkMidia(List<LinkMidia> linkMidia) {
+		this.linkMidia = linkMidia;
+	}
 }

@@ -161,6 +161,7 @@ public class ConfigSistemaMB extends AbstractMB {
                 .buscarPorTipo(Configuracao.Tipo.INDICE_PROJETO_PESQUISA_CAROUSEL)) {
             this.projetosDePesquisaCarouselSelecionados.add(projetoPesquisaService
                     .buscar(((ConfiguracaoIndice) configuracao).getId()));
+            indicesProjetoCarousel.add((ConfiguracaoIndice) configuracao);
         }
 
         this.projetosSelecionados = new ArrayList<ProjetoPesquisa>();

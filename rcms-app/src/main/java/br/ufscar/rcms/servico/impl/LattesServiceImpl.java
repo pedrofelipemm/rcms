@@ -141,7 +141,7 @@ public class LattesServiceImpl implements LattesService {
                 .participacaoEventos(pesquisadorLattes.getParticipacaoEvento())
                 .organizacaoEventos(pesquisadorLattes.getOrganizacaoEvento()).orientacoes(pesquisadorLattes)
                 .compreensaoIdiomas(pesquisadorLattes.getIdiomas()).areaAtuacoes(pesquisadorLattes.getAreaAtuacao())
-                .configuracao(pesquisador.getConfiguracoes()).build();
+                .build();
 
         normalizarIdiomas(novoPesquisador.getCompreensaoIdiomas());
         salvarHierarquiaGrandeArea(novoPesquisador.getAreaAtuacoes());
@@ -562,7 +562,7 @@ public class LattesServiceImpl implements LattesService {
         return listaCitacoes;
     }
 
-    public void salvarCitacaoBibliografica(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
+    public void salvarCitacaoBibliografica(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
 
         String[] citacoes = pesquisadorLattes.getIdentificacao().getNomeCitacaoBibliografica().split(";");
         for (int i = 0; i < citacoes.length; i++) {
@@ -573,8 +573,8 @@ public class LattesServiceImpl implements LattesService {
         }
     }
 
-    public void salvarProjetosPesquisa(PesquisadorLattes pesquisadorLattes, Pesquisador pesquisador) {
-        
+    public void salvarProjetosPesquisa(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {
+
         if (pesquisadorLattes.getProjetosPesquisa() != null) {
             for (ProjetoLattes projetoLattes : pesquisadorLattes.getProjetosPesquisa().getProjetos()) {
                 if (!isProjetoPesquisa(projetoLattes.getNome())) {
@@ -582,7 +582,6 @@ public class LattesServiceImpl implements LattesService {
                             projetoLattes.getDescricao(), projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao());
                     projetoPesquisa.adicionarPesquisador(pesquisador);
                     projetoPesquisaService.salvarOuAtualizar(projetoPesquisa);
-                    System.out.println("gravou");
                 }
             }
         }

@@ -57,9 +57,9 @@ public class ConfigSistemaMB extends AbstractMB {
     private ProducaoService producaoService;
 
     private String idioma;
-    
+
     private String idiomaBanco;
-    
+
     private Map<String, String> idiomas;
 
     private String estiloAdmin;
@@ -82,9 +82,9 @@ public class ConfigSistemaMB extends AbstractMB {
     private Boolean importacaoLattesAutomcatica = false;
 
     protected Set<Configuracao> configuracoes;
-    
+
     protected List<ConfiguracaoIndice> indicesProjeto;
-    
+
     protected List<ConfiguracaoIndice> indicesProjetoCarousel;
 
     protected List<ConfiguracaoIndice> indicesProducao;
@@ -136,12 +136,12 @@ public class ConfigSistemaMB extends AbstractMB {
         if (listaConfigs != null && !listaConfigs.isEmpty()) {
             configuracoes.addAll(listaConfigs);
         }
-        
+
         Configuracao configIdioma = getConfiguracao(Configuracao.Tipo.IDIOMA);
         if(isEmpty(idioma)){
 	        idioma = isEmpty(configIdioma.getValue()) ? idioma : configIdioma.getValue();
         }
-        
+
         idiomaBanco = isEmpty(configIdioma.getValue()) ? idiomaBanco : configIdioma.getValue();
 
         alterarIdioma();
@@ -238,14 +238,14 @@ public class ConfigSistemaMB extends AbstractMB {
             		this.configuracaoService.remover(confIndice);
             	}
             }
-            
+
             for (ConfiguracaoIndice confIndice : this.indicesProjeto) {
             	ProjetoPesquisa p = getProjetoByConfiguracao(confIndice.getId());
             	if(p == null){
             		this.configuracaoService.remover(confIndice);
             	}
             }
-            
+
             for (ConfiguracaoIndice confIndice : this.indicesProjetoCarousel) {
             	ProjetoPesquisa p = getProjetoCarouselByConfiguracao(confIndice.getId());
             	if(p == null){
@@ -275,7 +275,7 @@ public class ConfigSistemaMB extends AbstractMB {
             	configuracao.setKey(Configuracao.Tipo.INDICE_PRODUCAO);
                 this.configuracaoService.saveOrUpdate(configuracao);
             }
-            
+
             limparDados();
             adicionarMensagemInfoByKey("configuracoes.salva.sucesso");
 
@@ -318,7 +318,7 @@ public class ConfigSistemaMB extends AbstractMB {
     /*
      * private void carregarNomeGrupo() { if(getConfiguracao(Configuracao.Tipo.NOME_GRUPO) != null){
      * setNomeGrupo(getConfiguracao(Configuracao.Tipo.NOME_GRUPO).getValue()); } }
-     * 
+     *
      * private void carregarDescGrupo() { if(getConfiguracao(Configuracao.Tipo.DESCRICAO_GRUPO) != null){
      * setDescGrupo(getConfiguracao(Configuracao.Tipo.DESCRICAO_GRUPO).getValue()); } }
      */
@@ -354,7 +354,7 @@ public class ConfigSistemaMB extends AbstractMB {
         this.projetosSelecionados.remove(projetoDePesquisa);
     }
 
-    public List<Producao> completeProducao(String query) {
+    public List<Producao> completeProducao(final String query) {
         List<Producao> allProducoes = producaoService.buscarTodas();
         List<Producao> filteredProducoes = new ArrayList<Producao>();
 
@@ -391,7 +391,7 @@ public class ConfigSistemaMB extends AbstractMB {
     private void carregarProducoes() {
         this.producoesSelecionadas = new ArrayList<Producao>();
     }
-    
+
     private void carregarIndices() {
         this.indicesProducao = new ArrayList<ConfiguracaoIndice>();
         this.indicesProjeto = new ArrayList<ConfiguracaoIndice>();
@@ -402,32 +402,32 @@ public class ConfigSistemaMB extends AbstractMB {
         return configuracoes.stream().filter(c -> c.getKey().equals(tipo)).findFirst()
                 .orElse(new ConfiguracaoSistema(tipo));
     }
-    
+
     public ConfiguracaoIndice getConfiguracaoIndiceProjeto(final Long idProjeto) {
         return indicesProjeto.stream().filter(c -> c.getId().equals(idProjeto)).findFirst()
                 .orElse(new ConfiguracaoIndice());
     }
-    
+
     public ProjetoPesquisa getProjetoByConfiguracao(final Long idConfiguracao) {
         return projetosSelecionados.stream().filter(c -> c.getIdProjetoPesquisa().equals(idConfiguracao)).findFirst()
                 .orElse(null);
     }
-    
+
     public Producao getProducaoByConfiguracao(final Long idConfiguracao) {
         return producoesSelecionadas.stream().filter(c -> c.getIdProducao().equals(idConfiguracao)).findFirst()
                 .orElse(null);
     }
-    
+
     public ProjetoPesquisa getProjetoCarouselByConfiguracao(final Long idConfiguracao) {
         return projetosDePesquisaCarouselSelecionados.stream().filter(c -> c.getIdProjetoPesquisa().equals(idConfiguracao)).findFirst()
                 .orElse(null);
     }
-    
+
     public ConfiguracaoIndice getConfiguracaoIndiceProducao(final Long idProducao) {
         return indicesProducao.stream().filter(c -> c.getId().equals(idProducao)).findFirst()
                 .orElse(new ConfiguracaoIndice());
     }
-    
+
     public ConfiguracaoIndice getConfiguracaoIndiceProjetoCarousel(final Long idProjeto) {
         return indicesProjetoCarousel.stream().filter(c -> c.getId().equals(idProjeto)).findFirst()
                 .orElse(new ConfiguracaoIndice());
@@ -438,8 +438,8 @@ public class ConfigSistemaMB extends AbstractMB {
         partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         getViewRoot().setLocale(new Locale(idioma));
     }
-    
-    public void alterarIdioma(ValueChangeEvent event) {
+
+    public void alterarIdioma(final ValueChangeEvent event) {
         final PartialViewContext partialViewContext = getPartialViewContext();
         partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         setIdioma((String) event.getNewValue());
@@ -454,11 +454,12 @@ public class ConfigSistemaMB extends AbstractMB {
             getFoto().setFile(IOUtils.toByteArray(imagemLogo.getInputStream()));
             getFoto().setFileExtension(extractFileExtension(imagemLogo.getSubmittedFileName()));
         } catch (final IOException ioException) {
-            LOGGER.error(String.format("Erro ao realizar upload do logotipo", ioException));
+            LOGGER.error("Erro ao realizar upload do logotipo", ioException);
             adicionarMensagemErroByKey("erro.enviar.imagem");
         }
     }
-    
+
+    @Override
     protected HttpSession getSession(){
     	return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
     }
@@ -475,7 +476,7 @@ public class ConfigSistemaMB extends AbstractMB {
 		return idiomaBanco;
 	}
 
-	public void setIdiomaBanco(String idiomaBanco) {
+	public void setIdiomaBanco(final String idiomaBanco) {
 		this.idiomaBanco = idiomaBanco;
 	}
 
@@ -523,7 +524,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return imagemLogo;
     }
 
-    public void setImagemLogo(Part imagemLogo) {
+    public void setImagemLogo(final Part imagemLogo) {
         this.imagemLogo = imagemLogo;
     }
 
@@ -531,7 +532,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return foto;
     }
 
-    public void setFoto(TransientFile foto) {
+    public void setFoto(final TransientFile foto) {
         this.foto = foto;
     }
 
@@ -547,7 +548,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return configuracaoService;
     }
 
-    public void setConfiguracaoService(ConfiguracaoService configuracaoService) {
+    public void setConfiguracaoService(final ConfiguracaoService configuracaoService) {
         this.configuracaoService = configuracaoService;
     }
 
@@ -555,7 +556,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetoPesquisaService;
     }
 
-    public void setProjetoPesquisaService(ProjetoPesquisaService projetoPesquisaService) {
+    public void setProjetoPesquisaService(final ProjetoPesquisaService projetoPesquisaService) {
         this.projetoPesquisaService = projetoPesquisaService;
     }
 
@@ -563,7 +564,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return producaoService;
     }
 
-    public void setProducaoService(ProducaoService producaoService) {
+    public void setProducaoService(final ProducaoService producaoService) {
         this.producaoService = producaoService;
     }
 
@@ -571,7 +572,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return configuracoes;
     }
 
-    public void setConfiguracoes(Set<Configuracao> configuracoes) {
+    public void setConfiguracoes(final Set<Configuracao> configuracoes) {
         this.configuracoes = configuracoes;
     }
 
@@ -579,7 +580,7 @@ public class ConfigSistemaMB extends AbstractMB {
 		return indicesProjeto;
 	}
 
-	public void setIndicesProjeto(List<ConfiguracaoIndice> indicesProjeto) {
+	public void setIndicesProjeto(final List<ConfiguracaoIndice> indicesProjeto) {
 		this.indicesProjeto = indicesProjeto;
 	}
 
@@ -587,7 +588,7 @@ public class ConfigSistemaMB extends AbstractMB {
 		return indicesProjetoCarousel;
 	}
 
-	public void setIndicesProjetoCarousel(List<ConfiguracaoIndice> indicesProjetoCarousel) {
+	public void setIndicesProjetoCarousel(final List<ConfiguracaoIndice> indicesProjetoCarousel) {
 		this.indicesProjetoCarousel = indicesProjetoCarousel;
 	}
 
@@ -595,7 +596,7 @@ public class ConfigSistemaMB extends AbstractMB {
 		return indicesProducao;
 	}
 
-	public void setIndicesProducao(List<ConfiguracaoIndice> indicesProducao) {
+	public void setIndicesProducao(final List<ConfiguracaoIndice> indicesProducao) {
 		this.indicesProducao = indicesProducao;
 	}
 
@@ -603,7 +604,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return nomeGrupo;
     }
 
-    public void setNomeGrupo(String nomeGrupo) {
+    public void setNomeGrupo(final String nomeGrupo) {
         this.nomeGrupo = nomeGrupo;
     }
 
@@ -611,7 +612,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return descGrupo;
     }
 
-    public void setDescGrupo(String descGrupo) {
+    public void setDescGrupo(final String descGrupo) {
         this.descGrupo = descGrupo;
     }
 
@@ -619,7 +620,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return logotipo;
     }
 
-    public void setLogotipo(String logotipo) {
+    public void setLogotipo(final String logotipo) {
         this.logotipo = logotipo;
     }
 
@@ -627,7 +628,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetosDePesquisa;
     }
 
-    public void setProjetosDePesquisa(List<ProjetoPesquisa> projetosDePesquisa) {
+    public void setProjetosDePesquisa(final List<ProjetoPesquisa> projetosDePesquisa) {
         this.projetosDePesquisa = projetosDePesquisa;
     }
 
@@ -635,7 +636,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetosSelecionados;
     }
 
-    public void setProjetosSelecionados(List<ProjetoPesquisa> projetosSelecionados) {
+    public void setProjetosSelecionados(final List<ProjetoPesquisa> projetosSelecionados) {
         this.projetosSelecionados = projetosSelecionados;
     }
 
@@ -643,7 +644,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetoDePesquisaSelecionado;
     }
 
-    public void setProjetoDePesquisaSelecionado(ProjetoPesquisa projetoDePesquisaSelecionado) {
+    public void setProjetoDePesquisaSelecionado(final ProjetoPesquisa projetoDePesquisaSelecionado) {
         this.projetoDePesquisaSelecionado = projetoDePesquisaSelecionado;
     }
 
@@ -651,7 +652,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return producaoSelecionada;
     }
 
-    public void setProducaoSelecionada(Producao producaoSelecionada) {
+    public void setProducaoSelecionada(final Producao producaoSelecionada) {
         this.producaoSelecionada = producaoSelecionada;
     }
 
@@ -659,7 +660,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return producoesSelecionadas;
     }
 
-    public void setProducoesSelecionadas(List<Producao> producoesSelecionadas) {
+    public void setProducoesSelecionadas(final List<Producao> producoesSelecionadas) {
         this.producoesSelecionadas = producoesSelecionadas;
     }
 
@@ -667,7 +668,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetosDePesquisaCarouselSelecionados;
     }
 
-    public void setProjetosDePesquisaCarouselSelecionados(List<ProjetoPesquisa> projetosDePesquisaCarouselSelecionados) {
+    public void setProjetosDePesquisaCarouselSelecionados(final List<ProjetoPesquisa> projetosDePesquisaCarouselSelecionados) {
         this.projetosDePesquisaCarouselSelecionados = projetosDePesquisaCarouselSelecionados;
     }
 
@@ -675,7 +676,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return blocoCarouselOuProjetos;
     }
 
-    public void setBlocoCarouselOuProjetos(String blocoCarouselOuProjetos) {
+    public void setBlocoCarouselOuProjetos(final String blocoCarouselOuProjetos) {
         this.blocoCarouselOuProjetos = blocoCarouselOuProjetos;
     }
 
@@ -683,7 +684,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetoDePesquisaCarouselSelecionado;
     }
 
-    public void setProjetoDePesquisaCarouselSelecionado(ProjetoPesquisa projetoDePesquisaCarouselSelecionado) {
+    public void setProjetoDePesquisaCarouselSelecionado(final ProjetoPesquisa projetoDePesquisaCarouselSelecionado) {
         this.projetoDePesquisaCarouselSelecionado = projetoDePesquisaCarouselSelecionado;
     }
 
@@ -691,7 +692,7 @@ public class ConfigSistemaMB extends AbstractMB {
         return projetosDePesquisaCarousel;
     }
 
-    public void setProjetosDePesquisaCarousel(List<ProjetoPesquisa> projetosDePesquisaCarousel) {
+    public void setProjetosDePesquisaCarousel(final List<ProjetoPesquisa> projetosDePesquisaCarousel) {
         this.projetosDePesquisaCarousel = projetosDePesquisaCarousel;
     }
 }

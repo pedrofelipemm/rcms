@@ -10,6 +10,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.ufscar.rcms.modelo.lattes.ApresentacaoTrabalhoLattes;
@@ -58,6 +60,8 @@ import br.ufscar.rcms.modelo.lattes.TrabalhoLattes;
 import br.ufscar.rcms.modelo.lattes.TrabalhosTecnicoLattes;
 
 public class LattesServiceTest extends AbstractServiceTestBase {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LattesServiceTest.class);
 
     @Autowired
     private LattesService lattesService;
@@ -520,7 +524,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         try {
             result = Arrays.asList(IOUtils.toString(resourceAsStream, "UTF-8").split("\n"));
         } catch (IOException exception) {
-            exception.printStackTrace();
+            LOGGER.error(exception.getMessage(), exception);
         }
 
         return result;
@@ -534,7 +538,7 @@ public class LattesServiceTest extends AbstractServiceTestBase {
         try {
             result = Arrays.asList(IOUtils.toString(resourceAsStream, "UTF-8").split("\n"));
         } catch (IOException exception) {
-            exception.printStackTrace();
+            LOGGER.error(exception.getMessage(), exception);
         }
 
         return result;

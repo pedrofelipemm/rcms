@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.rcms.dao.ProducaoDAO;
+import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.ProducaoService;
@@ -46,6 +47,10 @@ public class ProducaoServiceImpl implements ProducaoService {
     public void saveOrUpdate(final Producao producao) {
 
         salvarArquivo(producao);
+
+        for (AutorProducao autor : producao.getAutores()) {
+            autor.setProducao(producao);
+        }
 
         producaoDAO.saveOrUpdate(producao);
     }
@@ -140,7 +145,8 @@ public class ProducaoServiceImpl implements ProducaoService {
         }
     }
 
-    public StreamedContent loadPDF(Producao p) {
+    @Override
+    public StreamedContent loadPDF(final Producao p) {
         String caminhoWebInf = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/");
         InputStream stream;
         try {
@@ -148,8 +154,7 @@ public class ProducaoServiceImpl implements ProducaoService {
             return new DefaultStreamedContent(stream, "application/pdf", "producao_" + p.getIdProducao().toString()
                     + ".pdf");
         } catch (FileNotFoundException e) {
-            System.out.println("erro");
-            e.printStackTrace();
+            LOGGER.error("Erro ao carregar PDF", e);
         }
         return null;
     }

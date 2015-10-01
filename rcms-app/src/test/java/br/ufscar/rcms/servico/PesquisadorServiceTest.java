@@ -49,6 +49,5 @@ public class PesquisadorServiceTest extends AbstractServiceTestBase {
 
         pesquisadorSalvo.setNome("Dunha");
         pesquisadorService.salvarOuAtualizar(pesquisadorSalvo);
-        System.out.println();
     }
 }

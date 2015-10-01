@@ -3,7 +3,6 @@ package br.ufscar.rcms.view.mb;
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,7 +103,7 @@ public class PesquisadorMB extends AbstractMB {
 
     @ManagedProperty("#{producaoService}")
     private ProducaoService producaoService;
-    
+
     @ManagedProperty("#{autorizacaoService}")
     private AutorizacaoService autorizacaoService;
 
@@ -117,7 +116,7 @@ public class PesquisadorMB extends AbstractMB {
 
     private Idioma idioma;
     private transient List<Idioma> idiomas;
-    
+
     private Autorizacao autorizacao;
     private transient List<Autorizacao> autorizacoes;
 
@@ -243,8 +242,8 @@ public class PesquisadorMB extends AbstractMB {
             try {
                 pesquisador.getFoto().setFile(IOUtils.toByteArray(fotoPesquisador.getInputStream()));
                 pesquisador.getFoto().setFileExtension(extractFileExtension(fotoPesquisador.getSubmittedFileName()));
-            } catch (final IOException ioException) {
-                LOGGER.error(String.format("Erro ao realizar upload de imagem para o pesquisador: %s", pesquisador.getNome()), ioException);
+            } catch (final Exception exception) {
+                LOGGER.error(String.format("Erro ao realizar upload de imagem para o pesquisador: %s", pesquisador.getNome()), exception);
                 adicionarMensagemErroByKey("erro.enviar.imagem");
             }
         }
@@ -363,7 +362,7 @@ public class PesquisadorMB extends AbstractMB {
     public void setIdiomas(final List<Idioma> idiomas) {
         this.idiomas = idiomas;
     }
-    
+
     public List<Autorizacao> getAutorizacoes() {
 		return autorizacoes;
 	}
@@ -393,7 +392,7 @@ public class PesquisadorMB extends AbstractMB {
                 compreensaoIdioma.getProficiencia(), pesquisador));
         compreensaoIdioma = new CompreensaoIdioma();
     }
-    
+
     public void adicionarAutorizacao(){
     	pesquisador.addAutorizacao(autorizacao);
     }
@@ -416,7 +415,7 @@ public class PesquisadorMB extends AbstractMB {
     public void setIdioma(final Idioma idioma) {
         this.idioma = idioma;
     }
-    
+
     public Autorizacao getAutorizacao() {
 		return autorizacao;
 	}

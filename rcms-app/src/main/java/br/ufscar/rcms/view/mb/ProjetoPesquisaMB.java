@@ -70,6 +70,10 @@ public class ProjetoPesquisaMB extends AbstractMB {
     	link = "http://";
     	projetosPesquisa = new ListDataModel<ProjetoPesquisa>(projetoPesquisaService.buscarTodos());
     	pesquisadores = new ArrayList<Pesquisador>(pesquisadorService.buscarTodos());
+    	
+    	if(pesquisadores != null){
+    		pesquisador = pesquisadores.get(0);
+    	}
 
         ProjetoPesquisa projetoPesquisaEdicao = (ProjetoPesquisa) getFlashObject(FLASH_KEY_PROJETO_PESQUISA);
         if (projetoPesquisaEdicao != null) {

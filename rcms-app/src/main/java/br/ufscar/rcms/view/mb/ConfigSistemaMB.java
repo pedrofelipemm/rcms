@@ -138,7 +138,7 @@ public class ConfigSistemaMB extends AbstractMB {
         }
 
         Configuracao configIdioma = getConfiguracao(Configuracao.Tipo.IDIOMA);
-        if(isEmpty(idioma)){
+        if(isEmpty(getSession().getAttribute("idioma")) || isEmpty(idioma)){
 	        idioma = isEmpty(configIdioma.getValue()) ? idioma : configIdioma.getValue();
         }
 

@@ -13,43 +13,40 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h:panelGroup rendered="#{configSistemaMB.temaPortal eq 'portal'}">
-							<div id="carousel-example-generic" class="carousel slide"
-								data-ride="carousel">
-								<!-- Indicators -->
-								<ol class="carousel-indicators">
-									<ui:repeat var="projetoCarousel1"
-										value="#{indiceMB.projetosDePesquisaCarousel}">
-										<li data-target="#carousel-example-generic" data-slide-to="0"></li>
-									</ui:repeat>
-								</ol>
+						<div id="carousel-example-generic" class="carousel slide"
+							data-ride="carousel">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<ui:repeat var="projetoCarousel1"
+									value="#{indiceMB.projetosDePesquisaCarousel}">
+									<li data-target="#carousel-example-generic" data-slide-to="0"></li>
+								</ui:repeat>
+							</ol>
 
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner">
 
-									<ui:repeat var="projetoCarousel2"
-										value="#{indiceMB.projetosDePesquisaCarousel}" varStatus="status">
-										<div class="item #{status.index eq 0 ? 'active' : ''}">
-											<a href="#"><img
-												src="#{request.contextPath}/carousel/#{projetoCarousel2.idProjetoPesquisa}"
-												alt="#{projetoCarousel2.nome}" /></a>
-											<div class="carousel-caption">#{projetoCarousel2.nome}</div>
-										</div>
-									</ui:repeat>
-								</div>
-
-								<!-- Controls -->
-								<a class="left carousel-control"
-									href="#carousel-example-generic" role="button"
-									data-slide="prev"> <span
-									class="glyphicon glyphicon-chevron-left"></span>
-								</a> <a class="right carousel-control"
-									href="#carousel-example-generic" role="button"
-									data-slide="next"> <span
-									class="glyphicon glyphicon-chevron-right"></span>
-								</a>
+								<ui:repeat var="projetoCarousel2"
+									value="#{indiceMB.projetosDePesquisaCarousel}"
+									varStatus="status">
+									<div class="item #{status.index eq 0 ? 'active' : ''}">
+										<a href="#"><img
+											src="#{request.contextPath}/carousel/#{projetoCarousel2.idProjetoPesquisa}"
+											alt="#{projetoCarousel2.nome}" /></a>
+										<div class="carousel-caption">#{projetoCarousel2.nome}</div>
+									</div>
+								</ui:repeat>
 							</div>
-						</h:panelGroup>
+
+							<!-- Controls -->
+							<a class="left carousel-control" href="#carousel-example-generic"
+								role="button" data-slide="prev"> <span
+								class="glyphicon glyphicon-chevron-left"></span>
+							</a> <a class="right carousel-control"
+								href="#carousel-example-generic" role="button" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

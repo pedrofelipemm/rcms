@@ -29,10 +29,13 @@
                         <a href="/RCMS/paginas/portal/login/login.xhtml" title="Login de Acesso" class="btn btn-link" >#{mensagens['login']}</a>
                     </div>
                     <div class="col-xs-2 col-md-2">
-                        <select class="form-control input-sm">
-                            <option selected="#{configSistemaMB.idioma eq 'pt_BR' ? 'selected': ''}">#{mensagens['portugues']}</option>
-                            <option selected="#{configSistemaMB.idioma eq 'en' ? 'selected': ''}">#{mensagens['ingles']}</option>
-                        </select>
+                    	<h:form>
+						    <h:selectOneMenu class="form-control input-sm" value="#{configSistemaMB.idioma}" valueChangeListener="#{configSistemaMB.alterarIdioma}" 
+						                     onchange="submit()">
+						        <f:selectItem itemValue="pt_BR" itemLabel="#{mensagens['portugues']}" />
+						        <f:selectItem itemValue="en" itemLabel="#{mensagens['ingles']}" />
+						    </h:selectOneMenu>
+						</h:form>
                     </div>
                 </div>
             </div>

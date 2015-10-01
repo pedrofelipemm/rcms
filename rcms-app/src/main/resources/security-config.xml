@@ -27,17 +27,10 @@
 	<http auto-config="true">
 		<csrf disabled="true"/>
 		<intercept-url pattern="/paginas/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<form-login login-page="/paginas/portal/login/login.xhtml"  />
+		<form-login login-page="/paginas/portal/login/login.xhtml" />
+		<logout logout-url="/logout" invalidate-session="true" logout-success-url="/paginas/portal/login/login.xhtml"/>
 	</http>	
-	
-	 <!--  <authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-			</user-service>
-		</authentication-provider>
-	</authentication-manager> -->
-	
+
 	<authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource" 

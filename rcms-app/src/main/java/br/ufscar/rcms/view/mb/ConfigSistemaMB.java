@@ -16,8 +16,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.persistence.Transient;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
@@ -54,6 +57,9 @@ public class ConfigSistemaMB extends AbstractMB {
     private ProducaoService producaoService;
 
     private String idioma;
+    
+    private String idiomaBanco;
+    
     private Map<String, String> idiomas;
 
     private String estiloAdmin;
@@ -130,9 +136,13 @@ public class ConfigSistemaMB extends AbstractMB {
         if (listaConfigs != null && !listaConfigs.isEmpty()) {
             configuracoes.addAll(listaConfigs);
         }
-
+        
         Configuracao configIdioma = getConfiguracao(Configuracao.Tipo.IDIOMA);
-        idioma = isEmpty(configIdioma.getValue()) ? idioma : configIdioma.getValue();
+        if(isEmpty(idioma)){
+	        idioma = isEmpty(configIdioma.getValue()) ? idioma : configIdioma.getValue();
+        }
+        
+        idiomaBanco = isEmpty(configIdioma.getValue()) ? idiomaBanco : configIdioma.getValue();
 
         alterarIdioma();
 
@@ -190,7 +200,7 @@ public class ConfigSistemaMB extends AbstractMB {
         try {
             Configuracao config;
             config = getConfiguracao(Configuracao.Tipo.IDIOMA);
-            config.setValue(idioma);
+            config.setValue(idiomaBanco);
             getConfiguracoes().add(config);
             config = getConfiguracao(Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA);
             config.setValue(importacaoLattesAutomcatica.toString());
@@ -280,7 +290,11 @@ public class ConfigSistemaMB extends AbstractMB {
     }
 
     private void carregarIdiomas() {
-        idioma = getViewRoot().getLocale().toString();
+    	if(isEmpty(getSession().getAttribute("idioma"))){
+    		idioma = getViewRoot().getLocale().toString();
+    	} else {
+    		idioma = (String) getSession().getAttribute("idioma");
+    	}
         idiomas = new HashMap<String, String>();
         idiomas.put(getMessage("ingles"), "en");
         idiomas.put(getMessage("portugues"), "pt_BR");
@@ -424,6 +438,16 @@ public class ConfigSistemaMB extends AbstractMB {
         partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
         getViewRoot().setLocale(new Locale(idioma));
     }
+    
+    public void alterarIdioma(ValueChangeEvent event) {
+        final PartialViewContext partialViewContext = getPartialViewContext();
+        partialViewContext.getRenderIds().addAll(partialViewContext.getExecuteIds());
+        setIdioma((String) event.getNewValue());
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        setIdioma((String) event.getNewValue());
+        session.setAttribute("idioma", idioma);
+        getViewRoot().setLocale(new Locale((String) event.getNewValue()));
+    }
 
     public void uploadFile() {
         try {
@@ -434,6 +458,10 @@ public class ConfigSistemaMB extends AbstractMB {
             adicionarMensagemErroByKey("erro.enviar.imagem");
         }
     }
+    
+    protected HttpSession getSession(){
+    	return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+    }
 
     public String getIdioma() {
         return idioma;
@@ -443,7 +471,15 @@ public class ConfigSistemaMB extends AbstractMB {
         this.idioma = idioma;
     }
 
-    public Map<String, String> getIdiomas() {
+    public String getIdiomaBanco() {
+		return idiomaBanco;
+	}
+
+	public void setIdiomaBanco(String idiomaBanco) {
+		this.idiomaBanco = idiomaBanco;
+	}
+
+	public Map<String, String> getIdiomas() {
         return idiomas;
     }
 

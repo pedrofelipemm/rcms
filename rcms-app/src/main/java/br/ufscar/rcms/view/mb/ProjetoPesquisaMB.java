@@ -3,10 +3,10 @@ package br.ufscar.rcms.view.mb;
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
-import java.io.IOException;
+import static br.ufscar.rcms.commons.util.FileUtils.extractFileName;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -15,13 +15,16 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
 
-import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.ufscar.rcms.commons.util.FileUtils;
 import br.ufscar.rcms.modelo.entidades.LinkMidia;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
@@ -50,8 +53,10 @@ public class ProjetoPesquisaMB extends AbstractMB {
     private Part imagemCarousel;
 
     private transient Part imagem;
-    
+
     private String link;
+
+    private List<String> imageUrls;
 
     @PostConstruct
     public void inicializar() {
@@ -95,20 +100,13 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return CONSULTA_PROJETO_PESQUISA;
     }
 
-    /*
-     * public void uploadFile() { if (!isEmpty(imagem)) { try { TransientFile file = new TransientFile();
-     * file.setFile(IOUtils.toByteArray(imagem.getInputStream())); file.setFileName(imagem.getSubmittedFileName());
-     * file.setFileExtension(extractFileExtension(imagem.getSubmittedFileName()));
-     * 
-     * projetoPesquisaService.salvarImagem(projetoPesquisa, file);
-     * 
-     * projetoPesquisa.getGaleria().add(file); } catch (final IOException ioException) {
-     * LOGGER.error("Erro ao realizar upload de imagem", ioException); adicionarMensagemErroByKey("erro.enviar.imagem");
-     * } catch (RCMSException e) { // TODO Auto-generated catch block e.printStackTrace(); } } }
-     */
     public String exibir(ProjetoPesquisa projetoPesquisa) {
 
         projetoPesquisa = projetoPesquisaService.buscarTodosDados(projetoPesquisa.getIdProjetoPesquisa());
+        if (!isEmpty(projetoPesquisa)) {
+            imageUrls = projetoPesquisaService.searchGalleryUrls(projetoPesquisa.getIdProjetoPesquisa());
+            setFlashObject("teste", imageUrls);
+        }
 
         setFlashObject(FLASH_KEY_PROJETO_PESQUISA, projetoPesquisa);
 
@@ -144,7 +142,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
     	projetoPesquisa.removerPesquisador(pesquisador);
     }
-    
+
     public void adicionarLink(){
     	if(!link.equals("http://")){
     		LinkMidia linkMidia = new LinkMidia();
@@ -154,14 +152,14 @@ public class ProjetoPesquisaMB extends AbstractMB {
     		link = "http://";
     	}
     }
-    
-    public void excluirLink(LinkMidia linkMidia){
+
+    public void excluirLink(final LinkMidia linkMidia){
     	if(linkMidia != null){
     		LinkMidia midia = projetoPesquisa.getLinkMidia().get(projetoPesquisa.getLinkMidia().indexOf(linkMidia));
     		projetoPesquisa.getLinkMidia().remove(midia);
 
     		projetoPesquisa.setLinkMidia(projetoPesquisa.getLinkMidia());
-    		
+
     		link = "http://";
     	}
     }
@@ -229,7 +227,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return link;
 	}
 
-	public void setLink(String link) {
+	public void setLink(final String link) {
 		this.link = link;
 	}
 
@@ -237,22 +235,40 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return imagemCarousel;
     }
 
-    public void setImagemCarousel(Part imagemCarousel) {
+    public void setImagemCarousel(final Part imagemCarousel) {
         this.imagemCarousel = imagemCarousel;
     }
 
-    public void uploadFile() {
-        if (!isEmpty(imagemCarousel)) {
-            try {
-                projetoPesquisa.getImagemCarousel().setFile(IOUtils.toByteArray(imagemCarousel.getInputStream()));
-                projetoPesquisa.getImagemCarousel().setFileExtension(
-                        extractFileExtension(imagemCarousel.getSubmittedFileName()));
-            } catch (final IOException ioException) {
-                LOGGER.error(
-                        String.format("Erro ao realizar upload de imagem para o carousel: %s",
-                                projetoPesquisa.getNome()), ioException);
-                adicionarMensagemErroByKey("erro.enviar.imagem");
-            }
+    public void uploadGalleryFile(final FileUploadEvent event) {
+
+        UploadedFile file = event.getFile();
+        String fileName = file.getFileName();
+
+        TransientFile image = new TransientFile(file.getContents(), FileUtils.extractFileName(fileName),
+                FileUtils.extractFileExtension(fileName));
+
+        projetoPesquisa.addGaleria(image);
+    }
+
+
+    public void uploadFile(final FileUploadEvent event) {
+        try {
+            projetoPesquisa.getImagemCarousel().setFile(event.getFile().getContents());
+            projetoPesquisa.getImagemCarousel().setFileName(extractFileName(event.getFile().getFileName()));
+            projetoPesquisa.getImagemCarousel().setFileExtension(extractFileExtension(event.getFile().getFileName()));
+        } catch (final Exception exception) {
+            LOGGER.error(String.format("Erro ao realizar upload de imagem para o carousel: %s",
+                    projetoPesquisa.getNome()), exception);
+            adicionarMensagemErroByKey("erro.enviar.imagem");
         }
     }
+
+    public List<String> getImageUrls() {
+        return imageUrls != null ? imageUrls : (List<String>) getFlashObject("teste");
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
 }

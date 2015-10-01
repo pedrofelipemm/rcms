@@ -1,13 +1,9 @@
 package br.ufscar.rcms.view.servlet;
 
-import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +25,8 @@ public class GaleriaServlet extends HttpServlet {
     private static final long serialVersionUID = 9079499391021534736L;
     private static final Logger LOGGER = LoggerFactory.getLogger(GaleriaServlet.class);
 
+    protected static final String IMAGES_PATH = "/images/";
+
     @Autowired
     private ProjetoPesquisaService projetoPesquisaService;
 
@@ -42,19 +40,16 @@ public class GaleriaServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
             IOException {
 
-        Long idProjetoPesquisa = extractIdProjetoPesquisa(request);
-        List<TransientFile> files = projetoPesquisaService.buscarGaleria(idProjetoPesquisa);
+        String fileName = extractFileName(request);
+        TransientFile file = projetoPesquisaService.buscarGaleria(fileName);
 
-        for (TransientFile file : files) {
-            byte[] image = file.getFile();
+        byte[] image = file.getFile();
 
-            downloadFile(response, image);
-        }
+        downloadFile(response, image);
     }
 
-    private Long extractIdProjetoPesquisa(final HttpServletRequest request) {
-        String id = request.getPathInfo().substring(1);
-        return !isEmpty(id) ? Long.valueOf(id) : Long.valueOf(-1);
+    private String extractFileName(final HttpServletRequest request) {
+        return request.getPathInfo().substring(1);
     }
 
     private void downloadFile(final HttpServletResponse response, final byte[] foto) throws IOException {

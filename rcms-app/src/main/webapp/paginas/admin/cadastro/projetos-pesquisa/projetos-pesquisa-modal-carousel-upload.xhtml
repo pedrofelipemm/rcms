@@ -8,7 +8,7 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<div class="modal fade" id="modalImagemCarouselUpload" tabindex="-1" role="dialog" aria-labelledby="modalImagemCarouselUpload" aria-hidden="true">
-		<div class="modal-dialog" style="width: 260px;">
+		<div class="modal-dialog" >
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -18,15 +18,15 @@
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
-						<h:form id="fileUpload" prependId="false" enctype="multipart/form-data" styleClass="dropzone">
-							<div style="display: none">
-								<h:inputFile id="file" name="file" value="#{projetoPesquisaMB.imagemCarousel}" />
-								<h:commandButton id="buttonEnviarImagemCarousel" value="Enviar" action="#{projetoPesquisaMB.uploadFile}"
-									styleClass="btn btn-success">
-									<f:ajax render="fileUpload :formProjetoPesquisa" execute="fileUpload" />
-								</h:commandButton>
-							</div>
-						</h:form>
+                        <h:form id="fileUpload" prependId="false" enctype="multipart/form-data" styleClass="dropzone">
+                            <div style="display: none">
+                                <h:inputFile id="file" name="file" value="#{projetoPesquisaMB.imagemCarousel}" />
+                                <h:commandButton id="buttonEnviarImagemCarousel" value="Enviar" action="#{projetoPesquisaMB.uploadFile}"
+                                    styleClass="btn btn-success">
+                                    <f:ajax render="fileUpload :formProjetoPesquisa" execute="fileUpload" />
+                                </h:commandButton>
+                            </div>
+                         </h:form>						
 					</div>
 				</div>
 			</div>

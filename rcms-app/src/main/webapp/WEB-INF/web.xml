@@ -15,16 +15,11 @@
 		<welcome-file>paginas/index.xhtml</welcome-file>
 	</welcome-file-list>
 	
-	<filter>
-		<filter-name>primeUploadFilter</filter-name>
-		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>primeUploadFilter</filter-name>
-		<servlet-name>Faces Servlet</servlet-name>
-	</filter-mapping>
-	
+	<context-param>
+		<param-name>primefaces.UPLOADER</param-name>
+		<param-value>auto</param-value>
+	</context-param>
+
 	<filter>
 		<filter-name>configurationFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

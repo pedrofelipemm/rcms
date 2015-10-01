@@ -15,16 +15,15 @@
 						<img style="width:50%"
 							src="#{request.contextPath}/carousel/#{projetoPesquisaMB.projetoPesquisa.idProjetoPesquisa}"></img>
 					</div>
-					<div class="form-group">
-						<button type="button" class="btn btn-primary fa fa-upload"
-							data-toggle="modal" data-target="#modalImagemCarouselUpload"
-							style="margin: 10px; font-family: FontAwesome">
-							<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
-								pt:title="#{mensagens['spacer.titutlo']}" />
-							#{mensagens['upload']}
-						</button>
-						Tamanho recomendado: 1140x500 pixels
-					</div>
+                    <div class="form-group">
+                        <p:fileUpload mode="advanced" dragDropSupport="true"
+                             fileUploadListener="#{projetoPesquisaMB.uploadFile}"
+                             label="#{mensagens['upload']}" auto="true" 
+                             allowTypes="/(\.|\/)(gif|jpe?g|png)$/" showButtons="false"
+                             styleClass="primefacesFileUpload" />
+                             
+                        <h:outputText value="#{mensagens['projeto.pesquisa.tamanho.recomendado']}" />
+                    </div>
 				</p:panel>
 			</div>
 		</div>

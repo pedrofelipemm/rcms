@@ -13,6 +13,18 @@ public class TransientFile implements Serializable{
     private String fileLocation;
     private String fileExtension;
 
+    public TransientFile() { /* Serialization */ }
+
+    public TransientFile(final byte[] file, final String fileName, final String fileExtension) {
+        this.file = file;
+        this.fileName = fileName;
+        this.fileExtension = fileExtension;
+    }
+
+    public String getFullName() {
+        return fileLocation + fileName + fileExtension;
+    }
+
     public byte[] getFile() {
 
         if (file == null) {

@@ -23,7 +23,7 @@
 								<h:inputFile id="file" name="file" value="#{pesquisadorMB.fotoPesquisador}" />
 								<h:commandButton id="buttonSalvar" value="Enviar" action="#{pesquisadorMB.uploadFile}"
 									styleClass="btn btn-success">
-									<f:ajax render="fileUpload :formPesquisador" execute="fileUpload" />
+									<f:ajax render="fileUpload :formPesquisador:foto-pesquisador" execute="fileUpload" />
 								</h:commandButton>
 							</div>
 						</h:form>

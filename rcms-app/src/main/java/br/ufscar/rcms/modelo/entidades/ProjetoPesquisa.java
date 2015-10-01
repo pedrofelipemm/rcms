@@ -56,7 +56,7 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa")
     private List<Midia> midia = new ArrayList<Midia>();
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projetoPesquisa", orphanRemoval = true)
     private List<LinkMidia> linkMidia = new ArrayList<LinkMidia>();
 
@@ -176,8 +176,17 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
         return galeria;
     }
 
-    public void setGaleria(List<TransientFile> galeria) {
-        this.galeria = galeria;
+    public void addGaleria(final TransientFile file) {
+        galeria.add(file);
+    }
+
+    public void removeGaleriaByFileName(final String name) {
+        for (TransientFile file : galeria) {
+            if (file.getFileName().equals(name)) {
+                galeria.remove(file);
+                break;
+            }
+        }
     }
 
     @Override
@@ -211,7 +220,7 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(final Object o) {
         ProjetoPesquisa pp = (ProjetoPesquisa) o;
         Integer ppAnoConclusao = (pp.anoConclusao != null) ? pp.anoConclusao : 10000;
         Integer thisAnoConclusao = (this.anoConclusao != null) ? this.anoConclusao : 10000;
@@ -223,14 +232,14 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
 		return linkMidia;
 	}
 
-	public void setLinkMidia(List<LinkMidia> linkMidia) {
+	public void setLinkMidia(final List<LinkMidia> linkMidia) {
 		this.linkMidia = linkMidia;
 	}
     public TransientFile getImagemCarousel() {
         return imagemCarousel;
     }
 
-    public void setImagemCarousel(TransientFile imagemCarousel) {
+    public void setImagemCarousel(final TransientFile imagemCarousel) {
         this.imagemCarousel = imagemCarousel;
     }
 }

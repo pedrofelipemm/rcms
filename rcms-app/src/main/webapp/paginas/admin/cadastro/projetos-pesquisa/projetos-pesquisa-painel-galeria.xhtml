@@ -5,31 +5,23 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
-	<div class="row">
-		<div class="col-sm-12">
-			<h:form id="form">
-				<p:dataGrid var="car" value="#{projetoPesquisaMB.projetoPesquisa.galeria}" columns="3"
-					layout="grid" rows="12" paginator="true" id="imagem"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="6,12,16">
-
-					<f:facet name="header">
-            Imagens
-        </f:facet>
-
-					<p:panel style="text-align:center">
-						<h:panelGrid columns="1" style="width:100%">
-							<p:graphicImage name="#{request.contextPath}/" />
-
-							<h:outputText value="#{imagem.fileName}" />
-
-							
-						</h:panelGrid>
-					</p:panel>
-
-				</p:dataGrid>
-			</h:form>
+    
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <p:panel id="painel-galeria"
+                    header="#{mensagens['projeto.pesquisa.imagem.carousel']}">
+	                 <h:form id="gallery-file-upload" prependId="false" enctype="multipart/form-data">
+	                     <p:fileUpload mode="advanced" dragDropSupport="true"
+	                         fileUploadListener="#{projetoPesquisaMB.uploadGalleryFile}"
+	                         label="#{mensagens['upload']}" fileLimit="100"
+	                         allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+	                         styleClass="primefacesFileUpload" />
+	                         
+	                     <h:outputText value="#{mensagens['projeto.pesquisa.tamanho.recomendado']}" />
+	                 </h:form>
+                </p:panel>
+            </div>
 		</div>
 	</div>
 

@@ -17,31 +17,13 @@
 				</div>
 			</div>
 
-			<ui:include
-				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-projetos-pesquisa.xhtml" />
-			<ui:include
-				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-pesquisador.xhtml" />
-			<ui:include
-				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-links.xhtml" />
-			<ui:include
-				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-carousel.xhtml" />
-				
-				<!-- 
-			<div class="row">
-				<div class="col-sm-12">
-					<button type="button" class="btn btn-primary fa fa-upload"
-						data-toggle="modal" data-target="#modalFileUpload"
-						style="margin: 10px; font-family: FontAwesome">
-						<p:spacer width="20" pt:alt="#{mensagens['spacer.mensagem']}"
-							pt:title="#{mensagens['spacer.titutlo']}" />
-						#{mensagens['upload']}
-					</button>
-				</div>
-			</div> -->
-
-			<!-- <ui:include
-				src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-galeria.xhtml" /> -->
-
+			<ui:include src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-projetos-pesquisa.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-pesquisador.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-links.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-carousel.xhtml" />
+			<ui:include src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-painel-galeria.xhtml" />
+            <ui:include src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-modal-carousel-upload.xhtml" />
+            
 			<div class="row">
 				<div class="col-sm-12">
 					<h:commandButton pt:name="buttonSalvarProjeto" 
@@ -54,11 +36,6 @@
 			</div>
 
 		</h:form>
-
-		<!-- <ui:include
-			src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-modal-file-upload.xhtml" />-->
-		<ui:include
-			src="/paginas/admin/cadastro/projetos-pesquisa/projetos-pesquisa-modal-carousel-upload.xhtml" />
 
 	</ui:define>
 </ui:composition>

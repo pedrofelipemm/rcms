@@ -63,7 +63,7 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">#{mensagens['cancelar']}</button>
 					<h:commandButton action="#{projetoPesquisaMB.adicionarPequisador}" styleClass="btn btn-primary"
 						value="#{mensagens['adicionar']}" pt:data-toggle="modal" pt:data-target="#modalProjetoPesquisador">
-						<f:ajax execute="form-projeto-pesquisa" render="form-projeto-pesquisa" />
+						<f:ajax execute="formProjetoPesquisa" render="painel-pesquisador" />
 					</h:commandButton>
 				</div>
 			</div>

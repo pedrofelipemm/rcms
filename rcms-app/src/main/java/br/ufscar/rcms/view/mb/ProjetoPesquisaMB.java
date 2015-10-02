@@ -2,11 +2,13 @@ package br.ufscar.rcms.view.mb;
 
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
 import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
-
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javassist.expr.NewArray;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -22,10 +24,13 @@ import org.slf4j.LoggerFactory;
 
 import br.ufscar.rcms.commons.util.FileUtils;
 import br.ufscar.rcms.modelo.entidades.LinkMidia;
+import br.ufscar.rcms.modelo.entidades.OutraProducaoBibliografica;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.modelo.entidades.Producao;
 import br.ufscar.rcms.modelo.entidades.ProjetoPesquisa;
 import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
+import br.ufscar.rcms.servico.ProducaoService;
 import br.ufscar.rcms.servico.ProjetoPesquisaService;
 import br.ufscar.rcms.servico.exception.ProjetoPesquisaNaoEncontradoException;
 
@@ -42,10 +47,15 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
+    
+    @ManagedProperty("#{producaoService}")
+    private ProducaoService producaoService;
 
     private transient List<Pesquisador> pesquisadores;
+    private transient List<Producao> producoes;
 
     private Pesquisador pesquisador;
+    private Producao producao;
 
     private ProjetoPesquisa projetoPesquisa;
     private transient DataModel<ProjetoPesquisa> projetosPesquisa;
@@ -70,6 +80,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
     	link = "http://";
     	projetosPesquisa = new ListDataModel<ProjetoPesquisa>(projetoPesquisaService.buscarTodos());
     	pesquisadores = new ArrayList<Pesquisador>(pesquisadorService.buscarTodos());
+    	producoes = new ArrayList<Producao>(getProducaoService().buscarTodas());
     	
     	if(pesquisadores != null){
     		pesquisador = pesquisadores.get(0);
@@ -84,6 +95,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
     @Override
     protected void limparDados() {
         projetoPesquisa = new ProjetoPesquisa();
+        producao = new OutraProducaoBibliografica();
         getFlash().clear();
     }
 
@@ -145,6 +157,18 @@ public class ProjetoPesquisaMB extends AbstractMB {
     public void removerPequisador(Pesquisador pesquisador) {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
     	projetoPesquisa.removerPesquisador(pesquisador);
+    }
+    
+    public void adicionarProducao(){
+    	producao = producaoService.buscarTodosDados(producao.getIdProducao());
+    	projetoPesquisa.adicionarProducao(producao);
+    	setProducao(new OutraProducaoBibliografica());
+    }
+    
+    public void removerProducao(Producao producao){
+    	producao = producaoService.buscarTodosDados(producao.getIdProducao());
+    	projetoPesquisa.removerProducao(producao);
+    	setProducao(new OutraProducaoBibliografica());
     }
 
     public void adicionarLink(){
@@ -274,5 +298,29 @@ public class ProjetoPesquisaMB extends AbstractMB {
     public void setImageUrls(List<String> imageUrls) {
         this.imageUrls = imageUrls;
     }
+
+	public List<Producao> getProducoes() {
+		return producoes;
+	}
+
+	public void setProducoes(List<Producao> producoes) {
+		this.producoes = producoes;
+	}
+
+	public Producao getProducao() {
+		return producao;
+	}
+
+	public void setProducao(Producao producao) {
+		this.producao = producao;
+	}
+
+	public ProducaoService getProducaoService() {
+		return producaoService;
+	}
+
+	public void setProducaoService(ProducaoService producaoService) {
+		this.producaoService = producaoService;
+	}
 
 }

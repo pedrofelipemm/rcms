@@ -158,4 +158,16 @@ public class ProducaoServiceImpl implements ProducaoService {
         }
         return null;
     }
+    
+    @Override
+    public Producao buscarTodosDados(final long producaoId){
+    	Producao p = producaoDAO.buscar(producaoId);
+    	loadLazyCollections(p);
+    	
+    	return p;
+    }
+
+	private void loadLazyCollections(Producao p) {
+		p.getAutores().size();		
+	}
 }

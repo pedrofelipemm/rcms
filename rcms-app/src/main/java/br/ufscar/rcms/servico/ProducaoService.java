@@ -29,4 +29,6 @@ public interface ProducaoService extends Serializable {
     TransientFile buscarPdf(Long producaoId);
     
     StreamedContent loadPDF(Producao p);
+    
+    Producao buscarTodosDados(final long producaoId);
 }

@@ -188,6 +188,18 @@ public class ProjetoPesquisa extends Entidade implements Comparable {
             }
         }
     }
+    
+    public void adicionarProducao(final Producao producao){
+    	if(!this.producoes.contains(producao)){
+    		this.producoes.add(producao);
+    	}
+    }
+    
+    public void removerProducao(final Producao producao){
+    	if(this.producoes.contains(producao)){
+    		this.producoes.remove(producao);
+    	}
+    }
 
     @Override
     public int hashCode() {

@@ -48,6 +48,6 @@ public class ConfiguracaoDAOTest extends AbstractDAOTestBase {
         List<Configuracao> configs = configuracaoDAO.buscarPorTipo(Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR,
                 Tipo.MICROSERVICE_AMOUNT_PRODUCAO_BY_YEAR, Tipo.IDIOMA);
 
-        assertEquals(4, configs.size());
+        assertEquals(3, configs.size());
     }
 }

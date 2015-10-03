@@ -287,7 +287,6 @@ public class LattesServiceImpl implements LattesService {
         throw new ArquivoNaoEncontradoException(arquivoConfig);
     }
 
-    // TODO PEDRO - DUPLICANDO ITENS
     private void salvarHierarquiaGrandeArea(final List<AtuacaoPesquisador> areaAtuacoes) {
         for (final AtuacaoPesquisador atuacaoPesquisador : areaAtuacoes) {
             try {

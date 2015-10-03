@@ -34,7 +34,7 @@ public class ProducaoDAOTest extends AbstractDAOTestBase {
         merge(new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", "resumoProfissional").endereco(endereco).build());
     }
 
-    // TODO PEDRO @Test
+    // TODO @Test
     public void buscarProducoesTest() {
 
         Pesquisador pesquisador = pesquisadorDAO.buscarTodos().get(0);

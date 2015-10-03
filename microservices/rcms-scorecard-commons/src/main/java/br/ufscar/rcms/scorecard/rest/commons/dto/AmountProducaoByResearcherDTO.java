@@ -6,12 +6,6 @@ public class AmountProducaoByResearcherDTO extends AmountProducaoDTO {
 
     private final String name;
 
-    // TODO PEDRO DELETE
-    public AmountProducaoByResearcherDTO(final Integer amount, final String name) {
-        super(amount);
-        this.name = name;
-    }
-
     public AmountProducaoByResearcherDTO(final Long amount, final String name) {
         super(amount.intValue());
         this.name = name;

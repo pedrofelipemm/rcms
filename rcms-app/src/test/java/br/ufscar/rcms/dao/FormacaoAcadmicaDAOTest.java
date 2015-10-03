@@ -9,7 +9,6 @@ public class FormacaoAcadmicaDAOTest extends AbstractDAOTestBase {
     @Before
     public void init(){
 
-        // TODO PEDRO MOVE TO PESQUISADOR BUILDER
         Endereco endereco = new Endereco();
         endereco.setEnderecoProfissional("Teste");
         Pesquisador pesquisador = new PesquisadorBuilder("login", "nome", "senha", "codigoLattes", "email", true, "resumoProfissional").endereco(endereco).build();

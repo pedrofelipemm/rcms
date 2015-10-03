@@ -334,13 +334,13 @@ public class PesquisadorMB extends AbstractMB {
             limparDados();
 
         } catch (final InvalidDataAccessApiUsageException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);// TODO PEDRO
+            LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemAlerta(String.format("Erro ao salvar dados importados do Lattes, pesquisador: %s ", pesquisador.getNome()));
         } catch (final CurriculoLattesNaoEncontradoException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);// TODO PEDRO
+            LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemErro(e.getMessage());
         } catch (final ArquivoNaoEncontradoException e) {
-            LOGGER.error("Erro ao salvar dados do lattes", e);// TODO PEDRO
+            LOGGER.error("Erro ao salvar dados do lattes", e);
             adicionarMensagemErro(e.getMessage());
         } catch (final Exception exception) {
             LOGGER.error(exception.getMessage(), exception);
@@ -367,7 +367,7 @@ public class PesquisadorMB extends AbstractMB {
 		return autorizacoes;
 	}
 
-	public void setAutorizacoes(List<Autorizacao> autorizacoes) {
+	public void setAutorizacoes(final List<Autorizacao> autorizacoes) {
 		this.autorizacoes = autorizacoes;
 	}
 
@@ -420,7 +420,7 @@ public class PesquisadorMB extends AbstractMB {
 		return autorizacao;
 	}
 
-	public void setAutorizacao(Autorizacao autorizacao) {
+	public void setAutorizacao(final Autorizacao autorizacao) {
 		this.autorizacao = autorizacao;
 	}
 
@@ -827,11 +827,11 @@ public class PesquisadorMB extends AbstractMB {
         return autorizacaoService;
     }
 
-    public void setAutorizacaoService(AutorizacaoService autorizacaoService) {
+    public void setAutorizacaoService(final AutorizacaoService autorizacaoService) {
         this.autorizacaoService = autorizacaoService;
     }
 
-    public StreamedContent downloadFile(Long idProducao) {
+    public StreamedContent downloadFile(final Long idProducao) {
         Producao producao = producaoService.buscarPorId(idProducao);
         return producaoService.loadPDF(producao);
     }

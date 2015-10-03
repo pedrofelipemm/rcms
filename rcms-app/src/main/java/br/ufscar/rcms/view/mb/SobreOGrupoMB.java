@@ -26,9 +26,9 @@ public class SobreOGrupoMB extends AbstractMB {
         carregarDados();
     }
 
+    @Override
     protected void carregarDados() {
 
-                                                        // TODO PEDRO
         sobreOGrupo = sobreOGrupoService.buscarPorIdioma("pt_BR");
 
         SobreOGrupo sobreOGrupoEdicao = (SobreOGrupo) getFlashObject(FLASH_KEY_SOBRE_O_GRUPO);
@@ -37,6 +37,7 @@ public class SobreOGrupoMB extends AbstractMB {
         }
     }
 
+    @Override
     protected void limparDados() {
 
         sobreOGrupo = new SobreOGrupo();
@@ -57,7 +58,7 @@ public class SobreOGrupoMB extends AbstractMB {
         return CONSULTA_SOBRE_O_GRUPO;
     }
 
-    public String editar(String idioma) {
+    public String editar(final String idioma) {
 
         sobreOGrupo = sobreOGrupoService.buscarPorIdioma(idioma);
 
@@ -75,7 +76,7 @@ public class SobreOGrupoMB extends AbstractMB {
         return sobreOGrupoService;
     }
 
-    public void setSobreOGrupoService(SobreOGrupoService sobreOGrupoService) {
+    public void setSobreOGrupoService(final SobreOGrupoService sobreOGrupoService) {
         this.sobreOGrupoService = sobreOGrupoService;
     }
 
@@ -83,7 +84,7 @@ public class SobreOGrupoMB extends AbstractMB {
         return sobreOGrupo;
     }
 
-    public void setSobreOGrupo(SobreOGrupo sobreOGrupo) {
+    public void setSobreOGrupo(final SobreOGrupo sobreOGrupo) {
         this.sobreOGrupo = sobreOGrupo;
     }
 

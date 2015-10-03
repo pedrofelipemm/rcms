@@ -224,9 +224,9 @@ public class PesquisadorMB extends AbstractMB {
     public String salvar() {
 
         try {
+
             pesquisador = pesquisadorService.salvarOuAtualizar(pesquisador);
             adicionarMensagemInfoByKey("pesquisador.salvo.sucesso", pesquisador.getNome());
-
             limparDados();
 
         } catch (final Exception exception) {

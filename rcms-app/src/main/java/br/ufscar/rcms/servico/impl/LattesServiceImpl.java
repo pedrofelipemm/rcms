@@ -241,6 +241,7 @@ public class LattesServiceImpl implements LattesService {
             }
         } catch (final IOException e) {
             LOGGER.error(e.getMessage(), e);
+            cleanUpFiles(codigoLattes);
             throw new ArquivoNaoEncontradoException(pastaScriptLates + arquivoCurriculoLattes);
         }
         return curriculoLattes;
@@ -278,7 +279,12 @@ public class LattesServiceImpl implements LattesService {
         File file;
         try {
             file = new File(classLoader.getResource(arquivoConfig).getPath());
-            return FileUtils.readFileToString(file).replaceAll("\\{codigoLattes\\}", hash);
+            String conteudo = FileUtils.readFileToString(file).replaceAll("\\{codigoLattes\\}", hash);
+
+            /* Cache temporário enquanto ScriptLattes não volta a funcionar */
+            String global = "global-diretorio_de_armazenamento_de_cvs  = ";
+            return conteudo.replace(global + hash, global + System.getProperty("user.home") + "/RCMS/lattes/cache");
+
         } catch (final FileNotFoundException fileNotFoundException) {
             LOGGER.error(fileNotFoundException.getMessage(), fileNotFoundException);
         } catch (final IOException ioException) {

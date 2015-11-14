@@ -283,7 +283,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
         String fileExtension = getFileExtension(fileName);
         try {
 
-            file.setFile(Files.readAllBytes(Paths.get(pastaGaleriaProjetos + fileName + '.' + fileExtension)));
+            file.setFile(Files.readAllBytes(Paths.get(pastaGaleriaProjetos + fileName)));
             file.setFileExtension(fileExtension);
             file.setFileLocation(pastaGaleriaProjetos);
             file.setFileName(fileName.substring(fileName.indexOf('/') + 1));

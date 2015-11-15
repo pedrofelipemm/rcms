@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.ufscar.rcms.modelo.entidades.Configuracao.Tipo;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
+import br.ufscar.rcms.servico.ConfiguracaoService;
 import br.ufscar.rcms.servico.LattesService;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.exception.RCMSException;
@@ -24,11 +26,16 @@ public class JobLattesImporter extends AbstractJob {
     @Autowired
     private PesquisadorService pesquisadorService;
 
+    @Autowired
+    private ConfiguracaoService configuracaoService;
+
     @Override
     public void process() {
 
-        List<Pesquisador> pesquisadores = pesquisadorService.findToAutoImport();
-        pesquisadores.stream().filter(Objects::nonNull).forEach(this::safeProcess);
+        if (Boolean.valueOf(configuracaoService.buscarPorTipo(Tipo.IMPORTACAO_LATTES_AUTOMATICA).get(0).getValue())) {
+            List<Pesquisador> pesquisadores = pesquisadorService.findToAutoImport();
+            pesquisadores.stream().filter(Objects::nonNull).forEach(this::safeProcess);
+        }
     }
 
     private void safeProcess(final Pesquisador pesquisador) {

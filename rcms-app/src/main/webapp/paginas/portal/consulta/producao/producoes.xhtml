@@ -40,9 +40,9 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaArtigosEmPeriodicos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.revista},
-														<!-- v. #{producao.volume}, --> <h:outputText
+														<h:outputText
 															value="n. #{producao.numero}"
 															rendered="#{producao.numero > 0}" />, p.
 														#{producao.paginas}, #{producao.ano}.<br/><h:panelGroup
@@ -55,15 +55,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -92,7 +92,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaLivrosPublicados}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.edicao},
 														#{producao.ano}. v. #{producao.volume}.
 														#{producao.paginas}p.<br/><h:panelGroup
@@ -105,15 +105,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -142,9 +142,9 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaCapitulosDeLivros}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. Em:
-														#{producao.livro}: <!-- #{producao.edicao}, -->
+														#{producao.livro}: 
 														#{producao.editora}, #{producao.ano}, v.
 														#{producao.volume}, p. #{producao.paginas}.<br/><h:panelGroup
 															rendered="#{not empty producao.link}"
@@ -156,15 +156,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -193,9 +193,9 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaTextosEmJornais}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>.
-														#{producao.nomeJornal}, <!-- v. #{producao.volume}, --> p.
+														#{producao.nomeJornal}, p.
 														#{producao.paginas}, <h:outputText
 															value="#{producao.dataPublicacao}">
 															<f:convertDateTime pattern="dd MMM. yyyy" />
@@ -208,15 +208,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -245,7 +245,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaTrabalhosCompletosCongressos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. Em:
 														#{producao.nomeEvento}, v. #{producao.volume}, p.
 														#{producao.paginas}, #{producao.ano}.<br/><h:panelGroup
@@ -258,15 +258,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -295,7 +295,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaResumosExpandidosCongressos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. Em:
 														#{producao.nomeEvento}, v. #{producao.volume}, p.
 														#{producao.paginas}, #{producao.ano}.<br/><h:panelGroup
@@ -308,15 +308,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -345,7 +345,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaResumosCongressos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. Em:
 														#{producao.nomeEvento}, v. #{producao.volume}, p.
 														#{producao.paginas}, #{producao.ano}.<br/><h:panelGroup
@@ -358,15 +358,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -394,7 +394,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaApresentacoesTrabalhos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.ano}.
 														(#{producao.natureza}).<br/><h:panelGroup
 															rendered="#{not empty producao.link}" style="display: inline-table;">
@@ -405,15 +405,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup></li>
@@ -442,7 +442,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaOutrasProducoesBibligraficas}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.ano}.
 														(#{producao.natureza}).<br/><h:panelGroup
 															rendered="#{not empty producao.link}"
@@ -454,15 +454,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -490,7 +490,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaProdutosTecnologicos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.ano}.<br/><h:panelGroup
 															rendered="#{not empty producao.link}"
 															 style="display: inline-table;">
@@ -501,15 +501,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -537,7 +537,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaProcessosOuTecnicas}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.ano}.<br/><h:panelGroup
 															rendered="#{not empty producao.link}"
 															 style="display: inline-table;">
@@ -548,15 +548,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -584,7 +584,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaTrabalhosTecnicos}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.ano}. <br/><h:panelGroup
 															rendered="#{not empty producao.link}"
 															 style="display: inline-table;">
@@ -595,15 +595,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>
@@ -632,7 +632,7 @@
 												<ui:repeat var="producao"
 													value="#{producaoMB.listaOutrasProducoesTecnicas}">
 													<li><ui:repeat var="autor"
-															value="#{producaoMB.listarAutores(producao)}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
+															value="#{producao.autores}">#{autor.citacaoBibliografica.nomeCitacao}; </ui:repeat>.
 														<strong>#{producao.titulo}</strong>. #{producao.ano}.
 														(#{producao.natureza}).<br/><h:panelGroup
 															rendered="#{not empty producao.link}"
@@ -644,15 +644,15 @@
 																	style="float: left; white-space: nowrap;" />
 															</h:form>
 														</h:panelGroup> <h:panelGroup
-															rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
+															rendered="#{producaoMB.downloadFile(producao) != null}" style="display: inline-table;">
 															<h:form>
 																<p:commandButton
 																	value="#{mensagens['exibir.producao.download.pdf']}"
 																	ajax="false"
-																	onclick="PrimeFaces.monitorDownload(start, stop);"
+																	onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																	icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																	<p:fileDownload
-																		value="#{producaoMB.downloadFile(producao.idProducao)}" />
+																		value="#{producaoMB.downloadFile(producao)}" />
 																</p:commandButton>
 															</h:form>
 														</h:panelGroup><br /></li>

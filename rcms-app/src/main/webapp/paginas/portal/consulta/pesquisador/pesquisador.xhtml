@@ -8,16 +8,6 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="conteudo">
-		<script type="text/javascript">
-			function start() {
-				PF('statusDialog').show();
-			}
-
-			function stop() {
-				PF('statusDialog').hide();
-			}
-		</script>
-
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -267,7 +257,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -301,7 +291,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -335,7 +325,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -371,7 +361,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -405,7 +395,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -439,7 +429,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -473,7 +463,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -506,7 +496,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -539,7 +529,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -571,7 +561,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -603,7 +593,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -635,7 +625,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />
@@ -668,7 +658,7 @@
 														rendered="#{producaoMB.downloadFile(producao.idProducao) != null}" style="display: inline-table;">
 														<h:form>
 															<p:commandButton value="#{mensagens['exibir.producao.download.pdf']}" ajax="false"
-																onclick="PrimeFaces.monitorDownload(start, stop);"
+																onclick="PrimeFaces.monitorDownload(rcms.showAjaxStatus, rcms.hideAjaxStatus);"
 																icon="ui-icon-arrowthick-1-s" style="float: left; white-space: nowrap; margin-right: 15px;">
 																<p:fileDownload
 																	value="#{producaoMB.downloadFile(producao.idProducao)}" />

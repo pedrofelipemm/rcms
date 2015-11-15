@@ -2,6 +2,7 @@ package br.ufscar.rcms.view.mb;
 
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
@@ -42,6 +44,7 @@ import br.ufscar.rcms.modelo.entidades.ResumoExpandidoCongresso;
 import br.ufscar.rcms.modelo.entidades.TextoEmJornal;
 import br.ufscar.rcms.modelo.entidades.TrabalhoCompletoCongresso;
 import br.ufscar.rcms.modelo.entidades.TrabalhoTecnico;
+import br.ufscar.rcms.modelo.entidades.TransientFile;
 import br.ufscar.rcms.servico.PesquisadorService;
 import br.ufscar.rcms.servico.ProducaoService;
 
@@ -72,19 +75,19 @@ public class ProducaoMB extends AbstractMB {
     private UploadedFile pdf;
     private StreamedContent file;
 
-    private transient List<ArtigoEmPeriodico> listaArtigosEmPeriodicos;
-    private transient List<LivroPublicado> listaLivrosPublicados;
-    private transient List<CapituloLivro> listaCapitulosDeLivros;
-    private transient List<TextoEmJornal> listaTextosEmJornais;
-    private transient List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos;
-    private transient List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos;
-    private transient List<ResumoCongresso> listaResumosCongressos;
-    private transient List<ApresentacaoTrabalho> listaApresentacoesTrabalhos;
-    private transient List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas;
-    private transient List<ProdutoTecnologico> listaProdutosTecnologicos;
-    private transient List<ProcessoOuTecnica> listaProcessosOuTecnicas;
-    private transient List<TrabalhoTecnico> listaTrabalhosTecnicos;
-    private transient List<OutraProducaoTecnica> listaOutrasProducoesTecnicas;
+    private List<ArtigoEmPeriodico> listaArtigosEmPeriodicos = new ArrayList<>();
+    private List<LivroPublicado> listaLivrosPublicados = new ArrayList<>();
+    private List<CapituloLivro> listaCapitulosDeLivros = new ArrayList<>();
+    private List<TextoEmJornal> listaTextosEmJornais = new ArrayList<>();
+    private List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos = new ArrayList<>();
+    private List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos = new ArrayList<>();
+    private List<ResumoCongresso> listaResumosCongressos = new ArrayList<>();
+    private List<ApresentacaoTrabalho> listaApresentacoesTrabalhos = new ArrayList<>();
+    private List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas = new ArrayList<>();
+    private List<ProdutoTecnologico> listaProdutosTecnologicos = new ArrayList<>();
+    private List<ProcessoOuTecnica> listaProcessosOuTecnicas = new ArrayList<>();
+    private List<TrabalhoTecnico> listaTrabalhosTecnicos = new ArrayList<>();
+    private List<OutraProducaoTecnica> listaOutrasProducoesTecnicas = new ArrayList<>();
 
     @PostConstruct
     public void inicializar() {
@@ -102,7 +105,7 @@ public class ProducaoMB extends AbstractMB {
         }
     }
 
-    public void excluirAutor(AutorProducao autor) {
+    public void excluirAutor(final AutorProducao autor) {
         producao.getAutores().remove(autor);
     }
 
@@ -138,13 +141,13 @@ public class ProducaoMB extends AbstractMB {
         return EXIBE_PRODUCAO;
     }
 
-    public String editar(Producao producao) {
+    public String editar(final Producao producao) {
         setFlashObject(FLASH_KEY_PRODUCAO, producao);
 
         return CADASTRO_PRODUCAO;
     }
 
-    public String excluir(Producao producao) {
+    public String excluir(final Producao producao) {
         producaoService.remove(producao);
         limparDados();
         return CONSULTA_PRODUCAO;
@@ -154,8 +157,9 @@ public class ProducaoMB extends AbstractMB {
         if (pesquisadorSelecionado != null) {
             pesquisadorSelecionado = pesquisadorService.buscarTodosDados(pesquisadorSelecionado.getIdUsuario());
             todasCitacoesDoPesquisador = pesquisadorSelecionado.getCitacaoBibliograficas();
-            if((todasCitacoesDoPesquisador != null) && (!todasCitacoesDoPesquisador.isEmpty()))
-            	citacaoBibliografica = pesquisadorSelecionado.getCitacaoBibliograficas().get(0);
+            if((todasCitacoesDoPesquisador != null) && (!todasCitacoesDoPesquisador.isEmpty())) {
+                citacaoBibliografica = pesquisadorSelecionado.getCitacaoBibliograficas().get(0);
+            }
         } else {
             todasCitacoesDoPesquisador.clear();
         }
@@ -175,43 +179,18 @@ public class ProducaoMB extends AbstractMB {
     @Override
     protected void carregarDados() {
         todosPesquisadores = pesquisadorService.buscarTodos();
-        producoes = producaoService.buscarTodas();
+        producoes = producaoService.buscarTodasComPdf();
 
         Producao producaoEditando = (Producao) getFlashObject(FLASH_KEY_PRODUCAO);
         if (producaoEditando != null) {
             this.producao = producaoService.buscarPorId(producaoEditando.getIdProducao());
-
             file = producaoService.loadPDF(producaoEditando);
-            /*
-             * String caminhoWebInf = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/");
-             * InputStream stream; try { stream = new FileInputStream("/home/andre/RCMS/producao/" +
-             * producao.getIdProducao() + ".pdf"); file = new DefaultStreamedContent(stream, "application/pdf",
-             * "producao_" + producao.getIdProducao().toString() + ".pdf"); } catch (FileNotFoundException e) {
-             * System.out.println("erro"); e.printStackTrace(); } /* InputStream stream = ((ServletContext)
-             * FacesContext.getCurrentInstance().getExternalContext().getContext())
-             * .getResourceAsStream("/home/andre/RCMS/producao/" + producao.getIdProducao() + ".pdf"); file = new
-             * DefaultStreamedContent(stream, "application/pdf", "producao_" + producao.getIdProducao().toString() +
-             * ".pdf");
-             */
         }
 
-        this.setListaArtigosEmPeriodicos(this.producaoService.buscarProducoes(ArtigoEmPeriodico.class));
-        this.setListaLivrosPublicados(this.producaoService.buscarProducoes(LivroPublicado.class));
-        this.setListaCapitulosDeLivros(this.producaoService.buscarProducoes(CapituloLivro.class));
-        this.setListaTextosEmJornais(this.producaoService.buscarProducoes(TextoEmJornal.class));
-        this.setListaTrabalhosCompletosCongressos(this.producaoService.buscarProducoes(TrabalhoCompletoCongresso.class));
-        this.setListaResumosExpandidosCongressos(this.producaoService.buscarProducoes(ResumoExpandidoCongresso.class));
-        this.setListaResumosCongressos(this.producaoService.buscarProducoes(ResumoCongresso.class));
-        this.setListaApresentacoesTrabalhos(this.producaoService.buscarProducoes(ApresentacaoTrabalho.class));
-        this.setListaOutrasProducoesBibligraficas(this.producaoService
-                .buscarProducoes(OutraProducaoBibliografica.class));
-        this.setListaProdutosTecnologicos(this.producaoService.buscarProducoes(ProdutoTecnologico.class));
-        this.setListaProcessosOuTecnicas(this.producaoService.buscarProducoes(ProcessoOuTecnica.class));
-        this.setListaTrabalhosTecnicos(this.producaoService.buscarProducoes(TrabalhoTecnico.class));
-        this.setListaOutrasProducoesTecnicas(this.producaoService.buscarProducoes(OutraProducaoTecnica.class));
+        carregarListasProducao();
     }
 
-    public void doUpload(FileUploadEvent fileUploadEvent) {
+    public void doUpload(final FileUploadEvent fileUploadEvent) {
 
         pdf = fileUploadEvent.getFile();
 
@@ -226,7 +205,7 @@ public class ProducaoMB extends AbstractMB {
         }
     }
 
-    public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
+    public void validateFile(final FacesContext ctx, final UIComponent comp, final Object value) {
         List<FacesMessage> msgs = new ArrayList<FacesMessage>();
         Part file = (Part) value;
 
@@ -239,11 +218,43 @@ public class ProducaoMB extends AbstractMB {
         }
     }
 
+    private void carregarListasProducao() {
+        for (Producao prod : producoes) {
+            if (prod instanceof ArtigoEmPeriodico) {
+                listaArtigosEmPeriodicos.add((ArtigoEmPeriodico) prod);
+            } else if (prod instanceof LivroPublicado) {
+                listaLivrosPublicados.add((LivroPublicado) prod);
+            } else if (prod instanceof CapituloLivro) {
+                listaCapitulosDeLivros.add((CapituloLivro) prod);
+            } else if (prod instanceof TextoEmJornal) {
+                listaTextosEmJornais.add((TextoEmJornal) prod);
+            } else if (prod instanceof TrabalhoCompletoCongresso) {
+                listaTrabalhosCompletosCongressos.add((TrabalhoCompletoCongresso) prod);
+            } else if (prod instanceof ResumoExpandidoCongresso) {
+                listaResumosExpandidosCongressos.add((ResumoExpandidoCongresso) prod);
+            } else if (prod instanceof ResumoCongresso) {
+                listaResumosCongressos.add((ResumoCongresso) prod);
+            } else if (prod instanceof ApresentacaoTrabalho) {
+                listaApresentacoesTrabalhos.add((ApresentacaoTrabalho) prod);
+            } else if (prod instanceof OutraProducaoBibliografica) {
+                listaOutrasProducoesBibligraficas.add((OutraProducaoBibliografica) prod);
+            } else if (prod instanceof OutraProducaoTecnica) {
+                listaOutrasProducoesTecnicas.add((OutraProducaoTecnica) prod);
+            } else if (prod instanceof ProdutoTecnologico) {
+                listaProdutosTecnologicos.add((ProdutoTecnologico) prod);
+            } else if (prod instanceof ProcessoOuTecnica) {
+                listaProcessosOuTecnicas.add((ProcessoOuTecnica) prod);
+            } else if (prod instanceof TrabalhoTecnico) {
+                listaTrabalhosTecnicos.add((TrabalhoTecnico) prod);
+            }
+        }
+    }
+
     public AutorProducao getAutor() {
         return autor;
     }
 
-    public void setAutor(AutorProducao autor) {
+    public void setAutor(final AutorProducao autor) {
         this.autor = autor;
     }
 
@@ -251,7 +262,7 @@ public class ProducaoMB extends AbstractMB {
         return producao;
     }
 
-    public void setProducao(Producao producao) {
+    public void setProducao(final Producao producao) {
         this.producao = producao;
     }
 
@@ -259,7 +270,7 @@ public class ProducaoMB extends AbstractMB {
         return todosPesquisadores;
     }
 
-    public void setTodosPesquisadores(List<Pesquisador> todosPesquisadores) {
+    public void setTodosPesquisadores(final List<Pesquisador> todosPesquisadores) {
         this.todosPesquisadores = todosPesquisadores;
     }
 
@@ -267,7 +278,7 @@ public class ProducaoMB extends AbstractMB {
         return pesquisadorService;
     }
 
-    public void setPesquisadorService(PesquisadorService pesquisadorService) {
+    public void setPesquisadorService(final PesquisadorService pesquisadorService) {
         this.pesquisadorService = pesquisadorService;
     }
 
@@ -275,7 +286,7 @@ public class ProducaoMB extends AbstractMB {
         return pesquisadorSelecionado;
     }
 
-    public void setPesquisadorSelecionado(Pesquisador pesquisadorSelecionado) {
+    public void setPesquisadorSelecionado(final Pesquisador pesquisadorSelecionado) {
         this.pesquisadorSelecionado = pesquisadorSelecionado;
     }
 
@@ -283,7 +294,7 @@ public class ProducaoMB extends AbstractMB {
         return todasCitacoesDoPesquisador;
     }
 
-    public void setTodasCitacoesDoPesquisador(List<CitacaoBibliografica> todasCitacoesDoPesquisador) {
+    public void setTodasCitacoesDoPesquisador(final List<CitacaoBibliografica> todasCitacoesDoPesquisador) {
         this.todasCitacoesDoPesquisador = todasCitacoesDoPesquisador;
     }
 
@@ -291,7 +302,7 @@ public class ProducaoMB extends AbstractMB {
         return tipoProducao;
     }
 
-    public void setTipoProducao(String tipoProducao) {
+    public void setTipoProducao(final String tipoProducao) {
         this.tipoProducao = tipoProducao;
     }
 
@@ -299,7 +310,7 @@ public class ProducaoMB extends AbstractMB {
         return producaoService;
     }
 
-    public void setProducaoService(ProducaoService producaoService) {
+    public void setProducaoService(final ProducaoService producaoService) {
         this.producaoService = producaoService;
     }
 
@@ -307,20 +318,15 @@ public class ProducaoMB extends AbstractMB {
         return producoes;
     }
 
-    public void setProducoes(List<Producao> producoes) {
+    public void setProducoes(final List<Producao> producoes) {
         this.producoes = producoes;
-    }
-
-    public List<AutorProducao> listarAutores(Producao producao) {
-
-        return producaoService.buscarPorId(producao.getIdProducao()).getAutores();
     }
 
     public List<ArtigoEmPeriodico> getListaArtigosEmPeriodicos() {
         return listaArtigosEmPeriodicos;
     }
 
-    public void setListaArtigosEmPeriodicos(List<ArtigoEmPeriodico> listaArtigosEmPeriodicos) {
+    public void setListaArtigosEmPeriodicos(final List<ArtigoEmPeriodico> listaArtigosEmPeriodicos) {
         this.listaArtigosEmPeriodicos = listaArtigosEmPeriodicos;
     }
 
@@ -328,7 +334,7 @@ public class ProducaoMB extends AbstractMB {
         return listaLivrosPublicados;
     }
 
-    public void setListaLivrosPublicados(List<LivroPublicado> listaLivrosPublicados) {
+    public void setListaLivrosPublicados(final List<LivroPublicado> listaLivrosPublicados) {
         this.listaLivrosPublicados = listaLivrosPublicados;
     }
 
@@ -336,7 +342,7 @@ public class ProducaoMB extends AbstractMB {
         return listaCapitulosDeLivros;
     }
 
-    public void setListaCapitulosDeLivros(List<CapituloLivro> listaCapitulosDeLivros) {
+    public void setListaCapitulosDeLivros(final List<CapituloLivro> listaCapitulosDeLivros) {
         this.listaCapitulosDeLivros = listaCapitulosDeLivros;
     }
 
@@ -344,7 +350,7 @@ public class ProducaoMB extends AbstractMB {
         return listaTextosEmJornais;
     }
 
-    public void setListaTextosEmJornais(List<TextoEmJornal> listaTextosEmJornais) {
+    public void setListaTextosEmJornais(final List<TextoEmJornal> listaTextosEmJornais) {
         this.listaTextosEmJornais = listaTextosEmJornais;
     }
 
@@ -352,7 +358,7 @@ public class ProducaoMB extends AbstractMB {
         return listaTrabalhosCompletosCongressos;
     }
 
-    public void setListaTrabalhosCompletosCongressos(List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos) {
+    public void setListaTrabalhosCompletosCongressos(final List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos) {
         this.listaTrabalhosCompletosCongressos = listaTrabalhosCompletosCongressos;
     }
 
@@ -360,7 +366,7 @@ public class ProducaoMB extends AbstractMB {
         return listaResumosExpandidosCongressos;
     }
 
-    public void setListaResumosExpandidosCongressos(List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos) {
+    public void setListaResumosExpandidosCongressos(final List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos) {
         this.listaResumosExpandidosCongressos = listaResumosExpandidosCongressos;
     }
 
@@ -368,7 +374,7 @@ public class ProducaoMB extends AbstractMB {
         return listaResumosCongressos;
     }
 
-    public void setListaResumosCongressos(List<ResumoCongresso> listaResumosCongressos) {
+    public void setListaResumosCongressos(final List<ResumoCongresso> listaResumosCongressos) {
         this.listaResumosCongressos = listaResumosCongressos;
     }
 
@@ -376,7 +382,7 @@ public class ProducaoMB extends AbstractMB {
         return listaApresentacoesTrabalhos;
     }
 
-    public void setListaApresentacoesTrabalhos(List<ApresentacaoTrabalho> listaApresentacoesTrabalhos) {
+    public void setListaApresentacoesTrabalhos(final List<ApresentacaoTrabalho> listaApresentacoesTrabalhos) {
         this.listaApresentacoesTrabalhos = listaApresentacoesTrabalhos;
     }
 
@@ -384,7 +390,7 @@ public class ProducaoMB extends AbstractMB {
         return listaOutrasProducoesBibligraficas;
     }
 
-    public void setListaOutrasProducoesBibligraficas(List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas) {
+    public void setListaOutrasProducoesBibligraficas(final List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas) {
         this.listaOutrasProducoesBibligraficas = listaOutrasProducoesBibligraficas;
     }
 
@@ -392,7 +398,7 @@ public class ProducaoMB extends AbstractMB {
         return listaProdutosTecnologicos;
     }
 
-    public void setListaProdutosTecnologicos(List<ProdutoTecnologico> listaProdutosTecnologicos) {
+    public void setListaProdutosTecnologicos(final List<ProdutoTecnologico> listaProdutosTecnologicos) {
         this.listaProdutosTecnologicos = listaProdutosTecnologicos;
     }
 
@@ -400,7 +406,7 @@ public class ProducaoMB extends AbstractMB {
         return listaProcessosOuTecnicas;
     }
 
-    public void setListaProcessosOuTecnicas(List<ProcessoOuTecnica> listaProcessosOuTecnicas) {
+    public void setListaProcessosOuTecnicas(final List<ProcessoOuTecnica> listaProcessosOuTecnicas) {
         this.listaProcessosOuTecnicas = listaProcessosOuTecnicas;
     }
 
@@ -408,7 +414,7 @@ public class ProducaoMB extends AbstractMB {
         return listaTrabalhosTecnicos;
     }
 
-    public void setListaTrabalhosTecnicos(List<TrabalhoTecnico> listaTrabalhosTecnicos) {
+    public void setListaTrabalhosTecnicos(final List<TrabalhoTecnico> listaTrabalhosTecnicos) {
         this.listaTrabalhosTecnicos = listaTrabalhosTecnicos;
     }
 
@@ -416,7 +422,7 @@ public class ProducaoMB extends AbstractMB {
         return listaOutrasProducoesTecnicas;
     }
 
-    public void setListaOutrasProducoesTecnicas(List<OutraProducaoTecnica> listaOutrasProducoesTecnicas) {
+    public void setListaOutrasProducoesTecnicas(final List<OutraProducaoTecnica> listaOutrasProducoesTecnicas) {
         this.listaOutrasProducoesTecnicas = listaOutrasProducoesTecnicas;
     }
 
@@ -424,7 +430,7 @@ public class ProducaoMB extends AbstractMB {
         return citacaoBibliografica;
     }
 
-    public void setCitacaoBibliografica(CitacaoBibliografica citacaoBibliografica) {
+    public void setCitacaoBibliografica(final CitacaoBibliografica citacaoBibliografica) {
         this.citacaoBibliografica = citacaoBibliografica;
     }
 
@@ -432,7 +438,7 @@ public class ProducaoMB extends AbstractMB {
         return pdf;
     }
 
-    public void setPdf(UploadedFile pdf) {
+    public void setPdf(final UploadedFile pdf) {
         this.pdf = pdf;
     }
 
@@ -440,8 +446,11 @@ public class ProducaoMB extends AbstractMB {
         return file;
     }
 
-    public StreamedContent downloadFile(Long idProducao) {
-        Producao producao = producaoService.buscarPorId(idProducao);
-        return producaoService.loadPDF(producao);
+    public StreamedContent downloadFile(final Producao producao) {
+        if (!TransientFile.isEmpty(producao.getArquivoPdf())) {
+            return new DefaultStreamedContent(new ByteArrayInputStream(producao.getArquivoPdf().getFile()),
+                    "application/pdf", "producao_" + producao.getIdProducao().toString() + ".pdf");
+        }
+        return null;
     }
 }

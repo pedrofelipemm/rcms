@@ -119,7 +119,7 @@ public class ApplicationConfig {
         final Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", hibernateHBM2DLL);
         properties.setProperty("hibernate.dialect", hibernateDialect);
-        // properties.setProperty("hibernate.show_sql", hibernateShowSql);
+        properties.setProperty("hibernate.show_sql", hibernateShowSql);
         return properties;
     }
 

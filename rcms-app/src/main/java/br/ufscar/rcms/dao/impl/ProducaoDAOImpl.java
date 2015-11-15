@@ -18,7 +18,8 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
         setClazz(Producao.class);
     }
 
-    public Boolean exists(String titulo, Integer ano) {
+    @Override
+    public Boolean exists(final String titulo, final Integer ano) {
 
         StringBuilder jpql = new StringBuilder();
         jpql.append("SELECT p FROM " + Producao.class.getName() + " p ");
@@ -31,8 +32,9 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
         return query.getResultList().size() > 0;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <T> List<T> buscarProducoes(Class<T> clazz) {
+    public <T> List<T> buscarProducoes(final Class<T> clazz) {
 
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT DISTINCT P FROM " + clazz.getName() + " P ");
@@ -45,7 +47,9 @@ public class ProducaoDAOImpl extends BaseDAOImpl<Producao, Long> implements Prod
         return query.getResultList();
     }
 
-    public <T> List<T> buscarProducoes(Class<T> clazz, final Long idUsuario) {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> List<T> buscarProducoes(final Class<T> clazz, final Long idUsuario) {
 
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT DISTINCT P FROM " + clazz.getName() + " P ");

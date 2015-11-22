@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.faces.application.Application;
@@ -137,6 +138,10 @@ public abstract class AbstractMB implements Serializable {
 
     protected UIViewRoot getViewRoot() {
         return getCurrentInstance().getViewRoot();
+    }
+
+    protected Locale getLocale() {
+        return getViewRoot().getLocale();
     }
 
     protected String getViewId() {

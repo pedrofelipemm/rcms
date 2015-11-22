@@ -80,12 +80,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         cachedPesquisador = pesquisador;
     }
 
-    /*
-     * public PesquisadorBuilder projetosPesquisa(final ProjetosPesquisaLattes projetosPesquisa) { if
-     * (projetosPesquisa!=null) { for (ProjetoLattes projetoLattes : projetosPesquisa.getProjetos()) {
-     * pesquisador.addProjetosPesquisa(new ProjetoPesquisa(projetoLattes.getNome(), projetoLattes .getDescricao(),
-     * projetoLattes.getAnoInicio(), projetoLattes.getAnoConclusao())); } } return this; }
-     */
     public PesquisadorBuilder areaAtuacoes(final AreaAtuacaoLattes areaAtuacao) {
         if (areaAtuacao != null) {
             for (String descricao : areaAtuacao.getDescricao()) {
@@ -221,7 +215,6 @@ public class PesquisadorBuilder implements Builder<Pesquisador> {
         Validate.notBlank(pesquisador.getSenha());
         Validate.notBlank(pesquisador.getCodigoLattes());
         Validate.notBlank(pesquisador.getEmail());
-        // Validate.notBlank(pesquisador.getResumoProfissional());
     }
 
     private void validatePesquisador(final PesquisadorLattes pesquisadorLattes, final Pesquisador pesquisador) {

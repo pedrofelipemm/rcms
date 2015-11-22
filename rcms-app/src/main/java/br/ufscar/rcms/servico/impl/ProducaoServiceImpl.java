@@ -94,6 +94,15 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
     @Override
+    public List<Producao> buscarTodasComPdf(final Long idUsuario) {
+        List<Producao> producoes = buscarProducoes(Producao.class, idUsuario);
+        for (Producao producao : producoes) {
+            loadPdf(producao);
+        }
+        return producoes;
+    }
+
+    @Override
     public Producao buscarPorId(final Long id) {
         Producao p = producaoDAO.buscar(id);
         loadLazyDependencies(p);
@@ -148,7 +157,7 @@ public class ProducaoServiceImpl implements ProducaoService {
                 producao.setArquivoPdf(file);
             }
         } catch (IOException exception) {
-            LOGGER.error(String.format("Erro ao carregar ao carregar o pdf da produção: %s - %s",
+            LOGGER.debug(String.format("Falha ao carregar ao carregar o pdf da produção: %s - %s",
                     +producao.getIdProducao(), producao.getTitulo()));
         }
     }

@@ -144,7 +144,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
                     .map(e -> idProjetoPesquisa + "/" + e.getFileName()).collect(Collectors.toList());
             urls.remove(0);
         } catch (IOException exception) {
-            LOGGER.error("Erro ao obter imagens para galeria", exception);
+            LOGGER.debug("Erro ao obter imagens para galeria", exception);
         }
         return urls;
     }
@@ -187,7 +187,7 @@ public class ProjetoPesquisaServiceImpl implements ProjetoPesquisaService {
         return projetoPesquisa;
     }
 
-    private void loadImagesGallery(ProjetoPesquisa projetoPesquisa) {
+    private void loadImagesGallery(final ProjetoPesquisa projetoPesquisa) {
         // TODO Auto-generated method stub
     }
 

@@ -26,7 +26,6 @@ import br.ufscar.rcms.modelo.entidades.ApresentacaoTrabalho;
 import br.ufscar.rcms.modelo.entidades.AreaAtuacao;
 import br.ufscar.rcms.modelo.entidades.ArtigoEmPeriodico;
 import br.ufscar.rcms.modelo.entidades.AtuacaoPesquisador;
-import br.ufscar.rcms.modelo.entidades.AutorProducao;
 import br.ufscar.rcms.modelo.entidades.Autorizacao;
 import br.ufscar.rcms.modelo.entidades.CapituloLivro;
 import br.ufscar.rcms.modelo.entidades.CitacaoBibliografica;
@@ -148,19 +147,19 @@ public class PesquisadorMB extends AbstractMB {
 
     private transient List<Producao> listaProducoes;
 
-    private transient List<ArtigoEmPeriodico> listaArtigosEmPeriodicos;
-    private transient List<LivroPublicado> listaLivrosPublicados;
-    private transient List<CapituloLivro> listaCapitulosDeLivros;
-    private transient List<TextoEmJornal> listaTextosEmJornais;
-    private transient List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos;
-    private transient List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos;
-    private transient List<ResumoCongresso> listaResumosCongressos;
-    private transient List<ApresentacaoTrabalho> listaApresentacoesTrabalhos;
-    private transient List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas;
-    private transient List<ProdutoTecnologico> listaProdutosTecnologicos;
-    private transient List<ProcessoOuTecnica> listaProcessosOuTecnicas;
-    private transient List<TrabalhoTecnico> listaTrabalhosTecnicos;
-    private transient List<OutraProducaoTecnica> listaOutrasProducoesTecnicas;
+    private List<ArtigoEmPeriodico> listaArtigosEmPeriodicos = new ArrayList<>();
+    private List<LivroPublicado> listaLivrosPublicados = new ArrayList<>();
+    private List<CapituloLivro> listaCapitulosDeLivros = new ArrayList<>();
+    private List<TextoEmJornal> listaTextosEmJornais = new ArrayList<>();
+    private List<TrabalhoCompletoCongresso> listaTrabalhosCompletosCongressos = new ArrayList<>();
+    private List<ResumoExpandidoCongresso> listaResumosExpandidosCongressos = new ArrayList<>();
+    private List<ResumoCongresso> listaResumosCongressos = new ArrayList<>();
+    private List<ApresentacaoTrabalho> listaApresentacoesTrabalhos = new ArrayList<>();
+    private List<OutraProducaoBibliografica> listaOutrasProducoesBibligraficas = new ArrayList<>();
+    private List<ProdutoTecnologico> listaProdutosTecnologicos = new ArrayList<>();
+    private List<ProcessoOuTecnica> listaProcessosOuTecnicas = new ArrayList<>();
+    private List<TrabalhoTecnico> listaTrabalhosTecnicos = new ArrayList<>();
+    private List<OutraProducaoTecnica> listaOutrasProducoesTecnicas = new ArrayList<>();
 
     @PostConstruct
     public void inicializar() {
@@ -182,32 +181,39 @@ public class PesquisadorMB extends AbstractMB {
             pesquisador = pesquisadorService.buscarTodosDados(pesquisadorEdicao.getIdUsuario());
             removeNullValues(pesquisador.getCompreensaoIdiomas(), pesquisador.getParticipacaoEventos());
 
-            this.setListaArtigosEmPeriodicos(this.producaoService.buscarProducoes(ArtigoEmPeriodico.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaLivrosPublicados(this.producaoService.buscarProducoes(LivroPublicado.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaCapitulosDeLivros(this.producaoService.buscarProducoes(CapituloLivro.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaTextosEmJornais(this.producaoService.buscarProducoes(TextoEmJornal.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaTrabalhosCompletosCongressos(this.producaoService.buscarProducoes(
-                    TrabalhoCompletoCongresso.class, pesquisador.getIdUsuario()));
-            this.setListaResumosExpandidosCongressos(this.producaoService.buscarProducoes(
-                    ResumoExpandidoCongresso.class, pesquisador.getIdUsuario()));
-            this.setListaResumosCongressos(this.producaoService.buscarProducoes(ResumoCongresso.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaApresentacoesTrabalhos(this.producaoService.buscarProducoes(ApresentacaoTrabalho.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaOutrasProducoesBibliograficas(this.producaoService.buscarProducoes(
-                    OutraProducaoBibliografica.class, pesquisador.getIdUsuario()));
-            this.setListaProdutosTecnologicos(this.producaoService.buscarProducoes(ProdutoTecnologico.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaProcessosOuTecnicas(this.producaoService.buscarProducoes(ProcessoOuTecnica.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaTrabalhosTecnicos(this.producaoService.buscarProducoes(TrabalhoTecnico.class,
-                    pesquisador.getIdUsuario()));
-            this.setListaOutrasProducoesTecnicas(this.producaoService.buscarProducoes(OutraProducaoTecnica.class,
-                    pesquisador.getIdUsuario()));
+            carregarListasProducao(producaoService.buscarTodasComPdf(pesquisadorEdicao.getIdUsuario()));
+        }
+    }
+
+    private void carregarListasProducao(final List<Producao> producoes) {
+        for (Producao prod : producoes) {
+            if (prod instanceof ArtigoEmPeriodico) {
+                listaArtigosEmPeriodicos.add((ArtigoEmPeriodico) prod);
+            } else if (prod instanceof LivroPublicado) {
+                listaLivrosPublicados.add((LivroPublicado) prod);
+            } else if (prod instanceof CapituloLivro) {
+                listaCapitulosDeLivros.add((CapituloLivro) prod);
+            } else if (prod instanceof TextoEmJornal) {
+                listaTextosEmJornais.add((TextoEmJornal) prod);
+            } else if (prod instanceof TrabalhoCompletoCongresso) {
+                listaTrabalhosCompletosCongressos.add((TrabalhoCompletoCongresso) prod);
+            } else if (prod instanceof ResumoExpandidoCongresso) {
+                listaResumosExpandidosCongressos.add((ResumoExpandidoCongresso) prod);
+            } else if (prod instanceof ResumoCongresso) {
+                listaResumosCongressos.add((ResumoCongresso) prod);
+            } else if (prod instanceof ApresentacaoTrabalho) {
+                listaApresentacoesTrabalhos.add((ApresentacaoTrabalho) prod);
+            } else if (prod instanceof OutraProducaoBibliografica) {
+                listaOutrasProducoesBibligraficas.add((OutraProducaoBibliografica) prod);
+            } else if (prod instanceof OutraProducaoTecnica) {
+                listaOutrasProducoesTecnicas.add((OutraProducaoTecnica) prod);
+            } else if (prod instanceof ProdutoTecnologico) {
+                listaProdutosTecnologicos.add((ProdutoTecnologico) prod);
+            } else if (prod instanceof ProcessoOuTecnica) {
+                listaProcessosOuTecnicas.add((ProcessoOuTecnica) prod);
+            } else if (prod instanceof TrabalhoTecnico) {
+                listaTrabalhosTecnicos.add((TrabalhoTecnico) prod);
+            }
         }
     }
 
@@ -712,11 +718,6 @@ public class PesquisadorMB extends AbstractMB {
 
     public void setListaProducoes(final List<Producao> listaProducoes) {
         this.listaProducoes = listaProducoes;
-    }
-
-    public List<AutorProducao> listarAutores(final Producao producao) {
-
-        return producaoService.buscarPorId(producao.getIdProducao()).getAutores();
     }
 
     public List<ArtigoEmPeriodico> getListaArtigosEmPeriodicos() {

@@ -26,6 +26,12 @@ var rcms = (function() {
 				});
 			});
 		},
+		showAjaxStatus: function() {
+			PF('statusDialog').show();
+		},
+		hideAjaxStatus: function() {
+			PF('statusDialog').hide();
+		},
 		applyTagCanvas: function(elements) {
 			elements.forEach(function(element) {
 				if (!element.container.tagcanvas({

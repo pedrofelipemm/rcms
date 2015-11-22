@@ -12,9 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import javax.faces.context.FacesContext;
-
 import org.apache.commons.io.FileUtils;
+import org.hibernate.Hibernate;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
@@ -86,6 +85,24 @@ public class ProducaoServiceImpl implements ProducaoService {
     }
 
     @Override
+    public List<Producao> buscarTodasComPdf() {
+        List<Producao> producoes = buscarProducoes(Producao.class);
+        for (Producao producao : producoes) {
+            loadPdf(producao);
+        }
+        return producoes;
+    }
+
+    @Override
+    public List<Producao> buscarTodasComPdf(final Long idUsuario) {
+        List<Producao> producoes = buscarProducoes(Producao.class, idUsuario);
+        for (Producao producao : producoes) {
+            loadPdf(producao);
+        }
+        return producoes;
+    }
+
+    @Override
     public Producao buscarPorId(final Long id) {
         Producao p = producaoDAO.buscar(id);
         loadLazyDependencies(p);
@@ -140,34 +157,33 @@ public class ProducaoServiceImpl implements ProducaoService {
                 producao.setArquivoPdf(file);
             }
         } catch (IOException exception) {
-            LOGGER.error(String.format("Erro ao carregar ao carregar o pdf da produção: %s", producao.getTitulo()),
-                    exception);
+            LOGGER.debug(String.format("Falha ao carregar ao carregar o pdf da produção: %s - %s",
+                    +producao.getIdProducao(), producao.getTitulo()));
         }
     }
 
     @Override
     public StreamedContent loadPDF(final Producao p) {
-        String caminhoWebInf = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/");
         InputStream stream;
         try {
             stream = new FileInputStream(pastaArquivos + p.getIdProducao() + ".pdf");
             return new DefaultStreamedContent(stream, "application/pdf", "producao_" + p.getIdProducao().toString()
                     + ".pdf");
         } catch (FileNotFoundException e) {
-            LOGGER.error("Erro ao carregar PDF", e);
+            LOGGER.error("Erro ao carregar PDF " + p.getIdProducao());
         }
         return null;
     }
-    
+
     @Override
     public Producao buscarTodosDados(final long producaoId){
     	Producao p = producaoDAO.buscar(producaoId);
     	loadLazyCollections(p);
-    	
+
     	return p;
     }
 
-	private void loadLazyCollections(Producao p) {
-		p.getAutores().size();		
-	}
+    private void loadLazyCollections(final Producao p) {
+        Hibernate.initialize(p.getAutores());
+    }
 }

@@ -80,29 +80,11 @@ public abstract class Producao extends Entidade {
     }
 
     public String getNomePdf() {
-
-        /*if (pdf == null) {
-            return new byte[0];
-        }
-
-        byte[] copyOfPdf = new byte[pdf.length];
-        System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
-
-        return copyOfPdf;*/
     	return this.nomePdf;
     }
 
-    public void setNomePdf(String pdf) {
+    public void setNomePdf(final String pdf) {
     	this.nomePdf = pdf;
-    	
-        /*if (pdf == null) {
-            return;
-        }
-
-        byte[] copyOfPdf = new byte[pdf.length];
-        System.arraycopy(pdf, 0, copyOfPdf, 0, pdf.length);
-
-        this.pdf = copyOfPdf;*/
     }
 
     @Override
@@ -158,7 +140,7 @@ public abstract class Producao extends Entidade {
 		return arquivoPdf;
 	}
 
-	public void setArquivoPdf(TransientFile arquivoPdf) {
+	public void setArquivoPdf(final TransientFile arquivoPdf) {
 		this.arquivoPdf = arquivoPdf;
 	}
 }

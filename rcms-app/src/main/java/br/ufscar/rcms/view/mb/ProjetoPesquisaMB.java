@@ -1,13 +1,11 @@
 package br.ufscar.rcms.view.mb;
 
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileExtension;
-import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 import static br.ufscar.rcms.commons.util.FileUtils.extractFileName;
+import static br.ufscar.rcms.commons.util.MiscellanyUtil.isEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javassist.expr.NewArray;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -47,7 +45,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 
     @ManagedProperty("#{pesquisadorService}")
     private PesquisadorService pesquisadorService;
-    
+
     @ManagedProperty("#{producaoService}")
     private ProducaoService producaoService;
 
@@ -81,7 +79,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
     	projetosPesquisa = new ListDataModel<ProjetoPesquisa>(projetoPesquisaService.buscarTodos());
     	pesquisadores = new ArrayList<Pesquisador>(pesquisadorService.buscarTodos());
     	producoes = new ArrayList<Producao>(getProducaoService().buscarTodas());
-    	
+
     	if(pesquisadores != null){
     		pesquisador = pesquisadores.get(0);
     	}
@@ -158,13 +156,13 @@ public class ProjetoPesquisaMB extends AbstractMB {
     	pesquisador = pesquisadorService.buscarTodosDados(pesquisador.getIdUsuario());
     	projetoPesquisa.removerPesquisador(pesquisador);
     }
-    
+
     public void adicionarProducao(){
     	producao = producaoService.buscarTodosDados(producao.getIdProducao());
     	projetoPesquisa.adicionarProducao(producao);
     	setProducao(new OutraProducaoBibliografica());
     }
-    
+
     public void removerProducao(Producao producao){
     	producao = producaoService.buscarTodosDados(producao.getIdProducao());
     	projetoPesquisa.removerProducao(producao);
@@ -295,7 +293,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
         return imageUrls != null ? imageUrls : (List<String>) getFlashObject("teste");
     }
 
-    public void setImageUrls(List<String> imageUrls) {
+    public void setImageUrls(final List<String> imageUrls) {
         this.imageUrls = imageUrls;
     }
 
@@ -303,7 +301,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return producoes;
 	}
 
-	public void setProducoes(List<Producao> producoes) {
+	public void setProducoes(final List<Producao> producoes) {
 		this.producoes = producoes;
 	}
 
@@ -311,7 +309,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return producao;
 	}
 
-	public void setProducao(Producao producao) {
+	public void setProducao(final Producao producao) {
 		this.producao = producao;
 	}
 
@@ -319,7 +317,7 @@ public class ProjetoPesquisaMB extends AbstractMB {
 		return producaoService;
 	}
 
-	public void setProducaoService(ProducaoService producaoService) {
+	public void setProducaoService(final ProducaoService producaoService) {
 		this.producaoService = producaoService;
 	}
 

@@ -16,6 +16,10 @@ public interface ProducaoService extends Serializable {
 
     List<Producao> buscarTodas();
 
+    List<Producao> buscarTodasComPdf();
+
+    List<Producao> buscarTodasComPdf(Long idUsuario);
+
     Producao buscarPorId(Long id);
 
     Boolean exists(String titulo, Integer ano);
@@ -27,8 +31,8 @@ public interface ProducaoService extends Serializable {
     TransientFile buscarPdf(Producao producao);
 
     TransientFile buscarPdf(Long producaoId);
-    
+
     StreamedContent loadPDF(Producao p);
-    
+
     Producao buscarTodosDados(final long producaoId);
 }

@@ -28,8 +28,7 @@ public class SobreOGrupoMB extends AbstractMB {
 
     @Override
     protected void carregarDados() {
-
-        sobreOGrupo = sobreOGrupoService.buscarPorIdioma("pt_BR");
+        sobreOGrupo = sobreOGrupoService.buscarPorIdioma(getLocale().getLanguage());
 
         SobreOGrupo sobreOGrupoEdicao = (SobreOGrupo) getFlashObject(FLASH_KEY_SOBRE_O_GRUPO);
         if (sobreOGrupoEdicao != null) {

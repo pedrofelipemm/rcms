@@ -10,7 +10,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.ufscar.rcms.dao.PesquisadorDAO;
-import br.ufscar.rcms.modelo.entidades.Configuracao;
 import br.ufscar.rcms.modelo.entidades.Pesquisador;
 
 @Repository
@@ -65,18 +64,5 @@ public class PesquisadorDAOImpl extends BaseDAOImpl<Pesquisador, Long> implement
         } catch (final NoResultException exception) {
             return null;
         }
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Pesquisador> findToAutoImport() {
-
-        String jpql = "select p from " + getClazz().getName() + " p "
-                + "inner join p.configuracoes c "
-                + "where c.key = '" + Configuracao.Tipo.IMPORTACAO_LATTES_AUTOMATICA + "' "
-                + "and c.value = 'true' ";
-
-        Query query = createQuery(jpql);
-        return query.getResultList();
     }
 }

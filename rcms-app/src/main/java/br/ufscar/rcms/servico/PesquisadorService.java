@@ -35,6 +35,4 @@ public interface PesquisadorService extends Serializable {
     Pesquisador buscarPorLogin(String login);
 
     void saveOrUpdate(Pesquisador pesquisador);
-
-    List<Pesquisador> findToAutoImport();
 }

@@ -165,11 +165,6 @@ public class PesquisadorServiceImpl implements PesquisadorService {
         pesquisadorDAO.saveOrUpdate(pesquisador);
     }
 
-    @Override
-    public List<Pesquisador> findToAutoImport() {
-        return pesquisadorDAO.findToAutoImport();
-    }
-
     private void loadPhoto(final Pesquisador pesquisador) {
         try {
             String fileExtension = getFileExtension(pesquisador);

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="insert1.html">insert1</a></td></tr>
+<tr><td><a href="insert2.html">insert2</a></td></tr>
+<tr><td><a href="insert3.html">insert3</a></td></tr>
+<tr><td><a href="insert4.html">insert4</a></td></tr>
+<tr><td><a href="insert5.html">insert5</a></td></tr>
+<tr><td><a href="insert6.html">insert6</a></td></tr>
+<tr><td><a href="insert7.html">insert7</a></td></tr>
+<tr><td><a href="insert8.html">insert8</a></td></tr>
+<tr><td><a href="insert9.html">insert9</a></td></tr>
+<tr><td><a href="insert10.html">insert10</a></td></tr>
+<tr><td><a href="insert11.html">insert11</a></td></tr>
+<tr><td><a href="insert12.html">insert12</a></td></tr>
+</tbody></table>
+</body>
+</html>
